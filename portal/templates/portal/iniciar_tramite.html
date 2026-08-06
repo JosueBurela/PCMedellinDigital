@@ -1,0 +1,802 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ tramite.titulo }} - Portal de Trámites</title>
+    <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5A123E',
+                        medellinVerde: '#5B7B34',
+                        medellinOro: '#E59E27',
+                        medellinFondo: '#F7F8F6',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    </style>
+</head>
+<body class="bg-medellinFondo text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Navegación -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 md:px-6 h-20 flex justify-between items-center">
+            <a href="{% url 'home' %}" class="flex items-center space-x-3">
+                <img src="{% static 'portal/img/logo_medellin.jpg' %}" alt="Logo Medellín" class="w-10 h-10 md:w-12 md:h-12 object-contain">
+                <div>
+                    <span class="block font-black text-medellinVino text-sm md:text-lg tracking-tight leading-tight">MEDELLÍN DE BRAVO</span>
+                    <span class="block text-[8px] md:text-[10px] font-bold text-medellinOro tracking-widest uppercase">Protección Civil y Bomberos</span>
+                </div>
+            </a>
+            
+            <a href="{% url 'home' %}" class="text-xs font-bold text-medellinVino hover:underline flex items-center gap-1">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Regresar al Inicio
+            </a>
+        </div>
+    </nav>
+
+    <!-- Encabezado del Trámite -->
+    <header class="bg-[#43082B] text-white py-12 px-4 md:px-6 relative overflow-hidden border-b-4 border-medellinOro">
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        </div>
+        
+        <div class="container mx-auto max-w-5xl relative z-10 space-y-3">
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="bg-white/10 text-medellinOro text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded border border-white/10">
+                    Trámite Oficial
+                </span>
+                <span class="bg-white/5 text-purple-200 text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded border border-white/10">
+                    {% if tramite.form_type == 'ANUENCIA_PC' %}Código: TR-140600-008{% elif tramite.form_type == 'ANUNCIOS_PC' %}Código: TR-140600-007{% else %}Código: TR-GENERAL{% endif %}
+                </span>
+            </div>
+            
+            <h1 class="text-2xl md:text-4xl font-black tracking-tight leading-tight uppercase">
+                {{ tramite.titulo }}
+            </h1>
+            <p class="text-purple-100/70 text-xs md:text-sm font-normal max-w-3xl leading-relaxed">
+                Visto bueno en materia de Protección Civil y factibilidad operativa de seguridad municipal.
+            </p>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-4 md:px-6 py-8 flex-1 max-w-5xl space-y-6">
+        
+        <!-- Alertas de Django -->
+        {% if messages %}
+            <div class="space-y-2">
+                {% for message in messages %}
+                    <div class="bg-red-50 border-red-500 text-red-700 border-l-4 p-4 rounded-xl text-sm font-medium shadow-sm">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Panel de Pestañas (Tabbed UI) -->
+        <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+            
+            <!-- Barra de Pestañas Adaptable (Sin Scroll Horizontal) -->
+            <div class="grid grid-cols-2 md:grid-cols-5 border-b border-gray-155 bg-gray-50/50 text-center">
+                <button id="btn-ficha" onclick="switchTab('ficha')" class="tab-btn px-3 py-4 border-b-2 border-medellinVino text-medellinVino font-bold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all w-full">
+                    <i data-lucide="info" class="w-3.5 h-3.5 shrink-0"></i> Ficha Informativa
+                </button>
+                <button id="btn-requisitos" onclick="switchTab('requisitos')" class="tab-btn px-3 py-4 border-b-2 border-transparent text-gray-500 hover:text-medellinVino font-bold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all w-full">
+                    <i data-lucide="file-text" class="w-3.5 h-3.5 shrink-0"></i> Requisitos
+                </button>
+                <button id="btn-costos" onclick="switchTab('costos')" class="tab-btn px-3 py-4 border-b-2 border-transparent text-gray-500 hover:text-medellinVino font-bold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all w-full">
+                    <i data-lucide="credit-card" class="w-3.5 h-3.5 shrink-0"></i> Costos y Tiempos
+                </button>
+                <button id="btn-modalidad" onclick="switchTab('modalidad')" class="tab-btn px-3 py-4 border-b-2 border-transparent text-gray-500 hover:text-medellinVino font-bold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all w-full">
+                    <i data-lucide="map-pin" class="w-3.5 h-3.5 shrink-0"></i> Modalidad y Contacto
+                </button>
+                <button id="btn-formulario" onclick="switchTab('formulario')" class="tab-btn col-span-2 md:col-span-1 px-3 py-4 border-b-2 border-transparent text-gray-500 hover:text-medellinVino font-bold text-[10px] md:text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 transition-all bg-medellinVino/5 w-full">
+                    <i data-lucide="rocket" class="w-3.5 h-3.5 text-medellinVino animate-bounce shrink-0"></i> Iniciar Trámite
+                </button>
+            </div>
+
+            <!-- Contenido de las Pestañas -->
+            <div class="p-6 md:p-8 space-y-6">
+                
+                <!-- PESTAÑA 1: FICHA INFORMATIVA -->
+                <div id="ficha" class="tab-content space-y-6">
+                    <div class="space-y-2">
+                        <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest">Descripción del Trámite</h3>
+                        <p class="text-sm text-gray-700 leading-relaxed font-normal">
+                            {{ tramite.descripcion }}
+                        </p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Información del Registro</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-xs">
+                            <div class="flex justify-between py-2 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">Última Actualización:</span>
+                                <span class="font-bold text-slate-800">13 de Febrero de 2026</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">Dependencia Responsable:</span>
+                                <span class="font-bold text-slate-800">Secretaría de Gobierno</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">Dirección Operativa:</span>
+                                <span class="font-bold text-slate-800">Coordinación Municipal de Protección Civil</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">Tipo de Trámite:</span>
+                                <span class="font-bold text-slate-800">Municipal</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">Dirigido a:</span>
+                                <span class="font-bold text-slate-800 text-right max-w-md block">
+                                    {% if tramite.id == 3 or "evento" in tramite.titulo.lower %}
+                                        Por la autorización de programas especiales de Protección Civil que se presenten para la realización de un evento o espectáculo en el municipio de Alvarado, para promotores particulares, se pagará:
+                                    {% else %}
+                                        Personas Físicas y Morales con Establecimiento
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">Vigencia del Documento:</span>
+                                <span class="font-bold text-slate-800">
+                                    {% if tramite.id == 3 or "evento" in tramite.titulo.lower %}
+                                        Hasta concluir el evento
+                                    {% else %}
+                                        1 año a partir de su fecha de emisión
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 pt-2">
+                        <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest">Beneficio Ciudadano</h3>
+                        <p class="text-xs text-gray-600 leading-relaxed font-normal">
+                            Dar cumplimiento a las disposiciones y medidas de seguridad que regulan el funcionamiento comercial e industrial en el municipio de Medellín de Bravo, Veracruz.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 border-t border-gray-100 flex justify-end">
+                        <button onclick="switchTab('formulario')" class="bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3 px-6 rounded-xl shadow transition text-xs flex items-center gap-1.5 uppercase">
+                            Comenzar Trámite Digital <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PESTAÑA 2: REQUISITOS -->
+                <div id="requisitos" class="tab-content hidden space-y-6">
+                    <div class="space-y-3">
+                        <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest">Documentación Requerida</h3>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                            A continuación se detallan los requisitos obligatorios que debe escanear e integrar al expediente técnico digital:
+                        </p>
+                    </div>
+
+                    <div class="overflow-x-auto border border-gray-150 rounded-2xl">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-gray-50 text-gray-400 font-bold uppercase tracking-wider border-b border-gray-150">
+                                    <th class="p-4">Documento / Requisito</th>
+                                    <th class="p-4 text-center">Original</th>
+                                    <th class="p-4 text-center">Copias</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-100 font-semibold text-slate-700">
+                                {% if tramite.form_type == 'ANUENCIA_PC' %}
+                                    <!-- Requisitos Formato 1 -->
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Establecimiento (Fachada e Interior)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Programa Interno de Protección Civil (PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Carta de Corresponsabilidad Técnica / Tercer Acreditado</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Constancia de Capacitación de Brigadas Internas</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen Técnico de Instalaciones de Gas LP/Natural</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen de Instalación Eléctrica Vigente</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen / Estudio de Estabilidad Estructural</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Póliza de Seguro de Responsabilidad Civil Vigente</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Recibo o Comprobante del Pago de Derechos Administrativos</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                {% elif tramite.form_type == 'ANUNCIOS_PC' %}
+                                    <!-- Requisitos Formato 2 -->
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Anuncio/Espectacular (Fachada y Entorno)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen Responsivo de Estabilidad y Seguridad Estructural</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Bitácora de Mantenimiento de la Estructura</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Anuencia por escrito firmada por Vecinos Colindantes</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Análisis de Riesgo elaborado por un Tercer Acreditado</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                {% elif tramite.form_type == 'CONSTRUCCION_PC' %}
+                                    <!-- Requisitos Formato 3 -->
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Predio/Inmueble Actual</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Título de Propiedad o Escritura Pública del Predio</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Plano Arquitectónico Completo aprobado</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Constancia de no Afectación en materia de Protección Civil</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Licencia de Uso de Suelo Vigente</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                {% elif tramite.form_type == 'TERCEROS_PC' %}
+                                    <!-- Requisitos Formato 4 -->
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Cédula de Registro Estatal de Terceros Acreditados Vigente</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Currículum Vitae Técnico de Capacitador o Empresa Tercera</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                {% else %}
+                                    <!-- Default fallback layout loop for general PDFs -->
+                                    {% for req in tramite.requisitos_list %}
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">{{ req }}</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial y Formato Único de Solicitud (PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bg-purple-50/50 border border-purple-100 rounded-2xl p-4 flex items-start gap-3">
+                        <span class="text-lg">💡</span>
+                        <p class="text-xs text-medellinVino leading-relaxed">
+                            <strong>Nota de Carga Digital:</strong> Todos los documentos deben subirse en formato **PDF** legible. Si son imágenes o fotografías de la fachada, puedes guardarlas en un archivo PDF o subirlas en formatos de imagen estándar directamente en los campos correspondientes del trámite.
+                        </p>
+                    </div>
+
+                    <div class="pt-6 border-t border-gray-100 flex justify-end">
+                        <button onclick="switchTab('formulario')" class="bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3 px-6 rounded-xl shadow transition text-xs flex items-center gap-1.5 uppercase">
+                            Comenzar Trámite Digital <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PESTAÑA 3: COSTOS Y TIEMPOS -->
+                <div id="costos" class="tab-content hidden space-y-6">
+                    <div class="space-y-4">
+                        <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Costos del Trámite</h3>
+                        <div class="bg-slate-50 border border-gray-155 rounded-2xl p-5 space-y-3">
+                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wide">Monto de Pago</span>
+                            <p class="text-sm text-gray-800 leading-relaxed font-bold">
+                                El costo de este trámite no es fijo y está sujeto a la evaluación técnica de Protección Civil:<br>
+                                <span class="text-medellinVino font-black text-base mt-2 block">Determinado según el caso específico</span>
+                                <span class="text-gray-500 font-normal text-xs block mt-1">(El importe se calcula con base en la Ley de Ingresos Municipal vigente tras analizar la superficie en m², el giro comercial del establecimiento y el nivel de riesgo correspondiente).</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                        <div class="space-y-2">
+                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wide">Formas de Pago Aceptadas</span>
+                            <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4 font-normal">
+                                <li>Pago en efectivo en ventanilla de Tesorería Municipal.</li>
+                                <li>Pago con tarjeta de crédito/débito.</li>
+                                <li>Transferencia bancaria (solicitando cuenta clave en tesorería).</li>
+                            </ul>
+                        </div>
+                        <div class="space-y-2">
+                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wide">Tiempos de Respuesta</span>
+                            <p class="text-xs text-gray-600 leading-relaxed font-normal">
+                                <strong>Plazo Máximo de Resolución:</strong> 3 a 5 días hábiles a partir de la correcta integración del expediente técnico digital y pago de derechos.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-gray-100 flex justify-end">
+                        <button onclick="switchTab('formulario')" class="bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3 px-6 rounded-xl shadow transition text-xs flex items-center gap-1.5 uppercase">
+                            Comenzar Trámite Digital <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PESTAÑA 4: MODALIDADES Y CONTACTO -->
+                <div id="modalidad" class="tab-content hidden space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <!-- Modalidades de atención -->
+                        <div class="space-y-4">
+                            <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Modalidad de Atención</h3>
+                            
+                            <div class="space-y-3.5">
+                                <div class="flex gap-3">
+                                    <span class="text-base text-medellinOro">🌐</span>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-gray-800 uppercase">En Línea</h4>
+                                        <p class="text-xs text-gray-500 leading-relaxed font-normal mt-0.5">
+                                            A través de este portal digital las 24 horas del día. Puedes cargar los requisitos, revisar estatus en tiempo real y chatear con el validador oficial.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex gap-3">
+                                    <span class="text-base text-medellinVino">🏢</span>
+                                    <div>
+                                        <h4 class="text-xs font-bold text-gray-800 uppercase">Presencial</h4>
+                                        <p class="text-xs text-gray-500 leading-relaxed font-normal mt-0.5">
+                                            Acude a la Dirección de Protección Civil en el Palacio Municipal, Col. Centro, Medellín de Bravo, Ver. Lunes a Viernes de 9:00 AM a 4:00 PM.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fundamento Jurídico e Información de Contacto -->
+                        <div class="space-y-4">
+                            <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Fundamento Jurídico</h3>
+                            <p class="text-xs text-gray-600 leading-relaxed font-normal text-justify">
+                                Constitución Política de los Estados Unidos Mexicanos; Ley Orgánica del Municipio Libre; Reglamento de Protección Civil del Municipio de Medellín de Bravo, Veracruz; Ley General de Protección Civil y Reducción de Riesgos de Desastres del Estado de Veracruz.
+                            </p>
+                            
+                            <div class="pt-2">
+                                <h4 class="text-xs font-bold text-gray-800 uppercase flex items-center gap-1.5 mb-1.5">
+                                    <i data-lucide="mail" class="w-3.5 h-3.5 text-medellinOro"></i> Contacto Oficial PC
+                                </h4>
+                                <p class="text-xs text-gray-600 font-normal">
+                                    Email: <a href="mailto:proteccioncivil@medellindebravo.gob.mx" class="text-medellinVino hover:underline">proteccioncivil@medellindebravo.gob.mx</a><br>
+                                    Teléfono: 229 955 4774
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="pt-6 border-t border-gray-100 flex justify-end">
+                        <button onclick="switchTab('formulario')" class="bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3 px-6 rounded-xl shadow transition text-xs flex items-center gap-1.5 uppercase">
+                            Comenzar Trámite Digital <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PESTAÑA 5: INICIAR TRÁMITE DIGITAL (EL FORMULARIO REAL) -->
+                <div id="formulario" class="tab-content hidden space-y-6">
+                    <div class="border-b border-gray-150 pb-4">
+                        <h2 class="text-lg font-black text-gray-900 tracking-tight flex items-center gap-2">
+                            <i data-lucide="folder-plus" class="w-5 h-5 text-medellinVino"></i> Carga de Expediente Digital
+                        </h2>
+                        <p class="text-gray-400 text-xs mt-1 font-normal">
+                            Complete el formulario a continuación e integre la documentación requerida para iniciar el análisis técnico de Protección Civil.
+                        </p>
+                    </div>
+
+                    <form method="POST" enctype="multipart/form-data" class="space-y-6 text-slate-800 font-medium">
+                        {% csrf_token %}
+                        
+                        <!-- ================= CASO 1: FORMULARIO DETALLADO ANUENCIA PC ================= -->
+{% if tramite.form_type == 'ANUENCIA_PC' %}
+    {% include 'portal/includes/form_anuencia_pc.html' %}
+{% elif tramite.form_type == 'ANUNCIOS_PC' %}
+    {% include 'portal/includes/form_anuncios_pc.html' %}
+{% elif tramite.form_type == 'CONSTRUCCION_PC' %}
+    {% include 'portal/includes/form_construccion_pc.html' %}
+{% elif tramite.form_type == 'TERCEROS_PC' %}
+    {% include 'portal/includes/form_terceros_pc.html' %}
+{% endif %}
+
+                        <button type="submit" class="w-full bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3.5 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 text-sm tracking-wide mt-4 uppercase">
+                            Enviar Solicitud de Trámite ➔
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Nuevo Pie de Página Integral (Color Morena/Vino, no redondeado, elegante y estructurado) -->
+    <footer id="transparencia" class="bg-[#43082B] text-white pt-16 pb-12 border-t-4 border-medellinOro mt-16 font-medium text-xs">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+                
+                <!-- Columna 1: Identidad Municipal -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Logo PC Circular" class="w-12 h-12 object-contain bg-white rounded-full p-0.5 shadow-sm">
+                        <div>
+                            <span class="block font-black text-sm tracking-tight text-white uppercase leading-tight">MEDELLÍN DE BRAVO</span>
+                            <span class="block text-[8px] font-bold text-medellinOro tracking-widest uppercase mt-0.5">Protección Civil y Bomberos</span>
+                        </div>
+                    </div>
+                    <p class="text-purple-100/75 leading-relaxed pr-4 font-normal text-justify">
+                        Portal oficial de trámites digitales y atención ciudadana de la Dirección Municipal de Protección Civil del Municipio de Medellín de Bravo, Veracruz.
+                    </p>
+                    <div class="pt-2 text-purple-200/50 text-[10px] font-semibold leading-relaxed">
+                        <p class="mb-1">&copy; 2026 H. Ayuntamiento de Medellín de Bravo.</p>
+                        <p>Todos los derechos reservados.</p>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Directorio de Emergencias (24/7) -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="phone-call" class="w-4 h-4 text-medellinOro animate-pulse"></i> Líneas de Emergencia
+                    </h4>
+                    <div class="space-y-4">
+                        <!-- Protección Civil & 911 -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Base de Protección Civil</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="tel:2299554774" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5 text-purple-300"></i> 229 955 4774
+                                </a>
+                                <a href="tel:911" class="hover:text-white flex items-center gap-1.5 text-red-400 font-extrabold transition-colors">
+                                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-red-400 animate-bounce"></i> 911 (Nacional)
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Policía Municipal -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Policía Municipal</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="https://wa.me/522291287616" target="_blank" class="hover:text-white flex items-center gap-1.5 text-green-400 font-bold transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5 text-green-400"></i> 229 128 7616 (WhatsApp)
+                                </a>
+                                <a href="tel:2299554305" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5 text-purple-300"></i> 229 955 4305
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 3: Servicios de Apoyo (Mando Único, Tránsito, CFE, C5) -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="activity" class="w-4 h-4 text-medellinOro"></i> Servicios de Apoyo
+                    </h4>
+                    <div class="space-y-4">
+                        <!-- Mando Único y Tránsito -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Seguridad y Tránsito</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="tel:2295480668" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="shield" class="w-3.5 h-3.5 text-purple-300"></i> Policía Estatal: 229 548 0668
+                                </a>
+                                <a href="tel:2291664589" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="navigation" class="w-3.5 h-3.5 text-purple-300"></i> Tránsito: 229 166 4589
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- CFE y C5 -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Infraestructura y Monitoreo</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="tel:071" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="zap" class="w-3.5 h-3.5 text-yellow-400 animate-pulse"></i> Reporte CFE: 071
+                                </a>
+                                <a href="tel:2288423660" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone-forwarded" class="w-3.5 h-3.5 text-purple-300"></i> C5 Estatal: 228 842 3660
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 4: Transparencia y Horarios -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="info" class="w-4 h-4 text-medellinOro"></i> Información Pública
+                    </h4>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Horarios Administrativos</span>
+                            <p class="text-purple-100/75 mt-1 leading-relaxed font-normal">
+                                Oficinas: Lunes a Viernes de 9:00 AM a 4:00 PM.<br>
+                                <span class="text-white font-bold">Atención operativa de emergencias: 24/7/365.</span>
+                            </p>
+                        </div>
+                        <div class="space-y-2.5 pt-1">
+                            <a href="https://www.medellindebravo.gob.mx/transparencia" target="_blank" class="bg-white/5 hover:bg-white/10 text-white font-bold py-2.5 px-4 rounded-xl border border-white/10 flex items-center justify-between transition-all group text-[11px]">
+                                <span>Portal de Transparencia Municipal</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-medellinOro group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                            <p class="text-[9px] text-purple-200/40 leading-relaxed font-semibold">
+                                Cumplimiento de la Ley General de Transparencia y Acceso a la Información Pública del Estado de Veracruz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de pestañas interactivas -->
+    <script>
+        function switchTab(tabId) {
+            // Ocultar todos los contenidos de pestaña
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            
+            // Mostrar la pestaña seleccionada
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            // Restablecer estilos de los botones
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-medellinVino', 'text-medellinVino');
+                btn.classList.add('border-transparent', 'text-gray-500');
+            });
+            
+            // Activar botón seleccionado
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.remove('border-transparent', 'text-gray-500');
+                activeBtn.classList.add('border-medellinVino', 'text-medellinVino');
+            }
+
+            // Scroll suave hacia la pestaña
+            document.getElementById('btn-' + tabId).scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Inicializar Iconos Lucide
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
+
+    <!-- Lista de Giros de la Base de Datos y Autocompletado -->
+    <script>
+        const baseGiros = [
+            {% for item in giros_pc %}
+            { "numero": {{ item.numero }}, "actividad": "{{ item.actividad|escapejs }}", "riesgo": "{{ item.riesgo|escapejs }}" },
+            {% endfor %}
+        ];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputs = [
+                { inputId: "input-giro-form1", dropdownId: "dropdown-giro-form1" },
+                { inputId: "input-giro-form2", dropdownId: "dropdown-giro-form2" },
+                { inputId: "input-giro-form3", dropdownId: "dropdown-giro-form3" }
+            ];
+
+            inputs.forEach(cfg => {
+                const inputEl = document.getElementById(cfg.inputId);
+                const dropdownEl = document.getElementById(cfg.dropdownId);
+                if (!inputEl || !dropdownEl) return;
+
+                function renderDropdown(items) {
+                    dropdownEl.innerHTML = "";
+                    if (items.length === 0) {
+                        dropdownEl.classList.add("hidden");
+                        return;
+                    }
+                    dropdownEl.classList.remove("hidden");
+                    
+                    items.forEach(item => {
+                        const div = document.createElement("div");
+                        div.className = "px-4 py-2 hover:bg-gray-50 cursor-pointer border-b border-gray-100 flex items-center justify-between text-xs font-semibold text-slate-700 transition-colors";
+                        
+                        // Badge color based on risk
+                        let badgeClass = "bg-green-100 text-green-700";
+                        if (item.riesgo === "Mediano Riesgo") {
+                            badgeClass = "bg-amber-100 text-amber-700";
+                        } else if (item.riesgo === "Alto Riesgo") {
+                            badgeClass = "bg-rose-100 text-rose-700";
+                        }
+                        
+                        div.innerHTML = `
+                            <span>${item.actividad}</span>
+                            <span class="px-2 py-0.5 rounded text-[8px] uppercase tracking-wider font-black ${badgeClass}">${item.riesgo}</span>
+                        `;
+                        
+                        div.addEventListener("click", function() {
+                            inputEl.value = item.actividad;
+                            dropdownEl.classList.add("hidden");
+                        });
+                        
+                        dropdownEl.appendChild(div);
+                    });
+                }
+
+                inputEl.addEventListener("input", function() {
+                    const q = inputEl.value.toLowerCase().trim();
+                    if (!q) {
+                        dropdownEl.classList.add("hidden");
+                        return;
+                    }
+                    // Filter matching giros
+                    const filtered = baseGiros.filter(g => 
+                        g.actividad.toLowerCase().includes(q)
+                    ).slice(0, 10); // Limit to top 10 results
+                    
+                    renderDropdown(filtered);
+                });
+
+                inputEl.addEventListener("focus", function() {
+                    const q = inputEl.value.toLowerCase().trim();
+                    if (q) {
+                        const filtered = baseGiros.filter(g => 
+                            g.actividad.toLowerCase().includes(q)
+                        ).slice(0, 10);
+                        renderDropdown(filtered);
+                    }
+                });
+            });
+
+            // Close all dropdowns when clicking outside
+            document.addEventListener("click", function(e) {
+                inputs.forEach(cfg => {
+                    const inputEl = document.getElementById(cfg.inputId);
+                    const dropdownEl = document.getElementById(cfg.dropdownId);
+                    if (dropdownEl && e.target !== inputEl && !dropdownEl.contains(e.target)) {
+                        dropdownEl.classList.add("hidden");
+                    }
+                });
+            });
+
+            // Lógica de sincronización de horarios (Select a Hidden Inputs)
+            function setupHourSync(formSuffix) {
+                const startHour = document.getElementById(`start-hour-${formSuffix}`);
+                const startMin = document.getElementById(`start-min-${formSuffix}`);
+                const startAmpm = document.getElementById(`start-ampm-${formSuffix}`);
+                
+                const endHour = document.getElementById(`end-hour-${formSuffix}`);
+                const endMin = document.getElementById(`end-min-${formSuffix}`);
+                const endAmpm = document.getElementById(`end-ampm-${formSuffix}`);
+                
+                const hiddenInput = document.getElementById(`hidden-horario-${formSuffix}`);
+                
+                if (!startHour || !hiddenInput) return;
+                
+                function updateValue() {
+                    hiddenInput.value = `${startHour.value}:${startMin.value} ${startAmpm.value} - ${endHour.value}:${endMin.value} ${endAmpm.value}`;
+                }
+                
+                [startHour, startMin, startAmpm, endHour, endMin, endAmpm].forEach(el => {
+                    el.addEventListener("change", updateValue);
+                });
+                
+                updateValue();
+            }
+
+            setupHourSync("form1");
+            setupHourSync("form2");
+        });
+    </script>
+</body>
+</html>

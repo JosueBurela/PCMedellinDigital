@@ -1,0 +1,103 @@
+{% load static %}
+<!-- Sección Integral de Estado del Clima (Diseño Original Horizontal Ajustado a Pantalla) -->
+<section id="clima-veracruz" class="max-w-6xl mx-auto space-y-3">
+    <div class="bg-white rounded-2xl p-4 md:p-5 shadow-sm border border-gray-150 space-y-3.5">
+        
+        <!-- Encabezado Original Compacto -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-gray-100 pb-2.5 gap-1.5">
+            <div>
+                <span class="bg-sky-50 text-sky-700 font-extrabold text-[9px] uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-sky-100 inline-flex items-center gap-1 mb-0.5">
+                    <i data-lucide="cloud-sun" class="w-3 h-3 text-sky-500"></i> Servicio Meteorológico Nacional (CONAGUA)
+                </span>
+                <h3 class="text-base md:text-lg font-extrabold text-slate-800 tracking-tight flex items-center gap-2">
+                    Estado del Clima — Local, Estatal y Nacional
+                </h3>
+            </div>
+            <span class="text-[9px] font-bold text-gray-400 bg-gray-50 px-2.5 py-1 rounded-lg border border-gray-100 inline-flex items-center gap-1 shrink-0">
+                <i data-lucide="refresh-cw" class="w-2.5 h-2.5 text-emerald-500"></i> Sincronizado con SMN
+            </span>
+        </div>
+
+        <!-- 1. PRONÓSTICO LOCAL A 3 DÍAS (DISEÑO ORIGINAL HORIZONTAL SUPERIOR) -->
+        <div>
+            <h4 class="text-[10px] font-black text-slate-700 uppercase tracking-wider mb-2 flex items-center gap-1">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-medellinVino"></i> Pronóstico Local a 3 Días (Medellín de Bravo / Veracruz)
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                {% for dia in pronostico_clima.dias %}
+                <div class="bg-gradient-to-b from-gray-50 to-slate-50/60 rounded-xl p-2.5 border border-gray-100 flex flex-col justify-between space-y-1.5 transition-all hover:shadow-sm">
+                    <div class="flex justify-between items-center">
+                        <span class="text-[11px] font-black text-slate-800 tracking-tight">{{ dia.label }}</span>
+                        <span class="text-[9px] font-bold px-2 py-0.2 rounded-full {{ dia.badge_color }}">
+                            {{ dia.cielo }}
+                        </span>
+                    </div>
+                    <div class="flex items-center justify-between pt-0.5">
+                        <div class="w-9 h-9 {{ dia.bg_icon }} rounded-xl flex items-center justify-center shadow-inner">
+                            <i data-lucide="{{ dia.icon }}" class="w-4 h-4 {{ dia.color }}"></i>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-sm font-black text-slate-800 tracking-tight">{{ dia.tmax }}</span>
+                            <span class="block text-[9px] font-bold text-gray-400">{{ dia.tmin }}</span>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- 2. BOLETINES Y VIDEO (DISEÑO ORIGINAL DE 2 COLUMNAS INFERIORES) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 pt-1 border-t border-gray-100 items-start">
+            
+            <!-- Columna Izquierda (7 cols): Pronóstico Regional y Monitoreo Nacional (Justificados) -->
+            <div class="lg:col-span-7 space-y-2.5">
+                <div class="bg-purple-50/50 border border-purple-100 rounded-xl p-3 space-y-1">
+                    <span class="text-[9px] font-black text-medellinVino uppercase tracking-widest flex items-center gap-1">
+                        <i data-lucide="compass" class="w-3 h-3"></i> Pronóstico Regional (Estado de Veracruz / Golfo)
+                    </span>
+                    <p class="text-[11px] text-slate-700 leading-snug font-medium text-justify">
+                        {{ pronostico_clima.boletin_estatal }}
+                    </p>
+                </div>
+
+                <div class="bg-gray-50 border border-gray-150 rounded-xl p-3 space-y-1">
+                    <span class="text-[9px] font-black text-gray-500 uppercase tracking-widest flex items-center gap-1">
+                        <i data-lucide="globe" class="w-3 h-3 text-slate-600"></i> Monitoreo Meteorológico Nacional (México)
+                    </span>
+                    <p class="text-[11px] text-slate-600 leading-snug font-normal text-justify">
+                        {{ pronostico_clima.resumen_nacional }}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Columna Derecha (5 cols): Video Boletín Diario SMN -->
+            <div class="lg:col-span-5 space-y-2">
+                <div class="flex items-center justify-between">
+                    <span class="text-[9px] font-black text-red-600 uppercase tracking-widest flex items-center gap-1">
+                        <i data-lucide="video" class="w-3 h-3 text-red-600"></i> Video Boletín Diario SMN
+                    </span>
+                    <span class="text-[8px] font-bold text-emerald-600 bg-emerald-50 px-1.5 py-0.2 rounded-full border border-emerald-100">
+                        Emitido Hoy
+                    </span>
+                </div>
+                <div id="yt-video-wrapper" class="relative w-full overflow-hidden rounded-xl shadow-sm border border-gray-200 bg-slate-900 aspect-video group cursor-pointer" onclick="loadYtVideo('{{ pronostico_clima.video_youtube_url|escapejs }}', '{{ pronostico_clima.video_titulo|escapejs }}')">
+                    <img id="yt-thumb" src="{{ pronostico_clima.video_thumbnail }}" alt="Boletín Clima" class="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+                    <div id="yt-play-overlay" class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/20 transition-colors">
+                        <div class="w-11 h-11 bg-red-600 text-white rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <svg class="w-6 h-6 fill-current ml-0.5" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center text-[9px]">
+                    <p class="text-gray-500 font-semibold truncate max-w-[70%]">
+                        📺 {{ pronostico_clima.video_titulo|default:"Reporte meteorológico oficial." }}
+                    </p>
+                    <a href="https://www.youtube.com/watch?v={{ pronostico_clima.video_id }}" target="_blank" class="text-red-600 font-bold hover:underline shrink-0">
+                        YouTube ↗
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

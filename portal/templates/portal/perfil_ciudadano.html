@@ -1,0 +1,414 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Historial y Chat | Medellín de Bravo</title>
+    <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5C1442',
+                        medellinOro: '#B39148',
+                        medellinOroClaro: '#F4EEDF',
+                        medellinGris: '#F8F9FA',
+                        medellinGrisOscuro: '#2D3748',
+                        medellinVerde: '#10B981',
+                        medellinRojo: '#EF4444',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #FDFCF7 0%, #F5F7FA 100%);
+        }
+        /* Custom scrollbar for chat */
+        .chat-container::-webkit-scrollbar {
+            width: 5px;
+        }
+        .chat-container::-webkit-scrollbar-track {
+            background: #F1F1F1;
+            border-radius: 10px;
+        }
+        .chat-container::-webkit-scrollbar-thumb {
+            background: #D8B4FE;
+            border-radius: 10px;
+        }
+        .chat-container::-webkit-scrollbar-thumb:hover {
+            background: #A855F7;
+        }
+    </style>
+</head>
+<body class="min-h-screen font-sans text-slate-800 flex flex-col">
+
+    <!-- Encabezado Municipal -->
+    <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <a href="{% url 'home' %}" class="flex items-center space-x-2">
+                    <img src="{% static 'portal/img/logo_pc.png' %}" alt="Logo PC" class="w-10 h-10 object-contain">
+                    <div>
+                        <h1 class="text-xs font-black text-medellinVino uppercase tracking-wider leading-none">Protección Civil</h1>
+                        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Medellín de Bravo</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <div class="bg-purple-50 text-medellinVino text-xs font-bold px-3 py-1.5 rounded-xl border border-purple-100 flex items-center space-x-1.5">
+                    <span>👤</span>
+                    <span>{{ ciudadano.nombre }}</span>
+                </div>
+                <a href="{% url 'home' %}" class="text-xs font-bold text-gray-500 hover:text-medellinVino transition">Volver al Inicio 🏠</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- COLUMNA IZQUIERDA: Historial de Trámites y Alertas (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col space-y-6">
+            
+            <!-- Datos del Ciudadano -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-50 rounded-full filter blur-2xl -mr-10 -mt-10 opacity-70"></div>
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3">Datos del Ciudadano</h3>
+                <div class="space-y-1.5 text-xs">
+                    <p class="font-bold text-slate-800 text-sm">{{ ciudadano.nombre }} {{ ciudadano.primer_apellido }} {{ ciudadano.segundo_apellido|default:"" }}</p>
+                    <p class="text-gray-500"><strong>CURP:</strong> <span class="font-mono text-medellinVino">{{ ciudadano.curp }}</span></p>
+                    <p class="text-gray-500"><strong>Correo:</strong> {{ ciudadano.correo }}</p>
+                    <p class="text-gray-500"><strong>Teléfono:</strong> {{ ciudadano.telefono }}</p>
+                </div>
+            </div>
+
+            <!-- Listado de Trámites -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 flex flex-col space-y-4">
+                <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center space-x-1">
+                        <span>📋</span>
+                        <span>Mis Trámites Realizados</span>
+                    </h3>
+                    <span class="bg-purple-100 text-medellinVino font-bold text-[10px] px-2 py-0.5 rounded-full">{{ solicitudes.count }}</span>
+                </div>
+                
+                <div class="space-y-3 max-h-[250px] overflow-y-auto pr-1">
+                    {% for sol in solicitudes %}
+                    <div class="border rounded-2xl p-3 text-xs transition hover:border-purple-200 {% if selected_solicitud.id == sol.id %}border-medellinVino bg-purple-50/30{% else %}border-gray-100 bg-gray-50/50{% endif %}">
+                        <div class="flex justify-between items-start gap-2 mb-1">
+                            <span class="font-bold text-slate-800 leading-tight block">{{ sol.establecimiento }}</span>
+                            {% if sol.estatus == 'PENDIENTE' %}
+                            <span class="bg-amber-50 text-medellinOro font-bold text-[9px] px-1.5 py-0.5 rounded border border-amber-100">Pendiente</span>
+                            {% elif sol.estatus == 'APROBADO' %}
+                            <span class="bg-emerald-50 text-medellinVerde font-bold text-[9px] px-1.5 py-0.5 rounded border border-emerald-100">Aprobado</span>
+                            {% else %}
+                            <span class="bg-red-50 text-medellinRojo font-bold text-[9px] px-1.5 py-0.5 rounded border border-red-100">Rechazado</span>
+                            {% endif %}
+                        </div>
+                        <p class="text-[10px] text-gray-400 mb-2">Trámite: {{ sol.tramite.titulo }}</p>
+                        
+                        <div class="flex justify-between items-center text-[10px]">
+                            <span class="text-gray-400">{{ sol.creado_en|date:"d/m/Y H:i" }}</span>
+                            <a href="?tipo=solicitud&id={{ sol.id }}" class="text-medellinVino font-bold hover:underline flex items-center space-x-0.5">
+                                <span>Detalle & Chat</span>
+                                <span>💬</span>
+                            </a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-xs text-gray-400 text-center py-4">No has registrado ningún trámite aún.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- Listado de Alertas de Riesgo -->
+            <div class="bg-white rounded-3xl p-5 shadow-sm border border-gray-100 flex flex-col space-y-4">
+                <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center space-x-1">
+                        <span>🚨</span>
+                        <span>Mis Alertas Reportadas</span>
+                    </h3>
+                    <span class="bg-purple-100 text-medellinVino font-bold text-[10px] px-2 py-0.5 rounded-full">{{ reportes.count }}</span>
+                </div>
+                
+                <div class="space-y-3 max-h-[250px] overflow-y-auto pr-1">
+                    {% for rep in reportes %}
+                    <div class="border rounded-2xl p-3 text-xs transition hover:border-purple-200 {% if selected_reporte.id == rep.id %}border-medellinVino bg-purple-50/30{% else %}border-gray-100 bg-gray-50/50{% endif %}">
+                        <div class="flex justify-between items-start gap-2 mb-1">
+                            <span class="font-bold text-slate-800 font-mono block">{{ rep.numero_reporte }}</span>
+                            {% if rep.estatus == 'PENDIENTE' %}
+                            <span class="bg-amber-50 text-medellinOro font-bold text-[9px] px-1.5 py-0.5 rounded border border-amber-100">Sin Atender</span>
+                            {% elif rep.estatus == 'LEIDO' %}
+                            <span class="bg-purple-50 text-purple-700 font-bold text-[9px] px-1.5 py-0.5 rounded border border-purple-100">Leído</span>
+                            {% elif rep.estatus == 'EN_PROCESO' %}
+                            <span class="bg-blue-50 text-blue-600 font-bold text-[9px] px-1.5 py-0.5 rounded border border-blue-100">En Curso</span>
+                            {% else %}
+                            <span class="bg-emerald-50 text-medellinVerde font-bold text-[9px] px-1.5 py-0.5 rounded border border-emerald-100">Resuelto</span>
+                            {% endif %}
+                        </div>
+                        <p class="text-[10px] text-gray-400 mb-2">Servicio: {{ rep.get_tipo_servicio_display }}</p>
+                        
+                        <div class="flex justify-between items-center text-[10px]">
+                            <span class="text-gray-400">{{ rep.fecha_reporte|date:"d/m/Y H:i" }}</span>
+                            <a href="?tipo=reporte&id={{ rep.id }}" class="text-medellinVino font-bold hover:underline flex items-center space-x-0.5">
+                                <span>Seguimiento & Chat</span>
+                                <span>💬</span>
+                            </a>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <p class="text-xs text-gray-400 text-center py-4">No has reportado ninguna alerta de riesgo.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COLUMNA DERECHA: Detalle y Chat Activo (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col h-full">
+            
+            <!-- SI SE SELECCIONÓ UN TRÁMITE -->
+            {% if selected_solicitud %}
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 flex flex-col h-[700px]">
+                <!-- Encabezado de la solicitud -->
+                <div class="border-b border-gray-100 pb-4 mb-4 flex justify-between items-start">
+                    <div>
+                        <span class="bg-purple-100 text-medellinVino font-bold text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider">Trámite Municipal</span>
+                        <h2 class="text-lg font-extrabold text-slate-800 leading-snug mt-1">{{ selected_solicitud.establecimiento }}</h2>
+                        <p class="text-xs text-gray-400 font-medium">RFC: {{ selected_solicitud.rfc }} | Folio: #TS-{{ selected_solicitud.id }}</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest">Estatus</span>
+                        <span class="inline-block mt-1 font-bold text-xs px-2.5 py-1 rounded-full {% if selected_solicitud.estatus == 'PENDIENTE' %}bg-amber-50 text-medellinOro border border-amber-100{% elif selected_solicitud.estatus == 'APROBADO' %}bg-emerald-50 text-medellinVerde border border-emerald-100{% else %}bg-red-50 text-medellinRojo border border-red-100{% endif %}">
+                            {{ selected_solicitud.get_estatus_display }}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Detalles adicionales -->
+                <div class="bg-gray-50 rounded-2xl p-4 mb-4 text-xs grid grid-cols-2 gap-3 text-gray-600">
+                    <p><strong>Tipo de Anuencia:</strong> {{ selected_solicitud.get_tipo_anuencia_display|default:selected_solicitud.get_tipo_anuencia_anuncio_display }}</p>
+                    <p><strong>Giro Comercial:</strong> {{ selected_solicitud.giro }}</p>
+                    <p><strong>Calle:</strong> {{ selected_solicitud.domicilio_calle|default:"No especificado" }}</p>
+                    <p><strong>Colonia:</strong> {{ selected_solicitud.colonia|default:"No especificado" }}</p>
+                </div>
+
+                <!-- Documentación Técnica Requerida (Siguiente Fase) -->
+                <div class="bg-purple-50/40 rounded-2xl p-4 mb-4 border border-purple-100/50 text-xs">
+                    <h4 class="font-extrabold text-slate-700 uppercase text-[10px] tracking-wider mb-2.5 flex items-center gap-1.5">
+                        <span>📂</span> Requisitos Técnicos Pendientes (Para Emisión)
+                    </h4>
+                    <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1.5 list-disc pl-4 text-gray-600 text-[11px] font-semibold">
+                        {% if selected_solicitud.tramite.form_type == 'ANUENCIA_PC' %}
+                            <li>Programa Interno de Protección Civil</li>
+                            <li>Carta de Corresponsabilidad Técnica (Tercer Acreditado)</li>
+                            <li>Acta/Constancias de Capacitación de Brigadas</li>
+                            <li>Dictamen Técnico de Instalaciones de Gas LP/Natural</li>
+                            <li>Dictamen de Instalación Eléctrica Vigente</li>
+                            <li>Dictamen / Estudio de Estabilidad Estructural</li>
+                            <li>Póliza de Seguro de Responsabilidad Civil Vigente</li>
+                            <li>Comprobante de Pago de Derechos de Anuencia</li>
+                        {% elif selected_solicitud.tramite.form_type == 'ANUNCIOS_PC' %}
+                            <li>Dictamen Estructural Vigente</li>
+                            <li>Responsiva de Estabilidad Estructural</li>
+                            <li>Programa/Bitácora del Anuncio</li>
+                            <li>Póliza de Seguro de Responsabilidad Civil</li>
+                            <li>Anuencia firmada por vecinos colindantes</li>
+                            <li>Análisis de Riesgo elaborado por Tercero</li>
+                            <li>Pago de derechos de anuncio</li>
+                        {% elif selected_solicitud.tramite.form_type == 'CONSTRUCCION_PC' %}
+                            <li>Plano arquitectónico o memoria descriptiva</li>
+                            <li>Constancia de no afectación (CFE, Pemex, INAH)</li>
+                            <li>Permiso de Uso de Suelo o Zonificación</li>
+                            <li>Análisis de riesgo por tercer acreditado</li>
+                            <li>Fotografías a color del predio</li>
+                            <li>Pago de derechos municipal</li>
+                        {% elif selected_solicitud.tramite.form_type == 'TERCEROS_PC' %}
+                            <li>Curriculum Vitae Técnico (Obligatorio en Nuevos Registros)</li>
+                        {% else %}
+                            <li>Expediente Técnico Completo / Planos de Ingeniería</li>
+                        {% endif %}
+                    </ul>
+                </div>
+
+                <!-- Chat de Soporte / Aclaraciones -->
+                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center space-x-1.5">
+                    <span>💬</span>
+                    <span>Chat de Aclaraciones con Protección Civil</span>
+                </h4>
+                
+                <!-- Caja de Mensajes -->
+                <div class="flex-grow overflow-y-auto chat-container space-y-3 bg-slate-50 border border-slate-100 rounded-2xl p-4 mb-4" id="chat-box">
+                    {% for msg in selected_solicitud.mensajes %}
+                    <div class="flex {% if msg.remitente_ciudadano %}justify-end{% else %}justify-start{% endif %}">
+                        <div class="max-w-[75%] rounded-2xl p-3 text-xs shadow-sm {% if msg.remitente_ciudadano %}bg-medellinVino text-white rounded-tr-none{% else %}bg-white text-slate-700 border border-gray-100 rounded-tl-none{% endif %}">
+                            {% if not msg.remitente_ciudadano %}
+                            <span class="block text-[8px] font-black text-medellinOro uppercase tracking-wider mb-0.5">H. Ayuntamiento ({{ msg.remitente_admin.first_name|default:msg.remitente_admin.username }})</span>
+                            {% endif %}
+                            <p class="leading-relaxed">{{ msg.mensaje }}</p>
+                            <span class="block text-[8px] text-right mt-1 {% if msg.remitente_ciudadano %}text-purple-300{% else %}text-gray-400{% endif %}">
+                                {{ msg.fecha_envio|date:"H:i" }}
+                            </span>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="flex flex-col items-center justify-center h-full text-gray-400 space-y-2">
+                        <span class="text-3xl">💬</span>
+                        <p class="text-xs font-bold text-center">No hay mensajes previos en este trámite.</p>
+                        <p class="text-[10px] text-center text-gray-400">Escribe abajo para consultar el estado o resolver dudas.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Formulario para enviar mensaje -->
+                <form action="{% url 'enviar_mensaje_chat' %}" method="POST" class="flex gap-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="solicitud_id" value="{{ selected_solicitud.id }}">
+                    <textarea name="mensaje" required placeholder="Escribe tu duda o consulta aquí..." rows="2" class="flex-grow px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino resize-none"></textarea>
+                    <button type="submit" class="bg-medellinVino hover:bg-[#43082B] text-white px-4 rounded-xl text-xs font-bold transition shadow-sm flex items-center justify-center">
+                        Enviar
+                    </button>
+                </form>
+            </div>
+
+            <!-- SI SE SELECCIONÓ UN REPORTE -->
+            {% elif selected_reporte %}
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 flex flex-col h-[700px]">
+                <!-- Encabezado del reporte -->
+                <div class="border-b border-gray-100 pb-4 mb-4 flex justify-between items-start">
+                    <div>
+                        <span class="bg-red-100 text-red-700 font-bold text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wider">Reporte de Emergencia / Riesgo</span>
+                        <h2 class="text-lg font-extrabold text-slate-800 leading-snug mt-1">{{ selected_reporte.get_tipo_servicio_display }}</h2>
+                        <p class="text-xs text-gray-400 font-medium">Folio: {{ selected_reporte.numero_reporte }}</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-widest">Estatus</span>
+                        <span class="inline-block mt-1 font-bold text-xs px-2.5 py-1 rounded-full {% if selected_reporte.estatus == 'PENDIENTE' %}bg-amber-50 text-medellinOro border border-amber-100{% elif selected_reporte.estatus == 'LEIDO' %}bg-purple-50 text-purple-700 border border-purple-100{% elif selected_reporte.estatus == 'EN_PROCESO' %}bg-blue-50 text-blue-600 border border-blue-100{% else %}bg-emerald-50 text-medellinVerde border border-emerald-100{% endif %}">
+                            {{ selected_reporte.get_estatus_display }}
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Detalles adicionales -->
+                <div class="bg-gray-50 rounded-2xl p-4 mb-4 text-xs space-y-2 text-gray-600">
+                    <p><strong>Ubicación:</strong> {{ selected_reporte.direccion }}, Col. {{ selected_reporte.colonia }}, {{ selected_reporte.localidad }}</p>
+                    <p><strong>Descripción:</strong> {{ selected_reporte.descripcion }}</p>
+                    <p><strong>Unidad Asignada:</strong> <span class="bg-blue-100 text-blue-800 font-bold px-2 py-0.5 rounded text-[10px]">{{ selected_reporte.unidad_acudira|default:"Sin unidad asignada aún" }}</span></p>
+                    {% if selected_reporte.tiempo_atencion %}
+                    <p><strong>Tiempo Estimado de Atención:</strong> {{ selected_reporte.tiempo_atencion }}</p>
+                    {% endif %}
+                    {% if selected_reporte.fecha_resolucion %}
+                    <p><strong>⏱️ Tiempo de Respuesta Total:</strong> <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded text-[10px]">{{ selected_reporte.tiempo_resolucion_calculado }}</span></p>
+                    {% endif %}
+                    {% if selected_reporte.evidencia_foto %}
+                    <p class="pt-1">
+                        <a href="{{ selected_reporte.evidencia_foto.url }}" target="_blank" class="inline-flex items-center text-medellinVino hover:underline font-bold">
+                            📸 Ver evidencia fotográfica cargada
+                        </a>
+                    </p>
+                    {% endif %}
+                </div>
+
+                <!-- Bitácora de Seguimiento Operativo -->
+                <div class="bg-purple-50/50 rounded-2xl p-4 mb-4 border border-purple-100/50 text-xs">
+                    <h5 class="font-extrabold text-slate-700 uppercase text-[10px] tracking-wider mb-2 flex items-center gap-1">
+                        <span>📋</span> Bitácora Operativa de Protección Civil
+                    </h5>
+                    <div class="space-y-2 max-h-[150px] overflow-y-auto pr-1">
+                        {% for hist in selected_reporte.historial.all %}
+                        <div class="border-b border-gray-100 pb-1.5 last:border-0 last:pb-0 border-dashed">
+                            <span class="text-[9px] text-gray-400 font-semibold block">{{ hist.fecha_registro|date:"d/m/Y H:i" }}</span>
+                            <p class="text-[11px] text-slate-700 font-medium mt-0.5">{{ hist.comentario }}</p>
+                        </div>
+                        {% endfor %}
+                        
+                        <!-- Entrada estática inicial (Cuando se lanzó el reporte) -->
+                        <div class="border-b border-gray-100 pb-1.5 last:border-0 last:pb-0">
+                            <span class="text-[9px] text-emerald-600 font-bold block">{{ selected_reporte.fecha_reporte|date:"d/m/Y H:i" }}</span>
+                            <p class="text-[11px] text-slate-500 font-bold mt-0.5">Reporte lanzado e ingresado en la central municipal. Folio generado: {{ selected_reporte.numero_reporte }}.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat de Emergencia -->
+                <h4 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center space-x-1.5">
+                    <span>💬</span>
+                    <span>Chat de Seguimiento del Incidente</span>
+                </h4>
+                
+                <!-- Caja de Mensajes -->
+                <div class="flex-grow overflow-y-auto chat-container space-y-3 bg-slate-50 border border-slate-100 rounded-2xl p-4 mb-4" id="chat-box">
+                    {% for msg in selected_reporte.mensajes %}
+                    <div class="flex {% if msg.remitente_ciudadano %}justify-end{% else %}justify-start{% endif %}">
+                        <div class="max-w-[75%] rounded-2xl p-3 text-xs shadow-sm {% if msg.remitente_ciudadano %}bg-medellinVino text-white rounded-tr-none{% else %}bg-white text-slate-700 border border-gray-100 rounded-tl-none{% endif %}">
+                            {% if not msg.remitente_ciudadano %}
+                            <span class="block text-[8px] font-black text-medellinOro uppercase tracking-wider mb-0.5">H. Ayuntamiento ({{ msg.remitente_admin.first_name|default:msg.remitente_admin.username }})</span>
+                            {% endif %}
+                            <p class="leading-relaxed">{{ msg.mensaje }}</p>
+                            <span class="block text-[8px] text-right mt-1 {% if msg.remitente_ciudadano %}text-purple-300{% else %}text-gray-400{% endif %}">
+                                {{ msg.fecha_envio|date:"H:i" }}
+                            </span>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="flex flex-col items-center justify-center h-full text-gray-400 space-y-2">
+                        <span class="text-3xl">💬</span>
+                        <p class="text-xs font-bold text-center">No hay mensajes de seguimiento.</p>
+                        <p class="text-[10px] text-center text-gray-400">Puedes escribir detalles adicionales para orientar al equipo técnico.</p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- Formulario para enviar mensaje -->
+                <form action="{% url 'enviar_mensaje_chat' %}" method="POST" class="flex gap-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="reporte_id" value="{{ selected_reporte.id }}">
+                    <textarea name="mensaje" required placeholder="Añade comentarios o detalles del siniestro..." rows="2" class="flex-grow px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino resize-none"></textarea>
+                    <button type="submit" class="bg-medellinVino hover:bg-[#43082B] text-white px-4 rounded-xl text-xs font-bold transition shadow-sm flex items-center justify-center">
+                        Enviar
+                    </button>
+                </form>
+            </div>
+
+            <!-- VACÍO / INSTRUCCIONES -->
+            {% else %}
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col items-center justify-center text-center h-[700px] space-y-4">
+                <div class="w-20 h-20 bg-purple-50 rounded-full flex items-center justify-center text-4xl animate-bounce">
+                    💬
+                </div>
+                <h2 class="text-lg font-extrabold text-slate-800">Buzón de Consultas y Seguimiento</h2>
+                <p class="text-xs text-gray-400 max-w-sm leading-relaxed">
+                    Selecciona uno de tus trámites o alertas en la lista lateral para visualizar el historial completo, estatus de dictamen y chatear directamente con el personal de Protección Civil.
+                </p>
+            </div>
+            {% endif %}
+
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-gray-100 py-4 text-center text-[10px] text-gray-400 font-bold uppercase tracking-wider">
+        H. Ayuntamiento de Medellín de Bravo, Ver. &copy; 2026 | Protección Civil
+    </footer>
+
+    <!-- Auto-scroll chat to bottom -->
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const chatBox = document.getElementById('chat-box');
+            if (chatBox) {
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>

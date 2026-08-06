@@ -1,0 +1,153 @@
+                        
+                        <div class="space-y-4">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">1. Tipo de Solicitud (Construcción / Obra)</span>
+                            {% if tramite.sub_tipo %}
+                                <input type="hidden" name="tipo_anuencia_construccion" value="{{ tramite.sub_tipo }}">
+                                <div class="w-full px-4 py-3 bg-purple-50/70 border border-purple-100 rounded-xl text-xs font-bold text-medellinVino flex items-center gap-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                    <span>
+                                        {% if tramite.sub_tipo == 'CONSTRUCCION' %}
+                                            Revisión de planos, proyecto para No inconveniente de construcción
+                                        {% elif tramite.sub_tipo == 'REMODELACION' %}
+                                            Inspección de inmueble y revisión de planos para remodelación y ampliación
+                                        {% elif tramite.sub_tipo == 'DEMOLICION' %}
+                                            Inspección de inmueble a demoler
+                                        {% else %}
+                                            {{ tramite.sub_tipo }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            {% else %}
+                                <select name="tipo_anuencia_construccion" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold focus:outline-none focus:border-medellinVino transition-colors">
+                                    <option value="CONSTRUCCION">Revisión de planos, proyecto para No inconveniente de construcción</option>
+                                    <option value="REMODELACION">Inspección de inmueble y revisión de planos para remodelación y ampliación</option>
+                                    <option value="DEMOLICION">Inspección de inmueble a demoler</option>
+                                </select>
+                            {% endif %}
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">2. Datos del Inmueble y Propietario</span>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Razón Social / Proyecto</label>
+                                    <input type="text" name="establecimiento" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. Desarrollos e Infraestructura Inmobiliaria S.A. de C.V.">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">RFC del Contribuyente o Propietario (Opcional)</label>
+                                    <input type="text" name="rfc" maxlength="13" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors uppercase font-bold text-slate-800" placeholder="RFC (Opcional)">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Nombre de Propietario, Representante Legal o Beneficiario (Saldrá en el Dictamen)</label>
+                                <input type="text" name="propietario_representante" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Nombre completo">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Giro o Destino de la Obra</label>
+                                    <input type="text" id="input-giro-form3" name="giro" autocomplete="off" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Escriba para buscar giro (ej. Casa Habitacion, Bodega)...">
+                                    <div id="dropdown-giro-form3" class="hidden absolute left-0 right-0 mt-1 max-h-48 overflow-y-auto bg-white border border-gray-250 rounded-xl shadow-2xl z-50 text-[11px]"></div>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Teléfono de Propietario</label>
+                                    <input type="tel" name="telefono_contacto" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. 2299887766">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Total Superficie de Terreno (m²)</label>
+                                    <input type="text" name="superficie_terreno" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. 200 m²">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Superficie de Construcción / Demolición (m²)</label>
+                                    <input type="text" name="superficie_construccion" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. 150 m²">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">3. Domicilio de la Obra o Inmueble</span>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="md:col-span-2">
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Calle / Av. / Prolongación</label>
+                                    <input type="text" name="domicilio_calle" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. Av. Playa de Vacas">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-gray-500 mb-1.5">No. Ext</label>
+                                        <input type="text" name="no_ext" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="S/N">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-gray-500 mb-1.5">No. Int</label>
+                                        <input type="text" name="no_int" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="N/A">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Colonia / Fraccionamiento / Localidad</label>
+                                    <input type="text" name="colonia" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. Playa de Vacas">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Entre qué calles se ubica</label>
+                                    <input type="text" name="entre_calles" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. Calle 2 y Prolongación Sur">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">4. Datos del Gestor o Solicitante (Quien realiza el trámite)</span>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Nombre Completo</label>
+                                    <input type="text" name="realiza_nombre" value="{{ nombre_prellenado }}" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Nombre de quien firma">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Teléfono Celular</label>
+                                    <input type="tel" name="realiza_telefono" value="{{ tel_prellenado }}" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. 2291234567">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Correo Electrónico Notificaciones</label>
+                                    <input type="email" name="correo_contacto" value="{{ correo_prellenado }}" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="ejemplo@correo.com">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <!-- Documentos generales de construcción -->
+                            <div class="space-y-4">
+                                <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">5. Documentación Básica Solicitada</span>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1 flex items-center gap-1">a) Copia de INE del solicitante <span class="text-red-500">*</span></label>
+                                        <input type="file" name="file_ine" required accept="application/pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1 flex items-center gap-1">b) Copia de pago de predial <span class="text-red-500">*</span></label>
+                                        <input type="file" name="file_predial" required accept="application/pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1 flex items-center gap-1">c) Croquis de localización <span class="text-red-500">*</span></label>
+                                        <input type="file" name="file_croquis" required accept="application/pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1 flex items-center gap-1">d) Copia del título de propiedad (RPP) <span class="text-red-500">*</span></label>
+                                        <input type="file" name="file_titulo_propiedad" required accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-gray-100">
+                            <label class="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase">Proyecto Ejecutivo Opcional (PDF)</label>
+                            <input type="file" name="pdf_documento" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                        </div>
+
+                        <!-- ================= CASO 1.9: FORMULARIO DETALLADO REGISTRO DE TERCEROS ACREDITADOS PC ================= -->

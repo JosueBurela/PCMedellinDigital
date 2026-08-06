@@ -1,0 +1,560 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportar Riesgo o Incidente - PCivil Digital</title>
+    <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5A123E',
+                        medellinVerde: '#5B7B34',
+                        medellinOro: '#E59E27',
+                        medellinFondo: '#F7F8F6',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-medellinFondo text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Navegación -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 md:px-6 h-20 flex justify-between items-center">
+            <a href="{% url 'home' %}" class="flex items-center space-x-3">
+                <img src="{% static 'portal/img/logo_medellin.jpg' %}" alt="Logo Medellín" class="w-10 h-10 md:w-12 md:h-12 object-contain">
+                <div>
+                    <span class="block font-black text-medellinVino text-sm md:text-lg tracking-tight leading-tight">MEDELLÍN DE BRAVO</span>
+                    <span class="block text-[8px] md:text-[10px] font-bold text-medellinOro tracking-widest uppercase">Protección Civil y Bomberos</span>
+                </div>
+            </a>
+            
+            <a href="{% url 'home' %}" class="text-xs font-bold text-medellinVino hover:underline flex items-center gap-1">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Regresar al Inicio
+            </a>
+        </div>
+    </nav>
+
+    <!-- Encabezado del Trámite / Reporte -->
+    <header class="bg-[#43082B] text-white py-12 px-4 md:px-6 relative overflow-hidden border-b-4 border-medellinOro">
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        </div>
+        
+        <div class="container mx-auto max-w-5xl relative z-10 space-y-3">
+            <span class="bg-white/10 text-medellinOro text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded border border-white/10 w-fit block">
+                Atención Ciudadana
+            </span>
+            <h1 class="text-2xl md:text-4xl font-black tracking-tight leading-tight uppercase">
+                Módulo Oficial de Reporte de Riesgos
+            </h1>
+            <p class="text-purple-100/70 text-xs md:text-sm font-normal max-w-3xl leading-relaxed">
+                Reporta en tiempo real cables expuestos, árboles caídos, fugas de gas, inundaciones o enjambres para la intervención de nuestro personal operativo.
+            </p>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-4 md:px-6 py-8 flex-1 max-w-5xl grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Columna Principal: Formulario de Registro (2 columnas) -->
+        <div class="lg:col-span-2 space-y-6">
+            
+            <!-- Alertas de Django -->
+            {% if messages %}
+                <div class="space-y-2">
+                    {% for message in messages %}
+                        <div class="bg-red-50 border-red-500 text-red-700 border-l-4 p-4 rounded-xl text-xs font-semibold shadow-sm">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Tarjeta del Formulario -->
+            <div class="bg-white rounded-3xl border border-gray-150 shadow-sm p-6 md:p-8 space-y-6">
+                <div>
+                    <h2 class="text-lg font-black text-gray-900 tracking-tight uppercase flex items-center gap-2">
+                        <i data-lucide="file-plus-2" class="w-5 h-5 text-medellinVino"></i> Registrar Reporte Ciudadano
+                    </h2>
+                    <p class="text-gray-400 text-xs mt-1 font-normal">Favor de proporcionar información verídica y precisa para facilitar la localización del incidente. Los campos marcados con (*) son requeridos.</p>
+                </div>
+
+                <form method="POST" enctype="multipart/form-data" class="space-y-5 font-semibold text-slate-800 text-xs">
+                    {% csrf_token %}
+                    
+                    <!-- Fila 1: Ciudadano y Teléfono -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Nombre Completo *</label>
+                            <div class="relative">
+                                <input type="text" name="nombre_ciudadano" required class="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-medellinVino focus:bg-white transition-colors" placeholder="Nombre de quien reporta">
+                                <i data-lucide="user" class="absolute left-3 top-3 w-4 h-4 text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Teléfono de Contacto *</label>
+                            <div class="relative">
+                                <input type="tel" name="telefono_ciudadano" maxlength="10" required class="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-medellinVino focus:bg-white transition-colors" placeholder="10 dígitos telefónicos">
+                                <i data-lucide="phone" class="absolute left-3 top-3 w-4 h-4 text-gray-400"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fila 2: Tipo de Incidente y Evidencia Fotográfica -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Tipo de Incidente *</label>
+                            <select name="tipo_servicio" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-medellinVino focus:bg-white font-bold text-slate-700 transition-colors cursor-pointer">
+                                <option value="GAS">Fuga de Gas / Cilindros Dañados</option>
+                                <option value="FUEGO">Incendio / Conato de Fuego</option>
+                                <option value="ARBOL">Árbol Caído / Ramas Peligrosas</option>
+                                <option value="AGUA">Inundación / Desborde</option>
+                                <option value="CABLE">Cables Expuestos / Postes Obstruidos</option>
+                                <option value="ABEJAS">Enjambre de Abejas</option>
+                                <option value="CHOQUE">Accidente Vial / Choque</option>
+                                <option value="OTRO">Otro Incidente de Riesgo</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Subir Evidencia Fotográfica (Opcional)</label>
+                            <input type="file" name="evidencia_foto" accept="image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                        </div>
+                    </div>
+
+                    <!-- Fila 3: Dirección y Colonia Autocompletada -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="space-y-1.5">
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Dirección (Calle y Número) *</label>
+                            <div class="relative">
+                                <input type="text" name="direccion" required class="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-medellinVino focus:bg-white transition-colors" placeholder="Ej. Calle Constitución 15">
+                                <i data-lucide="map" class="absolute left-3 top-3 w-4 h-4 text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div class="space-y-1.5 relative">
+                            <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Colonia / Fraccionamiento *</label>
+                            <div class="relative">
+                                <input type="text" id="input-colonia" name="colonia" autocomplete="off" required class="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-medellinVino focus:bg-white transition-colors" placeholder="Escriba para buscar...">
+                                <i data-lucide="search" class="absolute left-3 top-3 w-4 h-4 text-gray-400"></i>
+                            </div>
+                            
+                            <!-- Dropdown de resultados de colonias (estilizado) -->
+                            <div id="colonia-dropdown" class="hidden absolute left-0 right-0 mt-1 max-h-48 overflow-y-auto bg-white border border-gray-200 rounded-xl shadow-2xl z-50 text-[11px]">
+                                <!-- Los resultados se inyectan dinámicamente por JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fila 4: Localidad (Seleccionable, auto-seleccionado por Colonia) -->
+                    <div class="space-y-1.5">
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Localidad / Zona *</label>
+                        <div class="relative">
+                            <select id="input-localidad" name="localidad" required class="w-full pl-9 pr-10 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold focus:outline-none focus:border-medellinVino focus:bg-white text-slate-800 transition-colors cursor-pointer appearance-none">
+                                <option value="" disabled selected>Seleccione una localidad...</option>
+                                {% for loc in localidades %}
+                                    <option value="{{ loc.nombre }}">{{ loc.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                            <i data-lucide="map-pin" class="absolute left-3 top-3.5 w-4 h-4 text-gray-400 pointer-events-none"></i>
+                            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-400">
+                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                            </div>
+                        </div>
+                        <!-- Prioridad Oculta Auto-calculada por JS -->
+                        <input type="hidden" name="prioridad" id="input-prioridad" value="MEDIA">
+                    </div>
+
+                    <!-- Descripción de hechos -->
+                    <div class="space-y-1.5">
+                        <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Descripción Detallada de los Hechos *</label>
+                        <textarea name="descripcion" rows="3" required class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-medellinVino focus:bg-white transition-colors" placeholder="Por favor proporcione referencias de ubicación, daños visibles, etc., para acelerar la localización del incidente por nuestros elementos operativos..."></textarea>
+                    </div>
+
+                    <!-- Botón de Envío -->
+                    <button type="submit" class="w-full bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3.5 rounded-xl shadow-md transition-all transform hover:-translate-y-0.5 tracking-wider uppercase text-[11px] flex items-center justify-center gap-2">
+                        <i data-lucide="send" class="w-4 h-4 text-white"></i> Enviar Reporte Oficial
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+
+        <!-- Columna Lateral: Información y Guía (1 columna) -->
+        <div class="lg:col-span-1 space-y-6">
+            
+            <!-- Tarjeta 1: Línea Directa 911 -->
+            <div class="bg-white rounded-2xl border-l-4 border-red-500 shadow-sm p-6 space-y-3">
+                <h4 class="text-xs font-black text-red-600 uppercase tracking-wider flex items-center gap-1.5">
+                    <i data-lucide="phone-call" class="w-4 h-4 text-red-600 animate-pulse"></i> Emergencias 24/7
+                </h4>
+                <p class="text-[11px] text-gray-500 leading-relaxed font-medium">
+                    Si el incidente representa un <strong>peligro de vida inmediato</strong> o un siniestro grave con lesionados, por favor comuníquese de forma directa al servicio de emergencias nacional:
+                </p>
+                <a href="tel:911" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2.5 px-4 rounded-xl text-center flex items-center justify-center gap-2 transition-all text-xs uppercase shadow-sm">
+                    <i data-lucide="phone" class="w-4 h-4 text-white animate-bounce"></i> Llamar al 911
+                </a>
+            </div>
+
+            <!-- Tarjeta 2: Tipos de Incidentes Atendidos -->
+            <div class="bg-white rounded-2xl border border-gray-150 shadow-sm p-6 space-y-4">
+                <h4 class="text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">
+                    Incidentes Atendidos
+                </h4>
+                <p class="text-[11px] text-gray-500 leading-relaxed font-normal">
+                    La Coordinación Municipal de Protección Civil desplegará unidades operativas para los siguientes casos de riesgo urbano en la vía pública o predios:
+                </p>
+                <ul class="text-[11px] text-gray-700 space-y-2.5 font-bold">
+                    <li class="flex items-center gap-2"><i data-lucide="zap" class="w-4 h-4 text-yellow-400"></i> Cables de alta tensión caídos o postes a punto de colapsar.</li>
+                    <li class="flex items-center gap-2"><i data-lucide="flame" class="w-4 h-4 text-orange-400"></i> Fugas de gas LP en cilindros o conatos de incendio.</li>
+                    <li class="flex items-center gap-2"><i data-lucide="droplet" class="w-4 h-4 text-blue-400"></i> Inundaciones por desborde de canales o drenajes.</li>
+                    <li class="flex items-center gap-2"><i data-lucide="bug" class="w-4 h-4 text-yellow-600"></i> Presencia de enjambres de abejas agresivas.</li>
+                    <li class="flex items-center gap-2"><i data-lucide="tree-pine" class="w-4 h-4 text-green-500"></i> Árboles caídos obstruyendo vialidades principales.</li>
+                </ul>
+            </div>
+            
+        </div>
+
+    </main>
+
+    <!-- Nuevo Pie de Página Integral (Color Morena/Vino, no redondeado, elegante y estructurado) -->
+    <footer id="transparencia" class="bg-[#43082B] text-white pt-16 pb-12 border-t-4 border-medellinOro mt-16 font-medium text-xs">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+                
+                <!-- Columna 1: Identidad Municipal -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Logo PC Circular" class="w-12 h-12 object-contain bg-white rounded-full p-0.5 shadow-sm">
+                        <div>
+                            <span class="block font-black text-sm tracking-tight text-white uppercase leading-tight">MEDELLÍN DE BRAVO</span>
+                            <span class="block text-[8px] font-bold text-medellinOro tracking-widest uppercase mt-0.5">Protección Civil y Bomberos</span>
+                        </div>
+                    </div>
+                    <p class="text-purple-100/75 leading-relaxed pr-4 font-normal text-justify">
+                        Portal oficial de trámites digitales y atención ciudadana de la Dirección Municipal de Protección Civil del Municipio de Medellín de Bravo, Veracruz.
+                    </p>
+                    <div class="pt-2 text-purple-200/50 text-[10px] font-semibold leading-relaxed">
+                        <p class="mb-1">&copy; 2026 H. Ayuntamiento de Medellín de Bravo.</p>
+                        <p>Todos los derechos reservados.</p>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Directorio de Emergencias (24/7) -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="phone-call" class="w-4 h-4 text-medellinOro animate-pulse"></i> Líneas de Emergencia
+                    </h4>
+                    <div class="space-y-4">
+                        <!-- Protección Civil & 911 -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Base de Protección Civil</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="tel:2299554774" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5 text-purple-300"></i> 229 955 4774
+                                </a>
+                                <a href="tel:911" class="hover:text-white flex items-center gap-1.5 text-red-400 font-extrabold transition-colors">
+                                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-red-400 animate-bounce"></i> 911 (Nacional)
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Policía Municipal -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Policía Municipal</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="https://wa.me/522291287616" target="_blank" class="hover:text-white flex items-center gap-1.5 text-green-400 font-bold transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5 text-green-400"></i> 229 128 7616 (WhatsApp)
+                                </a>
+                                <a href="tel:2299554305" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5 text-purple-300"></i> 229 955 4305
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 3: Servicios de Apoyo (Mando Único, Tránsito, CFE, C5) -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="activity" class="w-4 h-4 text-medellinOro"></i> Servicios de Apoyo
+                    </h4>
+                    <div class="space-y-4">
+                        <!-- Mando Único y Tránsito -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Seguridad y Tránsito</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="tel:2295480668" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="shield" class="w-3.5 h-3.5 text-purple-300"></i> Policía Estatal: 229 548 0668
+                                </a>
+                                <a href="tel:2291664589" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="navigation" class="w-3.5 h-3.5 text-purple-300"></i> Tránsito: 229 166 4589
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- CFE y C5 -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Infraestructura y Monitoreo</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="tel:071" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="zap" class="w-3.5 h-3.5 text-yellow-400 animate-pulse"></i> Reporte CFE: 071
+                                </a>
+                                <a href="tel:2288423660" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone-forwarded" class="w-3.5 h-3.5 text-purple-300"></i> C5 Estatal: 228 842 3660
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 4: Transparencia y Horarios -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="info" class="w-4 h-4 text-medellinOro"></i> Información Pública
+                    </h4>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Horarios Administrativos</span>
+                            <p class="text-purple-100/75 mt-1 leading-relaxed font-normal">
+                                Oficinas: Lunes a Viernes de 9:00 AM a 4:00 PM.<br>
+                                <span class="text-white font-bold">Atención operativa de emergencias: 24/7/365.</span>
+                            </p>
+                        </div>
+                        <div class="space-y-2.5 pt-1">
+                            <a href="https://www.medellindebravo.gob.mx/transparencia" target="_blank" class="bg-white/5 hover:bg-white/10 text-white font-bold py-2.5 px-4 rounded-xl border border-white/10 flex items-center justify-between transition-all group text-[11px]">
+                                <span>Portal de Transparencia Municipal</span>
+                                <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-medellinOro group-hover:translate-x-1 transition-transform"></i>
+                            </a>
+                            <p class="text-[9px] text-purple-200/40 leading-relaxed font-semibold">
+                                Cumplimiento de la Ley General de Transparencia y Acceso a la Información Pública del Estado de Veracruz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script de Autocompletado de Colonias Oficiales -->
+    <script>
+        const coloniasData = [
+            { name: "Puente Moreno", loc: "Fraccionamiento Puente Moreno" },
+            { name: "Lagos de Puente Moreno", loc: "Fraccionamiento Puente Moreno" },
+            { name: "Arboledas San Ramón", loc: "Fraccionamiento Arboledas San Ramón" },
+            { name: "Arboledas de San Miguel", loc: "Fraccionamiento Arboledas de San Miguel" },
+            { name: "Las Palmas de Medellín", loc: "Las Palmas de Medellín" },
+            { name: "Residencial Marino", loc: "Fraccionamiento Residencial Marino" },
+            { name: "Paseos del Campestre", loc: "El Tejar" },
+            { name: "Fracc. Leonardo Rodríguez Alcaine", loc: "Fraccionamiento Leonardo Rodríguez Alcaine" },
+            { name: "Colonia El Tejar (Centro)", loc: "El Tejar" },
+            { name: "Colonia El Tejar (Ejido)", loc: "El Tejar" },
+            { name: "Casa Blanca (Infonavit)", loc: "El Tejar" },
+            { name: "Del Bosque", loc: "El Tejar" },
+            { name: "Gutiérrez Rosas", loc: "El Tejar" },
+            { name: "Paraíso", loc: "El Tejar" },
+            { name: "El Paraíso II", loc: "El Tejar" },
+            { name: "Las Flores", loc: "Las Flores" },
+            { name: "Exhacienda Palma Tejar y Jobo", loc: "El Tejar" },
+            { name: "Dra. Teresa Morales de Delgado", loc: "El Tejar" },
+            { name: "Centro (Medellín Cabecera)", loc: "Medellín" },
+            { name: "Nuevo Medellín", loc: "Fraccionamiento Nuevo Medellín" },
+            { name: "Jardines de Medellín", loc: "Medellín" },
+            { name: "Lorenzo Barcelata", loc: "Medellín" },
+            { name: "20 de Noviembre", loc: "Colonia Veinte de Noviembre de Medellín de Bravo" },
+            { name: "Benito Juárez (Marcos Vélez)", loc: "Marcos Vélez Campos" },
+            { name: "Cándido Duarte", loc: "Medellín" },
+            { name: "Lomas de San Gabriel", loc: "Medellín" },
+            { name: "Héroes de Veracruz", loc: "Medellín" },
+            { name: "Clara Córdoba Morán", loc: "Colonia Clara Córdoba Morán" },
+            { name: "Playa de Vacas", loc: "Playa de Vacas" },
+            { name: "Playa de Vacas (Ejido)", loc: "Playa de Vacas" },
+            { name: "Paso del Toro", loc: "Paso del Toro" },
+            { name: "La Y Griega", loc: "Paso del Toro" },
+            { name: "Los Robles", loc: "Los Robles" },
+            { name: "Los Robles (Ampliación)", loc: "Ampliación de los Robles" },
+            { name: "La Laguna", loc: "La Laguna y Monte del Castillo" },
+            { name: "Monte del Castillo", loc: "La Laguna y Monte del Castillo" },
+            { name: "La Esperanza", loc: "La Esperanza" },
+            { name: "La Gloria", loc: "La Gloria" },
+            { name: "Dos Bocas", loc: "Dos Bocas" },
+            { name: "Jardines de Dos Bocas", loc: "Dos Bocas" },
+            { name: "El Copital", loc: "El Copital" },
+            { name: "Rancho del Padre", loc: "Rancho del Padre" },
+            { name: "Paso Colorado", loc: "Paso Colorado" },
+            { name: "Herón Proal", loc: "Herón Proal [Colonia Campestre]" },
+            { name: "Emiliano Zapata", loc: "Medellín" }
+        ];
+
+        // Lista dinámica de localidades cargadas de la base de datos
+        const baseLocalidades = [
+            {% for loc in localidades %}
+                "{{ loc.nombre|escapejs }}",
+            {% endfor %}
+        ];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const inputColonia = document.getElementById("input-colonia");
+            const inputLocalidad = document.getElementById("input-localidad");
+            const dropdown = document.getElementById("colonia-dropdown");
+            
+            if (!inputColonia || !dropdown) return;
+            
+            function showMatches(val) {
+                dropdown.innerHTML = "";
+                const valLower = val.toLowerCase();
+                
+                // 1. Filtrar las colonias predefinidas
+                let matched = coloniasData.filter(item => 
+                    item.name.toLowerCase().includes(valLower)
+                );
+                
+                // 2. Filtrar las localidades de la base de datos que coincidan
+                const matchedLocalidades = baseLocalidades.filter(name => 
+                    name.toLowerCase().includes(valLower)
+                );
+                
+                // Añadir localidades encontradas al listado (si no existen con ese mismo nombre)
+                matchedLocalidades.forEach(name => {
+                    if (!matched.some(item => item.name.toLowerCase() === name.toLowerCase())) {
+                        matched.push({ name: name, loc: name });
+                    }
+                });
+                
+                if (matched.length === 0 || val.trim() === "") {
+                    dropdown.classList.add("hidden");
+                    return;
+                }
+                
+                // Mostrar máximo 12 resultados para mantener un dropdown compacto y ágil
+                matched.slice(0, 12).forEach(item => {
+                    const div = document.createElement("div");
+                    div.className = "px-4 py-2.5 hover:bg-slate-100 cursor-pointer border-b border-gray-100 last:border-0 font-bold text-gray-700 transition";
+                    div.innerHTML = `<strong>${item.name}</strong> <span class="text-[9px] text-gray-400 block font-semibold mt-0.5">Zona: ${item.loc}</span>`;
+                    div.addEventListener("click", function() {
+                        inputColonia.value = item.name;
+                        inputLocalidad.value = item.loc;
+                        dropdown.classList.add("hidden");
+                    });
+                    dropdown.appendChild(div);
+                });
+                
+                dropdown.classList.remove("hidden");
+            }
+            
+            inputColonia.addEventListener("input", function() {
+                showMatches(this.value);
+            });
+            
+            inputColonia.addEventListener("focus", function() {
+                showMatches(this.value);
+            });
+            
+            document.addEventListener("click", function(e) {
+                if (e.target !== inputColonia && !dropdown.contains(e.target)) {
+                    dropdown.classList.add("hidden");
+                }
+            });
+
+            // Auto-calificación de Prioridad según el Incidente
+            const selectTipo = document.querySelector('select[name="tipo_servicio"]');
+            const inputPrioridad = document.getElementById('input-prioridad');
+            
+            const priorityMap = {
+                'GAS': 'ALTA',
+                'FUEGO': 'ALTA',
+                'CHOQUE': 'ALTA',
+                'CABLE': 'MEDIA',
+                'AGUA': 'MEDIA',
+                'ABEJAS': 'MEDIA',
+                'ARBOL': 'LOW',
+                'OTRO': 'LOW'
+            };
+            
+            if (selectTipo && inputPrioridad) {
+                function updatePriority() {
+                    const mapped = priorityMap[selectTipo.value] || 'MEDIA';
+                    inputPrioridad.value = mapped;
+                }
+                selectTipo.addEventListener('change', updatePriority);
+                updatePriority(); // Ejecutar al cargar
+            }
+
+            // Mostrar modal de éxito si el folio viene en la URL (?success_folio=REP-XXXX)
+            const urlParams = new URLSearchParams(window.location.search);
+            const successFolio = urlParams.get('success_folio');
+            const modal = document.getElementById('modal-success-report');
+            const displayFolio = document.getElementById('display-success-folio');
+            const btnCopy = document.getElementById('btn-copy-folio');
+            
+            if (successFolio && modal && displayFolio) {
+                displayFolio.textContent = successFolio;
+                modal.classList.remove('hidden');
+                
+                // Botón para copiar folio
+                btnCopy.addEventListener('click', () => {
+                    navigator.clipboard.writeText(successFolio).then(() => {
+                        btnCopy.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-500"></i> ¡Copiado!';
+                        if (typeof lucide !== 'undefined') lucide.createIcons();
+                        setTimeout(() => {
+                            btnCopy.innerHTML = '<i data-lucide="copy" class="w-4 h-4"></i> Copiar Folio';
+                            if (typeof lucide !== 'undefined') lucide.createIcons();
+                        }, 2000);
+                    });
+                });
+            }
+
+            // Inicializar Lucide Icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+
+    <!-- Modal de Éxito al Generar Reporte (se abre automáticamente si success_folio está en la URL) -->
+    <div id="modal-success-report" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-gray-100 p-8 text-center space-y-6 transform scale-100 transition-all duration-300">
+            <!-- Icono Éxito -->
+            <div class="w-16 h-16 bg-emerald-50 text-emerald-500 rounded-full flex items-center justify-center mx-auto border border-emerald-100 animate-bounce">
+                <i data-lucide="check-circle" class="w-10 h-10"></i>
+            </div>
+            
+            <!-- Mensaje principal -->
+            <div class="space-y-2">
+                <h3 class="text-xl font-black text-gray-900 uppercase tracking-tight">¡Reporte Registrado!</h3>
+                <p class="text-gray-500 text-xs font-medium leading-relaxed">
+                    Hemos recibido tu reporte de riesgo con éxito. Los brigadistas de Protección Civil han sido notificados.
+                </p>
+            </div>
+            
+            <!-- Folio Destacado -->
+            <div class="bg-gray-50 rounded-2xl p-4 border border-gray-150 space-y-1">
+                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-widest">Folio de Seguimiento</span>
+                <span id="display-success-folio" class="block text-2xl font-black text-medellinVino tracking-widest font-mono select-all">REP-0000</span>
+                <p class="text-[10px] text-gray-400 font-semibold">Usa este folio para consultar el estatus de tu reporte en cualquier momento.</p>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div class="flex flex-col gap-2 pt-2">
+                <button id="btn-copy-folio" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-xs transition flex items-center justify-center gap-1.5 border border-slate-200 cursor-pointer">
+                    <i data-lucide="copy" class="w-4 h-4"></i> Copiar Folio
+                </button>
+                <a href="{% url 'home' %}" class="w-full bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3 rounded-xl text-xs transition flex items-center justify-center gap-1.5 shadow-md uppercase tracking-wider text-center">
+                    <i data-lucide="home" class="w-4 h-4"></i> Volver al Inicio
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

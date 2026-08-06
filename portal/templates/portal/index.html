@@ -1,0 +1,731 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protección Civil y Bomberos - Medellín de Bravo</title>
+    <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5A123E',
+                        medellinVerde: '#5B7B34',
+                        medellinOro: '#E59E27',
+                        medellinVerdeClaro: '#8BA854',
+                        medellinTurquesa: '#6B9987',
+                        medellinFondo: '#F7F8F6',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 22s linear infinite;
+        }
+        .animate-marquee:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="bg-medellinFondo text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Navegación por Pestañas (SPA Híbrida) -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 md:px-6 h-20 flex justify-between items-center">
+            
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('inicio')">
+                <img src="{% static 'portal/img/logo_medellin.jpg' %}" alt="Logo Medellín de Bravo" class="w-10 h-10 md:w-12 md:h-12 object-contain">
+                <div>
+                    <span class="block font-black text-medellinVino text-sm md:text-lg tracking-tight leading-tight">MEDELLÍN DE BRAVO</span>
+                    <span class="block text-[8px] md:text-[10px] font-bold text-medellinOro tracking-widest uppercase">Protección Civil y Bomberos</span>
+                </div>
+            </div>
+
+            <!-- Menú Escritorio de Pestañas SPA (Sin pestaña Transparencia) -->
+            <div class="hidden lg:flex items-center space-x-8 text-sm font-semibold text-gray-600">
+                <button type="button" id="tab-nav-inicio" onclick="switchTab('inicio')" class="tab-nav-item text-medellinVino border-b-2 border-medellinVino py-2 transition-all cursor-pointer font-bold">
+                    Inicio & Atención
+                </button>
+                <button type="button" id="tab-nav-tramites" onclick="switchTab('tramites')" class="tab-nav-item hover:text-medellinVino py-2 transition-all cursor-pointer">
+                    Trámites y Servicios
+                </button>
+                <button type="button" id="tab-nav-clima" onclick="switchTab('clima')" class="tab-nav-item hover:text-medellinVino py-2 transition-all flex items-center gap-1 cursor-pointer">
+                    <i data-lucide="cloud-sun" class="w-4 h-4 text-sky-500"></i> Estado del Tiempo
+                </button>
+            </div>
+
+            <!-- Sesión Escritorio con Engranaje de Ajustes -->
+            <div class="hidden md:flex items-center space-x-3">
+                {% if ciudadano %}
+                <div class="flex items-center gap-2">
+                    <div class="bg-purple-50/80 border border-purple-100 rounded-2xl px-3.5 py-1.5 flex items-center space-x-2 text-xs font-bold text-slate-800 shadow-sm">
+                        <span class="w-7 h-7 rounded-xl bg-[#5A123E] text-white flex items-center justify-center font-black text-xs shadow-sm">
+                            {{ ciudadano.nombre|slice:":1"|upper }}
+                        </span>
+                        <span class="text-slate-800">Hola, <strong>{{ ciudadano.nombre }}</strong></span>
+                    </div>
+
+                    <!-- Botón de Engranaje para Ajustes -->
+                    <div class="relative">
+                        <button type="button" onclick="toggleAjustesMenu()" class="w-9 h-9 rounded-xl bg-white hover:bg-purple-50 border border-gray-250 text-[#5A123E] flex items-center justify-center shadow-sm transition-all hover:scale-105 cursor-pointer" title="Ajustes de Cuenta">
+                            <i data-lucide="settings" class="w-4.5 h-4.5 text-[#5A123E]"></i>
+                        </button>
+
+                        <!-- Menú Desplegable de Ajustes -->
+                        <div id="ajustes-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-150 py-2 z-50 animate-fadeIn">
+                            <div class="px-4 py-2 border-b border-gray-100">
+                                <span class="block text-[9px] font-black text-medellinOro uppercase tracking-wider">Cuenta Ciudadana</span>
+                                <span class="block text-xs font-bold text-slate-800 truncate">{{ ciudadano.correo }}</span>
+                            </div>
+                            
+                            <a href="{% url 'perfil_ciudadano' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-purple-50 hover:text-medellinVino transition-colors">
+                                <i data-lucide="user" class="w-4 h-4 text-medellinVino"></i> Mi Perfil
+                            </a>
+
+                            <div class="border-t border-gray-100 my-1"></div>
+                            
+                            <a href="{% url 'salir_ciudadano' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-extrabold text-red-600 hover:bg-red-50 transition-colors">
+                                <i data-lucide="log-out" class="w-4 h-4 text-red-600"></i> Cerrar Sesión
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {% elif user.is_authenticated %}
+                <div class="flex items-center gap-2">
+                    <div class="bg-purple-50/80 border border-purple-100 rounded-2xl px-3.5 py-1.5 flex items-center space-x-2 text-xs font-bold text-slate-800 shadow-sm">
+                        <span class="w-7 h-7 rounded-xl bg-medellinOro text-white flex items-center justify-center font-black text-xs shadow-sm">
+                            <i data-lucide="shield" class="w-3.5 h-3.5"></i>
+                        </span>
+                        <span class="text-slate-800">Personal: <strong>{{ user.first_name|default:user.username }}</strong></span>
+                    </div>
+
+                    <!-- Botón de Engranaje para Ajustes -->
+                    <div class="relative">
+                        <button type="button" onclick="toggleAjustesMenu()" class="w-9 h-9 rounded-xl bg-white hover:bg-purple-50 border border-gray-250 text-[#5A123E] flex items-center justify-center shadow-sm transition-all hover:scale-105 cursor-pointer" title="Ajustes de Cuenta">
+                            <i data-lucide="settings" class="w-4.5 h-4.5 text-[#5A123E]"></i>
+                        </button>
+
+                        <!-- Menú Desplegable de Ajustes -->
+                        <div id="ajustes-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-xl border border-gray-150 py-2 z-50 animate-fadeIn">
+                            <div class="px-4 py-2 border-b border-gray-100">
+                                <span class="block text-[9px] font-black text-medellinOro uppercase tracking-wider">Personal Operativo</span>
+                                <span class="block text-xs font-bold text-slate-800 truncate">{{ user.username }}</span>
+                            </div>
+                            
+                            <a href="{% url 'dashboard_admin' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-purple-50 hover:text-medellinVino transition-colors">
+                                <i data-lucide="layout-dashboard" class="w-4 h-4 text-medellinVino"></i> Consola Administrativa
+                            </a>
+
+                            <div class="border-t border-gray-100 my-1"></div>
+                            
+                            <a href="{% url 'logout' %}" class="flex items-center gap-2.5 px-4 py-2.5 text-xs font-extrabold text-red-600 hover:bg-red-50 transition-colors">
+                                <i data-lucide="log-out" class="w-4 h-4 text-red-600"></i> Cerrar Sesión
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <a href="{% url 'login_unificado' %}" class="text-xs bg-medellinVino hover:bg-[#43082B] text-white font-bold px-4 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-1.5">
+                    <i data-lucide="key" class="w-3.5 h-3.5"></i> Ingresar al Portal
+                </a>
+                {% endif %}
+                
+                <img src="{% static 'portal/img/logo_pc.png' %}" alt="Logo Protección Civil" class="w-10 h-10 md:w-12 md:h-12 object-contain">
+            </div>
+
+            <!-- Botón de Menú Móvil -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-600 focus:outline-none p-2 rounded-lg hover:bg-gray-50 transition" aria-label="Abrir Menú">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path id="menu-btn-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+
+        </div>
+
+        <!-- Menú Desplegable Móvil -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-6 py-5 space-y-4 shadow-inner text-sm font-semibold text-gray-600">
+            <button type="button" onclick="switchTab('inicio'); toggleMobileMenu();" class="block w-full text-left py-2 text-medellinVino border-b border-gray-50">Inicio & Atención</button>
+            <button type="button" onclick="switchTab('tramites'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-medellinVino border-b border-gray-50">Trámites y Servicios</button>
+            <button type="button" onclick="switchTab('clima'); toggleMobileMenu();" class="block w-full text-left py-2 hover:text-medellinVino border-b border-gray-50">Estado del Tiempo</button>
+            
+            <div class="pt-4 border-t border-gray-100 flex flex-col space-y-3">
+                {% if ciudadano %}
+                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4 flex flex-col space-y-3 text-xs font-semibold">
+                    <span class="text-slate-800 flex items-center gap-1.5 font-bold"><i data-lucide="user" class="w-4 h-4 text-medellinVino"></i> Hola, <strong>{{ ciudadano.nombre }}</strong></span>
+                    <a href="{% url 'perfil_ciudadano' %}" class="w-full bg-white border border-gray-200 text-slate-700 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center gap-2 shadow-sm">
+                        <i data-lucide="user" class="w-4 h-4 text-medellinVino"></i> Mi Perfil
+                    </a>
+                    <a href="{% url 'salir_ciudadano' %}" class="w-full bg-red-50 text-red-600 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center gap-2 border border-red-100">
+                        <i data-lucide="log-out" class="w-4 h-4 text-red-600"></i> Cerrar Sesión
+                    </a>
+                </div>
+                {% elif user.is_authenticated %}
+                <div class="bg-gray-50 border border-gray-100 rounded-2xl p-4 flex flex-col space-y-3 text-xs font-semibold">
+                    <span class="text-slate-800 flex items-center gap-1.5 font-bold"><i data-lucide="shield" class="w-4 h-4 text-medellinVino"></i> Personal: <strong>{{ user.username }}</strong></span>
+                    <a href="{% url 'dashboard_admin' %}" class="w-full bg-white border border-gray-200 text-slate-700 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center gap-2 shadow-sm">
+                        <i data-lucide="layout-dashboard" class="w-4 h-4 text-medellinVino"></i> Consola Administrativa
+                    </a>
+                    <a href="{% url 'logout' %}" class="w-full bg-red-50 text-red-600 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center gap-2 border border-red-100">
+                        <i data-lucide="log-out" class="w-4 h-4 text-red-600"></i> Cerrar Sesión
+                    </a>
+                </div>
+                {% else %}
+                <a href="{% url 'login_unificado' %}" class="w-full bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3 rounded-xl shadow-md transition-all text-center text-xs flex items-center justify-center gap-1.5">
+                    <i data-lucide="key" class="w-3.5 h-3.5"></i> Ingresar al Portal
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cintillo de Alertas SMN -->
+    <div class="bg-[#fcf8e3] border-b border-[#faebcc] text-[#8a6d3b] py-2.5 px-4 text-xs font-semibold overflow-hidden relative shadow-sm flex items-center gap-3">
+        <span class="bg-red-600 text-white font-extrabold text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md flex items-center gap-1 shrink-0 animate-pulse shadow-sm">
+            <i data-lucide="radio" class="w-3.5 h-3.5"></i> ALERTA METEOROLÓGICA SMN
+        </span>
+        <div class="overflow-hidden whitespace-nowrap flex-grow relative">
+            <div id="cintillo-content" class="animate-marquee pl-4">
+                <span class="text-amber-800 font-bold">Cargando avisos meteorológicos en tiempo real...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- SECCIÓN 1: INICIO & ATENCIÓN CIUDADANA (Renderizada inicialmente)   -->
+    <!-- =================================================================== -->
+    <div id="seccion-inicio" class="seccion-content space-y-8">
+        
+        <!-- Banner / Héroe Principal Exclusivo de Inicio (Ancho Completo Estándar) -->
+        <header class="bg-[#43082B] text-white py-12 md:py-14 px-4 md:px-6 relative overflow-hidden border-b-4 border-medellinOro">
+            <div class="absolute inset-0 opacity-5 pointer-events-none">
+                <div class="absolute inset-0 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+            </div>
+            
+            <div class="container mx-auto max-w-5xl relative z-10 text-center space-y-4">
+                <span class="inline-block text-medellinOro text-[10px] md:text-xs font-black uppercase tracking-widest bg-white/10 px-4 py-1.5 rounded-full border border-white/10">
+                    H. Ayuntamiento de Medellín de Bravo • Protección Civil
+                </span>
+                <h1 class="text-3xl md:text-5xl font-black tracking-tight leading-tight">
+                    Por la Grandeza de Medellín
+                </h1>
+                <p class="text-purple-100/80 text-xs md:text-sm font-light leading-relaxed max-w-2xl mx-auto">
+                    Bienvenido al portal digital de atención ciudadana para trámites y reporte de riesgos de la Dirección Municipal de Protección Civil y Bomberos.
+                </p>
+            </div>
+        </header>
+
+        <div class="container mx-auto px-4 md:px-6 space-y-8">
+            <!-- Mensajes de Django -->
+            {% if messages %}
+                <div class="max-w-4xl mx-auto">
+                    {% for message in messages %}
+                        <div class="{% if message.tags == 'error' %}bg-red-50 border-red-400 text-red-700{% else %}bg-purple-50 border-medellinVino text-medellinVino{% endif %} border-l-4 p-4 rounded-xl text-sm font-medium shadow-sm">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Sección Unificada de Atención Ciudadana y Reporte de Riesgos -->
+            <section id="atencion-ciudadana" class="max-w-4xl mx-auto scroll-mt-24 space-y-4">
+                <div class="bg-gradient-to-r from-[#43082B] to-[#5A123E] text-white p-6 md:p-8 rounded-3xl shadow-lg border border-medellinOro/10 space-y-6">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="space-y-3 max-w-xl text-center md:text-left">
+                            <span class="inline-block bg-white/10 text-medellinOro text-[9px] md:text-[10px] font-extrabold uppercase tracking-widest px-3 py-1 rounded-full border border-white/10">
+                                Atención de Emergencias y Reportes
+                            </span>
+                            <h3 class="text-2xl md:text-3xl font-black tracking-tight leading-tight">¿Detectas algún riesgo en tu colonia?</h3>
+                            <p class="text-purple-100/80 text-xs md:text-sm font-light leading-relaxed">
+                                Reporta cables expuestos, árboles caídos, fugas de gas, inundaciones o enjambres. Protección Civil y Bomberos acudirá a resolverlo de inmediato.
+                            </p>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto shrink-0">
+                            <a href="{% url 'crear_reporte' %}" class="w-full sm:w-auto bg-medellinOro hover:bg-[#cf8a1e] text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition-all text-xs flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                                <i data-lucide="alert-triangle" class="w-4 h-4 text-white animate-pulse"></i> Levantar Reporte Ciudadano
+                            </a>
+                            <button type="button" onclick="toggleAlertasPanel()" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold px-4 py-3.5 rounded-xl border border-white/20 transition-all text-xs flex items-center justify-center gap-2 cursor-pointer">
+                                <span>Más Información y Folios</span>
+                                <i data-lucide="chevron-down" id="alerta-chevron" class="w-4 h-4 transition-transform duration-300"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Panel Desplegable Integrado (Especificaciones + Consultar Estatus por Folio) -->
+                    <div id="alertas-panel-desplegable" class="hidden pt-6 border-t border-white/15 space-y-6 animate-fadeIn">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-left">
+                            <div class="bg-white/5 border border-white/10 p-3.5 rounded-2xl space-y-1">
+                                <span class="text-medellinOro text-xs font-black flex items-center gap-1.5">
+                                    <i data-lucide="zap" class="w-4 h-4 text-amber-300"></i> Cables y Energía
+                                </span>
+                                <p class="text-[11px] text-purple-100/75 leading-tight">Cables caídos, postes inestables o cortocircuitos en vía pública.</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-3.5 rounded-2xl space-y-1">
+                                <span class="text-medellinOro text-xs font-black flex items-center gap-1.5">
+                                    <i data-lucide="flame" class="w-4 h-4 text-red-400"></i> Fugas y Gas
+                                </span>
+                                <p class="text-[11px] text-purple-100/75 leading-tight">Olor a gas LP, tanques dañados o sustancias químicas en riesgo.</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-3.5 rounded-2xl space-y-1">
+                                <span class="text-medellinOro text-xs font-black flex items-center gap-1.5">
+                                    <i data-lucide="trees" class="w-4 h-4 text-emerald-300"></i> Árboles y Ramas
+                                </span>
+                                <p class="text-[11px] text-purple-100/75 leading-tight">Árboles colapsados o ramas sobre líneas eléctricas y viviendas.</p>
+                            </div>
+                            <div class="bg-white/5 border border-white/10 p-3.5 rounded-2xl space-y-1">
+                                <span class="text-medellinOro text-xs font-black flex items-center gap-1.5">
+                                    <i data-lucide="droplets" class="w-4 h-4 text-sky-300"></i> Inundaciones
+                                </span>
+                                <p class="text-[11px] text-purple-100/75 leading-tight">Encharcamientos severos, desbordamientos de arroyos o enjambres.</p>
+                            </div>
+                        </div>
+
+                        <!-- Consultar Estatus de Reporte por Folio -->
+                        <div class="bg-white/10 backdrop-blur-md p-5 rounded-2xl border border-white/20 flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div class="space-y-1 text-center md:text-left">
+                                <h4 class="text-xs font-extrabold text-white uppercase tracking-wider flex items-center gap-2 justify-center md:justify-start">
+                                    <i data-lucide="search" class="w-4 h-4 text-medellinOro"></i> Consultar Estatus por Folio
+                                </h4>
+                                <p class="text-[11px] text-purple-100/80 font-medium">¿Ya realizaste un reporte? Ingrésalo para darle seguimiento en tiempo real.</p>
+                            </div>
+                            
+                            <form action="{% url 'consultar_reporte' %}" method="GET" class="w-full md:w-auto flex gap-2">
+                                <input type="text" name="folio" required placeholder="Ej. REP-0001" class="w-full md:w-48 px-3.5 py-2.5 bg-white text-slate-800 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-medellinOro text-xs uppercase font-black tracking-wider placeholder:text-gray-400">
+                                <button type="submit" class="bg-medellinOro hover:bg-[#cf8a1e] text-white px-5 py-2.5 rounded-xl text-xs font-bold transition-all shadow-md flex items-center gap-1.5 shrink-0">
+                                    Buscar Alerta
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Contenedor Principal para Secciones Dinámicas Asíncronas (Hermanas) -->
+    <main class="container mx-auto px-4 md:px-6 pt-3 pb-8 md:pt-4 md:pb-8 flex-1 space-y-6">
+        <!-- =================================================================== -->
+        <!-- SECCIÓN 2: TRÁMITES Y SERVICIOS (Carga Diferida via AJAX)          -->
+        <!-- =================================================================== -->
+        <div id="seccion-tramites" class="seccion-content hidden"></div>
+
+        <!-- =================================================================== -->
+        <!-- SECCIÓN 3: ESTADO DEL TIEMPO (Carga Diferida via AJAX)             -->
+        <!-- =================================================================== -->
+        <div id="seccion-clima" class="seccion-content hidden"></div>
+    </main>
+
+    <!-- Footer Oficial con Directorio Completo de Emergencias -->
+    <footer class="bg-[#43082B] text-white pt-14 pb-12 border-t-4 border-medellinOro mt-16 font-medium text-xs">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                
+                <!-- Columna 1 (3 cols): Identidad Municipal -->
+                <div class="md:col-span-3 space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Logo PC Circular" class="w-12 h-12 object-contain bg-white rounded-full p-0.5 shadow-sm">
+                        <div>
+                            <span class="block font-black text-sm tracking-tight text-white uppercase leading-tight">MEDELLÍN DE BRAVO</span>
+                            <span class="block text-[8px] font-bold text-medellinOro tracking-widest uppercase mt-0.5">Protección Civil y Bomberos</span>
+                        </div>
+                    </div>
+                    <p class="text-purple-100/75 leading-relaxed font-normal text-justify">
+                        Portal oficial de trámites digitales y atención ciudadana de la Dirección Municipal de Protección Civil del Municipio de Medellín de Bravo, Veracruz.
+                    </p>
+                    <div class="pt-2 text-purple-200/50 text-[10px] font-semibold leading-relaxed">
+                        <p class="mb-0.5">&copy; 2026 H. Ayuntamiento de Medellín de Bravo.</p>
+                        <p class="mb-0.5">Desarrollo Tecnológico por: <span class="text-white">Josué Jaziel Delgado Burela</span></p>
+                        <p>Contacto: <a href="mailto:jburela1@gmal.com" class="text-purple-300 hover:text-white underline transition-colors">jburela1@gmal.com</a></p>
+                    </div>
+                </div>
+
+                <!-- Columna 2 (6 cols): DIRECTORIO COMPLETO DE LÍNEAS DE EMERGENCIA MUNICIPAL -->
+                <div class="md:col-span-6 space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="phone-call" class="w-4 h-4 text-medellinOro animate-pulse"></i> Directorio Completo de Emergencias (24/7)
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-[11px]">
+                        <!-- 1. Protección Civil & 911 -->
+                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl space-y-1">
+                            <span class="block font-black text-medellinOro uppercase text-[10px] flex items-center gap-1">
+                                <i data-lucide="shield-alert" class="w-3 h-3 text-medellinOro"></i> Base de Protección Civil
+                            </span>
+                            <div class="space-y-1 pt-0.5">
+                                <a href="tel:2299554774" class="hover:text-medellinOro font-bold flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone" class="w-3 h-3 text-purple-300"></i> 229 955 4774
+                                </a>
+                                <a href="tel:911" class="hover:text-red-300 text-red-400 font-extrabold flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="alert-triangle" class="w-3 h-3 text-red-400"></i> 911 (Nacional)
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 2. Policía Municipal Medellín -->
+                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl space-y-1">
+                            <span class="block font-black text-amber-300 uppercase text-[10px] flex items-center gap-1">
+                                <i data-lucide="shield" class="w-3 h-3 text-amber-300"></i> Policía Municipal Medellín
+                            </span>
+                            <div class="space-y-1 pt-0.5">
+                                <a href="https://wa.me/522291287616" target="_blank" class="hover:text-emerald-300 text-emerald-400 font-bold flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="message-square" class="w-3 h-3 text-emerald-400"></i> 229 128 7616 (WhatsApp)
+                                </a>
+                                <a href="tel:2299554305" class="hover:text-amber-300 font-bold flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone" class="w-3 h-3 text-purple-300"></i> 229 955 4305
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- 3. Mando Único Policía Estatal -->
+                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl space-y-1">
+                            <span class="block font-black text-sky-300 uppercase text-[10px] flex items-center gap-1">
+                                <i data-lucide="badge-check" class="w-3 h-3 text-sky-300"></i> Mando Único Policía Estatal
+                            </span>
+                            <a href="tel:2295480668" class="hover:text-sky-300 font-bold flex items-center gap-1.5 transition-colors pt-0.5">
+                                <i data-lucide="phone" class="w-3 h-3 text-purple-300"></i> 229 548 0668
+                            </a>
+                        </div>
+
+                        <!-- 4. Tránsito Estatal Medellín -->
+                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl space-y-1">
+                            <span class="block font-black text-teal-300 uppercase text-[10px] flex items-center gap-1">
+                                <i data-lucide="navigation" class="w-3 h-3 text-teal-300"></i> Tránsito Estatal Medellín
+                            </span>
+                            <a href="tel:2291664589" class="hover:text-teal-300 font-bold flex items-center gap-1.5 transition-colors pt-0.5">
+                                <i data-lucide="phone" class="w-3 h-3 text-purple-300"></i> 229 166 4589
+                            </a>
+                        </div>
+
+                        <!-- 5. CFE (Comisión Federal de Electricidad) -->
+                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl space-y-1">
+                            <span class="block font-black text-emerald-300 uppercase text-[10px] flex items-center gap-1">
+                                <i data-lucide="zap" class="w-3 h-3 text-emerald-300"></i> CFE (Luz & Energía)
+                            </span>
+                            <a href="tel:071" class="hover:text-emerald-300 font-bold flex items-center gap-1.5 transition-colors pt-0.5">
+                                <i data-lucide="phone" class="w-3 h-3 text-purple-300"></i> 071
+                            </a>
+                        </div>
+
+                        <!-- 6. C5 (Centro de Control) -->
+                        <div class="bg-white/5 border border-white/10 p-3 rounded-xl space-y-1">
+                            <span class="block font-black text-purple-200 uppercase text-[10px] flex items-center gap-1">
+                                <i data-lucide="radio" class="w-3 h-3 text-purple-200"></i> C5 (Centro de Control)
+                            </span>
+                            <a href="tel:2288423660" class="hover:text-purple-200 font-bold flex items-center gap-1.5 transition-colors pt-0.5">
+                                <i data-lucide="phone" class="w-3 h-3 text-purple-300"></i> 228 842 3660
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 3 (3 cols): Ubicación & Horarios -->
+                <div class="md:col-span-3 space-y-5">
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2 flex items-center gap-2">
+                            <i data-lucide="building-2" class="w-4 h-4 text-medellinOro"></i> Ubicación
+                        </h4>
+                        <div class="text-purple-100/80 leading-relaxed font-normal text-[11px] space-y-0.5">
+                            <p class="font-bold text-white">Base Protección Civil y Bomberos</p>
+                            <p>Av. Revolución S/N, Col. Centro</p>
+                            <p>Medellín de Bravo, Ver. C.P. 94270</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 pt-1">
+                        <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2 flex items-center gap-2">
+                            <i data-lucide="clock" class="w-4 h-4 text-medellinOro"></i> Horarios
+                        </h4>
+                        <div class="text-purple-100/80 leading-relaxed font-normal text-[11px] space-y-1">
+                            <p><strong class="text-white">Trámites:</strong> Lun - Vie 8:00 AM a 3:00 PM</p>
+                            <p><strong class="text-white">Emergencias:</strong> Operativo 24/7 (365 Días)</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Controlador JS de Navegación SPA y Lazy Loading -->
+    <script>
+        lucide.createIcons();
+
+        // Control del Cintillo SMN
+        window.addEventListener('load', function() {
+            find_data_cintillo();
+        });
+
+        function find_data_cintillo() {
+            fetch('{% url "api_cintillo_clima" %}')
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.items && data.items.length > 0) {
+                        const container = document.getElementById('cintillo-content');
+                        if (container) {
+                            let html = '';
+                            data.items.forEach((item, index) => {
+                                html += `<a href="${item.link}" target="_blank" class="text-[#8a6d3b] font-bold hover:underline">${item.texto}</a>`;
+                                if (index < data.items.length - 1) {
+                                    html += `<span class="text-amber-400 font-bold mx-6">---</span>`;
+                                }
+                            });
+                            container.innerHTML = html;
+                        }
+                    }
+                })
+                .catch(err => console.log('Cintillo SMN activo.'));
+        }
+
+        function toggleAlertasPanel() {
+            const panel = document.getElementById('alertas-panel-desplegable');
+            const chevron = document.getElementById('alerta-chevron');
+            if (panel) {
+                panel.classList.toggle('hidden');
+                if (chevron) {
+                    chevron.classList.toggle('rotate-180');
+                }
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        document.getElementById('mobile-menu-btn')?.addEventListener('click', toggleMobileMenu);
+
+        // =======================================================================
+        // MOTOR DE NAVEGACIÓN Y CARGA DIFERIDA (LAZY LOADING AJAX)
+        // =======================================================================
+        const loadedSections = {
+            'inicio': true
+        };
+
+        function switchTab(targetTab) {
+            // 1. Ocultar todas las secciones
+            document.querySelectorAll('.seccion-content').forEach(sec => {
+                sec.classList.add('hidden');
+            });
+
+            // 2. Actualizar estilos de los botones del menú
+            document.querySelectorAll('.tab-nav-item').forEach(btn => {
+                btn.classList.remove('text-medellinVino', 'border-b-2', 'border-medellinVino', 'font-bold');
+                btn.classList.add('hover:text-medellinVino');
+            });
+
+            const activeBtn = document.getElementById(`tab-nav-${targetTab}`);
+            if (activeBtn) {
+                activeBtn.classList.add('text-medellinVino', 'border-b-2', 'border-medellinVino', 'font-bold');
+            }
+
+            const targetContainer = document.getElementById(`seccion-${targetTab}`);
+            if (!targetContainer) return;
+
+            // 3. Mostrar sección activa
+            targetContainer.classList.remove('hidden');
+
+            // 4. Lazy Load Si aún no se ha cargado el HTML del backend
+            if (!loadedSections[targetTab]) {
+                targetContainer.innerHTML = `
+                    <div class="py-16 text-center space-y-4">
+                        <div class="w-12 h-12 border-4 border-medellinVino border-t-transparent rounded-full animate-spin mx-auto"></div>
+                        <p class="text-xs font-bold text-gray-500 uppercase tracking-widest">Cargando información del servidor...</p>
+                    </div>
+                `;
+
+                const endpoint = targetTab === 'tramites' ? '{% url "seccion_tramites" %}' : '{% url "seccion_clima" %}';
+                
+                fetch(endpoint)
+                    .then(res => res.text())
+                    .then(html => {
+                        targetContainer.innerHTML = html;
+                        loadedSections[targetTab] = true;
+                        lucide.createIcons();
+                        
+                        // Inicializar listeners específicos si se cargó trámites
+                        if (targetTab === 'tramites' && typeof selectCategory === 'function') {
+                            selectCategory(1);
+                        }
+                    })
+                    .catch(err => {
+                        targetContainer.innerHTML = `
+                            <div class="p-6 bg-red-50 text-red-700 rounded-2xl text-center text-xs font-bold">
+                                Error al cargar la sección. Inténtalo de nuevo.
+                            </div>
+                        `;
+                    });
+            } else {
+                lucide.createIcons();
+            }
+        }
+
+        // =======================================================================
+        // FUNCIONES DE CONTROL PARA LA SECCIÓN DE TRÁMITES
+        // =======================================================================
+        let currentCategory = 1;
+
+        function slideCarousel(direction) {
+            const track = document.getElementById('carousel-track');
+            if (!track) return;
+            let currentOffset = parseInt(track.dataset.offset || '0');
+            const cardWidth = 280;
+            currentOffset += direction * cardWidth;
+            if (currentOffset < 0) currentOffset = 0;
+            if (currentOffset > cardWidth * 2) currentOffset = cardWidth * 2;
+            track.style.transform = `translateX(-${currentOffset}px)`;
+            track.dataset.offset = currentOffset;
+        }
+
+        function selectCategory(catId) {
+            currentCategory = catId;
+            for (let i = 1; i <= 4; i++) {
+                const card = document.getElementById(`cat-card-${i}`);
+                const list = document.getElementById(`listado-tramites-cat-${i}`);
+                if (card) {
+                    card.classList.remove('border-[#5A123E]', 'bg-[#5A123E]/5', 'border-amber-300', 'bg-amber-50/50', 'border-teal-300', 'bg-teal-50/50', 'border-indigo-300', 'bg-indigo-50/50');
+                    card.classList.add('border-gray-100');
+                }
+                if (list) list.classList.add('hidden');
+            }
+
+            const activeCard = document.getElementById(`cat-card-${catId}`);
+            const activeList = document.getElementById(`listado-tramites-cat-${catId}`);
+
+            if (activeCard) {
+                activeCard.classList.remove('border-gray-100');
+                if (catId === 1) activeCard.classList.add('border-[#5A123E]', 'bg-[#5A123E]/5');
+                else if (catId === 2) activeCard.classList.add('border-amber-300', 'bg-amber-50/50');
+                else if (catId === 3) activeCard.classList.add('border-teal-300', 'bg-teal-50/50');
+                else if (catId === 4) activeCard.classList.add('border-indigo-300', 'bg-indigo-50/50');
+            }
+
+            if (activeList) {
+                activeList.classList.remove('hidden');
+                const firstBtn = activeList.querySelector('.item-selector-tramite');
+                if (firstBtn) firstBtn.click();
+            }
+        }
+
+        function seleccionarTramite(id) {
+            document.querySelectorAll('.item-selector-tramite').forEach(b => {
+                b.classList.remove('border-purple-300', 'bg-white', 'shadow-sm', 'border-amber-400', 'border-teal-400', 'border-indigo-400');
+            });
+
+            const activeBtn = document.getElementById(`btn-tramite-${id}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-white', 'shadow-sm');
+                if (currentCategory === 1) activeBtn.classList.add('border-purple-300');
+                else if (currentCategory === 2) activeBtn.classList.add('border-amber-400');
+                else if (currentCategory === 3) activeBtn.classList.add('border-teal-400');
+                else if (currentCategory === 4) activeBtn.classList.add('border-indigo-400');
+            }
+
+            document.querySelectorAll('.detalle-container-tramite').forEach(d => d.classList.add('hidden'));
+            const vacio = document.getElementById('detalle-tramite-vacio');
+            if (vacio) vacio.classList.add('hidden');
+
+            const targetDetalle = document.getElementById(`detalle-tramite-${id}`);
+            if (targetDetalle) {
+                targetDetalle.classList.remove('hidden');
+            }
+        }
+
+        function setVista(vista) {
+            const btnAgrupada = document.getElementById('toggle-vista-agrupada');
+            const btnLista = document.getElementById('toggle-vista-lista');
+            const contAgrupada = document.getElementById('contenedor-vista-agrupada');
+            const contLista = document.getElementById('contenedor-vista-lista');
+
+            if (vista === 'agrupada') {
+                if (btnAgrupada) btnAgrupada.className = 'px-5 py-2.5 rounded-2xl border font-black text-xs flex items-center gap-2 transition-all shadow-sm cursor-pointer bg-[#5A123E] text-white border-[#5A123E]';
+                if (btnLista) btnLista.className = 'px-5 py-2.5 rounded-2xl border font-black text-xs flex items-center gap-2 transition-all shadow-sm cursor-pointer bg-white text-slate-700 border-gray-250 hover:bg-gray-50';
+                if (contAgrupada) contAgrupada.classList.remove('hidden');
+                if (contLista) contLista.classList.add('hidden');
+            } else {
+                if (btnLista) btnLista.className = 'px-5 py-2.5 rounded-2xl border font-black text-xs flex items-center gap-2 transition-all shadow-sm cursor-pointer bg-[#5A123E] text-white border-[#5A123E]';
+                if (btnAgrupada) btnAgrupada.className = 'px-5 py-2.5 rounded-2xl border font-black text-xs flex items-center gap-2 transition-all shadow-sm cursor-pointer bg-white text-slate-700 border-gray-250 hover:bg-gray-50';
+                if (contLista) contLista.classList.remove('hidden');
+                if (contAgrupada) contAgrupada.classList.add('hidden');
+            }
+        }
+
+        function actualizarTablaLista() {
+            const buscador = document.getElementById('buscador-tabla-lista');
+            const selectCant = document.getElementById('select-cantidad-entradas');
+            const filas = document.querySelectorAll('.fila-tramite-lista');
+            const vacioRow = document.getElementById('tabla-lista-vacia');
+
+            if (!filas) return;
+
+            const q = buscador ? buscador.value.toLowerCase().trim() : '';
+            const limit = selectCant ? (selectCant.value === 'all' ? 9999 : parseInt(selectCant.value)) : 5;
+
+            let mostrados = 0;
+            filas.forEach(fila => {
+                const titulo = fila.dataset.titulo || '';
+                const desc = fila.dataset.descripcion || '';
+                const reqs = fila.dataset.requisitos || '';
+
+                const coincide = !q || titulo.includes(q) || desc.includes(q) || reqs.includes(q);
+
+                if (coincide && mostrados < limit) {
+                    fila.classList.remove('hidden');
+                    mostrados++;
+                } else {
+                    fila.classList.add('hidden');
+                }
+            });
+
+            if (vacioRow) {
+                if (mostrados === 0) vacioRow.classList.remove('hidden');
+                else vacioRow.classList.add('hidden');
+            }
+        }
+
+        // =======================================================================
+        // CONTROLADOR DE MENÚ DESPLEGABLE DE AJUSTES Y PERFIL
+        // =======================================================================
+        function toggleAjustesMenu() {
+            const dropdown = document.getElementById('ajustes-dropdown');
+            if (dropdown) {
+                dropdown.classList.toggle('hidden');
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            const dropdown = document.getElementById('ajustes-dropdown');
+            const btn = e.target.closest('button[title="Ajustes de Cuenta"]');
+            if (dropdown && !dropdown.contains(e.target) && !btn) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        // =======================================================================
+        // CONTROLADOR DE VIDEO BOLETÍN SMN EN VIVO
+        // =======================================================================
+        function loadYtVideo(url, title) {
+            const wrapper = document.getElementById('yt-video-wrapper');
+            if (wrapper) {
+                wrapper.onclick = null;
+                const embedUrl = url || 'https://www.youtube-nocookie.com/embed/K_5u_k1xII4?autoplay=1&rel=0';
+                wrapper.innerHTML = `<iframe src="${embedUrl}" title="${title || 'Boletín Meteorológico'}" class="w-full h-full border-0 rounded-xl" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>`;
+            }
+        }
+    </script>
+</body>
+</html>

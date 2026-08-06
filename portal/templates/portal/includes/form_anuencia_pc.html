@@ -1,0 +1,219 @@
+                        
+                        <div class="space-y-4">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">1. Tipo de Solicitud de Anuencia</span>
+                            {% if tramite.sub_tipo %}
+                                <input type="hidden" name="tipo_anuencia" value="{{ tramite.sub_tipo }}">
+                                <div class="w-full px-4 py-3 bg-purple-50/70 border border-purple-100 rounded-xl text-xs font-bold text-medellinVino flex items-center gap-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                    <span>
+                                        {% if tramite.sub_tipo == 'OPERATIVA' %}
+                                            Anuencia operativa de protección civil a instalaciones públicas y privadas
+                                        {% elif tramite.sub_tipo == 'RENOVACION' %}
+                                            Renovación de anuencia operativa
+                                        {% elif tramite.sub_tipo == 'RECOMENDACIONES' %}
+                                            Pliego de Recomendaciones de seguridad (Eventos)
+                                        {% elif tramite.sub_tipo == 'TEMPORAL' %}
+                                            Temporal (verificación de seguridad para puestos ambulantes)
+                                        {% else %}
+                                            {{ tramite.sub_tipo }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            {% else %}
+                                <select name="tipo_anuencia" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold focus:outline-none focus:border-medellinVino transition-colors">
+                                    <option value="OPERATIVA">Anuencia operativa de protección civil a instalaciones públicas y privadas</option>
+                                    <option value="RENOVACION">Renovación de anuencia operativa</option>
+                                    <option value="RECOMENDACIONES">Pliego de Recomendaciones de seguridad (Eventos)</option>
+                                    <option value="TEMPORAL">Temporal (verificación de seguridad para puestos ambulantes)</option>
+                                </select>
+                            {% endif %}
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">2. Datos del Local y Propietario</span>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Razón Social / Local</label>
+                                    <input type="text" name="establecimiento" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. Comercializadora Médica del Golfo S.A. de C.V.">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">RFC del Contribuyente</label>
+                                    <input type="text" name="rfc" maxlength="13" minlength="12" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors uppercase font-bold text-slate-800" placeholder="RFC de 12 o 13 letras">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Nombre del Propietario o Representante Legal (Para el oficio)</label>
+                                <input type="text" name="propietario_representante" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Nombre completo">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="relative">
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Giro Comercial</label>
+                                    <input type="text" id="input-giro-form1" name="giro" autocomplete="off" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Escriba para buscar giro (ej. Abarrotes, Escuela)...">
+                                    <div id="dropdown-giro-form1" class="hidden absolute left-0 right-0 mt-1 max-h-48 overflow-y-auto bg-white border border-gray-250 rounded-xl shadow-2xl z-50 text-[11px]"></div>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Capacidad Fija (Personas)</label>
+                                    <input type="text" name="capacidad_fija" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. 15 personas">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Representante de la Unidad Interna</label>
+                                    <input type="text" name="unidad_interna_nombre" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Nombre del encargado PC interno">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Teléfono de la Unidad Interna</label>
+                                    <input type="tel" name="unidad_interna_tel" maxlength="15" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Teléfono">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">3. Domicilio Comercial</span>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="md:col-span-2">
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Calle / Av.</label>
+                                    <input type="text" name="domicilio_calle" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Nombre de calle">
+                                </div>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-gray-500 mb-1.5">No. Ext</label>
+                                        <input type="text" name="no_ext" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="S/N">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-bold text-gray-500 mb-1.5">No. Int</label>
+                                        <input type="text" name="no_int" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="A">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Colonia / Fraccionamiento</label>
+                                    <input type="text" name="colonia" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Col. Centro">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Entre Calles</label>
+                                    <input type="text" name="entre_calles" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. Calle Morelos y Zaragoza">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Teléfono Local</label>
+                                    <input type="tel" name="telefono_contacto" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Tel. contacto">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Superficie m²</label>
+                                    <input type="text" name="superficie_m2" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. 50 m²">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Horario de Funcionamiento</label>
+                                <input type="hidden" name="horario_funcionamiento" id="hidden-horario-form1" value="09:00 AM - 06:00 PM">
+                                <div class="flex items-center gap-1.5">
+                                    <!-- HORA INICIO -->
+                                    <div class="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-xl px-2 py-1.5 focus-within:border-medellinVino transition-colors">
+                                        <select id="start-hour-form1" class="bg-transparent border-0 text-xs font-bold text-slate-800 focus:outline-none cursor-pointer p-0">
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06">06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09" selected>09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                        <span class="text-xs text-gray-400 font-bold">:</span>
+                                        <select id="start-min-form1" class="bg-transparent border-0 text-xs font-bold text-slate-800 focus:outline-none cursor-pointer p-0">
+                                            <option value="00" selected>00</option>
+                                            <option value="15">15</option>
+                                            <option value="30">30</option>
+                                            <option value="45">45</option>
+                                        </select>
+                                        <select id="start-ampm-form1" class="bg-transparent border-0 text-xs font-bold text-slate-800 focus:outline-none cursor-pointer p-0">
+                                            <option value="AM" selected>AM</option>
+                                            <option value="PM">PM</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <span class="text-[10px] text-gray-400 font-bold px-0.5">a</span>
+                                    
+                                    <!-- HORA FIN -->
+                                    <div class="flex items-center gap-1 bg-gray-50 border border-gray-200 rounded-xl px-2 py-1.5 focus-within:border-medellinVino transition-colors">
+                                        <select id="end-hour-form1" class="bg-transparent border-0 text-xs font-bold text-slate-800 focus:outline-none cursor-pointer p-0">
+                                            <option value="01">01</option>
+                                            <option value="02">02</option>
+                                            <option value="03">03</option>
+                                            <option value="04">04</option>
+                                            <option value="05">05</option>
+                                            <option value="06" selected>06</option>
+                                            <option value="07">07</option>
+                                            <option value="08">08</option>
+                                            <option value="09">09</option>
+                                            <option value="10">10</option>
+                                            <option value="11">11</option>
+                                            <option value="12">12</option>
+                                        </select>
+                                        <span class="text-xs text-gray-400 font-bold">:</span>
+                                        <select id="end-min-form1" class="bg-transparent border-0 text-xs font-bold text-slate-800 focus:outline-none cursor-pointer p-0">
+                                            <option value="00" selected>00</option>
+                                            <option value="15">15</option>
+                                            <option value="30">30</option>
+                                            <option value="45">45</option>
+                                        </select>
+                                        <select id="end-ampm-form1" class="bg-transparent border-0 text-xs font-bold text-slate-800 focus:outline-none cursor-pointer p-0">
+                                            <option value="AM">AM</option>
+                                            <option value="PM" selected>PM</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Correo de Contacto Ciudadano</label>
+                                <input type="email" name="correo_contacto" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="ejemplo@correo.com">
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <!-- Documentos presentados -->
+                            <div class="space-y-4">
+                                <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">4. Documentación Anexa</span>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1">Copia de INE (PDF/Imagen)</label>
+                                        <input type="file" name="file_ine" accept="application/pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1">Croquis de ubicación (PDF/Imagen)</label>
+                                        <input type="file" name="file_croquis" accept="application/pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1">Fotos impresas de fachada (PDF/Imagen)</label>
+                                        <input type="file" name="file_fotos" accept="application/pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1">Copia predial o contrato (PDF/Imagen)</label>
+                                        <input type="file" name="file_predial" accept="application/pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-gray-100">
+                            <label class="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase">Plano de Seguridad Opcional (PDF)</label>
+                            <input type="file" name="pdf_documento" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                        </div>
+
+                        <!-- ================= CASO 1.5: FORMULARIO DETALLADO ANUNCIOS Y ANTENAS PC ================= -->

@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación en 2 Pasos (2FA) - Protección Civil y Bomberos Medellín</title>
+    <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5A123E',
+                        medellinVinoOscuro: '#43082B',
+                        medellinVerde: '#5B7B34',
+                        medellinOro: '#E59E27',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .bg-medellin-gradient {
+            background: linear-gradient(135deg, #320420 0%, #5A123E 45%, #476228 85%, #5B7B34 100%);
+        }
+        .otp-input {
+            width: 3rem;
+            height: 3.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-medellin-gradient min-h-screen flex items-center justify-center p-4 md:p-6 antialiased text-slate-800 relative overflow-hidden">
+
+    <!-- Destellos Ambientales -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#E59E27]/25 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#5B7B34]/35 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Contenedor Principal de Verificación 2FA -->
+    <div class="max-w-md w-full bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/40 p-6 md:p-8 space-y-6 relative z-10 text-center">
+        
+        <!-- Franja Superior Tricolor -->
+        <div class="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-medellinVino via-medellinOro to-medellinVerde"></div>
+        
+        <!-- Ícono de Seguridad 2FA -->
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-medellinVino/10 text-medellinVino rounded-3xl mb-1 shadow-inner border border-medellinVino/20">
+            <i data-lucide="shield-check" class="w-8 h-8 text-medellinVino"></i>
+        </div>
+
+        <div>
+            <h1 class="text-xl md:text-2xl font-black text-medellinVino uppercase tracking-tight">Verificación de Seguridad</h1>
+            <p class="text-xs text-slate-500 font-medium mt-1 leading-relaxed">
+                Ingresa el código de seguridad de <strong>6 dígitos</strong> para confirmar el acceso a la cuenta de:
+            </p>
+            <span class="inline-block mt-2 font-bold text-xs bg-slate-100 text-slate-700 px-3 py-1 rounded-full border border-slate-200">
+                👤 {{ ciudadano.nombre }} ({{ ciudadano.correo }})
+            </span>
+        </div>
+
+        <!-- Mensajes Flash Django -->
+        {% if messages %}
+            <div class="space-y-2 text-left">
+                {% for message in messages %}
+                    <div class="p-3.5 rounded-2xl text-xs font-semibold flex items-start gap-2.5 {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-amber-50 text-amber-800 border border-amber-200{% endif %} shadow-sm">
+                        <i data-lucide="{% if message.tags == 'error' %}alert-circle{% else %}key{% endif %}" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                        <span class="leading-snug">{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Formulario 2FA OTP -->
+        <form method="POST" action="{% url 'verificar_2fa' %}" id="form-2fa" class="space-y-6">
+            {% csrf_token %}
+            <input type="hidden" name="codigo_2fa" id="codigo_2fa_full">
+            
+            <!-- Cajas de 6 dígitos interactivas -->
+            <div class="flex justify-center gap-2" id="otp-boxes">
+                <input type="text" maxlength="1" class="otp-input bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white text-slate-800 transition" autofocus>
+                <input type="text" maxlength="1" class="otp-input bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white text-slate-800 transition">
+                <input type="text" maxlength="1" class="otp-input bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white text-slate-800 transition">
+                <input type="text" maxlength="1" class="otp-input bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white text-slate-800 transition">
+                <input type="text" maxlength="1" class="otp-input bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white text-slate-800 transition">
+                <input type="text" maxlength="1" class="otp-input bg-slate-50 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white text-slate-800 transition">
+            </div>
+
+            <!-- Contador de Tiempo de Expiración -->
+            <div class="text-xs font-bold text-slate-400 flex items-center justify-center gap-1.5">
+                <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                <span>El código expira en: <span id="timer" class="text-medellinVino font-black">04:59</span> min</span>
+            </div>
+
+            <button type="submit" class="w-full bg-gradient-to-r from-[#43082B] via-[#5A123E] to-[#5B7B34] hover:opacity-95 text-white font-extrabold py-3.5 rounded-2xl shadow-lg transition-all transform hover:-translate-y-0.5 text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer">
+                <span>Verificar e Ingresar</span>
+                <i data-lucide="check-circle-2" class="w-4 h-4"></i>
+            </button>
+        </form>
+
+        <div class="pt-4 border-t border-slate-100 flex justify-between items-center text-xs font-bold">
+            <a href="{% url 'login_unificado' %}" class="text-slate-400 hover:text-slate-700 transition flex items-center gap-1">
+                ← Cancelar
+            </a>
+            <a href="{% url 'reenviar_codigo_2fa' %}" class="text-medellinVerde hover:underline transition flex items-center gap-1">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Reenviar Código
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Autofocus y salto entre casillas OTP
+        const inputs = document.querySelectorAll('#otp-boxes input');
+        const fullInput = document.getElementById('codigo_2fa_full');
+        const form = document.getElementById('form-2fa');
+
+        inputs.forEach((input, index) => {
+            input.addEventListener('keyup', (e) => {
+                if (e.key >= '0' && e.key <= '9') {
+                    if (index < inputs.length - 1) inputs[index + 1].focus();
+                } else if (e.key === 'Backspace') {
+                    if (index > 0) inputs[index - 1].focus();
+                }
+                updateFullCode();
+            });
+
+            input.addEventListener('paste', (e) => {
+                const pasteData = e.clipboardData.getData('text').trim();
+                if (pasteData.length === 6 && !isNaN(pasteData)) {
+                    pasteData.split('').forEach((char, i) => {
+                        if (inputs[i]) inputs[i].value = char;
+                    });
+                    updateFullCode();
+                    inputs[5].focus();
+                }
+            });
+        });
+
+        function updateFullCode() {
+            let code = '';
+            inputs.forEach(i => code += i.value);
+            fullInput.value = code;
+        }
+
+        form.addEventListener('submit', (e) => {
+            updateFullCode();
+            if (fullInput.value.length !== 6) {
+                e.preventDefault();
+                alert('Por favor ingresa los 6 dígitos del código de seguridad.');
+            }
+        });
+
+        // Timer regresivo de 5 minutos
+        let timeLeft = 299;
+        const timerElem = document.getElementById('timer');
+        const countdown = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                timerElem.innerText = '00:00';
+            } else {
+                const mins = Math.floor(timeLeft / 60);
+                const secs = timeLeft % 60;
+                timerElem.innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

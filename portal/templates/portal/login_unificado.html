@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso al Portal - Protección Civil y Bomberos Medellín</title>
+    <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5A123E',
+                        medellinVinoOscuro: '#43082B',
+                        medellinVerde: '#5B7B34',
+                        medellinOro: '#E59E27',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .bg-medellin-gradient {
+            background: linear-gradient(135deg, #320420 0%, #5A123E 45%, #476228 85%, #5B7B34 100%);
+        }
+    </style>
+</head>
+<body class="bg-medellin-gradient min-h-screen flex items-center justify-center p-4 md:p-6 antialiased text-slate-800 relative overflow-hidden">
+
+    <!-- Esferas Ambientales -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#E59E27]/25 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#5B7B34]/35 rounded-full blur-3xl"></div>
+    </div>
+
+    <!-- Contenedor Principal de Login (Tarjeta Glassmorphism) -->
+    <div class="max-w-md w-full bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/40 p-6 md:p-8 space-y-6 relative z-10">
+        
+        <!-- Franja Superior Tricolor Medellín -->
+        <div class="absolute top-0 inset-x-0 h-2 bg-gradient-to-r from-medellinVino via-medellinOro to-medellinVerde"></div>
+        
+        <!-- Header con Logotipos Oficiales -->
+        <div class="flex flex-col items-center text-center space-y-3 pt-1">
+            <div class="flex items-center justify-center gap-3">
+                <img src="{% static 'portal/img/logo_medellin.jpg' %}" alt="Logo Medellín" class="h-14 w-auto object-contain">
+                <div class="h-8 w-px bg-slate-200"></div>
+                <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Protección Civil" class="h-14 w-auto object-contain">
+            </div>
+            <div>
+                <h1 class="text-xl md:text-2xl font-black text-medellinVino uppercase tracking-tight">Acceso al Portal</h1>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Protección Civil y Bomberos • Medellín de Bravo</p>
+            </div>
+        </div>
+
+        <!-- Selector de Tipo de Usuario (Tabs Interactivas) -->
+        <div class="grid grid-cols-2 p-1 bg-slate-100/90 rounded-2xl border border-slate-200/80 text-xs font-bold">
+            <button type="button" id="tab-ciudadano" onclick="setTab('ciudadano')" class="py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 bg-white text-medellinVino shadow-sm border border-slate-200">
+                <i data-lucide="mail" class="w-4 h-4"></i> Ciudadano
+            </button>
+            <button type="button" id="tab-personal" onclick="setTab('personal')" class="py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-slate-500 hover:text-slate-800">
+                <i data-lucide="shield" class="w-4 h-4"></i> Personal PC
+            </button>
+        </div>
+
+        <!-- Mensajes Flash Django -->
+        {% if messages %}
+            <div class="space-y-2">
+                {% for message in messages %}
+                    <div class="p-3 rounded-2xl text-xs font-semibold flex items-start gap-2.5 {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200{% endif %}">
+                        <i data-lucide="{% if message.tags == 'error' %}alert-circle{% else %}check-circle{% endif %}" class="w-4 h-4 shrink-0 mt-0.5"></i>
+                        <span class="leading-snug">{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Advertencia de Bloq Mayús -->
+        <div id="caps-lock-warning" class="hidden p-2.5 bg-amber-50 border border-amber-200 text-amber-800 rounded-xl text-xs font-bold flex items-center gap-2">
+            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 shrink-0"></i>
+            <span>Atención: Mayúsculas (Bloq Mayús) activadas.</span>
+        </div>
+
+        <!-- Formulario de Inicio de Sesión -->
+        <form method="POST" action="{% url 'login_unificado' %}" class="space-y-4">
+            {% csrf_token %}
+            <input type="hidden" name="tipo_acceso" id="tipo_acceso_input" value="ciudadano">
+            
+            <!-- Identificador (Correo Electrónico o Usuario) -->
+            <div class="space-y-1.5">
+                <label id="lbl-identificador" class="block text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                    Correo Electrónico
+                </label>
+                <div class="relative">
+                    <input type="text" id="identificador-input" name="identificador" required autocomplete="username"
+                           class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white transition-all placeholder:font-medium placeholder:text-slate-400" 
+                           placeholder="Ej. usuario@correo.com"/>
+                    <i data-lucide="mail" id="icon-identificador" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5 transition-colors"></i>
+                </div>
+            </div>
+
+            <!-- Contraseña con Toggle Ojo -->
+            <div class="space-y-1.5">
+                <div class="flex justify-between items-center">
+                    <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                        Contraseña
+                    </label>
+                </div>
+                <div class="relative">
+                    <input type="password" id="password-input" name="password" required autocomplete="current-password"
+                           class="w-full pl-10 pr-10 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white transition-all placeholder:font-medium placeholder:text-slate-400" 
+                           placeholder="••••••••"/>
+                    <i data-lucide="lock" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+                    
+                    <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3.5 top-3.5 text-slate-400 hover:text-slate-600 focus:outline-none">
+                        <i data-lucide="eye" id="eye-icon" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recordarme -->
+            <div class="flex items-center justify-between text-xs pt-1">
+                <label class="flex items-center gap-2 cursor-pointer select-none text-slate-600 font-medium">
+                    <input type="checkbox" id="remember-me" class="rounded border-slate-300 text-medellinVino focus:ring-medellinVino w-4 h-4">
+                    <span>Recordar mis datos</span>
+                </label>
+            </div>
+
+            <!-- Botón Ingresar con Degradado Vino-Verde -->
+            <button type="submit" class="w-full bg-gradient-to-r from-[#43082B] via-[#5A123E] to-[#5B7B34] hover:opacity-95 text-white font-extrabold py-3.5 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer">
+                <span>Ingresar al Sistema</span>
+                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </button>
+        </form>
+
+        <!-- Navegación y Registros -->
+        <div class="pt-4 border-t border-slate-100 space-y-3 text-center text-xs">
+            <div class="flex justify-between items-center font-bold">
+                <a href="{% url 'home' %}" class="text-slate-400 hover:text-slate-700 flex items-center gap-1 transition">
+                    <i data-lucide="home" class="w-3.5 h-3.5"></i> Volver al Inicio
+                </a>
+                <a href="{% url 'registro_ciudadano' %}" class="text-medellinVerde hover:underline flex items-center gap-1 transition">
+                    <i data-lucide="user-plus" class="w-3.5 h-3.5"></i> Registro Ciudadano
+                </a>
+            </div>
+            
+            <a href="{% url 'registro_personal' %}" class="block text-[10px] font-bold text-slate-400 hover:text-medellinVino hover:underline transition pt-1">
+                ¿Eres elemento de Protección Civil / Bomberos? Solicita cuenta aquí ➔
+            </a>
+        </div>
+
+        <!-- Badge Seguridad SSL -->
+        <div class="pt-2 text-center">
+            <span class="inline-flex items-center gap-1.5 text-[9px] font-extrabold text-slate-500 uppercase tracking-widest bg-slate-100/80 px-3 py-1 rounded-full border border-slate-200">
+                <i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i> Conexión Encriptada SSL
+            </span>
+        </div>
+
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        function setTab(tab) {
+            const inputTipo = document.getElementById('tipo_acceso_input');
+            const btnCiudadano = document.getElementById('tab-ciudadano');
+            const btnPersonal = document.getElementById('tab-personal');
+            const lblIdentificador = document.getElementById('lbl-identificador');
+            const inputIdentificador = document.getElementById('identificador-input');
+
+            if (tab === 'ciudadano') {
+                inputTipo.value = 'ciudadano';
+                btnCiudadano.className = 'py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 bg-white text-medellinVino shadow-sm border border-slate-200';
+                btnPersonal.className = 'py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-slate-500 hover:text-slate-800';
+                lblIdentificador.innerText = 'Correo Electrónico';
+                inputIdentificador.placeholder = 'Ej. usuario@correo.com';
+            } else {
+                inputTipo.value = 'personal';
+                btnPersonal.className = 'py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 bg-white text-medellinVino shadow-sm border border-slate-200';
+                btnCiudadano.className = 'py-2.5 px-3 rounded-xl transition-all flex items-center justify-center gap-1.5 text-slate-500 hover:text-slate-800';
+                lblIdentificador.innerText = 'Nombre de Usuario Institucional';
+                inputIdentificador.placeholder = 'Ej. usuario.pc';
+            }
+        }
+
+        function togglePasswordVisibility() {
+            const pwdInput = document.getElementById('password-input');
+            const eyeIcon = document.getElementById('eye-icon');
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                eyeIcon.setAttribute('data-lucide', 'eye-off');
+            } else {
+                pwdInput.type = 'password';
+                eyeIcon.setAttribute('data-lucide', 'eye');
+            }
+            lucide.createIcons();
+        }
+
+        const passwordInput = document.getElementById('password-input');
+        const capsWarning = document.getElementById('caps-lock-warning');
+        if (passwordInput && capsWarning) {
+            passwordInput.addEventListener('keyup', function(e) {
+                if (e.getModifierState('CapsLock')) {
+                    capsWarning.classList.remove('hidden');
+                } else {
+                    capsWarning.classList.add('hidden');
+                }
+            });
+        }
+
+        const rememberCheckbox = document.getElementById('remember-me');
+        const inputIdentificador = document.getElementById('identificador-input');
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedUser = localStorage.getItem('pc_saved_user');
+            if (savedUser && inputIdentificador) {
+                inputIdentificador.value = savedUser;
+                if (rememberCheckbox) rememberCheckbox.checked = true;
+            }
+        });
+
+        document.querySelector('form').addEventListener('submit', () => {
+            if (rememberCheckbox && rememberCheckbox.checked) {
+                localStorage.setItem('pc_saved_user', inputIdentificador.value);
+            } else {
+                localStorage.removeItem('pc_saved_user');
+            }
+        });
+    </script>
+</body>
+</html>

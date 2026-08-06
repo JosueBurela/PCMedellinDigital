@@ -1,0 +1,346 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Anuencia - {{ solicitud.establecimiento }}</title>
+    <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5A123E',
+                        medellinVerde: '#5B7B34',
+                        medellinOro: '#E59E27',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        
+        /* Estilo simulador de línea manuscrita / máquina de escribir */
+        .input-line {
+            border-bottom: 1px solid #475569; /* slate-600 */
+            padding-left: 8px;
+            padding-right: 8px;
+            font-weight: 700;
+            color: #0f172a; /* slate-900 */
+            min-height: 1.15rem;
+            display: inline-block;
+        }
+
+        /* Estilos de impresión comprimidos para forzar hoja única y remover headers/footers del navegador */
+        @media print {
+            @page {
+                size: letter;
+                margin: 0; /* Remueve las cabeceras y pies de página automáticos del navegador (URL, hora, fecha) */
+            }
+            .no-print { display: none !important; }
+            
+            /* Recreamos los márgenes físicos (2cm a los lados, 1.2cm arriba/abajo) directamente en el cuerpo */
+            body {
+                background: white;
+                color: black;
+                font-size: 8pt;
+                line-height: 1.15;
+                margin: 0 !important;
+                padding: 1.2cm 2.0cm !important; /* Margen real de impresión */
+            }
+            
+            .page-container {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                max-width: 100% !important;
+                min-height: auto !important;
+            }
+            
+            /* Reducción de espaciados */
+            .logo-header { padding-bottom: 0.15rem !important; margin-bottom: 0.25rem !important; }
+            .logo-header img { height: 1.3cm !important; }
+            .titles-header { margin-bottom: 0.3rem !important; }
+            .date-header { margin-bottom: 0.4rem !important; }
+            .dirigido-header { margin-bottom: 0.4rem !important; }
+            .peticion-text { margin-bottom: 0.4rem !important; }
+            .tramites-box { margin-bottom: 0.4rem !important; }
+            .datos-comercial-box { margin-bottom: 0.4rem !important; }
+            .documentos-box { margin-bottom: 0.4rem !important; }
+            
+            /* Textos compactos */
+            .text-xs { font-size: 8pt !important; }
+            .text-[10px] { font-size: 7.5pt !important; }
+            .text-[9px] { font-size: 7pt !important; }
+            
+            /* Ajustes de flex lines para mantener las líneas horizontales */
+            .input-line { min-height: 1.05rem !important; font-size: 8pt !important; }
+            .firma-line { margin-top: 0.6rem !important; }
+            
+            /* Ajuste de listas */
+            .list-docs li { margin-bottom: 0.1rem !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-2 md:p-6">
+
+    <!-- Botonera de Impresión Flotante (Oculta al Imprimir) -->
+    <div class="no-print max-w-3xl mx-auto mb-4 bg-white rounded-2xl p-4 shadow border border-gray-200 flex justify-between items-center">
+        <div>
+            <h2 class="font-bold text-gray-800 text-sm">Vista de Impresión Oficial</h2>
+            <p class="text-[10px] text-gray-500">Márgenes laterales de 2cm. La fecha, hora y URL del navegador han sido ocultadas.</p>
+        </div>
+        <div class="flex space-x-2">
+            <button onclick="window.close()" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold px-4 py-2 rounded-xl text-xs transition">
+                ✕ Cancelar
+            </button>
+            <button onclick="window.print()" class="bg-medellinVino hover:bg-[#43082B] text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow-md transition transform hover:-translate-y-0.5">
+                🖨️ Imprimir Oficio
+            </button>
+        </div>
+    </div>
+
+    <!-- Hoja de Oficio Membretado (Simulador de papel) -->
+    <div class="page-container max-w-3xl mx-auto bg-white p-8 md:p-12 shadow-xl border border-gray-200 md:rounded-3xl relative min-h-[11in] flex flex-col justify-between">
+        
+        <div>
+            <!-- Cabecera de 3 Logotipos alineados en la parte superior -->
+            <div class="logo-header flex justify-between items-center border-b border-gray-100 pb-3 mb-3 px-1">
+                <!-- Logo Izq: Por la grandeza (1.6cm / h-14) -->
+                <img src="{% static 'portal/img/logo_medellin.jpg' %}" alt="Logo Medellín" class="h-14 w-auto object-contain">
+                
+                <!-- Logo Centro: Protección Civil Medellín (1.1cm / h-10, PNG oficial de alta resolución) -->
+                <img src="{% static 'portal/img/logo_pc.png' %}" alt="Logo PC" class="h-10 w-auto object-contain">
+                
+                <!-- Logo Der: Escudo de armas (1.6cm / h-14) -->
+                <img src="{% static 'portal/img/escudo.png' %}" alt="Escudo Medellín" class="h-14 w-auto object-contain">
+            </div>
+
+            <!-- Títulos Institucionales Centrados y Distribuidos en Líneas -->
+            <div class="titles-header text-center space-y-1 mb-3">
+                <h3 class="font-black text-xs md:text-[13px] text-slate-800 leading-tight uppercase tracking-wide">
+                    UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS
+                </h3>
+                <h4 class="font-bold text-[10px] md:text-[11px] text-slate-700 leading-tight uppercase tracking-wide">
+                    H. AYUNTAMIENTO DE MEDELLÍN DE BRAVO, VER.
+                </h4>
+                <span class="block text-[9px] md:text-[10px] font-black text-medellinOro tracking-widest uppercase">
+                    2026-2029
+                </span>
+            </div>
+
+            <!-- Fecha del Documento -->
+            <div class="date-header text-right text-xs text-gray-700 font-semibold mb-3">
+                Medellín de Bravo, Ver. A <span class="border-b border-slate-700 px-3 font-bold text-slate-900">{{ solicitud.creado_en.day }}</span> de 
+                <span class="border-b border-slate-700 px-4 font-bold text-slate-900">
+                    {% if solicitud.creado_en.month == 1 %}Enero
+                    {% elif solicitud.creado_en.month == 2 %}Febrero
+                    {% elif solicitud.creado_en.month == 3 %}Marzo
+                    {% elif solicitud.creado_en.month == 4 %}Abril
+                    {% elif solicitud.creado_en.month == 5 %}Mayo
+                    {% elif solicitud.creado_en.month == 6 %}Junio
+                    {% elif solicitud.creado_en.month == 7 %}Julio
+                    {% elif solicitud.creado_en.month == 8 %}Agosto
+                    {% elif solicitud.creado_en.month == 9 %}Septiembre
+                    {% elif solicitud.creado_en.month == 10 %}Octubre
+                    {% elif solicitud.creado_en.month == 11 %}Noviembre
+                    {% else %}Diciembre{% endif %}
+                </span> del 
+                <span class="border-b border-slate-700 px-3 font-bold text-slate-900">{{ solicitud.creado_en.year }}</span>
+            </div>
+
+            <!-- Dirigido a -->
+            <div class="dirigido-header text-xs space-y-0.5 font-bold text-slate-800 mb-3">
+                <p>LPC. ANTONIO ROSAS DELON</p>
+                <p>DIRECTOR MUNICIPAL DE PROTECCIÓN CIVIL</p>
+                <p>DE MEDELLÍN DE BRAVO, VER.</p>
+                <p class="font-black tracking-wide mt-0.5">PRESENTE:</p>
+            </div>
+
+            <!-- Petición -->
+            <p class="peticion-text text-xs text-slate-700 leading-relaxed text-justify mb-3">
+                Por medio de la presente solicito a usted el trámite indicado, con el fin de obtener la anuencia de protección civil, una vez cubiertos en su totalidad los requerimientos de seguridad y haber realizado los pagos correspondientes.
+            </p>
+
+            <!-- Tabla de Tipo de Trámite -->
+            <div class="tramites-box mb-3">
+                <span class="block text-[8px] font-bold text-slate-500 uppercase tracking-wide mb-1">Marque con una X los trámites solicitados:</span>
+                <table class="w-full text-left border-collapse text-xs border border-slate-300">
+                    <tbody class="divide-y divide-slate-300">
+                        <tr class="align-middle">
+                            <td class="border border-slate-300 py-1 px-2.5 text-center font-bold text-slate-800 w-8 bg-slate-50">
+                                {% if solicitud.tipo_anuencia == 'OPERATIVA' %}X{% endif %}
+                            </td>
+                            <td class="border border-slate-300 py-1 px-2.5 text-slate-700 text-[10px]">Anuencia de Operativas de Protección Civil a Instalaciones Públicas y Privadas</td>
+                        </tr>
+                        <tr class="align-middle">
+                            <td class="border border-slate-300 py-1 px-2.5 text-center font-bold text-slate-800 w-8 bg-slate-50">
+                                {% if solicitud.tipo_anuencia == 'RENOVACION' %}X{% endif %}
+                            </td>
+                            <td class="border border-slate-300 py-1 px-2.5 text-slate-700 text-[10px]">Renovación de Anuencias Operativas</td>
+                        </tr>
+                        <tr class="align-middle">
+                            <td class="border border-slate-300 py-1 px-2.5 text-center font-bold text-slate-800 w-8 bg-slate-50">
+                                {% if solicitud.tipo_anuencia == 'RECOMENDACIONES' %}X{% endif %}
+                            </td>
+                            <td class="border border-slate-300 py-1 px-2.5 text-slate-700 text-[10px]">Pliego de Recomendaciones de Eventos Masivos</td>
+                        </tr>
+                        <tr class="align-middle">
+                            <td class="border border-slate-300 py-1 px-2.5 text-center font-bold text-slate-800 w-8 bg-slate-50">
+                                {% if solicitud.tipo_anuencia == 'TEMPORAL' %}X{% endif %}
+                            </td>
+                            <td class="border border-slate-300 py-1 px-2.5 text-slate-700 text-[10px]">Temporal (Verificación de Seguridad para Puestos Ambulantes)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Datos Local Comercial -->
+            <div class="datos-comercial-box mb-3">
+                <div class="text-center font-bold text-xs uppercase tracking-wide bg-slate-100 py-0.5 border border-slate-300 mb-1">
+                    Datos Local Comercial:
+                </div>
+                
+                <!-- Campos en Líneas Continuas e Inline como el Original -->
+                <div class="space-y-1.5 text-xs text-slate-700">
+                    
+                    <div class="w-full">
+                        Nombre de propietario, representante legal, y/o nombre de quien saldrá el documento: <br>
+                        <span class="input-line w-full">{{ solicitud.propietario_representante|default:'' }}</span>
+                    </div>
+
+                    <div class="flex items-end w-full">
+                        <span class="whitespace-nowrap">Nombre del titular o representante de la Unidad Interna:</span>
+                        <span class="flex-1 input-line mx-2">{{ solicitud.unidad_interna_nombre|default:'' }}</span>
+                        <span class="whitespace-nowrap">Tel:</span>
+                        <span class="w-32 input-line ml-2">{{ solicitud.unidad_interna_tel|default:'' }}</span>
+                    </div>
+
+                    <div class="flex items-end w-full">
+                        <span class="whitespace-nowrap">Razón Social:</span>
+                        <span class="flex-1 input-line mx-2">{{ solicitud.establecimiento }}</span>
+                        <span class="whitespace-nowrap">Capacidad fija:</span>
+                        <span class="w-24 input-line ml-2">{{ solicitud.capacidad_fija|default:'' }}</span>
+                    </div>
+
+                    <div class="flex items-end w-full">
+                        <span class="whitespace-nowrap">Giro:</span>
+                        <span class="flex-1 input-line ml-2">{{ solicitud.giro|default:'' }}</span>
+                    </div>
+
+                    <div class="flex items-end w-full">
+                        <span class="whitespace-nowrap">Domicilio:</span>
+                        <span class="flex-1 input-line mx-2">{{ solicitud.domicilio_calle|default:'' }}</span>
+                        <span class="whitespace-nowrap">No. Ext:</span>
+                        <span class="w-16 input-line mx-2">{{ solicitud.no_ext|default:'' }}</span>
+                        <span class="whitespace-nowrap">No. Int:</span>
+                        <span class="w-16 input-line ml-2">{{ solicitud.no_int|default:'' }}</span>
+                    </div>
+
+                    <div class="flex items-end w-full">
+                        <span class="whitespace-nowrap">Entre:</span>
+                        <span class="flex-1 input-line mx-2">{{ solicitud.entre_calles|default:'' }}</span>
+                        <span class="whitespace-nowrap">COL.</span>
+                        <span class="w-40 input-line mx-2">{{ solicitud.colonia|default:'' }}</span>
+                        <span class="whitespace-nowrap">Teléfono:</span>
+                        <span class="w-32 input-line ml-2">{{ solicitud.telefono_contacto|default:'' }}</span>
+                    </div>
+
+                    <div class="flex items-end w-full">
+                        <span class="whitespace-nowrap">Horario:</span>
+                        <span class="w-44 input-line mx-2">{{ solicitud.horario_funcionamiento|default:'' }}</span>
+                        <span class="whitespace-nowrap">Metros cuadrados de superficie:</span>
+                        <span class="flex-1 input-line ml-2">{{ solicitud.superficie_m2|default:'' }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Listado de Documentos Recibidos -->
+            <div class="documentos-box space-y-3">
+                
+                <!-- Documentos Solicitados -->
+                <div>
+                    <div class="text-center font-bold text-[10px] uppercase tracking-wide border-b border-slate-200 mb-1">
+                        DOCUMENTOS SOLICITADOS
+                    </div>
+                    <ul class="list-docs text-xs text-slate-700 space-y-0.5">
+                        <li>
+                            <span class="font-bold">a) [{% if solicitud.doc_ine %}X{% else %}  {% endif %}]</span> Fotocopia de credencial de elector de quien realiza el trámite.
+                        </li>
+                        <li>
+                            <span class="font-bold">b) [{% if solicitud.doc_croquis %}X{% else %}  {% endif %}]</span> Croquis de ubicación del Inmueble.
+                        </li>
+                        <li>
+                            <span class="font-bold">c) [{% if solicitud.doc_fotos %}X{% else %}  {% endif %}]</span> Dos Fotografías impresas en papel a color de la fachada.
+                        </li>
+                        <li>
+                            <span class="font-bold">d) [{% if solicitud.doc_predial %}X{% else %}  {% endif %}]</span> Copia del pago del predial o contrato de arrendamiento.
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Documentos Emisión -->
+                <div>
+                    <div class="text-center font-bold text-[10px] uppercase tracking-wide border-b border-slate-200 mb-1">
+                        DOCUMENTOS PARA EMISIÓN DE ANUENCIA
+                    </div>
+                    <ol class="list-docs text-xs text-slate-700 space-y-0.5">
+                        <li>
+                            <span class="font-bold">1. ({% if solicitud.req_programa %}X{% else %}  {% endif %})</span> Programa de protección civil en documento o CD formato PDF
+                        </li>
+                        <li>
+                            <span class="font-bold">2. ({% if solicitud.req_corresponsabilidad %}X{% else %}  {% endif %})</span> Carta de corresponsabilidad en papel seguridad de tercero acreditado.
+                        </li>
+                        <li>
+                            <span class="font-bold">3. ({% if solicitud.req_capacitacion %}X{% else %}  {% endif %})</span> Constancias de capacitación en uso y manejo de extintores y primeros auxilios por un agente capacitador o tercer acreditado.
+                        </li>
+                        <li>
+                            <span class="font-bold">4. ({% if solicitud.req_gas %}X{% else %}  {% endif %})</span> Dictamen de gas vigente emitido por unidad verificadora vigente NOM-004 y 013 SEDG
+                        </li>
+                        <li>
+                            <span class="font-bold">5. ({% if solicitud.req_electrico %}X{% else %}  {% endif %})</span> Dictamen eléctrico vigente NOM-001-SEDE-2012
+                        </li>
+                        <li>
+                            <span class="font-bold">6. ({% if solicitud.req_estructural %}X{% else %}  {% endif %})</span> Dictamen estructural vigente.
+                        </li>
+                        <li>
+                            <span class="font-bold">7. ({% if solicitud.req_seguro %}X{% else %}  {% endif %})</span> Póliza de seguro vigente.
+                        </li>
+                        <li>
+                            <span class="font-bold">8. ({% if solicitud.req_pago %}X{% else %}  {% endif %})</span> Pago correspondiente a la anuencia en trámite.
+                        </li>
+                    </ol>
+                </div>
+
+            </div>
+
+            <!-- Firmas finales con Underline -->
+            <div class="firma-line mt-4 space-y-2 text-xs text-slate-700 pt-2 border-t border-slate-200">
+                <div class="flex items-end w-full">
+                    <span class="whitespace-nowrap">Nombre y firma de quien realiza el trámite:</span>
+                    <span class="flex-1 input-line ml-2 text-center">{{ solicitud.propietario_representante|default:solicitud.establecimiento }}</span>
+                </div>
+                <div class="flex items-end w-full">
+                    <span class="whitespace-nowrap">Teléfono:</span>
+                    <span class="w-48 input-line mx-2">{{ solicitud.telefono_contacto|default:'' }}</span>
+                    <span class="whitespace-nowrap">Correo Electrónico:</span>
+                    <span class="flex-1 input-line ml-2">{{ solicitud.correo_contacto|default:'' }}</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer Membretado Oficial -->
+        <footer class="mt-4 border-t border-slate-200 pt-1.5 text-[8px] md:text-[9px] text-center text-gray-500 italic font-medium">
+            Dirección: Calz San Ramón S/N Col. Fracc. Arboleda San Ramón, Ver. C.P. 94274 / Teléfono: (229) 955 4000
+        </footer>
+
+    </div>
+
+</body>
+</html>

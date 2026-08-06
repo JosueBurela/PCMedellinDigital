@@ -1,0 +1,273 @@
+{% load static %}
+<!-- Sección Trámites y Servicios Digitales (Lazy Loaded) -->
+<section id="tramites" class="scroll-mt-24 space-y-10">
+    <div class="text-center">
+        <h2 class="text-2xl md:text-3xl font-black text-medellinVino tracking-tight uppercase">Trámites y Servicios Digitales</h2>
+        <div class="w-12 h-1 bg-medellinOro mx-auto mt-3 rounded"></div>
+    </div>
+    
+    <!-- Selector de Modos de Visualización -->
+    <div class="flex justify-center gap-2 max-w-5xl mx-auto mb-6">
+        <button type="button" id="toggle-vista-agrupada" onclick="setVista('agrupada')" class="px-5 py-2.5 rounded-2xl border font-black text-xs flex items-center gap-2 transition-all shadow-sm cursor-pointer bg-[#5A123E] text-white border-[#5A123E]">
+            <i data-lucide="layout-grid" class="w-4 h-4"></i> Vista por Categorías
+        </button>
+        <button type="button" id="toggle-vista-lista" onclick="setVista('lista')" class="px-5 py-2.5 rounded-2xl border font-black text-xs flex items-center gap-2 transition-all shadow-sm cursor-pointer bg-white text-slate-700 border-gray-250 hover:bg-gray-50">
+            <i data-lucide="list" class="w-4 h-4"></i> Lista de Trámites Completa
+        </button>
+    </div>
+
+    <!-- CONTENEDOR 1: Vista Agrupada por Categorías -->
+    <div id="contenedor-vista-agrupada" class="transition-all duration-300 max-w-5xl mx-auto space-y-6">
+        
+        <!-- CAROUSEL DE CATEGORÍAS -->
+        <div class="relative flex items-center gap-3">
+            <button type="button" onclick="slideCarousel(-1)" class="bg-white hover:bg-gray-50 text-slate-700 border border-gray-250 w-9 h-9 rounded-full flex items-center justify-center shadow-sm cursor-pointer shrink-0 transition select-none">
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+            </button>
+            
+            <div class="overflow-hidden flex-grow py-1">
+                <div id="carousel-track" class="flex gap-4 transition-transform duration-300" style="transform: translateX(0px);">
+                    <div onclick="selectCategory(1)" id="cat-card-1" class="w-[250px] md:w-[280px] shrink-0 bg-white rounded-3xl p-4 shadow-sm border-2 cursor-pointer transition-all border-[#5A123E] bg-[#5A123E]/5 select-none hover:shadow-md">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-purple-100 text-medellinVino p-2 rounded-xl flex items-center justify-center shrink-0">
+                                <i data-lucide="shield-alert" class="w-4 h-4"></i>
+                            </span>
+                            <div>
+                                <h3 class="text-[11px] font-black text-slate-800 uppercase tracking-wider leading-snug">Protección Civil General</h3>
+                                <p class="text-[8px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Formato 1 de 5 • Comunes</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="selectCategory(2)" id="cat-card-2" class="w-[250px] md:w-[280px] shrink-0 bg-white rounded-3xl p-4 shadow-sm border-2 cursor-pointer transition-all border-gray-100 hover:border-amber-200 select-none hover:shadow-md">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-amber-100 text-medellinOro p-2 rounded-xl flex items-center justify-center shrink-0">
+                                <i data-lucide="antenna" class="w-4 h-4 text-medellinOro"></i>
+                            </span>
+                            <div>
+                                <h3 class="text-[11px] font-black text-slate-800 uppercase tracking-wider leading-snug">Anuncios y Antenas</h3>
+                                <p class="text-[8px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Formato 2 de 5 • Comunes</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="selectCategory(3)" id="cat-card-3" class="w-[250px] md:w-[280px] shrink-0 bg-white rounded-3xl p-4 shadow-sm border-2 cursor-pointer transition-all border-gray-100 hover:border-teal-200 select-none hover:shadow-md">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-teal-50 text-teal-600 p-2 rounded-xl flex items-center justify-center shrink-0">
+                                <i data-lucide="wrench" class="w-4 h-4 text-teal-600"></i>
+                            </span>
+                            <div>
+                                <h3 class="text-[11px] font-black text-slate-800 uppercase tracking-wider leading-snug">Construcción y Obras</h3>
+                                <p class="text-[8px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Formato 3 de 5 • Comunes</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div onclick="selectCategory(4)" id="cat-card-4" class="w-[250px] md:w-[280px] shrink-0 bg-white rounded-3xl p-4 shadow-sm border-2 cursor-pointer transition-all border-gray-100 hover:border-indigo-200 select-none hover:shadow-md">
+                        <div class="flex items-center gap-3">
+                            <span class="bg-indigo-50 text-indigo-600 p-2 rounded-xl flex items-center justify-center shrink-0">
+                                <i data-lucide="award" class="w-4 h-4 text-indigo-600"></i>
+                            </span>
+                            <div>
+                                <h3 class="text-[11px] font-black text-slate-800 uppercase tracking-wider leading-snug">Registro de Terceros</h3>
+                                <p class="text-[8px] text-gray-400 font-bold uppercase tracking-wider mt-0.5">Formato 4 de 5 • Comunes</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="button" onclick="slideCarousel(1)" class="bg-white hover:bg-gray-50 text-slate-700 border border-gray-250 w-9 h-9 rounded-full flex items-center justify-center shadow-sm cursor-pointer shrink-0 transition select-none">
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+
+        <!-- CONTENIDO INFERIOR -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            <div class="lg:col-span-5 flex flex-col justify-between bg-white rounded-3xl p-5 shadow-sm border border-gray-100 min-h-[380px]">
+                <div class="space-y-3 flex-grow flex flex-col justify-start">
+                    <span class="block text-[9px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2 mb-2">Trámites Disponibles</span>
+                    
+                    <!-- Categoría 1 -->
+                    <div id="listado-tramites-cat-1" class="space-y-2 listado-tramites-categoria">
+                        {% for tramite in tramites %}
+                            {% if tramite.form_type == 'ANUENCIA_PC' %}
+                                <button type="button" onclick="seleccionarTramite('{{ tramite.id }}')" id="btn-tramite-{{ tramite.id }}" class="w-full text-left p-3.5 rounded-2xl border border-gray-100 hover:border-purple-200 bg-gray-50/50 hover:bg-white text-xs transition-all flex items-center justify-between group cursor-pointer item-selector-tramite">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-2 h-2 rounded-full bg-purple-500 group-hover:scale-125 transition-transform shrink-0"></span>
+                                        <span class="font-bold text-slate-700 group-hover:text-medellinVino transition-colors leading-snug">{{ tramite.titulo }}</span>
+                                    </div>
+                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-gray-300 group-hover:text-medellinVino group-hover:translate-x-0.5 transition-all shrink-0"></i>
+                                </button>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Categoría 2 -->
+                    <div id="listado-tramites-cat-2" class="space-y-2 listado-tramites-categoria hidden">
+                        {% for tramite in tramites %}
+                            {% if tramite.form_type == 'ANUNCIOS_PC' %}
+                                <button type="button" onclick="seleccionarTramite('{{ tramite.id }}')" id="btn-tramite-{{ tramite.id }}" class="w-full text-left p-3.5 rounded-2xl border border-gray-100 hover:border-amber-300 bg-gray-50/50 hover:bg-white text-xs transition-all flex items-center justify-between group cursor-pointer item-selector-tramite">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-2 h-2 rounded-full bg-amber-500 group-hover:scale-125 transition-transform shrink-0"></span>
+                                        <span class="font-bold text-slate-700 group-hover:text-medellinOro transition-colors leading-snug">{{ tramite.titulo }}</span>
+                                    </div>
+                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-gray-300 group-hover:text-medellinOro group-hover:translate-x-0.5 transition-all shrink-0"></i>
+                                </button>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Categoría 3 -->
+                    <div id="listado-tramites-cat-3" class="space-y-2 listado-tramites-categoria hidden">
+                        {% for tramite in tramites %}
+                            {% if tramite.form_type == 'CONSTRUCCION_PC' %}
+                                <button type="button" onclick="seleccionarTramite('{{ tramite.id }}')" id="btn-tramite-{{ tramite.id }}" class="w-full text-left p-3.5 rounded-2xl border border-gray-100 hover:border-teal-300 bg-gray-50/50 hover:bg-white text-xs transition-all flex items-center justify-between group cursor-pointer item-selector-tramite">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-2 h-2 rounded-full bg-teal-500 group-hover:scale-125 transition-transform shrink-0"></span>
+                                        <span class="font-bold text-slate-700 group-hover:text-teal-600 transition-colors leading-snug">{{ tramite.titulo }}</span>
+                                    </div>
+                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-gray-300 group-hover:text-teal-600 group-hover:translate-x-0.5 transition-all shrink-0"></i>
+                                </button>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Categoría 4 -->
+                    <div id="listado-tramites-cat-4" class="space-y-2 listado-tramites-categoria hidden">
+                        {% for tramite in tramites %}
+                            {% if tramite.form_type == 'TERCEROS_PC' %}
+                                <button type="button" onclick="seleccionarTramite('{{ tramite.id }}')" id="btn-tramite-{{ tramite.id }}" class="w-full text-left p-3.5 rounded-2xl border border-gray-100 hover:border-indigo-300 bg-gray-50/50 hover:bg-white text-xs transition-all flex items-center justify-between group cursor-pointer item-selector-tramite">
+                                    <div class="flex items-center gap-3">
+                                        <span class="w-2 h-2 rounded-full bg-indigo-500 group-hover:scale-125 transition-transform shrink-0"></span>
+                                        <span class="font-bold text-slate-700 group-hover:text-indigo-600 transition-colors leading-snug">{{ tramite.titulo }}</span>
+                                    </div>
+                                    <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-gray-300 group-hover:text-indigo-600 group-hover:translate-x-0.5 transition-all shrink-0"></i>
+                                </button>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL DERECHO: Detalle -->
+            <div class="lg:col-span-7 flex flex-col">
+                <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-gray-100 flex-grow flex flex-col justify-between min-h-[420px] transition-all">
+                    {% for tramite in tramites %}
+                    <div id="detalle-tramite-{{ tramite.id }}" class="space-y-6 detalle-container-tramite hidden flex flex-col h-full">
+                        <div class="border-b border-gray-100 pb-4">
+                            <span class="bg-[#5A123E]/5 text-medellinVino text-[9px] uppercase font-black px-3 py-1 rounded-full tracking-wider border border-medellinVino/10 inline-block mb-2">
+                                {{ tramite.get_area_display }} • Protección Civil
+                            </span>
+                            <h3 class="text-lg md:text-xl font-black text-slate-800 leading-snug">{{ tramite.titulo }}</h3>
+                        </div>
+
+                        <div class="space-y-2">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest">¿En qué consiste el trámite?</span>
+                            <p class="text-gray-500 text-xs md:text-sm leading-relaxed">{{ tramite.descripcion }}</p>
+                        </div>
+
+                        {% if tramite.requisitos_list %}
+                        <div class="bg-purple-50/20 border border-purple-100/50 rounded-2xl p-4 md:p-5">
+                            <span class="block text-[10px] font-black text-medellinVino uppercase tracking-widest mb-3 flex items-center gap-1.5">
+                                <i data-lucide="check-square" class="w-3.5 h-3.5"></i> Documentación a integrar
+                            </span>
+                            <ul class="space-y-2">
+                                {% for req in tramite.requisitos_list %}
+                                <li class="flex items-start gap-2 text-xs text-slate-700">
+                                    <i data-lucide="check-circle" class="w-4 h-4 text-emerald-500 shrink-0 mt-0.5"></i>
+                                    <span class="font-semibold text-gray-600">{{ req }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+
+                        <div class="pt-4 mt-auto">
+                            <a href="{% url 'iniciar_tramite' tramite.id %}" class="w-full bg-medellinVino hover:bg-[#43082B] text-white font-bold py-4 rounded-xl shadow-md transition-all text-xs tracking-wider uppercase flex items-center justify-center gap-2 transform hover:-translate-y-0.5">
+                                <i data-lucide="arrow-right-circle" class="w-4 h-4 animate-pulse"></i> Iniciar Solicitud Digital
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                    <div id="detalle-tramite-vacio" class="flex flex-col items-center justify-center text-center p-8 space-y-4 my-auto">
+                        <div class="w-16 h-16 bg-purple-50 text-medellinVino rounded-full flex items-center justify-center text-3xl animate-bounce">
+                            📋
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-slate-800">Seleccione un trámite de la lista</h4>
+                            <p class="text-xs text-gray-400 font-semibold mt-1.5 max-w-xs mx-auto">Haga clic en cualquiera de los trámites de la izquierda para ver su descripción, requisitos e iniciar su solicitud en línea.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTENEDOR 2: Vista Tabla -->
+    <div id="contenedor-vista-lista" class="hidden transition-all duration-300 max-w-5xl mx-auto">
+        <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-gray-150 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-center gap-2 text-xs font-semibold text-gray-500">
+                    <span>Mostrar</span>
+                    <select id="select-cantidad-entradas" onchange="actualizarTablaLista()" class="px-3 py-1.5 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:border-medellinVino cursor-pointer font-bold text-slate-700">
+                        <option value="5">5</option>
+                        <option value="10" selected>10</option>
+                        <option value="25">25</option>
+                        <option value="all">Todas (12)</option>
+                    </select>
+                    <span>entradas</span>
+                </div>
+                
+                <div class="relative w-full md:w-72">
+                    <input type="text" id="buscador-tabla-lista" oninput="actualizarTablaLista()" placeholder="Buscar trámite por título..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-250 rounded-xl focus:outline-none focus:border-medellinVino text-xs font-bold text-slate-800">
+                    <i data-lucide="search" class="absolute left-3 top-2.5 w-4 h-4 text-gray-400"></i>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl border border-gray-200">
+                <table class="w-full text-left border-collapse text-xs">
+                    <thead>
+                        <tr class="bg-gray-50 border-b border-gray-200 text-slate-600 font-black uppercase text-[10px] tracking-wider">
+                            <th class="py-3.5 px-4 w-28">Código</th>
+                            <th class="py-3.5 px-4">Trámite</th>
+                            <th class="py-3.5 px-4 w-60">Dependencia</th>
+                            <th class="py-3.5 px-4 w-44 text-center">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-lista-body" class="divide-y divide-gray-150">
+                        {% for tramite in tramites %}
+                        <tr class="hover:bg-gray-50/50 transition-colors fila-tramite-lista" 
+                            data-id="{{ tramite.id }}"
+                            data-titulo="{{ tramite.titulo|lower }}"
+                            data-descripcion="{{ tramite.descripcion|lower }}"
+                            data-requisitos="{% for req in tramite.requisitos_list %}{{ req|lower }} {% endfor %}">
+                            <td class="py-4 px-4 font-mono font-extrabold text-slate-800">
+                                <span class="bg-slate-100 text-slate-700 px-2 py-1 rounded-lg text-[9px] uppercase border border-slate-200 font-bold">
+                                    TR-{{ tramite.id|stringformat:"03d" }}
+                                </span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <div class="font-bold text-slate-800 leading-snug text-xs">{{ tramite.titulo }}</div>
+                                <div class="text-[10px] text-gray-400 font-medium mt-0.5 line-clamp-1 leading-relaxed">{{ tramite.descripcion }}</div>
+                            </td>
+                            <td class="py-4 px-4 text-gray-500 font-bold text-[11px] leading-tight">
+                                Unidad de Protección Civil y Bomberos
+                                <span class="block text-[9px] text-gray-400 font-semibold uppercase mt-0.5">{{ tramite.get_area_display }} • Medellín</span>
+                            </td>
+                            <td class="py-4 px-4">
+                                <div class="flex flex-col gap-1.5 justify-center">
+                                    <a href="{% url 'iniciar_tramite' tramite.id %}" class="w-full text-center bg-medellinVino hover:bg-[#43082B] text-white font-bold py-2 rounded-xl text-[10px] shadow-sm transition uppercase tracking-wider">
+                                        Iniciar trámite
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

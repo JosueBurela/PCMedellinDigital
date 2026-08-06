@@ -1,0 +1,65 @@
+# ==============================================================================
+# 🛡️ GITIGNORE DE PROTECCIÓN CIVIL DIGITAL - MEDELLÍN DE BRAVO
+# Protege credenciales, tokens, bases de datos locales y archivos temporales
+# ==============================================================================
+
+# 🔑 Variables de Entorno, Claves y Datos Privados (¡NUNCA SUBIR A GITHUB!)
+.env
+.env.*
+!.env.example
+*.env
+*.pem
+*.key
+*.cert
+*.crt
+
+# 🐍 Entornos Virtuales y Cache de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+*.bak
+
+# 🗄️ Base de Datos Local y Archivos Subidos
+*.sqlite3
+db.sqlite3
+media/
+staticfiles/
+
+# 🖼️ Archivos Temporales y Pruebas Locales
+qr_reconnect.png
+scratch_*
+
+# 💻 IDEs, Editores de Código y Archivos del SO
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 🤖 Antigravity / Gemini Workspace State
+.agents/
+.gemini/

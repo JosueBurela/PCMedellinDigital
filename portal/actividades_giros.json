@@ -1,0 +1,5012 @@
+[
+    {
+        "numero": 1,
+        "actividad": "Cultivo de soya",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 2,
+        "actividad": "Cultivo de cártamo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 3,
+        "actividad": "Cultivo de girasol",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 4,
+        "actividad": "Cultivo anual de otras semillas oleaginosas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 5,
+        "actividad": "Cultivo de frijol grano",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 6,
+        "actividad": "Cultivo de garbanzo grano",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 7,
+        "actividad": "Cultivo de otras leguminosas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 8,
+        "actividad": "Cultivo de trigo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 9,
+        "actividad": "Cultivo de maíz grano",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 10,
+        "actividad": "Cultivo de maíz forrajero",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 11,
+        "actividad": "Cultivo de arroz",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 12,
+        "actividad": "Cultivo de sorgo grano",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 13,
+        "actividad": "Cultivo de avena grano",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 14,
+        "actividad": "Cultivo de cebada grano",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 15,
+        "actividad": "Cultivo de sorgo forrajero",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 16,
+        "actividad": "Cultivo de avena forrajera",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 17,
+        "actividad": "Cultivo de otros cereales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 18,
+        "actividad": "Cultivo de jitomate o tomate rojo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 19,
+        "actividad": "Cultivo de chile",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 20,
+        "actividad": "Cultivo de cebolla",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 21,
+        "actividad": "Cultivo de melón",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 22,
+        "actividad": "Cultivo de tomate verde",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 23,
+        "actividad": "Cultivo de papa",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 24,
+        "actividad": "Cultivo de calabaza",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 25,
+        "actividad": "Cultivo de sandía",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 26,
+        "actividad": "Cultivo de otras hortalizas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 27,
+        "actividad": "Cultivo de naranja",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 28,
+        "actividad": "Cultivo de limón",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 29,
+        "actividad": "Cultivo de otros cítricos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 30,
+        "actividad": "Cultivo de café",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 31,
+        "actividad": "Cultivo de plátano",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 32,
+        "actividad": "Cultivo de mango",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 33,
+        "actividad": "Cultivo de aguacate",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 34,
+        "actividad": "Cultivo de uva",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 35,
+        "actividad": "Cultivo de manzana",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 36,
+        "actividad": "Cul ti vo de cacao",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 37,
+        "actividad": "Cultivo de coco",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 38,
+        "actividad": "Cultivo de otros frutales no cítricos y de nueces",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 39,
+        "actividad": "Cultivo de productos alimenticios en invernaderos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 40,
+        "actividad": "Floricultura a cielo abierto",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 41,
+        "actividad": "Floricultura en invernadero",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 42,
+        "actividad": "Cultivo de árboles de ciclo productivo de 10 años o menos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 43,
+        "actividad": "Otros cultivos no alimenticios en invernaderos y viveros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 44,
+        "actividad": "Cultivo de tabaco",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 45,
+        "actividad": "Cultivo de algodón",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 46,
+        "actividad": "Cultivo de caña de azúcar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 47,
+        "actividad": "Cultivo de alfalfa",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 48,
+        "actividad": "Cultivo de pastos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 49,
+        "actividad": "Cultivo de agaves alcoholeros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 50,
+        "actividad": "Cultivo de cacahuate",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 51,
+        "actividad": "Actividades agrícolas combinadas con explotación de animales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 52,
+        "actividad": "Actividades agrícolas combinadas con aprovechamiento forestal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 53,
+        "actividad": "Actividades agrícolas combinadas con explotación de animales y aprovechamiento forestal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 54,
+        "actividad": "Otros cultivos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 55,
+        "actividad": "Explotación de bovinos para la producción de carne",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 56,
+        "actividad": "Explotación de bovinos para la producción de leche",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 57,
+        "actividad": "Explotación de bovinos para la producción conjunta de leche y carne",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 58,
+        "actividad": "Explotación de bovinos para otros propósitos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 59,
+        "actividad": "Explotación de porcinos en granja",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 60,
+        "actividad": "Explotación de porcinos en traspatio",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 61,
+        "actividad": "Explotación de gallinas para la producción de huevo fértil",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 62,
+        "actividad": "Explotación de gallinas para la producción de huevo para plato",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 63,
+        "actividad": "Explotación de pollos para la producción de carne",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 64,
+        "actividad": "Explotación de guajolotes o pavos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 65,
+        "actividad": "Producción de aves en incubadora",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 66,
+        "actividad": "Explotación de otras aves para producción de carne y huevo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 67,
+        "actividad": "Explotación de ovinos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 68,
+        "actividad": "Explotación de caprinos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 69,
+        "actividad": "Camaronicultura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 70,
+        "actividad": "Piscicultura y otra acuicultura, excepto camaronicultura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 71,
+        "actividad": "Apicultura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 72,
+        "actividad": "Explotación de équidos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 73,
+        "actividad": "Cunicultura y explotación de animales con pelaje fino",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 74,
+        "actividad": "Explotación de animales combinada con aprovechamiento forestal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 75,
+        "actividad": "Explotación de otros animales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 76,
+        "actividad": "Silvicultura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 77,
+        "actividad": "Viveros forestales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 78,
+        "actividad": "Recolección de productos forestales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 79,
+        "actividad": "Tala de árboles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 80,
+        "actividad": "Pesca de camarón",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 81,
+        "actividad": "Pesca de túnidos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 82,
+        "actividad": "Pesca de sardina y anchoveta",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 83,
+        "actividad": "Pesca y captura de otros peces, crustáceos, moluscos y otras especies",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 84,
+        "actividad": "Caza y captura",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 85,
+        "actividad": "Servicios de fumigación agrícola",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 86,
+        "actividad": "Despepite de algodón",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 87,
+        "actividad": "Beneficio de productos agrícolas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 88,
+        "actividad": "Otros servicios relacionados con la agricultura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 89,
+        "actividad": "Servicios relacionados con la cría y explotación de animales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 90,
+        "actividad": "Servicios relacionados con el aprovechamiento forestal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 91,
+        "actividad": "Extracción de petróleo y gas",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 92,
+        "actividad": "Minería de carbón mineral",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 93,
+        "actividad": "Minería de hierro",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 94,
+        "actividad": "Minería de oro",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 95,
+        "actividad": "Minería de plata",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 96,
+        "actividad": "Minería de cobre",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 97,
+        "actividad": "Minería de plomo y zinc",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 98,
+        "actividad": "Minería de manganeso",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 99,
+        "actividad": "Minería de mercurio y antimonio",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 100,
+        "actividad": "Minería de uranio y minerales radiactivos",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 101,
+        "actividad": "Minería de otros minerales metálicos",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 102,
+        "actividad": "Minería de piedra caliza",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 103,
+        "actividad": "Minería de mármol",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 104,
+        "actividad": "Minería de otras piedras dimensionadas",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 105,
+        "actividad": "Minería de arena y grava para la construcción",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 106,
+        "actividad": "Minería de tezontle y tepetate",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 107,
+        "actividad": "Minería de feldespato",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 108,
+        "actividad": "Minería de sílice",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 109,
+        "actividad": "Minería de caolín",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 110,
+        "actividad": "Minería de otras arcillas y de otros minerales refractarios",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 111,
+        "actividad": "Minería de sal",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 112,
+        "actividad": "Minería de piedra de yeso",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 113,
+        "actividad": "Minería de barita",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 114,
+        "actividad": "Minería de roca fosfórica",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 115,
+        "actividad": "Minería de fluorita",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 116,
+        "actividad": "Minería de grafito",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 117,
+        "actividad": "Minería de azufre",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 118,
+        "actividad": "Minería de minerales no metálicos para productos químicos",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 119,
+        "actividad": "Minería de otros minerales no metálicos",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 120,
+        "actividad": "Perforación de pozos petroleros y de gas",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 121,
+        "actividad": "Otros servicios relacionados con la minería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 122,
+        "actividad": "Generación de energía eléctrica",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 123,
+        "actividad": "Transmisión y distribución de energía eléctrica",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 124,
+        "actividad": "Captación, tratamiento y suministro de agua realizados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 125,
+        "actividad": "Captación, tratamiento y suministro de agua realizados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 126,
+        "actividad": "Suministro de gas por ductos al consumidor final (vivienda)",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 127,
+        "actividad": "Suministro de gas por ductos al consumidor final (industrial)",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 128,
+        "actividad": "Edificación de vivienda unifamiliar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 129,
+        "actividad": "Edificación de vivienda multifamiliar",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 130,
+        "actividad": "Edifi cación de naves y plantas industriales, excepto la supervisión",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 131,
+        "actividad": "Edificación de inmuebles comerciales y de servicios, excepto la supervisión",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 132,
+        "actividad": "Construcción de obras para el tratamiento, distribución y suministro de agua y drenaje",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 133,
+        "actividad": "Construcción de sistemas de riego agrícola",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 134,
+        "actividad": "Construcción de sistemas de distribución de petróleo y gas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 135,
+        "actividad": "Construcción de plantas de refinería y petroquímica",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 136,
+        "actividad": "Construcción de obras de generación y conducción de energía eléctrica",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 137,
+        "actividad": "Construcción de obras para telecomunicaciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 138,
+        "actividad": "División de terrenos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 139,
+        "actividad": "Construcción de obras de urbanización",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 140,
+        "actividad": "Instalación de señalamientos y protecciones en obras viales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 141,
+        "actividad": "Construcción de carreteras, puentes y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 142,
+        "actividad": "Construcción de presas y represas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 143,
+        "actividad": "Construcción de obras marítimas, fluviales y subacuáticas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 144,
+        "actividad": "Construcción de obras para transporte eléctrico y ferroviario",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 145,
+        "actividad": "Otras construcciones de ingeniería civil",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 146,
+        "actividad": "Trabajos de cimentaciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 147,
+        "actividad": "Montaje de estructuras de concreto prefabricadas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 148,
+        "actividad": "Montaje de estructuras de acero prefabricadas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 149,
+        "actividad": "Trabajos de albañilería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 150,
+        "actividad": "Otros trabajos en exteriores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 151,
+        "actividad": "Instalaciones eléctricas en construcciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 152,
+        "actividad": "Instalaciones hidrosanitarias y de gas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 153,
+        "actividad": "Instalaciones de sistemas centrales de aire acondicionado y calefacción",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 154,
+        "actividad": "Otras instalaciones y equipamiento en construcciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 155,
+        "actividad": "Colocación de muros falsos y aislamiento",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 156,
+        "actividad": "Trabajos de enyesado, empastado y tiroleado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 157,
+        "actividad": "Trabajos de pintura y otros cubrimientos de paredes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 158,
+        "actividad": "Colocación de pisos flexibles y de madera",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 159,
+        "actividad": "Colocación de pisos cerámicos y azulejos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 160,
+        "actividad": "Realización de trabajos de carpintería en el lugar de la construcción",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 161,
+        "actividad": "Otros trabajos de acabados en edificaciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 162,
+        "actividad": "Preparación de terrenos para la construcción",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 163,
+        "actividad": "Otros trabajos especializados para la construcción",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 164,
+        "actividad": "Elaboración de alimentos para animales",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 165,
+        "actividad": "Beneficio del arroz",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 166,
+        "actividad": "Elaboración de harina de trigo",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 167,
+        "actividad": "Elaboración de harina de maíz",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 168,
+        "actividad": "Elaboración de harina de otros productos agrícolas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 169,
+        "actividad": "Elaboración de malta",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 170,
+        "actividad": "Elaboración de féculas y otros almidones y sus derivados",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 171,
+        "actividad": "Elaboración de aceites y grasas vegetales comestibles",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 172,
+        "actividad": "Elaboración de cereales para el desayuno",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 173,
+        "actividad": "Elaboración de azúcar de caña",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 174,
+        "actividad": "Elaboración de otros azúcares",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 175,
+        "actividad": "Elaboración de dulces, chicles y productos de confitería que no sean de chocolate",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 176,
+        "actividad": "Elaboración de chocolate y productos de chocolate",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 177,
+        "actividad": "Congelación de frutas y verduras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 178,
+        "actividad": "Congelación de guisos y otros alimentos preparados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 179,
+        "actividad": "Deshidratación de frutas y verduras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 180,
+        "actividad": "Conservación de frutas y verduras por procesos distintos a la congelación y la deshidratación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 181,
+        "actividad": "Conservación de guisos y otros alimentos preparados por procesos distintos a la congelación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 182,
+        "actividad": "Elaboración de leche líquida",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 183,
+        "actividad": "Elaboración de leche en polvo, condensada y evaporada",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 184,
+        "actividad": "Elaboración de derivados y fermentos lácteos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 185,
+        "actividad": "Elaboración de helados y paletas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 186,
+        "actividad": "Matanza de ganado, aves y otros animales comestibles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 187,
+        "actividad": "Corte y empacado de carne de ganado, aves y otros animales comestibles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 188,
+        "actividad": "Preparación de embutidos y otras conservas de carne de ganado, aves y otros animales comestibles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 189,
+        "actividad": "Elaboración de manteca y otras grasas animales comestibles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 190,
+        "actividad": "Preparación y envasado de pescados y mariscos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 191,
+        "actividad": "Panificación industrial",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 192,
+        "actividad": "Panificación tradicional",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 193,
+        "actividad": "Elaboración de galletas y pastas para sopa",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 194,
+        "actividad": "El abor ación de tortillas de maíz y molienda de nixtamal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 195,
+        "actividad": "Elaboración industrial de botanas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 196,
+        "actividad": "Elaboración tradicional de botanas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 197,
+        "actividad": "Beneficio del café",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 198,
+        "actividad": "Elaboración de café tostado y molido",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 199,
+        "actividad": "Elaboración de café instantáneo",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 200,
+        "actividad": "Preparación y envasado de té",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 201,
+        "actividad": "Elaboración de concentrados, polvos, jarabes y esencias de sabor para bebidas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 202,
+        "actividad": "El abor ación de condimentos y aderezos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 203,
+        "actividad": "Elaboración de gelatinas y otros postres en polvo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 204,
+        "actividad": "Elaboración de levadura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 205,
+        "actividad": "Elaboración de alimentos frescos para consumo inmediato",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 206,
+        "actividad": "El abor ación de otros alimentos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 207,
+        "actividad": "Elaboración de refrescos y otras bebidas no alcohólicas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 208,
+        "actividad": "Purificación y embotellado de agua",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 209,
+        "actividad": "Elaboración de hielo",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 210,
+        "actividad": "Elaboración de cerveza",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 211,
+        "actividad": "Elaboración de bebidas alcohólicas a base de uva",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 212,
+        "actividad": "Elaboración de pulque",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 213,
+        "actividad": "Elaboración de sidra y otras bebidas fermentadas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 214,
+        "actividad": "Elaboración de ron y otras bebidas destiladas de caña",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 215,
+        "actividad": "Elaboración de bebidas destiladas de agave",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 216,
+        "actividad": "Obtención de alcohol etílico potable",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 217,
+        "actividad": "Elaboración de otras bebidas destiladas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 218,
+        "actividad": "Beneficio del tabaco",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 219,
+        "actividad": "Elaboración de cigarros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 220,
+        "actividad": "Elaboración de puros y otros productos de tabaco",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 221,
+        "actividad": "Preparación e hilado de fibras duras naturales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 222,
+        "actividad": "Preparación e hilado de fibras blandas naturales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 223,
+        "actividad": "Fabricación de hilos para coser y bordar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 224,
+        "actividad": "Fabricación de telas anchas de tejido de trama",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 225,
+        "actividad": "Fabricación de telas angostas de tejido de trama y pasamanería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 226,
+        "actividad": "Fabricación de telas no tejidas (comprimidas)",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 227,
+        "actividad": "Fabricación de telas de tejido de punto",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 228,
+        "actividad": "Acabado de productos textiles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 229,
+        "actividad": "Fabricación de telas recubiertas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 230,
+        "actividad": "Fabricación de alfombras y tapetes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 231,
+        "actividad": "Confección de cortinas, blancos y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 232,
+        "actividad": "Confección de costales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 233,
+        "actividad": "Confección de productos de textiles recubiertos y de materiales sucedáneos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 234,
+        "actividad": "Confección, bordado y deshilado de productos textiles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 235,
+        "actividad": "Fabricación de redes y otros productos de cordelería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 236,
+        "actividad": "Fabricación de productos textiles reciclados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 237,
+        "actividad": "Fabricación de banderas y otros productos textiles no clasificados en otra parte",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 238,
+        "actividad": "Fabricación de calcetines y medias de tejido de punto",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 239,
+        "actividad": "Fabricación de ropa interior de tejido de punto",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 240,
+        "actividad": "Fabricación de ropa exterior de tejido de punto",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 241,
+        "actividad": "Confección de prendas de vestir de cuero, piel y de materiales sucedáneos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 242,
+        "actividad": "Confección en serie de ropa interior y de dormir",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 243,
+        "actividad": "Confección en serie de camisas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 244,
+        "actividad": "Confección en serie de uniformes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 245,
+        "actividad": "Confección en serie de disfraces y trajes típicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 246,
+        "actividad": "Confección de prendas de vestir sobre medida",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 247,
+        "actividad": "Confección en serie de otra ropa exterior de materiales textiles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 248,
+        "actividad": "Confección de sombreros y gorras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 249,
+        "actividad": "Confección de otros accesorios y prendas de vestir no clasificados en otra parte",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 250,
+        "actividad": "Curtido y acabado de cuero y piel",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 251,
+        "actividad": "Curtido y acabado de cuero y piel en cantidades industriales",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 252,
+        "actividad": "Fabricación de calzado con corte de piel y cuero",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 253,
+        "actividad": "Fabricación de calzado con corte de tela",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 254,
+        "actividad": "Fabricación de calzado de plástico",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 255,
+        "actividad": "Fabricación de calzado de hule",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 256,
+        "actividad": "Fabricación de huaraches y calzado de otro tipo de materiales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 257,
+        "actividad": "Fabricación de bolsos de mano, maletas y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 258,
+        "actividad": "Fabricación de otros productos de cuero, piel y materiales sucedáneos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 259,
+        "actividad": "Aserraderos integrados",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 260,
+        "actividad": "Aserrado de tablas y tablones",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 261,
+        "actividad": "Tratamiento de la madera y fabricación de postes y durmientes",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 262,
+        "actividad": "Fabricación de laminados y aglutinados de madera",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 263,
+        "actividad": "Fabricación de productos de madera para la construcción",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 264,
+        "actividad": "Fabricación de productos para embalaje y envases de madera",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 265,
+        "actividad": "Fabricación de productos de materiales trenzables, excepto palma",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 266,
+        "actividad": "Fabricación de artículos y utensilios de madera para el hogar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 267,
+        "actividad": "Fabricación de productos de madera de uso industrial",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 268,
+        "actividad": "Fabricación de otros productos de madera",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 269,
+        "actividad": "Fabricación de pulpa",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 270,
+        "actividad": "Fabricación de papel en plantas integradas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 271,
+        "actividad": "Fabricación de papel a partir de pulpa",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 272,
+        "actividad": "Fabricación de cartón en plantas integradas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 273,
+        "actividad": "Fabricación de cartón y cartoncillo a partir de pulpa",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 274,
+        "actividad": "Fabricación de envases de cartón",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 275,
+        "actividad": "Fabricación de bolsas de papel y productos celulósicos recubiertos y tratados",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 276,
+        "actividad": "Fabricación de productos de papelería",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 277,
+        "actividad": "Fabricación de pañales desechables y productos sanitarios",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 278,
+        "actividad": "Fabricación de otros productos de cartón y papel",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 279,
+        "actividad": "Impresión de libros, periódicos y revistas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 280,
+        "actividad": "Impresión de formas continuas y otros impresos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 281,
+        "actividad": "Industrias conexas a la impresión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 282,
+        "actividad": "Refinación de petróleo",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 282,
+        "actividad": "Fabricación de productos de asfalto",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 282,
+        "actividad": "Fabricación de aceites y grasas lubricantes",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 282,
+        "actividad": "Fabricación de coque y otros productos derivados del petróleo refinado y del carbón mineral",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 283,
+        "actividad": "Fabricación de petroquímicos básicos del gas natural y del petróleo refinado",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 284,
+        "actividad": "Fabricación de gases industriales",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 285,
+        "actividad": "Fabricación de pigmentos y colorantes sintéticos",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 286,
+        "actividad": "Fabricación de otros productos químicos básicos inorgánicos",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 287,
+        "actividad": "Fabricación de otros productos químicos básicos orgánicos",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 288,
+        "actividad": "Fabricación de resinas sintéticas",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 289,
+        "actividad": "Fabricación de hules sintéticos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 290,
+        "actividad": "Fabricación de fibras químicas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 291,
+        "actividad": "Fabricación de fertilizantes",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 292,
+        "actividad": "Fabricación de pesticidas y otros agroquímicos, excepto fertilizantes",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 293,
+        "actividad": "Fabricación de materias primas para la industria farmacéutica",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 294,
+        "actividad": "Fabricación de preparaciones farmacéuticas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 295,
+        "actividad": "Fabricación de pinturas y recubrimientos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 296,
+        "actividad": "Fabricación de adhesivos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 297,
+        "actividad": "Fabricación de jabones, limpiadores y dentífricos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 298,
+        "actividad": "Fabricación de cosméticos, perfumes y otras preparaciones de tocador",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 299,
+        "actividad": "Fabricación de tintas para impresión",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 300,
+        "actividad": "Fabricación de explosivos",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 301,
+        "actividad": "Fabricación de cerillos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 302,
+        "actividad": "Fabricación de películas, placas y papel fotosensible para fotografía",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 303,
+        "actividad": "Fabricación de resinas de plásticos reciclados",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 304,
+        "actividad": "Fabricación de otros productos químicos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 305,
+        "actividad": "Fabricación de bolsas y películas de plástico flexible",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 306,
+        "actividad": "Fabricación de tubería y conexiones, y tubos para embalaje",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 307,
+        "actividad": "Fabricación de laminados de plástico rígido",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 308,
+        "actividad": "Fabricación de espumas y productos de poliestireno",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 309,
+        "actividad": "Fabricación de espumas y productos de uretano",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 310,
+        "actividad": "Fabricación de botellas de plástico",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 311,
+        "actividad": "Fabricación de productos de plástico para el hogar con y sin reforzamiento",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 312,
+        "actividad": "Fabricación de autopartes de plástico con y sin reforzamiento",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 313,
+        "actividad": "Fabricación de envases y contenedores de plástico para embalaje con y sin reforzamiento",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 314,
+        "actividad": "Fabricación de otros productos de plástico de uso industrial sin reforzamiento",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 315,
+        "actividad": "Fabricación de otros productos de plástico con reforzamiento",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 316,
+        "actividad": "Fabricación de otros productos de plástico sin reforzamiento",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 317,
+        "actividad": "Fabricación de llantas y cámaras",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 318,
+        "actividad": "Revitalización de llantas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 319,
+        "actividad": "Fabricación de bandas y mangueras de hule y de plástico",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 320,
+        "actividad": "Fabricación de otros productos de hule",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 321,
+        "actividad": "Fabricación de artículos de alfarería, porcelana y loza",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 322,
+        "actividad": "Fabricación de muebles de baño",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 323,
+        "actividad": "Fabricación de ladrillos no refractarios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 324,
+        "actividad": "Fabricación de azulejos y losetas no refractarias",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 325,
+        "actividad": "Fabricación de productos refractarios",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 326,
+        "actividad": "Fabricación de vidrio",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 327,
+        "actividad": "Fabricación de espejos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 328,
+        "actividad": "Fabricación de envases y ampolletas de vidrio",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 329,
+        "actividad": "Fabricación de fibra de vidrio",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 330,
+        "actividad": "Fabricación de artículos de vidrio de uso doméstico",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 331,
+        "actividad": "Fabricación de artículos de vidrio de uso industrial y comercial",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 332,
+        "actividad": "Fabricación de otros productos de vidrio",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 333,
+        "actividad": "Fabricación de cemento y productos a base de cemento en plantas integradas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 334,
+        "actividad": "Fabricación de concreto",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 335,
+        "actividad": "Fabricación de tubos y bloques de cemento y concreto",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 336,
+        "actividad": "Fabricación de productos preesforzados de concreto",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 337,
+        "actividad": "Fabricación de otros productos de cemento y concreto",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 338,
+        "actividad": "Fabricación de cal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 339,
+        "actividad": "Fabricación de yeso y productos de yeso",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 340,
+        "actividad": "Fabricación de productos abrasivos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 341,
+        "actividad": "Fabricación de productos a base de piedras de cantera",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 342,
+        "actividad": "Fabricación de otros productos a base de minerales no metálicos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 343,
+        "actividad": "Complejos siderúrgicos",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 344,
+        "actividad": "Fabricación de desbastes primarios y ferroaleaciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 345,
+        "actividad": "Fabricación de tubos y postes de hierro y acero",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 346,
+        "actividad": "Fabricación de otros productos de hierro y acero",
+        "riesgo": "Alto Riesgo"
+    },
+    {
+        "numero": 347,
+        "actividad": "Industria básica del aluminio",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 348,
+        "actividad": "Fundición y refinación de cobre",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 349,
+        "actividad": "Fundición y refinación de metales preciosos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 350,
+        "actividad": "Fundición y refinación de otros metales no ferrosos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 351,
+        "actividad": "Laminación secundaria de cobre",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 352,
+        "actividad": "Laminación secundaria de otros metales no ferrosos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 353,
+        "actividad": "Moldeo por fundición de piezas de hierro y acero",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 354,
+        "actividad": "Moldeo por fundición de piezas metálicas no ferrosas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 355,
+        "actividad": "Fabricación de productos metálicos forjados y troquelados",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 356,
+        "actividad": "Fabricación de herramientas de mano metálicas sin motor",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 357,
+        "actividad": "Fabricación de utensilios de cocina metálicos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 358,
+        "actividad": "Fabricación de estructuras metálicas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 359,
+        "actividad": "Fabricación de productos de herrería",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 360,
+        "actividad": "Fabricación de calderas industriales",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 361,
+        "actividad": "Fabricación de tanques metálicos de calibre grueso",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 362,
+        "actividad": "Fabricación de envases metálicos de calibre ligero",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 363,
+        "actividad": "Fabricación de herrajes y cerraduras",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 364,
+        "actividad": "Fabricación de alambre, productos de alambre y resortes",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 365,
+        "actividad": "Maquinado de piezas metálicas para maquinaria y equipo en general",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 366,
+        "actividad": "Fabricación de tornillos, tuercas, remaches y similares",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 367,
+        "actividad": "Recubrimientos y terminados metálicos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 368,
+        "actividad": "Fabricación de válvulas metálicas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 369,
+        "actividad": "Fabricación de baleros y rodamientos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 370,
+        "actividad": "Fabricación de otros productos metálicos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 371,
+        "actividad": "Fabricación de maquinaria y equipo agrícola",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 372,
+        "actividad": "Fabricación de maquinaria y equipo pecuario",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 373,
+        "actividad": "Fabricación de maquinaria y equipo para la construcción",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 374,
+        "actividad": "Fabricación de maquinaria y equipo para la industria extractiva",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 375,
+        "actividad": "Fabricación de maquinaria y equipo para la industria de la madera",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 376,
+        "actividad": "Fabricación de maquinaria y equipo para la industria del hule y del plástico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 377,
+        "actividad": "Fabricación de maquinaria y equipo para la industria alimentaria y de las bebidas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 378,
+        "actividad": "Fabricación de maquinaria y equipo para la industria textil",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 379,
+        "actividad": "Fabricación de maquinaria y equipo para la industria de la impresión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 380,
+        "actividad": "Fabricación de maquinaria y equipo para la industria del vidrio y otros minerales no metálicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 381,
+        "actividad": "Fabricación de maquinaria y equipo para otras industrias manufactureras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 382,
+        "actividad": "Fabricación de aparatos fotográficos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 383,
+        "actividad": "Fabricación de máquinas fotocopiadoras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 384,
+        "actividad": "Fabricación de otra maquinaria y equipo para el comercio y los servicios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 385,
+        "actividad": "Fabricación de equipo de aire acondicionado y calefacción",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 386,
+        "actividad": "Fabricación de equipo de refrigeración industrial y comercial",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 387,
+        "actividad": "Fabricación de maquinaria y equipo para la industria metalmecánica",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 388,
+        "actividad": "Fabricación de motores de combustión interna, turbinas y transmisiones",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 389,
+        "actividad": "Fabricación de bombas y sistemas de bombeo",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 390,
+        "actividad": "Fabricación de maquinaria y equipo para levantar y trasladar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 391,
+        "actividad": "Fabricación de equipo para soldar y soldaduras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 392,
+        "actividad": "Fabricación de maquinaria y equipo para envasar y empacar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 393,
+        "actividad": "Fabricación de aparatos e instrumentos para pesar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 394,
+        "actividad": "Fabricación de otra maquinaria y equipo para la industria en general",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 395,
+        "actividad": "Fabricación de computadoras y equipo periférico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 396,
+        "actividad": "Fabricación de equipo telefónico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 397,
+        "actividad": "Fabricación de equipo de transmisión y recepción de señales de radio y televisión, y equipo de comunicación inalámbrico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 398,
+        "actividad": "Fabricación de otros equipos de comunicación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 399,
+        "actividad": "Fabricación de equipo de audio y de video",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 400,
+        "actividad": "Fabricación de componentes electrónicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 401,
+        "actividad": "Fabricación de relojes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 402,
+        "actividad": "Fabricación de otros instrumentos de medición, control, navegación, y equipo médico electrónico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 403,
+        "actividad": "Fabricación y reproducción de medios magnéticos y ópticos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 404,
+        "actividad": "Fabricación de focos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 405,
+        "actividad": "Fabricación de lámparas ornamentales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 406,
+        "actividad": "Fabricación de enseres electrodomésticos menores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 407,
+        "actividad": "Fabricación de aparatos de línea blanca",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 408,
+        "actividad": "Fabricación de motores y generadores eléctricos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 409,
+        "actividad": "Fabricación de equipo y aparatos de distribución de energía eléctrica",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 410,
+        "actividad": "Fabricación de acumuladores y pilas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 411,
+        "actividad": "Fabricación de cables de conducción eléctrica",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 412,
+        "actividad": "Fabricación de enchufes, contactos, fusibles y otros accesorios para instalaciones eléctricas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 413,
+        "actividad": "Fabricación de productos eléctricos de carbón y grafito",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 414,
+        "actividad": "Fabricación de otros productos eléctricos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 415,
+        "actividad": "Fabricación de automóviles y camionetas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 416,
+        "actividad": "Fabricación de camiones y tractocamiones",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 417,
+        "actividad": "Fabricación de carrocerías y remolques",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 418,
+        "actividad": "Fabricación de motores y sus partes para vehículos automotrices",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 419,
+        "actividad": "Fabricación de equipo eléctrico y electrónico y sus partes para vehículos automotores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 420,
+        "actividad": "Fabricación de partes de sistemas de dirección y de suspensión para vehículos automotrices",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 421,
+        "actividad": "Fabricación de partes de sistemas de frenos para vehículos automotrices",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 422,
+        "actividad": "Fabricación de partes de sistemas de transmisión para vehículos automotores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 423,
+        "actividad": "Fabricación de asientos y accesorios interiores para vehículos automotores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 424,
+        "actividad": "Fabricación de piezas metálicas troqueladas para vehículos automotrices",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 425,
+        "actividad": "Fabricación de otras partes para vehículos automotrices",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 426,
+        "actividad": "Fabricación de equipo aeroespacial",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 427,
+        "actividad": "Fabricación de equipo ferroviario",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 428,
+        "actividad": "Fabricación de embarcaciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 429,
+        "actividad": "Fabricación de motocicletas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 430,
+        "actividad": "Fabricación de bicicletas y triciclos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 431,
+        "actividad": "Fabricación de otro equipo de transporte",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 432,
+        "actividad": "Fabricación de cocinas integrales y muebles modulares de baño",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 433,
+        "actividad": "Fabricación de muebles, excepto cocinas integrales, muebles modulares de baño y muebles de oficina y estantería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 434,
+        "actividad": "Fabricación de muebles de oficina y estantería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 435,
+        "actividad": "Fabricación de colchones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 436,
+        "actividad": "Fabricación de persianas y cortineros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 437,
+        "actividad": "Fabricación de equipo no electrónico para uso médico, dental y para laboratorio",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 438,
+        "actividad": "Fabricación de material desechable de uso médico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 439,
+        "actividad": "Fabricación de artículos oftálmicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 440,
+        "actividad": "Acuñación e impresión de monedas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 441,
+        "actividad": "Orfebrería y joyería de metales y piedras preciosos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 442,
+        "actividad": "Joyería de metales y piedras no preciosos y de otros materiales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 443,
+        "actividad": "Metalistería de metales no preciosos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 444,
+        "actividad": "Fabricación de artículos deportivos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 445,
+        "actividad": "Fabricación de juguetes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 446,
+        "actividad": "Fabricación de artículos y accesorios para escritura, pintura, dibujo y actividades de oficina",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 447,
+        "actividad": "Fabricación de anuncios y señalamientos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 448,
+        "actividad": "Fabricación de instrumentos musicales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 449,
+        "actividad": "Fabricación de cierres, botones y agujas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 450,
+        "actividad": "Fabricación de escobas, cepillos y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 451,
+        "actividad": "Fabricación de velas y veladoras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 452,
+        "actividad": "Fabricación de ataúdes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 453,
+        "actividad": "Otras industrias manufactureras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 454,
+        "actividad": "Comercio al por mayor de diversos productos en centrales de abasto",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 455,
+        "actividad": "Comercio al por mayor de abarrotes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 456,
+        "actividad": "Comercio al por mayor de carnes rojas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 457,
+        "actividad": "Comercio al por mayor de carne de aves",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 458,
+        "actividad": "Comercio al por mayor de pescados y mariscos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 459,
+        "actividad": "Comercio al por mayor de frutas y verduras frescas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 460,
+        "actividad": "Comercio al por mayor de huevo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 461,
+        "actividad": "Comercio al por mayor de semillas y granos alimenticios, especias y chiles secos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 462,
+        "actividad": "Comercio al por mayor de leche y otros productos lácteos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 463,
+        "actividad": "Comercio al por mayor de embutidos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 464,
+        "actividad": "Comercio al por mayor de dulces y materias primas para repostería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 465,
+        "actividad": "Comercio al por mayor de pan y pasteles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 466,
+        "actividad": "Comercio al por mayor de botanas y frituras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 467,
+        "actividad": "Comercio al por mayor de conservas alimenticias",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 468,
+        "actividad": "Comercio al por mayor de miel",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 469,
+        "actividad": "Comercio al por mayor de otros alimentos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 470,
+        "actividad": "Comercio al por mayor de bebidas no alcohólicas y hielo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 471,
+        "actividad": "Comercio al por mayor de vinos y licores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 472,
+        "actividad": "Comercio al por mayor de cerveza",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 473,
+        "actividad": "Comercio al por mayor de cigarros, puros y tabaco",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 474,
+        "actividad": "Comercio al por mayor de fibras, hilos y telas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 475,
+        "actividad": "Comercio al por mayor de blancos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 476,
+        "actividad": "Comercio al por mayor de cueros y pieles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 477,
+        "actividad": "Comercio al por mayor de otros productos textiles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 478,
+        "actividad": "Comercio al por mayor de ropa, bisutería y accesorios de vestir",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 479,
+        "actividad": "Comercio al por mayor de calzado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 480,
+        "actividad": "Comercio al por mayor de productos farmacéuticos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 481,
+        "actividad": "Comercio al por mayor de artículos de perfumería y cosméticos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 482,
+        "actividad": "Comercio al por mayor de artículos de joyería y relojes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 483,
+        "actividad": "Comercio al por mayor de discos y casetes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 484,
+        "actividad": "Comercio al por mayor de juguetes y bicicletas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 485,
+        "actividad": "Comercio al por mayor de artículos y aparatos deportivos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 486,
+        "actividad": "Comercio al por mayor de artículos de papelería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 487,
+        "actividad": "Comercio al por mayor de libros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 488,
+        "actividad": "Comercio al por mayor de revistas y periódicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 489,
+        "actividad": "Comercio al por mayor de electrodomésticos menores y aparatos de línea blanca",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 490,
+        "actividad": "Comercio al por mayor de fertilizantes, plaguicidas y semillas para siembra",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 491,
+        "actividad": "Comercio al por mayor de medicamentos veterinarios y alimentos para animales, excepto mascotas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 492,
+        "actividad": "Comercio al por mayor de cemento, tabique y grava",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 493,
+        "actividad": "Comercio al por mayor de otros materiales para la construcción, excepto de madera y metálicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 494,
+        "actividad": "Comercio al por mayor de materiales metálicos para la construcción y la manufactura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 495,
+        "actividad": "Comercio al por mayor de productos químicos para la industria farmacéutica y para otro uso industrial",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 496,
+        "actividad": "Comercio al por mayor de envases en general, papel y cartón para la industria",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 497,
+        "actividad": "Comercio al por mayor de madera para la construcción y la industria",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 498,
+        "actividad": "Comercio al por mayor de equipo y material eléctrico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 499,
+        "actividad": "Comercio al por mayor de pintura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 500,
+        "actividad": "Comercio al por mayor de vidrios y espejos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 501,
+        "actividad": "Comercio al por mayor de ganado y aves en pie",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 502,
+        "actividad": "Comercio al por mayor de otras materias primas para otras industrias",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 503,
+        "actividad": "Comercio al por mayor de combustibles de uso industrial",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 504,
+        "actividad": "Comercio al por mayor de artículos desechables",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 505,
+        "actividad": "Comercio al por mayor de desechos metálicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 506,
+        "actividad": "Comercio al por mayor de desechos de papel y de cartón",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 507,
+        "actividad": "Comercio al por mayor de desechos de vidrio",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 508,
+        "actividad": "Comercio al por mayor de desechos de plástico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 509,
+        "actividad": "Comercio al por mayor de otros materiales de desecho",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 510,
+        "actividad": "Comercio al por mayor de maquinaria y equipo agropecuario, forestal y para la pesca",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 511,
+        "actividad": "Comercio al por mayor de maquinaria y equipo para la construcción y la minería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 512,
+        "actividad": "Comercio al por mayor de maquinaria y equipo para la industria manufacturera",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 513,
+        "actividad": "Comercio al por mayor de equipo de telecomunicaciones, fotografía y cinematografía",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 514,
+        "actividad": "Comercio al por mayor de artículos y accesorios para diseño y pintura artística",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 515,
+        "actividad": "Comercio al por mayor de mobiliario, equipo e instrumental médico y de laboratorio",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 516,
+        "actividad": "Comercio al por mayor de maquinaria y equipo para otros servicios y para actividades comerciales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 517,
+        "actividad": "Comercio al por mayor de mobiliario, equipo, y accesorios de cómputo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 518,
+        "actividad": "Comercio al por mayor de mobiliario y equipo de oficina",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 519,
+        "actividad": "Comercio al por mayor de otra maquinaria y equipo de uso general",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 520,
+        "actividad": "Comercio al por mayor de camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 521,
+        "actividad": "Comercio al por mayor de partes y refacciones nuevas para automóviles, camionetas y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 523,
+        "actividad": "Intermediación de comercio al por mayor de productos agropecuarios, excepto a través de Internet y de otros medios electrónicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 524,
+        "actividad": "Intermediación de comercio al por mayor de productos para la industria, el comercio y los servicios, excepto a través de Internet y de otros medios electrónicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 525,
+        "actividad": "Intermediación de comercio al por mayor para productos de uso doméstico y personal, excepto a través de Internet y de otros medios electrónicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 526,
+        "actividad": "exclusivamente a través de Internet y otros medios electrónicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 527,
+        "actividad": "Comercio al por menor en tiendas de abarrotes, ultramarinos y misceláneas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 528,
+        "actividad": "Comercio al por menor de carnes rojas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 529,
+        "actividad": "Comercio al por menor de carne de aves",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 530,
+        "actividad": "Comercio al por menor de pescados y mariscos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 531,
+        "actividad": "Comercio al por menor de frutas y verduras frescas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 532,
+        "actividad": "Comercio al por menor de semillas y granos alimenticios, especias y chiles secos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 533,
+        "actividad": "Comercio al por menor de leche, otros productos lácteos y embutidos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 534,
+        "actividad": "Comercio al por menor de café tostado y molido",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 535,
+        "actividad": "Comercio al por menor de dulces y materias primas para repostería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 536,
+        "actividad": "Comercio al por menor de paletas de hielo y helados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 537,
+        "actividad": "Comercio al por menor de otros alimentos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 538,
+        "actividad": "Comercio al por menor de vinos y licores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 539,
+        "actividad": "Comercio al por menor de cerveza",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 540,
+        "actividad": "Comercio al por menor de bebidas no alcohólicas y hielo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 541,
+        "actividad": "Comercio al por menor de cigarros, puros y tabaco",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 542,
+        "actividad": "Comercio al por menor en supermercados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 543,
+        "actividad": "Comercio al por menor en minisupers",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 544,
+        "actividad": "Comercio al por menor en tiendas departamentales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 545,
+        "actividad": "Comercio al por menor de telas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 546,
+        "actividad": "Comercio al por menor de blancos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 547,
+        "actividad": "Comercio al por menor de artículos de mercería y bonetería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 548,
+        "actividad": "Comercio al por menor de ropa, excepto de bebé y lencería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 549,
+        "actividad": "Comercio al por menor de ropa de bebé",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 550,
+        "actividad": "Comercio al por menor de lencería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 551,
+        "actividad": "Comercio al por menor de disfraces, vestimenta regional y vestidos de novia",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 552,
+        "actividad": "Comercio al por menor de bisutería y accesorios de vestir",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 553,
+        "actividad": "Comercio al por menor de ropa de cuero y piel y de otros artículos de estos materiales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 554,
+        "actividad": "Comercio al por menor de pañales desechables",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 555,
+        "actividad": "Comercio al por menor de sombreros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 556,
+        "actividad": "Comercio al por menor de calzado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 557,
+        "actividad": "Farmacias sin minisúper",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 558,
+        "actividad": "Farmacias con minisúper",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 559,
+        "actividad": "Comercio al por menor de productos naturistas, medicamentos homeopáticos y de complementos alimenticios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 560,
+        "actividad": "Comercio al por menor de lentes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 561,
+        "actividad": "Comercio al por menor de artículos ortopédicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 562,
+        "actividad": "Comercio al por menor de artículos de perfumería y cosméticos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 563,
+        "actividad": "Comercio al por menor de artículos de joyería y relojes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 564,
+        "actividad": "Comercio al por menor de discos y casetes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 565,
+        "actividad": "Comercio al por menor de juguetes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 566,
+        "actividad": "Comercio al por menor de bicicletas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 567,
+        "actividad": "Comercio al por menor de equipo y material fotográfico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 568,
+        "actividad": "Comercio al por menor de artículos y aparatos deportivos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 569,
+        "actividad": "Comercio al por menor de instrumentos musicales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 570,
+        "actividad": "Comercio al por menor de artículos de papelería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 571,
+        "actividad": "Comercio al por menor de libros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 572,
+        "actividad": "Comercio al por menor de revistas y periódicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 573,
+        "actividad": "Comercio al por menor de mascotas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 574,
+        "actividad": "Comercio al por menor de regalos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 575,
+        "actividad": "Comercio al por menor de artículos religiosos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 576,
+        "actividad": "Comercio al por menor de artículos desechables",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 577,
+        "actividad": "Comercio al por menor en tiendas de artesanías",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 578,
+        "actividad": "Comercio al por menor de otros artículos de uso personal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 579,
+        "actividad": "Comercio al por menor de muebles para el hogar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 580,
+        "actividad": "Comercio al por menor de electrodomésticos menores y aparatos de línea blanca",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 581,
+        "actividad": "Comercio al por menor de muebles para jardín",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 582,
+        "actividad": "Comercio al por menor de cristalería, loza y utensilios de cocina",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 583,
+        "actividad": "Comercio al por menor de mobiliario, equipo y accesorios de cómputo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 584,
+        "actividad": "Comercio al por menor de teléfonos y otros aparatos de comunicación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 585,
+        "actividad": "Comercio al por menor de alfombras, cortinas, tapices y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 586,
+        "actividad": "Comercio al por menor de plantas y flores naturales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 587,
+        "actividad": "Comercio al por menor de antigüedades y obras de arte",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 588,
+        "actividad": "Comercio al por menor de lámparas ornamentales y candiles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 589,
+        "actividad": "Comercio al por menor de otros artículos para la decoración de interiores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 590,
+        "actividad": "Comercio al por menor de artículos usados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 591,
+        "actividad": "Comercio al por menor en ferreterías y tlapalerías",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 592,
+        "actividad": "Comercio al por menor de pisos y recubrimientos cerámicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 593,
+        "actividad": "Comercio al por menor de pintura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 594,
+        "actividad": "Comercio al por menor de vidrios y espejos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 595,
+        "actividad": "Comercio al por menor de artículos para la limpieza",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 596,
+        "actividad": "Comercio al por menor de materiales para la construcción en tiendas de autoservicio especializadas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 597,
+        "actividad": "Comercio al por menor de artículos para albercas y otros artículos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 598,
+        "actividad": "Comercio al por menor de automóviles y camionetas nuevos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 599,
+        "actividad": "Comercio al por menor de automóviles y camionetas usados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 600,
+        "actividad": "Comercio al por menor de partes y refacciones nuevas para automóviles, camionetas y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 601,
+        "actividad": "Comercio al por menor de partes y refacciones usadas para automóviles, camionetas y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 602,
+        "actividad": "Comercio al por menor de llantas y cámaras para automóviles, camionetas y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 603,
+        "actividad": "Comercio al por menor de motocicletas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 604,
+        "actividad": "Comercio al por menor de otros vehículos de motor",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 605,
+        "actividad": "Comercio al por menor de gasolina y diesel",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 606,
+        "actividad": "Comercio al por menor de gas L.P. en cilindros y para tanques estacionarios",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 607,
+        "actividad": "Comercio al por menor de gas L.P. en estaciones de carburación",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 608,
+        "actividad": "Comercio al por menor de otros combustibles",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 609,
+        "actividad": "Comercio al por menor de aceites y grasas lubricantes, aditivos y similares para vehículos de motor",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 610,
+        "actividad": "Comercio al por menor exclusivamente a través de Internet, y catálogos impresos, televisión y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 611,
+        "actividad": "Centrales camioneras de transporte foráneo de pasajeros de ruta fija",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 612,
+        "actividad": "Transporte de petróleo crudo por ductos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 613,
+        "actividad": "Transporte de gas natural por ductos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 614,
+        "actividad": "Transporte por ductos de productos refinados del petróleo",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 615,
+        "actividad": "Transporte por ductos de otros productos, excepto de productos refinados del petróleo",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 617,
+        "actividad": "Servicios de mensajería y paquetería foránea",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 618,
+        "actividad": "Servicios de mensajería y paquetería local",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 619,
+        "actividad": "Almacenes generales de depósito",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 620,
+        "actividad": "Otros servicios de almacenamiento general sin instalaciones especializadas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 621,
+        "actividad": "Almacenamiento con refrigeración",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 622,
+        "actividad": "Almacenamiento de productos agrícolas que no requieren refrigeración",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 623,
+        "actividad": "Otros servicios de almacenamiento con instalaciones especializadas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 624,
+        "actividad": "Edición de periódicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 625,
+        "actividad": "Edición de periódicos integrada con la impresión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 626,
+        "actividad": "Edición de revistas y otras publicaciones periódicas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 627,
+        "actividad": "Edición de revistas y otras publicaciones periódicas integrada con la impresión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 628,
+        "actividad": "Edición de libros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 629,
+        "actividad": "Edición de libros integrada con la impresión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 630,
+        "actividad": "Edición de directorios y de listas de correo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 631,
+        "actividad": "Edición de directorios y de listas de correo integrada con la impresión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 632,
+        "actividad": "Edición de otros materiales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 633,
+        "actividad": "Edición de otros materiales integrada con la impresión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 634,
+        "actividad": "Edición de software y edición de software integrada con la reproducción",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 635,
+        "actividad": "Producción de películas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 636,
+        "actividad": "Producción de programas para la televisión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 637,
+        "actividad": "Producción de videoclips, comerciales y otros materiales audiovisuales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 638,
+        "actividad": "Distribución de películas y de otros materiales audiovisuales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 639,
+        "actividad": "Exhibición de películas y otros materiales audiovisuales",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 640,
+        "actividad": "Servicios de postproducción y otros servicios para la industria fílmica y del video",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 641,
+        "actividad": "Productoras discográficas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 642,
+        "actividad": "Producción de material discográfico integrada con su reproducción y distribución",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 643,
+        "actividad": "Editoras de música",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 644,
+        "actividad": "Grabación de discos compactos (CD) y de video digital (DVD) o casetes musicales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 645,
+        "actividad": "Otros servicios de grabación del sonido",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 646,
+        "actividad": "Transmisión de programas de radio",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 647,
+        "actividad": "Transmisión de programas de televisión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 648,
+        "actividad": "Producción de programación de canales para sistemas de televisión por cable o satelitales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 649,
+        "actividad": "Operadores de servicios de telecomunicaciones alámbricas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 650,
+        "actividad": "Operadores de servicios de telecomunicaciones inalámbricas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 651,
+        "actividad": "Operadores de servicios de telecomunicaciones vía satélite",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 652,
+        "actividad": "Otros servicios de telecomunicaciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 653,
+        "actividad": "Procesamiento electrónico de información, hospedaje y otros servicios relacionados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 655,
+        "actividad": "Agencias noticiosas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 656,
+        "actividad": "Bibliotecas y archivos del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 657,
+        "actividad": "Bibliotecas y archivos del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 658,
+        "actividad": "Edición y difusión de contenido exclusivamente a través de Internet y servicios de búsqueda en la red",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 659,
+        "actividad": "Otros servicios de suministro de información",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 660,
+        "actividad": "Banca múltiple",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 661,
+        "actividad": "Banca de desarrollo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 662,
+        "actividad": "Fondos y fideicomisos financieros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 663,
+        "actividad": "Uniones de crédito",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 664,
+        "actividad": "Cajas de ahorro popular",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 665,
+        "actividad": "Otras instituciones de ahorro y préstamo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 666,
+        "actividad": "Arrendadoras financieras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 667,
+        "actividad": "Compañías de factoraje financiero",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 668,
+        "actividad": "Sociedades financieras de objeto limitado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 669,
+        "actividad": "Compañías de autofinanciamiento",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 670,
+        "actividad": "Montepíos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 671,
+        "actividad": "Casas de empeño",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 672,
+        "actividad": "Sociedades financieras de objeto múltiple",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 673,
+        "actividad": "Otras instituciones de intermediación crediticia y financiera no bursátil",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 674,
+        "actividad": "Servicios relacionados con la intermediación crediticia no bursátil",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 675,
+        "actividad": "Casas de bolsa",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 676,
+        "actividad": "Casas de cambio",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 677,
+        "actividad": "Centros cambiarios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 678,
+        "actividad": "Bolsa de valores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 679,
+        "actividad": "Asesoría en inversiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 680,
+        "actividad": "Otros servicios relacionados con la intermediación bursátil",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 681,
+        "actividad": "Compañías de seguros",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 682,
+        "actividad": "Fondos de aseguramiento campesino",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 683,
+        "actividad": "Compañías afianzadoras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 684,
+        "actividad": "Agentes, ajustadores y gestores de seguros y fianzas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 685,
+        "actividad": "Administración de cajas de pensión y de seguros independientes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 686,
+        "actividad": "Alquiler sin intermediación de viviendas amuebladas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 687,
+        "actividad": "Alquiler sin intermediación de viviendas no amuebladas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 688,
+        "actividad": "Alquiler sin intermediación de salones para fiestas y convenciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 689,
+        "actividad": "Alquiler sin intermediación de oficinas y locales comerciales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 690,
+        "actividad": "Alquiler sin intermediación de teatros, estadios, auditorios y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 691,
+        "actividad": "Alquiler sin intermediación de edificios industriales dentro de un parque industrial",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 692,
+        "actividad": "Alquiler sin intermediación de otros bienes raíces",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 693,
+        "actividad": "Inmobiliarias y corredores de bienes raíces",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 694,
+        "actividad": "Servicios de administración de bienes raíces",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 695,
+        "actividad": "Otros servicios relacionados con los servicios inmobiliarios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 696,
+        "actividad": "Alquiler de automóviles sin chofer",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 697,
+        "actividad": "Alquiler de camiones de carga sin chofer",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 698,
+        "actividad": "Alquiler de autobuses, minibuses y remolques sin chofer",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 699,
+        "actividad": "Alquiler de aparatos eléctricos y electrónicos para el hogar y personales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 700,
+        "actividad": "Alquiler de prendas de vestir",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 701,
+        "actividad": "Alquiler de videocasetes y discos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 702,
+        "actividad": "Alquiler de mesas, sillas, vajillas y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 703,
+        "actividad": "Alquiler de instrumentos musicales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 704,
+        "actividad": "Alquiler de otros artículos para el hogar y personales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 705,
+        "actividad": "Centros generales de alquiler",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 706,
+        "actividad": "Alquiler de maquinaria y equipo para construcción, minería y actividades forestales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 707,
+        "actividad": "Alquiler de equipo de transporte, excepto terrestre",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 708,
+        "actividad": "Alquiler de equipo de cómputo y de otras máquinas y mobiliario de oficina",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 709,
+        "actividad": "Alquiler de maquinaria y equipo agropecuario, pesquero y para la industria manufacturera",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 710,
+        "actividad": "Alquiler de maquinaria y equipo para mover, levantar y acomodar materiales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 711,
+        "actividad": "Alquiler de maquinaria y equipo comercial y de servicios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 712,
+        "actividad": "Servicios de alquiler de marcas registradas, patentes y franquicias",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 713,
+        "actividad": "Bufetes jurídicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 714,
+        "actividad": "Notarías públicas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 715,
+        "actividad": "Servicios de apoyo para efectuar trámites legales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 716,
+        "actividad": "Servicios de contabilidad y auditoría",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 717,
+        "actividad": "Otros servicios relacionados con la contabilidad",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 718,
+        "actividad": "Servicios de arquitectura",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 719,
+        "actividad": "Servicios de arquitectura de paisaje y urbanismo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 720,
+        "actividad": "Servicios de ingeniería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 721,
+        "actividad": "Servicios de dibujo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 722,
+        "actividad": "Servicios de inspección de edificios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 723,
+        "actividad": "Servicios de levantamiento geofísico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 724,
+        "actividad": "Servicios de elaboración de mapas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 725,
+        "actividad": "Laboratorios de pruebas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 726,
+        "actividad": "Diseño y decoración de interiores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 727,
+        "actividad": "Diseño industrial",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 728,
+        "actividad": "Diseño gráfico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 729,
+        "actividad": "Diseño de modas y otros diseños especializados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 730,
+        "actividad": "Servicios de diseño de sistemas de cómputo y servicios relacionados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 731,
+        "actividad": "Servicios de consultoría en administración",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 732,
+        "actividad": "Servicios de consultoría en medio ambiente",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 733,
+        "actividad": "Otros servicios de consultoría científica y técnica",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 734,
+        "actividad": "Servicios de investigación científica y desarrollo en ciencias naturales y exactas, ingeniería, y ciencias de la vida, prestados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 735,
+        "actividad": "Servicios de investigación científica y desarrollo en ciencias naturales y exactas, ingeniería, y ciencias de la vida, prestados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 736,
+        "actividad": "Servicios de investigación científica y desarrollo en ciencias sociales y humanidades, prestados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 737,
+        "actividad": "Servicios de investigación científica y desarrollo en ciencias sociales y humanidades, prestados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 738,
+        "actividad": "Agencias de publicidad",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 739,
+        "actividad": "Agencias de relaciones públicas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 740,
+        "actividad": "Agencias de compra de medios a petición del cliente",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 741,
+        "actividad": "Agencias de representación de medios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 742,
+        "actividad": "Agencias de anuncios publicitarios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 743,
+        "actividad": "Agencias de correo directo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 744,
+        "actividad": "Distribución de material publicitario",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 745,
+        "actividad": "Servicios de rotulación y otros servicios de publicidad",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 746,
+        "actividad": "Servicios de investigación de mercados y encuestas de opinión pública",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 747,
+        "actividad": "Servicios de fotografía y videograbación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 748,
+        "actividad": "Servicios de traducción e interpretación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 749,
+        "actividad": "Servicios veterinarios para mascotas prestados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 750,
+        "actividad": "Servicios veterinarios para mascotas prestados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 751,
+        "actividad": "Servicios veterinarios para la ganadería prestados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 752,
+        "actividad": "Servicios veterinarios para la ganadería prestados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 753,
+        "actividad": "Otros servicios profesionales, científicos y técnicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 754,
+        "actividad": "Corporativos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 755,
+        "actividad": "Tenedoras de acciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 756,
+        "actividad": "Servicios de administración de negocios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 757,
+        "actividad": "Servicios combinados de apoyo en instalaciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 758,
+        "actividad": "Agencias de colocación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 759,
+        "actividad": "Agencias de empleo temporal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 760,
+        "actividad": "Suministro de personal permanente",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 761,
+        "actividad": "Servicios de preparación de documentos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 762,
+        "actividad": "Servicios de casetas telefónicas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 763,
+        "actividad": "Servicios de recepción de llamadas telefónicas y promoción por teléfono",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 764,
+        "actividad": "Servicios de fotocopiado, fax y afines",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 765,
+        "actividad": "Servicios de acceso a computadoras",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 766,
+        "actividad": "Agencias de cobranza",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 767,
+        "actividad": "Despachos de investigación de solvencia financiera",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 768,
+        "actividad": "Otros servicios de apoyo secretarial y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 769,
+        "actividad": "Agencias de viajes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 770,
+        "actividad": "Organización de excursiones y paquetes turísticos para agencias de viajes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 771,
+        "actividad": "Otros servicios de reservaciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 772,
+        "actividad": "Servicios de investigación y de protección y custodia, excepto mediante monitoreo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 773,
+        "actividad": "Servicios de protección y custodia mediante el monitoreo de sistemas de seguridad",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 774,
+        "actividad": "Servicios de control y exterminación de plagas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 775,
+        "actividad": "Servicios de limpieza de inmuebles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 776,
+        "actividad": "Servicios de instalación y mantenimiento de áreas verdes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 777,
+        "actividad": "Servicios de limpieza de tapicería, alfombras y muebles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 778,
+        "actividad": "Otros servicios de limpieza",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 779,
+        "actividad": "Servicios de empacado y etiquetado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 780,
+        "actividad": "Organizadores de convenciones y ferias comerciales e industriales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 781,
+        "actividad": "Otros servicios de apoyo a los negocios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 782,
+        "actividad": "Manejo de residuos peligrosos y servicios de remediación a zonas dañadas por materiales o residuos peligrosos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 783,
+        "actividad": "Manejo de desechos no peligrosos y servicios de remediación a zonas dañadas por desechos no peligrosos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 784,
+        "actividad": "Escuelas de educación preescolar del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 785,
+        "actividad": "Escuelas de educación preescolar del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 786,
+        "actividad": "Escuelas de educación primaria del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 787,
+        "actividad": "Escuelas de educación primaria del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 788,
+        "actividad": "Escuelas de educación secundaria general del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 789,
+        "actividad": "Escuelas de educación secundaria general del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 790,
+        "actividad": "Escuelas de educación secundaria técnica del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 791,
+        "actividad": "Escuelas de educación secundaria técnica del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 792,
+        "actividad": "Escuelas de educación media técnica terminal del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 793,
+        "actividad": "Escuelas de educación media técnica terminal del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 794,
+        "actividad": "Escuelas de educación media superior del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 795,
+        "actividad": "Escuelas de educación media superior del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 796,
+        "actividad": "Escuelas del sector privado que combinan diversos niveles de educación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 797,
+        "actividad": "Escuelas del sector público que combinan diversos niveles de educación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 798,
+        "actividad": "Escuelas del sector privado de educación para necesidades especiales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 799,
+        "actividad": "Escuelas del sector público de educación para necesidades especiales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 800,
+        "actividad": "Escuelas de educación técnica superior del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 801,
+        "actividad": "Escuelas de educación técnica superior del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 802,
+        "actividad": "Escuelas de educación superior del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 803,
+        "actividad": "Escuelas de educación superior del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 804,
+        "actividad": "Escuelas comerciales y secretariales del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 805,
+        "actividad": "Escuelas comerciales y secretariales del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 806,
+        "actividad": "Escuelas de computación del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 807,
+        "actividad": "Escuelas de computación del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 808,
+        "actividad": "Escuelas para la capacitación de ejecutivos del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 809,
+        "actividad": "Escuelas para la capacitación de ejecutivos del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 810,
+        "actividad": "Escuelas del sector privado dedicadas a la enseñanza de oficios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 811,
+        "actividad": "Escuelas del sector público dedicadas a la enseñanza de oficios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 812,
+        "actividad": "Escuelas de arte del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 813,
+        "actividad": "Escuelas de arte del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 814,
+        "actividad": "Escuelas de deporte del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 815,
+        "actividad": "Escuelas de deporte del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 816,
+        "actividad": "Escuelas de idiomas del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 817,
+        "actividad": "Escuelas de idiomas del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 818,
+        "actividad": "Servicios de profesores particulares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 819,
+        "actividad": "Otros servicios educativos proporcionados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 820,
+        "actividad": "Otros servicios educativos proporcionados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 821,
+        "actividad": "Servicios de apoyo a la educación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 822,
+        "actividad": "Consultorios de medicina general del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 823,
+        "actividad": "Consultorios de medicina general del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 824,
+        "actividad": "Consultorios de medicina especializada del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 825,
+        "actividad": "Consultorios de medicina especializada del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 826,
+        "actividad": "Clínicas de consultorios médicos del sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 827,
+        "actividad": "Clínicas de consultorios médicos del sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 828,
+        "actividad": "Consultorios dentales del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 829,
+        "actividad": "Consultorios dentales del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 830,
+        "actividad": "Consultorios de quiropráctica del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 831,
+        "actividad": "Consultorios de quiropráctica del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 832,
+        "actividad": "Consultorios de optometría",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 833,
+        "actividad": "Consultorios de psicología del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 834,
+        "actividad": "Consultorios de psicología del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 835,
+        "actividad": "Consultorios del sector privado de audiología y de terapia ocupacional, física y del lenguaje",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 836,
+        "actividad": "Consultorios del sector público de audiología y de terapia ocupacional, física y del lenguaje",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 837,
+        "actividad": "Consultorios de nutriólogos y dietistas del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 838,
+        "actividad": "Consultorios de nutriólogos y dietistas del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 839,
+        "actividad": "Otros consultorios del sector privado para el cuidado de la salud",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 840,
+        "actividad": "Otros consultorios del sector público para el cuidado de la salud",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 841,
+        "actividad": "Centros de planificación familiar del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 842,
+        "actividad": "Centros de planificación familiar del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 843,
+        "actividad": "Centros del sector privado de atención médica externa para enfermos mentales y adictos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 844,
+        "actividad": "Centros del sector público de atención médica externa para enfermos mentales y adictos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 845,
+        "actividad": "Otros centros del sector privado para la atención de pacientes que no requieren hospitalización",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 846,
+        "actividad": "Otros centros del sector público para la atención de pacientes que no requieren hospitalización",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 847,
+        "actividad": "Laboratorios médicos y de diagnóstico del sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 848,
+        "actividad": "Laboratorios médicos y de diagnóstico del sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 849,
+        "actividad": "Servicios de enfermería a domicilio",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 850,
+        "actividad": "Servicios de ambulancias",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 851,
+        "actividad": "Servicios de bancos de órganos, bancos de sangre y otros servicios auxiliares al tratamiento médico prestados por el sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 852,
+        "actividad": "Servicios de bancos de órganos, bancos de sangre y otros servicios auxiliares al tratamiento médico prestados por el sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 853,
+        "actividad": "Hospitales generales del sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 854,
+        "actividad": "Hospitales generales del sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 855,
+        "actividad": "Hospitales psiquiátricos y para el tratamiento por adicción del sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 856,
+        "actividad": "Hospitales psiquiátricos y para el tratamiento por adicción del sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 857,
+        "actividad": "Hospitales del sector privado de otras especialidades médicas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 858,
+        "actividad": "Hospitales del sector público de otras especialidades médicas",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 859,
+        "actividad": "Residencias del sector privado con cuidados de enfermeras para enfermos convalecientes, en rehabilitación, incurables y terminales",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 860,
+        "actividad": "Residencias del sector público con cuidados de enfermeras para enfermos convalecientes, en rehabilitación, incurables y terminales",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 861,
+        "actividad": "Residencias del sector privado para el cuidado de personas con problemas de retardo mental",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 862,
+        "actividad": "Residencias del sector público para el cuidado de personas con problemas de retardo mental",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 863,
+        "actividad": "Residencias del sector privado para el cuidado de personas con problemas de trastorno mental y adicción",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 864,
+        "actividad": "Residencias del sector público para el cuidado de personas con problemas de trastorno mental y adicción",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 865,
+        "actividad": "Asilos y otras residencias del sector privado para el cuidado de ancianos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 866,
+        "actividad": "Asilos y otras residencias del sector público para el cuidado de ancianos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 867,
+        "actividad": "Orfanatos y otras residencias de asistencia social del sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 868,
+        "actividad": "Orfanatos y otras residencias de asistencia social del sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 869,
+        "actividad": "Servicios de orientación y trabajo social para la niñez y la juventud prestados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 870,
+        "actividad": "Servicios de orientación y trabajo social para la niñez y la juventud prestados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 871,
+        "actividad": "Centros del sector privado dedicados a la atención y cuidado diurno de ancianos y discapacitados",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 872,
+        "actividad": "Centros del sector público dedicados a la atención y cuidado diurno de ancianos y discapacitados",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 873,
+        "actividad": "Agrupaci ones de autoayuda para alcohólicos y personas con otras adicciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 874,
+        "actividad": "Otros servicios de orientación y trabajo social prestados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 875,
+        "actividad": "Otros servicios de orientación y trabajo social prestados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 876,
+        "actividad": "Servicios de alimentación comunitarios prestados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 877,
+        "actividad": "Servicios de alimentación comunitarios prestados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 878,
+        "actividad": "R efugi os temporales comunitarios del sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 879,
+        "actividad": "Refugios temporales comunitarios del sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 880,
+        "actividad": "Servicios de emergencia comunitarios prestados por el sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 881,
+        "actividad": "Servicios de emergencia comunitarios prestados por el sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 882,
+        "actividad": "Servicios de capacitación para el trabajo prestados por el sector privado para personas desempleadas, subempleadas o discapacitadas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 883,
+        "actividad": "Servicios de capacitación para el trabajo prestados por el sector público para personas desempleadas, subempleadas o discapacitadas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 884,
+        "actividad": "Guarderías del sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 885,
+        "actividad": "Guarderías del sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 886,
+        "actividad": "Compañías de teatro del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 887,
+        "actividad": "Compañías de teatro del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 888,
+        "actividad": "Compañías de danza del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 889,
+        "actividad": "Compañías de danza del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 890,
+        "actividad": "Cantantes y grupos musicales del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 891,
+        "actividad": "Grupos musicales del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 892,
+        "actividad": "Otras compañías y grupos de espectáculos artísticos del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 893,
+        "actividad": "Otras compañías y grupos de espectáculos artísticos del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 894,
+        "actividad": "Deportistas profesionales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 895,
+        "actividad": "Equipos deportivos profesionales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 896,
+        "actividad": "Promotores del sector privado de espectáculos artísticos, culturales, deportivos y similares que cuentan con instalaciones para presentarlos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 897,
+        "actividad": "Promotores del sector público de espectáculos artísticos, culturales, deportivos y similares que cuentan con instalaciones para presentarlos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 898,
+        "actividad": "Promotores de espectáculos artísticos, culturales, deportivos y similares que no cuentan con instalaciones para presentarlos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 899,
+        "actividad": "Agentes y representantes de artistas, deportistas y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 900,
+        "actividad": "Artistas, escritores y técnicos independientes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 901,
+        "actividad": "Museos del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 902,
+        "actividad": "Museos del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 903,
+        "actividad": "Sitios históricos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 904,
+        "actividad": "Jardines botánicos y zoológicos del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 905,
+        "actividad": "Jardines botánicos y zoológicos del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 906,
+        "actividad": "Grutas, parques naturales y otros sitios del patrimonio cultural de la nación",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 907,
+        "actividad": "Parques de diversiones y temáticos del sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 908,
+        "actividad": "Parques de diversiones y temáticos del sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 909,
+        "actividad": "Parques acuáticos y balnearios del sector privado",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 910,
+        "actividad": "Parques acuáticos y balnearios del sector público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 911,
+        "actividad": "Casas de juegos electrónicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 912,
+        "actividad": "Casinos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 913,
+        "actividad": "Venta de billetes de lotería, pronósticos deportivos y otros boletos de sorteo",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 914,
+        "actividad": "Otros juegos de azar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 915,
+        "actividad": "Campos de golf",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 916,
+        "actividad": "Marinas turísticas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 917,
+        "actividad": "Clubes deportivos del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 918,
+        "actividad": "Clubes deportivos del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 919,
+        "actividad": "Centros de acondicionamiento físico del sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 920,
+        "actividad": "Centros de acondicionamiento físico del sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 921,
+        "actividad": "Boliches",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 922,
+        "actividad": "Billares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 923,
+        "actividad": "Clubes o ligas de aficionados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 924,
+        "actividad": "Otros servicios recreativos prestados por el sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 925,
+        "actividad": "Otros servicios recreativos prestados por el sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 926,
+        "actividad": "Hoteles con otros servicios integrados",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 927,
+        "actividad": "Hoteles sin otros servicios integrados",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 928,
+        "actividad": "Moteles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 929,
+        "actividad": "Hoteles con casino",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 930,
+        "actividad": "Cabañas, villas y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 931,
+        "actividad": "Campamentos y albergues recreativos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 932,
+        "actividad": "Pensiones y casas de huéspedes",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 933,
+        "actividad": "Departamentos y casas amueblados con servicios de hotelería",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 934,
+        "actividad": "Servicios de comedor para empresas e instituciones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 935,
+        "actividad": "Servicios de preparación de alimentos para ocasiones especiales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 936,
+        "actividad": "Servicios de preparación de alimentos en unidades móviles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 937,
+        "actividad": "Centros nocturnos, discotecas y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 938,
+        "actividad": "Bares, cantinas y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 939,
+        "actividad": "Restaurantes con servicio de preparación de alimentos a la carta o de comida corrida",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 940,
+        "actividad": "Restaurantes con servicio de preparación de pescados y mariscos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 941,
+        "actividad": "Restaurantes con servicio de preparación de antojitos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 942,
+        "actividad": "Restaurantes con servicio de preparación de tacos y tortas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 943,
+        "actividad": "Cafeterías, fuentes de sodas, neverías, refresquerías y similares",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 944,
+        "actividad": "Restaurantes de autoservicio",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 945,
+        "actividad": "Restaurantes con servicio de preparación de pizzas, hamburguesas, hotdogs y pollos rostizados para llevar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 946,
+        "actividad": "Restaurantes que preparan otro tipo de alimentos para llevar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 947,
+        "actividad": "Servicios de preparación de otros alimentos para consumo inmediato",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 948,
+        "actividad": "Reparación mecánica en general de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 949,
+        "actividad": "Reparación del sistema eléctrico de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 950,
+        "actividad": "Rectificación de partes de motor de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 951,
+        "actividad": "Reparación de transmisiones de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 952,
+        "actividad": "Reparación de suspensiones de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 953,
+        "actividad": "Alineación y balanceo de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 954,
+        "actividad": "Otras reparaciones mecánicas de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 955,
+        "actividad": "Hojalatería y pintura de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 956,
+        "actividad": "Tapicería de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 957,
+        "actividad": "Instalación de cristales y otras reparaciones a la carrocería de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 958,
+        "actividad": "Reparación menor de llantas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 959,
+        "actividad": "Lavado y lubricado de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 960,
+        "actividad": "Otros servicios de reparación y mantenimiento de automóviles y camiones",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 961,
+        "actividad": "Reparación y mantenimiento de equipo electrónico de uso doméstico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 962,
+        "actividad": "Reparación y mantenimiento de otro equipo electrónico y de equipo de precisión",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 963,
+        "actividad": "Reparación y mantenimiento de maquinaria y equipo agropecuario y forestal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 964,
+        "actividad": "Reparación y mantenimiento de maquinaria y equipo industrial",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 965,
+        "actividad": "Reparación y mantenimiento de maquinaria y equipo para mover, levantar y acomodar materiales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 966,
+        "actividad": "Reparación y mantenimiento de maquinaria y equipo comercial y de servicios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 967,
+        "actividad": "Reparación y mantenimiento de aparatos eléctricos para el hogar y personales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 968,
+        "actividad": "Reparación de tapicería de muebles para el hogar",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 969,
+        "actividad": "Reparación de calzado y otros artículos de piel y cuero",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 970,
+        "actividad": "Cerrajerías",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 971,
+        "actividad": "Reparación y mantenimiento de motocicletas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 972,
+        "actividad": "Reparación y mantenimiento de bicicletas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 973,
+        "actividad": "Reparación y mantenimiento de otros artículos para el hogar y personales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 974,
+        "actividad": "Salones y clínicas de belleza y peluquerías",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 975,
+        "actividad": "Baños públicos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 976,
+        "actividad": "Sanitarios públicos y bolerías",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 977,
+        "actividad": "Lavanderías y tintorerías",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 978,
+        "actividad": "Servicios funerarios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 979,
+        "actividad": "Administración de cementerios pertenecientes al sector privado",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 980,
+        "actividad": "Administración de cementerios pertenecientes al sector público",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 981,
+        "actividad": "Estacionamientos y pensiones para vehículos automotores",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 982,
+        "actividad": "Servicios de revelado e impresión de fotografías",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 983,
+        "actividad": "Otros servicios personales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 984,
+        "actividad": "Asociaciones, organizaciones y cámaras de productores, comerciantes y prestadores de servicios",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 985,
+        "actividad": "Asociaciones y organizaciones laborales y sindicales",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 986,
+        "actividad": "Asociaciones y organizaciones de profesionistas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 987,
+        "actividad": "Asociaciones regulatorias de actividades recreativas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 988,
+        "actividad": "Asociaciones y organizaciones religiosas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 989,
+        "actividad": "Asociaciones y organizaciones políticas",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 990,
+        "actividad": "Asociaciones y organizaciones civiles",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 991,
+        "actividad": "Hogares con empleados domésticos",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 992,
+        "actividad": "Órganos legislativos",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 993,
+        "actividad": "Administración pública estatal",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 994,
+        "actividad": "Administración pública municipal",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 995,
+        "actividad": "Regulación y fomento del desarrollo económico",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 996,
+        "actividad": "Impartición de justicia y mantenimiento de la seguridad y el orden público",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 997,
+        "actividad": "Regulación y fomento de actividades para mejorar y preservar el medio ambiente",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 998,
+        "actividad": "Actividades administrativas de instituciones de bienestar social",
+        "riesgo": "Bajo Riesgo"
+    },
+    {
+        "numero": 999,
+        "actividad": "Relaciones exteriores",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 1000,
+        "actividad": "Actividades de seguridad nacional",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 1001,
+        "actividad": "Organismos internacionales",
+        "riesgo": "Mediano Riesgo"
+    },
+    {
+        "numero": 1002,
+        "actividad": "Sedes diplomáticas y otras unidades extraterritoriales",
+        "riesgo": "Mediano Riesgo"
+    }
+]

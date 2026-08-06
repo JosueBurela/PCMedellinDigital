@@ -1,0 +1,95 @@
+                        
+                        <div class="space-y-4">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">1. Modalidad de Registro (Padrón Municipal)</span>
+                            {% if tramite.sub_tipo %}
+                                <input type="hidden" name="tipo_anuencia_terceros" value="{{ tramite.sub_tipo }}">
+                                <div class="w-full px-4 py-3 bg-purple-50/70 border border-purple-100 rounded-xl text-xs font-bold text-medellinVino flex items-center gap-2">
+                                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                                    <span>
+                                        {% if tramite.sub_tipo == 'NUEVO_INGRESO' %}
+                                            Registro de Tercer Acreditado y/o Empresas Capacitadoras (Nuevo Ingreso)
+                                        {% elif tramite.sub_tipo == 'RENOVACION_REGISTRO' %}
+                                            Renovación de Registro en el Padrón Municipal
+                                        {% else %}
+                                            {{ tramite.sub_tipo }}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                            {% else %}
+                                <select name="tipo_anuencia_terceros" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold focus:outline-none focus:border-medellinVino transition-colors">
+                                    <option value="NUEVO_INGRESO">Registro de Tercer Acreditado y/o Empresas Capacitadoras (Nuevo Ingreso)</option>
+                                    <option value="RENOVACION_REGISTRO">Renovación de Registro en el Padrón Municipal</option>
+                                </select>
+                            {% endif %}
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">2. Datos del Solicitante (Persona Física o Moral)</span>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Nombre o Razón Social (Como saldrá en el Padrón)</label>
+                                    <input type="text" name="establecimiento" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. Servicios de Consultoría en Gestión de Riesgos S.A. de C.V.">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">RFC del Contribuyente</label>
+                                    <input type="text" name="rfc" required maxlength="13" minlength="12" class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors uppercase font-bold text-slate-800" placeholder="RFC de 12 o 13 letras">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Representante Legal (Si aplica)</label>
+                                <input type="text" name="propietario_representante" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Nombre completo">
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Teléfono Celular de Contacto</label>
+                                    <input type="tel" name="telefono_contacto" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. 2299887766">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Correo Electrónico Notificaciones</label>
+                                    <input type="email" name="correo_contacto" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="ejemplo@correo.com">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">3. Datos de quien realiza el trámite (Gestor o Solicitante)</span>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Nombre Completo</label>
+                                    <input type="text" name="realiza_nombre" value="{{ nombre_prellenado }}" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Nombre completo">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Teléfono Celular</label>
+                                    <input type="tel" name="realiza_telefono" value="{{ tel_prellenado }}" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="Ej. 2291234567">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-gray-500 mb-1.5">Correo Electrónico</label>
+                                    <input type="email" name="realiza_correo" value="{{ correo_prellenado }}" required class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-medellinVino transition-colors font-bold text-slate-800" placeholder="ejemplo@correo.com">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2">
+                            <!-- Documentos obligatorios -->
+                            <div class="space-y-4">
+                                <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-1.5">4. Documentación Obligatoria</span>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1 flex items-center gap-1">a) Copia de INE del solicitante o representante <span class="text-red-500">*</span></label>
+                                        <input type="file" name="file_ine" required accept="application/pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1 flex items-center gap-1">b) Cédula de Protección Civil Estatal (Alcances) <span class="text-red-500">*</span></label>
+                                        <input type="file" name="file_cedula_estatal" required accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[9px] font-bold text-gray-500 mb-1">c) Comprobante de Pago de Derechos</label>
+                                        <input type="file" name="file_pago" accept="application/pdf,image/*" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>

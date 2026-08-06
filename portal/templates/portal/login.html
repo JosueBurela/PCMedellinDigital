@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Panel Administrativo</title>
+    <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5A123E',
+                        medellinVerde: '#5B7B34',
+                        medellinOro: '#E59E27',
+                        medellinFondo: '#F7F8F6',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="bg-medellinFondo min-h-screen flex items-center justify-center p-6 antialiased">
+
+    <div class="max-w-md w-full bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden p-8 space-y-6">
+        
+        <div class="text-center space-y-3">
+            <img src="{% static 'portal/img/logo_medellin.jpg' %}" alt="Logo Medellín" class="w-20 h-20 object-contain mx-auto">
+            <div>
+                <h2 class="text-2xl font-black text-medellinVino tracking-tight">PCivil Digital</h2>
+                <p class="text-gray-400 text-[10px] font-bold uppercase tracking-wider mt-1">Protección Civil y Bomberos</p>
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="{% if message.tags == 'error' %}bg-red-50 border-red-500 text-red-700{% else %}bg-green-50 border-green-500 text-green-700{% endif %} border-l-4 p-3 rounded-xl text-sm font-medium">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" class="space-y-5">
+            {% csrf_token %}
+            <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Usuario Institucional</label>
+                <input type="text" name="username" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-medellinVino transition-colors" placeholder="ejemplo.pc">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Contraseña de Acceso</label>
+                <input type="password" name="password" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-medellinVino transition-colors" placeholder="••••••••">
+            </div>
+
+            <button type="submit" class="w-full bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3.5 rounded-xl shadow-lg transition-all transform hover:-translate-y-0.5 text-sm tracking-wide">
+                Ingresar al Sistema ➔
+            </button>
+        </form>
+
+        <div class="text-center space-y-2 pt-2 border-t border-gray-100">
+            <div>
+                <a href="{% url 'registro_personal' %}" class="text-xs text-medellinVino hover:underline font-bold transition">
+                    ¿No tienes cuenta? Solicitar registro
+                </a>
+            </div>
+            <div>
+                <a href="{% url 'home' %}" class="text-xs text-gray-400 hover:text-medellinVino font-semibold transition">
+                    ← Volver al Portal Ciudadano
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

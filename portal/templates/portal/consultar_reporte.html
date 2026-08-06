@@ -1,0 +1,526 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Reporte - PCivil Digital</title>
+    <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5A123E',
+                        medellinVerde: '#5B7B34',
+                        medellinOro: '#E59E27',
+                        medellinFondo: '#F7F8F6',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-medellinFondo text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Navegación -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-4 md:px-6 h-20 flex justify-between items-center">
+            <a href="{% url 'home' %}" class="flex items-center space-x-3">
+                <img src="{% static 'portal/img/logo_medellin.jpg' %}" alt="Logo Medellín" class="w-10 h-10 md:w-12 md:h-12 object-contain">
+                <div>
+                    <span class="block font-black text-medellinVino text-sm md:text-lg tracking-tight leading-tight">MEDELLÍN DE BRAVO</span>
+                    <span class="block text-[8px] md:text-[10px] font-bold text-medellinOro tracking-widest uppercase">Protección Civil y Bomberos</span>
+                </div>
+            </a>
+            
+            <a href="{% url 'home' %}" class="text-xs font-bold text-medellinVino hover:underline flex items-center gap-1">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Regresar al Inicio
+            </a>
+        </div>
+    </nav>
+
+    <!-- Encabezado -->
+    <header class="bg-[#43082B] text-white py-10 px-4 md:px-6 relative overflow-hidden border-b-4 border-medellinOro">
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
+            <div class="absolute inset-0 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        </div>
+        
+        <div class="container mx-auto max-w-3xl relative z-10 space-y-2">
+            <span class="bg-white/10 text-medellinOro text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded border border-white/10 w-fit block">
+                Seguimiento Ciudadano
+            </span>
+            <h1 class="text-xl md:text-3xl font-black tracking-tight leading-tight uppercase">
+                Consulta de Estatus de Incidente
+            </h1>
+            <p class="text-purple-100/70 text-xs font-normal max-w-2xl leading-relaxed">
+                Ingrese el folio generado para visualizar el estado de la brigada y la bitácora de atención de Protección Civil.
+            </p>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="container mx-auto px-4 py-8 flex-grow max-w-3xl space-y-6">
+
+        <!-- Card de Búsqueda Secundaria -->
+        <div class="bg-white rounded-2xl border border-gray-150 shadow-sm p-5">
+            <form method="GET" class="flex flex-col sm:flex-row gap-3 items-end sm:items-center">
+                <div class="space-y-1.5 flex-grow w-full">
+                    <label class="block text-[9px] font-bold text-gray-500 uppercase tracking-widest">Número de Folio del Reporte</label>
+                    <div class="relative">
+                        <input type="text" name="folio" required value="{{ folio|default:'' }}" placeholder="Ej. REP-0001" class="w-full pl-9 pr-3 py-2.5 bg-gray-50 border border-gray-255 rounded-xl focus:outline-none focus:border-medellinVino focus:bg-white text-xs uppercase font-extrabold text-slate-800 tracking-wider">
+                        <i data-lucide="hash" class="absolute left-3 top-3 w-4 h-4 text-gray-400"></i>
+                    </div>
+                </div>
+                <button type="submit" class="w-full sm:w-auto bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3 px-6 rounded-xl text-xs transition-colors shadow-md uppercase tracking-wider flex items-center justify-center gap-1.5 shrink-0">
+                    <i data-lucide="search" class="w-4 h-4"></i> Consultar
+                </button>
+            </form>
+        </div>
+
+        {% if buscado %}
+            {% if reporte %}
+                <!-- RESULTADO: Reporte Encontrado -->
+                <div class="bg-white rounded-3xl border border-gray-150 shadow-sm overflow-hidden">
+                    
+                    <!-- Encabezado de Estatus del Folio -->
+                    <div class="bg-slate-50 border-b border-gray-100 p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                        <div>
+                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Folio Consultador</span>
+                            <h2 class="text-xl font-black text-medellinVino tracking-wider font-mono">{{ reporte.numero_reporte }}</h2>
+                        </div>
+                        
+                        <!-- Badge de Estatus -->
+                        <div id="reporte-estatus-badge">
+                            {% if reporte.estatus == 'PENDIENTE' %}
+                                <span class="bg-amber-50 text-medellinOro font-bold text-[10px] px-3.5 py-1.5 rounded-full border border-amber-100 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 animate-spin"></i> Sin Atender / Pendiente
+                                </span>
+                            {% elif reporte.estatus == 'LEIDO' %}
+                                <span class="bg-purple-50 text-purple-700 font-bold text-[10px] px-3.5 py-1.5 rounded-full border border-purple-100 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5"></i> Leído / Evaluando
+                                </span>
+                            {% elif reporte.estatus == 'EN_PROCESO' %}
+                                <span class="bg-blue-50 text-blue-600 font-bold text-[10px] px-3.5 py-1.5 rounded-full border border-blue-100 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i data-lucide="truck" class="w-3.5 h-3.5 animate-bounce"></i> En Camino / Atendiendo
+                                </span>
+                            {% else %}
+                                <span class="bg-emerald-50 text-medellinVerde font-bold text-[10px] px-3.5 py-1.5 rounded-full border border-emerald-100 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Atendido / Resuelto
+                                </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Ficha Técnica -->
+                    <div class="p-6 md:p-8 space-y-6">
+                        
+                        <!-- Detalles del Incidente -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs border-b border-gray-100 pb-6">
+                            <div class="space-y-3">
+                                <div>
+                                    <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Tipo de Riesgo</span>
+                                    <span class="text-slate-800 font-bold text-sm">{{ reporte.get_tipo_servicio_display }}</span>
+                                </div>
+                                <div>
+                                    <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Fecha y Hora de Reporte</span>
+                                    <span class="text-slate-700 font-semibold">{{ reporte.fecha_reporte|date:"d/m/Y H:i" }}</span>
+                                </div>
+                                <div>
+                                    <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Gravedad / Prioridad</span>
+                                    <span class="text-slate-700 font-bold {% if reporte.prioridad == 'ALTA' %}text-red-600{% else %}text-slate-700{% endif %}">
+                                        {{ reporte.get_prioridad_display }}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-3">
+                                <div>
+                                    <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Ubicación del Suceso</span>
+                                    <span class="text-slate-700 font-semibold block">{{ reporte.direccion }}</span>
+                                    <span class="text-gray-400 font-medium block">Col. {{ reporte.colonia }}, {{ reporte.localidad }}</span>
+                                </div>
+                                <div>
+                                    <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider">Descripción del Ciudadano</span>
+                                    <p class="text-gray-500 font-normal leading-relaxed text-justify">{{ reporte.descripcion }}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Detalles Operativos de Despliegue -->
+                        <div class="bg-gray-50 rounded-2xl p-5 border border-gray-150 grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                            <div>
+                                <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Unidad Operativa Asignada</span>
+                                <span id="reporte-unidad" class="font-extrabold text-slate-800 text-sm flex items-center gap-1.5">
+                                    <i data-lucide="shield-alert" class="w-4 h-4 text-medellinVino"></i>
+                                    {{ reporte.unidad_acudira|default:"Por asignar brigada" }}
+                                </span>
+                            </div>
+                            <div>
+                                <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-0.5">Tiempo Estimado de Atención</span>
+                                <span id="reporte-tiempo-estimado" class="font-bold text-slate-700">
+                                    {{ reporte.tiempo_atencion|default:"En evaluación operativa" }}
+                                </span>
+                            </div>
+                            <div id="reporte-resolucion-container" class="{% if not reporte.fecha_resolucion %}hidden{% endif %}">
+                                <span class="block text-[9px] font-bold text-emerald-600 uppercase tracking-widest mb-0.5">⏱️ Tiempo de Respuesta Total</span>
+                                <span id="reporte-tiempo-resolucion" class="font-black text-emerald-700 text-sm">
+                                    {{ reporte.tiempo_resolucion_calculado }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Bitácora / Bitácora de Campo de Protección Civil (Línea de tiempo) -->
+                        <div class="space-y-4">
+                            <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-2 flex items-center gap-1.5">
+                                <i data-lucide="list-todo" class="w-4 h-4"></i> Bitácora de Seguimiento de Protección Civil
+                            </h3>
+                            
+                            <div id="reporte-bitacora-timeline" class="relative pl-6 border-l border-purple-200/60 space-y-5">
+                                {% for item in historial %}
+                                    <div class="relative">
+                                        <!-- Viñeta de Línea de Tiempo -->
+                                        <div class="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-medellinVino border border-white"></div>
+                                        
+                                        <div class="space-y-1">
+                                            <span class="text-[9px] font-bold text-gray-400 block">{{ item.fecha_registro|date:"d/m/Y H:i" }}</span>
+                                            <p class="text-xs font-semibold text-slate-700">{{ item.comentario }}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                
+                                <!-- Entrada estática inicial (Cuando se lanzó el reporte) -->
+                                <div class="relative">
+                                    <div class="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-white"></div>
+                                    <div class="space-y-1">
+                                        <span class="text-[9px] font-bold text-gray-400 block">{{ reporte.fecha_reporte|date:"d/m/Y H:i" }}</span>
+                                        <p class="text-xs font-bold text-gray-500">Reporte lanzado e ingresado en la central municipal. Folio generado: {{ reporte.numero_reporte }}.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat de Emergencia con la Central Municipal -->
+                        <div class="space-y-4 pt-6 border-t border-gray-100">
+                            <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider flex items-center gap-1.5">
+                                <i data-lucide="messages-square" class="w-4 h-4"></i> Chat Directo con la Central de Protección Civil
+                            </h3>
+                            
+                            <!-- Caja de Mensajes -->
+                            <div id="reporte-chat-container" class="bg-slate-50 border border-gray-150 rounded-2xl p-4 space-y-3 max-h-[250px] overflow-y-auto">
+                                {% for msg in chat_mensajes %}
+                                    <div class="flex flex-col {% if msg.remitente_admin %}items-start{% else %}items-end{% endif %}">
+                                        <div class="max-w-[85%] rounded-2xl px-4 py-2.5 text-xs shadow-sm
+                                            {% if msg.remitente_admin %}
+                                                bg-white text-slate-800 rounded-tl-none border border-gray-100
+                                            {% else %}
+                                                bg-medellinVino text-white rounded-tr-none
+                                            {% endif %}">
+                                            <p class="font-medium leading-relaxed break-words">{{ msg.mensaje }}</p>
+                                        </div>
+                                        <span class="text-[9px] text-gray-400 mt-1 px-1 font-semibold">
+                                            {% if msg.remitente_admin %}
+                                                👮 Central PC ({{ msg.remitente_admin.username }})
+                                            {% else %}
+                                                👤 Ciudadano
+                                            {% endif %}
+                                            • {{ msg.fecha_envio|date:"H:i" }}
+                                        </span>
+                                    </div>
+                                {% empty %}
+                                    <p id="chat-vacio-texto" class="text-xs text-gray-400 italic text-center py-4">No se han registrado mensajes en este chat. Puedes reportar información adicional sobre tu reporte por aquí.</p>
+                                {% endfor %}
+                            </div>
+                            
+                            <!-- Formulario para enviar mensaje -->
+                            <form action="{% url 'enviar_mensaje_chat' %}" method="POST" class="flex gap-2">
+                                {% csrf_token %}
+                                <input type="hidden" name="reporte_id" value="{{ reporte.id }}">
+                                <textarea name="mensaje" required placeholder="Escribe un mensaje o añade más información al reporte..." rows="2" class="flex-grow px-4 py-3 bg-gray-50 border border-gray-250 rounded-xl text-xs focus:outline-none focus:border-medellinVino focus:bg-white resize-none shadow-inner font-medium text-slate-700"></textarea>
+                                <button type="submit" class="bg-medellinVino hover:bg-[#43082B] text-white px-5 rounded-xl text-xs font-bold transition shadow-md flex items-center justify-center gap-1.5 self-end py-3 cursor-pointer">
+                                    <i data-lucide="send" class="w-3.5 h-3.5"></i> Enviar
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            {% else %}
+                <!-- ERROR: Folio no encontrado -->
+                <div class="bg-red-50 border border-red-200 text-red-800 rounded-3xl p-8 text-center space-y-4 shadow-sm">
+                    <div class="w-14 h-14 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto">
+                        <i data-lucide="shield-alert" class="w-8 h-8"></i>
+                    </div>
+                    <div class="space-y-1.5 max-w-md mx-auto">
+                        <h3 class="text-base font-extrabold uppercase tracking-wide text-red-950">Folio no Registrado</h3>
+                        <p class="text-xs text-red-700/80 leading-relaxed font-medium">
+                            El folio <strong>{{ folio }}</strong> no corresponde a ninguna alerta de riesgo en nuestra base de datos. Por favor verifique el formato (ej. REP-0001) e intente de nuevo.
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+    </main>
+
+    <!-- Nuevo Pie de Página Integral -->
+    <footer id="transparencia" class="bg-[#43082B] text-white pt-16 pb-12 border-t-4 border-medellinOro mt-16 font-medium text-xs">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+                
+                <!-- Columna 1: Identidad Municipal -->
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-3">
+                        <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Logo PC Circular" class="w-12 h-12 object-contain bg-white rounded-full p-0.5 shadow-sm">
+                        <div>
+                            <span class="block font-black text-sm tracking-tight text-white uppercase leading-tight">MEDELLÍN DE BRAVO</span>
+                            <span class="block text-[8px] font-bold text-medellinOro tracking-widest uppercase mt-0.5">Protección Civil y Bomberos</span>
+                        </div>
+                    </div>
+                    <p class="text-purple-100/75 leading-relaxed pr-4 font-normal text-justify">
+                        Portal oficial de trámites digitales y atención ciudadana de la Dirección Municipal de Protección Civil del Municipio de Medellín de Bravo, Veracruz.
+                    </p>
+                    <div class="pt-2 text-purple-200/50 text-[10px] font-semibold leading-relaxed">
+                        <p class="mb-1">&copy; 2026 H. Ayuntamiento de Medellín de Bravo.</p>
+                        <p>Todos los derechos reservados.</p>
+                    </div>
+                </div>
+
+                <!-- Columna 2: Directorio de Emergencias (24/7) -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="phone-call" class="w-4 h-4 text-medellinOro animate-pulse"></i> Líneas de Emergencia
+                    </h4>
+                    <div class="space-y-4">
+                        <!-- Protección Civil & 911 -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Base de Protección Civil</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="tel:2299554774" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5 text-purple-300"></i> 229 955 4774
+                                </a>
+                                <a href="tel:911" class="hover:text-white flex items-center gap-1.5 text-red-400 font-extrabold transition-colors">
+                                    <i data-lucide="alert-triangle" class="w-3.5 h-3.5 text-red-400 animate-bounce"></i> 911 (Nacional)
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Policía Municipal -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Policía Municipal</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="https://wa.me/522291287616" target="_blank" class="hover:text-white flex items-center gap-1.5 text-green-400 font-bold transition-colors">
+                                    <i data-lucide="message-square" class="w-3.5 h-3.5 text-green-400"></i> 229 128 7616 (WhatsApp)
+                                </a>
+                                <a href="tel:2299554305" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5 text-purple-300"></i> 229 955 4305
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 3: Servicios de Apoyo -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="activity" class="w-4 h-4 text-medellinOro"></i> Servicios de Apoyo
+                    </h4>
+                    <div class="space-y-4">
+                        <!-- Mando Único y Tránsito -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Seguridad y Tránsito</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="tel:2295480668" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="shield" class="w-3.5 h-3.5 text-purple-300"></i> Policía Estatal: 229 548 0668
+                                </a>
+                                <a href="tel:2291664589" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="navigation" class="w-3.5 h-3.5 text-purple-300"></i> Tránsito: 229 166 4589
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- CFE y C5 -->
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Infraestructura y Monitoreo</span>
+                            <div class="mt-1.5 space-y-1.5 text-purple-100/90 font-semibold">
+                                <a href="tel:071" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="zap" class="w-3.5 h-3.5 text-yellow-400 animate-pulse"></i> Reporte CFE: 071
+                                </a>
+                                <a href="tel:2288423660" class="hover:text-white flex items-center gap-1.5 transition-colors">
+                                    <i data-lucide="phone-forwarded" class="w-3.5 h-3.5 text-purple-300"></i> C5 Estatal: 228 842 3660
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Columna 4: Transparencia -->
+                <div class="space-y-4">
+                    <h4 class="font-bold text-white text-xs uppercase tracking-widest border-b border-white/10 pb-2.5 flex items-center gap-2">
+                        <i data-lucide="info" class="w-4 h-4 text-medellinOro"></i> Información Pública
+                    </h4>
+                    <div class="space-y-4">
+                        <div>
+                            <span class="block text-[10px] font-black text-medellinOro uppercase tracking-wider">Horarios Administrativos</span>
+                            <p class="text-purple-100/75 mt-1 leading-relaxed font-normal">
+                                Oficinas: Lunes a Viernes de 9:00 AM a 4:00 PM.<br>
+                                <span class="text-white font-bold">Atención operativa de emergencias: 24/7/365.</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- Inicializar Lucide Icons y Real-Time Polling -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            {% if reporte %}
+            // Hacer scroll automático al fondo del chat al iniciar
+            const chatMsgContainerInit = document.getElementById('reporte-chat-container');
+            if (chatMsgContainerInit) {
+                chatMsgContainerInit.scrollTop = chatMsgContainerInit.scrollHeight;
+            }
+
+            // Polling de estatus en tiempo real cada 5 segundos (5000ms) con control de versión (hash)
+            const currentFolio = "{{ reporte.numero_reporte }}";
+            let currentVersion = "";
+            
+            function pollReportStatus() {
+                fetch(`?folio=${currentFolio}&ajax=1&version=${currentVersion}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.encontrado) {
+                            // Si la versión no ha cambiado, no hacer nada (ahorra ciclos de CPU y renderizado)
+                            if (data.modificado === false) {
+                                return;
+                            }
+                            
+                            // Guardar la nueva versión del estado
+                            currentVersion = data.version;
+
+                            // 1. Actualizar estatus badge
+                            const badgeContainer = document.getElementById('reporte-estatus-badge');
+                            let badgeHTML = '';
+                            if (data.estatus === 'PENDIENTE') {
+                                badgeHTML = `<span class="bg-amber-50 text-medellinOro font-bold text-[10px] px-3.5 py-1.5 rounded-full border border-amber-100 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 animate-spin"></i> Sin Atender / Pendiente
+                                </span>`;
+                            } else if (data.estatus === 'LEIDO') {
+                                badgeHTML = `<span class="bg-purple-50 text-purple-700 font-bold text-[10px] px-3.5 py-1.5 rounded-full border border-purple-100 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i data-lucide="eye" class="w-3.5 h-3.5"></i> Leído / Evaluando
+                                </span>`;
+                            } else if (data.estatus === 'EN_PROCESO') {
+                                badgeHTML = `<span class="bg-blue-50 text-blue-600 font-bold text-[10px] px-3.5 py-1.5 rounded-full border border-blue-100 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i data-lucide="truck" class="w-3.5 h-3.5 animate-bounce"></i> En Camino / Atendiendo
+                                </span>`;
+                            } else {
+                                badgeHTML = `<span class="bg-emerald-50 text-medellinVerde font-bold text-[10px] px-3.5 py-1.5 rounded-full border border-emerald-100 uppercase tracking-wider flex items-center gap-1.5">
+                                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i> Atendido / Resuelto
+                                </span>`;
+                            }
+                            if (badgeContainer) badgeContainer.innerHTML = badgeHTML;
+
+                            // 2. Actualizar unidad asignada
+                            const unidadSpan = document.getElementById('reporte-unidad');
+                            if (unidadSpan) {
+                                unidadSpan.innerHTML = `<i data-lucide="shield-alert" class="w-4 h-4 text-medellinVino"></i> ${data.unidad_acudira}`;
+                            }
+
+                            // 3. Actualizar tiempo estimado
+                            const tiempoSpan = document.getElementById('reporte-tiempo-estimado');
+                            if (tiempoSpan) {
+                                tiempoSpan.textContent = data.tiempo_atencion;
+                            }
+
+                            // 4. Actualizar tiempo de respuesta total
+                            const resolucionContainer = document.getElementById('reporte-resolucion-container');
+                            const resolucionSpan = document.getElementById('reporte-tiempo-resolucion');
+                            if (data.tiempo_resolucion_calculado) {
+                                if (resolucionSpan) resolucionSpan.textContent = data.tiempo_resolucion_calculado;
+                                if (resolucionContainer) resolucionContainer.classList.remove('hidden');
+                            } else {
+                                if (resolucionContainer) resolucionContainer.classList.add('hidden');
+                            }
+
+                            // 5. Actualizar bitácora timeline
+                            const timelineContainer = document.getElementById('reporte-bitacora-timeline');
+                            if (timelineContainer && data.historial) {
+                                let timelineHTML = '';
+                                data.historial.forEach((item, index) => {
+                                    const isLast = (index === data.historial.length - 1);
+                                    const dotColor = isLast ? 'bg-emerald-400' : 'bg-medellinVino';
+                                    const commentClass = isLast ? 'font-bold text-gray-500' : 'font-semibold text-slate-700';
+                                    timelineHTML += `<div class="relative">
+                                        <div class="absolute -left-[30px] top-1 w-2.5 h-2.5 rounded-full ${dotColor} border border-white"></div>
+                                        <div class="space-y-1">
+                                            <span class="text-[9px] font-bold text-gray-400 block">${item.fecha}</span>
+                                            <p class="text-xs ${commentClass}">${item.comentario}</p>
+                                        </div>
+                                    </div>`;
+                                });
+                                timelineContainer.innerHTML = timelineHTML;
+                            }
+
+                            // 6. Actualizar chat de mensajes en tiempo real
+                            const chatMsgContainer = document.getElementById('reporte-chat-container');
+                            if (chatMsgContainer && data.chat_mensajes) {
+                                let chatHTML = '';
+                                if (data.chat_mensajes.length === 0) {
+                                    chatHTML = `<p id="chat-vacio-texto" class="text-xs text-gray-400 italic text-center py-4">No se han registrado mensajes en este chat. Puedes reportar información adicional sobre tu reporte por aquí.</p>`;
+                                } else {
+                                    data.chat_mensajes.forEach(msg => {
+                                        const alignClass = msg.is_admin ? 'items-start' : 'items-end';
+                                        const bubbleClass = msg.is_admin 
+                                            ? 'bg-white text-slate-800 rounded-tl-none border border-gray-100' 
+                                            : 'bg-medellinVino text-white rounded-tr-none';
+                                        const senderName = msg.is_admin ? `👮 Central PC (${msg.remitente})` : '👤 Ciudadano';
+                                        const timeOnly = msg.fecha.split(' ')[1];
+                                        
+                                        chatHTML += `<div class="flex flex-col ${alignClass}">
+                                            <div class="max-w-[85%] rounded-2xl px-4 py-2.5 text-xs shadow-sm ${bubbleClass}">
+                                                <p class="font-medium leading-relaxed break-words">${msg.mensaje}</p>
+                                            </div>
+                                            <span class="text-[9px] text-gray-400 mt-1 px-1 font-semibold">
+                                                ${senderName} • ${timeOnly}
+                                            </span>
+                                        </div>`;
+                                    });
+                                }
+                                
+                                // Si el scroll estaba abajo, mantenerlo abajo
+                                const wasAtBottom = chatMsgContainer.scrollHeight - chatMsgContainer.clientHeight <= chatMsgContainer.scrollTop + 50;
+                                chatMsgContainer.innerHTML = chatHTML;
+                                if (wasAtBottom) {
+                                    chatMsgContainer.scrollTop = chatMsgContainer.scrollHeight;
+                                }
+                            }
+
+                            // Volver a renderizar los iconos de Lucide actualizados
+                            if (typeof lucide !== 'undefined') {
+                                lucide.createIcons();
+                            }
+                        }
+                    })
+                    .catch(err => console.error("Error en real-time polling:", err));
+            }
+
+            // Iniciar ciclo de polling cada 5 segundos
+            setInterval(pollReportStatus, 5000);
+            {% endif %}
+        });
+    </script>
+</body>
+</html>
