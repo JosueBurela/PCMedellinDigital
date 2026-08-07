@@ -38,6 +38,13 @@ def whatsapp_webhook(request):
         texto = ""
         message = data.get("message", {}) if isinstance(data.get("message"), dict) else {}
         
+        def _obtener_nombre_opcion(opt):
+            if isinstance(opt, str):
+                return opt
+            if isinstance(opt, dict):
+                return opt.get("optionName") or opt.get("name") or opt.get("text") or opt.get("value") or ""
+            return ""
+
         if message:
             if "conversation" in message:
                 texto = message["conversation"]
@@ -45,18 +52,27 @@ def whatsapp_webhook(request):
                 texto = message["extendedTextMessage"].get("text", "")
             elif "pollUpdateMessage" in message:
                 poll_msg = message.get("pollUpdateMessage", {})
-                vote = poll_msg.get("vote", {}) or poll_msg
-                opts = vote.get("selectedOptions", []) or vote.get("options", [])
+                vote = poll_msg.get("vote", {}) or poll_msg.get("pollCreationMessageKey", {}) or poll_msg
+                opts = vote.get("selectedOptions", []) or vote.get("options", []) or vote.get("selectedOption", [])
                 if opts:
-                    texto = opts[0] if isinstance(opts[0], str) else opts[0].get("optionName", "")
+                    texto = _obtener_nombre_opcion(opts[0] if isinstance(opts, list) else opts)
             elif "buttonsResponseMessage" in message:
                 btn_msg = message.get("buttonsResponseMessage", {})
                 texto = btn_msg.get("selectedDisplayText", "") or btn_msg.get("selectedButtonId", "")
 
-        if not texto and "selectedOptions" in data:
-            opts = data.get("selectedOptions", [])
-            if opts:
-                texto = opts[0] if isinstance(opts[0], str) else opts[0].get("optionName", "")
+        if not texto:
+            for field in ["selectedOptions", "options", "pollUpdateMessage", "selectedOption", "selectedAnswer"]:
+                val = data.get(field) or (message.get(field) if isinstance(message, dict) else None)
+                if val:
+                    if isinstance(val, list) and len(val) > 0:
+                        texto = _obtener_nombre_opcion(val[0])
+                    elif isinstance(val, (dict, str)):
+                        texto = _obtener_nombre_opcion(val)
+                    if texto:
+                        break
+
+        if not texto and isinstance(data.get("body"), str):
+            texto = data.get("body", "")
 
         texto_clean = texto.strip()
         logger.info(f"Webhook WhatsApp de {remote_jid} ({push_name}): '{texto_clean}'")
