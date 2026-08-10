@@ -133,7 +133,7 @@ def iniciar_tramite(request, tramite_id):
                     doc_croquis=d_croquis,
                     doc_fotos=d_fotos,
                     doc_predial=d_predial,
-                    req_programa_interno=r_programa,
+                    req_programa=r_programa,
                     req_corresponsabilidad=r_corresp,
                     req_capacitacion=r_capacitacion,
                     req_gas=r_gas,
