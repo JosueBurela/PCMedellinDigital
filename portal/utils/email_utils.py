@@ -35,14 +35,14 @@ H. Ayuntamiento de Medellín de Bravo, Veracruz.
         email_user = getattr(settings, 'EMAIL_HOST_USER', None)
         if email_user:
             from_email = getattr(settings, 'DEFAULT_FROM_EMAIL', email_user)
-            send_mail(
+            sent_count = send_mail(
                 subject=asunto,
                 message=mensaje_texto,
                 from_email=from_email,
                 recipient_list=[ciudadano.correo],
-                fail_silently=False
+                fail_silently=True
             )
-            return True
+            return sent_count > 0
     except Exception as e:
         print(f"⚠️ Error enviando correo SMTP a {ciudadano.correo}: {e}")
     
