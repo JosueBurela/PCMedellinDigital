@@ -28,13 +28,6 @@ def acceso_unificado(request):
     if request.session.get('ciudadano_curp') or request.session.get('ciudadano_id'):
         return redirect('home')
         
-    # Rate Limiting / Protección Antifraude
-    intentos_fallidos = request.session.get('intentos_login', 0)
-    if intentos_fallidos >= 5:
-        messages.error(request, "⚠️ Por seguridad, se ha bloqueado temporalmente el acceso por múltiples intentos fallidos. Inténtalo de nuevo en unos momentos.")
-        if request.method == 'POST':
-            return render(request, 'portal/login_unificado.html')
-
     if request.method == 'POST':
         identificador = request.POST.get('identificador', '').strip()
         clave = request.POST.get('password', '').strip()
@@ -56,7 +49,6 @@ def acceso_unificado(request):
                 ciudadano.save()
 
                 request.session['pending_2fa_ciudadano_id'] = ciudadano.id
-                request.session['intentos_login'] = 0
                 
                 # Intentar enviar por Correo SMTP Real
                 enviado_email = enviar_correo_2fa(ciudadano, codigo_2fa)
@@ -73,16 +65,10 @@ def acceso_unificado(request):
                     messages.error(request, "Tu cuenta institucional está en revisión o inactiva por el Administrador General.")
                 else:
                     login(request, user)
-                    request.session['intentos_login'] = 0
                     messages.success(request, f"Sesión de personal iniciada: {user.first_name or user.username}.")
                     return redirect('dashboard_admin')
             else:
-                request.session['intentos_login'] = intentos_fallidos + 1
-                intentos_restantes = 5 - (intentos_fallidos + 1)
-                if intentos_restantes > 0:
-                    messages.error(request, f"Credenciales incorrectas. Te quedan {intentos_restantes} intento(s) antes del bloqueo temporal.")
-                else:
-                    messages.error(request, "⚠️ Múltiples intentos fallidos registrados. Acceso bloqueado por seguridad.")
+                messages.error(request, "Credenciales incorrectas. Por favor verifica tu usuario o correo y contraseña.")
                 
     return render(request, 'portal/login_unificado.html')
 
