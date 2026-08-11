@@ -35,10 +35,17 @@ ALLOWED_HOSTS = [h.strip() for h in allowed_hosts_str.split(',') if h.strip()]
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
     'http://localhost:8000',
-    'http://192.168.1.75:8000',
-    'http://192.168.1.66:8000',
-    'http://192.168.1.104:8000',
+    'http://127.0.0.1',
+    'http://localhost',
 ]
+
+for host in ALLOWED_HOSTS:
+    if host not in ('*', '127.0.0.1', 'localhost'):
+        if not host.startswith('http://') and not host.startswith('https://'):
+            CSRF_TRUSTED_ORIGINS.append(f'http://{host}')
+            CSRF_TRUSTED_ORIGINS.append(f'https://{host}')
+        else:
+            CSRF_TRUSTED_ORIGINS.append(host)
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
