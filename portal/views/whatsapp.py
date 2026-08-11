@@ -20,9 +20,11 @@ logger = logging.getLogger(__name__)
 def whatsapp_webhook(request):
     """
     Webhook para recibir eventos y mensajes entrantes de WhatsApp desde Evolution API:
-    1. Aceptación / Rechazo de emergencia por Encuestas (Poll) / Botones / Texto.
-    2. Flujo conversacional interactivo privado (Unidad + Tiempo Estimado) para el primer respondedor.
-    3. Registro de bitácoras por comando ("Bitacora REP-XXXX: comentario") o auto-bitácora.
+    1. Voto en Encuesta "Aceptar Atender": Inicia sesión conversacional privada y envía Pregunta 1 (Unidad).
+    2. Voto en Encuesta "No Disponible": Responde agradecimiento y registra en bitácora.
+    3. Flujo conversacional (Pregunta 1 -> Pregunta 2 -> Despacho en Camino).
+    4. Auto-bitácora continua durante alerta activa.
+    5. Finalización de alerta ("ALERTA FINALIZADA CON ÉXITO").
     """
     if request.method != 'POST':
         return JsonResponse({"status": "method_not_allowed"}, status=405)
@@ -62,12 +64,14 @@ def whatsapp_webhook(request):
                 return opt.get("optionName") or opt.get("name") or opt.get("text") or opt.get("value") or ""
             return ""
 
+        es_poll_update = False
         if message:
             if "conversation" in message:
                 texto = message["conversation"]
             elif "extendedTextMessage" in message:
                 texto = message["extendedTextMessage"].get("text", "")
             elif "pollUpdateMessage" in message:
+                es_poll_update = True
                 poll_msg = message.get("pollUpdateMessage", {})
                 vote = poll_msg.get("vote", {}) or poll_msg.get("pollCreationMessageKey", {}) or poll_msg
                 opts = vote.get("selectedOptions", []) or vote.get("options", []) or vote.get("selectedOption", [])
@@ -81,6 +85,7 @@ def whatsapp_webhook(request):
             for field in ["selectedOptions", "options", "pollUpdateMessage", "selectedOption", "selectedAnswer"]:
                 val = data.get(field) or (message.get(field) if isinstance(message, dict) else None)
                 if val:
+                    es_poll_update = True
                     if isinstance(val, list) and len(val) > 0:
                         texto = _obtener_nombre_opcion(val[0])
                     elif isinstance(val, (dict, str)):
@@ -92,7 +97,7 @@ def whatsapp_webhook(request):
             texto = data.get("body", "")
 
         texto_clean = texto.strip()
-        logger.info(f"Webhook WhatsApp de {target_jid} (Chat: {chat_jid}, Nombre: {push_name}): '{texto_clean}'")
+        logger.info(f"Webhook WhatsApp de {target_jid} (Chat: {chat_jid}, Nombre: {push_name}, Poll: {es_poll_update}): '{texto_clean}'")
 
         if not texto_clean:
             return JsonResponse({"status": "no_text"})
@@ -105,88 +110,75 @@ def whatsapp_webhook(request):
 
         nombre_respondedor = trabajador.nombre if trabajador else push_name
 
-        # ── 2. Revisar si el remitente tiene una sesión conversacional activa ───
-        sesion = SesionAtencionWhatsApp.objects.filter(
-            Q(phone_number=target_jid) | Q(phone_number=chat_jid) | 
-            Q(phone_number__icontains=participant_digits[-10:] if len(participant_digits) >= 10 else 'NOMATCH')
-        ).select_related('reporte').first()
+        # Detectar intenciones de comandos principales
+        texto_lower = texto_clean.lower()
+        
+        es_aceptar = (
+            (es_poll_update and ("aceptar" in texto_lower or "atender" in texto_lower or "✋" in texto_lower or "rep-" in texto_lower)) or
+            bool(re.search(r'(?i)(?:aceptar|atender|acepto).*?(REP-\d{4})|(REP-\d{4}).*?(?:aceptar|atender|acepto)', texto_clean))
+        )
 
-        if sesion:
-            reporte = sesion.reporte
+        es_no_disponible = (
+            (es_poll_update and ("no disponible" in texto_lower or "❌" in texto_lower or "guardia" in texto_lower)) or
+            any(k in texto_lower for k in ['no disponible', 'no puedo', 'ocupado', 'fuera de servicio', 'rechazar'])
+        )
 
-            if sesion.paso == 1:
-                # Paso 1: Recibir Unidad / Vehículo
-                sesion.unidad_acudira = texto_clean
-                sesion.paso = 2
-                sesion.save()
+        es_finalizar = bool(re.search(r'(?i)alerta\s+finalizada|finalizada\s+con\s+exito|finalizada\s+con\s+éxito|finalizar\s+alerta|finalizar\s+reporte', texto_clean))
 
-                pregunta2 = (
-                    f"👍 *Unidad registrada:* {texto_clean}\n\n"
-                    f"2️⃣ *¿Cuál es tu Tiempo Estimado de Arribo / Atención al punto?*\n"
-                    f"_(Escribe el tiempo estimado, ej: 10 minutos, 15 min, etc.)_"
+        # ── 2. PROCESAR VOTO "ACEPTAR ATENDER" FIRST ───────────────────────────
+        if es_aceptar:
+            # 1. Limpiar cualquier sesión conversacional previa del trabajador o chat
+            SesionAtencionWhatsApp.objects.filter(
+                Q(phone_number=target_jid) | Q(phone_number=chat_jid) |
+                Q(phone_number__icontains=participant_digits[-10:] if len(participant_digits) >= 10 else 'NOMATCH')
+            ).delete()
+
+            # 2. Identificar el reporte
+            match_folio = re.search(r'(?i)(REP-\d{4})', texto_clean)
+            folio_encontrado = match_folio.group(1).upper() if match_folio else None
+
+            if not folio_encontrado:
+                reporte_pend = ReporteRiesgo.objects.filter(estatus='PENDIENTE').order_by('-id').first()
+                if reporte_pend:
+                    folio_encontrado = reporte_pend.numero_reporte
+
+            if not folio_encontrado:
+                enviar_mensaje_whatsapp(target_jid, "❌ No hay ninguna alerta pendiente disponible para atender en este momento.")
+                return JsonResponse({"status": "no_pending_report"})
+
+            reporte = ReporteRiesgo.objects.filter(numero_reporte=folio_encontrado).first()
+
+            if not reporte:
+                enviar_mensaje_whatsapp(target_jid, f"❌ No se encontró ningún reporte activo con el folio *{folio_encontrado}*.")
+                return JsonResponse({"status": "report_not_found"})
+
+            # Verificar si ya fue tomado por alguien más
+            if reporte.estatus != 'PENDIENTE' and reporte.unidad_acudira:
+                ya_asignado = (
+                    f"ℹ️ *Aviso de Disponibilidad*\n\n"
+                    f"El reporte *{reporte.numero_reporte}* ya fue tomado a cargo previamente por *{reporte.unidad_acudira}*.\n\n"
+                    f"¡Muchas gracias por tu rápida respuesta!"
                 )
-                enviar_mensaje_whatsapp(target_jid, pregunta2)
-                return JsonResponse({"status": "unit_saved_asked_time"})
+                enviar_mensaje_whatsapp(target_jid, ya_asignado)
+                return JsonResponse({"status": "already_assigned"})
 
-            elif sesion.paso == 2:
-                # Paso 2: Recibir Tiempo Estimado -> COMPLETAR DESPACHO
-                tiempo_est = texto_clean
-                unidad_def = sesion.unidad_acudira or "Unidad de Respuesta"
+            # Iniciar sesión conversacional activa en PASO 1 (Unidad)
+            SesionAtencionWhatsApp.objects.create(phone_number=target_jid, reporte=reporte, paso=1)
+            if chat_jid != target_jid:
+                SesionAtencionWhatsApp.objects.create(phone_number=chat_jid, reporte=reporte, paso=1)
 
-                # Actualizar reporte oficialmente en la Base de Datos
-                reporte.estatus = 'EN_PROCESO'
-                reporte.unidad_acudira = unidad_def
-                reporte.tiempo_atencion = tiempo_est
-                reporte.save()
+            pregunta1 = (
+                f"✅ *¡HAS SIDO SELECCIONADO PARA ATENDER EL REPORTE {reporte.numero_reporte}!*\n"
+                f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                f"Hola *{nombre_respondedor}*, para completar el despacho y notificar al grupo de alertas, responde las siguientes 2 preguntas:\n\n"
+                f"1️⃣ *¿En qué unidad o vehículo acudirás a la emergencia?*\n"
+                f"_(Escribe el nombre o número de unidad, ej: Ambulancia 02, PC-01, Pick-up Rescate, etc.)_"
+            )
+            enviar_mensaje_whatsapp(target_jid, pregunta1)
+            logger.info(f"Voto 'Aceptar Atender' procesado para {nombre_respondedor} ({target_jid}) en {folio_encontrado}. Pregunta 1 enviada.")
+            return JsonResponse({"status": "selected_asked_unit"})
 
-                # Añadir al historial oficial / bitácora
-                HistorialReporte.objects.create(
-                    reporte=reporte,
-                    comentario=f"✅ [Despacho WhatsApp]: Tomado a cargo por {nombre_respondedor} en unidad {unidad_def} (Tiempo estimado de arribo: {tiempo_est})."
-                )
-
-                # Eliminar sesión conversacional
-                SesionAtencionWhatsApp.objects.filter(
-                    Q(phone_number=target_jid) | Q(phone_number=chat_jid)
-                ).delete()
-
-                # A) Confirmación privada al trabajador
-                confirmacion_privada = (
-                    f"🚀 *¡DESPACHO COMPLETADO Y REGISTRADO!* 🚀\n"
-                    f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-                    f"📋 *Folio:* {reporte.numero_reporte}\n"
-                    f"👷 *Encargado:* {nombre_respondedor}\n"
-                    f"🚑 *Unidad:* {unidad_def}\n"
-                    f"⏱️ *Tiempo Estimado:* {tiempo_est}\n\n"
-                    f"📌 *Estatus Actualizado:* 🚑 EN CAMINO\n\n"
-                    f"¡Procede con precaución! Puedes enviar avances a la bitácora escribiendo:\n"
-                    f"_Bitacora {reporte.numero_reporte}: Arribando al punto_"
-                )
-                enviar_mensaje_whatsapp(target_jid, confirmacion_privada)
-
-                # B) Notificación oficial al Grupo de Alertas de Medellín
-                aviso_grupo = (
-                    f"📢 *ALERTA EN CAMINO — UNIDAD Y PERSONAL ASIGNADO* 📢\n"
-                    f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-                    f"📋 *Folio:* {reporte.numero_reporte}\n"
-                    f"⚠️ *Tipo:* {reporte.get_tipo_servicio_display()}\n"
-                    f"📍 *Ubicación:* {reporte.direccion}, Col. {reporte.colonia}\n\n"
-                    f"👷 *Encargado a Cargo:* *{nombre_respondedor}*\n"
-                    f"🚑 *Unidad Despachada:* *{unidad_def}*\n"
-                    f"⏱️ *Tiempo Estimado de Arribo:* *{tiempo_est}*\n\n"
-                    f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
-                    f"🔄 *Estatus:* 🚑 EN CAMINO"
-                )
-                enviar_mensaje_whatsapp(GRUPO_ALERTAS_JID, aviso_grupo)
-
-                logger.info(f"Despacho completado para {reporte.numero_reporte}: {nombre_respondedor} en {unidad_def}")
-                return JsonResponse({"status": "dispatch_completed"})
-
-        # ── 3. PROCESAR RESPUESTA DE "NO DISPONIBLE" ─────────────────────────────
-        es_no_disponible = any(k in texto_clean.lower() for k in [
-            'no disponible', 'no puedo', 'ocupado', 'en otra emergencia', 'fuera de servicio', 'rechazar', '❌'
-        ])
-
+        # ── 3. PROCESAR VOTO "NO DISPONIBLE" FIRST ─────────────────────────────
         if es_no_disponible:
             match_folio_nodisp = re.search(r'(?i)(REP-\d{4})', texto_clean)
             reporte_nodisp = None
@@ -198,7 +190,7 @@ def whatsapp_webhook(request):
             respuesta_agradecimiento = (
                 f"👍 *Estatus Registrado*\n\n"
                 f"Muchas gracias por contestar, *{nombre_respondedor}*.\n"
-                f"Entendido que no estás disponible en este momento. La atención de la alerta queda pendiente para los demás integrantes de la guardia."
+                f"Entendido que no estás disponible en este momento. La atención de la alerta queda a cargo de los demás integrantes de la guardia."
             )
             enviar_mensaje_whatsapp(target_jid, respuesta_agradecimiento)
 
@@ -208,76 +200,11 @@ def whatsapp_webhook(request):
                     comentario=f"ℹ️ [WhatsApp]: {nombre_respondedor} notificó no estar disponible para este llamado."
                 )
 
-            logger.info(f"Respuesta No Disponible registrada para {nombre_respondedor}")
+            logger.info(f"Voto 'No Disponible' registrado para {nombre_respondedor}")
             return JsonResponse({"status": "not_available_acknowledged"})
 
-        # ── 4. PROCESAR ACEPTACIÓN INICIAL ("Aceptar Atender (REP-XXXX)") ────────
-        es_aceptar = any(k in texto_clean.lower() for k in [
-            'aceptar', 'atender', 'acepto', 'si', 'sí', 'voy', 'disponible', '✋'
-        ])
-
-        folio_encontrado = None
-        match_aceptar = re.search(r'(?i)(?:aceptar|atender|acepto).*?(REP-\d{4})|(REP-\d{4}).*?(?:aceptar|atender|acepto)', texto_clean)
-        
-        if match_aceptar:
-            folio_encontrado = (match_aceptar.group(1) or match_aceptar.group(2)).upper()
-        else:
-            match_folio = re.search(r'(?i)(REP-\d{4})', texto_clean)
-            if match_folio:
-                folio_encontrado = match_folio.group(1).upper()
-            elif es_aceptar:
-                reporte_pend = ReporteRiesgo.objects.filter(estatus='PENDIENTE').order_by('-id').first()
-                if reporte_pend:
-                    folio_encontrado = reporte_pend.numero_reporte
-
-        if folio_encontrado:
-            reporte = ReporteRiesgo.objects.filter(numero_reporte=folio_encontrado).first()
-
-            if not reporte:
-                enviar_mensaje_whatsapp(target_jid, f"❌ No se encontró ningún reporte activo con el folio *{folio_encontrado}*.")
-                return JsonResponse({"status": "report_not_found"})
-
-            # VERIFICAR SI EL REPORTE YA FUE ASIGNADO PREVIAMENTE
-            if reporte.estatus != 'PENDIENTE' and reporte.unidad_acudira:
-                ya_asignado = (
-                    f"ℹ️ *Aviso de Disponibilidad*\n\n"
-                    f"El reporte *{reporte.numero_reporte}* ya fue tomado a cargo previamente por *{reporte.unidad_acudira}*.\n\n"
-                    f"¡Muchas gracias por tu rápida respuesta!"
-                )
-                enviar_mensaje_whatsapp(target_jid, ya_asignado)
-                return JsonResponse({"status": "already_assigned"})
-
-            # ¡PRIMERO EN RESPONDER! INICIAR SESIÓN CONVERSACIONAL EN EL CHAT PRIVADO DEL TRABAJADOR
-            SesionAtencionWhatsApp.objects.filter(
-                Q(phone_number=target_jid) | Q(phone_number=chat_jid)
-            ).delete()
-
-            SesionAtencionWhatsApp.objects.create(
-                phone_number=target_jid,
-                reporte=reporte,
-                paso=1
-            )
-            if chat_jid != target_jid:
-                SesionAtencionWhatsApp.objects.create(
-                    phone_number=chat_jid,
-                    reporte=reporte,
-                    paso=1
-                )
-
-            # Enviar pregunta 1 al chat PRIVADO del trabajador
-            pregunta1 = (
-                f"✅ *¡HAS SIDO SELECCIONADO PARA ATENDER EL REPORTE {reporte.numero_reporte}!*\n"
-                f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-                f"Hola *{nombre_respondedor}*, para completar el despacho y notificar al grupo de alertas, responde las siguientes 2 preguntas:\n\n"
-                f"1️⃣ *¿En qué unidad o vehículo acudirás a la emergencia?*\n"
-                f"_(Escribe el nombre o número de unidad, ej: Ambulancia 02, PC-01, Pick-up Rescate, etc.)_"
-            )
-            enviar_mensaje_whatsapp(target_jid, pregunta1)
-            logger.info(f"Trabajador {nombre_respondedor} ({target_jid}) aceptó {folio_encontrado}. Pregunta 1 enviada a su chat privado.")
-            return JsonResponse({"status": "selected_asked_unit"})
-
-        # ── 5. Procesar FINALIZACIÓN DE ALERTA ("ALERTA FINALIZADA CON EXITO") ──
-        if re.search(r'(?i)alerta\s+finalizada|finalizada\s+con\s+exito|finalizada\s+con\s+éxito|finalizar\s+alerta|finalizar\s+reporte', texto_clean):
+        # ── 4. PROCESAR FINALIZACIÓN DE ALERTA FIRST ──────────────────────────
+        if es_finalizar:
             reporte_activo = ReporteRiesgo.objects.exclude(estatus='RESUELTO').order_by('-id').first()
 
             if reporte_activo:
@@ -289,7 +216,8 @@ def whatsapp_webhook(request):
                 reporte_activo.save()
 
                 SesionAtencionWhatsApp.objects.filter(
-                    Q(phone_number=target_jid) | Q(phone_number=chat_jid)
+                    Q(phone_number=target_jid) | Q(phone_number=chat_jid) |
+                    Q(phone_number__icontains=participant_digits[-10:] if len(participant_digits) >= 10 else 'NOMATCH')
                 ).delete()
 
                 HistorialReporte.objects.create(
@@ -332,7 +260,85 @@ def whatsapp_webhook(request):
                 enviar_mensaje_whatsapp(target_jid, "ℹ️ No tienes ningún reporte activo en proceso asignado para finalizar.")
                 return JsonResponse({"status": "no_active_report_to_finalize"})
 
-        # ── 6. Procesar COMANDO DE BITÁCORA EXPLÍCITO ("Bitacora REP-XXXX: comentario") ──
+        # ── 5. PROCESAR RESPUESTAS DE SESIÓN CONVERSACIONAL ACTIVA (PREGUNTA 1 Y 2) ──
+        sesion = SesionAtencionWhatsApp.objects.filter(
+            Q(phone_number=target_jid) | Q(phone_number=chat_jid) |
+            Q(phone_number__icontains=participant_digits[-10:] if len(participant_digits) >= 10 else 'NOMATCH')
+        ).select_related('reporte').first()
+
+        if sesion:
+            reporte = sesion.reporte
+
+            if sesion.paso == 1:
+                # Recibió respuesta a Pregunta 1 (Unidad) -> Guardar y enviar Pregunta 2 (Tiempo)
+                sesion.unidad_acudira = texto_clean
+                sesion.paso = 2
+                sesion.save()
+
+                pregunta2 = (
+                    f"👍 *Unidad registrada:* {texto_clean}\n\n"
+                    f"2️⃣ *¿Cuál es tu Tiempo Estimado de Arribo / Atención al punto?*\n"
+                    f"_(Escribe el tiempo estimado, ej: 10 minutos, 15 min, etc.)_"
+                )
+                enviar_mensaje_whatsapp(target_jid, pregunta2)
+                logger.info(f"Pregunta 1 recibida ({texto_clean}). Pregunta 2 enviada a {nombre_respondedor}")
+                return JsonResponse({"status": "unit_saved_asked_time"})
+
+            elif sesion.paso == 2:
+                # Recibió respuesta a Pregunta 2 (Tiempo) -> COMPLETAR DESPACHO
+                tiempo_est = texto_clean
+                unidad_def = sesion.unidad_acudira or "Unidad de Respuesta"
+
+                reporte.estatus = 'EN_PROCESO'
+                reporte.unidad_acudira = unidad_def
+                reporte.tiempo_atencion = tiempo_est
+                if trabajador and trabajador not in reporte.responsables.all():
+                    reporte.responsables.add(trabajador)
+                reporte.save()
+
+                HistorialReporte.objects.create(
+                    reporte=reporte,
+                    comentario=f"✅ [Despacho WhatsApp]: Tomado a cargo por {nombre_respondedor} en unidad {unidad_def} (Tiempo estimado de arribo: {tiempo_est})."
+                )
+
+                # Eliminar sesión activa
+                SesionAtencionWhatsApp.objects.filter(
+                    Q(phone_number=target_jid) | Q(phone_number=chat_jid) |
+                    Q(phone_number__icontains=participant_digits[-10:] if len(participant_digits) >= 10 else 'NOMATCH')
+                ).delete()
+
+                # A) Confirmación privada al trabajador
+                confirmacion_privada = (
+                    f"🚀 *¡DESPACHO COMPLETADO Y REGISTRADO!* 🚀\n"
+                    f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                    f"📋 *Folio:* {reporte.numero_reporte}\n"
+                    f"👷 *Encargado:* {nombre_respondedor}\n"
+                    f"🚑 *Unidad:* {unidad_def}\n"
+                    f"⏱️ *Tiempo Estimado:* {tiempo_est}\n\n"
+                    f"📌 *Estatus Actualizado:* 🚑 EN CAMINO\n\n"
+                    f"¡Procede con precaución! Puedes enviar avances a la bitácora escribiendo cualquier mensaje por WhatsApp hasta decir *ALERTA FINALIZADA*."
+                )
+                enviar_mensaje_whatsapp(target_jid, confirmacion_privada)
+
+                # B) Notificación oficial al Grupo de Alertas de Medellín
+                aviso_grupo = (
+                    f"📢 *ALERTA EN CAMINO — UNIDAD Y PERSONAL ASIGNADO* 📢\n"
+                    f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
+                    f"📋 *Folio:* {reporte.numero_reporte}\n"
+                    f"⚠️ *Tipo:* {reporte.get_tipo_servicio_display()}\n"
+                    f"📍 *Ubicación:* {reporte.direccion}, Col. {reporte.colonia}\n\n"
+                    f"👷 *Encargado a Cargo:* *{nombre_respondedor}*\n"
+                    f"🚑 *Unidad Despachada:* *{unidad_def}*\n"
+                    f"⏱️ *Tiempo Estimado de Arribo:* *{tiempo_est}*\n\n"
+                    f"━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n"
+                    f"🔄 *Estatus:* 🚑 EN CAMINO"
+                )
+                enviar_mensaje_whatsapp(GRUPO_ALERTAS_JID, aviso_grupo)
+
+                logger.info(f"Despacho completado para {reporte.numero_reporte}: {nombre_respondedor} en {unidad_def}")
+                return JsonResponse({"status": "dispatch_completed"})
+
+        # ── 6. COMANDO DE BITÁCORA EXPLÍCITO ("Bitacora REP-XXXX: comentario") ────
         match_bitacora = re.match(r'(?i)^bitacora\s*([a-zA-Z0-9\-]+)\s*:\s*(.*)', texto_clean)
         if match_bitacora:
             reporte_num = match_bitacora.group(1).upper()
