@@ -138,6 +138,7 @@ STATIC_URL = 'static/'
 AUTH_USER_MODEL = 'portal.PersonalAdministrativo'
 
 import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
