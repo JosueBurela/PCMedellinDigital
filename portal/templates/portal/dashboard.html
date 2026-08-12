@@ -143,10 +143,31 @@
                 modal.classList.add('hidden');
             }
         }
+
+        function toggleAdminSidebar() {
+            let sb = document.getElementById('admin-sidebar');
+            if (sb) {
+                sb.classList.toggle('hidden');
+            }
+        }
     </script>
 
+    <!-- Header Móvil para Consola Administrativa -->
+    <div class="md:hidden bg-medellinVino text-white px-4 py-3 flex justify-between items-center sticky top-0 z-50 shadow-md">
+        <div class="flex items-center space-x-2.5">
+            <img src="{% static 'portal/img/logo_medellin.jpg' %}" alt="Logo" class="w-8 h-8 object-contain rounded-md bg-white p-0.5">
+            <div>
+                <span class="font-black text-xs block leading-tight">PCivil Digital</span>
+                <span class="text-[9px] uppercase font-bold text-medellinOro tracking-widest block">{{ area }}</span>
+            </div>
+        </div>
+        <button type="button" onclick="toggleAdminSidebar()" class="p-2 rounded-xl bg-white/10 hover:bg-white/20 text-white transition focus:outline-none flex items-center gap-1.5 text-xs font-bold" aria-label="Abrir Menú">
+            <i data-lucide="menu" class="w-4 h-4"></i> Menú
+        </button>
+    </div>
+
     <!-- Menú Lateral -->
-    <aside class="w-full md:w-64 bg-medellinVino text-white flex flex-col shadow-xl md:sticky md:top-0 md:h-screen shrink-0">
+    <aside id="admin-sidebar" class="hidden md:flex w-full md:w-64 bg-medellinVino text-white flex-col shadow-xl md:sticky md:top-0 md:h-screen shrink-0">
         <div class="p-6 bg-[#43082B] flex items-center space-x-3 border-b border-white/10">
             <img src="{% static 'portal/img/logo_medellin.jpg' %}" alt="Logo" class="w-10 h-10 object-contain rounded-lg bg-white p-1">
             <div>
