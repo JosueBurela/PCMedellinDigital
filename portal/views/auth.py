@@ -58,8 +58,13 @@ def acceso_unificado(request):
                     messages.info(request, f"🔒 Se ha generado tu código de seguridad en 2 pasos: {codigo_2fa}")
                 return redirect('verificar_2fa')
             
-            # 2. Intentar validar como Personal Administrativo / Operativo
-            user = authenticate(request, username=identificador, password=clave)
+            # 2. Intentar validar como Personal Administrativo / Operativo (por usuario o correo)
+            admin_obj = PersonalAdministrativo.objects.filter(
+                Q(username__iexact=identificador) | Q(email__iexact=identificador)
+            ).first()
+            username_to_auth = admin_obj.username if admin_obj else identificador
+
+            user = authenticate(request, username=username_to_auth, password=clave)
             if user is not None:
                 if not user.is_active:
                     messages.error(request, "Tu cuenta institucional está en revisión o inactiva por el Administrador General.")
