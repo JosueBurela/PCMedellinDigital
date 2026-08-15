@@ -174,3 +174,60 @@ def api_programacion_calendario(request):
         'mes': mes,
         'programaciones': eventos
     })
+
+
+from portal.models import RolGuardiaFirmado
+
+def control_operativo_guardias(request):
+    """
+    Vista aislada / secundaria para el Rol Operativo de Guardias:
+    - Generador de hoja interactiva e imprimible PDF.
+    - Carga de imágenes/PDFs de la hoja firmada.
+    - Historial de roles guardados en el servidor.
+    """
+    roles_firmados = RolGuardiaFirmado.objects.all().order_by('-fecha_periodo', '-creado_en')
+    hoy_str = datetime.date.today().strftime('%Y-%m-%d')
+    return render(request, 'portal/imprimir_rol_guardia.html', {
+        'roles_firmados': roles_firmados,
+        'hoy_str': hoy_str,
+    })
+
+
+def subir_rol_guardia_firmado(request):
+    """
+    Procesa la subida de una hoja de rol de guardia firmada (imágen o PDF).
+    """
+    if request.method == 'POST':
+        fecha = request.POST.get('fecha_periodo')
+        guardia_tipo = request.POST.get('guardia_tipo', 'GENERAL')
+        comandante = request.POST.get('comandante_nombre', '').strip()
+        observaciones = request.POST.get('observaciones_novedades', '').strip()
+        archivo = request.FILES.get('imagen_documento_firmado')
+
+        if fecha and archivo:
+            usuario_staff = request.user if request.user.is_authenticated else None
+            RolGuardiaFirmado.objects.create(
+                fecha_periodo=fecha,
+                guardia_tipo=guardia_tipo,
+                comandante_nombre=comandante,
+                observaciones_novedades=observaciones,
+                imagen_documento_firmado=archivo,
+                subido_por=usuario_staff
+            )
+            messages.success(request, f"¡Hoja de Rol Firmada registrada exitosamente para la fecha {fecha}!")
+        else:
+            messages.error(request, "Por favor selecciona la fecha y adjunta la imagen o PDF firmado.")
+
+    return redirect('control_operativo_guardias')
+
+
+def eliminar_rol_guardia_firmado(request, rol_id):
+    """
+    Elimina un registro de rol de guardia firmado.
+    """
+    rol = get_object_or_404(RolGuardiaFirmado, id=rol_id)
+    fecha_text = rol.fecha_periodo.strftime('%d/%m/%Y')
+    rol.delete()
+    messages.success(request, f"Se eliminó el registro de rol firmado del {fecha_text}.")
+    return redirect('control_operativo_guardias')
+

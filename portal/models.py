@@ -7,6 +7,7 @@
 
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
 
 class PersonalAdministrativo(AbstractUser):
     AREAS_CHOICES = [
@@ -544,5 +545,31 @@ class SesionAtencionWhatsApp(models.Model):
 
     def __str__(self):
         return f"{self.phone_number} -> {self.reporte.numero_reporte} (Paso {self.paso})"
+
+
+class RolGuardiaFirmado(models.Model):
+    GUARDIA_CHOICES = [
+        ('GUARDIA_1', 'Guardia 1'),
+        ('GUARDIA_2', 'Guardia 2'),
+        ('GUARDIA_3', 'Guardia 3'),
+        ('GENERAL', 'Rol Completo (Guardias 1 y 2)'),
+    ]
+
+    fecha_periodo = models.DateField(default=timezone.now)
+    guardia_tipo = models.CharField(max_length=20, choices=GUARDIA_CHOICES, default='GENERAL')
+    comandante_nombre = models.CharField(max_length=150, blank=True, null=True)
+    observaciones_novedades = models.TextField(blank=True, null=True)
+    imagen_documento_firmado = models.FileField(upload_to='roles_guardia/')
+    subido_por = models.ForeignKey(PersonalAdministrativo, on_delete=models.SET_NULL, null=True, blank=True)
+    creado_en = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Rol de Guardia Firmado"
+        verbose_name_plural = "Roles de Guardias Firmados"
+        ordering = ['-fecha_periodo', '-creado_en']
+
+    def __str__(self):
+        return f"Rol Firmado ({self.fecha_periodo.strftime('%d/%m/%Y')}) - {self.get_guardia_tipo_display()}"
+
 
 

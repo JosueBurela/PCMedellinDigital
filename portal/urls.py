@@ -60,6 +60,11 @@ urlpatterns = [
     path('panel/guardia/eliminar/<int:programacion_id>/', views.eliminar_programacion_guardia, name='eliminar_programacion_guardia'),
     path('api/trabajadores/calendario/', views.api_programacion_calendario, name='api_programacion_calendario'),
 
+    # Módulo Aislado / Secundario: Rol Operativo de Guardias y Almacenamiento de Hojas Firmadas
+    path('control-operativo-guardias/', views.control_operativo_guardias, name='control_operativo_guardias'),
+    path('control-operativo-guardias/subir/', views.subir_rol_guardia_firmado, name='subir_rol_guardia_firmado'),
+    path('control-operativo-guardias/eliminar/<int:rol_id>/', views.eliminar_rol_guardia_firmado, name='eliminar_rol_guardia_firmado'),
+
     # Perfil Ciudadano e Historial
     path('perfil/', views.perfil_ciudadano, name='perfil_ciudadano'),
     path('chat/enviar/', views.enviar_mensaje_chat, name='enviar_mensaje_chat'),
