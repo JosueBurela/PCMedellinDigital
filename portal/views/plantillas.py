@@ -178,17 +178,34 @@ def api_programacion_calendario(request):
 
 from portal.models import RolGuardiaFirmado
 
+import json
+
 def control_operativo_guardias(request):
     """
     Vista aislada / secundaria para el Rol Operativo de Guardias:
     - Generador de hoja interactiva e imprimible PDF.
+    - Calendario interactivo con visor de documento firmado y formato original.
     - Carga de imágenes/PDFs de la hoja firmada.
-    - Historial de roles guardados en el servidor.
     """
     roles_firmados = RolGuardiaFirmado.objects.all().order_by('-fecha_periodo', '-creado_en')
-    hoy_str = datetime.date.today().strftime('%Y-%m-%d')
+    hoy = datetime.date.today()
+    hoy_str = hoy.strftime('%Y-%m-%d')
+
+    roles_list = []
+    for r in roles_firmados:
+        roles_list.append({
+            'id': r.id,
+            'fecha': r.fecha_periodo.strftime('%Y-%m-%d'),
+            'guardia_tipo': r.guardia_tipo,
+            'guardia_tipo_display': r.get_guardia_tipo_display(),
+            'comandante': r.comandante_nombre or '',
+            'observaciones': r.observaciones_novedades or '',
+            'url': r.imagen_documento_firmado.url if r.imagen_documento_firmado else '',
+        })
+
     return render(request, 'portal/imprimir_rol_guardia.html', {
         'roles_firmados': roles_firmados,
+        'roles_json': json.dumps(roles_list),
         'hoy_str': hoy_str,
     })
 

@@ -80,13 +80,6 @@
     background: #2b6cb0;
   }
 
-  .btn-success {
-    background: #10b981;
-  }
-  .btn-success:hover {
-    background: #059669;
-  }
-
   .btn-purple {
     background: #8b5cf6;
   }
@@ -125,40 +118,15 @@
     vertical-align: middle;
   }
 
-  .logo-dropzone {
-    width: 115px;
+  .header-logo-container {
+    width: 120px;
     height: 70px;
-    border: 2px dashed #cbd5e1;
-    border-radius: 8px;
-    background-color: #ffffff;
-    text-align: center;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 2px;
-    transition: all 0.2s ease;
+    justify-content: center;
   }
 
-  .logo-dropzone:hover {
-    border-color: #3182ce;
-    background-color: #f0f9ff;
-  }
-
-  .logo-dropzone input[type="file"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-  }
-
-  .dropzone-preview {
+  .header-logo-img {
     max-width: 100%;
     max-height: 100%;
     object-fit: contain;
@@ -478,10 +446,6 @@
       page-break-after: avoid !important;
       break-after: avoid !important;
     }
-    .logo-dropzone {
-      border: none !important;
-      background: transparent !important;
-    }
     .meta-fill {
       border-bottom: 1px solid #334155 !important;
     }
@@ -499,8 +463,8 @@
     <button class="btn btn-purple" onclick="toggleModal('modal-subir')">
       <i data-lucide="upload-cloud" class="w-4 h-4"></i> 📸 Subir Rol Firmado
     </button>
-    <button class="btn btn-sec" onclick="scrollToSection('seccion-historial')">
-      <i data-lucide="folder-check" class="w-4 h-4"></i> 📁 Historial ({{ roles_firmados.count }})
+    <button class="btn btn-sec" onclick="scrollToSection('seccion-calendario')">
+      <i data-lucide="calendar" class="w-4 h-4"></i> 📅 Calendario & Historial
     </button>
     <button class="btn" onclick="window.print()">
       <i data-lucide="printer" class="w-4 h-4"></i> 🖨️ Imprimir / Guardar PDF
@@ -527,9 +491,9 @@
     <table class="header-table">
       <tr>
         <td style="width: 120px;">
-          <div class="logo-dropzone" id="zone-logo1-p1" title="Arrastra un logo o haz clic para cambiarlo">
-            <input type="file" accept="image/*" onchange="handleFileSelect(event, 'logo1')">
-            <img class="dropzone-preview" id="img-logo1-p1" src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín">
+          <!-- LOGO IZQUIERDO FIJO ESTÁTICO (Por la Grandeza de Medellín) -->
+          <div class="header-logo-container">
+            <img src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín" class="header-logo-img">
           </div>
         </td>
         <td class="header-title-cell">
@@ -538,9 +502,9 @@
           <div class="doc-subtext" contenteditable="true">Control Diario de Turnos, Tripulaciones y Parque Vehicular</div>
         </td>
         <td style="width: 120px; text-align: right;">
-          <div class="logo-dropzone" id="zone-logo2-p1" style="margin-left: auto;" title="Arrastra un logo o haz clic para cambiarlo">
-            <input type="file" accept="image/*" onchange="handleFileSelect(event, 'logo2')">
-            <img class="dropzone-preview" id="img-logo2-p1" src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín">
+          <!-- LOGO DERECHO FIJO ESTÁTICO (Protección Civil Medellín) -->
+          <div class="header-logo-container" style="margin-left: auto;">
+            <img src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín" class="header-logo-img">
           </div>
         </td>
       </tr>
@@ -552,7 +516,7 @@
           <span class="guard-tag" contenteditable="true">GUARDIA 1</span>
         </td>
         <td style="width: 42%;">
-          <span class="meta-label">Fecha / Periodo:</span> <span class="meta-fill" contenteditable="true">&nbsp;&nbsp;{{ hoy_str }}&nbsp;&nbsp;</span>
+          <span class="meta-label">Fecha / Periodo:</span> <span class="meta-fill" id="fecha-g1" contenteditable="true">&nbsp;&nbsp;{{ hoy_str }}&nbsp;&nbsp;</span>
         </td>
         <td style="width: 30%; text-align: right;">
           <span class="meta-label">Horario:</span> <span style="font-weight: 600; color: #0f172a;" contenteditable="true">24 Horas de Turno</span>
@@ -706,9 +670,9 @@
     <table class="header-table">
       <tr>
         <td style="width: 120px;">
-          <div class="logo-dropzone" id="zone-logo1-p2" title="Arrastra un logo o haz clic para cambiarlo">
-            <input type="file" accept="image/*" onchange="handleFileSelect(event, 'logo1')">
-            <img class="dropzone-preview" id="img-logo1-p2" src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín">
+          <!-- LOGO IZQUIERDO FIJO ESTÁTICO -->
+          <div class="header-logo-container">
+            <img src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín" class="header-logo-img">
           </div>
         </td>
         <td class="header-title-cell">
@@ -717,9 +681,9 @@
           <div class="doc-subtext" contenteditable="true">Control Diario de Turnos, Tripulaciones y Parque Vehicular</div>
         </td>
         <td style="width: 120px; text-align: right;">
-          <div class="logo-dropzone" id="zone-logo2-p2" style="margin-left: auto;" title="Arrastra un logo o haz clic para cambiarlo">
-            <input type="file" accept="image/*" onchange="handleFileSelect(event, 'logo2')">
-            <img class="dropzone-preview" id="img-logo2-p2" src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín">
+          <!-- LOGO DERECHO FIJO ESTÁTICO -->
+          <div class="header-logo-container" style="margin-left: auto;">
+            <img src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín" class="header-logo-img">
           </div>
         </td>
       </tr>
@@ -731,7 +695,7 @@
           <span class="guard-tag guard-tag-2" contenteditable="true">GUARDIA 2</span>
         </td>
         <td style="width: 42%;">
-          <span class="meta-label">Fecha / Periodo:</span> <span class="meta-fill" contenteditable="true">&nbsp;&nbsp;{{ hoy_str }}&nbsp;&nbsp;</span>
+          <span class="meta-label">Fecha / Periodo:</span> <span class="meta-fill" id="fecha-g2" contenteditable="true">&nbsp;&nbsp;{{ hoy_str }}&nbsp;&nbsp;</span>
         </td>
         <td style="width: 30%; text-align: right;">
           <span class="meta-label">Horario:</span> <span style="font-weight: 600; color: #0f172a;" contenteditable="true">24 Horas de Turno</span>
@@ -878,62 +842,117 @@
   </div>
 
 
-  <!-- ==================== SECCIÓN DE HISTORIAL Y ARCHIVOS FIRMADOS ==================== -->
-  <div id="seccion-historial" class="no-print bg-white rounded-2xl p-6 shadow-sm border border-slate-200 space-y-4">
-    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-      <div class="flex items-center space-x-2">
-        <span class="text-xl">📁</span>
-        <h2 class="text-base font-black text-slate-800 uppercase tracking-tight">Historial de Roles Firmados y Escaneados</h2>
+  <!-- ==================== CALENDARIO Y EXPEDIENTES DE GUARDIAS ==================== -->
+  <div id="seccion-calendario" class="no-print bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+    
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+      <div>
+        <h2 class="text-lg font-black text-slate-800 uppercase tracking-tight flex items-center gap-2">
+          <span>📅</span> Calendario de Control de Guardias y Archivos
+        </h2>
+        <p class="text-xs text-slate-500 font-medium">
+          Selecciona cualquier día para consultar la <strong>Hoja Firmada Escaneada</strong> o imprimir el <strong>Formato Original Re-imprimible</strong>.
+        </p>
       </div>
-      <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-full border border-slate-200">
-        Total Guardados: {{ roles_firmados.count }}
-      </span>
+
+      <!-- Controles de Mes del Calendario -->
+      <div class="flex items-center gap-3 bg-slate-100 p-1.5 rounded-2xl text-xs font-bold">
+        <button onclick="cambiarMes(-1)" class="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-200 text-slate-700 shadow-sm transition">
+          ◀ Mes Anterior
+        </button>
+        <span id="cal-mes-anio" class="px-3 py-1 text-slate-800 font-black text-sm uppercase">Agosto 2026</span>
+        <button onclick="cambiarMes(1)" class="px-3 py-1.5 rounded-xl bg-white hover:bg-slate-200 text-slate-700 shadow-sm transition">
+          Mes Siguiente ▶
+        </button>
+      </div>
     </div>
 
-    {% if roles_firmados %}
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {% for rol in roles_firmados %}
-      <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3 hover:shadow-md transition">
-        <div>
-          <div class="flex justify-between items-center mb-1.5">
-            <span class="text-[10px] font-black uppercase px-2 py-0.5 rounded bg-[#0f2942] text-white">
-              {{ rol.get_guardia_tipo_display }}
-            </span>
-            <span class="text-xs font-bold text-slate-600">
-              📅 {{ rol.fecha_periodo|date:"d/m/Y" }}
-            </span>
-          </div>
-          {% if rol.comandante_nombre %}
-          <p class="text-xs text-slate-700 font-semibold truncate">
-            👮 <strong>Jefe:</strong> {{ rol.comandante_nombre }}
-          </p>
-          {% endif %}
-          {% if rol.observaciones_novedades %}
-          <p class="text-[11px] text-slate-500 line-clamp-2 mt-1 italic">
-            "{{ rol.observaciones_novedades }}"
-          </p>
-          {% endif %}
+    <!-- Rejilla del Calendario -->
+    <div class="overflow-x-auto">
+      <div class="min-w-[600px]">
+        <!-- Días de la Semana -->
+        <div class="grid grid-cols-7 gap-2 text-center text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-2">
+          <div class="py-1">Dom</div>
+          <div class="py-1">Lun</div>
+          <div class="py-1">Mar</div>
+          <div class="py-1">Mié</div>
+          <div class="py-1">Jue</div>
+          <div class="py-1">Vie</div>
+          <div class="py-1">Sáb</div>
         </div>
 
-        <div class="flex items-center justify-between pt-2 border-t border-slate-200/80">
-          <a href="{{ rol.imagen_documento_firmado.url }}" target="_blank" class="text-xs font-bold text-blue-600 hover:text-blue-800 flex items-center gap-1">
-            <i data-lucide="eye" class="w-3.5 h-3.5"></i> Ver Documento
-          </a>
-          <a href="{% url 'eliminar_rol_guardia_firmado' rol.id %}" onclick="return confirm('¿Seguro que deseas eliminar este registro firmado?');" class="text-xs font-bold text-red-500 hover:text-red-700">
-            Eliminar
-          </a>
+        <!-- Celdas del Calendario Dinámicas -->
+        <div id="grid-dias-calendario" class="grid grid-cols-7 gap-2">
+          <!-- Generado dinámicamente con JavaScript -->
         </div>
       </div>
-      {% endfor %}
     </div>
-    {% else %}
-    <div class="text-center py-8 text-slate-400 text-xs font-semibold">
-      <p>No se ha registrado ningún archivo firmado aún.</p>
-      <p class="text-[11px] text-slate-400">Presiona el botón "📸 Subir Rol Firmado" arriba para registrar la foto o escaneo oficial.</p>
-    </div>
-    {% endif %}
+
   </div>
 
+</div>
+
+
+<!-- MODAL DETALLE DE DÍA (Documento Firmado vs Formato Original) -->
+<div id="modal-dia-detalle" class="fixed inset-0 bg-black/65 backdrop-blur-sm z-[1000] hidden items-center justify-center p-4 no-print">
+  <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-5 border border-slate-200 relative">
+    
+    <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+      <div>
+        <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-widest block">Expediente de Guardia</span>
+        <h3 id="modal-fecha-titulo" class="font-black text-slate-800 text-base uppercase tracking-tight">
+          📅 Día: --/--/----
+        </h3>
+      </div>
+      <button onclick="toggleModal('modal-dia-detalle')" class="text-slate-400 hover:text-slate-600 font-bold text-lg">✕</button>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      
+      <!-- Opción 1: Formato Original Re-imprimible -->
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+        <div>
+          <span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-black uppercase px-2.5 py-1 rounded-md mb-2">
+            📄 Formato Original
+          </span>
+          <h4 class="font-black text-slate-800 text-sm">Rol Operativo Re-imprimible</h4>
+          <p class="text-xs text-slate-500 font-medium mt-1 leading-relaxed">
+            Carga la plantilla vacía u editable configurada para esta fecha para re-imprimir o editar.
+          </p>
+        </div>
+
+        <button type="button" onclick="cargarFechaOriginalModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
+          <i data-lucide="printer" class="w-4 h-4"></i> Cargar y Editar para Impresión
+        </button>
+      </div>
+
+      <!-- Opción 2: Documento Firmado Escaneado -->
+      <div class="bg-purple-50 border border-purple-200 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+        <div>
+          <span class="inline-block bg-purple-100 text-purple-800 text-[10px] font-black uppercase px-2.5 py-1 rounded-md mb-2">
+            📸 Documento Oficial Firmado
+          </span>
+          <h4 class="font-black text-slate-800 text-sm">Hoja Escaneada / Fotografiada</h4>
+          
+          <div id="modal-firmado-info" class="mt-2 space-y-1 text-xs">
+            <!-- Rellenado por JS -->
+          </div>
+        </div>
+
+        <div id="modal-firmado-acciones">
+          <!-- Botón de ver o botón de subir por JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex justify-end pt-2 border-t border-slate-100">
+      <button type="button" onclick="toggleModal('modal-dia-detalle')" class="px-5 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+        Cerrar Ventana
+      </button>
+    </div>
+
+  </div>
 </div>
 
 
@@ -952,7 +971,7 @@
       
       <div>
         <label class="block text-xs font-bold text-slate-700 mb-1">Fecha del Turno / Periodo *</label>
-        <input type="date" name="fecha_periodo" value="{{ hoy_str }}" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="date" name="fecha_periodo" id="input-subir-fecha" value="{{ hoy_str }}" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
       </div>
 
       <div>
@@ -967,7 +986,7 @@
 
       <div>
         <label class="block text-xs font-bold text-slate-700 mb-1">Comandante / Jefe de Guardia</label>
-        <input type="text" name="comandante_nombre" placeholder="Ej. Comandante Francisco / Paco" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <input type="text" name="comandante_nombre" placeholder="Ej. Comandante Francisco Paco" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
       </div>
 
       <div>
@@ -997,6 +1016,132 @@
 <script>
   lucide.createIcons();
 
+  // Datos de Roles Firmados pasados desde Django
+  const rolesGuardados = {{ roles_json|safe }};
+  
+  let fechaActualCal = new Date();
+  let fechaSeleccionadaGlobal = '{{ hoy_str }}';
+
+  const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+  function renderCalendario() {
+    const anio = fechaActualCal.getFullYear();
+    const mes = fechaActualCal.getMonth();
+    
+    document.getElementById('cal-mes-anio').innerText = `${nombresMeses[mes]} ${anio}`;
+
+    const primerDia = new Date(anio, mes, 1).getDay();
+    const totalDias = new Date(anio, mes + 1, 0).getDate();
+
+    const grid = document.getElementById('grid-dias-calendario');
+    grid.innerHTML = '';
+
+    // Celdas vacías previas
+    for (let i = 0; i < primerDia; i++) {
+      const emptyCell = document.createElement('div');
+      emptyCell.className = 'h-24 bg-slate-50/50 rounded-2xl border border-slate-100 opacity-40';
+      grid.appendChild(emptyCell);
+    }
+
+    // Días del mes
+    for (let dia = 1; dia <= totalDias; dia++) {
+      const diaStr = String(dia).padStart(2, '0');
+      const mesStr = String(mes + 1).padStart(2, '0');
+      const fechaIso = `${anio}-${mesStr}-${diaStr}`;
+
+      const cell = document.createElement('div');
+      cell.className = 'h-24 bg-white hover:bg-blue-50/50 rounded-2xl border border-slate-200 p-2 cursor-pointer transition flex flex-col justify-between shadow-sm';
+      cell.onclick = () => abrirDetalleDia(fechaIso);
+
+      // Buscar si hay rol firmado guardado para esta fecha
+      const rolesDia = rolesGuardados.filter(r => r.fecha === fechaIso);
+
+      let badgesHtml = '';
+      if (rolesDia.length > 0) {
+        rolesDia.forEach(r => {
+          badgesHtml += `
+            <span class="block text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-600 text-white truncate shadow-xs">
+              📸 ${r.guardia_tipo_display}
+            </span>
+          `;
+        });
+      } else {
+        badgesHtml = `
+          <span class="block text-[8px] font-semibold text-slate-400">
+            📜 Formato Original
+          </span>
+        `;
+      }
+
+      cell.innerHTML = `
+        <div class="flex justify-between items-center">
+          <span class="font-black text-xs text-slate-800">${dia}</span>
+          ${rolesDia.length > 0 ? '<span class="w-2 h-2 rounded-full bg-emerald-500"></span>' : ''}
+        </div>
+        <div class="space-y-1">
+          ${badgesHtml}
+        </div>
+      `;
+
+      grid.appendChild(cell);
+    }
+  }
+
+  function cambiarMes(delta) {
+    fechaActualCal.setMonth(fechaActualCal.getMonth() + delta);
+    renderCalendario();
+  }
+
+  function abrirDetalleDia(fechaIso) {
+    fechaSeleccionadaGlobal = fechaIso;
+    document.getElementById('modal-fecha-titulo').innerText = `📅 Día: ${fechaIso}`;
+    
+    const rolesDia = rolesGuardados.filter(r => r.fecha === fechaIso);
+    const infoContainer = document.getElementById('modal-firmado-info');
+    const accionesContainer = document.getElementById('modal-firmado-acciones');
+
+    if (rolesDia.length > 0) {
+      const rol = rolesDia[0];
+      infoContainer.innerHTML = `
+        <p class="text-purple-900 font-bold">✅ Rol Registrado (${rol.guardia_tipo_display})</p>
+        ${rol.comandante ? `<p class="text-slate-600 font-semibold">👮 Comandante: ${rol.comandante}</p>` : ''}
+        ${rol.observaciones ? `<p class="text-slate-500 italic">"${rol.observaciones}"</p>` : ''}
+      `;
+
+      accionesContainer.innerHTML = `
+        <a href="${rol.url}" target="_blank" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
+          <i data-lucide="eye" class="w-4 h-4"></i> Abrir Documento Firmado
+        </a>
+      `;
+    } else {
+      infoContainer.innerHTML = `
+        <p class="text-slate-500 italic">No se ha subido aún el escaneo firmado para este día.</p>
+      `;
+
+      accionesContainer.innerHTML = `
+        <button type="button" onclick="abrirSubirParaFecha('${fechaIso}')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
+          <i data-lucide="upload-cloud" class="w-4 h-4"></i> 📸 Subir Hoja Firmada de este día
+        </button>
+      `;
+    }
+
+    lucide.createIcons();
+    toggleModal('modal-dia-detalle');
+  }
+
+  function cargarFechaOriginalModal() {
+    document.getElementById('fecha-g1').innerText = `  ${fechaSeleccionadaGlobal}  `;
+    document.getElementById('fecha-g2').innerText = `  ${fechaSeleccionadaGlobal}  `;
+    toggleModal('modal-dia-detalle');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function abrirSubirParaFecha(fechaIso) {
+    toggleModal('modal-dia-detalle');
+    document.getElementById('input-subir-fecha').value = fechaIso;
+    toggleModal('modal-subir');
+  }
+
   function toggleModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {
@@ -1017,7 +1162,7 @@
     }
   }
 
-  // Funciones para agregar/eliminar filas de forma dinámicas
+  // Funciones para agregar/eliminar filas de forma dinámica
   function agregarFila(tableId, tipo) {
     const table = document.getElementById(tableId);
     if (!table) return;
@@ -1068,29 +1213,12 @@
 
   function eliminarFila(btn) {
     const tr = btn.closest('tr');
-    if (tr) {
-      tr.remove();
-    }
+    if (tr) tr.remove();
   }
 
-  // Manejo de drag & drop para logos personalizados
-  function handleFileSelect(event, logoKey) {
-    if (event.target.files && event.target.files[0]) {
-      applyImage(event.target.files[0], logoKey);
-    }
-  }
-
-  function applyImage(file, logoKey) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-      const dataUrl = e.target.result;
-      ['p1', 'p2'].forEach(page => {
-        const img = document.getElementById(`img-${logoKey}-${page}`);
-        if (img) img.src = dataUrl;
-      });
-    };
-    reader.readAsDataURL(file);
-  }
+  window.addEventListener('DOMContentLoaded', () => {
+    renderCalendario();
+  });
 </script>
 
 </body>
