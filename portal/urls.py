@@ -62,6 +62,8 @@ urlpatterns = [
 
     # Módulo Aislado / Secundario: Rol Operativo de Guardias y Almacenamiento de Hojas Firmadas
     path('control-operativo-guardias/', views.control_operativo_guardias, name='control_operativo_guardias'),
+    path('control-operativo-guardias/guardar-configuracion/', views.guardar_configuracion_guardia, name='guardar_configuracion_guardia'),
+    path('control-operativo-guardias/imprimir-pdf/', views.imprimir_rol_guardia_pdf, name='imprimir_rol_guardia_pdf'),
     path('control-operativo-guardias/subir/', views.subir_rol_guardia_firmado, name='subir_rol_guardia_firmado'),
     path('control-operativo-guardias/eliminar/<int:rol_id>/', views.eliminar_rol_guardia_firmado, name='eliminar_rol_guardia_firmado'),
 

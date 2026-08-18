@@ -176,18 +176,19 @@ def api_programacion_calendario(request):
     })
 
 
-from portal.models import RolGuardiaFirmado
-
+from portal.models import RolGuardiaFirmado, RolGuardiaConfigurado
 import json
 
 def control_operativo_guardias(request):
     """
     Vista aislada / secundaria para el Rol Operativo de Guardias:
-    - Generador de hoja interactiva e imprimible PDF.
+    - Formulario de configuración de guardia por fecha.
     - Calendario interactivo con visor de documento firmado y formato original.
     - Carga de imágenes/PDFs de la hoja firmada.
     """
     roles_firmados = RolGuardiaFirmado.objects.all().order_by('-fecha_periodo', '-creado_en')
+    roles_configurados = RolGuardiaConfigurado.objects.all().order_by('-fecha')
+    
     hoy = datetime.date.today()
     hoy_str = hoy.strftime('%Y-%m-%d')
 
@@ -203,10 +204,77 @@ def control_operativo_guardias(request):
             'url': r.imagen_documento_firmado.url if r.imagen_documento_firmado else '',
         })
 
+    configurados_map = {}
+    for c in roles_configurados:
+        configurados_map[c.fecha.strftime('%Y-%m-%d')] = {
+            'id': c.id,
+            'guardia_tipo': c.guardia_tipo,
+            'comandante_g1': c.comandante_g1,
+            'comandante_g2': c.comandante_g2,
+            'datos': json.loads(c.datos_json) if c.datos_json else {}
+        }
+
     return render(request, 'portal/imprimir_rol_guardia.html', {
         'roles_firmados': roles_firmados,
         'roles_json': json.dumps(roles_list),
+        'configurados_json': json.dumps(configurados_map),
         'hoy_str': hoy_str,
+    })
+
+
+def guardar_configuracion_guardia(request):
+    """
+    Guarda o actualiza la configuración de guardia para una fecha específica.
+    """
+    if request.method == 'POST':
+        fecha_str = request.POST.get('fecha')
+        guardia_tipo = request.POST.get('guardia_tipo', 'GENERAL')
+        comandante_g1 = request.POST.get('comandante_g1', '').strip()
+        comandante_g2 = request.POST.get('comandante_g2', '').strip()
+        datos_json = request.POST.get('datos_json', '{}')
+
+        if fecha_str:
+            try:
+                fecha_obj = datetime.datetime.strptime(fecha_str, '%Y-%m-%d').date()
+                usuario_staff = request.user if request.user.is_authenticated else None
+                
+                rol_cfg, created = RolGuardiaConfigurado.objects.update_or_create(
+                    fecha=fecha_obj,
+                    defaults={
+                        'guardia_tipo': guardia_tipo,
+                        'comandante_g1': comandante_g1,
+                        'comandante_g2': comandante_g2,
+                        'datos_json': datos_json,
+                        'creado_por': usuario_staff
+                    }
+                )
+                action_text = "guardado" if created else "actualizado"
+                messages.success(request, f"¡Rol de Guardia para el {fecha_obj.strftime('%d/%m/%Y')} {action_text} exitosamente!")
+                return JsonResponse({'status': 'ok', 'fecha': fecha_str})
+            except Exception as e:
+                return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    
+    return JsonResponse({'status': 'error', 'message': 'Método no permitido'}, status=405)
+
+
+def imprimir_rol_guardia_pdf(request):
+    """
+    Genera la plantilla oficial imprimible en PDF con los datos cargados para la fecha solicitada.
+    """
+    fecha_str = request.GET.get('fecha', datetime.date.today().strftime('%Y-%m-%d'))
+    try:
+        fecha_obj = datetime.datetime.strptime(fecha_str, '%Y-%m-%d').date()
+    except ValueError:
+        fecha_obj = datetime.date.today()
+
+    rol_cfg = RolGuardiaConfigurado.objects.filter(fecha=fecha_obj).first()
+    datos = json.loads(rol_cfg.datos_json) if (rol_cfg and rol_cfg.datos_json) else {}
+
+    return render(request, 'portal/imprimir_rol_guardia_pdf.html', {
+        'fecha_str': fecha_str,
+        'fecha_obj': fecha_obj,
+        'rol_cfg': rol_cfg,
+        'datos': datos,
     })
 
 
@@ -247,4 +315,5 @@ def eliminar_rol_guardia_firmado(request, rol_id):
     rol.delete()
     messages.success(request, f"Se eliminó el registro de rol firmado del {fecha_text}.")
     return redirect('control_operativo_guardias')
+
 

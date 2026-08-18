@@ -572,6 +572,32 @@ class RolGuardiaFirmado(models.Model):
         return f"Rol Firmado ({self.fecha_periodo.strftime('%d/%m/%Y')}) - {self.get_guardia_tipo_display()}"
 
 
+class RolGuardiaConfigurado(models.Model):
+    GUARDIA_CHOICES = [
+        ('GUARDIA_1', 'Guardia 1'),
+        ('GUARDIA_2', 'Guardia 2'),
+        ('GENERAL', 'Rol Completo (Guardias 1 y 2)'),
+    ]
+
+    fecha = models.DateField(unique=True)
+    guardia_tipo = models.CharField(max_length=20, choices=GUARDIA_CHOICES, default='GENERAL')
+    comandante_g1 = models.CharField(max_length=150, blank=True, null=True, default='Comandante / Jefe de Guardia')
+    comandante_g2 = models.CharField(max_length=150, blank=True, null=True, default='Comandante / Jefe de Guardia')
+    datos_json = models.TextField(default='{}')
+    creado_por = models.ForeignKey(PersonalAdministrativo, on_delete=models.SET_NULL, null=True, blank=True)
+    creado_en = models.DateTimeField(auto_now_add=True)
+    actualizado_en = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Rol de Guardia Configurado"
+        verbose_name_plural = "Roles de Guardias Configurados"
+        ordering = ['-fecha']
+
+    def __str__(self):
+        return f"Rol Configurado ({self.fecha.strftime('%d/%m/%Y')})"
+
+
+
 # ==============================================================================
 #  🛠️ SUITE DE HERRAMIENTAS AUXILIARES Y APPS EXTERNAS
 # ==============================================================================

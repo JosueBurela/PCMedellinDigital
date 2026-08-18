@@ -4,488 +4,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rol Operativo de Guardias y Asignación de Unidades | PCivil Medellín</title>
+<title>Control Operativo de Guardias | PCivil Medellín</title>
 <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
-  @page {
-    size: letter portrait;
-    margin: 8mm 12mm;
-  }
-
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
-
   body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    color: #1a202c;
     background-color: #f1f5f9;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  /* Barra de herramientas flotante (no se imprime) */
-  .toolbar {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background: #0f2942;
-    color: #ffffff;
-    padding: 12px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
-
-  .toolbar-title {
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .toolbar-btns {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    background: #e53e3e;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: all 0.2s;
-  }
-
-  .btn:hover {
-    background: #c53030;
-    transform: translateY(-1px);
-  }
-
-  .btn-sec {
-    background: #3182ce;
-  }
-  .btn-sec:hover {
-    background: #2b6cb0;
-  }
-
-  .btn-purple {
-    background: #8b5cf6;
-  }
-  .btn-purple:hover {
-    background: #7c3aed;
-  }
-
-  .main-wrapper {
-    max-width: 860px;
-    margin: 20px auto 40px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
-
-  .sheet-container {
-    background-color: #ffffff;
-    border: 1px solid #cbd5e1;
-    border-radius: 12px;
-    padding: 20px 24px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-    position: relative;
-    box-sizing: border-box;
-  }
-
-  /* Encabezado */
-  .header-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-bottom: 2.5px solid #0f2942;
-    padding-bottom: 8px;
-    margin-bottom: 10px;
-  }
-
-  .header-table td {
-    vertical-align: middle;
-  }
-
-  .header-logo-container {
-    width: 130px;
-    height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .header-logo-img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-  }
-
-  .header-title-cell {
-    text-align: center;
-    padding: 0 12px;
-  }
-
-  .institution-name {
-    font-size: 12.5pt;
-    font-weight: 800;
-    color: #0f2942;
-    text-transform: uppercase;
-    letter-spacing: 0.6px;
-    margin-bottom: 2px;
-  }
-
-  .doc-main-title {
-    font-size: 10.5pt;
-    font-weight: 800;
-    color: #c53030;
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 2px;
-  }
-
-  .doc-subtext {
-    font-size: 8pt;
-    color: #475569;
-    font-weight: 500;
-  }
-
-  /* Barra de Metadatos */
-  .meta-bar-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-    background-color: #f8fafc;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-  }
-
-  .meta-bar-table td {
-    padding: 5px 12px;
-    font-size: 8.5pt;
-    vertical-align: middle;
-  }
-
-  .guard-tag {
-    display: inline-block;
-    background-color: #0f2942;
-    color: #ffffff;
-    font-size: 10pt;
-    font-weight: 800;
-    padding: 3px 12px;
-    border-radius: 4px;
-    letter-spacing: 0.8px;
-  }
-
-  .guard-tag-2 {
-    background-color: #1e3a8a;
-  }
-
-  .meta-label {
-    font-weight: 700;
-    color: #334155;
-  }
-
-  .meta-fill {
-    color: #475569;
-    outline: none;
-    border-bottom: 1px dashed #cbd5e1;
-    padding: 1px 6px;
-  }
-
-  /* Tabla de Asignaciones */
-  .assignment-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 10px;
-  }
-
-  .assignment-table th {
-    background-color: #0f2942;
-    color: #ffffff;
-    font-size: 8pt;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 7px 10px;
-    border: 1px solid #0f2942;
-  }
-
-  .assignment-table td {
-    padding: 8px 10px;
-    border: 1px solid #e2e8f0;
-    vertical-align: middle;
-  }
-
-  .assignment-table tr:nth-child(even) td {
-    background-color: #f8fafc;
-  }
-
-  .unit-badge {
-    display: inline-block;
-    background-color: #1e293b;
-    color: #ffffff;
-    font-weight: 800;
-    padding: 4px 8px;
-    border-radius: 5px;
-    font-size: 9pt;
-    letter-spacing: 0.3px;
-  }
-
-  .unit-badge-fire {
-    background-color: #991b1b;
-  }
-
-  .service-tag {
-    display: inline-block;
-    font-size: 7.5pt;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.4px;
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-
-  .service-tag-prehosp {
-    background-color: #ecfdf5;
-    color: #065f46;
-    border: 1px solid #a7f3d0;
-  }
-
-  .service-tag-fire {
-    background-color: #fef2f2;
-    color: #991b1b;
-    border: 1px solid #fecaca;
-  }
-
-  .service-sub {
-    font-size: 7pt;
-    color: #64748b;
-    margin-top: 1px;
-  }
-
-  .crew-names {
-    font-size: 9.5pt;
-    font-weight: 700;
-    color: #0f172a;
-    outline: none;
-  }
-
-  .crew-desc {
-    font-size: 7pt;
-    color: #64748b;
-  }
-
-  .sign-blank {
-    border-bottom: 1px solid #94a3b8;
-    height: 12px;
-    margin: 4px 10px 1px 10px;
-  }
-
-  /* Cajas de notas / Apoyo */
-  .card-box {
-    border: 1px solid #e2e8f0;
-    border-radius: 6px;
-    background-color: #ffffff;
-    padding: 8px 12px;
-    margin-bottom: 8px;
-  }
-
-  .card-box-accent {
-    border-left: 4px solid #d97706;
-    background-color: #fffbeb;
-  }
-
-  .card-box-purple {
-    border-left: 4px solid #6366f1;
-    background-color: #f5f3ff;
-  }
-
-  .card-title {
-    font-size: 8pt;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
-  }
-
-  .card-title-accent {
-    color: #92400e;
-  }
-
-  .card-title-purple {
-    color: #4338ca;
-  }
-
-  .support-grid-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .support-grid-table td {
-    padding: 3px 6px;
-    font-size: 8pt;
-    vertical-align: top;
-  }
-
-  .time-pill {
-    display: inline-block;
-    background-color: #fef3c7;
-    color: #78350f;
-    border: 1px solid #fde68a;
-    font-weight: 700;
-    padding: 1.5px 6px;
-    border-radius: 4px;
-    font-size: 7.5pt;
-  }
-
-  .volunteer-pill {
-    display: inline-block;
-    background-color: #e0e7ff;
-    color: #3730a3;
-    border: 1px solid #c7d2fe;
-    font-weight: 700;
-    padding: 1.5px 6px;
-    border-radius: 4px;
-    font-size: 7.5pt;
-  }
-
-  /* Firmas */
-  .footer-signatures {
-    margin-top: 6px;
-  }
-
-  .sig-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .sig-table td {
-    width: 48%;
-    text-align: center;
-    vertical-align: top;
-  }
-
-  .sig-line {
-    border-top: 1.2px solid #334155;
-    margin: 18px 25px 3px 25px;
-  }
-
-  .sig-name {
-    font-size: 8pt;
-    font-weight: 700;
-    color: #1e293b;
-  }
-
-  .sig-subtext {
-    font-size: 7pt;
-    color: #64748b;
-  }
-
-  /* Botón para eliminar filas (solo pantalla) */
-  .btn-remove-row {
-    background: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-    font-size: 11px;
-    font-weight: bold;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 6px;
-    transition: all 0.2s;
-  }
-
-  .btn-remove-row:hover {
-    background: #dc2626;
-    transform: scale(1.1);
-  }
-
-  /* Estilos de Impresión */
-  @media print {
-    body {
-      background-color: #ffffff;
-    }
-    .toolbar, .btn-remove-row, .add-row-actions, .no-print {
-      display: none !important;
-    }
-    .main-wrapper {
-      margin: 0 !important;
-      gap: 0 !important;
-      max-width: 100% !important;
-      display: block !important;
-    }
-    .sheet-container {
-      border: none !important;
-      box-shadow: none !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      page-break-inside: avoid !important;
-      break-inside: avoid !important;
-    }
-    .sheet-page-1 {
-      page-break-after: always !important;
-      break-after: always !important;
-    }
-    .sheet-page-2 {
-      page-break-after: avoid !important;
-      break-after: avoid !important;
-    }
-    .meta-fill {
-      border-bottom: 1px solid #334155 !important;
-    }
-    .header-logo-container {
-      width: 130px !important;
-      height: 90px !important;
-    }
-    .header-logo-img {
-      max-height: 90px !important;
-      width: auto !important;
-      object-fit: contain !important;
-    }
+    font-family: 'Segoe UI', Arial, sans-serif;
   }
 </style>
 </head>
-<body>
+<body class="min-h-screen text-slate-800 antialiased">
 
-<!-- Barra de Herramientas Principal (No se imprime) -->
-<div class="toolbar">
-  <div class="toolbar-title flex items-center gap-2">
-    <span>🛡️ CONTROL OPERATIVO DE GUARDIAS &bull; MEDELLÍN DE BRAVO</span>
-  </div>
-  <div class="toolbar-btns">
-    <button class="btn btn-purple" onclick="toggleModal('modal-subir')">
-      <i data-lucide="upload-cloud" class="w-4 h-4"></i> 📸 Subir Rol Firmado
-    </button>
-    <button class="btn btn-sec" onclick="scrollToSection('seccion-calendario')">
-      <i data-lucide="calendar" class="w-4 h-4"></i> 📅 Calendario & Historial
-    </button>
-    <button class="btn" onclick="window.print()">
-      <i data-lucide="printer" class="w-4 h-4"></i> 🖨️ Imprimir / Guardar PDF
-    </button>
-  </div>
-</div>
+<!-- BARRA SUPERIOR DE NAVEGACIÓN (Ruta Aislada) -->
+<header class="bg-[#0f2942] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-3">
+    
+    <div class="flex items-center space-x-3">
+      <img src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín" class="h-10 w-auto object-contain bg-white/10 rounded-lg p-1">
+      <div>
+        <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Protección Civil Medellín</span>
+        <h1 class="text-sm font-black tracking-tight uppercase">Control Operativo de Guardias y Asignación de Unidades</h1>
+      </div>
+    </div>
 
-<!-- Alertas Django -->
+    <div class="flex items-center gap-2 flex-wrap">
+      <button type="button" onclick="scrollToSection('seccion-calendario')" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
+        <i data-lucide="calendar" class="w-4 h-4"></i> 📅 Calendario & Historial
+      </button>
+      <button type="button" onclick="toggleModal('modal-subir')" class="bg-purple-600 hover:bg-purple-700 text-white font-extrabold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
+        <i data-lucide="upload-cloud" class="w-4 h-4"></i> 📸 Subir Hoja Firmada
+      </button>
+      <img src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín" class="h-10 w-auto object-contain bg-white/10 rounded-lg p-1">
+    </div>
+
+  </div>
+</header>
+
+<!-- ALERTAS DJANGO -->
 {% if messages %}
-<div class="max-w-4xl mx-auto mt-4 px-4 no-print space-y-2">
+<div class="max-w-7xl mx-auto mt-4 px-4 space-y-2">
   {% for message in messages %}
   <div class="p-4 rounded-2xl text-xs font-bold flex items-center justify-between {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200{% endif %} shadow-sm">
     <span>{{ message }}</span>
@@ -495,374 +54,200 @@
 </div>
 {% endif %}
 
-<div class="main-wrapper">
+<!-- CONTENIDO PRINCIPAL -->
+<main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
 
-  <!-- ==================== HOJA 1: GUARDIA 1 ==================== -->
-  <div class="sheet-container sheet-page-1">
-    <table class="header-table">
-      <tr>
-        <td style="width: 120px;">
-          <!-- LOGO IZQUIERDO FIJO ESTÁTICO (Por la Grandeza de Medellín) -->
-          <div class="header-logo-container">
-            <img src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín" class="header-logo-img">
+  <!-- FORMULARIO DE CONFIGURACIÓN DEL ROL DE GUARDIA -->
+  <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+    
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+      <div>
+        <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest block">Formulario de Edición</span>
+        <h2 class="text-lg font-black text-slate-800 uppercase tracking-tight flex items-center gap-2">
+          <span>📝</span> Configuración del Rol Operativo del Día
+        </h2>
+        <p class="text-xs text-slate-500 font-medium mt-1">
+          Llena los campos y asignaciones. Al guardar, los datos quedan vinculados a la fecha elegida y podrás generar el PDF firmado o imprimirlo en cualquier momento.
+        </p>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button type="button" onclick="guardarConfiguracionForm()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-5 py-2.5 rounded-2xl text-xs flex items-center gap-1.5 shadow transition">
+          <i data-lucide="save" class="w-4 h-4"></i> 💾 Guardar Día
+        </button>
+        <button type="button" onclick="imprimirPdfForm()" class="bg-red-600 hover:bg-red-700 text-white font-extrabold px-5 py-2.5 rounded-2xl text-xs flex items-center gap-1.5 shadow transition">
+          <i data-lucide="printer" class="w-4 h-4"></i> 🖨️ Abrir PDF
+        </button>
+      </div>
+    </div>
+
+    <form id="form-config-guardia" onsubmit="event.preventDefault(); guardarConfiguracionForm();" class="space-y-8">
+      
+      <!-- SECCIÓN 1: METADATOS Y FECHA -->
+      <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Fecha del Turno / Periodo *</label>
+          <input type="date" id="cfg-fecha" value="{{ hoy_str }}" onchange="cargarDatosFechaForm(this.value)" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Guardia a Configurar *</label>
+          <select id="cfg-guardia-tipo" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="GENERAL">Ambas Guardias (Guardia 1 y 2)</option>
+            <option value="GUARDIA_1">Guardia 1</option>
+            <option value="GUARDIA_2">Guardia 2</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Jefe de Guardia (Guardia 1)</label>
+          <input type="text" id="cfg-comandante-g1" value="Comandante / Jefe de Guardia" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Jefe de Guardia (Guardia 2)</label>
+          <input type="text" id="cfg-comandante-g2" value="Comandante / Jefe de Guardia" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+
+      <!-- SECCIÓN 2: GUARDIA 1 -->
+      <div class="space-y-4 border border-slate-200 rounded-2xl p-5 bg-white">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-lg bg-[#0f2942] text-white text-xs font-black">GUARDIA 1</span>
+            <h3 class="font-black text-slate-800 text-sm">Asignación de Unidades y Personal</h3>
           </div>
-        </td>
-        <td class="header-title-cell">
-          <div class="institution-name" contenteditable="true">Dirección de Protección Civil y Bomberos</div>
-          <div class="doc-main-title" contenteditable="true">Rol Operativo de Guardias y Asignación de Unidades</div>
-          <div class="doc-subtext" contenteditable="true">Control Diario de Turnos, Tripulaciones y Parque Vehicular</div>
-        </td>
-        <td style="width: 120px; text-align: right;">
-          <!-- LOGO DERECHO FIJO ESTÁTICO (Protección Civil Medellín) -->
-          <div class="header-logo-container" style="margin-left: auto;">
-            <img src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín" class="header-logo-img">
+
+          <div class="flex gap-2">
+            <button type="button" onclick="agregarFilaConfig('tabla-config-g1', 'AMBULANCIA')" class="text-xs font-bold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 px-3 py-1.5 rounded-lg border border-emerald-200 transition">
+              ➕ Agregar Ambulancia
+            </button>
+            <button type="button" onclick="agregarFilaConfig('tabla-config-g1', 'BOMBEROS')" class="text-xs font-bold bg-red-50 text-red-700 hover:bg-red-100 px-3 py-1.5 rounded-lg border border-red-200 transition">
+              ➕ Agregar Bomberos
+            </button>
           </div>
-        </td>
-      </tr>
-    </table>
+        </div>
 
-    <table class="meta-bar-table">
-      <tr>
-        <td style="width: 28%;">
-          <span class="guard-tag" contenteditable="true">GUARDIA 1</span>
-        </td>
-        <td style="width: 42%;">
-          <span class="meta-label">Fecha / Periodo:</span> <span class="meta-fill" id="fecha-g1" contenteditable="true">&nbsp;&nbsp;{{ hoy_str }}&nbsp;&nbsp;</span>
-        </td>
-        <td style="width: 30%; text-align: right;">
-          <span class="meta-label">Horario:</span> <span style="font-weight: 600; color: #0f172a;" contenteditable="true">24 Horas de Turno</span>
-        </td>
-      </tr>
-    </table>
+        <!-- Tabla Unidades Guardia 1 -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left border-collapse" id="tabla-config-g1">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 font-extrabold uppercase text-[10px]">
+                <th class="p-2 w-1/6">Unidad</th>
+                <th class="p-2 w-1/4">Área / Servicio</th>
+                <th class="p-2 w-1/4">Sub-Servicio</th>
+                <th class="p-2 w-1/4">Tripulación</th>
+                <th class="p-2 w-1/4">Cargo</th>
+                <th class="p-2 text-center w-8"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <!-- Carga inicial JS -->
+            </tbody>
+          </table>
+        </div>
 
-    <!-- Tabla Asignaciones Guardia 1 -->
-    <table class="assignment-table" id="tabla-guardia-1">
-      <thead>
-        <tr>
-          <th style="width: 16%; text-align: center;">Unidad</th>
-          <th style="width: 28%;">Área / Servicio</th>
-          <th style="width: 38%;">Personal Asignado / Tripulación</th>
-          <th style="width: 18%; text-align: center;">Firma / Estatus</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: center;">
-            <span class="unit-badge" contenteditable="true">Móvil 097</span>
-            <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-          </td>
-          <td>
-            <span class="service-tag service-tag-prehosp" contenteditable="true">Atención Prehospitalaria</span>
-            <div class="service-sub" contenteditable="true">Ambulancia de Urgencias Médicas</div>
-          </td>
-          <td>
-            <div class="crew-names" contenteditable="true">Paco &mdash; Arely</div>
-            <div class="crew-desc" contenteditable="true">Operador y Paramédico de Guardia</div>
-          </td>
-          <td>
-            <div class="sign-blank"></div>
-            <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">
-            <span class="unit-badge" contenteditable="true">Móvil 096</span>
-            <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-          </td>
-          <td>
-            <span class="service-tag service-tag-prehosp" contenteditable="true">Atención Prehospitalaria</span>
-            <div class="service-sub" contenteditable="true">Ambulancia de Urgencias Médicas</div>
-          </td>
-          <td>
-            <div class="crew-names" contenteditable="true">Giovany &mdash; Ruth</div>
-            <div class="crew-desc" contenteditable="true">Operador y Paramédico de Guardia</div>
-          </td>
-          <td>
-            <div class="sign-blank"></div>
-            <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">
-            <span class="unit-badge" contenteditable="true">Móvil 208</span>
-            <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-          </td>
-          <td>
-            <span class="service-tag service-tag-prehosp" contenteditable="true">Atención Prehospitalaria</span>
-            <div class="service-sub" contenteditable="true">Unidad de Primer Contacto / Apoyo</div>
-          </td>
-          <td>
-            <div class="crew-names" contenteditable="true">Miguel &mdash; Luz</div>
-            <div class="crew-desc" contenteditable="true">Operador y Paramédico de Guardia</div>
-          </td>
-          <td>
-            <div class="sign-blank"></div>
-            <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">
-            <span class="unit-badge unit-badge-fire" contenteditable="true">Unidad 073</span>
-            <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-          </td>
-          <td>
-            <span class="service-tag service-tag-fire" contenteditable="true">Cuerpo de Bomberos</span>
-            <div class="service-sub" contenteditable="true">Unidad de Ataque Rápido / Autobomba</div>
-          </td>
-          <td>
-            <div class="crew-names" contenteditable="true">Ángel R. &mdash; Luis</div>
-            <div class="crew-desc" contenteditable="true">Maquinista y Bombero de Línea</div>
-          </td>
-          <td>
-            <div class="sign-blank"></div>
-            <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-
-    <!-- Acciones Dinámicas para Fila (No se imprime) -->
-    <div class="add-row-actions mb-3 no-print flex gap-2">
-      <button type="button" onclick="agregarFila('tabla-guardia-1', 'AMBULANCIA')" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 flex items-center gap-1 transition">
-        ➕ Agregar Unidad (Ambulancia / Apoyo)
-      </button>
-      <button type="button" onclick="agregarFila('tabla-guardia-1', 'BOMBEROS')" class="text-xs font-bold bg-red-50 hover:bg-red-100 text-red-700 px-3 py-1.5 rounded-lg border border-red-200 flex items-center gap-1 transition">
-        ➕ Agregar Unidad (Bomberos)
-      </button>
-    </div>
-
-    <!-- Personal de Apoyo / Radio Operación -->
-    <div class="card-box card-box-accent">
-      <div class="card-title card-title-accent" contenteditable="true">Personal de Apoyo / Radio Operación y Enlace en Cabina &mdash; Guardia 1</div>
-      <table class="support-grid-table">
-        <tr>
-          <td style="width: 50%;">
-            <strong style="color: #1e293b; font-size: 8.5pt;" contenteditable="true">&bull; Cadena:</strong>
-            <span class="time-pill" contenteditable="true">09:00 &mdash; 18:00 hrs (9 AM - 6 PM)</span>
-            <div style="font-size: 7pt; color: #64748b; margin-top: 1px;" contenteditable="true">Turno diurno / Guardia de apoyo y radiocomunicación</div>
-          </td>
-          <td style="width: 50%;">
-            <strong style="color: #1e293b; font-size: 8.5pt;" contenteditable="true">&bull; Yeyo:</strong>
-            <span class="time-pill" contenteditable="true">15:00 &mdash; 24:00 hrs (3 PM - 12 AM)</span>
-            <div style="font-size: 7pt; color: #64748b; margin-top: 1px;" contenteditable="true">Turno vespertino-nocturno / Guardia de cabina</div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" style="color: #64748b; padding-top: 5px; border-top: 1px dashed #cbd5e1; margin-top: 3px; font-size: 7.5pt;">
-            <strong>Consigna:</strong> <span contenteditable="true">Registro continuo en bitácora física/digital y reporte de novedades por frecuencia oficial con C4.</span>
-          </td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- Firmas -->
-    <div class="footer-signatures">
-      <table class="sig-table">
-        <tr>
-          <td>
-            <div class="sig-line"></div>
-            <div class="sig-name" contenteditable="true">Comandante / Jefe de Guardia en Turno</div>
-            <div class="sig-subtext" contenteditable="true">Nombre, Firma y Matrícula Operativa</div>
-          </td>
-          <td style="width: 4%;"></td>
-          <td>
-            <div class="sig-line"></div>
-            <div class="sig-name" contenteditable="true">Dirección de Protección Civil y Bomberos</div>
-            <div class="sig-subtext" contenteditable="true">Visto Bueno, Sello y Autorización</div>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-
-
-  <!-- ==================== HOJA 2: GUARDIA 2 ==================== -->
-  <div class="sheet-container sheet-page-2">
-    <table class="header-table">
-      <tr>
-        <td style="width: 120px;">
-          <!-- LOGO IZQUIERDO FIJO ESTÁTICO -->
-          <div class="header-logo-container">
-            <img src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín" class="header-logo-img">
+        <!-- Cabina y Radio Operación Guardia 1 -->
+        <div class="bg-amber-50/60 p-4 rounded-xl border border-amber-200 space-y-3">
+          <h4 class="font-extrabold text-amber-900 text-xs uppercase tracking-wider">📻 Personal de Apoyo / Radio Operación en Cabina (Guardia 1)</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Cadena (Turno Diurno)</label>
+              <input type="text" id="g1-cabina-cadena" value="09:00 — 18:00 hrs (9 AM - 6 PM)" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs font-bold">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Yeyo (Turno Vespertino)</label>
+              <input type="text" id="g1-cabina-yeyo" value="15:00 — 24:00 hrs (3 PM - 12 AM)" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs font-bold">
+            </div>
           </div>
-        </td>
-        <td class="header-title-cell">
-          <div class="institution-name" contenteditable="true">Dirección de Protección Civil y Bomberos</div>
-          <div class="doc-main-title" contenteditable="true">Rol Operativo de Guardias y Asignación de Unidades</div>
-          <div class="doc-subtext" contenteditable="true">Control Diario de Turnos, Tripulaciones y Parque Vehicular</div>
-        </td>
-        <td style="width: 120px; text-align: right;">
-          <!-- LOGO DERECHO FIJO ESTÁTICO -->
-          <div class="header-logo-container" style="margin-left: auto;">
-            <img src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín" class="header-logo-img">
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Consigna Operativa Cabina</label>
+            <input type="text" id="g1-cabina-consigna" value="Registro continuo en bitácora física/digital y reporte de novedades por frecuencia oficial con C4." class="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs font-semibold">
           </div>
-        </td>
-      </tr>
-    </table>
+        </div>
+      </div>
 
-    <table class="meta-bar-table">
-      <tr>
-        <td style="width: 28%;">
-          <span class="guard-tag guard-tag-2" contenteditable="true">GUARDIA 2</span>
-        </td>
-        <td style="width: 42%;">
-          <span class="meta-label">Fecha / Periodo:</span> <span class="meta-fill" id="fecha-g2" contenteditable="true">&nbsp;&nbsp;{{ hoy_str }}&nbsp;&nbsp;</span>
-        </td>
-        <td style="width: 30%; text-align: right;">
-          <span class="meta-label">Horario:</span> <span style="font-weight: 600; color: #0f172a;" contenteditable="true">24 Horas de Turno</span>
-        </td>
-      </tr>
-    </table>
+      <!-- SECCIÓN 3: GUARDIA 2 -->
+      <div class="space-y-4 border border-slate-200 rounded-2xl p-5 bg-white">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="px-3 py-1 rounded-lg bg-blue-900 text-white text-xs font-black">GUARDIA 2</span>
+            <h3 class="font-black text-slate-800 text-sm">Asignación de Unidades y Personal</h3>
+          </div>
 
-    <!-- Tabla Asignaciones Guardia 2 -->
-    <table class="assignment-table" id="tabla-guardia-2">
-      <thead>
-        <tr>
-          <th style="width: 16%; text-align: center;">Unidad</th>
-          <th style="width: 28%;">Área / Servicio</th>
-          <th style="width: 38%;">Personal Asignado / Tripulación</th>
-          <th style="width: 18%; text-align: center;">Firma / Estatus</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td style="text-align: center;">
-            <span class="unit-badge" contenteditable="true">Móvil 098</span>
-            <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-          </td>
-          <td>
-            <span class="service-tag service-tag-prehosp" contenteditable="true">Atención Prehospitalaria</span>
-            <div class="service-sub" contenteditable="true">Ambulancia de Urgencias Médicas</div>
-          </td>
-          <td>
-            <div class="crew-names" contenteditable="true">Checo &mdash; Jorge</div>
-            <div class="crew-desc" contenteditable="true">Operador y Paramédico de Guardia</div>
-          </td>
-          <td>
-            <div class="sign-blank"></div>
-            <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">
-            <span class="unit-badge" contenteditable="true">Móvil 097</span>
-            <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-          </td>
-          <td>
-            <span class="service-tag service-tag-prehosp" contenteditable="true">Atención Prehospitalaria</span>
-            <div class="service-sub" contenteditable="true">Ambulancia de Urgencias Médicas</div>
-          </td>
-          <td>
-            <div class="crew-names" contenteditable="true">Jonathan &mdash; Yaiza</div>
-            <div class="crew-desc" contenteditable="true">Operador y Paramédico de Guardia</div>
-          </td>
-          <td>
-            <div class="sign-blank"></div>
-            <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">
-            <span class="unit-badge" contenteditable="true">Móvil 208</span>
-            <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-          </td>
-          <td>
-            <span class="service-tag service-tag-prehosp" contenteditable="true">Atención Prehospitalaria</span>
-            <div class="service-sub" contenteditable="true">Unidad de Primer Contacto / Apoyo</div>
-          </td>
-          <td>
-            <div class="crew-names" contenteditable="true">Carlos &mdash; Ángel</div>
-            <div class="crew-desc" contenteditable="true">Operador y Paramédico de Guardia</div>
-          </td>
-          <td>
-            <div class="sign-blank"></div>
-            <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-          </td>
-        </tr>
-        <tr>
-          <td style="text-align: center;">
-            <span class="unit-badge unit-badge-fire" contenteditable="true">Unidad 073</span>
-            <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-          </td>
-          <td>
-            <span class="service-tag service-tag-fire" contenteditable="true">Cuerpo de Bomberos</span>
-            <div class="service-sub" contenteditable="true">Unidad de Ataque Rápido / Autobomba</div>
-          </td>
-          <td>
-            <div class="crew-names" contenteditable="true">Chapo &mdash; Arturo</div>
-            <div class="crew-desc" contenteditable="true">Maquinista y Bombero de Línea</div>
-          </td>
-          <td>
-            <div class="sign-blank"></div>
-            <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          <div class="flex gap-2">
+            <button type="button" onclick="agregarFilaConfig('tabla-config-g2', 'AMBULANCIA')" class="text-xs font-bold bg-emerald-50 text-emerald-700 hover:bg-emerald-100 px-3 py-1.5 rounded-lg border border-emerald-200 transition">
+              ➕ Agregar Ambulancia
+            </button>
+            <button type="button" onclick="agregarFilaConfig('tabla-config-g2', 'BOMBEROS')" class="text-xs font-bold bg-red-50 text-red-700 hover:bg-red-100 px-3 py-1.5 rounded-lg border border-red-200 transition">
+              ➕ Agregar Bomberos
+            </button>
+          </div>
+        </div>
 
-    <!-- Acciones Dinámicas para Fila (No se imprime) -->
-    <div class="add-row-actions mb-3 no-print flex gap-2">
-      <button type="button" onclick="agregarFila('tabla-guardia-2', 'AMBULANCIA')" class="text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-200 flex items-center gap-1 transition">
-        ➕ Agregar Unidad (Ambulancia / Apoyo)
-      </button>
-      <button type="button" onclick="agregarFila('tabla-guardia-2', 'BOMBEROS')" class="text-xs font-bold bg-red-50 hover:bg-red-100 text-red-700 px-3 py-1.5 rounded-lg border border-red-200 flex items-center gap-1 transition">
-        ➕ Agregar Unidad (Bomberos)
-      </button>
-    </div>
+        <!-- Tabla Unidades Guardia 2 -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left border-collapse" id="tabla-config-g2">
+            <thead>
+              <tr class="bg-slate-100 text-slate-700 font-extrabold uppercase text-[10px]">
+                <th class="p-2 w-1/6">Unidad</th>
+                <th class="p-2 w-1/4">Área / Servicio</th>
+                <th class="p-2 w-1/4">Sub-Servicio</th>
+                <th class="p-2 w-1/4">Tripulación</th>
+                <th class="p-2 w-1/4">Cargo</th>
+                <th class="p-2 text-center w-8"></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <!-- Carga inicial JS -->
+            </tbody>
+          </table>
+        </div>
 
-    <!-- Personal Voluntario y Consignas -->
-    <div class="card-box card-box-purple">
-      <div class="card-title card-title-purple" contenteditable="true">Personal Voluntario y Consignas Operativas &mdash; Guardia 2</div>
-      <table class="support-grid-table">
-        <tr>
-          <td style="width: 45%;">
-            <strong style="color: #1e293b; font-size: 8.5pt;" contenteditable="true">&bull; Emily Janet:</strong>
-            <span class="volunteer-pill" contenteditable="true">Personal Voluntario</span>
-            <div style="font-size: 7pt; color: #64748b; margin-top: 1px;" contenteditable="true">Apoyo operativo / Atención Prehospitalaria</div>
-          </td>
-          <td style="width: 55%; color: #334155;">
-            <strong>&bull; Check-list vehicular:</strong> <span contenteditable="true">Revisión de combustible, niveles mecánicos, torretas y equipo médico/contra incendio.</span>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" style="color: #64748b; padding-top: 5px; border-top: 1px dashed #cbd5e1; margin-top: 3px; font-size: 7.5pt;">
-            <strong>Novedades de Relevo:</strong> <span contenteditable="true">Sin novedad de relevancia al momento del pase de lista.</span>
-          </td>
-        </tr>
-      </table>
-    </div>
+        <!-- Voluntarios y Consignas Guardia 2 -->
+        <div class="bg-purple-50/60 p-4 rounded-xl border border-purple-200 space-y-3">
+          <h4 class="font-extrabold text-purple-900 text-xs uppercase tracking-wider">🤝 Personal Voluntario y Consignas (Guardia 2)</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Nombre Personal Voluntario</label>
+              <input type="text" id="g2-voluntario-nombre" value="Emily Janet" class="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs font-bold">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Check-list Vehicular</label>
+              <input type="text" id="g2-checklist" value="Revisión de combustible, niveles mecánicos, torretas y equipo médico/contra incendio." class="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs font-semibold">
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Novedades de Relevo</label>
+            <input type="text" id="g2-novedades" value="Sin novedad de relevancia al momento del pase de lista." class="w-full bg-white border border-slate-300 rounded-lg p-2 text-xs font-semibold">
+          </div>
+        </div>
+      </div>
 
-    <!-- Firmas -->
-    <div class="footer-signatures">
-      <table class="sig-table">
-        <tr>
-          <td>
-            <div class="sig-line"></div>
-            <div class="sig-name" contenteditable="true">Comandante / Jefe de Guardia en Turno</div>
-            <div class="sig-subtext" contenteditable="true">Nombre, Firma y Matrícula Operativa</div>
-          </td>
-          <td style="width: 4%;"></td>
-          <td>
-            <div class="sig-line"></div>
-            <div class="sig-name" contenteditable="true">Dirección de Protección Civil y Bomberos</div>
-            <div class="sig-subtext" contenteditable="true">Visto Bueno, Sello y Autorización</div>
-          </td>
-        </tr>
-      </table>
-    </div>
+      <!-- BOTONES INFERIORES DE GUARDADO -->
+      <div class="flex justify-end gap-3 pt-3 border-t border-slate-100">
+        <button type="button" onclick="guardarConfiguracionForm()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-6 py-3 rounded-2xl text-xs flex items-center gap-2 shadow-md transition">
+          <i data-lucide="save" class="w-4 h-4"></i> 💾 Guardar Configuración de este Día
+        </button>
+        <button type="button" onclick="imprimirPdfForm()" class="bg-red-600 hover:bg-red-700 text-white font-extrabold px-6 py-3 rounded-2xl text-xs flex items-center gap-2 shadow-md transition">
+          <i data-lucide="printer" class="w-4 h-4"></i> 🖨️ Generar e Imprimir PDF Oficial
+        </button>
+      </div>
+
+    </form>
   </div>
 
 
   <!-- ==================== CALENDARIO Y EXPEDIENTES DE GUARDIAS ==================== -->
-  <div id="seccion-calendario" class="no-print bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+  <div id="seccion-calendario" class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
     
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-4">
       <div>
         <h2 class="text-lg font-black text-slate-800 uppercase tracking-tight flex items-center gap-2">
-          <span>📅</span> Calendario de Control de Guardias y Archivos
+          <span>📅</span> Calendario de Control de Guardias y Expedientes
         </h2>
         <p class="text-xs text-slate-500 font-medium">
-          Selecciona cualquier día para consultar la <strong>Hoja Firmada Escaneada</strong> o imprimir el <strong>Formato Original Re-imprimible</strong>.
+          Selecciona cualquier fecha para <strong>Cargar Datos al Formulario</strong>, <strong>Imprimir PDF</strong> o consultar la <strong>Hoja Firmada</strong>.
         </p>
       </div>
 
@@ -881,7 +266,6 @@
     <!-- Rejilla del Calendario -->
     <div class="overflow-x-auto">
       <div class="min-w-[600px]">
-        <!-- Días de la Semana -->
         <div class="grid grid-cols-7 gap-2 text-center text-xs font-extrabold text-slate-400 uppercase tracking-wider mb-2">
           <div class="py-1">Dom</div>
           <div class="py-1">Lun</div>
@@ -892,25 +276,24 @@
           <div class="py-1">Sáb</div>
         </div>
 
-        <!-- Celdas del Calendario Dinámicas -->
         <div id="grid-dias-calendario" class="grid grid-cols-7 gap-2">
-          <!-- Generado dinámicamente con JavaScript -->
+          <!-- Generado dinámicamente -->
         </div>
       </div>
     </div>
 
   </div>
 
-</div>
+</main>
 
 
-<!-- MODAL DETALLE DE DÍA (Documento Firmado vs Formato Original) -->
-<div id="modal-dia-detalle" class="fixed inset-0 bg-black/65 backdrop-blur-sm z-[1000] hidden items-center justify-center p-4 no-print">
+<!-- MODAL DETALLE DE DÍA -->
+<div id="modal-dia-detalle" class="fixed inset-0 bg-black/65 backdrop-blur-sm z-[1000] hidden items-center justify-center p-4">
   <div class="bg-white rounded-3xl max-w-2xl w-full p-6 shadow-2xl space-y-5 border border-slate-200 relative">
     
     <div class="flex justify-between items-center border-b border-slate-100 pb-3">
       <div>
-        <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-widest block">Expediente de Guardia</span>
+        <span class="text-[10px] font-extrabold text-blue-600 uppercase tracking-widest block">Expediente del Día</span>
         <h3 id="modal-fecha-titulo" class="font-black text-slate-800 text-base uppercase tracking-tight">
           📅 Día: --/--/----
         </h3>
@@ -918,47 +301,60 @@
       <button onclick="toggleModal('modal-dia-detalle')" class="text-slate-400 hover:text-slate-600 font-bold text-lg">✕</button>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       
-      <!-- Opción 1: Formato Original Re-imprimible -->
-      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+      <!-- Opcion 1: Cargar en Formulario -->
+      <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 flex flex-col justify-between space-y-3">
         <div>
-          <span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-black uppercase px-2.5 py-1 rounded-md mb-2">
-            📄 Formato Original
+          <span class="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase px-2 py-0.5 rounded mb-1">
+            📝 Editar
           </span>
-          <h4 class="font-black text-slate-800 text-sm">Rol Operativo Re-imprimible</h4>
-          <p class="text-xs text-slate-500 font-medium mt-1 leading-relaxed">
-            Carga la plantilla vacía u editable configurada para esta fecha para re-imprimir o editar.
+          <h4 class="font-black text-slate-800 text-xs">Cargar en Formulario</h4>
+          <p class="text-[11px] text-slate-500 font-medium mt-1">
+            Poblar los campos de la pantalla con los datos guardados para esta fecha.
           </p>
         </div>
-
-        <button type="button" onclick="cargarFechaOriginalModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
-          <i data-lucide="printer" class="w-4 h-4"></i> Cargar y Editar para Impresión
+        <button type="button" onclick="cargarFechaAlFormularioModal()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-2 rounded-xl text-xs shadow transition">
+          Cargar Datos
         </button>
       </div>
 
-      <!-- Opción 2: Documento Firmado Escaneado -->
-      <div class="bg-purple-50 border border-purple-200 rounded-2xl p-5 flex flex-col justify-between space-y-4">
+      <!-- Opción 2: Formato PDF -->
+      <div class="bg-blue-50 border border-blue-200 rounded-2xl p-4 flex flex-col justify-between space-y-3">
         <div>
-          <span class="inline-block bg-purple-100 text-purple-800 text-[10px] font-black uppercase px-2.5 py-1 rounded-md mb-2">
-            📸 Documento Oficial Firmado
+          <span class="inline-block bg-blue-100 text-blue-800 text-[10px] font-black uppercase px-2 py-0.5 rounded mb-1">
+            🖨️ Imprimir
           </span>
-          <h4 class="font-black text-slate-800 text-sm">Hoja Escaneada / Fotografiada</h4>
-          
-          <div id="modal-firmado-info" class="mt-2 space-y-1 text-xs">
-            <!-- Rellenado por JS -->
+          <h4 class="font-black text-slate-800 text-xs">PDF Oficial de Guardia</h4>
+          <p class="text-[11px] text-slate-500 font-medium mt-1">
+            Generar e imprimir el documento de 2 hojas para firma física.
+          </p>
+        </div>
+        <button type="button" onclick="imprimirPdfModal()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-2 rounded-xl text-xs shadow transition">
+          Abrir PDF
+        </button>
+      </div>
+
+      <!-- Opción 3: Documento Firmado -->
+      <div class="bg-purple-50 border border-purple-200 rounded-2xl p-4 flex flex-col justify-between space-y-3">
+        <div>
+          <span class="inline-block bg-purple-100 text-purple-800 text-[10px] font-black uppercase px-2 py-0.5 rounded mb-1">
+            📸 Escaneo
+          </span>
+          <h4 class="font-black text-slate-800 text-xs">Hoja Firmada Escaneada</h4>
+          <div id="modal-firmado-info" class="mt-1 text-[11px]">
+            <!-- JS -->
           </div>
         </div>
-
         <div id="modal-firmado-acciones">
-          <!-- Botón de ver o botón de subir por JS -->
+          <!-- JS -->
         </div>
       </div>
 
     </div>
 
     <div class="flex justify-end pt-2 border-t border-slate-100">
-      <button type="button" onclick="toggleModal('modal-dia-detalle')" class="px-5 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+      <button type="button" onclick="toggleModal('modal-dia-detalle')" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
         Cerrar Ventana
       </button>
     </div>
@@ -967,8 +363,8 @@
 </div>
 
 
-<!-- MODAL PARA SUBIR HOJA FIRMADA (No se imprime) -->
-<div id="modal-subir" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1000] hidden items-center justify-center p-4 no-print">
+<!-- MODAL PARA SUBIR HOJA FIRMADA -->
+<div id="modal-subir" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1000] hidden items-center justify-center p-4">
   <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 border border-slate-200">
     <div class="flex justify-between items-center border-b border-slate-100 pb-3">
       <h3 class="font-black text-slate-800 text-sm uppercase tracking-tight flex items-center gap-2">
@@ -991,7 +387,6 @@
           <option value="GENERAL">Rol Completo (Guardias 1 y 2)</option>
           <option value="GUARDIA_1">Guardia 1</option>
           <option value="GUARDIA_2">Guardia 2</option>
-          <option value="GUARDIA_3">Guardia 3 / Relevo Especial</option>
         </select>
       </div>
 
@@ -1003,7 +398,6 @@
       <div>
         <label class="block text-xs font-bold text-slate-700 mb-1">Imagen o PDF del Documento Firmado *</label>
         <input type="file" name="imagen_documento_firmado" accept="image/*,.pdf" required class="w-full text-xs font-semibold text-slate-600 border border-slate-200 rounded-xl p-2 bg-slate-50">
-        <p class="text-[10px] text-slate-400 mt-1">Puedes subir la foto tomada desde tu celular (JPG, PNG) o un archivo PDF escaneado.</p>
       </div>
 
       <div>
@@ -1015,7 +409,7 @@
         <button type="button" onclick="toggleModal('modal-subir')" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
           Cancelar
         </button>
-        <button type="submit" class="px-5 py-2 text-xs font-extrabold text-white bg-blue-600 hover:bg-blue-700 rounded-xl transition shadow">
+        <button type="submit" class="px-5 py-2 text-xs font-extrabold text-white bg-purple-600 hover:bg-purple-700 rounded-xl transition shadow">
           Guardar Documento Firmado
         </button>
       </div>
@@ -1027,13 +421,173 @@
 <script>
   lucide.createIcons();
 
-  // Datos de Roles Firmados pasados desde Django
-  const rolesGuardados = {{ roles_json|safe }};
-  
+  const rolesFirmadosGuardados = {{ roles_json|safe }};
+  const rolesConfiguradosMap = {{ configurados_json|safe }};
+
   let fechaActualCal = new Date();
   let fechaSeleccionadaGlobal = '{{ hoy_str }}';
 
   const nombresMeses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+
+  // Inicializar filas por defecto en las tablas de Guardia 1 y Guardia 2
+  const defaultG1 = [
+    { unidad: 'Móvil 097', servicio: 'Atención Prehospitalaria', subservicio: 'Ambulancia de Urgencias Médicas', tripulacion: 'Paco — Arely', cargo: 'Operador y Paramédico de Guardia', tipo: 'AMBULANCIA' },
+    { unidad: 'Móvil 096', servicio: 'Atención Prehospitalaria', subservicio: 'Ambulancia de Urgencias Médicas', tripulacion: 'Giovany — Ruth', cargo: 'Operador y Paramédico de Guardia', tipo: 'AMBULANCIA' },
+    { unidad: 'Móvil 208', servicio: 'Atención Prehospitalaria', subservicio: 'Unidad de Primer Contacto / Apoyo', tripulacion: 'Miguel — Luz', cargo: 'Operador y Paramédico de Guardia', tipo: 'AMBULANCIA' },
+    { unidad: 'Unidad 073', servicio: 'Cuerpo de Bomberos', subservicio: 'Unidad de Ataque Rápido / Autobomba', tripulacion: 'Ángel R. — Luis', cargo: 'Maquinista y Bombero de Línea', tipo: 'BOMBEROS' },
+  ];
+
+  const defaultG2 = [
+    { unidad: 'Móvil 098', servicio: 'Atención Prehospitalaria', subservicio: 'Ambulancia de Urgencias Médicas', tripulacion: 'Checo — Jorge', cargo: 'Operador y Paramédico de Guardia', tipo: 'AMBULANCIA' },
+    { unidad: 'Móvil 097', servicio: 'Atención Prehospitalaria', subservicio: 'Ambulancia de Urgencias Médicas', tripulacion: 'Jonathan — Yaiza', cargo: 'Operador y Paramédico de Guardia', tipo: 'AMBULANCIA' },
+    { unidad: 'Móvil 208', servicio: 'Atención Prehospitalaria', subservicio: 'Unidad de Primer Contacto / Apoyo', tripulacion: 'Carlos — Ángel', cargo: 'Operador y Paramédico de Guardia', tipo: 'AMBULANCIA' },
+    { unidad: 'Unidad 073', servicio: 'Cuerpo de Bomberos', subservicio: 'Unidad de Ataque Rápido / Autobomba', tripulacion: 'Chapo — Arturo', cargo: 'Maquinista y Bombero de Línea', tipo: 'BOMBEROS' },
+  ];
+
+  function renderTablaConfig(tableId, filas) {
+    const table = document.getElementById(tableId);
+    if (!table) return;
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = '';
+
+    filas.forEach(f => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td class="p-1.5"><input type="text" class="cfg-u-unidad w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="${f.unidad || ''}"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-servicio w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="${f.servicio || ''}"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-subservicio w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="${f.subservicio || ''}"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-tripulacion w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="${f.tripulacion || ''}"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-cargo w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="${f.cargo || ''}"></td>
+        <td class="p-1.5 text-center"><input type="hidden" class="cfg-u-tipo" value="${f.tipo || 'AMBULANCIA'}"><button type="button" onclick="this.closest('tr').remove()" class="text-red-500 font-bold text-sm">✕</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  function agregarFilaConfig(tableId, tipo) {
+    const table = document.getElementById(tableId);
+    const tbody = table.querySelector('tbody');
+    const tr = document.createElement('tr');
+
+    if (tipo === 'BOMBEROS') {
+      tr.innerHTML = `
+        <td class="p-1.5"><input type="text" class="cfg-u-unidad w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Unidad 000"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-servicio w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Cuerpo de Bomberos"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-subservicio w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Unidad de Ataque / Autobomba"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-tripulacion w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Nombre — Nombre"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-cargo w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Maquinista y Bombero de Línea"></td>
+        <td class="p-1.5 text-center"><input type="hidden" class="cfg-u-tipo" value="BOMBEROS"><button type="button" onclick="this.closest('tr').remove()" class="text-red-500 font-bold text-sm">✕</button></td>
+      `;
+    } else {
+      tr.innerHTML = `
+        <td class="p-1.5"><input type="text" class="cfg-u-unidad w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Móvil 000"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-servicio w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Atención Prehospitalaria"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-subservicio w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Ambulancia de Urgencias Médicas"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-tripulacion w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Nombre — Nombre"></td>
+        <td class="p-1.5"><input type="text" class="cfg-u-cargo w-full bg-slate-50 border border-slate-200 rounded-lg p-1 text-xs font-bold" value="Operador y Paramédico de Guardia"></td>
+        <td class="p-1.5 text-center"><input type="hidden" class="cfg-u-tipo" value="AMBULANCIA"><button type="button" onclick="this.closest('tr').remove()" class="text-red-500 font-bold text-sm">✕</button></td>
+      `;
+    }
+    tbody.appendChild(tr);
+  }
+
+  function capturarFilasTabla(tableId) {
+    const table = document.getElementById(tableId);
+    const trs = table.querySelectorAll('tbody tr');
+    const res = [];
+    trs.forEach(tr => {
+      res.push({
+        unidad: tr.querySelector('.cfg-u-unidad').value,
+        servicio: tr.querySelector('.cfg-u-servicio').value,
+        subservicio: tr.querySelector('.cfg-u-subservicio').value,
+        tripulacion: tr.querySelector('.cfg-u-tripulacion').value,
+        cargo: tr.querySelector('.cfg-u-cargo').value,
+        tipo: tr.querySelector('.cfg-u-tipo').value,
+      });
+    });
+    return res;
+  }
+
+  function cargarDatosFechaForm(fechaIso) {
+    fechaSeleccionadaGlobal = fechaIso;
+    document.getElementById('cfg-fecha').value = fechaIso;
+
+    if (rolesConfiguradosMap[fechaIso]) {
+      const cfg = rolesConfiguradosMap[fechaIso];
+      document.getElementById('cfg-guardia-tipo').value = cfg.guardia_tipo || 'GENERAL';
+      document.getElementById('cfg-comandante-g1').value = cfg.comandante_g1 || 'Comandante / Jefe de Guardia';
+      document.getElementById('cfg-comandante-g2').value = cfg.comandante_g2 || 'Comandante / Jefe de Guardia';
+
+      const d = cfg.datos || {};
+      renderTablaConfig('tabla-config-g1', d.guardia_1 || defaultG1);
+      renderTablaConfig('tabla-config-g2', d.guardia_2 || defaultG2);
+
+      if (d.cabina_g1) {
+        document.getElementById('g1-cabina-cadena').value = d.cabina_g1.cadena || '';
+        document.getElementById('g1-cabina-yeyo').value = d.cabina_g1.yeyo || '';
+        document.getElementById('g1-cabina-consigna').value = d.cabina_g1.consigna || '';
+      }
+      if (d.voluntarios_g2) {
+        document.getElementById('g2-voluntario-nombre').value = d.voluntarios_g2.voluntario || '';
+        document.getElementById('g2-checklist').value = d.voluntarios_g2.checklist || '';
+        document.getElementById('g2-novedades').value = d.voluntarios_g2.novedades || '';
+      }
+    } else {
+      renderTablaConfig('tabla-config-g1', defaultG1);
+      renderTablaConfig('tabla-config-g2', defaultG2);
+    }
+  }
+
+  function guardarConfiguracionForm() {
+    const fecha = document.getElementById('cfg-fecha').value;
+    const datos = {
+      guardia_1: capturarFilasTabla('tabla-config-g1'),
+      guardia_2: capturarFilasTabla('tabla-config-g2'),
+      cabina_g1: {
+        cadena: document.getElementById('g1-cabina-cadena').value,
+        yeyo: document.getElementById('g1-cabina-yeyo').value,
+        consigna: document.getElementById('g1-cabina-consigna').value,
+      },
+      voluntarios_g2: {
+        voluntario: document.getElementById('g2-voluntario-nombre').value,
+        checklist: document.getElementById('g2-checklist').value,
+        novedades: document.getElementById('g2-novedades').value,
+      }
+    };
+
+    const formData = new FormData();
+    formData.append('fecha', fecha);
+    formData.append('guardia_tipo', document.getElementById('cfg-guardia-tipo').value);
+    formData.append('comandante_g1', document.getElementById('cfg-comandante-g1').value);
+    formData.append('comandante_g2', document.getElementById('cfg-comandante-g2').value);
+    formData.append('datos_json', JSON.stringify(datos));
+
+    fetch('{% url "guardar_configuracion_guardia" %}', {
+      method: 'POST',
+      headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+      body: formData
+    })
+    .then(r => r.json())
+    .then(res => {
+      if (res.status === 'ok') {
+        rolesConfiguradosMap[fecha] = {
+          guardia_tipo: document.getElementById('cfg-guardia-tipo').value,
+          comandante_g1: document.getElementById('cfg-comandante-g1').value,
+          comandante_g2: document.getElementById('cfg-comandante-g2').value,
+          datos: datos
+        };
+        renderCalendario();
+        alert(`¡Configuración de Guardia para la fecha ${fecha} guardada con éxito!`);
+      } else {
+        alert('Error al guardar: ' + res.message);
+      }
+    });
+  }
+
+  function imprimirPdfForm() {
+    const fecha = document.getElementById('cfg-fecha').value;
+    window.open(`{% url "imprimir_rol_guardia_pdf" %}?fecha=${fecha}`, '_blank');
+  }
 
   function renderCalendario() {
     const anio = fechaActualCal.getFullYear();
@@ -1047,14 +601,12 @@
     const grid = document.getElementById('grid-dias-calendario');
     grid.innerHTML = '';
 
-    // Celdas vacías previas
     for (let i = 0; i < primerDia; i++) {
       const emptyCell = document.createElement('div');
       emptyCell.className = 'h-24 bg-slate-50/50 rounded-2xl border border-slate-100 opacity-40';
       grid.appendChild(emptyCell);
     }
 
-    // Días del mes
     for (let dia = 1; dia <= totalDias; dia++) {
       const diaStr = String(dia).padStart(2, '0');
       const mesStr = String(mes + 1).padStart(2, '0');
@@ -1064,34 +616,26 @@
       cell.className = 'h-24 bg-white hover:bg-blue-50/50 rounded-2xl border border-slate-200 p-2 cursor-pointer transition flex flex-col justify-between shadow-sm';
       cell.onclick = () => abrirDetalleDia(fechaIso);
 
-      // Buscar si hay rol firmado guardado para esta fecha
-      const rolesDia = rolesGuardados.filter(r => r.fecha === fechaIso);
+      const hasConfig = rolesConfiguradosMap[fechaIso] !== undefined;
+      const rolesDiaFirmados = rolesFirmadosGuardados.filter(r => r.fecha === fechaIso);
 
       let badgesHtml = '';
-      if (rolesDia.length > 0) {
-        rolesDia.forEach(r => {
-          badgesHtml += `
-            <span class="block text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-600 text-white truncate shadow-xs">
-              📸 ${r.guardia_tipo_display}
-            </span>
-          `;
-        });
-      } else {
-        badgesHtml = `
-          <span class="block text-[8px] font-semibold text-slate-400">
-            📜 Formato Original
-          </span>
-        `;
+      if (hasConfig) {
+        badgesHtml += `<span class="block text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-600 text-white truncate shadow-xs">📜 Configurado</span>`;
+      }
+      if (rolesDiaFirmados.length > 0) {
+        badgesHtml += `<span class="block text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-600 text-white truncate shadow-xs mt-0.5">📸 Firmado</span>`;
+      }
+      if (!hasConfig && rolesDiaFirmados.length === 0) {
+        badgesHtml = `<span class="block text-[8px] font-semibold text-slate-400">Sin datos</span>`;
       }
 
       cell.innerHTML = `
         <div class="flex justify-between items-center">
           <span class="font-black text-xs text-slate-800">${dia}</span>
-          ${rolesDia.length > 0 ? '<span class="w-2 h-2 rounded-full bg-emerald-500"></span>' : ''}
+          ${hasConfig || rolesDiaFirmados.length > 0 ? '<span class="w-2 h-2 rounded-full bg-emerald-500"></span>' : ''}
         </div>
-        <div class="space-y-1">
-          ${badgesHtml}
-        </div>
+        <div class="space-y-0.5">${badgesHtml}</div>
       `;
 
       grid.appendChild(cell);
@@ -1107,31 +651,23 @@
     fechaSeleccionadaGlobal = fechaIso;
     document.getElementById('modal-fecha-titulo').innerText = `📅 Día: ${fechaIso}`;
     
-    const rolesDia = rolesGuardados.filter(r => r.fecha === fechaIso);
+    const rolesDia = rolesFirmadosGuardados.filter(r => r.fecha === fechaIso);
     const infoContainer = document.getElementById('modal-firmado-info');
     const accionesContainer = document.getElementById('modal-firmado-acciones');
 
     if (rolesDia.length > 0) {
       const rol = rolesDia[0];
-      infoContainer.innerHTML = `
-        <p class="text-purple-900 font-bold">✅ Rol Registrado (${rol.guardia_tipo_display})</p>
-        ${rol.comandante ? `<p class="text-slate-600 font-semibold">👮 Comandante: ${rol.comandante}</p>` : ''}
-        ${rol.observaciones ? `<p class="text-slate-500 italic">"${rol.observaciones}"</p>` : ''}
-      `;
-
+      infoContainer.innerHTML = `<p class="text-purple-900 font-bold">✅ Rol Firmado Subido</p>`;
       accionesContainer.innerHTML = `
-        <a href="${rol.url}" target="_blank" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
-          <i data-lucide="eye" class="w-4 h-4"></i> Abrir Documento Firmado
+        <a href="${rol.url}" target="_blank" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-2 rounded-xl text-xs flex items-center justify-center gap-1 shadow transition">
+          <i data-lucide="eye" class="w-3.5 h-3.5"></i> Abrir Firmado
         </a>
       `;
     } else {
-      infoContainer.innerHTML = `
-        <p class="text-slate-500 italic">No se ha subido aún el escaneo firmado para este día.</p>
-      `;
-
+      infoContainer.innerHTML = `<p class="text-slate-500 italic text-[10px]">Sin archivo firmado subido.</p>`;
       accionesContainer.innerHTML = `
-        <button type="button" onclick="abrirSubirParaFecha('${fechaIso}')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
-          <i data-lucide="upload-cloud" class="w-4 h-4"></i> 📸 Subir Hoja Firmada de este día
+        <button type="button" onclick="abrirSubirParaFecha('${fechaIso}')" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold py-2 rounded-xl text-xs flex items-center justify-center gap-1 shadow transition">
+          <i data-lucide="upload-cloud" class="w-3.5 h-3.5"></i> Subir Firmado
         </button>
       `;
     }
@@ -1140,11 +676,14 @@
     toggleModal('modal-dia-detalle');
   }
 
-  function cargarFechaOriginalModal() {
-    document.getElementById('fecha-g1').innerText = `  ${fechaSeleccionadaGlobal}  `;
-    document.getElementById('fecha-g2').innerText = `  ${fechaSeleccionadaGlobal}  `;
+  function cargarFechaAlFormularioModal() {
+    cargarDatosFechaForm(fechaSeleccionadaGlobal);
     toggleModal('modal-dia-detalle');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function imprimirPdfModal() {
+    window.open(`{% url "imprimir_rol_guardia_pdf" %}?fecha=${fechaSeleccionadaGlobal}`, '_blank');
   }
 
   function abrirSubirParaFecha(fechaIso) {
@@ -1168,66 +707,11 @@
 
   function scrollToSection(sectionId) {
     const sec = document.getElementById(sectionId);
-    if (sec) {
-      sec.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
-
-  // Funciones para agregar/eliminar filas de forma dinámica
-  function agregarFila(tableId, tipo) {
-    const table = document.getElementById(tableId);
-    if (!table) return;
-    const tbody = table.querySelector('tbody');
-    const tr = document.createElement('tr');
-
-    if (tipo === 'BOMBEROS') {
-      tr.innerHTML = `
-        <td style="text-align: center;">
-          <span class="unit-badge unit-badge-fire" contenteditable="true">Unidad 000</span>
-          <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-        </td>
-        <td>
-          <span class="service-tag service-tag-fire" contenteditable="true">Cuerpo de Bomberos</span>
-          <div class="service-sub" contenteditable="true">Unidad de Ataque / Autobomba</div>
-        </td>
-        <td>
-          <div class="crew-names" contenteditable="true">Nombre &mdash; Nombre</div>
-          <div class="crew-desc" contenteditable="true">Maquinista y Bombero de Línea</div>
-        </td>
-        <td>
-          <div class="sign-blank"></div>
-          <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-        </td>
-      `;
-    } else {
-      tr.innerHTML = `
-        <td style="text-align: center;">
-          <span class="unit-badge" contenteditable="true">Móvil 000</span>
-          <button type="button" class="btn-remove-row no-print" onclick="eliminarFila(this)" title="Eliminar fila">✕</button>
-        </td>
-        <td>
-          <span class="service-tag service-tag-prehosp" contenteditable="true">Atención Prehospitalaria</span>
-          <div class="service-sub" contenteditable="true">Ambulancia / Apoyo Operativo</div>
-        </td>
-        <td>
-          <div class="crew-names" contenteditable="true">Nombre &mdash; Nombre</div>
-          <div class="crew-desc" contenteditable="true">Operador y Paramédico de Guardia</div>
-        </td>
-        <td>
-          <div class="sign-blank"></div>
-          <div style="text-align:center; font-size: 6.5pt; color: #94a3b8;">Firma de Conformidad</div>
-        </td>
-      `;
-    }
-    tbody.appendChild(tr);
-  }
-
-  function eliminarFila(btn) {
-    const tr = btn.closest('tr');
-    if (tr) tr.remove();
+    if (sec) sec.scrollIntoView({ behavior: 'smooth' });
   }
 
   window.addEventListener('DOMContentLoaded', () => {
+    cargarDatosFechaForm('{{ hoy_str }}');
     renderCalendario();
   });
 </script>
