@@ -37,6 +37,11 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1',
     'http://localhost',
+    'http://162.243.15.87',
+    'https://162.243.15.87',
+    'https://162-243-15-87.sslip.io',
+    'https://*.sslip.io',
+    'https://*.duckdns.org',
 ]
 
 for host in ALLOWED_HOSTS:
