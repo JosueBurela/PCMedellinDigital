@@ -1,0 +1,279 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Orden de Inspección #{{ orden.id }} | PCivil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  @page {
+    size: letter portrait;
+    margin: 10mm 12mm;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #1e293b;
+    background-color: #f8fafc;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #0f2942;
+    color: #ffffff;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .main-wrapper {
+    max-width: 850px;
+    margin: 20px auto 40px auto;
+  }
+
+  .sheet-container {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    box-sizing: border-box;
+  }
+
+  .header-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom: 2.5px solid #0f2942;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+
+  .header-logo {
+    width: 110px;
+    height: 70px;
+    object-fit: contain;
+  }
+
+  .doc-title {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #0f2942;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+
+  .doc-subtitle {
+    font-size: 9.5pt;
+    font-weight: 800;
+    color: #c53030;
+    text-transform: uppercase;
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  .meta-grid {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+  }
+
+  .meta-grid td {
+    padding: 6px 12px;
+    font-size: 8.5pt;
+    vertical-align: middle;
+  }
+
+  .items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+  }
+
+  .items-table th {
+    background-color: #0f2942;
+    color: #ffffff;
+    font-size: 8pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 7px 10px;
+    border: 1px solid #0f2942;
+  }
+
+  .items-table td {
+    padding: 7px 10px;
+    border: 1px solid #cbd5e1;
+    font-size: 8.5pt;
+    vertical-align: middle;
+  }
+
+  .items-table tr:nth-child(even) td {
+    background-color: #f8fafc;
+  }
+
+  .sig-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  .sig-table td {
+    width: 48%;
+    text-align: center;
+    vertical-align: top;
+  }
+
+  .sig-line {
+    border-top: 1.2px solid #334155;
+    margin: 30px 30px 4px 30px;
+  }
+
+  @media print {
+    body {
+      background-color: #ffffff;
+    }
+    .toolbar, .no-print {
+      display: none !important;
+    }
+    .main-wrapper {
+      margin: 0 !important;
+      max-width: 100% !important;
+    }
+    .sheet-container {
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <div class="font-bold text-sm">📋 ORDEN DE INSPECCIÓN #{{ orden.id }} &bull; MEDELLÍN DE BRAVO</div>
+  <div class="flex gap-2">
+    <a href="{% url 'herramienta_inspecciones' %}" class="bg-slate-700 hover:bg-slate-800 text-white text-xs font-bold px-3 py-2 rounded-lg transition">
+      Volver al Módulo
+    </a>
+    <button onclick="window.print()" class="bg-red-600 hover:bg-red-700 text-white text-xs font-extrabold px-4 py-2 rounded-lg transition shadow">
+      🖨️ Imprimir / Guardar PDF
+    </button>
+  </div>
+</div>
+
+<div class="main-wrapper">
+  <div class="sheet-container">
+    
+    <!-- ENCABEZADO -->
+    <table class="header-table">
+      <tr>
+        <td style="width: 120px;">
+          <img src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín" class="header-logo">
+        </td>
+        <td>
+          <div class="doc-title">DIRECCIÓN MUNICIPAL DE PROTECCIÓN CIVIL</div>
+          <div class="doc-subtitle">ÓRDEN DE INSPECCIÓN Y VERIFICACIÓN EN CAMPO</div>
+          <div style="text-align: center; font-size: 7.5pt; color: #64748b; margin-top: 2px;">MUNICIPIO DE MEDELLÍN DE BRAVO, VER.</div>
+        </td>
+        <td style="width: 120px; text-align: right;">
+          <img src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín" class="header-logo" style="margin-left: auto;">
+        </td>
+      </tr>
+    </table>
+
+    <!-- METADATOS DE LA ORDEN -->
+    <table class="meta-grid">
+      <tr>
+        <td style="width: 50%;">
+          <strong>FECHA PROGRAMADA:</strong> <span style="color: #0f2942; font-weight: 800;">{{ orden.fecha_texto }}</span>
+        </td>
+        <td style="width: 50%;">
+          <strong>HORARIO DE INSPECCIÓN:</strong> {{ orden.horario }}
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <strong>RUTAS A RECORRER:</strong> <span style="color: #1e3a8a; font-weight: 800;">{{ orden.rutas_resumen }}</span>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <strong>INSPECTOR ASIGNADO:</strong> <span style="color: #0f172a; font-weight: 700;">{{ orden.inspector }}</span>
+        </td>
+        <td>
+          <strong>OPERADOR DE UNIDAD:</strong> <span style="color: #0f172a; font-weight: 700;">{{ orden.operador }}</span>
+        </td>
+      </tr>
+    </table>
+
+    <!-- TABLA DE ESTABLECIMIENTOS -->
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th style="width: 5%; text-align: center;">#</th>
+          <th style="width: 25%;">Ruta / Localidad</th>
+          <th style="width: 45%;">Nombre del Establecimiento / Comercio</th>
+          <th style="width: 15%; text-align: center;">Mes Pago</th>
+          <th style="width: 10%; text-align: center;">Estatus</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for it in items %}
+        <tr>
+          <td style="text-align: center; font-weight: bold; color: #64748b;">{{ it.numero }}</td>
+          <td style="font-weight: 800; color: #0f2942;">{{ it.ruta }}</td>
+          <td style="font-weight: 800; color: #0f172a;">{{ it.establecimiento }}</td>
+          <td style="text-align: center; font-weight: 700; color: #92400e;">{{ it.mes_pago }}</td>
+          <td style="text-align: center; font-weight: 800;">
+            {% if it.realizado %}
+            <span style="color: #065f46;">✓ REALIZADO</span>
+            {% elif it.pendiente %}
+            <span style="color: #991b1b;">✕ PENDIENTE</span>
+            {% else %}
+            <span style="color: #94a3b8;">[ &nbsp; ]</span>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- FIRMAS OFICIALES -->
+    <table class="sig-table">
+      <tr>
+        <td>
+          <div class="sig-line"></div>
+          <div style="font-size: 8.5pt; font-weight: 800; color: #0f2942;">{{ orden.inspector }}</div>
+          <div style="font-size: 7.5pt; color: #64748b;">Inspector de Protección Civil</div>
+        </td>
+        <td>
+          <div class="sig-line"></div>
+          <div style="font-size: 8.5pt; font-weight: 800; color: #0f2942;">{{ orden.director }}</div>
+          <div style="font-size: 7.5pt; color: #64748b;">Director Municipal de Protección Civil</div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+</body>
+</html>

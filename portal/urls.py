@@ -65,6 +65,14 @@ urlpatterns = [
     path('control-operativo-guardias/subir/', views.subir_rol_guardia_firmado, name='subir_rol_guardia_firmado'),
     path('control-operativo-guardias/eliminar/<int:rol_id>/', views.eliminar_rol_guardia_firmado, name='eliminar_rol_guardia_firmado'),
 
+    # Módulo Aislado / Secundario: Suite de Herramientas Auxiliares y Apps Externas
+    path('herramientas-auxiliares/', views.suite_herramientas_hub, name='suite_herramientas_hub'),
+    path('herramientas-auxiliares/directorio/', views.herramienta_directorio, name='herramienta_directorio'),
+    path('herramientas-auxiliares/directorio/eliminar/<int:contacto_id>/', views.eliminar_contacto_directorio, name='eliminar_contacto_directorio'),
+    path('herramientas-auxiliares/inspecciones/', views.herramienta_inspecciones, name='herramienta_inspecciones'),
+    path('herramientas-auxiliares/inspecciones/eliminar/<int:orden_id>/', views.eliminar_orden_inspeccion, name='eliminar_orden_inspeccion'),
+    path('herramientas-auxiliares/inspecciones/imprimir/<int:orden_id>/', views.imprimir_orden_inspeccion, name='imprimir_orden_inspeccion'),
+
     # Perfil Ciudadano e Historial
     path('perfil/', views.perfil_ciudadano, name='perfil_ciudadano'),
     path('chat/enviar/', views.enviar_mensaje_chat, name='enviar_mensaje_chat'),

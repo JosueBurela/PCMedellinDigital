@@ -1,0 +1,86 @@
+\documentclass[11pt,letterpaper]{article}
+\package[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage[margin=1.2cm]{geometry}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{titlesec}
+
+\pagestyle{empty}
+
+\begin{document}
+
+% Encabezado con los 3 Logos Oficiales
+\noindent
+\begin{tabularx}{\textwidth}{@{} p{4.5cm} >{\centering\arraybackslash}X p{3.5cm} @{}}
+\includegraphics[height=2.2cm]{C:/Users/burel/OneDrive/Documentos/Programas/Inspecciones/assets/logo_medellin.png} & \includegraphics[height=1.9cm]{C:/Users/burel/OneDrive/Documentos/Programas/Inspecciones/assets/logo_proteccion_civil.png} & \raggedleft\includegraphics[height=2.2cm]{C:/Users/burel/OneDrive/Documentos/Programas/Inspecciones/assets/logo_escudo.png} \\
+\end{tabularx}
+
+\vspace{0.3cm}
+
+% Titulo Principal Dependencia
+\begin{center}
+    {\LARGE \textbf{DIRECCIÓN MUNICIPAL DE PROTECCIÓN CIVIL}}\\[1.2em]
+\end{center}
+
+\vspace{-0.4cm}
+
+% Datos de la Orden (FECHA Y HORARIO)
+\noindent
+\begin{tabularx}{\textwidth}{@{} X r @{}}
+\textbf{FECHA:} JUEVES 06/AGOSTO/26 & \textbf{HORARIO:} De 10am A 2pm \\
+\end{tabularx}
+
+\vspace{0.15cm}
+
+% RUTAS, INSPECTOR Y OPERADOR (Ancho al 58% para coincidir exactamente con el salto de línea del formato impreso)
+\noindent
+\begin{tabularx}{0.58\textwidth}{@{} l X @{}}
+\textbf{RUTAS:} & TEJAR-\allowbreak P.TORO-\allowbreak P.CHOCOLT-\allowbreak LOMAS S.GABRIEL-\allowbreak  LA BASCULA-\allowbreak PTE MORENO-\allowbreak LAS PALMAS-\allowbreak LA BOCANA-\allowbreak SAN RAMON \\[0.15cm]
+\textbf{INSPECTOR:} & Larisa Pauleth Gonzalez Acosta \\[0.15cm]
+\textbf{OPERADOR:} & ALBERTO VIQUEZ Ó CARLOS ALBERTO
+\end{tabularx}
+
+\vspace{0.4cm}
+
+% Titulo Sección
+\begin{center}
+    {\Large \textbf{INSPECCIONES A REALIZAR}}
+\end{center}
+
+\vspace{0.2cm}
+
+% Tabla de Inspecciones
+\noindent
+\begin{tabularx}{\textwidth}{| c | >{\raggedright\arraybackslash}p{3.0cm} | X | c | p{2.2cm} | p{2.2cm} |}
+\hline
+\textbf{Nº} & \textbf{RUTA} & \textbf{ESTABLECIMIENTO} & \textbf{MES DE PAGO} & \textbf{REALIZADO} & \textbf{PENDIENTE} \\ \hline
+  1 & TEJAR & GASOLINERA EL TEJAR & ENERO &  &  \\ \hline
+  2 & TEJAR & DEPOSITO LA VENTANITA II & ENERO &  &  \\ \hline
+  3 & TEJAR & TORTILLERIA AQUIAHUAC & MAYO &  &  \\ \hline
+  4 & TEJAR & ANTOJITOS VIKY & MAYO &  &  \\ \hline
+  5 & TEJAR & TOP VENT & MAYO &  &  \\ \hline
+  6 & TEJAR & SAND BLAST & ABRIL &  &  \\ \hline
+  7 & P. DEL TORO & RESTAURAN FELISITAS & MARZO &  &  \\ \hline
+  8 & P. DEL TORO & SONIGAS & MARZO &  &  \\ \hline
+  9 & P. CHOCOLATE & ABARROTES LA UNICA & ENERO &  &  \\ \hline
+  10 & LOMAS SAN GABRIEL & MADERAS Y TRIPLAY MEDELLIN & ABRIL &  &  \\ \hline
+  11 & LA BASCULA & ANTOJITOS EL PUNTALITO & ABRIL &  &  \\ \hline
+  12 & PUENTE MORENO & ABARROTES EL GÜERO & FEBRERO &  &  \\ \hline
+  13 & FRACC LAS PALMAS & ALPROQUIMEX & FEBRERO &  &  \\ \hline
+  14 & LA BOCANA & TRANSPORTES VICTOR & ABRIL &  &  \\ \hline
+  15 & SAN RAMON & TAQUERIA LA UNICA & MARZO &  &  \\ \hline
+\end{tabularx}
+
+\vfill
+
+% Firma del Director Municipal
+\begin{center}
+    \textbf{L.E.D. DANIEL EDUARDO ROMERO PILAR}\\[0.2em]
+    \textbf{DIRECTOR MUNICIPAL DE LA UNIDAD DE}\\[0.2em]
+    \textbf{PROTECCIÓN CIVIL DE MEDELLÍN DE BRAVO, VER.}
+\end{center}
+
+\end{document}

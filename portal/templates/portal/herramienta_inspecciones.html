@@ -1,0 +1,304 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Órdenes de Inspección | PCivil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans antialiased">
+
+<!-- ENCABEZADO Y HEADER -->
+<header class="bg-[#0f2942] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <a href="{% url 'suite_herramientas_hub' %}" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </a>
+      <div>
+        <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Suite de Herramientas Auxiliares</span>
+        <h1 class="text-base md:text-lg font-black tracking-tight">📋 Generador de Órdenes de Inspección</h1>
+      </div>
+    </div>
+
+    <button onclick="toggleModal('modal-crear-orden')" class="bg-purple-600 hover:bg-purple-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
+      <i data-lucide="plus-circle" class="w-4 h-4"></i> Nueva Orden de Inspección
+    </button>
+  </div>
+</header>
+
+<!-- ALERTAS DJANGO -->
+{% if messages %}
+<div class="max-w-7xl mx-auto mt-4 px-4 space-y-2">
+  {% for message in messages %}
+  <div class="p-4 rounded-2xl text-xs font-bold flex items-center justify-between {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200{% endif %} shadow-sm">
+    <span>{{ message }}</span>
+    <button onclick="this.parentElement.remove()" class="text-xs">✕</button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- FILTROS DE FECHA Y ESTATUS -->
+  <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0">
+      <a href="?filtro=todas" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition whitespace-nowrap {% if tipo_filtro == 'todas' %}bg-purple-600 text-white shadow{% else %}bg-slate-100 hover:bg-slate-200 text-slate-700{% endif %}">
+        Todas las Órdenes
+      </a>
+      <a href="?filtro=hoy" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition whitespace-nowrap {% if tipo_filtro == 'hoy' %}bg-purple-600 text-white shadow{% else %}bg-slate-100 hover:bg-slate-200 text-slate-700{% endif %}">
+        📅 Hoy
+      </a>
+      <a href="?filtro=semana" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition whitespace-nowrap {% if tipo_filtro == 'semana' %}bg-purple-600 text-white shadow{% else %}bg-slate-100 hover:bg-slate-200 text-slate-700{% endif %}">
+        Esta Semana
+      </a>
+      <a href="?filtro=mes" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition whitespace-nowrap {% if tipo_filtro == 'mes' %}bg-purple-600 text-white shadow{% else %}bg-slate-100 hover:bg-slate-200 text-slate-700{% endif %}">
+        Este Mes
+      </a>
+      <a href="?filtro=bimestre" class="px-3.5 py-2 rounded-xl text-xs font-extrabold transition whitespace-nowrap {% if tipo_filtro == 'bimestre' %}bg-purple-600 text-white shadow{% else %}bg-slate-100 hover:bg-slate-200 text-slate-700{% endif %}">
+        Últimos 2 Meses
+      </a>
+    </div>
+
+    <div class="text-xs font-bold text-slate-500 whitespace-nowrap">
+      Órdenes Registradas: <span class="text-slate-900 font-black">{{ ordenes.count }}</span>
+    </div>
+  </div>
+
+  <!-- LISTA DE ÓRDENES DE INSPECCIÓN -->
+  {% if ordenes %}
+  <div class="space-y-6">
+    {% for ord in ordenes %}
+    <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4 hover:shadow-md transition">
+      
+      <!-- Encabezado de la Orden -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black uppercase px-2.5 py-0.5 rounded-md bg-purple-100 text-purple-800">
+              Orden #{{ ord.id }}
+            </span>
+            <span class="text-xs font-bold text-slate-600">
+              📅 {{ ord.fecha_texto }}
+            </span>
+            <span id="badge-estado-{{ ord.id }}" class="text-[10px] font-black uppercase px-2 py-0.5 rounded-full {% if ord.estado == 'Completado' %}bg-emerald-100 text-emerald-800 border border-emerald-200{% elif ord.estado == 'En Proceso' %}bg-amber-100 text-amber-800 border border-amber-200{% else %}bg-slate-100 text-slate-700 border border-slate-200{% endif %}">
+              {{ ord.estado }}
+            </span>
+          </div>
+
+          <h3 class="font-black text-slate-800 text-sm">
+            📍 Rutas: <span class="text-blue-700">{{ ord.rutas_resumen }}</span>
+          </h3>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <a href="{% url 'imprimir_orden_inspeccion' ord.id %}" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
+            <i data-lucide="printer" class="w-3.5 h-3.5"></i> Imprimir PDF
+          </a>
+          <a href="{% url 'eliminar_orden_inspeccion' ord.id %}" onclick="return confirm('¿Seguro que deseas eliminar esta orden de inspección?');" class="bg-red-50 hover:bg-red-100 text-red-600 font-bold px-3 py-2 rounded-xl text-xs transition">
+            Eliminar
+          </a>
+        </div>
+      </div>
+
+      <!-- Detalle Personal -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs bg-slate-50 p-3 rounded-2xl border border-slate-100 font-semibold text-slate-700">
+        <div>👮 <strong>Inspector:</strong> {{ ord.inspector }}</div>
+        <div>🚒 <strong>Operador:</strong> {{ ord.operador }}</div>
+        <div>🕒 <strong>Horario:</strong> {{ ord.horario }}</div>
+      </div>
+
+      <!-- Tabla de Establecimientos a Inspeccionar -->
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 font-extrabold uppercase text-[10px] border-b border-slate-200">
+              <th class="p-2 text-center w-10">#</th>
+              <th class="p-2">Ruta / Zona</th>
+              <th class="p-2">Establecimiento / Comercio</th>
+              <th class="p-2">Mes Pago</th>
+              <th class="p-2 text-center">Realizado</th>
+              <th class="p-2 text-center">Pendiente</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {% for item in ord.items.all %}
+            <tr class="hover:bg-slate-50 transition">
+              <td class="p-2 font-bold text-center text-slate-400">{{ item.numero }}</td>
+              <td class="p-2 font-bold text-blue-900">{{ item.ruta }}</td>
+              <td class="p-2 font-extrabold text-slate-800">{{ item.establecimiento }}</td>
+              <td class="p-2 font-bold text-amber-700">{{ item.mes_pago }}</td>
+              <td class="p-2 text-center">
+                <input type="checkbox" onchange="toggleItemEstatus('{{ item.id }}', this, 'realizado')" {% if item.realizado %}checked{% endif %} class="w-4 h-4 text-emerald-600 rounded border-slate-300 focus:ring-emerald-500 cursor-pointer">
+              </td>
+              <td class="p-2 text-center">
+                <input type="checkbox" onchange="toggleItemEstatus('{{ item.id }}', this, 'pendiente')" {% if item.pendiente %}checked{% endif %} class="w-4 h-4 text-red-600 rounded border-slate-300 focus:ring-red-500 cursor-pointer">
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="bg-white rounded-3xl p-12 text-center text-slate-400 space-y-3 shadow-sm border border-slate-200">
+    <i data-lucide="clipboard-x" class="w-12 h-12 mx-auto text-slate-300"></i>
+    <p class="font-bold text-sm text-slate-600">No hay órdenes de inspección registradas con este filtro.</p>
+    <p class="text-xs text-slate-400">Presiona "Nueva Orden de Inspección" para registrar establecimientos.</p>
+  </div>
+  {% endif %}
+
+</main>
+
+
+<!-- MODAL CREAR NUEVA ORDEN DE INSPECCIÓN -->
+<div id="modal-crear-orden" class="fixed inset-0 bg-black/65 backdrop-blur-sm z-[1000] hidden items-center justify-center p-4">
+  <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 border border-slate-200 max-h-[90vh] overflow-y-auto">
+    
+    <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+      <h3 class="font-black text-slate-800 text-sm uppercase tracking-tight flex items-center gap-2">
+        <span>📋</span> Nueva Orden de Inspección
+      </h3>
+      <button onclick="toggleModal('modal-crear-orden')" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+    </div>
+
+    <form method="POST" action="{% url 'herramienta_inspecciones' %}" class="space-y-4">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="crear_orden">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Fecha *</label>
+          <input type="date" name="fecha_corta" value="{{ hoy_str }}" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Inspector a Cargo *</label>
+          <input type="text" name="inspector" placeholder="Ej. Larisa Pauleth González" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Operador / Conductor *</label>
+          <input type="text" name="operador" placeholder="Ej. Alberto Víquez" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Horario Programado</label>
+          <input type="text" name="horario" value="De 10am A 2pm" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Resumen de Rutas</label>
+          <input type="text" name="rutas_resumen" placeholder="Ej. TEJAR - PUENTE MORENO - PASO DEL TORO" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-purple-500">
+        </div>
+      </div>
+
+      <!-- TABLA DINÁMICA DE ESTABLECIMIENTOS -->
+      <div class="space-y-2 pt-2 border-t border-slate-100">
+        <div class="flex items-center justify-between">
+          <label class="block text-xs font-black text-slate-800 uppercase tracking-tight">
+            🏪 Lista de Comercios a Inspeccionar
+          </label>
+          <button type="button" onclick="agregarFilaComercio()" class="text-xs font-extrabold text-purple-700 bg-purple-50 hover:bg-purple-100 px-3 py-1 rounded-lg border border-purple-200 transition">
+            ➕ Agregar Comercio
+          </button>
+        </div>
+
+        <table class="w-full text-xs text-left border-collapse" id="tabla-comercios-modal">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 font-extrabold uppercase text-[10px]">
+              <th class="p-2 w-1/4">Ruta</th>
+              <th class="p-2 w-1/2">Establecimiento</th>
+              <th class="p-2 w-1/4">Mes Pago</th>
+              <th class="p-2 text-center w-8"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr>
+              <td class="p-1.5"><input type="text" name="item_ruta" placeholder="TEJAR" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs font-bold"></td>
+              <td class="p-1.5"><input type="text" name="item_establecimiento" placeholder="GASOLINERA EL TEJAR" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs font-bold"></td>
+              <td class="p-1.5"><input type="text" name="item_mes_pago" placeholder="ENERO" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs font-bold"></td>
+              <td class="p-1.5 text-center"><button type="button" onclick="this.closest('tr').remove()" class="text-red-500 font-bold text-sm">✕</button></td>
+            </tr>
+            <tr>
+              <td class="p-1.5"><input type="text" name="item_ruta" placeholder="TEJAR" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs font-bold"></td>
+              <td class="p-1.5"><input type="text" name="item_establecimiento" placeholder="ANTOJITOS VIKY" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs font-bold"></td>
+              <td class="p-1.5"><input type="text" name="item_mes_pago" placeholder="MAYO" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs font-bold"></td>
+              <td class="p-1.5 text-center"><button type="button" onclick="this.closest('tr').remove()" class="text-red-500 font-bold text-sm">✕</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
+        <button type="button" onclick="toggleModal('modal-crear-orden')" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+          Cancelar
+        </button>
+        <button type="submit" class="px-5 py-2 text-xs font-extrabold text-white bg-purple-600 hover:bg-purple-700 rounded-xl transition shadow">
+          Crear Orden de Inspección
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script>
+  lucide.createIcons();
+
+  function toggleModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+      }
+    }
+  }
+
+  function agregarFilaComercio() {
+    const tbody = document.querySelector('#tabla-comercios-modal tbody');
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="p-1.5"><input type="text" name="item_ruta" placeholder="RUTA" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs font-bold"></td>
+      <td class="p-1.5"><input type="text" name="item_establecimiento" placeholder="NOMBRE COMERCIO" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs font-bold"></td>
+      <td class="p-1.5"><input type="text" name="item_mes_pago" placeholder="MES" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-1.5 text-xs font-bold"></td>
+      <td class="p-1.5 text-center"><button type="button" onclick="this.closest('tr').remove()" class="text-red-500 font-bold text-sm">✕</button></td>
+    `;
+    tbody.appendChild(tr);
+  }
+
+  function toggleItemEstatus(itemId, chk, campo) {
+    const formData = new FormData();
+    formData.append('action', 'actualizar_estatus');
+    formData.append('item_id', itemId);
+    formData.append(campo, chk.checked ? 'X' : '');
+
+    fetch('{% url "herramienta_inspecciones" %}', {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': '{{ csrf_token }}'
+      },
+      body: formData
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.status === 'ok') {
+        console.log('Estatus actualizado');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

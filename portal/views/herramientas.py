@@ -1,0 +1,250 @@
+# ==============================================================================
+#  🛡️ SUITE DE HERRAMIENTAS AUXILIARES Y APPS EXTERNAS
+#  Copyright (c) 2026 Josué Jaziel Delgado Burela. Todos los derechos reservados.
+#  Desarrollado y Diseñado por: Josué Jaziel Delgado Burela
+#  Contacto y Soporte: jburela1@gmail.com
+# ==============================================================================
+
+import json
+import datetime
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
+from django.db.models import Q
+from django.http import JsonResponse, HttpResponse
+from django.utils import timezone
+
+from portal.models import (
+    ContactoDirectorio,
+    OrdenInspeccion,
+    ItemInspeccion,
+    ConfiguracionInspeccion
+)
+
+def suite_herramientas_hub(request):
+    """
+    Menú principal / Hub de la Suite de Herramientas Auxiliares (Ruta Aislada).
+    """
+    herramientas = [
+        {
+            'id': 'directorio',
+            'titulo': 'Directorio Telefónico y Tarjetas QR',
+            'categoria': 'Comunicación y Contactos',
+            'descripcion': 'Gestión de contactos oficiales, búsqueda rápida y generación de tarjetas digitales con código QR.',
+            'icono': 'contact',
+            'color': 'bg-blue-600',
+            'badge': f"{ContactoDirectorio.objects.count()} Contactos",
+            'url': '/herramientas-auxiliares/directorio/',
+        },
+        {
+            'id': 'inspecciones',
+            'titulo': 'Generador de Órdenes de Inspección',
+            'categoria': 'Protección Civil & Comercio',
+            'descripcion': 'Generación y control de órdenes de inspección por rutas, asignación de inspectores y exportación en PDF.',
+            'icono': 'clipboard-check',
+            'color': 'bg-purple-600',
+            'badge': f"{OrdenInspeccion.objects.count()} Órdenes",
+            'url': '/herramientas-auxiliares/inspecciones/',
+        },
+        {
+            'id': 'futura_tool',
+            'titulo': 'Módulo Extensible (Proximamente)',
+            'categoria': 'Automatización Administrativa',
+            'descripcion': 'Espacio reservado para conectar automáticamente nuevas herramientas y scripts adicionales.',
+            'icono': 'plus-circle',
+            'color': 'bg-slate-500',
+            'badge': 'Próximamente',
+            'url': '#',
+            'disabled': True,
+        }
+    ]
+
+    return render(request, 'portal/herramientas_hub.html', {
+        'herramientas': herramientas
+    })
+
+
+def herramienta_directorio(request):
+    """
+    Vista del Módulo 1: Directorio Telefónico y Tarjetas de Contacto Digitales.
+    """
+    query = request.GET.get('q', '').strip()
+    contactos = ContactoDirectorio.objects.all()
+
+    if query:
+        contactos = contactos.filter(
+            Q(nombre__icontains=query) |
+            Q(empresa__icontains=query) |
+            Q(puesto__icontains=query) |
+            Q(telefono__icontains=query) |
+            Q(email__icontains=query)
+        )
+
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre', '').strip()
+        telefono = request.POST.get('telefono', '').strip()
+        email = request.POST.get('email', '').strip()
+        empresa = request.POST.get('empresa', '').strip()
+        puesto = request.POST.get('puesto', '').strip()
+        direccion = request.POST.get('direccion', '').strip()
+        web = request.POST.get('web', '').strip()
+        foto = request.FILES.get('foto')
+
+        if nombre and telefono:
+            ContactoDirectorio.objects.create(
+                nombre=nombre,
+                telefono=telefono,
+                email=email,
+                empresa=empresa,
+                puesto=puesto,
+                direccion=direccion,
+                web=web,
+                foto=foto
+            )
+            messages.success(request, f"¡Contacto '{nombre}' agregado exitosamente al directorio!")
+            return redirect('herramienta_directorio')
+        else:
+            messages.error(request, "El nombre y teléfono son obligatorios.")
+
+    return render(request, 'portal/herramienta_directorio.html', {
+        'contactos': contactos,
+        'query': query,
+    })
+
+
+def eliminar_contacto_directorio(request, contacto_id):
+    """
+    Elimina un contacto del directorio.
+    """
+    contacto = get_object_or_404(ContactoDirectorio, id=contacto_id)
+    nombre = contacto.nombre
+    contacto.delete()
+    messages.success(request, f"El contacto '{nombre}' fue eliminado del directorio.")
+    return redirect('herramienta_directorio')
+
+
+def herramienta_inspecciones(request):
+    """
+    Vista del Módulo 2: Generador de Órdenes de Inspección de Protección Civil.
+    """
+    tipo_filtro = request.GET.get('filtro', 'todas')
+    hoy = datetime.date.today()
+    
+    ordenes = OrdenInspeccion.objects.all().prefetch_related('items')
+
+    if tipo_filtro == 'hoy':
+        ordenes = ordenes.filter(fecha_corta=hoy)
+    elif tipo_filtro == 'semana':
+        inicio_semana = hoy - datetime.timedelta(days=hoy.weekday())
+        ordenes = ordenes.filter(fecha_corta__gte=inicio_semana)
+    elif tipo_filtro == 'mes':
+        inicio_mes = hoy.replace(day=1)
+        ordenes = ordenes.filter(fecha_corta__gte=inicio_mes)
+    elif tipo_filtro == 'bimestre':
+        inicio_bimestre = hoy - datetime.timedelta(days=60)
+        ordenes = ordenes.filter(fecha_corta__gte=inicio_bimestre)
+
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        
+        if action == 'crear_orden':
+            fecha_corta_str = request.POST.get('fecha_corta', hoy.strftime('%Y-%m-%d'))
+            horario = request.POST.get('horario', 'De 10am A 2pm').strip()
+            rutas_resumen = request.POST.get('rutas_resumen', '').strip()
+            inspector = request.POST.get('inspector', '').strip()
+            operador = request.POST.get('operador', '').strip()
+            director = request.POST.get('director', 'L.E.D. DANIEL EDUARDO ROMERO PILAR').strip()
+
+            # Formatear fecha_texto (ej. JUEVES 06/AGOSTO/26)
+            try:
+                fecha_obj = datetime.datetime.strptime(fecha_corta_str, '%Y-%m-%d').date()
+            except ValueError:
+                fecha_obj = hoy
+            
+            dias = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO', 'DOMINGO']
+            meses = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO', 'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE']
+            fecha_texto = f"{dias[fecha_obj.weekday()]} {fecha_obj.day:02d}/{meses[fecha_obj.month - 1]}/{str(fecha_obj.year)[-2:]}"
+
+            if inspector and operador:
+                orden = OrdenInspeccion.objects.create(
+                    fecha_corta=fecha_obj,
+                    fecha_texto=fecha_texto,
+                    horario=horario,
+                    rutas_resumen=rutas_resumen,
+                    inspector=inspector,
+                    operador=operador,
+                    director=director,
+                    estado='Pendiente'
+                )
+
+                # Procesar lista dinámica de ítems (rutas y establecimientos)
+                rutas = request.POST.getlist('item_ruta')
+                establecimientos = request.POST.getlist('item_establecimiento')
+                meses_pago = request.POST.getlist('item_mes_pago')
+
+                for idx, (rt, est, mp) in enumerate(zip(rutas, establecimientos, meses_pago), start=1):
+                    if est.strip():
+                        ItemInspeccion.objects.create(
+                            orden=orden,
+                            numero=idx,
+                            ruta=rt.strip().upper(),
+                            establecimiento=est.strip().upper(),
+                            mes_pago=mp.strip().upper()
+                        )
+
+                messages.success(request, f"¡Orden de Inspección #{orden.id} creada con éxito con {orden.items.count()} establecimientos!")
+                return redirect('herramienta_inspecciones')
+            else:
+                messages.error(request, "El Inspector y Operador son requeridos.")
+
+        elif action == 'actualizar_estatus':
+            item_id = request.POST.get('item_id')
+            realizado = request.POST.get('realizado', '').strip()
+            pendiente = request.POST.get('pendiente', '').strip()
+
+            item = get_object_or_404(ItemInspeccion, id=item_id)
+            item.realizado = realizado
+            item.pendiente = pendiente
+            item.save()
+
+            # Si todos los ítems están marcados, cambiar estado de la orden
+            orden = item.orden
+            total_items = orden.items.count()
+            completados = orden.items.exclude(realizado='').count()
+            if completados == total_items and total_items > 0:
+                orden.estado = 'Completado'
+            elif completados > 0:
+                orden.estado = 'En Proceso'
+            orden.save()
+
+            return JsonResponse({'status': 'ok', 'estado_orden': orden.estado})
+
+    # Cargar catálogos por defecto para autocompletar
+    config_dict = {cfg.key: cfg.value for cfg in ConfiguracionInspeccion.objects.all()}
+
+    return render(request, 'portal/herramienta_inspecciones.html', {
+        'ordenes': ordenes,
+        'tipo_filtro': tipo_filtro,
+        'hoy_str': hoy.strftime('%Y-%m-%d'),
+        'config_dict': config_dict,
+    })
+
+
+def eliminar_orden_inspeccion(request, orden_id):
+    """
+    Elimina una orden de inspección.
+    """
+    orden = get_object_or_404(OrdenInspeccion, id=orden_id)
+    orden.delete()
+    messages.success(request, f"Se ha eliminado la Orden de Inspección #{orden_id}.")
+    return redirect('herramienta_inspecciones')
+
+
+def imprimir_orden_inspeccion(request, orden_id):
+    """
+    Renders la plantilla imprimible PDF oficial de la Orden de Inspección.
+    """
+    orden = get_object_or_404(OrdenInspeccion.objects.prefetch_related('items'), id=orden_id)
+    return render(request, 'portal/imprimir_orden_inspeccion.html', {
+        'orden': orden,
+        'items': orden.items.all().order_by('numero')
+    })

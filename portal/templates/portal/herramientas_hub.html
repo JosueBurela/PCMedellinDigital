@@ -1,0 +1,123 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suite de Herramientas Auxiliares | PCivil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans antialiased">
+
+<!-- ENCABEZADO Y HEADER -->
+<header class="bg-[#0f2942] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+    
+    <div class="flex items-center space-x-4">
+      <img src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín" class="h-14 w-auto object-contain bg-white/10 rounded-xl p-1">
+      <div>
+        <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Dirección de Protección Civil y Bomberos</span>
+        <h1 class="text-lg md:text-xl font-black tracking-tight">SUITE DE HERRAMIENTAS AUXILIARES</h1>
+        <p class="text-xs text-slate-300">Portal de Automatización y Herramientas Especiales</p>
+      </div>
+    </div>
+
+    <div class="flex items-center space-x-3">
+      <img src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín" class="h-14 w-auto object-contain bg-white/10 rounded-xl p-1">
+    </div>
+
+  </div>
+</header>
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+  <!-- BANNER DE BIENVENIDA -->
+  <div class="bg-gradient-to-r from-blue-900 via-indigo-900 to-[#0f2942] rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden">
+    <div class="relative z-10 max-w-3xl space-y-3">
+      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-extrabold bg-blue-500/30 text-blue-200 border border-blue-400/30 backdrop-blur-sm">
+        🛠️ Herramientas Administrativas & Automáticas
+      </span>
+      <h2 class="text-2xl md:text-3xl font-black tracking-tight">Panel de Herramientas Especiales</h2>
+      <p class="text-sm text-slate-200 leading-relaxed font-medium">
+        Selecciona cualquiera de los módulos disponibles para gestionar directorios, generar tarjetas digitales o consultar y emitir órdenes oficiales de inspección. Este menú se expandirá automáticamente con nuevas aplicaciones.
+      </p>
+    </div>
+  </div>
+
+  <!-- REJILLA DE TARJETAS DE HERRAMIENTAS -->
+  <div class="space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-base font-black text-slate-800 uppercase tracking-tight flex items-center gap-2">
+        <span>🎛️</span> Módulos Disponibles ({{ herramientas|length }})
+      </h3>
+      <span class="text-xs font-bold text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">
+        Ruta Aislada Secundario
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {% for tool in herramientas %}
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group {% if tool.disabled %}opacity-60 grayscale{% endif %}">
+        
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="w-12 h-12 rounded-2xl {{ tool.color }} text-white flex items-center justify-center shadow-md group-hover:scale-110 transition duration-300">
+              <i data-lucide="{{ tool.icono }}" class="w-6 h-6"></i>
+            </div>
+            <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+              {{ tool.badge }}
+            </span>
+          </div>
+
+          <div>
+            <span class="text-[10px] font-bold text-blue-600 uppercase tracking-wider block">
+              {{ tool.categoria }}
+            </span>
+            <h4 class="text-lg font-black text-slate-800 tracking-tight mt-0.5 group-hover:text-blue-600 transition">
+              {{ tool.titulo }}
+            </h4>
+            <p class="text-xs text-slate-500 font-medium leading-relaxed mt-2">
+              {{ tool.descripcion }}
+            </p>
+          </div>
+        </div>
+
+        <div class="pt-6 border-t border-slate-100 mt-6">
+          {% if not tool.disabled %}
+          <a href="{{ tool.url }}" class="w-full inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-blue-600 text-white font-extrabold py-3 px-4 rounded-2xl text-xs shadow-md transition duration-200">
+            <span>Abrir Herramienta</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          {% else %}
+          <button disabled class="w-full bg-slate-200 text-slate-500 font-bold py-3 px-4 rounded-2xl text-xs cursor-not-allowed">
+            Próximamente Disponible
+          </button>
+          {% endif %}
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- NOTA DE EXTENSIBILIDAD -->
+  <div class="bg-blue-50/80 border border-blue-200 rounded-3xl p-6 text-slate-700 text-xs space-y-2">
+    <div class="flex items-center gap-2 text-blue-900 font-extrabold text-sm">
+      <i data-lucide="info" class="w-5 h-5 text-blue-600"></i>
+      <span>¿Cómo agregar nuevas aplicaciones o herramientas?</span>
+    </div>
+    <p class="font-medium text-slate-600 leading-relaxed">
+      Cada vez que agregues un nuevo programa o script a la carpeta <code class="bg-blue-100 text-blue-900 px-2 py-0.5 rounded font-mono font-bold">Apps extras</code>, el sistema registrará automáticamente su tarjeta en este panel manteniendo la URL aislada sin afectar el sitio público principal.
+    </p>
+  </div>
+
+</main>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

@@ -1,0 +1,263 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Directorio Telefónico & Tarjetas QR | PCivil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans antialiased">
+
+<!-- ENCABEZADO Y HEADER -->
+<header class="bg-[#0f2942] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <a href="{% url 'suite_herramientas_hub' %}" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </a>
+      <div>
+        <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Suite de Herramientas Auxiliares</span>
+        <h1 class="text-base md:text-lg font-black tracking-tight">📇 Directorio Telefónico y Tarjetas QR</h1>
+      </div>
+    </div>
+
+    <button onclick="toggleModal('modal-agregar')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
+      <i data-lucide="user-plus" class="w-4 h-4"></i> Nuevo Contacto
+    </button>
+  </div>
+</header>
+
+<!-- ALERTAS DJANGO -->
+{% if messages %}
+<div class="max-w-7xl mx-auto mt-4 px-4 space-y-2">
+  {% for message in messages %}
+  <div class="p-4 rounded-2xl text-xs font-bold flex items-center justify-between {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200{% endif %} shadow-sm">
+    <span>{{ message }}</span>
+    <button onclick="this.parentElement.remove()" class="text-xs">✕</button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="max-w-7xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- BARRA DE BÚSQUEDA -->
+  <div class="bg-white rounded-3xl p-4 shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
+    <form method="GET" action="{% url 'herramienta_directorio' %}" class="w-full flex items-center gap-2">
+      <div class="relative flex-1">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3.5 text-slate-400"></i>
+        <input type="text" name="q" value="{{ query }}" placeholder="Buscar por nombre, empresa, puesto, teléfono o correo..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl pl-10 pr-4 py-2.5 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-extrabold px-5 py-2.5 rounded-2xl text-xs transition shadow">
+        Buscar
+      </button>
+      {% if query %}
+      <a href="{% url 'herramienta_directorio' %}" class="bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold px-3 py-2.5 rounded-2xl text-xs transition">
+        Limpiar
+      </a>
+      {% endif %}
+    </form>
+
+    <div class="text-xs font-bold text-slate-500 whitespace-nowrap">
+      Total Contactos: <span class="text-slate-800 font-black">{{ contactos.count }}</span>
+    </div>
+  </div>
+
+  <!-- REJILLA DE TARJETAS DE CONTACTO -->
+  {% if contactos %}
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for c in contactos %}
+    <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-lg transition space-y-4 relative">
+      
+      <div class="flex items-start space-x-4">
+        {% if c.foto %}
+        <img src="{{ c.foto.url }}" alt="{{ c.nombre }}" class="w-14 h-14 rounded-2xl object-cover border-2 border-amber-500 shadow-sm">
+        {% else %}
+        <div class="w-14 h-14 rounded-2xl bg-amber-500 text-white font-black text-xl flex items-center justify-center shadow-sm">
+          {{ c.nombre|slice:":1"|upper }}
+        </div>
+        {% endif %}
+
+        <div class="flex-1 min-w-0">
+          <h3 class="font-black text-slate-900 text-base truncate">{{ c.nombre }}</h3>
+          {% if c.puesto %}
+          <p class="text-xs font-bold text-amber-700 truncate">{{ c.puesto }}</p>
+          {% endif %}
+          {% if c.empresa %}
+          <p class="text-xs font-semibold text-slate-500 truncate">{{ c.empresa }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="space-y-2 border-t border-b border-slate-100 py-3 text-xs">
+        <div class="flex items-center gap-2 text-slate-700 font-semibold">
+          <i data-lucide="phone" class="w-4 h-4 text-emerald-600"></i>
+          <a href="tel:{{ c.telefono }}" class="hover:underline font-bold text-slate-900">{{ c.telefono }}</a>
+        </div>
+        {% if c.email %}
+        <div class="flex items-center gap-2 text-slate-700 font-semibold truncate">
+          <i data-lucide="mail" class="w-4 h-4 text-blue-600"></i>
+          <a href="mailto:{{ c.email }}" class="hover:underline truncate">{{ c.email }}</a>
+        </div>
+        {% endif %}
+        {% if c.direccion %}
+        <div class="flex items-start gap-2 text-slate-500 text-[11px]">
+          <i data-lucide="map-pin" class="w-4 h-4 text-slate-400 shrink-0 mt-0.5"></i>
+          <span class="line-clamp-2">{{ c.direccion }}</span>
+        </div>
+        {% endif %}
+      </div>
+
+      <div class="flex items-center justify-between pt-1">
+        <button onclick="verTarjetaQr('{{ c.nombre }}', '{{ c.telefono }}', '{{ c.email|default:"" }}', '{{ c.puesto|default:"" }}', '{{ c.empresa|default:"" }}')" class="bg-amber-50 hover:bg-amber-100 text-amber-800 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 border border-amber-200 transition">
+          <i data-lucide="qr-code" class="w-3.5 h-3.5"></i> Tarjeta Digital QR
+        </button>
+
+        <a href="{% url 'eliminar_contacto_directorio' c.id %}" onclick="return confirm('¿Seguro que deseas eliminar este contacto?');" class="text-red-500 hover:text-red-700 text-xs font-bold">
+          Eliminar
+        </a>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="bg-white rounded-3xl p-12 text-center text-slate-400 space-y-3 shadow-sm border border-slate-200">
+    <i data-lucide="contact" class="w-12 h-12 mx-auto text-slate-300"></i>
+    <p class="font-bold text-sm text-slate-600">No se encontraron contactos en el directorio.</p>
+    <p class="text-xs text-slate-400">Presiona el botón "Nuevo Contacto" arriba para agregar un registro.</p>
+  </div>
+  {% endif %}
+
+</main>
+
+
+<!-- MODAL AGREGAR CONTACTO -->
+<div id="modal-agregar" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1000] hidden items-center justify-center p-4">
+  <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl space-y-4 border border-slate-200">
+    <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+      <h3 class="font-black text-slate-800 text-sm uppercase tracking-tight flex items-center gap-2">
+        <span>👤</span> Nuevo Contacto de Directorio
+      </h3>
+      <button onclick="toggleModal('modal-agregar')" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+    </div>
+
+    <form method="POST" action="{% url 'herramienta_directorio' %}" enctype="multipart/form-data" class="space-y-3">
+      {% csrf_token %}
+      
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Nombre Completo *</label>
+        <input type="text" name="nombre" required placeholder="Ej. Lic. Laura Martínez" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Teléfono *</label>
+          <input type="text" name="telefono" required placeholder="Ej. 2291234567" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Correo Electrónico</label>
+          <input type="email" name="email" placeholder="correo@ejemplo.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Empresa / Dirección</label>
+          <input type="text" name="empresa" placeholder="Ej. Protección Civil Medellín" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Puesto / Cargo</label>
+          <input type="text" name="puesto" placeholder="Ej. Coordinadora Administrativa" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Dirección Física</label>
+        <input type="text" name="direccion" placeholder="Calle, Número, Colonia, Municipio" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Fotografía / Logotipo (Opcional)</label>
+        <input type="file" name="foto" accept="image/*" class="w-full text-xs font-semibold text-slate-600 border border-slate-200 rounded-xl p-2 bg-slate-50">
+      </div>
+
+      <div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
+        <button type="button" onclick="toggleModal('modal-agregar')" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+          Cancelar
+        </button>
+        <button type="submit" class="px-5 py-2 text-xs font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition shadow">
+          Guardar Contacto
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<!-- MODAL TARJETA QR DIGITAL -->
+<div id="modal-qr" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1000] hidden items-center justify-center p-4">
+  <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4 border border-slate-200 text-center relative">
+    <button onclick="toggleModal('modal-qr')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 font-bold">✕</button>
+
+    <div class="bg-gradient-to-br from-[#0f2942] to-indigo-950 text-white rounded-2xl p-5 shadow-lg space-y-3 border-2 border-amber-500/50">
+      <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Credencial Digital QR</span>
+      
+      <div id="qr-img-container" class="bg-white p-3 rounded-2xl inline-block shadow-md">
+        <img id="qr-img" src="" alt="Código QR Contacto" class="w-44 h-44 mx-auto">
+      </div>
+
+      <div>
+        <h4 id="qr-nombre" class="font-black text-base text-white">--</h4>
+        <p id="qr-puesto" class="text-xs text-amber-300 font-bold">--</p>
+        <p id="qr-empresa" class="text-[11px] text-slate-300">--</p>
+      </div>
+    </div>
+
+    <p class="text-[11px] text-slate-500 font-medium">
+      Escanea el código QR con cualquier celular para guardar la tarjeta de contacto directamente en la agenda.
+    </p>
+
+    <button onclick="toggleModal('modal-qr')" class="w-full bg-slate-900 text-white font-bold py-2.5 rounded-xl text-xs">
+      Cerrar Tarjeta
+    </button>
+  </div>
+</div>
+
+
+<script>
+  lucide.createIcons();
+
+  function toggleModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      if (modal.classList.contains('hidden')) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+      }
+    }
+  }
+
+  function verTarjetaQr(nombre, telefono, email, puesto, empresa) {
+    document.getElementById('qr-nombre').innerText = nombre;
+    document.getElementById('qr-puesto').innerText = puesto || 'Contacto Oficial';
+    document.getElementById('qr-empresa').innerText = empresa || 'Protección Civil Medellín';
+
+    // Generar vCard string para el QR
+    const vcard = `BEGIN:VCARD\nVERSION:3.0\nN:${nombre}\nFN:${nombre}\nTEL:${telefono}\nEMAIL:${email}\nORG:${empresa}\nTITLE:${puesto}\nEND:VCARD`;
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(vcard)}`;
+
+    document.getElementById('qr-img').src = qrUrl;
+    toggleModal('modal-qr');
+  }
+</script>
+
+</body>
+</html>

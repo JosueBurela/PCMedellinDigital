@@ -572,4 +572,85 @@ class RolGuardiaFirmado(models.Model):
         return f"Rol Firmado ({self.fecha_periodo.strftime('%d/%m/%Y')}) - {self.get_guardia_tipo_display()}"
 
 
+# ==============================================================================
+#  🛠️ SUITE DE HERRAMIENTAS AUXILIARES Y APPS EXTERNAS
+# ==============================================================================
+
+class ContactoDirectorio(models.Model):
+    nombre = models.CharField(max_length=150)
+    telefono = models.CharField(max_length=30)
+    email = models.EmailField(blank=True, null=True)
+    empresa = models.CharField(max_length=150, blank=True, null=True)
+    puesto = models.CharField(max_length=150, blank=True, null=True)
+    direccion = models.TextField(blank=True, null=True)
+    web = models.CharField(max_length=150, blank=True, null=True)
+    foto = models.ImageField(upload_to='directorio/', blank=True, null=True)
+    creado_en = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Contacto de Directorio"
+        verbose_name_plural = "Contactos de Directorio"
+        ordering = ['nombre']
+
+    def __str__(self):
+        return f"{self.nombre} ({self.puesto or 'Contacto'})"
+
+
+class OrdenInspeccion(models.Model):
+    ESTADO_CHOICES = [
+        ('Pendiente', 'Pendiente'),
+        ('En Proceso', 'En Proceso'),
+        ('Completado', 'Completado'),
+    ]
+
+    fecha_corta = models.DateField()
+    fecha_texto = models.CharField(max_length=150)
+    horario = models.CharField(max_length=100, default='De 10am A 2pm')
+    rutas_resumen = models.CharField(max_length=255)
+    inspector = models.CharField(max_length=150)
+    operador = models.CharField(max_length=150)
+    director = models.CharField(max_length=150, default='L.E.D. DANIEL EDUARDO ROMERO PILAR')
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='Pendiente')
+    creado_en = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Orden de Inspección"
+        verbose_name_plural = "Órdenes de Inspecciones"
+        ordering = ['-fecha_corta', '-id']
+
+    def __str__(self):
+        return f"Orden #{self.id} ({self.fecha_corta}) - Inspector: {self.inspector}"
+
+
+class ItemInspeccion(models.Model):
+    orden = models.ForeignKey(OrdenInspeccion, related_name='items', on_delete=models.CASCADE)
+    numero = models.IntegerField(default=1)
+    ruta = models.CharField(max_length=150)
+    establecimiento = models.CharField(max_length=255)
+    mes_pago = models.CharField(max_length=50, blank=True, default='')
+    realizado = models.CharField(max_length=50, blank=True, default='')
+    pendiente = models.CharField(max_length=50, blank=True, default='')
+
+    class Meta:
+        verbose_name = "Ítem de Inspección"
+        verbose_name_plural = "Ítems de Inspección"
+        ordering = ['numero']
+
+    def __str__(self):
+        return f"Item #{self.numero} ({self.ruta}) - {self.establecimiento}"
+
+
+class ConfiguracionInspeccion(models.Model):
+    key = models.CharField(max_length=100, unique=True)
+    value = models.TextField()
+
+    class Meta:
+        verbose_name = "Configuración de Inspección"
+        verbose_name_plural = "Configuraciones de Inspección"
+
+    def __str__(self):
+        return f"{self.key}: {self.value[:30]}"
+
+
+
 
