@@ -244,16 +244,20 @@
     object-fit: contain;
   }
 
-  /* IMPRESIÓN OFICIAL Y MULTI-PÁGINA (@media print) */
+  /* IMPRESIÓN OFICIAL (@media print) */
   @media print {
     @page {
       size: letter portrait;
-      margin: 28mm 14mm 20mm 14mm;
+      margin: 0;
     }
 
-    body {
+    html, body {
       background-color: #ffffff !important;
-      font-size: 9.5pt;
+      margin: 0 !important;
+      padding: 0 !important;
+      width: 100% !important;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
     }
 
     .toolbar, .no-print {
@@ -269,46 +273,39 @@
 
     .sheet-container {
       width: 100% !important;
-      min-height: auto !important;
+      min-height: 279.4mm !important;
       box-shadow: none !important;
       border: none !important;
+      margin: 0 !important;
       padding: 0 !important;
-      overflow: visible !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
     }
 
-    /* CABECERA FIJA Y REPETIBLE EN CADA PÁGINA */
     .print-header {
-      position: fixed;
-      top: -28mm;
-      left: -14mm;
-      right: -14mm;
-      height: 26mm;
-      width: calc(100% + 28mm);
-      z-index: 1000;
+      width: 100% !important;
+      position: static !important;
+    }
+
+    .print-footer {
+      width: 100% !important;
+      position: relative !important;
+      margin-top: auto !important;
     }
 
     .membrete-head-img {
-      height: 26mm !important;
-    }
-
-    /* PIE DE PÁGINA FIJO Y REPETIBLE EN CADA PÁGINA */
-    .print-footer {
-      position: fixed;
-      bottom: -20mm;
-      left: -14mm;
-      right: -14mm;
-      height: 18mm;
-      width: calc(100% + 28mm);
-      z-index: 1000;
+      width: 100% !important;
+      height: 95px !important;
+      object-fit: fill !important;
+      display: block !important;
     }
 
     .membrete-foot-img {
-      height: 18mm !important;
-    }
-
-    .content-body {
-      padding: 0 !important;
-      overflow: visible !important;
+      width: 100% !important;
+      height: 48px !important;
+      object-fit: fill !important;
+      display: block !important;
     }
 
     .atentamente-block {
