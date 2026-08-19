@@ -45,11 +45,11 @@
     margin: 20px auto 40px auto;
   }
 
+  /* PANTALLA GENERAL (Vista previa web) */
   .sheet-container {
     background-color: #ffffff;
     width: 215.9mm;
-    height: 279.4mm;
-    max-height: 279.4mm;
+    min-height: 279.4mm;
     margin: 0 auto;
     position: relative;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
@@ -57,7 +57,16 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 0;
-    overflow: hidden;
+  }
+
+  .print-header {
+    width: 100%;
+  }
+
+  .print-footer {
+    position: relative;
+    width: 100%;
+    margin-top: auto;
   }
 
   /* MEMBRETE SUPERIOR */
@@ -69,11 +78,10 @@
   }
 
   .content-body {
-    padding: 10px 42px 8px 42px;
+    padding: 12px 42px 16px 42px;
     flex: 1;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
   }
 
   /* ESTILOS OFICIO */
@@ -83,14 +91,14 @@
   }
 
   .inst-title {
-    font-size: 10.5pt;
+    font-size: 11pt;
     font-weight: 800;
     color: #000000;
     line-height: 1.25;
   }
 
   .inst-subtitle {
-    font-size: 9.5pt;
+    font-size: 10pt;
     font-weight: 800;
     color: #000000;
     margin-top: 2px;
@@ -98,60 +106,60 @@
 
   .meta-oficio-block {
     text-align: right;
-    font-size: 9pt;
+    font-size: 9.5pt;
     font-weight: 700;
     color: #000000;
-    line-height: 1.3;
+    line-height: 1.35;
     margin-bottom: 14px;
   }
 
   .destinatario-block {
-    font-size: 9.5pt;
+    font-size: 10pt;
     font-weight: 800;
     color: #000000;
-    line-height: 1.25;
-    margin-bottom: 12px;
+    line-height: 1.3;
+    margin-bottom: 14px;
     text-transform: uppercase;
   }
 
   .atencion-block {
     text-align: right;
-    font-size: 9.5pt;
+    font-size: 10pt;
     font-weight: 800;
     color: #000000;
-    line-height: 1.25;
-    margin-bottom: 12px;
+    line-height: 1.3;
+    margin-bottom: 14px;
     text-transform: uppercase;
   }
 
   .presente-tag {
-    font-size: 10pt;
+    font-size: 10.5pt;
     font-weight: 800;
     letter-spacing: 3px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     display: block;
   }
 
   /* ESTILOS TARJETA INFORMATIVA */
   .tarjeta-header-title {
     text-align: center;
-    font-size: 11.5pt;
+    font-size: 12.5pt;
     font-weight: 900;
     letter-spacing: 1px;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     text-transform: uppercase;
   }
 
   .tarjeta-meta-list {
-    font-size: 8.8pt;
-    line-height: 1.35;
-    margin-bottom: 10px;
+    font-size: 9.5pt;
+    line-height: 1.4;
+    margin-bottom: 12px;
     color: #000000;
   }
 
   .tarjeta-meta-item {
-    margin-bottom: 2px;
+    margin-bottom: 3px;
   }
 
   .tarjeta-meta-item strong {
@@ -160,65 +168,59 @@
   }
 
   .hechos-section-title {
-    font-size: 9.5pt;
+    font-size: 10pt;
     font-weight: 900;
     text-transform: uppercase;
-    margin-top: 4px;
-    margin-bottom: 6px;
+    margin-top: 6px;
+    margin-bottom: 8px;
     letter-spacing: 0.5px;
   }
 
   .cuerpo-text {
-    font-size: 8.8pt;
-    line-height: 1.35;
+    font-size: 9.5pt;
+    line-height: 1.45;
     color: #000000;
     text-align: justify;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
     white-space: pre-line;
   }
 
   .atentamente-block {
     text-align: center;
     margin-top: auto;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   .atentamente-title {
-    font-size: 9.5pt;
+    font-size: 10pt;
     font-weight: 800;
     letter-spacing: 1px;
-    margin-bottom: 14px;
+    margin-bottom: 18px;
   }
 
   .firmante-nombre {
-    font-size: 8.8pt;
+    font-size: 9.5pt;
     font-weight: 800;
     color: #000000;
   }
 
   .firmante-cargo {
-    font-size: 7.8pt;
+    font-size: 8.2pt;
     font-weight: 800;
     color: #000000;
-    max-width: 440px;
+    max-width: 480px;
     margin: 2px auto 0 auto;
-    line-height: 1.2;
+    line-height: 1.25;
   }
 
   .ccp-block {
-    font-size: 7pt;
+    font-size: 7.5pt;
     color: #333333;
-    line-height: 1.25;
-    margin-top: 6px;
+    line-height: 1.3;
+    margin-top: 8px;
   }
 
   /* MEMBRETE INFERIOR */
-  .footer-container {
-    position: relative;
-    width: 100%;
-    margin-top: auto;
-  }
-
   .membrete-foot-img {
     width: 100%;
     height: 48px;
@@ -242,38 +244,74 @@
     object-fit: contain;
   }
 
+  /* IMPRESIÓN OFICIAL Y MULTI-PÁGINA (@media print) */
   @media print {
     @page {
       size: letter portrait;
-      margin: 0;
+      margin: 28mm 14mm 20mm 14mm;
     }
-    html, body {
-      width: 215.9mm !important;
-      height: 279.4mm !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: hidden !important;
+
+    body {
       background-color: #ffffff !important;
+      font-size: 9.5pt;
     }
+
     .toolbar, .no-print {
       display: none !important;
     }
+
     .main-wrapper {
       margin: 0 !important;
       padding: 0 !important;
       max-width: 100% !important;
-      width: 215.9mm !important;
-      height: 279.4mm !important;
+      width: 100% !important;
     }
+
     .sheet-container {
-      width: 215.9mm !important;
-      height: 279.4mm !important;
-      max-height: 279.4mm !important;
+      width: 100% !important;
+      min-height: auto !important;
       box-shadow: none !important;
       border: none !important;
-      overflow: hidden !important;
-      page-break-after: avoid !important;
-      break-after: avoid !important;
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+
+    /* CABECERA FIJA Y REPETIBLE EN CADA PÁGINA */
+    .print-header {
+      position: fixed;
+      top: -28mm;
+      left: -14mm;
+      right: -14mm;
+      height: 26mm;
+      width: calc(100% + 28mm);
+      z-index: 1000;
+    }
+
+    .membrete-head-img {
+      height: 26mm !important;
+    }
+
+    /* PIE DE PÁGINA FIJO Y REPETIBLE EN CADA PÁGINA */
+    .print-footer {
+      position: fixed;
+      bottom: -20mm;
+      left: -14mm;
+      right: -14mm;
+      height: 18mm;
+      width: calc(100% + 28mm);
+      z-index: 1000;
+    }
+
+    .membrete-foot-img {
+      height: 18mm !important;
+    }
+
+    .content-body {
+      padding: 0 !important;
+      overflow: visible !important;
+    }
+
+    .atentamente-block {
       page-break-inside: avoid !important;
       break-inside: avoid !important;
     }
@@ -304,7 +342,7 @@
   <div class="sheet-container">
     
     <!-- MEMBRETE SUPERIOR DE BANNER -->
-    <div>
+    <div class="print-header">
       <img src="{% static 'portal/img/membrete_superior.jpg' %}" alt="Membrete Superior Medellín" class="membrete-head-img">
     </div>
 
@@ -397,7 +435,7 @@
     </div>
 
     <!-- MEMBRETE INFERIOR BANNER CON DIRECCIÓN -->
-    <div class="footer-container">
+    <div class="print-footer footer-container">
       <img src="{% static 'portal/img/membrete_inferior.jpg' %}" alt="Membrete Inferior" class="membrete-foot-img">
       <div class="membrete-foot-text-overlay">
         <img src="{% static 'portal/img/membrete_inferior_texto.png' %}" alt="Dirección y Teléfono" class="membrete-foot-text-img">
