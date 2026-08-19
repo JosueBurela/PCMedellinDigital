@@ -244,7 +244,7 @@
     object-fit: contain;
   }
 
-  /* IMPRESIÓN OFICIAL (@media print) */
+  /* IMPRESIÓN OFICIAL INAMOVIBLE (1 HOJA CARTA) */
   @media print {
     @page {
       size: letter portrait;
@@ -255,7 +255,10 @@
       background-color: #ffffff !important;
       margin: 0 !important;
       padding: 0 !important;
-      width: 100% !important;
+      width: 215.9mm !important;
+      height: 279.4mm !important;
+      max-height: 279.4mm !important;
+      overflow: hidden !important;
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
     }
@@ -267,13 +270,16 @@
     .main-wrapper {
       margin: 0 !important;
       padding: 0 !important;
-      max-width: 100% !important;
-      width: 100% !important;
+      width: 215.9mm !important;
+      height: 279.4mm !important;
+      max-height: 279.4mm !important;
+      overflow: hidden !important;
     }
 
     .sheet-container {
-      width: 100% !important;
-      min-height: 279.4mm !important;
+      width: 215.9mm !important;
+      height: 279.4mm !important;
+      max-height: 279.4mm !important;
       box-shadow: none !important;
       border: none !important;
       margin: 0 !important;
@@ -281,36 +287,101 @@
       display: flex !important;
       flex-direction: column !important;
       justify-content: space-between !important;
+      overflow: hidden !important;
+      page-break-after: avoid !important;
+      break-after: avoid !important;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
     }
 
     .print-header {
       width: 100% !important;
-      position: static !important;
-    }
-
-    .print-footer {
-      width: 100% !important;
-      position: relative !important;
-      margin-top: auto !important;
+      height: 85px !important;
+      flex-shrink: 0 !important;
     }
 
     .membrete-head-img {
       width: 100% !important;
-      height: 95px !important;
+      height: 85px !important;
       object-fit: fill !important;
       display: block !important;
+    }
+
+    .content-body {
+      padding: 8px 36px 6px 36px !important;
+      flex: 1 !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      overflow: hidden !important;
+    }
+
+    .tarjeta-header-title {
+      font-size: 11pt !important;
+      margin-bottom: 8px !important;
+    }
+
+    .tarjeta-meta-list {
+      font-size: 8.5pt !important;
+      line-height: 1.3 !important;
+      margin-bottom: 8px !important;
+    }
+
+    .cuerpo-text {
+      font-size: 8.5pt !important;
+      line-height: 1.32 !important;
+      margin-bottom: 8px !important;
+    }
+
+    .atentamente-block {
+      margin-top: auto !important;
+      margin-bottom: 4px !important;
+      page-break-inside: avoid !important;
+      break-inside: avoid !important;
+    }
+
+    .atentamente-title {
+      font-size: 9pt !important;
+      margin-bottom: 10px !important;
+    }
+
+    .firmante-nombre {
+      font-size: 8.5pt !important;
+    }
+
+    .firmante-cargo {
+      font-size: 7.5pt !important;
+    }
+
+    .print-footer {
+      width: 100% !important;
+      height: 42px !important;
+      position: relative !important;
+      margin-top: auto !important;
+      flex-shrink: 0 !important;
     }
 
     .membrete-foot-img {
       width: 100% !important;
-      height: 48px !important;
+      height: 42px !important;
       object-fit: fill !important;
       display: block !important;
     }
 
-    .atentamente-block {
-      page-break-inside: avoid !important;
-      break-inside: avoid !important;
+    .membrete-foot-text-overlay {
+      position: absolute !important;
+      inset: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-start !important;
+      padding-left: 20px !important;
+      padding-top: 10px !important;
+    }
+
+    .membrete-foot-text-img {
+      max-width: 80% !important;
+      max-height: 20px !important;
+      object-fit: contain !important;
     }
   }
 </style>
