@@ -63,13 +63,11 @@
   .membrete-head-img {
     width: 100%;
     height: auto;
-    max-height: 70px;
-    object-fit: cover;
     display: block;
   }
 
   .content-body {
-    padding: 10px 48px 20px 48px;
+    padding: 8px 48px 12px 48px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -184,18 +182,22 @@
   .membrete-foot-img {
     width: 100%;
     height: auto;
-    max-height: 60px;
-    object-fit: cover;
     display: block;
   }
 
-  .membrete-foot-text-img {
+  .membrete-foot-text-overlay {
     position: absolute;
-    bottom: 6px;
-    left: 0;
-    width: 100%;
-    height: auto;
-    max-height: 20px;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 24px;
+    padding-top: 18px;
+  }
+
+  .membrete-foot-text-img {
+    max-width: 80%;
+    max-height: 28px;
     object-fit: contain;
   }
 
@@ -302,7 +304,9 @@
     <!-- MEMBRETE INFERIOR BANNER CON DIRECCIÓN -->
     <div class="footer-container">
       <img src="{% static 'portal/img/membrete_inferior.jpg' %}" alt="Membrete Inferior" class="membrete-foot-img">
-      <img src="{% static 'portal/img/membrete_inferior_texto.png' %}" alt="Dirección y Teléfono" class="membrete-foot-text-img">
+      <div class="membrete-foot-text-overlay">
+        <img src="{% static 'portal/img/membrete_inferior_texto.png' %}" alt="Dirección y Teléfono" class="membrete-foot-text-img">
+      </div>
     </div>
 
   </div>
