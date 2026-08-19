@@ -225,8 +225,11 @@
 
       <!-- CUERPO DE TEXTO / HECHOS -->
       <div>
-        <label id="lbl-cuerpo-texto" class="block text-xs font-bold text-slate-700 mb-1">Descripción de los HECHOS / Narrativa *</label>
-        <textarea name="cuerpo_texto" id="field-cuerpo" rows="8" required placeholder="Redacta la narrativa detallada de los hechos, unidades movilizadas, maniobras de atención y personas valoradas..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+        <div class="flex justify-between items-center mb-1">
+          <label id="lbl-cuerpo-texto" class="block text-xs font-bold text-slate-700">Descripción de los HECHOS / Narrativa *</label>
+          <span id="char-counter" class="text-[11px] font-extrabold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">0 / 1500 caracteres</span>
+        </div>
+        <textarea name="cuerpo_texto" id="field-cuerpo" rows="7" maxlength="1500" oninput="actualizarContador(this)" required placeholder="Redacta la narrativa detallada de los hechos o el cuerpo del oficio..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
       </div>
 
       <!-- FIRMA Y CCP -->
@@ -297,6 +300,19 @@
     }
   }
 
+  function actualizarContador(textarea) {
+    const counter = document.getElementById('char-counter');
+    if (counter && textarea) {
+      const len = textarea.value.length;
+      counter.innerText = `${len} / 1500 caracteres`;
+      if (len >= 1400) {
+        counter.className = "text-[11px] font-extrabold text-red-600 bg-red-100 px-2 py-0.5 rounded-md animate-pulse";
+      } else {
+        counter.className = "text-[11px] font-extrabold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md";
+      }
+    }
+  }
+
   function cargarEjemploTarjeta() {
     document.getElementById('field-tipo-doc').value = 'TARJETA_INFORMATIVA';
     alternarTipoDocumento('TARJETA_INFORMATIVA');
@@ -307,7 +323,8 @@
     document.getElementById('field-hora-arribo').value = '10:32 horas';
     document.getElementById('field-lugar-hechos').value = 'Calle Ciprés s/n, entre calle Almendro y calle del Parque, colonia Nuevo Medellín, municipio de Medellín de Bravo, Veracruz.';
 
-    document.getElementById('field-cuerpo').value = `Siendo las 10:08 horas del día 19 de agosto de 2026, se recibió un reporte por parte del C5, informando sobre un incendio en una casa habitación ubicada en calle Ciprés s/n, entre calle Almendro y calle del Parque, colonia Nuevo Medellín, municipio de Medellín de Bravo, Veracruz.
+    const cuerpoField = document.getElementById('field-cuerpo');
+    cuerpoField.value = `Siendo las 10:08 horas del día 19 de agosto de 2026, se recibió un reporte por parte del C5, informando sobre un incendio en una casa habitación ubicada en calle Ciprés s/n, entre calle Almendro y calle del Parque, colonia Nuevo Medellín, municipio de Medellín de Bravo, Veracruz.
 
 En atención al reporte, se movilizaron las unidades 072, tipo pipa; 096, tipo pick up; y 208, ambulancia, con personal operativo de Protección Civil y Bomberos de Medellín de Bravo.
 
@@ -325,6 +342,8 @@ Una vez controlada la emergencia, el personal operativo se entrevistó con la C.
 
 Finalmente, al no existir condiciones que ameritaran la permanencia de las unidades en el lugar, el personal operativo dio por concluido el servicio y se retiró sin novedad.`;
 
+    actualizarContador(cuerpoField);
+
     document.getElementById('field-firmante-nombre').value = 'UNIDAD MUNICIPAL DE';
     document.getElementById('field-firmante-cargo').value = 'PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER';
 
@@ -341,13 +360,17 @@ Finalmente, al no existir condiciones que ameritaran la permanencia de las unida
     document.getElementById('field-dest-dependencia').value = 'DE MEDELLIN DE BRAVO, VERACRUZ.';
     document.getElementById('field-atn-nombre').value = 'LIC. JESSICA DURÀN GOMEZ';
     document.getElementById('field-atn-cargo').value = 'PRESIDENTA DEL DIF MUNICIPAL';
-    document.getElementById('field-cuerpo').value = `Por medio del presente, me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me hablo de la manera más atenta para solicitar su valioso apoyo para autorizar el uso del Auditorio del DIF Municipal ó la sala de juntas (Cabildo) con la finalidad de llevar a cabo un Curso de Primeros Auxilios y Manejo de Extintores, en el marco de las actividades con motivo del Mes de la Protección Civil.
+
+    const cuerpoField = document.getElementById('field-cuerpo');
+    cuerpoField.value = `Por medio del presente me dirijo a usted de la manera más atenta para solicitar su valioso apoyo para autorizar el uso del Auditorio del DIF Municipal ó la sala de juntas (Cabildo) con la finalidad de llevar a cabo un Curso de Primeros Auxilios y Manejo de Extintores, en el marco de las actividades con motivo del Mes de la Protección Civil.
 
 El curso tiene como objetivo brindar a la población conocimientos básicos y herramientas prácticas para actuar de manera adecuada ante situaciones de emergencia, fortaleciendo la cultura de prevención y protección civil. La capacitación estará dirigida al público en general, así como al sector comercial, con la finalidad de fomentar espacios y establecimientos más seguros para la ciudadanía.
 
-La actividad se tiene programada para el día 28 de agosto de 2026 y 4 de septiembre de 2026, con una duración aproximada de 6 horas, en un horario de 10am a 4pm. Por lo anterior, agradecemos de antemano las facilidades que se sirvan brindar para disponer de dicho espacio y poder realizar esta importante actividad de capacitación.
+La actividad se tiene programada para el día 28 de agosto de 2026 y 4 de septiembre de 2026, con una duración aproximada de 6 horas, en un horario de 10:00 a 16:00 horas. Por lo anterior, agradecemos de antemano las facilidades que se sirvan brindar para disponer de dicho espacio y poder realizar esta importante actividad de capacitación.
 
 Sin otro particular, y esperando contar con una respuesta favorable a nuestra solicitud, agradezco de antemano su atención y apoyo.`;
+
+    actualizarContador(cuerpoField);
 
     document.getElementById('field-firmante-nombre').value = 'LIC. DANIEL EDUARDO ROMERO PILAR';
     document.getElementById('field-firmante-cargo').value = 'TITULAR DE LA UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER.';
@@ -357,6 +380,8 @@ Sin otro particular, y esperando contar con una respuesta favorable a nuestra so
 
   window.addEventListener('DOMContentLoaded', () => {
     alternarTipoDocumento('TARJETA_INFORMATIVA');
+    const cuerpoField = document.getElementById('field-cuerpo');
+    if (cuerpoField) actualizarContador(cuerpoField);
   });
 </script>
 
