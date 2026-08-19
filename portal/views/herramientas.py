@@ -257,31 +257,42 @@ def herramienta_fichas_informativas(request):
     fichas = FichaInformativa.objects.all()
     hoy = datetime.date.today()
     meses_es = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
-    lugar_fecha_defecto = f"Medellín de Bravo, Ver. A {hoy.day} de {meses_es[hoy.month - 1]} de {hoy.year}."
+    lugar_fecha_defecto = f"{hoy.day} de {meses_es[hoy.month - 1]} de {hoy.year}"
 
     # Autogenerar correlativo de oficio
     count_hoy = FichaInformativa.objects.filter(creado_en__year=hoy.year).count() + 1
     num_oficio_defecto = f"MUNICIPIO MEDELLIN.PROCI.{count_hoy:04d}.{hoy.year}"
 
     if request.method == 'POST':
+        tipo_documento = request.POST.get('tipo_documento', 'OFICIO').strip()
         num_oficio = request.POST.get('num_oficio', num_oficio_defecto).strip()
         asunto = request.POST.get('asunto', '').strip()
         lugar_fecha = request.POST.get('lugar_fecha', lugar_fecha_defecto).strip()
+        
+        hora_reporte = request.POST.get('hora_reporte', '').strip()
+        hora_arribo = request.POST.get('hora_arribo', '').strip()
+        lugar_hechos = request.POST.get('lugar_hechos', '').strip()
+
         destinatario_nombre = request.POST.get('destinatario_nombre', '').strip()
         destinatario_cargo = request.POST.get('destinatario_cargo', '').strip()
         destinatario_dependencia = request.POST.get('destinatario_dependencia', '').strip()
         atencion_nombre = request.POST.get('atencion_nombre', '').strip()
         atencion_cargo = request.POST.get('atencion_cargo', '').strip()
+        
         cuerpo_texto = request.POST.get('cuerpo_texto', '').strip()
         firmante_nombre = request.POST.get('firmante_nombre', 'LIC. DANIEL EDUARDO ROMERO PILAR').strip()
         firmante_cargo = request.POST.get('firmante_cargo', 'TITULAR DE LA UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER.').strip()
-        ccp_lineas = request.POST.get('ccp_lineas', 'C.c. p -. Presidencia\nC.c.p -. Archivo').strip()
+        ccp_lineas = request.POST.get('ccp_lineas', '').strip()
 
-        if num_oficio and asunto and destinatario_nombre and cuerpo_texto:
+        if asunto and cuerpo_texto:
             ficha = FichaInformativa.objects.create(
-                num_oficio=num_oficio,
+                tipo_documento=tipo_documento,
+                num_oficio=num_oficio if tipo_documento == 'OFICIO' else '',
                 asunto=asunto,
                 lugar_fecha=lugar_fecha,
+                hora_reporte=hora_reporte,
+                hora_arribo=hora_arribo,
+                lugar_hechos=lugar_hechos,
                 destinatario_nombre=destinatario_nombre,
                 destinatario_cargo=destinatario_cargo,
                 destinatario_dependencia=destinatario_dependencia,
@@ -292,10 +303,11 @@ def herramienta_fichas_informativas(request):
                 firmante_cargo=firmante_cargo,
                 ccp_lineas=ccp_lineas
             )
-            messages.success(request, f"¡Oficio '{num_oficio}' generado y guardado exitosamente!")
+            doc_type_name = "Tarjeta Informativa" if tipo_documento == 'TARJETA_INFORMATIVA' else f"Oficio '{num_oficio}'"
+            messages.success(request, f"¡{doc_type_name} generada y guardada exitosamente!")
             return redirect('imprimir_ficha_informativa', ficha_id=ficha.id)
         else:
-            messages.error(request, "Por favor llena los campos requeridos (Número de Oficio, Asunto, Destinatario y Cuerpo del Mensaje).")
+            messages.error(request, "Por favor llena los campos requeridos (Asunto y Descripción de los Hechos / Cuerpo).")
 
     return render(request, 'portal/herramienta_fichas_informativas.html', {
         'fichas': fichas,

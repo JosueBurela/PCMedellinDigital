@@ -679,18 +679,32 @@ class ConfiguracionInspeccion(models.Model):
 
 
 class FichaInformativa(models.Model):
-    num_oficio = models.CharField(max_length=150)
+    TIPO_CHOICES = [
+        ('OFICIO', 'Oficio Municipal / Solicitud'),
+        ('TARJETA_INFORMATIVA', 'Tarjeta Informativa de Emergencias / Hechos'),
+    ]
+
+    tipo_documento = models.CharField(max_length=30, choices=TIPO_CHOICES, default='OFICIO')
+    num_oficio = models.CharField(max_length=150, blank=True, null=True)
     asunto = models.CharField(max_length=255)
     lugar_fecha = models.CharField(max_length=200)
-    destinatario_nombre = models.CharField(max_length=200)
-    destinatario_cargo = models.CharField(max_length=200)
+    
+    # Campos especificos de Tarjeta Informativa
+    hora_reporte = models.CharField(max_length=50, blank=True, null=True)
+    hora_arribo = models.CharField(max_length=50, blank=True, null=True)
+    lugar_hechos = models.TextField(blank=True, null=True)
+
+    # Campos especificos de Oficio
+    destinatario_nombre = models.CharField(max_length=200, blank=True, null=True)
+    destinatario_cargo = models.CharField(max_length=200, blank=True, null=True)
     destinatario_dependencia = models.CharField(max_length=200, blank=True, null=True)
     atencion_nombre = models.CharField(max_length=200, blank=True, null=True)
     atencion_cargo = models.CharField(max_length=200, blank=True, null=True)
+    
     cuerpo_texto = models.TextField()
     firmante_nombre = models.CharField(max_length=200, default='LIC. DANIEL EDUARDO ROMERO PILAR')
     firmante_cargo = models.TextField(default='TITULAR DE LA UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER.')
-    ccp_lineas = models.TextField(default='C.c. p -. Presidencia\nC.c.p -. Archivo')
+    ccp_lineas = models.TextField(blank=True, null=True, default='C.c. p -. Presidencia\nC.c.p -. Archivo')
     creado_en = models.DateTimeField(auto_now_add=True)
     actualizado_en = models.DateTimeField(auto_now=True)
 
@@ -700,7 +714,8 @@ class FichaInformativa(models.Model):
         ordering = ['-creado_en']
 
     def __str__(self):
-        return f"Oficio {self.num_oficio} - {self.asunto[:30]}"
+        return f"{self.get_tipo_documento_display()} - {self.asunto[:30]}"
+
 
 
 

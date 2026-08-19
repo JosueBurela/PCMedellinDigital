@@ -25,7 +25,7 @@
     </div>
 
     <button onclick="toggleModal('modal-crear-oficio')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
-      <i data-lucide="plus-circle" class="w-4 h-4"></i> Redactar Nuevo Oficio
+      <i data-lucide="plus-circle" class="w-4 h-4"></i> Redactar Nuevo Documento
     </button>
   </div>
 </header>
@@ -45,26 +45,29 @@
 <!-- CONTENIDO PRINCIPAL -->
 <main class="max-w-7xl mx-auto px-4 py-8 space-y-6">
 
-  <!-- RESUMEN Y BOTÓN RÁPIDO -->
+  <!-- RESUMEN Y BOTONES RÁPIDOS DE EJEMPLOS -->
   <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
     <div class="space-y-1">
-      <h2 class="font-black text-slate-800 text-base">Historial de Oficios y Fichas Informativas Emitidas</h2>
+      <h2 class="font-black text-slate-800 text-base">Historial de Documentos y Tarjetas Informativas Emitidas</h2>
       <p class="text-xs text-slate-500 font-medium">
-        Generación e impresión oficial en hoja carta con membrete del H. Ayuntamiento 2026-2029.
+        Emisión de Oficios Municipales y Tarjetas Informativas de Emergencias con membrete oficial 2026-2029.
       </p>
     </div>
 
-    <div class="flex items-center gap-3">
-      <button onclick="cargarEjemploDIF()" class="bg-amber-50 text-amber-800 border border-amber-300 hover:bg-amber-100 font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition">
-        <i data-lucide="sparkles" class="w-4 h-4 text-amber-600"></i> Cargar Ejemplo DIF
+    <div class="flex items-center gap-2 flex-wrap">
+      <button onclick="cargarEjemploTarjeta()" class="bg-red-50 text-red-800 border border-red-300 hover:bg-red-100 font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition">
+        <i data-lucide="flame" class="w-4 h-4 text-red-600"></i> Ejemplo Tarjeta Informativa
       </button>
-      <div class="text-xs font-bold text-slate-500 whitespace-nowrap">
-        Total Emitidos: <span class="text-slate-900 font-black">{{ fichas.count }}</span>
+      <button onclick="cargarEjemploDIF()" class="bg-amber-50 text-amber-800 border border-amber-300 hover:bg-amber-100 font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 transition">
+        <i data-lucide="file-text" class="w-4 h-4 text-amber-600"></i> Ejemplo Oficio DIF
+      </button>
+      <div class="text-xs font-bold text-slate-500 whitespace-nowrap pl-2">
+        Total: <span class="text-slate-900 font-black">{{ fichas.count }}</span>
       </div>
     </div>
   </div>
 
-  <!-- REJILLA / LISTA DE OFICIOS -->
+  <!-- REJILLA / LISTA DE OFICIOS Y TARJETAS INFORMATIVAS -->
   {% if fichas %}
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for f in fichas %}
@@ -72,9 +75,16 @@
       
       <div class="space-y-2">
         <div class="flex items-center justify-between">
-          <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-800">
-            {{ f.num_oficio }}
+          {% if f.tipo_documento == 'TARJETA_INFORMATIVA' %}
+          <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-md bg-red-100 text-red-800 border border-red-200">
+            📋 Tarjeta Informativa
           </span>
+          {% else %}
+          <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-800 border border-emerald-200">
+            📄 {{ f.num_oficio|default:"Oficio" }}
+          </span>
+          {% endif %}
+
           <span class="text-[11px] font-bold text-slate-400">
             {{ f.creado_en|date:"d/m/Y" }}
           </span>
@@ -82,9 +92,14 @@
 
         <h3 class="font-black text-slate-900 text-sm line-clamp-2">{{ f.asunto }}</h3>
         
-        <div class="text-xs font-semibold text-slate-600 space-y-0.5 border-t border-slate-100 pt-2">
-          <p>👤 <strong>Para:</strong> {{ f.destinatario_nombre }}</p>
-          <p class="text-[11px] text-slate-500 truncate">{{ f.destinatario_cargo }}</p>
+        <div class="text-xs font-semibold text-slate-600 space-y-1 border-t border-slate-100 pt-2">
+          {% if f.tipo_documento == 'TARJETA_INFORMATIVA' %}
+            {% if f.hora_reporte %}<p>🕒 <strong>Reporte:</strong> {{ f.hora_reporte }} | <strong>Arribo:</strong> {{ f.hora_arribo }}</p>{% endif %}
+            {% if f.lugar_hechos %}<p class="text-[11px] text-slate-500 line-clamp-2">📍 <strong>Lugar:</strong> {{ f.lugar_hechos }}</p>{% endif %}
+          {% else %}
+            <p>👤 <strong>Para:</strong> {{ f.destinatario_nombre }}</p>
+            <p class="text-[11px] text-slate-500 truncate">{{ f.destinatario_cargo }}</p>
+          {% endif %}
         </div>
       </div>
 
@@ -93,7 +108,7 @@
           <i data-lucide="printer" class="w-3.5 h-3.5"></i> Imprimir PDF
         </a>
 
-        <a href="{% url 'eliminar_ficha_informativa' f.id %}" onclick="return confirm('¿Seguro que deseas eliminar este oficio?');" class="text-red-500 hover:text-red-700 text-xs font-bold">
+        <a href="{% url 'eliminar_ficha_informativa' f.id %}" onclick="return confirm('¿Seguro que deseas eliminar este registro?');" class="text-red-500 hover:text-red-700 text-xs font-bold">
           Eliminar
         </a>
       </div>
@@ -104,21 +119,21 @@
   {% else %}
   <div class="bg-white rounded-3xl p-12 text-center text-slate-400 space-y-3 shadow-sm border border-slate-200">
     <i data-lucide="file-x" class="w-12 h-12 mx-auto text-slate-300"></i>
-    <p class="font-bold text-sm text-slate-600">No hay fichas informativas u oficios registrados aún.</p>
-    <p class="text-xs text-slate-400">Presiona el botón "Redactar Nuevo Oficio" para generar tu primer documento oficial.</p>
+    <p class="font-bold text-sm text-slate-600">No hay documentos ni tarjetas informativas registradas aún.</p>
+    <p class="text-xs text-slate-400">Presiona el botón "Redactar Nuevo Documento" para crear una Tarjeta Informativa u Oficio.</p>
   </div>
   {% endif %}
 
 </main>
 
 
-<!-- MODAL REDACTAR NUEVO OFICIO -->
+<!-- MODAL REDACTAR NUEVO DOCUMENTO -->
 <div id="modal-crear-oficio" class="fixed inset-0 bg-black/65 backdrop-blur-sm z-[1000] hidden items-center justify-center p-4">
   <div class="bg-white rounded-3xl max-w-3xl w-full p-6 shadow-2xl space-y-4 border border-slate-200 max-h-[92vh] overflow-y-auto">
     
     <div class="flex justify-between items-center border-b border-slate-100 pb-3">
       <h3 class="font-black text-slate-800 text-sm uppercase tracking-tight flex items-center gap-2">
-        <span>📄</span> Redactar Oficio / Ficha Informativa Oficial
+        <span>📄</span> Redactar Documento Oficial con Membrete
       </h3>
       <button onclick="toggleModal('modal-crear-oficio')" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
     </div>
@@ -126,77 +141,109 @@
     <form method="POST" action="{% url 'herramienta_fichas_informativas' %}" id="form-oficio" class="space-y-4">
       {% csrf_token %}
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <!-- SELECTOR DE TIPO DE DOCUMENTO -->
+      <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Número de Oficio *</label>
-          <input type="text" name="num_oficio" id="field-num-oficio" value="{{ num_oficio_defecto }}" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Tipo de Documento Oficial *</label>
+          <select name="tipo_documento" id="field-tipo-doc" onchange="alternarTipoDocumento(this.value)" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="TARJETA_INFORMATIVA">📋 Tarjeta Informativa (Emergencia / Hechos)</option>
+            <option value="OFICIO">📄 Oficio Municipal / Solicitud Formal</option>
+          </select>
         </div>
+
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Lugar y Fecha *</label>
-          <input type="text" name="lugar_fecha" id="field-lugar-fecha" value="{{ lugar_fecha_defecto }}" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Fecha *</label>
+          <input type="text" name="lugar_fecha" id="field-lugar-fecha" value="{{ lugar_fecha_defecto }}" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
         </div>
       </div>
 
+      <!-- CAMPO NÚMERO DE OFICIO (SOLO PARA OFICIO) -->
+      <div id="sec-num-oficio" class="hidden">
+        <label class="block text-xs font-bold text-slate-700 mb-1">Número de Oficio *</label>
+        <input type="text" name="num_oficio" id="field-num-oficio" value="{{ num_oficio_defecto }}" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+      </div>
+
+      <!-- ASUNTO -->
       <div>
-        <label class="block text-xs font-bold text-slate-700 mb-1">Asunto del Documento *</label>
-        <input type="text" name="asunto" id="field-asunto" placeholder="Ej. SOLICITUD DE SALA AUDIOVISUAL Ó SALA DE JUNTAS (CABILDO)" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        <label class="block text-xs font-bold text-slate-700 mb-1">Asunto *</label>
+        <input type="text" name="asunto" id="field-asunto" placeholder="Ej. Incendio en casa habitación / Solicitud de auditorio" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
       </div>
 
-      <!-- DESTINATARIO -->
-      <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-3">
-        <h4 class="font-extrabold text-slate-700 text-xs uppercase tracking-wider">👤 Destinatario Principal</h4>
+      <!-- CAMPOS ESPECÍFICOS DE TARJETA INFORMATIVA -->
+      <div id="sec-tarjeta-campos" class="space-y-3 bg-red-50/60 p-4 rounded-2xl border border-red-200">
+        <h4 class="font-extrabold text-red-900 text-xs uppercase tracking-wider">📋 Metadatos del Incidente / Emergencia</h4>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
-            <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Nombre Completo *</label>
-            <input type="text" name="destinatario_nombre" id="field-dest-nombre" placeholder="ING. SAMUEL ACOSTA MARTINEZ" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+            <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Hora del Reporte</label>
+            <input type="text" name="hora_reporte" id="field-hora-reporte" placeholder="Ej. 10:08 horas" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Cargo u Organismo *</label>
-            <input type="text" name="destinatario_cargo" id="field-dest-cargo" placeholder="PRESIDENTE MUNICIPAL CONSTITUCIONAL" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+            <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Hora de Arribo</label>
+            <input type="text" name="hora_arribo" id="field-hora-arribo" placeholder="Ej. 10:32 horas" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
           </div>
         </div>
         <div>
-          <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Municipio / Dependencia (Opcional)</label>
-          <input type="text" name="destinatario_dependencia" id="field-dest-dependencia" placeholder="DE MEDELLIN DE BRAVO, VERACRUZ." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800">
+          <label class="block text-[11px] font-bold text-slate-700 mb-0.5">Lugar de los Hechos (Ubicación Completa)</label>
+          <input type="text" name="lugar_hechos" id="field-lugar-hechos" placeholder="Ej. Calle Ciprés s/n, entre calle Almendro y calle del Parque, colonia Nuevo Medellín..." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800">
         </div>
       </div>
 
-      <!-- ATENCIÓN (OPCIONAL) -->
-      <div class="bg-amber-50/70 p-3.5 rounded-2xl border border-amber-200 space-y-3">
-        <h4 class="font-extrabold text-amber-900 text-xs uppercase tracking-wider">🤝 Con Atención A (AT'N - Opcional)</h4>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Nombre AT'N</label>
-            <input type="text" name="atencion_nombre" id="field-atn-nombre" placeholder="LIC. JESSICA DURÀN GOMEZ" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+      <!-- CAMPOS ESPECÍFICOS DE OFICIO (DESTINATARIO Y AT'N) -->
+      <div id="sec-oficio-campos" class="hidden space-y-3">
+        <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200 space-y-3">
+          <h4 class="font-extrabold text-slate-700 text-xs uppercase tracking-wider">👤 Destinatario Principal</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Nombre Completo</label>
+              <input type="text" name="destinatario_nombre" id="field-dest-nombre" placeholder="ING. SAMUEL ACOSTA MARTINEZ" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Cargo u Organismo</label>
+              <input type="text" name="destinatario_cargo" id="field-dest-cargo" placeholder="PRESIDENTE MUNICIPAL CONSTITUCIONAL" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+            </div>
           </div>
           <div>
-            <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Cargo AT'N</label>
-            <input type="text" name="atencion_cargo" id="field-atn-cargo" placeholder="PRESIDENTA DEL DIF MUNICIPAL" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+            <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Municipio / Dependencia</label>
+            <input type="text" name="destinatario_dependencia" id="field-dest-dependencia" placeholder="DE MEDELLIN DE BRAVO, VERACRUZ." class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-semibold text-slate-800">
+          </div>
+        </div>
+
+        <div class="bg-amber-50/70 p-3.5 rounded-2xl border border-amber-200 space-y-3">
+          <h4 class="font-extrabold text-amber-900 text-xs uppercase tracking-wider">🤝 Con Atención A (AT'N - Opcional)</h4>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Nombre AT'N</label>
+              <input type="text" name="atencion_nombre" id="field-atn-nombre" placeholder="LIC. JESSICA DURÀN GOMEZ" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-slate-600 mb-0.5">Cargo AT'N</label>
+              <input type="text" name="atencion_cargo" id="field-atn-cargo" placeholder="PRESIDENTA DEL DIF MUNICIPAL" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- CUERPO DE TEXTO -->
+      <!-- CUERPO DE TEXTO / HECHOS -->
       <div>
-        <label class="block text-xs font-bold text-slate-700 mb-1">Cuerpo del Oficio / Mensaje *</label>
-        <textarea name="cuerpo_texto" id="field-cuerpo" rows="7" required placeholder="Escribe el texto del oficio o redacta la solicitud..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+        <label id="lbl-cuerpo-texto" class="block text-xs font-bold text-slate-700 mb-1">Descripción de los HECHOS / Narrativa *</label>
+        <textarea name="cuerpo_texto" id="field-cuerpo" rows="8" required placeholder="Redacta la narrativa detallada de los hechos, unidades movilizadas, maniobras de atención y personas valoradas..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
       </div>
 
       <!-- FIRMA Y CCP -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label class="block text-xs font-bold text-slate-700 mb-1">Firmante Autorizado</label>
-          <input type="text" name="firmante_nombre" id="field-firmante-nombre" value="LIC. DANIEL EDUARDO ROMERO PILAR" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+          <input type="text" name="firmante_nombre" id="field-firmante-nombre" value="UNIDAD MUNICIPAL DE" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
         </div>
         <div>
-          <label class="block text-xs font-bold text-slate-700 mb-1">Cargo del Firmante</label>
-          <input type="text" name="firmante_cargo" id="field-firmante-cargo" value="TITULAR DE LA UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER." class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
+          <label class="block text-xs font-bold text-slate-700 mb-1">Cargo / Dependencia del Firmante</label>
+          <input type="text" name="firmante_cargo" id="field-firmante-cargo" value="PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800">
         </div>
       </div>
 
-      <div>
-        <label class="block text-xs font-bold text-slate-700 mb-1">Copias de Conocimiento (C.c.p)</label>
-        <textarea name="ccp_lineas" id="field-ccp" rows="2" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800">C.c. p -. Presidencia&#10;C.c.p -. Archivo</textarea>
+      <div id="sec-ccp">
+        <label class="block text-xs font-bold text-slate-700 mb-1">Copias de Conocimiento (C.c.p - Solo para Oficios)</label>
+        <textarea name="ccp_lineas" id="field-ccp" rows="2" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-800"></textarea>
       </div>
 
       <div class="flex justify-end gap-2 pt-3 border-t border-slate-100">
@@ -204,7 +251,7 @@
           Cancelar
         </button>
         <button type="submit" class="px-5 py-2 text-xs font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition shadow">
-          Generar e Imprimir Oficio
+          Generar e Imprimir Documento
         </button>
       </div>
     </form>
@@ -228,21 +275,73 @@
     }
   }
 
+  function alternarTipoDocumento(tipo) {
+    const secNumOficio = document.getElementById('sec-num-oficio');
+    const secTarjetaCampos = document.getElementById('sec-tarjeta-campos');
+    const secOficioCampos = document.getElementById('sec-oficio-campos');
+    const secCcp = document.getElementById('sec-ccp');
+    const lblCuerpo = document.getElementById('lbl-cuerpo-texto');
+
+    if (tipo === 'TARJETA_INFORMATIVA') {
+      secNumOficio.classList.add('hidden');
+      secTarjetaCampos.classList.remove('hidden');
+      secOficioCampos.classList.add('hidden');
+      secCcp.classList.add('hidden');
+      lblCuerpo.innerText = 'Descripción de los HECHOS / Narrativa *';
+    } else {
+      secNumOficio.classList.remove('hidden');
+      secTarjetaCampos.classList.add('hidden');
+      secOficioCampos.classList.remove('hidden');
+      secCcp.classList.remove('hidden');
+      lblCuerpo.innerText = 'Cuerpo del Oficio / Mensaje *';
+    }
+  }
+
+  function cargarEjemploTarjeta() {
+    document.getElementById('field-tipo-doc').value = 'TARJETA_INFORMATIVA';
+    alternarTipoDocumento('TARJETA_INFORMATIVA');
+
+    document.getElementById('field-asunto').value = 'Incendio en casa habitación';
+    document.getElementById('field-lugar-fecha').value = '19 de agosto de 2026';
+    document.getElementById('field-hora-reporte').value = '10:08 horas';
+    document.getElementById('field-hora-arribo').value = '10:32 horas';
+    document.getElementById('field-lugar-hechos').value = 'Calle Ciprés s/n, entre calle Almendro y calle del Parque, colonia Nuevo Medellín, municipio de Medellín de Bravo, Veracruz.';
+
+    document.getElementById('field-cuerpo').value = `Siendo las 10:08 horas del día 19 de agosto de 2026, se recibió un reporte por parte del C5, informando sobre un incendio en una casa habitación ubicada en calle Ciprés s/n, entre calle Almendro y calle del Parque, colonia Nuevo Medellín, municipio de Medellín de Bravo, Veracruz.
+
+En atención al reporte, se movilizaron las unidades 072, tipo pipa; 096, tipo pick up; y 208, ambulancia, con personal operativo de Protección Civil y Bomberos de Medellín de Bravo.
+
+Siendo las 10:32 horas, las unidades arribaron al lugar, ingresando el personal a una vivienda de un nivel, construida con material de lámina de zinc, donde se constató que el incendio se encontraba localizado en el interior del inmueble y en fase de libre combustión.
+
+El personal de Bomberos realizó labores de combate, control y enfriamiento, logrando sofocar el incendio en su totalidad. Como resultado del siniestro, se registraron daños materiales de consideración, determinándose pérdida total del inmueble.
+
+Durante las labores de remoción y revisión del material combustible, se localizó y extrajo un cilindro de gas LP con capacidad de 20 kilogramos, el cual se encontraba con la válvula abierta.
+Asimismo, en el lugar fueron valoradas dos personas, obteniéndose los siguientes resultados:
+
+• María Eloína Hernández, de 59 años de edad: se realizó valoración de signos vitales, presentando una crisis nerviosa. Fue estabilizada en el lugar, por lo que no ameritó traslado a una unidad hospitalaria.
+• Persona de aproximadamente 28 años de edad, quien no proporcionó datos personales: se realizó valoración de signos vitales, encontrándose en aparente estado etílico, sin requerir traslado. Se recomendó valoración médica para descartar otras posibles causas relacionadas con su estado.
+
+Una vez controlada la emergencia, el personal operativo se entrevistó con la C. María Eloína Hernández, a quien se le proporcionaron las recomendaciones correspondientes en materia de seguridad, prevención y manejo posterior del inmueble afectado.
+
+Finalmente, al no existir condiciones que ameritaran la permanencia de las unidades en el lugar, el personal operativo dio por concluido el servicio y se retiró sin novedad.`;
+
+    document.getElementById('field-firmante-nombre').value = 'UNIDAD MUNICIPAL DE';
+    document.getElementById('field-firmante-cargo').value = 'PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER';
+
+    toggleModal('modal-crear-oficio');
+  }
+
   function cargarEjemploDIF() {
+    document.getElementById('field-tipo-doc').value = 'OFICIO';
+    alternarTipoDocumento('OFICIO');
+
     document.getElementById('field-asunto').value = 'SOLICITUD DE SALA AUDIOVISUAL Ó SALA DE JUNTAS (CABILDO)';
     document.getElementById('field-dest-nombre').value = 'ING. SAMUEL ACOSTA MARTINEZ';
     document.getElementById('field-dest-cargo').value = 'PRESIDENTE MUNICIPAL CONSTITUCIONAL';
     document.getElementById('field-dest-dependencia').value = 'DE MEDELLIN DE BRAVO, VERACRUZ.';
     document.getElementById('field-atn-nombre').value = 'LIC. JESSICA DURÀN GOMEZ';
     document.getElementById('field-atn-cargo').value = 'PRESIDENTA DEL DIF MUNICIPAL';
-    
-    document.getElementById('field-cuerpo').value = `Por medio del presente, me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me habiamos reunidos, cuando ya nos dimos cuenta que teniamos un objetivo en común, por el cuál ibamos a luchar, el cual fue ser mejores personas, amarnos nosotros mismos y querernos como mejores amigos, por esa razón, nosotros decidimos estar juntos. 
-
-Por esa razón, te pido de la manera más atenta tu apoyo para poder seguir siendo mejores personas y así demostrartelo y demostrarle a toda la gente que nos rodea.
-
-¡Muchas Gracias! Por tu atención presta a este documento.`;
-
-    document.getElementById('field-cuerpo').value = `Por medio del presente, me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me hablo de la manera más atenta para solicitar su valioso apoyo para autorizar el uso del Auditorio del DIF Municipal ó la sala de juntas (Cabildo) con la finalidad de llevar a cabo un Curso de Primeros Auxilios y Manejo de Extintores, en el marco de las actividades con motivo del Mes de la Protección Civil.
+    document.getElementById('field-cuerpo').value = `Por medio del presente, me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me me hablo de la manera más atenta para solicitar su valioso apoyo para autorizar el uso del Auditorio del DIF Municipal ó la sala de juntas (Cabildo) con la finalidad de llevar a cabo un Curso de Primeros Auxilios y Manejo de Extintores, en el marco de las actividades con motivo del Mes de la Protección Civil.
 
 El curso tiene como objetivo brindar a la población conocimientos básicos y herramientas prácticas para actuar de manera adecuada ante situaciones de emergencia, fortaleciendo la cultura de prevención y protección civil. La capacitación estará dirigida al público en general, así como al sector comercial, con la finalidad de fomentar espacios y establecimientos más seguros para la ciudadanía.
 
@@ -250,8 +349,15 @@ La actividad se tiene programada para el día 28 de agosto de 2026 y 4 de septie
 
 Sin otro particular, y esperando contar con una respuesta favorable a nuestra solicitud, agradezco de antemano su atención y apoyo.`;
 
+    document.getElementById('field-firmante-nombre').value = 'LIC. DANIEL EDUARDO ROMERO PILAR';
+    document.getElementById('field-firmante-cargo').value = 'TITULAR DE LA UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER.';
+
     toggleModal('modal-crear-oficio');
   }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    alternarTipoDocumento('TARJETA_INFORMATIVA');
+  });
 </script>
 
 </body>

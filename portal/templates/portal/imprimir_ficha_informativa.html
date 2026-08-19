@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Oficio {{ ficha.num_oficio }} | PCivil Medellín</title>
+<title>{% if ficha.tipo_documento == 'TARJETA_INFORMATIVA' %}Tarjeta Informativa{% else %}Oficio {{ ficha.num_oficio }}{% endif %} | PCivil Medellín</title>
 <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
@@ -73,6 +73,7 @@
     flex-direction: column;
   }
 
+  /* ESTILOS OFICIO */
   .header-institution {
     text-align: center;
     margin-bottom: 12px;
@@ -126,6 +127,42 @@
     letter-spacing: 3px;
     margin-bottom: 14px;
     display: block;
+  }
+
+  /* ESTILOS TARJETA INFORMATIVA */
+  .tarjeta-header-title {
+    text-align: center;
+    font-size: 13pt;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-top: 6px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  .tarjeta-meta-list {
+    font-size: 10pt;
+    line-height: 1.45;
+    margin-bottom: 16px;
+    color: #000000;
+  }
+
+  .tarjeta-meta-item {
+    margin-bottom: 3px;
+  }
+
+  .tarjeta-meta-item strong {
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .hechos-section-title {
+    font-size: 10.5pt;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
   }
 
   .cuerpo-text {
@@ -222,7 +259,13 @@
 <body>
 
 <div class="toolbar no-print">
-  <div class="font-bold text-sm">📄 OFICIO {{ ficha.num_oficio }} &bull; MEDELLÍN DE BRAVO</div>
+  <div class="font-bold text-sm">
+    {% if ficha.tipo_documento == 'TARJETA_INFORMATIVA' %}
+    📋 TARJETA INFORMATIVA &bull; MEDELLÍN DE BRAVO
+    {% else %}
+    📄 OFICIO {{ ficha.num_oficio }} &bull; MEDELLÍN DE BRAVO
+    {% endif %}
+  </div>
   <div class="flex gap-2">
     <a href="{% url 'herramienta_fichas_informativas' %}" class="bg-slate-700 hover:bg-slate-800 text-white text-xs font-bold px-3 py-2 rounded-lg transition">
       Volver al Módulo
@@ -244,59 +287,87 @@
     <!-- CUERPO PRINCIPAL -->
     <div class="content-body">
       
-      <!-- SUBTÍTULO INSTITUCIONAL -->
-      <div class="header-institution">
-        <div class="inst-title">Unidad Municipal de Protección Civil y Bomberos del H.<br>Ayuntamiento Constitucional de Medellín de Bravo, Ver.</div>
-        <div class="inst-subtitle">2026-2029</div>
-      </div>
+      {% if ficha.tipo_documento == 'TARJETA_INFORMATIVA' %}
+        <!-- ================= FORMATO TARJETA INFORMATIVA ================= -->
+        <div class="tarjeta-header-title">TARJETA INFORMATIVA</div>
 
-      <!-- METADATOS DEL OFICIO (DERECHA) -->
-      <div class="meta-oficio-block">
-        <div>{{ ficha.num_oficio }}</div>
-        <div>Asunto: {{ ficha.asunto }}</div>
-        <div>{{ ficha.lugar_fecha }}</div>
-      </div>
+        <div class="tarjeta-meta-list">
+          <div class="tarjeta-meta-item"><strong>ASUNTO:</strong> {{ ficha.asunto }}</div>
+          <div class="tarjeta-meta-item"><strong>FECHA:</strong> {{ ficha.lugar_fecha }}</div>
+          {% if ficha.hora_reporte %}
+          <div class="tarjeta-meta-item"><strong>HORA DEL REPORTE:</strong> {{ ficha.hora_reporte }}</div>
+          {% endif %}
+          {% if ficha.hora_arribo %}
+          <div class="tarjeta-meta-item"><strong>HORA DE ARRIBO:</strong> {{ ficha.hora_arribo }}</div>
+          {% endif %}
+          {% if ficha.lugar_hechos %}
+          <div class="tarjeta-meta-item"><strong>LUGAR:</strong> {{ ficha.lugar_hechos }}</div>
+          {% endif %}
+        </div>
 
-      <!-- DESTINATARIO (IZQUIERDA) -->
-      <div class="destinatario-block">
-        <div>{{ ficha.destinatario_nombre }}</div>
-        <div>{{ ficha.destinatario_cargo }}</div>
-        {% if ficha.destinatario_dependencia %}
-        <div>{{ ficha.destinatario_dependencia }}</div>
+        <div class="hechos-section-title">HECHOS</div>
+
+        <div class="cuerpo-text">
+          {{ ficha.cuerpo_texto }}
+        </div>
+
+        <!-- FIRMA OPERATIVA -->
+        <div class="atentamente-block">
+          <div class="atentamente-title">ATENTAMENTE</div>
+          <div style="border-bottom: 1.2px solid #000000; width: 180px; margin: 0 auto 12px auto;"></div>
+          <div class="firmante-nombre">{{ ficha.firmante_nombre }}</div>
+          <div class="firmante-cargo">{{ ficha.firmante_cargo }}</div>
+        </div>
+
+      {% else %}
+        <!-- ================= FORMATO OFICIO MUNICIPAL ================= -->
+        <div class="header-institution">
+          <div class="inst-title">Unidad Municipal de Protección Civil y Bomberos del H.<br>Ayuntamiento Constitucional de Medellín de Bravo, Ver.</div>
+          <div class="inst-subtitle">2026-2029</div>
+        </div>
+
+        <div class="meta-oficio-block">
+          <div>{{ ficha.num_oficio }}</div>
+          <div>Asunto: {{ ficha.asunto }}</div>
+          <div>Medellín de Bravo, Ver. A {{ ficha.lugar_fecha }}</div>
+        </div>
+
+        <div class="destinatario-block">
+          <div>{{ ficha.destinatario_nombre }}</div>
+          <div>{{ ficha.destinatario_cargo }}</div>
+          {% if ficha.destinatario_dependencia %}
+          <div>{{ ficha.destinatario_dependencia }}</div>
+          {% endif %}
+        </div>
+
+        {% if ficha.atencion_nombre %}
+        <div class="atencion-block">
+          <div>AT'N: {{ ficha.atencion_nombre }}</div>
+          {% if ficha.atencion_cargo %}
+          <div>{{ ficha.atencion_cargo }}</div>
+          {% endif %}
+        </div>
         {% endif %}
-      </div>
 
-      <!-- ATENCIÓN (DERECHA) SI EXISTE -->
-      {% if ficha.atencion_nombre %}
-      <div class="atencion-block">
-        <div>AT'N: {{ ficha.atencion_nombre }}</div>
-        {% if ficha.atencion_cargo %}
-        <div>{{ ficha.atencion_cargo }}</div>
+        <span class="presente-tag">P R E S E N T E</span>
+
+        <div class="cuerpo-text">
+          {{ ficha.cuerpo_texto }}
+        </div>
+
+        <div class="atentamente-block">
+          <div class="atentamente-title">ATENTAMENTE</div>
+          <div class="firmante-nombre">{{ ficha.firmante_nombre }}</div>
+          <div class="firmante-cargo">{{ ficha.firmante_cargo }}</div>
+        </div>
+
+        {% if ccp_list %}
+        <div class="ccp-block">
+          {% for line in ccp_list %}
+          <div>{{ line }}</div>
+          {% endfor %}
+        </div>
         {% endif %}
-      </div>
-      {% endif %}
-
-      <span class="presente-tag">P R E S E N T E</span>
-
-      <!-- TEXTO PRINCIPAL -->
-      <div class="cuerpo-text">
-        {{ ficha.cuerpo_texto }}
-      </div>
-
-      <!-- FIRMA -->
-      <div class="atentamente-block">
-        <div class="atentamente-title">ATENTAMENTE</div>
-        <div class="firmante-nombre">{{ ficha.firmante_nombre }}</div>
-        <div class="firmante-cargo">{{ ficha.firmante_cargo }}</div>
-      </div>
-
-      <!-- CCP -->
-      {% if ccp_list %}
-      <div class="ccp-block">
-        {% for line in ccp_list %}
-        <div>{{ line }}</div>
-        {% endfor %}
-      </div>
       {% endif %}
 
     </div>
