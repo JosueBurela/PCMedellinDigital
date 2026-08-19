@@ -17,7 +17,8 @@ from portal.models import (
     ContactoDirectorio,
     OrdenInspeccion,
     ItemInspeccion,
-    ConfiguracionInspeccion
+    ConfiguracionInspeccion,
+    FichaInformativa
 )
 
 def suite_herramientas_hub(request):
@@ -46,15 +47,14 @@ def suite_herramientas_hub(request):
             'url': '/herramientas-auxiliares/inspecciones/',
         },
         {
-            'id': 'futura_tool',
-            'titulo': 'Módulo Extensible (Proximamente)',
-            'categoria': 'Automatización Administrativa',
-            'descripcion': 'Espacio reservado para conectar automáticamente nuevas herramientas y scripts adicionales.',
-            'icono': 'plus-circle',
-            'color': 'bg-slate-500',
-            'badge': 'Próximamente',
-            'url': '#',
-            'disabled': True,
+            'id': 'fichas_informativas',
+            'titulo': 'Generador de Fichas Informativas y Oficios',
+            'categoria': 'Documentación & Administración',
+            'descripcion': 'Redacción y emisión de oficios oficiales con membrete del Ayuntamiento 2026-2029 e impresión en PDF.',
+            'icono': 'file-text',
+            'color': 'bg-emerald-600',
+            'badge': f"{FichaInformativa.objects.count()} Oficios",
+            'url': '/herramientas-auxiliares/fichas-informativas/',
         }
     ]
 
@@ -248,3 +248,82 @@ def imprimir_orden_inspeccion(request, orden_id):
         'orden': orden,
         'items': orden.items.all().order_by('numero')
     })
+
+
+def herramienta_fichas_informativas(request):
+    """
+    Vista del Módulo 3: Generador de Fichas Informativas y Oficios Oficiales con Membrete.
+    """
+    fichas = FichaInformativa.objects.all()
+    hoy = datetime.date.today()
+    meses_es = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
+    lugar_fecha_defecto = f"Medellín de Bravo, Ver. A {hoy.day} de {meses_es[hoy.month - 1]} de {hoy.year}."
+
+    # Autogenerar correlativo de oficio
+    count_hoy = FichaInformativa.objects.filter(creado_en__year=hoy.year).count() + 1
+    num_oficio_defecto = f"MUNICIPIO MEDELLIN.PROCI.{count_hoy:04d}.{hoy.year}"
+
+    if request.method == 'POST':
+        num_oficio = request.POST.get('num_oficio', num_oficio_defecto).strip()
+        asunto = request.POST.get('asunto', '').strip()
+        lugar_fecha = request.POST.get('lugar_fecha', lugar_fecha_defecto).strip()
+        destinatario_nombre = request.POST.get('destinatario_nombre', '').strip()
+        destinatario_cargo = request.POST.get('destinatario_cargo', '').strip()
+        destinatario_dependencia = request.POST.get('destinatario_dependencia', '').strip()
+        atencion_nombre = request.POST.get('atencion_nombre', '').strip()
+        atencion_cargo = request.POST.get('atencion_cargo', '').strip()
+        cuerpo_texto = request.POST.get('cuerpo_texto', '').strip()
+        firmante_nombre = request.POST.get('firmante_nombre', 'LIC. DANIEL EDUARDO ROMERO PILAR').strip()
+        firmante_cargo = request.POST.get('firmante_cargo', 'TITULAR DE LA UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER.').strip()
+        ccp_lineas = request.POST.get('ccp_lineas', 'C.c. p -. Presidencia\nC.c.p -. Archivo').strip()
+
+        if num_oficio and asunto and destinatario_nombre and cuerpo_texto:
+            ficha = FichaInformativa.objects.create(
+                num_oficio=num_oficio,
+                asunto=asunto,
+                lugar_fecha=lugar_fecha,
+                destinatario_nombre=destinatario_nombre,
+                destinatario_cargo=destinatario_cargo,
+                destinatario_dependencia=destinatario_dependencia,
+                atencion_nombre=atencion_nombre,
+                atencion_cargo=atencion_cargo,
+                cuerpo_texto=cuerpo_texto,
+                firmante_nombre=firmante_nombre,
+                firmante_cargo=firmante_cargo,
+                ccp_lineas=ccp_lineas
+            )
+            messages.success(request, f"¡Oficio '{num_oficio}' generado y guardado exitosamente!")
+            return redirect('imprimir_ficha_informativa', ficha_id=ficha.id)
+        else:
+            messages.error(request, "Por favor llena los campos requeridos (Número de Oficio, Asunto, Destinatario y Cuerpo del Mensaje).")
+
+    return render(request, 'portal/herramienta_fichas_informativas.html', {
+        'fichas': fichas,
+        'num_oficio_defecto': num_oficio_defecto,
+        'lugar_fecha_defecto': lugar_fecha_defecto,
+    })
+
+
+def imprimir_ficha_informativa(request, ficha_id):
+    """
+    Renderiza la plantilla imprimible en PDF oficial de la Ficha Informativa / Oficio con Membrete.
+    """
+    ficha = get_object_or_404(FichaInformativa, id=ficha_id)
+    ccp_list = [line.strip() for line in ficha.ccp_lineas.split('\n') if line.strip()]
+
+    return render(request, 'portal/imprimir_ficha_informativa.html', {
+        'ficha': ficha,
+        'ccp_list': ccp_list
+    })
+
+
+def eliminar_ficha_informativa(request, ficha_id):
+    """
+    Elimina un registro de oficio / ficha informativa.
+    """
+    ficha = get_object_or_404(FichaInformativa, id=ficha_id)
+    num_oficio = ficha.num_oficio
+    ficha.delete()
+    messages.success(request, f"Se eliminó el oficio '{num_oficio}'.")
+    return redirect('herramienta_fichas_informativas')
+

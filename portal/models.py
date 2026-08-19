@@ -678,5 +678,31 @@ class ConfiguracionInspeccion(models.Model):
         return f"{self.key}: {self.value[:30]}"
 
 
+class FichaInformativa(models.Model):
+    num_oficio = models.CharField(max_length=150)
+    asunto = models.CharField(max_length=255)
+    lugar_fecha = models.CharField(max_length=200)
+    destinatario_nombre = models.CharField(max_length=200)
+    destinatario_cargo = models.CharField(max_length=200)
+    destinatario_dependencia = models.CharField(max_length=200, blank=True, null=True)
+    atencion_nombre = models.CharField(max_length=200, blank=True, null=True)
+    atencion_cargo = models.CharField(max_length=200, blank=True, null=True)
+    cuerpo_texto = models.TextField()
+    firmante_nombre = models.CharField(max_length=200, default='LIC. DANIEL EDUARDO ROMERO PILAR')
+    firmante_cargo = models.TextField(default='TITULAR DE LA UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER.')
+    ccp_lineas = models.TextField(default='C.c. p -. Presidencia\nC.c.p -. Archivo')
+    creado_en = models.DateTimeField(auto_now_add=True)
+    actualizado_en = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Ficha Informativa / Oficio"
+        verbose_name_plural = "Fichas Informativas y Oficios"
+        ordering = ['-creado_en']
+
+    def __str__(self):
+        return f"Oficio {self.num_oficio} - {self.asunto[:30]}"
+
+
+
 
 

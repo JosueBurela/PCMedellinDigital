@@ -75,6 +75,11 @@ urlpatterns = [
     path('herramientas-auxiliares/inspecciones/eliminar/<int:orden_id>/', views.eliminar_orden_inspeccion, name='eliminar_orden_inspeccion'),
     path('herramientas-auxiliares/inspecciones/imprimir/<int:orden_id>/', views.imprimir_orden_inspeccion, name='imprimir_orden_inspeccion'),
 
+    # Módulo 3: Generador de Fichas Informativas y Oficios Oficiales con Membrete
+    path('herramientas-auxiliares/fichas-informativas/', views.herramienta_fichas_informativas, name='herramienta_fichas_informativas'),
+    path('herramientas-auxiliares/fichas-informativas/imprimir/<int:ficha_id>/', views.imprimir_ficha_informativa, name='imprimir_ficha_informativa'),
+    path('herramientas-auxiliares/fichas-informativas/eliminar/<int:ficha_id>/', views.eliminar_ficha_informativa, name='eliminar_ficha_informativa'),
+
     # Perfil Ciudadano e Historial
     path('perfil/', views.perfil_ciudadano, name='perfil_ciudadano'),
     path('chat/enviar/', views.enviar_mensaje_chat, name='enviar_mensaje_chat'),
