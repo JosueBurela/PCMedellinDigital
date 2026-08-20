@@ -334,8 +334,60 @@ def eliminar_ficha_informativa(request, ficha_id):
     Elimina un registro de oficio / ficha informativa.
     """
     ficha = get_object_or_404(FichaInformativa, id=ficha_id)
-    num_oficio = ficha.num_oficio
+    num_oficio = ficha.num_oficio or ficha.asunto
     ficha.delete()
-    messages.success(request, f"Se eliminó el oficio '{num_oficio}'.")
+    messages.success(request, f"Se eliminó el registro '{num_oficio}'.")
     return redirect('herramienta_fichas_informativas')
+
+
+def editar_ficha_informativa(request, ficha_id):
+    """
+    Permite editar o actualizar una Ficha Informativa / Oficio existente.
+    """
+    ficha = get_object_or_404(FichaInformativa, id=ficha_id)
+
+    if request.method == 'POST':
+        ficha.tipo_documento = request.POST.get('tipo_documento', ficha.tipo_documento).strip()
+        ficha.num_oficio = request.POST.get('num_oficio', ficha.num_oficio).strip()
+        ficha.asunto = request.POST.get('asunto', ficha.asunto).strip()
+        ficha.lugar_fecha = request.POST.get('lugar_fecha', ficha.lugar_fecha).strip()
+        ficha.hora_reporte = request.POST.get('hora_reporte', '').strip()
+        ficha.hora_arribo = request.POST.get('hora_arribo', '').strip()
+        ficha.lugar_hechos = request.POST.get('lugar_hechos', '').strip()
+
+        ficha.destinatario_nombre = request.POST.get('destinatario_nombre', '').strip()
+        ficha.destinatario_cargo = request.POST.get('destinatario_cargo', '').strip()
+        ficha.destinatario_dependencia = request.POST.get('destinatario_dependencia', '').strip()
+        ficha.atencion_nombre = request.POST.get('atencion_nombre', '').strip()
+        ficha.atencion_cargo = request.POST.get('atencion_cargo', '').strip()
+        
+        ficha.cuerpo_texto = request.POST.get('cuerpo_texto', '').strip()
+        ficha.firmante_nombre = request.POST.get('firmante_nombre', 'LIC. DANIEL EDUARDO ROMERO PILAR').strip()
+        ficha.firmante_cargo = request.POST.get('firmante_cargo', 'TITULAR DE LA UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS DEL H. AYUNTAMIENTO MEDELLÍN DE BRAVO, VER.').strip()
+        ficha.ccp_lineas = request.POST.get('ccp_lineas', '').strip()
+
+        ficha.save()
+
+        messages.success(request, f"¡El documento '{ficha.asunto}' fue actualizado con éxito!")
+        return redirect('imprimir_ficha_informativa', ficha_id=ficha.id)
+
+    return JsonResponse({
+        'id': ficha.id,
+        'tipo_documento': ficha.tipo_documento,
+        'num_oficio': ficha.num_oficio or '',
+        'asunto': ficha.asunto or '',
+        'lugar_fecha': ficha.lugar_fecha or '',
+        'hora_reporte': ficha.hora_reporte or '',
+        'hora_arribo': ficha.hora_arribo or '',
+        'lugar_hechos': ficha.lugar_hechos or '',
+        'destinatario_nombre': ficha.destinatario_nombre or '',
+        'destinatario_cargo': ficha.destinatario_cargo or '',
+        'destinatario_dependencia': ficha.destinatario_dependencia or '',
+        'atencion_nombre': ficha.atencion_nombre or '',
+        'atencion_cargo': ficha.atencion_cargo or '',
+        'cuerpo_texto': ficha.cuerpo_texto or '',
+        'firmante_nombre': ficha.firmante_nombre or '',
+        'firmante_cargo': ficha.firmante_cargo or '',
+        'ccp_lineas': ficha.ccp_lineas or '',
+    })
 

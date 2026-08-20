@@ -438,7 +438,7 @@
         <div class="hechos-section-title">HECHOS</div>
 
         <div class="cuerpo-text">
-          {{ ficha.cuerpo_texto }}
+          {{ ficha.cuerpo_texto|safe }}
         </div>
 
         <!-- FIRMA OPERATIVA -->
@@ -482,7 +482,7 @@
         <span class="presente-tag">P R E S E N T E</span>
 
         <div class="cuerpo-text">
-          {{ ficha.cuerpo_texto }}
+          {{ ficha.cuerpo_texto|safe }}
         </div>
 
         <div class="atentamente-block">

@@ -78,6 +78,7 @@ urlpatterns = [
     # Módulo 3: Generador de Fichas Informativas y Oficios Oficiales con Membrete
     path('herramientas-auxiliares/fichas-informativas/', views.herramienta_fichas_informativas, name='herramienta_fichas_informativas'),
     path('herramientas-auxiliares/fichas-informativas/imprimir/<int:ficha_id>/', views.imprimir_ficha_informativa, name='imprimir_ficha_informativa'),
+    path('herramientas-auxiliares/fichas-informativas/editar/<int:ficha_id>/', views.editar_ficha_informativa, name='editar_ficha_informativa'),
     path('herramientas-auxiliares/fichas-informativas/eliminar/<int:ficha_id>/', views.eliminar_ficha_informativa, name='eliminar_ficha_informativa'),
 
     # Perfil Ciudadano e Historial
