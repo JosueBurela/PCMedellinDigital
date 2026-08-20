@@ -83,6 +83,9 @@ urlpatterns = [
 
     # Módulo 4: Control Operativo de Vehículos y Bitácora Digital de Emergencias
     path('control-vehiculos/', views.flotilla_vehiculos_hub, name='flotilla_vehiculos_hub'),
+    path('control-vehiculos/registro/', views.registro_operador, name='registro_operador'),
+    path('control-vehiculos/login/', views.login_operador, name='login_operador'),
+    path('control-vehiculos/logout/', views.logout_operador, name='logout_operador'),
     path('control-vehiculos/salida/<int:unidad_id>/', views.dar_salida_unidad, name='dar_salida_unidad'),
     path('control-vehiculos/retorno/<int:bitacora_id>/', views.registrar_retorno_unidad, name='registrar_retorno_unidad'),
     path('control-vehiculos/gasolina/<int:unidad_id>/', views.registrar_carga_gasolina, name='registrar_carga_gasolina'),
@@ -90,6 +93,7 @@ urlpatterns = [
     path('control-vehiculos/admin/unidad/crear/', views.crear_unidad, name='crear_unidad'),
     path('control-vehiculos/admin/unidad/editar/<int:unidad_id>/', views.editar_unidad, name='editar_unidad'),
     path('control-vehiculos/admin/unidad/eliminar/<int:unidad_id>/', views.eliminar_unidad, name='eliminar_unidad'),
+    path('control-vehiculos/admin/usuario/estado/<int:usuario_id>/<str:nuevo_estado>/', views.cambiar_estado_usuario, name='cambiar_estado_usuario'),
 
     # Perfil Ciudadano e Historial
     path('perfil/', views.perfil_ciudadano, name='perfil_ciudadano'),

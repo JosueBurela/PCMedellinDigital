@@ -829,6 +829,43 @@ class RegistroCargaGasolina(models.Model):
         return f"{self.unidad.nombre_identificador} - {self.litros_cargados}L (${self.costo_total})"
 
 
+class UsuarioOperadorVehiculo(models.Model):
+    ESTADO_CHOICES = [
+        ('PENDIENTE', '🕒 Pendiente de Aprobación'),
+        ('APROBADO', '🟢 Activo / Aprobado'),
+        ('DESACTIVADO', '🔴 Desactivado / Suspendido'),
+        ('RECHAZADO', '❌ Rechazado'),
+    ]
+
+    ROL_CHOICES = [
+        ('OPERADOR', 'Operador / Paramédico'),
+        ('ADMIN', 'Administrador de Flotilla'),
+    ]
+
+    nombre_completo = models.CharField(max_length=200, unique=True, help_text="Nombre completo (se guarda en MAYÚSCULAS)")
+    password_hash = models.CharField(max_length=256)
+    rol = models.CharField(max_length=20, choices=ROL_CHOICES, default='OPERADOR')
+    estado = models.CharField(max_length=20, choices=ESTADO_CHOICES, default='PENDIENTE')
+    
+    ultimo_acceso = models.DateTimeField(blank=True, null=True)
+    creado_en = models.DateTimeField(auto_now_add=True)
+    actualizado_en = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Operador de Vehículo"
+        verbose_name_plural = "Operadores de Vehículos"
+        ordering = ['nombre_completo']
+
+    def __str__(self):
+        return f"{self.nombre_completo} ({self.get_estado_display()})"
+
+    def save(self, *args, **kwargs):
+        if self.nombre_completo:
+            self.nombre_completo = self.nombre_completo.strip().upper()
+        super().save(*args, **kwargs)
+
+
+
 
 
 

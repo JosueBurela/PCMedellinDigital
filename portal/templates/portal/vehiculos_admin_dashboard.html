@@ -273,6 +273,147 @@
     {% endif %}
   </div>
 
+  <!-- GESTIÓN Y APROBACIÓN DE USUARIOS OPERADORES -->
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+    <div class="border-b border-slate-100 pb-3 flex justify-between items-center">
+      <div>
+        <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="users" class="w-4 h-4 text-slate-700"></i> Control y Permisos de Usuarios Operadores
+        </h3>
+        <p class="text-xs text-slate-500">Aprueba nuevas solicitudes de registro, gestiona operadores activos o desactiva cuentas.</p>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1: SOLICITUDES PENDIENTES DE APROBACIÓN -->
+    {% if usuarios_pendientes %}
+    <div class="bg-amber-50 rounded-xl p-4 border border-amber-200 space-y-3">
+      <div class="flex items-center justify-between">
+        <h4 class="font-bold text-xs uppercase tracking-wider text-amber-900 flex items-center gap-1.5">
+          <i data-lucide="clock" class="w-4 h-4 text-amber-700"></i> Solicitudes Pendientes de Aprobación ({{ usuarios_pendientes.count }})
+        </h4>
+        <span class="text-[10px] font-bold bg-amber-200 text-amber-900 px-2 py-0.5 rounded">Revisión Requerida</span>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse text-xs">
+          <thead>
+            <tr class="bg-amber-100/70 text-amber-950 uppercase text-[10px] font-bold">
+              <th class="p-2.5">Nombre Completo del Operador</th>
+              <th class="p-2.5">Fecha de Registro</th>
+              <th class="p-2.5">Rol Solicitado</th>
+              <th class="p-2.5 text-right">Acción de Aprobación</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-amber-200/60 text-slate-800 font-semibold">
+            {% for u in usuarios_pendientes %}
+            <tr>
+              <td class="p-2.5 font-bold text-slate-900 uppercase">{{ u.nombre_completo }}</td>
+              <td class="p-2.5">{{ u.creado_en|date:"d/m/Y H:i" }} hrs</td>
+              <td class="p-2.5 text-slate-600">{{ u.get_rol_display }}</td>
+              <td class="p-2.5 text-right space-x-1">
+                <a href="{% url 'cambiar_estado_usuario' u.id 'APROBADO' %}" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1 rounded-lg text-[11px] inline-flex items-center gap-1 shadow-sm transition">
+                  <i data-lucide="check" class="w-3 h-3"></i> Aprobar Acceso
+                </a>
+                <a href="{% url 'cambiar_estado_usuario' u.id 'RECHAZADO' %}" onclick="return confirm('¿Seguro que deseas rechazar a {{ u.nombre_completo }}?');" class="bg-red-600 hover:bg-red-700 text-white font-bold px-3 py-1 rounded-lg text-[11px] inline-flex items-center gap-1 transition">
+                  <i data-lucide="x" class="w-3 h-3"></i> Rechazar
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- SECCIÓN 2: USUARIOS ACTIVOS Y DESACTIVADOS -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+      <!-- ACTIVOS -->
+      <div class="space-y-2">
+        <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+          <i data-lucide="user-check" class="w-4 h-4 text-emerald-600"></i> Operadores Activos Aprobados ({{ usuarios_activos.count }})
+        </h4>
+
+        {% if usuarios_activos %}
+        <div class="overflow-x-auto border border-slate-200 rounded-xl">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 text-slate-600 uppercase text-[10px] font-bold border-b border-slate-200">
+                <th class="p-2.5">Operador</th>
+                <th class="p-2.5">Rol</th>
+                <th class="p-2.5 text-right">Acción</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+              {% for u in usuarios_activos %}
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-2.5 font-bold text-slate-900 uppercase">{{ u.nombre_completo }}</td>
+                <td class="p-2.5">
+                  {% if u.rol == 'ADMIN' %}
+                  <span class="text-[10px] font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200">Administrador</span>
+                  {% else %}
+                  <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">Operador</span>
+                  {% endif %}
+                </td>
+                <td class="p-2.5 text-right">
+                  {% if u.id != operador_actual.id %}
+                  <a href="{% url 'cambiar_estado_usuario' u.id 'DESACTIVADO' %}" onclick="return confirm('¿Seguro que deseas desactivar la cuenta de {{ u.nombre_completo }}?');" class="bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 font-bold px-2.5 py-1 rounded-lg text-[11px] inline-flex items-center gap-1 transition">
+                    <i data-lucide="user-x" class="w-3 h-3 text-red-600"></i> Desactivar Cuenta
+                  </a>
+                  {% else %}
+                  <span class="text-[10px] font-bold text-slate-400">Tu Cuenta</span>
+                  {% endif %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="text-xs text-slate-400 py-3 italic">No hay operadores activos registrados todavía.</p>
+        {% endif %}
+      </div>
+
+      <!-- DESACTIVADOS / SUSPENDIDOS -->
+      <div class="space-y-2">
+        <h4 class="font-bold text-xs uppercase tracking-wider text-slate-800 flex items-center gap-1.5">
+          <i data-lucide="user-minus" class="w-4 h-4 text-red-600"></i> Cuentas Desactivadas / Suspendidas ({{ usuarios_desactivados.count }})
+        </h4>
+
+        {% if usuarios_desactivados %}
+        <div class="overflow-x-auto border border-slate-200 rounded-xl">
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="bg-slate-50 text-slate-600 uppercase text-[10px] font-bold border-b border-slate-200">
+                <th class="p-2.5">Operador</th>
+                <th class="p-2.5">Estatus</th>
+                <th class="p-2.5 text-right">Acción</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+              {% for u in usuarios_desactivados %}
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-2.5 font-bold text-slate-900 uppercase">{{ u.nombre_completo }}</td>
+                <td class="p-2.5">
+                  <span class="text-[10px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded border border-red-200">{{ u.get_estado_display }}</span>
+                </td>
+                <td class="p-2.5 text-right">
+                  <a href="{% url 'cambiar_estado_usuario' u.id 'APROBADO' %}" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 font-bold px-2.5 py-1 rounded-lg text-[11px] inline-flex items-center gap-1 transition">
+                    <i data-lucide="rotate-ccw" class="w-3 h-3 text-emerald-700"></i> Reactivar Cuenta
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <p class="text-xs text-slate-400 py-3 italic">No hay cuentas desactivadas o suspendidas.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
 </main>
 
 <!-- MODAL CREAR / EDITAR UNIDAD -->
