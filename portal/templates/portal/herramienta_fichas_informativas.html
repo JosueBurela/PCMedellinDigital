@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <button onclick="toggleModal('modal-crear-oficio')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
+    <button onclick="abrirModalNuevo()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
       <i data-lucide="plus-circle" class="w-4 h-4"></i> Redactar Nuevo Documento
     </button>
   </div>
@@ -231,7 +231,7 @@
       <div>
         <div class="flex justify-between items-center mb-1">
           <label id="lbl-cuerpo-texto" class="block text-xs font-bold text-slate-700">Descripción de los HECHOS / Narrativa *</label>
-          <span id="char-counter" class="text-[11px] font-extrabold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">0 / 1500 caracteres</span>
+          <span id="char-counter" class="text-[11px] font-extrabold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">0 / 4000 caracteres</span>
         </div>
 
         <!-- BARRA DE HERRAMIENTAS DE FORMATO PROFESIONAL -->
@@ -243,7 +243,7 @@
           <button type="button" onclick="insertarFormato('• ', '')" title="Insertar Viñeta" class="bg-white hover:bg-slate-200 text-slate-800 font-bold px-2.5 py-1 rounded-lg border border-slate-300 shadow-sm transition">• Viñeta</button>
         </div>
 
-        <textarea name="cuerpo_texto" id="field-cuerpo" rows="7" maxlength="1500" oninput="actualizarContador(this)" required placeholder="Redacta la narrativa detallada de los hechos o el cuerpo del oficio..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+        <textarea name="cuerpo_texto" id="field-cuerpo" rows="7" maxlength="4000" oninput="actualizarContador(this)" required placeholder="Redacta la narrativa detallada de los hechos o el cuerpo del oficio..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
       </div>
 
       <!-- FIRMA Y CCP -->
@@ -336,6 +336,23 @@
     insertarFormato('&nbsp;&nbsp;&nbsp;&nbsp;', '');
   }
 
+  function abrirModalNuevo() {
+    const form = document.getElementById('form-oficio');
+    if (form) {
+      form.action = "{% url 'herramienta_fichas_informativas' %}";
+    }
+    const modalTitle = document.querySelector('#modal-crear-oficio h3');
+    if (modalTitle) modalTitle.innerHTML = '<span>📄</span> Redactar Documento Oficial con Membrete';
+
+    document.getElementById('field-tipo-doc').value = 'TARJETA_INFORMATIVA';
+    alternarTipoDocumento('TARJETA_INFORMATIVA');
+
+    const cuerpoField = document.getElementById('field-cuerpo');
+    if (cuerpoField) actualizarContador(cuerpoField);
+
+    toggleModal('modal-crear-oficio');
+  }
+
   async function abrirModalEditar(fichaId) {
     try {
       const resp = await fetch(`/herramientas-auxiliares/fichas-informativas/editar/${fichaId}/`);
@@ -363,7 +380,7 @@
       document.getElementById('field-atn-cargo').value = data.atencion_cargo;
 
       const cuerpoField = document.getElementById('field-cuerpo');
-      cuerpoField.value = data.cuerpo_texto;
+      cuerpoField.value = data.cuerpo_texto || '';
       actualizarContador(cuerpoField);
 
       document.getElementById('field-firmante-nombre').value = data.firmante_nombre;
@@ -383,8 +400,8 @@
     const counter = document.getElementById('char-counter');
     if (counter && textarea) {
       const len = textarea.value.length;
-      counter.innerText = `${len} / 1500 caracteres`;
-      if (len >= 1400) {
+      counter.innerText = `${len} / 4000 caracteres`;
+      if (len >= 3800) {
         counter.className = "text-[11px] font-extrabold text-red-600 bg-red-100 px-2 py-0.5 rounded-md animate-pulse";
       } else {
         counter.className = "text-[11px] font-extrabold text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md";
