@@ -29,8 +29,10 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-fallback-key-protec
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'True').lower() in ('true', '1', 't')
 
-allowed_hosts_str = os.getenv('ALLOWED_HOSTS', 'localhost,127.0.0.1')
+allowed_hosts_str = os.getenv('ALLOWED_HOSTS', '*')
 ALLOWED_HOSTS = [h.strip() for h in allowed_hosts_str.split(',') if h.strip()]
+if '*' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('*')
 
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000',
@@ -42,6 +44,9 @@ CSRF_TRUSTED_ORIGINS = [
     'https://162-243-15-87.sslip.io',
     'https://*.sslip.io',
     'https://*.duckdns.org',
+    'https://*.gob.mx',
+    'http://*',
+    'https://*',
 ]
 
 for host in ALLOWED_HOSTS:
