@@ -785,11 +785,16 @@ class BitacoraSalidaVehiculo(models.Model):
     odometro_salida = models.PositiveIntegerField(help_text="Kilometraje al salir")
     gasolina_salida = models.CharField(max_length=30, choices=VehiculoUnidad.GASOLINA_CHOICES, default='Lleno')
     foto_odometro_salida = models.ImageField(upload_to='vehiculos/odometros_salida/', blank=True, null=True)
+    foto_gasolina_salida = models.ImageField(upload_to='vehiculos/gasolina_salida/', blank=True, null=True)
     
+    incongruencia_salida = models.BooleanField(default=False)
+    detalle_incongruencia_salida = models.CharField(max_length=255, blank=True, null=True)
+
     fecha_llegada = models.DateTimeField(blank=True, null=True)
     odometro_llegada = models.PositiveIntegerField(blank=True, null=True)
     gasolina_llegada = models.CharField(max_length=30, choices=VehiculoUnidad.GASOLINA_CHOICES, blank=True, null=True)
     foto_odometro_llegada = models.ImageField(upload_to='vehiculos/odometros_llegada/', blank=True, null=True)
+    foto_gasolina_llegada = models.ImageField(upload_to='vehiculos/gasolina_llegada/', blank=True, null=True)
     
     km_recorridos = models.PositiveIntegerField(default=0, help_text="Calculado: Odómetro Llegada - Odómetro Salida")
     duracion_minutos = models.PositiveIntegerField(default=0)

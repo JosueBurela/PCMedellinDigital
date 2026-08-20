@@ -185,6 +185,9 @@ def flotilla_vehiculos_hub(request):
 def dar_salida_unidad(request, unidad_id):
     """
     Registra la SALIDA de un vehículo de emergencia.
+    - El nombre del operador se auto-llena con el usuario autenticado.
+    - Compara el odómetro ingresado con el último registrado para detectar incongruencias.
+    - Exige subir de manera obligatoria la Foto del Odómetro y la Foto de la Gasolina.
     """
     unidad = get_object_or_404(VehiculoUnidad, id=unidad_id)
 
@@ -193,17 +196,39 @@ def dar_salida_unidad(request, unidad_id):
         return redirect('flotilla_vehiculos_hub')
 
     if request.method == 'POST':
-        operador_nombre = request.POST.get('operador_nombre', request.operador_actual.nombre_completo).strip().upper()
+        # El nombre del operador se auto-llena con el usuario en sesión
+        operador_nombre = request.operador_actual.nombre_completo.strip().upper()
         guardia_turno = request.POST.get('guardia_turno', '').strip()
         descripcion_servicio = request.POST.get('descripcion_servicio', '').strip()
         odometro_salida = request.POST.get('odometro_salida', unidad.odometro_actual)
         gasolina_salida = request.POST.get('gasolina_salida', unidad.nivel_gasolina_actual)
+        
         foto_odometro = request.FILES.get('foto_odometro_salida')
+        foto_gasolina = request.FILES.get('foto_gasolina_salida')
+
+        # Fotos obligatorias al dar salida
+        if not foto_odometro or not foto_gasolina:
+            messages.error(request, "⚠️ Es obligatorio subir ambas fotografías de evidencia: Foto del Odómetro y Foto del Nivel de Gasolina.")
+            return render(request, 'portal/vehiculos_dar_salida.html', {
+                'unidad': unidad,
+                'operador_actual': request.operador_actual
+            })
 
         try:
             odometro_salida_val = int(odometro_salida)
         except (ValueError, TypeError):
             odometro_salida_val = unidad.odometro_actual
+
+        # Comparación de Odómetro para Incongruencias
+        incongruencia = False
+        detalle_incongruencia = ""
+        odometro_anterior = unidad.odometro_actual
+
+        if odometro_salida_val != odometro_anterior:
+            incongruencia = True
+            diff = odometro_salida_val - odometro_anterior
+            signo = "+" if diff > 0 else ""
+            detalle_incongruencia = f"Incongruencia: El sistema registraba {odometro_anterior} km y el operador ingresó {odometro_salida_val} km ({signo}{diff} km)."
 
         if operador_nombre and descripcion_servicio:
             salida = BitacoraSalidaVehiculo.objects.create(
@@ -215,6 +240,9 @@ def dar_salida_unidad(request, unidad_id):
                 odometro_salida=odometro_salida_val,
                 gasolina_salida=gasolina_salida,
                 foto_odometro_salida=foto_odometro,
+                foto_gasolina_salida=foto_gasolina,
+                incongruencia_salida=incongruencia,
+                detalle_incongruencia_salida=detalle_incongruencia,
                 completado=False
             )
 
@@ -223,7 +251,10 @@ def dar_salida_unidad(request, unidad_id):
             unidad.nivel_gasolina_actual = gasolina_salida
             unidad.save()
 
-            messages.success(request, f"Salida registrada para {unidad.nombre_identificador}. Estatus cambiado a En Servicio.")
+            if incongruencia:
+                messages.warning(request, f"Salida registrada con ALERTA DE INCONGRUENCIA en Kilometraje para {unidad.nombre_identificador}. ({detalle_incongruencia})")
+            else:
+                messages.success(request, f"Salida registrada con éxito para {unidad.nombre_identificador}. Estatus cambiado a En Servicio.")
             return redirect('flotilla_vehiculos_hub')
         else:
             messages.error(request, "Por favor llena los campos requeridos.")
@@ -238,6 +269,7 @@ def dar_salida_unidad(request, unidad_id):
 def registrar_retorno_unidad(request, bitacora_id):
     """
     Registra el RETORNO a base de una unidad.
+    - Exige subir de manera obligatoria la Foto del Odómetro y la Foto de la Gasolina al llegar.
     """
     bitacora = get_object_or_404(BitacoraSalidaVehiculo.objects.select_related('unidad'), id=bitacora_id)
     unidad = bitacora.unidad
@@ -246,6 +278,15 @@ def registrar_retorno_unidad(request, bitacora_id):
         odometro_llegada = request.POST.get('odometro_llegada', unidad.odometro_actual)
         gasolina_llegada = request.POST.get('gasolina_llegada', unidad.nivel_gasolina_actual)
         foto_llegada = request.FILES.get('foto_odometro_llegada')
+        foto_gasolina_llegada = request.FILES.get('foto_gasolina_llegada')
+
+        # Fotos obligatorias al registrar retorno
+        if not foto_llegada or not foto_gasolina_llegada:
+            messages.error(request, "⚠️ Es obligatorio subir ambas fotografías de evidencia al retornar: Foto del Odómetro y Foto del Nivel de Gasolina.")
+            return render(request, 'portal/vehiculos_registrar_retorno.html', {
+                'bitacora': bitacora,
+                'unidad': unidad
+            })
 
         try:
             odometro_llegada_val = int(odometro_llegada)
@@ -260,6 +301,7 @@ def registrar_retorno_unidad(request, bitacora_id):
         bitacora.odometro_llegada = odometro_llegada_val
         bitacora.gasolina_llegada = gasolina_llegada
         bitacora.foto_odometro_llegada = foto_llegada
+        bitacora.foto_gasolina_llegada = foto_gasolina_llegada
         bitacora.km_recorridos = km_recorridos
         bitacora.duracion_minutos = duracion_min
         bitacora.completado = True

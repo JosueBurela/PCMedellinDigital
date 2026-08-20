@@ -212,25 +212,42 @@
         </thead>
         <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
           {% for r in salidas_todas %}
-          <tr class="hover:bg-slate-50 transition">
-            <td class="p-2.5 font-bold text-slate-900 whitespace-nowrap">{{ r.unidad.nombre_identificador }}</td>
+          <tr class="hover:bg-slate-50 transition {% if r.incongruencia_salida %}bg-amber-50/50{% endif %}">
+            <td class="p-2.5 font-bold text-slate-900 whitespace-nowrap">
+              {{ r.unidad.nombre_identificador }}
+              {% if r.incongruencia_salida %}
+              <span class="block text-[9px] font-bold text-amber-800 bg-amber-100 border border-amber-300 px-1.5 py-0.5 rounded mt-0.5" title="{{ r.detalle_incongruencia_salida }}">
+                ⚠️ Incongruencia de Km
+              </span>
+              {% endif %}
+            </td>
             <td class="p-2.5 whitespace-nowrap">{{ r.fecha_salida|date:"d/m/Y H:i" }}</td>
-            <td class="p-2.5 font-semibold">{{ r.odometro_salida }} km</td>
+            <td class="p-2.5 font-semibold">
+              {{ r.odometro_salida }} km
+              {% if r.incongruencia_salida %}
+              <span class="block text-[9px] font-semibold text-amber-700">{{ r.detalle_incongruencia_salida }}</span>
+              {% endif %}
+            </td>
             <td class="p-2.5 max-w-xs leading-snug">{{ r.descripcion_servicio }}</td>
             <td class="p-2.5 whitespace-nowrap">{{ r.fecha_llegada|date:"H:i"|default:"En curso" }}</td>
             <td class="p-2.5 font-semibold">{{ r.odometro_llegada|default:"-" }} {% if r.odometro_llegada %}km{% endif %}</td>
             <td class="p-2.5 font-bold text-emerald-700">{{ r.km_recorridos }} km</td>
-            <td class="p-2.5 font-semibold">{{ r.operador_nombre }}</td>
-            <td class="p-2.5">
-              {% if r.foto_odometro_salida %}
-              <a href="{{ r.foto_odometro_salida.url }}" target="_blank" class="text-blue-600 font-bold hover:underline block text-[11px]">Foto Salida</a>
-              {% endif %}
-              {% if r.foto_odometro_llegada %}
-              <a href="{{ r.foto_odometro_llegada.url }}" target="_blank" class="text-emerald-600 font-bold hover:underline block text-[11px]">Foto Llegada</a>
-              {% endif %}
-              {% if not r.foto_odometro_salida and not r.foto_odometro_llegada %}
-              <span class="text-slate-400 text-[10px]">Sin foto</span>
-              {% endif %}
+            <td class="p-2.5 font-semibold uppercase">{{ r.operador_nombre }}</td>
+            <td class="p-2.5 whitespace-nowrap">
+              <div class="space-y-0.5 text-[10px]">
+                {% if r.foto_odometro_salida %}
+                <a href="{{ r.foto_odometro_salida.url }}" target="_blank" class="text-blue-600 font-bold hover:underline block">📷 Km Salida</a>
+                {% endif %}
+                {% if r.foto_gasolina_salida %}
+                <a href="{{ r.foto_gasolina_salida.url }}" target="_blank" class="text-purple-600 font-bold hover:underline block">⛽ Gas Salida</a>
+                {% endif %}
+                {% if r.foto_odometro_llegada %}
+                <a href="{{ r.foto_odometro_llegada.url }}" target="_blank" class="text-emerald-600 font-bold hover:underline block">📷 Km Llegada</a>
+                {% endif %}
+                {% if r.foto_gasolina_llegada %}
+                <a href="{{ r.foto_gasolina_llegada.url }}" target="_blank" class="text-teal-600 font-bold hover:underline block">⛽ Gas Llegada</a>
+                {% endif %}
+              </div>
             </td>
           </tr>
           {% endfor %}
