@@ -481,3 +481,33 @@ def eliminar_unidad(request, unidad_id):
     unidad.delete()
     messages.success(request, f"Se eliminó la unidad '{nombre}' de la flotilla.")
     return redirect('admin_vehiculos_dashboard')
+
+
+@requiere_admin_flotilla
+def historial_unidad(request, unidad_id):
+    """
+    Muestra los antecedentes e historial completo de salidas y cargas de una unidad específica,
+    ordenado del viaje más reciente al más antiguo.
+    """
+    unidad = get_object_or_404(VehiculoUnidad, id=unidad_id)
+    
+    # Salidas/viajes ordenados del último (más reciente) al primero
+    salidas = BitacoraSalidaVehiculo.objects.filter(unidad=unidad).order_by('-fecha_salida')
+    cargas = RegistroCargaGasolina.objects.filter(unidad=unidad).order_by('-fecha_carga')
+
+    # Métricas específicas de la unidad
+    total_km_unidad = salidas.aggregate(Sum('km_recorridos'))['km_recorridos__sum'] or 0
+    total_viajes = salidas.count()
+    total_litros_unidad = cargas.aggregate(Sum('litros_cargados'))['litros_cargados__sum'] or 0
+    total_costo_gasolina = cargas.aggregate(Sum('costo_total'))['costo_total__sum'] or 0
+
+    return render(request, 'portal/vehiculos_historial_unidad.html', {
+        'unidad': unidad,
+        'salidas': salidas,
+        'cargas': cargas,
+        'total_km_unidad': total_km_unidad,
+        'total_viajes': total_viajes,
+        'total_litros_unidad': total_litros_unidad,
+        'total_costo_gasolina': total_costo_gasolina,
+        'operador_actual': request.operador_actual
+    })

@@ -1,0 +1,228 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Historial y Antecedentes - {{ unidad.nombre_identificador }} | Protección Civil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<link rel="manifest" href="{% static 'portal/manifest.json' %}">
+<meta name="theme-color" content="#0f2942">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PCivil Vehículos">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 font-sans antialiased">
+
+<!-- HEADER NAVEGACIÓN (1 SOLA LÍNEA EN MÓVIL) -->
+<header class="bg-[#0f2942] text-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-3 sm:px-4 py-2.5 flex flex-row items-center justify-between gap-2">
+    <div class="flex items-center space-x-2 min-w-0">
+      <a href="{% url 'admin_vehiculos_dashboard' %}" class="bg-white/10 hover:bg-white/20 p-1.5 sm:p-2 rounded-xl text-white transition shrink-0" title="Volver al Panel de Administración">
+        <i data-lucide="arrow-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+      </a>
+      <div class="min-w-0">
+        <span class="text-[9px] sm:text-[10px] font-bold text-amber-400 uppercase tracking-wider block truncate">Expediente de Flotilla</span>
+        <h1 class="text-xs sm:text-sm md:text-base font-extrabold tracking-tight flex items-center gap-1.5 truncate">
+          <i data-lucide="file-text" class="w-4 h-4 text-amber-400 shrink-0"></i>
+          <span class="truncate">Antecedentes de {{ unidad.nombre_identificador }}</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <button onclick="window.print()" class="bg-white/10 hover:bg-white/20 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 transition shrink-0">
+        <i data-lucide="printer" class="w-3.5 h-3.5"></i> Imprimir
+      </button>
+      <a href="{% url 'logout_operador' %}" class="bg-red-600/90 hover:bg-red-700 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0" title="Cerrar Sesión">
+        <i data-lucide="log-out" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+        <span>Salir</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+  <!-- RESUMEN GENERAL DE LA UNIDAD Y FICHA DE ANTECEDENTES -->
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col md:flex-row items-center md:items-start gap-6">
+    
+    <!-- FOTO DE LA UNIDAD -->
+    <div class="w-full md:w-56 h-40 bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200 shrink-0">
+      {% if unidad.foto_unidad %}
+      <img src="{{ unidad.foto_unidad.url }}" alt="{{ unidad.nombre_identificador }}" class="w-full h-full object-cover">
+      {% else %}
+      <div class="text-center p-4">
+        <i data-lucide="truck" class="w-10 h-10 text-slate-300 mx-auto mb-1"></i>
+        <span class="text-[10px] font-semibold text-slate-400">Sin foto de unidad</span>
+      </div>
+      {% endif %}
+    </div>
+
+    <!-- DATOS DE FICHA TÉCNICA -->
+    <div class="flex-1 space-y-3 text-center md:text-left w-full">
+      <div class="flex flex-wrap items-center justify-center md:justify-start gap-2">
+        <span class="text-[10px] font-bold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-200">
+          Unidad {{ unidad.numero_unidad }}
+        </span>
+        <span class="text-[10px] font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">
+          {{ unidad.get_tipo_vehiculo_display }}
+        </span>
+        {% if unidad.placas %}
+        <span class="text-[10px] font-semibold text-slate-500 uppercase bg-slate-50 px-2 py-0.5 rounded">
+          Placas: {{ unidad.placas }}
+        </span>
+        {% endif %}
+        {% if unidad.estatus == 'DISPONIBLE' %}
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">🟢 Disponible</span>
+        {% elif unidad.estatus == 'EN_SERVICIO' %}
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-50 text-red-700 border border-red-200">🔴 En Servicio</span>
+        {% else %}
+        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-50 text-amber-700 border border-amber-200">🛠️ Mantenimiento</span>
+        {% endif %}
+      </div>
+
+      <h2 class="text-xl font-bold text-slate-900 tracking-tight">{{ unidad.nombre_identificador }}</h2>
+
+      <!-- MÉTRICAS ACUMULADAS DE LA UNIDAD -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <span class="text-[9px] text-slate-400 block font-bold uppercase">Total Viajes / Salidas</span>
+          <span class="text-slate-900 font-extrabold text-base">{{ total_viajes }}</span>
+        </div>
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <span class="text-[9px] text-slate-400 block font-bold uppercase">Km Recorridos</span>
+          <span class="text-emerald-700 font-extrabold text-base">{{ total_km_unidad }} km</span>
+        </div>
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <span class="text-[9px] text-slate-400 block font-bold uppercase">Odómetro Actual</span>
+          <span class="text-slate-900 font-extrabold text-base">{{ unidad.odometro_actual }} km</span>
+        </div>
+        <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+          <span class="text-[9px] text-slate-400 block font-bold uppercase">Gasto Combustible</span>
+          <span class="text-amber-700 font-extrabold text-base">${{ total_costo_gasolina }}</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HISTORIAL DE SALIDAS / VIAJE REALIZADOS (DEL MÁS RECIENTE AL MÁS ANTIGUO) -->
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+      <div>
+        <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="history" class="w-4 h-4 text-slate-700"></i> Historial de Salidas y Servicios Atendidos
+        </h3>
+        <p class="text-xs text-slate-500">Ordenado cronológicamente desde el servicio más reciente hasta el más antiguo.</p>
+      </div>
+      <span class="text-xs font-bold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-lg">
+        {{ salidas.count }} Registros
+      </span>
+    </div>
+
+    {% if salidas %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse text-xs">
+        <thead>
+          <tr class="bg-[#0f2942] text-white uppercase text-[10px] font-bold border-b border-slate-200">
+            <th class="p-2.5">Fecha y Hora Salida</th>
+            <th class="p-2.5">Odómetro Salida</th>
+            <th class="p-2.5">Descripción del Servicio</th>
+            <th class="p-2.5">Hora Llegada</th>
+            <th class="p-2.5">Odómetro Llegada</th>
+            <th class="p-2.5">Km Recorridos</th>
+            <th class="p-2.5">Operador</th>
+            <th class="p-2.5">Evidencias</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+          {% for s in salidas %}
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-2.5 font-bold text-slate-900 whitespace-nowrap">{{ s.fecha_salida|date:"d/m/Y H:i" }} hrs</td>
+            <td class="p-2.5 font-semibold">{{ s.odometro_salida }} km</td>
+            <td class="p-2.5 max-w-sm leading-snug">{{ s.descripcion_servicio }}</td>
+            <td class="p-2.5 whitespace-nowrap">{{ s.fecha_llegada|date:"H:i"|default:"En curso" }}</td>
+            <td class="p-2.5 font-semibold">{{ s.odometro_llegada|default:"-" }} {% if s.odometro_llegada %}km{% endif %}</td>
+            <td class="p-2.5 font-bold text-emerald-700">{{ s.km_recorridos }} km</td>
+            <td class="p-2.5 font-semibold uppercase">{{ s.operador_nombre }}</td>
+            <td class="p-2.5 whitespace-nowrap">
+              {% if s.foto_odometro_salida %}
+              <a href="{{ s.foto_odometro_salida.url }}" target="_blank" class="text-blue-600 font-bold hover:underline block text-[11px]">Foto Salida</a>
+              {% endif %}
+              {% if s.foto_odometro_llegada %}
+              <a href="{{ s.foto_odometro_llegada.url }}" target="_blank" class="text-emerald-600 font-bold hover:underline block text-[11px]">Foto Llegada</a>
+              {% endif %}
+              {% if not s.foto_odometro_salida and not s.foto_odometro_llegada %}
+              <span class="text-slate-400 text-[10px]">Sin foto</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="bg-slate-50 rounded-xl p-6 text-center text-slate-400 space-y-1">
+      <i data-lucide="file-x" class="w-8 h-8 mx-auto text-slate-300"></i>
+      <p class="font-bold text-xs text-slate-600">No hay salidas registradas para esta unidad todavía.</p>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- HISTÓRICO DE CARGAS DE COMBUSTIBLE -->
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+    <div class="border-b border-slate-100 pb-3">
+      <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="fuel" class="w-4 h-4 text-slate-700"></i> Histórico de Recargas de Combustible
+      </h3>
+    </div>
+
+    {% if cargas %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse text-xs">
+        <thead>
+          <tr class="bg-slate-100 text-slate-600 uppercase text-[10px] font-bold">
+            <th class="p-2.5">Fecha</th>
+            <th class="p-2.5">Operador</th>
+            <th class="p-2.5">Litros</th>
+            <th class="p-2.5">Costo ($)</th>
+            <th class="p-2.5">Odómetro</th>
+            <th class="p-2.5">Ticket</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+          {% for c in cargas %}
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-2.5 whitespace-nowrap">{{ c.fecha_carga|date:"d/m/Y H:i" }} hrs</td>
+            <td class="p-2.5 uppercase font-semibold">{{ c.operador }}</td>
+            <td class="p-2.5 font-bold text-amber-900">{{ c.litros_cargados }} L</td>
+            <td class="p-2.5 font-bold text-emerald-700">${{ c.costo_total }}</td>
+            <td class="p-2.5 font-semibold">{{ c.odometro_al_cargar }} km</td>
+            <td class="p-2.5">
+              {% if c.foto_ticket_o_bomba %}
+              <a href="{{ c.foto_ticket_o_bomba.url }}" target="_blank" class="text-blue-600 font-bold hover:underline text-[11px]">Ver Recibo</a>
+              {% else %}
+              <span class="text-slate-400 text-[10px]">Sin ticket</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-xs text-slate-400 text-center py-4">No hay recargas de combustible registradas para esta unidad.</p>
+    {% endif %}
+  </div>
+
+</main>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

@@ -93,6 +93,7 @@ urlpatterns = [
     path('control-vehiculos/admin/unidad/crear/', views.crear_unidad, name='crear_unidad'),
     path('control-vehiculos/admin/unidad/editar/<int:unidad_id>/', views.editar_unidad, name='editar_unidad'),
     path('control-vehiculos/admin/unidad/eliminar/<int:unidad_id>/', views.eliminar_unidad, name='eliminar_unidad'),
+    path('control-vehiculos/admin/unidad/historial/<int:unidad_id>/', views.historial_unidad, name='historial_unidad'),
     path('control-vehiculos/admin/usuario/estado/<int:usuario_id>/<str:nuevo_estado>/', views.cambiar_estado_usuario, name='cambiar_estado_usuario'),
 
     # Perfil Ciudadano e Historial
