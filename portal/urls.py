@@ -87,6 +87,9 @@ urlpatterns = [
     path('control-vehiculos/retorno/<int:bitacora_id>/', views.registrar_retorno_unidad, name='registrar_retorno_unidad'),
     path('control-vehiculos/gasolina/<int:unidad_id>/', views.registrar_carga_gasolina, name='registrar_carga_gasolina'),
     path('control-vehiculos/admin/', views.admin_vehiculos_dashboard, name='admin_vehiculos_dashboard'),
+    path('control-vehiculos/admin/unidad/crear/', views.crear_unidad, name='crear_unidad'),
+    path('control-vehiculos/admin/unidad/editar/<int:unidad_id>/', views.editar_unidad, name='editar_unidad'),
+    path('control-vehiculos/admin/unidad/eliminar/<int:unidad_id>/', views.eliminar_unidad, name='eliminar_unidad'),
 
     # Perfil Ciudadano e Historial
     path('perfil/', views.perfil_ciudadano, name='perfil_ciudadano'),

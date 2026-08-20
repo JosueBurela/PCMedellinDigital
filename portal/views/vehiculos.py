@@ -210,3 +210,93 @@ def admin_vehiculos_dashboard(request):
         'total_costo': total_costo,
         'rendimiento_promedio': rendimiento_promedio,
     })
+
+
+def crear_unidad(request):
+    """
+    Crea una nueva unidad de vehículo en la flotilla.
+    """
+    if request.method == 'POST':
+        numero_unidad = request.POST.get('numero_unidad', '').strip()
+        nombre_identificador = request.POST.get('nombre_identificador', '').strip()
+        tipo_vehiculo = request.POST.get('tipo_vehiculo', 'Ambulancia').strip()
+        placas = request.POST.get('placas', '').strip()
+        odometro_actual = request.POST.get('odometro_actual', '0')
+        nivel_gasolina_actual = request.POST.get('nivel_gasolina_actual', 'Lleno').strip()
+        foto_unidad = request.FILES.get('foto_unidad')
+
+        try:
+            odometro_val = int(odometro_actual)
+        except ValueError:
+            odometro_val = 0
+
+        if numero_unidad and nombre_identificador:
+            if VehiculoUnidad.objects.filter(numero_unidad=numero_unidad).exists():
+                messages.error(request, f"Ya existe una unidad registrada con el número '{numero_unidad}'.")
+            else:
+                unidad = VehiculoUnidad.objects.create(
+                    numero_unidad=numero_unidad,
+                    nombre_identificador=nombre_identificador,
+                    tipo_vehiculo=tipo_vehiculo,
+                    placas=placas,
+                    odometro_actual=odometro_val,
+                    nivel_gasolina_actual=nivel_gasolina_actual,
+                    foto_unidad=foto_unidad,
+                    estatus='DISPONIBLE'
+                )
+                messages.success(request, f"¡Unidad '{unidad.nombre_identificador}' agregada con éxito a la flotilla!")
+        else:
+            messages.error(request, "Por favor completa el número de unidad y el nombre identificador.")
+
+    return redirect('admin_vehiculos_dashboard')
+
+
+def editar_unidad(request, unidad_id):
+    """
+    Edita una unidad existente o retorna sus datos en JSON.
+    """
+    unidad = get_object_or_404(VehiculoUnidad, id=unidad_id)
+
+    if request.method == 'POST':
+        unidad.numero_unidad = request.POST.get('numero_unidad', unidad.numero_unidad).strip()
+        unidad.nombre_identificador = request.POST.get('nombre_identificador', unidad.nombre_identificador).strip()
+        unidad.tipo_vehiculo = request.POST.get('tipo_vehiculo', unidad.tipo_vehiculo).strip()
+        unidad.placas = request.POST.get('placas', '').strip()
+        unidad.estatus = request.POST.get('estatus', unidad.estatus).strip()
+        
+        try:
+            unidad.odometro_actual = int(request.POST.get('odometro_actual', unidad.odometro_actual))
+        except ValueError:
+            pass
+
+        unidad.nivel_gasolina_actual = request.POST.get('nivel_gasolina_actual', unidad.nivel_gasolina_actual).strip()
+        
+        if request.FILES.get('foto_unidad'):
+            unidad.foto_unidad = request.FILES.get('foto_unidad')
+
+        unidad.save()
+        messages.success(request, f"¡Unidad '{unidad.nombre_identificador}' actualizada con éxito!")
+        return redirect('admin_vehiculos_dashboard')
+
+    return JsonResponse({
+        'id': unidad.id,
+        'numero_unidad': unidad.numero_unidad,
+        'nombre_identificador': unidad.nombre_identificador,
+        'tipo_vehiculo': unidad.tipo_vehiculo,
+        'placas': unidad.placas or '',
+        'estatus': unidad.estatus,
+        'odometro_actual': unidad.odometro_actual,
+        'nivel_gasolina_actual': unidad.nivel_gasolina_actual,
+        'foto_url': unidad.foto_unidad.url if unidad.foto_unidad else ''
+    })
+
+
+def eliminar_unidad(request, unidad_id):
+    """
+    Elimina una unidad de la flotilla.
+    """
+    unidad = get_object_or_404(VehiculoUnidad, id=unidad_id)
+    nombre = unidad.nombre_identificador
+    unidad.delete()
+    messages.success(request, f"Se eliminó la unidad '{nombre}' de la flotilla.")
+    return redirect('admin_vehiculos_dashboard')
