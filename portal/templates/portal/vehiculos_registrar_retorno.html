@@ -12,17 +12,25 @@
 <body class="bg-slate-50 min-h-screen text-slate-800 font-sans antialiased">
 
 <header class="bg-[#0f2942] text-white shadow-md sticky top-0 z-50">
-  <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
-    <div class="flex items-center space-x-3">
-      <a href="{% url 'flotilla_vehiculos_hub' %}" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition" title="Volver a la Flotilla">
-        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+  <div class="max-w-4xl mx-auto px-3 sm:px-4 py-2.5 flex flex-row items-center justify-between gap-2">
+    <div class="flex items-center space-x-2 min-w-0">
+      <a href="{% url 'flotilla_vehiculos_hub' %}" class="bg-white/10 hover:bg-white/20 p-1.5 sm:p-2 rounded-xl text-white transition shrink-0" title="Volver a la Flotilla">
+        <i data-lucide="arrow-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
       </a>
-      <div>
-        <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest block">Registro de Bitácora Digital</span>
-        <h1 class="text-base font-bold tracking-tight flex items-center gap-2">
-          <i data-lucide="log-in" class="w-4 h-4 text-amber-400"></i> Registrar Retorno de {{ unidad.nombre_identificador }}
+      <div class="min-w-0">
+        <span class="text-[9px] sm:text-[10px] font-bold text-amber-400 uppercase tracking-wider block truncate">Bitácora Digital</span>
+        <h1 class="text-xs sm:text-sm font-extrabold tracking-tight flex items-center gap-1.5 truncate">
+          <i data-lucide="log-in" class="w-4 h-4 text-amber-400 shrink-0"></i>
+          <span class="truncate">Retorno de {{ unidad.nombre_identificador }}</span>
         </h1>
       </div>
+    </div>
+
+    <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <a href="{% url 'logout_operador' %}" class="bg-red-600/90 hover:bg-red-700 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0" title="Cerrar Sesión">
+        <i data-lucide="log-out" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+        <span>Salir</span>
+      </a>
     </div>
   </div>
 </header>
