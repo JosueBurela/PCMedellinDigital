@@ -1,0 +1,195 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Administración de Vehículos | PCivil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans antialiased">
+
+<!-- HEADER -->
+<header class="bg-[#0f2942] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <a href="{% url 'flotilla_vehiculos_hub' %}" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </a>
+      <div>
+        <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Administración Operativa</span>
+        <h1 class="text-base md:text-lg font-black tracking-tight">📊 Dashboard de Analítica y Bitácora Digital</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+  <!-- TARJETAS DE MÉTRICAS OPERATIVAS -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex items-center justify-between">
+      <div>
+        <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Total Recorrido</span>
+        <h3 class="text-2xl font-black text-slate-900 mt-1">{{ total_km }} km</h3>
+        <span class="text-xs font-semibold text-emerald-600">Kilometraje acumulado</span>
+      </div>
+      <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-700 flex items-center justify-center">
+        <i data-lucide="gauge" class="w-6 h-6"></i>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex items-center justify-between">
+      <div>
+        <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Combustible Surtido</span>
+        <h3 class="text-2xl font-black text-slate-900 mt-1">{{ total_litros }} L</h3>
+        <span class="text-xs font-semibold text-amber-600">Litros totales cargados</span>
+      </div>
+      <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center">
+        <i data-lucide="fuel" class="w-6 h-6"></i>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex items-center justify-between">
+      <div>
+        <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Gasto de Gasolina</span>
+        <h3 class="text-2xl font-black text-slate-900 mt-1">${{ total_costo }}</h3>
+        <span class="text-xs font-semibold text-slate-500">Pesos Mexicanos ($ MXN)</span>
+      </div>
+      <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center">
+        <i data-lucide="dollar-sign" class="w-6 h-6"></i>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex items-center justify-between">
+      <div>
+        <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block">Rendimiento Promedio</span>
+        <h3 class="text-2xl font-black text-slate-900 mt-1">{{ rendimiento_promedio }} <span class="text-xs">km/L</span></h3>
+        <span class="text-xs font-semibold text-purple-600">Kilómetros por litro</span>
+      </div>
+      <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-700 flex items-center justify-center">
+        <i data-lucide="trending-up" class="w-6 h-6"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- BITÁCORA DIGITAL HISTÓRICA COMPLETA (RÉPLICA FORMATO FÍSICO) -->
+  <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4 border-b border-slate-100 pb-4">
+      <div>
+        <h3 class="font-black text-slate-900 text-base flex items-center gap-2">
+          <span>📋</span> BITÁCORA DE SALIDAS DE VEHÍCULOS DE EMERGENCIA
+        </h3>
+        <p class="text-xs text-slate-500">Historial completo digitalizado de salidas, servicios, odómetros y evidencias.</p>
+      </div>
+
+      <button onclick="window.print()" class="bg-slate-900 hover:bg-slate-800 text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
+        <i data-lucide="printer" class="w-4 h-4"></i> Imprimir Reporte Oficial
+      </button>
+    </div>
+
+    {% if salidas_todas %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse text-xs">
+        <thead>
+          <tr class="bg-[#0f2942] text-white uppercase text-[10px] font-black border-b border-slate-200">
+            <th class="p-3">Unidad</th>
+            <th class="p-3">Fecha y Hora Salida</th>
+            <th class="p-3">Odómetro Salida</th>
+            <th class="p-3">Descripción del Servicio</th>
+            <th class="p-3">Hora Llegada</th>
+            <th class="p-3">Odómetro Llegada</th>
+            <th class="p-3">Km Recorridos</th>
+            <th class="p-3">Operador</th>
+            <th class="p-3">Evidencia Tablero</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-200 text-slate-800 font-medium">
+          {% for r in salidas_todas %}
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-3 font-black text-slate-900 whitespace-nowrap">{{ r.unidad.nombre_identificador }}</td>
+            <td class="p-3 whitespace-nowrap">{{ r.fecha_salida|date:"d/m/Y H:i" }}</td>
+            <td class="p-3 font-bold">{{ r.odometro_salida }} km</td>
+            <td class="p-3 max-w-xs leading-snug">{{ r.descripcion_servicio }}</td>
+            <td class="p-3 whitespace-nowrap">{{ r.fecha_llegada|date:"H:i"|default:"En curso" }}</td>
+            <td class="p-3 font-bold">{{ r.odometro_llegada|default:"-" }} {% if r.odometro_llegada %}km{% endif %}</td>
+            <td class="p-3 font-black text-emerald-600">{{ r.km_recorridos }} km</td>
+            <td class="p-3 font-bold">{{ r.operador_nombre }}</td>
+            <td class="p-3">
+              {% if r.foto_odometro_salida %}
+              <a href="{{ r.foto_odometro_salida.url }}" target="_blank" class="text-blue-600 font-bold hover:underline">Ver Foto Salida</a>
+              {% endif %}
+              {% if r.foto_odometro_llegada %}
+              <br><a href="{{ r.foto_odometro_llegada.url }}" target="_blank" class="text-emerald-600 font-bold hover:underline">Ver Foto Llegada</a>
+              {% endif %}
+              {% if not r.foto_odometro_salida and not r.foto_odometro_llegada %}
+              <span class="text-slate-400 text-[10px]">Sin foto</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-xs text-slate-400 text-center py-6">No hay registros cargados en la bitácora todavía.</p>
+    {% endif %}
+  </div>
+
+  <!-- REGISTROS DE CARGAS DE GASOLINA -->
+  <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+    <div class="border-b border-slate-100 pb-3">
+      <h3 class="font-black text-slate-800 text-sm uppercase tracking-tight flex items-center gap-2">
+        <span>⛽</span> Histórico de Cargas de Combustible
+      </h3>
+    </div>
+
+    {% if cargas_todas %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse text-xs">
+        <thead>
+          <tr class="bg-amber-500 text-slate-950 uppercase text-[10px] font-black">
+            <th class="p-3">Fecha</th>
+            <th class="p-3">Unidad</th>
+            <th class="p-3">Operador</th>
+            <th class="p-3">Litros</th>
+            <th class="p-3">Costo ($)</th>
+            <th class="p-3">Odómetro</th>
+            <th class="p-3">Ticket</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 text-slate-700 font-semibold">
+          {% for c in cargas_todas %}
+          <tr class="hover:bg-slate-50 transition">
+            <td class="p-3 whitespace-nowrap">{{ c.fecha_carga|date:"d/m/Y H:i" }}</td>
+            <td class="p-3 font-black text-slate-900">{{ c.unidad.nombre_identificador }}</td>
+            <td class="p-3">{{ c.operador }}</td>
+            <td class="p-3 font-bold text-amber-900">{{ c.litros_cargados }} L</td>
+            <td class="p-3 font-black text-emerald-600">${{ c.costo_total }}</td>
+            <td class="p-3 font-bold">{{ c.odometro_al_cargar }} km</td>
+            <td class="p-3">
+              {% if c.foto_ticket_o_bomba %}
+              <a href="{{ c.foto_ticket_o_bomba.url }}" target="_blank" class="text-blue-600 font-bold hover:underline">Ver Recibo</a>
+              {% else %}
+              <span class="text-slate-400 text-[10px]">Sin ticket</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-xs text-slate-400 text-center py-4">No hay cargas de gasolina registradas.</p>
+    {% endif %}
+  </div>
+
+</main>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

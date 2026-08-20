@@ -14,5 +14,6 @@ from .whatsapp import *
 from .secciones import *
 from .plantillas import *
 from .herramientas import *
+from .vehiculos import *
 
 

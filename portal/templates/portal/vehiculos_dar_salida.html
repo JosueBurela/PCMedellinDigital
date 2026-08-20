@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dar Salida a Unidad {{ unidad.numero_unidad }} | PCivil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans antialiased">
+
+<header class="bg-[#0f2942] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <a href="{% url 'flotilla_vehiculos_hub' %}" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </a>
+      <div>
+        <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Registro de Bitácora Digital</span>
+        <h1 class="text-base font-black tracking-tight">🚀 Registrar Salida de {{ unidad.nombre_identificador }}</h1>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="max-w-4xl mx-auto px-4 py-8 space-y-6">
+
+  <!-- TARJETA INFORMACIÓN DE LA UNIDAD -->
+  <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex flex-col sm:flex-row items-center gap-6">
+    {% if unidad.foto_unidad %}
+    <img src="{{ unidad.foto_unidad.url }}" alt="{{ unidad.nombre_identificador }}" class="w-32 h-24 object-cover rounded-2xl border border-slate-200 shadow-sm">
+    {% else %}
+    <div class="w-32 h-24 bg-slate-100 rounded-2xl flex items-center justify-center border border-slate-200">
+      <i data-lucide="truck" class="w-10 h-10 text-slate-400"></i>
+    </div>
+    {% endif %}
+
+    <div class="space-y-1 text-center sm:text-left">
+      <span class="text-[10px] font-black text-blue-600 bg-blue-50 px-2 py-0.5 rounded">Unidad {{ unidad.numero_unidad }}</span>
+      <h2 class="text-xl font-black text-slate-900">{{ unidad.nombre_identificador }}</h2>
+      <p class="text-xs text-slate-500 font-medium">Placas: {{ unidad.placas|default:"Sin registro" }} | Tipo: {{ unidad.get_tipo_vehiculo_display }}</p>
+      <div class="flex gap-4 text-xs font-bold text-slate-700 pt-1">
+        <span>🛞 Odómetro Base: <strong>{{ unidad.odometro_actual }} km</strong></span>
+        <span>⛽ Tanque Actual: <strong>{{ unidad.nivel_gasolina_actual }}</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORMULARIO DE SALIDA -->
+  <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-6">
+    <div class="border-b border-slate-100 pb-3">
+      <h3 class="font-black text-slate-800 text-sm uppercase tracking-tight flex items-center gap-2">
+        <span>📝</span> Datos Obligatorios de Salida de Base
+      </h3>
+      <p class="text-xs text-slate-500">Ingresa la información requerida. Al guardar, la unidad pasará a estado EN SERVICIO (No disponible).</p>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-5">
+      {% csrf_token %}
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Nombre del Operador / Paramédico *</label>
+          <input type="text" name="operador_nombre" placeholder="Ej. Francisco Lara / Miguel Martínez" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Turno / Guardia (Opcional)</label>
+          <input type="text" name="guardia_turno" placeholder="Ej. Paco / Guardia A" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">Motivo / Descripción del Servicio *</label>
+        <textarea name="descripcion_servicio" rows="3" required placeholder="Ej. Servicio de incendio de casa habitación en Nuevo Medellín / Traslado a Hospital..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 text-xs font-medium text-slate-800 leading-relaxed focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-200">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Odómetro al Salir (km) *</label>
+          <input type="number" name="odometro_salida" value="{{ unidad.odometro_actual }}" required class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-black text-slate-900 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Nivel de Tanque de Gasolina *</label>
+          <select name="gasolina_salida" class="w-full bg-white border border-slate-300 rounded-xl px-3 py-2.5 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            <option value="Lleno" {% if unidad.nivel_gasolina_actual == 'Lleno' %}selected{% endif %}>⛽ Tanque Lleno</option>
+            <option value="3/4" {% if unidad.nivel_gasolina_actual == '3/4' %}selected{% endif %}>3/4 de Tanque</option>
+            <option value="1/2" {% if unidad.nivel_gasolina_actual == '1/2' %}selected{% endif %}>1/2 de Tanque</option>
+            <option value="1/4" {% if unidad.nivel_gasolina_actual == '1/4' %}selected{% endif %}>1/4 de Tanque</option>
+            <option value="Reserva" {% if unidad.nivel_gasolina_actual == 'Reserva' %}selected{% endif %}>⚠️ Reserva (Bajo)</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-xs font-bold text-slate-700 mb-1">📷 Foto de Evidencia del Odómetro/Tablero al Salir (Opcional)</label>
+        <input type="file" name="foto_odometro_salida" accept="image/*" capture="environment" class="w-full bg-slate-50 border border-slate-300 rounded-xl p-2 text-xs font-semibold text-slate-700">
+        <span class="text-[10px] text-slate-400 block mt-1">Puedes tomar la foto directamente con la cámara del celular o seleccionar un archivo.</span>
+      </div>
+
+      <div class="flex justify-end gap-3 pt-3 border-t border-slate-100">
+        <a href="{% url 'flotilla_vehiculos_hub' %}" class="px-4 py-2.5 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
+          Cancelar
+        </a>
+        <button type="submit" class="px-6 py-2.5 text-xs font-black text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition shadow flex items-center gap-1.5">
+          <i data-lucide="check" class="w-4 h-4"></i> Confirmar y Dar Salida
+        </button>
+      </div>
+
+    </form>
+  </div>
+
+</main>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

@@ -1,0 +1,247 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control de Vehículos y Bitácora Digital | PCivil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800 font-sans antialiased">
+
+<!-- HEADER NAVEGACIÓN -->
+<header class="bg-[#0f2942] text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center space-x-3">
+      <a href="{% url 'suite_herramientas_hub' %}" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </a>
+      <div>
+        <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Protección Civil & Bomberos Medellín</span>
+        <h1 class="text-base md:text-lg font-black tracking-tight flex items-center gap-2">
+          <span>🚑</span> Control de Vehículos y Bitácora Digital
+        </h1>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <a href="{% url 'admin_vehiculos_dashboard' %}" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
+        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Panel Admin & Bitácora Histórica
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- DJANGO MESSAGES -->
+{% if messages %}
+<div class="max-w-7xl mx-auto mt-4 px-4 space-y-2">
+  {% for message in messages %}
+  <div class="p-4 rounded-2xl text-xs font-bold flex items-center justify-between {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200{% endif %} shadow-sm">
+    <span>{{ message }}</span>
+    <button onclick="this.parentElement.remove()" class="text-xs">✕</button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<!-- CONTENIDO PRINCIPAL -->
+<main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+  <!-- UNIDADES ACTIVA EN SERVICIO (SI EXISTEN) -->
+  {% if salidas_activas %}
+  <div class="bg-red-900 text-white rounded-3xl p-6 shadow-xl border border-red-700 space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="font-black text-sm md:text-base uppercase tracking-wider flex items-center gap-2 text-red-200">
+        <span class="animate-pulse">🚨</span> Unidades Actualmente en Servicio ({{ salidas_activas.count }})
+      </h3>
+      <span class="text-[10px] font-extrabold bg-red-800 text-red-100 px-3 py-1 rounded-full border border-red-600">
+        En Curso
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {% for s in salidas_activas %}
+      <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 space-y-3">
+        <div class="flex justify-between items-start">
+          <div>
+            <h4 class="font-black text-base text-white">{{ s.unidad.nombre_identificador }}</h4>
+            <p class="text-xs text-red-200 font-semibold">👤 Operador: {{ s.operador_nombre }}</p>
+          </div>
+          <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-md bg-red-500 text-white shadow-sm">
+            🔴 EN SERVICIO
+          </span>
+        </div>
+
+        <div class="text-xs text-slate-200 space-y-1 bg-black/20 p-2.5 rounded-xl border border-white/10">
+          <p>📍 <strong>Motivo:</strong> {{ s.descripcion_servicio }}</p>
+          <p>🕒 <strong>Hora Salida:</strong> {{ s.fecha_salida|date:"H:i" }} hrs</p>
+          <p>🛞 <strong>Odómetro Inicial:</strong> {{ s.odometro_salida }} km</p>
+        </div>
+
+        <a href="{% url 'registrar_retorno_unidad' s.id %}" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
+          <i data-lucide="check-circle" class="w-4 h-4"></i> Registrar Retorno a Base
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- CATÁLOGO DE FLOTILLA -->
+  <div class="space-y-4">
+    <div class="flex items-center justify-between">
+      <h3 class="text-base font-black text-slate-800 uppercase tracking-tight flex items-center gap-2">
+        <span>🚒</span> Flotilla de Vehículos de Emergencia ({{ unidades.count }})
+      </h3>
+      <span class="text-xs font-bold text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">
+        Control de Odómetro & Gasolina
+      </span>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for u in unidades %}
+      <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-xl transition duration-300 group space-y-4">
+        
+        <div class="space-y-3">
+          <!-- IMAGEN / ILUSTRACIÓN DE LA UNIDAD -->
+          <div class="relative h-44 bg-slate-100 rounded-2xl overflow-hidden flex items-center justify-center border border-slate-200">
+            {% if u.foto_unidad %}
+            <img src="{{ u.foto_unidad.url }}" alt="{{ u.nombre_identificador }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            {% else %}
+            <div class="text-center p-4">
+              <i data-lucide="truck" class="w-12 h-12 text-slate-400 mx-auto mb-1"></i>
+              <span class="text-[10px] font-bold text-slate-400">Sin foto de unidad</span>
+            </div>
+            {% endif %}
+
+            <!-- BADGE ESTATUS -->
+            <div class="absolute top-2 right-2">
+              {% if u.estatus == 'DISPONIBLE' %}
+              <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-emerald-500 text-white shadow-md">
+                🟢 Disponible
+              </span>
+              {% elif u.estatus == 'EN_SERVICIO' %}
+              <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-red-600 text-white shadow-md">
+                🔴 En Servicio
+              </span>
+              {% else %}
+              <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 shadow-md">
+                🛠️ Mantenimiento
+              </span>
+              {% endif %}
+            </div>
+          </div>
+
+          <!-- DETALLES DE LA UNIDAD -->
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-black uppercase text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
+                Unidad {{ u.numero_unidad }}
+              </span>
+              {% if u.placas %}
+              <span class="text-[10px] font-bold text-slate-400 uppercase">
+                Placas: {{ u.placas }}
+              </span>
+              {% endif %}
+            </div>
+
+            <h4 class="text-base font-black text-slate-900 tracking-tight mt-1">{{ u.nombre_identificador }}</h4>
+
+            <div class="grid grid-cols-2 gap-2 text-[11px] font-bold text-slate-600 mt-3 pt-3 border-t border-slate-100">
+              <div class="bg-slate-50 p-2 rounded-xl border border-slate-200">
+                <span class="text-[9px] text-slate-400 block font-bold uppercase">Odómetro Actual</span>
+                <span class="text-slate-900 font-black text-xs">{{ u.odometro_actual }} km</span>
+              </div>
+              <div class="bg-slate-50 p-2 rounded-xl border border-slate-200">
+                <span class="text-[9px] text-slate-400 block font-bold uppercase">Tanque Gasolina</span>
+                <span class="text-slate-900 font-black text-xs">{{ u.nivel_gasolina_actual }}</span>
+              </div>
+            </div>
+
+            {% if u.horas_sin_uso != None %}
+            <div class="mt-2 text-[11px] font-semibold text-slate-500 flex items-center justify-between bg-amber-50/80 px-2.5 py-1.5 rounded-xl border border-amber-200">
+              <span>⏳ Tiempo sin uso:</span>
+              <strong class="text-amber-900 font-extrabold">{{ u.horas_sin_uso }} hrs</strong>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- BOTONERA DE ACCIÓN -->
+        <div class="space-y-2 pt-2 border-t border-slate-100">
+          {% if u.estatus == 'DISPONIBLE' %}
+          <a href="{% url 'dar_salida_unidad' u.id %}" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
+            <i data-lucide="navigation" class="w-4 h-4"></i> 🚀 Dar Salida a Unidad
+          </a>
+          {% else %}
+          <button disabled class="w-full bg-slate-200 text-slate-400 font-extrabold py-2.5 px-3 rounded-xl text-xs cursor-not-allowed flex items-center justify-center gap-1.5">
+            <i data-lucide="lock" class="w-4 h-4"></i> Unidad Ocupada
+          </button>
+          {% endif %}
+
+          <a href="{% url 'registrar_carga_gasolina' u.id %}" class="w-full bg-slate-100 hover:bg-amber-50 hover:text-amber-900 text-slate-700 border border-slate-200 font-bold py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="fuel" class="w-3.5 h-3.5 text-amber-600"></i> Cargar Gasolina
+          </a>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- BITÁCORA HISTÓRICA RECIENTE -->
+  <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+      <h3 class="font-black text-slate-800 text-sm uppercase tracking-tight flex items-center gap-2">
+        <span>📋</span> Últimas Salidas Registradas en Bitácora
+      </h3>
+      <a href="{% url 'admin_vehiculos_dashboard' %}" class="text-xs font-bold text-blue-600 hover:text-blue-800">
+        Ver Historial Completo →
+      </a>
+    </div>
+
+    {% if salidas_recientes %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse text-xs">
+        <thead>
+          <tr class="bg-slate-50 text-slate-500 uppercase text-[10px] font-black border-b border-slate-200">
+            <th class="p-3">Unidad</th>
+            <th class="p-3">Fecha y Salida</th>
+            <th class="p-3">Odómetro Salida</th>
+            <th class="p-3">Descripción del Servicio</th>
+            <th class="p-3">Llegada</th>
+            <th class="p-3">Odómetro Llegada</th>
+            <th class="p-3">Km Recorridos</th>
+            <th class="p-3">Operador</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 text-slate-700 font-semibold">
+          {% for r in salidas_recientes %}
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="p-3 font-black text-slate-900">{{ r.unidad.nombre_identificador }}</td>
+            <td class="p-3 whitespace-nowrap">{{ r.fecha_salida|date:"d/m/Y H:i" }}</td>
+            <td class="p-3 font-bold">{{ r.odometro_salida }} km</td>
+            <td class="p-3 max-w-xs truncate" title="{{ r.descripcion_servicio }}">{{ r.descripcion_servicio }}</td>
+            <td class="p-3 whitespace-nowrap">{{ r.fecha_llegada|date:"H:i"|default:"-" }}</td>
+            <td class="p-3 font-bold">{{ r.odometro_llegada|default:"-" }} {% if r.odometro_llegada %}km{% endif %}</td>
+            <td class="p-3 font-black text-emerald-600">{{ r.km_recorridos }} km</td>
+            <td class="p-3">{{ r.operador_nombre }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <p class="text-xs text-slate-400 text-center py-4">No hay registros de salidas en la bitácora todavía.</p>
+    {% endif %}
+  </div>
+
+</main>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

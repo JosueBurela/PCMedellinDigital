@@ -717,6 +717,119 @@ class FichaInformativa(models.Model):
         return f"{self.get_tipo_documento_display()} - {self.asunto[:30]}"
 
 
+# ==============================================================================
+# 🚑 MÓDULO CONTROL DE VEHÍCULOS & BITÁCORA DIGITAL DE EMERGENCIAS
+# ==============================================================================
+
+class VehiculoUnidad(models.Model):
+    TIPO_CHOICES = [
+        ('Ambulancia', 'Ambulancia'),
+        ('Pipa', 'Pipa de Agua'),
+        ('PickUp', 'Pick Up / Camioneta Operativa'),
+        ('Rescate', 'Unidad de Rescate'),
+        ('Moto', 'Motocicleta Operativa'),
+        ('Bomberos', 'Camión de Bomberos'),
+    ]
+
+    ESTATUS_CHOICES = [
+        ('DISPONIBLE', '🟢 Disponible'),
+        ('EN_SERVICIO', '🔴 En Servicio (No Disponible)'),
+        ('MANTENIMIENTO', '🛠️ En Mantenimiento'),
+        ('FUERA_DE_SERVICIO', '⚠️ Fuera de Servicio'),
+    ]
+
+    GASOLINA_CHOICES = [
+        ('Reserva', '⚠️ Reserva (Bajo)'),
+        ('1/4', '1/4 de Tanque'),
+        ('1/2', '1/2 de Tanque'),
+        ('3/4', '3/4 de Tanque'),
+        ('Lleno', '⛽ Tanque Lleno'),
+    ]
+
+    numero_unidad = models.CharField(max_length=50, unique=True, help_text="Ej. 208, 072, 096")
+    nombre_identificador = models.CharField(max_length=150, help_text="Ej. Ambulancia 208, Pipa 072")
+    tipo_vehiculo = models.CharField(max_length=50, choices=TIPO_CHOICES, default='Ambulancia')
+    placas = models.CharField(max_length=50, blank=True, null=True, help_text="Placas de la unidad")
+    foto_unidad = models.ImageField(upload_to='vehiculos/fotos/', blank=True, null=True)
+    
+    estatus = models.CharField(max_length=30, choices=ESTATUS_CHOICES, default='DISPONIBLE')
+    odometro_actual = models.PositiveIntegerField(default=0, help_text="Kilometraje actual del odómetro")
+    nivel_gasolina_actual = models.CharField(max_length=30, choices=GASOLINA_CHOICES, default='Lleno')
+    
+    ultima_salida_finalizada = models.DateTimeField(blank=True, null=True, help_text="Fecha y hora del último retorno a base")
+    creado_en = models.DateTimeField(auto_now_add=True)
+    actualizado_en = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Vehículo de Flotilla"
+        verbose_name_plural = "Vehículos de Flotilla"
+        ordering = ['numero_unidad']
+
+    def __str__(self):
+        return f"{self.nombre_identificador} ({self.get_estatus_display()})"
+
+    def horas_sin_uso(self):
+        if not self.ultima_salida_finalizada:
+            return None
+        diff = timezone.now() - self.ultima_salida_finalizada
+        return round(diff.total_seconds() / 3600, 1)
+
+
+class BitacoraSalidaVehiculo(models.Model):
+    unidad = models.ForeignKey(VehiculoUnidad, on_delete=models.CASCADE, related_name='salidas')
+    operador_nombre = models.CharField(max_length=200, help_text="Nombre del operador o paramédico a cargo")
+    guardia_turno = models.CharField(max_length=100, blank=True, null=True, help_text="Ej. Paco / Guardia 1")
+    descripcion_servicio = models.TextField(help_text="Motivo / Descripción del servicio o llamada de emergencia")
+    
+    fecha_salida = models.DateTimeField(default=timezone.now)
+    odometro_salida = models.PositiveIntegerField(help_text="Kilometraje al salir")
+    gasolina_salida = models.CharField(max_length=30, choices=VehiculoUnidad.GASOLINA_CHOICES, default='Lleno')
+    foto_odometro_salida = models.ImageField(upload_to='vehiculos/odometros_salida/', blank=True, null=True)
+    
+    fecha_llegada = models.DateTimeField(blank=True, null=True)
+    odometro_llegada = models.PositiveIntegerField(blank=True, null=True)
+    gasolina_llegada = models.CharField(max_length=30, choices=VehiculoUnidad.GASOLINA_CHOICES, blank=True, null=True)
+    foto_odometro_llegada = models.ImageField(upload_to='vehiculos/odometros_llegada/', blank=True, null=True)
+    
+    km_recorridos = models.PositiveIntegerField(default=0, help_text="Calculado: Odómetro Llegada - Odómetro Salida")
+    duracion_minutos = models.PositiveIntegerField(default=0)
+    completado = models.BooleanField(default=False)
+    
+    creado_en = models.DateTimeField(auto_now_add=True)
+    actualizado_en = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Registro de Bitácora de Salida"
+        verbose_name_plural = "Registros de Bitácora de Salidas"
+        ordering = ['-fecha_salida']
+
+    def __str__(self):
+        estado_str = "FINALIZADO" if self.completado else "EN CURSO"
+        return f"{self.unidad.nombre_identificador} - {self.operador_nombre} ({estado_str})"
+
+
+class RegistroCargaGasolina(models.Model):
+    unidad = models.ForeignKey(VehiculoUnidad, on_delete=models.CASCADE, related_name='cargas_gasolina')
+    operador = models.CharField(max_length=200, help_text="Nombre de quien realizó la carga")
+    fecha_carga = models.DateTimeField(default=timezone.now)
+    litros_cargados = models.DecimalField(max_digits=8, decimal_places=2, help_text="Litros surtidos")
+    costo_total = models.DecimalField(max_digits=10, decimal_places=2, help_text="Importe total en $ MXN")
+    odometro_al_cargar = models.PositiveIntegerField(help_text="Kilometraje al momento de cargar")
+    foto_ticket_o_bomba = models.ImageField(upload_to='vehiculos/tickets_gasolina/', blank=True, null=True)
+    notas = models.TextField(blank=True, null=True)
+
+    creado_en = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Carga de Gasolina"
+        verbose_name_plural = "Cargas de Gasolina"
+        ordering = ['-fecha_carga']
+
+    def __str__(self):
+        return f"{self.unidad.nombre_identificador} - {self.litros_cargados}L (${self.costo_total})"
+
+
+
 
 
 

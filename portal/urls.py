@@ -81,6 +81,13 @@ urlpatterns = [
     path('herramientas-auxiliares/fichas-informativas/editar/<int:ficha_id>/', views.editar_ficha_informativa, name='editar_ficha_informativa'),
     path('herramientas-auxiliares/fichas-informativas/eliminar/<int:ficha_id>/', views.eliminar_ficha_informativa, name='eliminar_ficha_informativa'),
 
+    # Módulo 4: Control Operativo de Vehículos y Bitácora Digital de Emergencias
+    path('control-vehiculos/', views.flotilla_vehiculos_hub, name='flotilla_vehiculos_hub'),
+    path('control-vehiculos/salida/<int:unidad_id>/', views.dar_salida_unidad, name='dar_salida_unidad'),
+    path('control-vehiculos/retorno/<int:bitacora_id>/', views.registrar_retorno_unidad, name='registrar_retorno_unidad'),
+    path('control-vehiculos/gasolina/<int:unidad_id>/', views.registrar_carga_gasolina, name='registrar_carga_gasolina'),
+    path('control-vehiculos/admin/', views.admin_vehiculos_dashboard, name='admin_vehiculos_dashboard'),
+
     # Perfil Ciudadano e Historial
     path('perfil/', views.perfil_ciudadano, name='perfil_ciudadano'),
     path('chat/enviar/', views.enviar_mensaje_chat, name='enviar_mensaje_chat'),

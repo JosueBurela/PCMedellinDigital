@@ -18,7 +18,8 @@ from portal.models import (
     OrdenInspeccion,
     ItemInspeccion,
     ConfiguracionInspeccion,
-    FichaInformativa
+    FichaInformativa,
+    VehiculoUnidad
 )
 
 def suite_herramientas_hub(request):
@@ -55,6 +56,16 @@ def suite_herramientas_hub(request):
             'color': 'bg-emerald-600',
             'badge': f"{FichaInformativa.objects.count()} Oficios",
             'url': '/herramientas-auxiliares/fichas-informativas/',
+        },
+        {
+            'id': 'control_vehiculos',
+            'titulo': 'Control de Vehículos y Bitácora Digital',
+            'categoria': 'Operativo & Flotilla',
+            'descripcion': 'Control de salidas de emergencias, registro de odómetro, tanque de gasolina, evidencia fotográfica y analítica de consumo.',
+            'icono': 'truck',
+            'color': 'bg-amber-600',
+            'badge': f"{VehiculoUnidad.objects.count()} Unidades",
+            'url': '/control-vehiculos/',
         }
     ]
 
