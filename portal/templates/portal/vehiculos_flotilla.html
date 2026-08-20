@@ -4,31 +4,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Control de Vehículos y Bitácora Digital | PCivil Medellín</title>
+<title>Control de Vehículos y Bitácora Digital | Protección Civil Medellín</title>
 <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-100 min-h-screen text-slate-800 font-sans antialiased">
+<body class="bg-slate-50 min-h-screen text-slate-800 font-sans antialiased">
 
 <!-- HEADER NAVEGACIÓN -->
-<header class="bg-[#0f2942] text-white shadow-lg sticky top-0 z-50">
-  <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+<header class="bg-[#0f2942] text-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col md:flex-row items-center justify-between gap-3">
     <div class="flex items-center space-x-3">
-      <a href="{% url 'suite_herramientas_hub' %}" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition">
+      <a href="{% url 'suite_herramientas_hub' %}" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition" title="Volver al Menú Principal">
         <i data-lucide="arrow-left" class="w-5 h-5"></i>
       </a>
       <div>
-        <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Protección Civil & Bomberos Medellín</span>
-        <h1 class="text-base md:text-lg font-black tracking-tight flex items-center gap-2">
-          <span>🚑</span> Control de Vehículos y Bitácora Digital
+        <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest block">Protección Civil & Bomberos Medellín</span>
+        <h1 class="text-base font-extrabold tracking-tight flex items-center gap-2">
+          <i data-lucide="shield-alert" class="w-5 h-5 text-amber-400"></i> Control de Vehículos y Bitácora Digital
         </h1>
       </div>
     </div>
 
     <div class="flex items-center gap-2">
-      <a href="{% url 'admin_vehiculos_dashboard' %}" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
-        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Panel Admin & Bitácora Histórica
+      <a href="{% url 'admin_vehiculos_dashboard' %}" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-sm transition">
+        <i data-lucide="layout-dashboard" class="w-4 h-4"></i> Panel de Administración
       </a>
     </div>
   </div>
@@ -38,50 +38,53 @@
 {% if messages %}
 <div class="max-w-7xl mx-auto mt-4 px-4 space-y-2">
   {% for message in messages %}
-  <div class="p-4 rounded-2xl text-xs font-bold flex items-center justify-between {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200{% endif %} shadow-sm">
-    <span>{{ message }}</span>
-    <button onclick="this.parentElement.remove()" class="text-xs">✕</button>
+  <div class="p-3.5 rounded-xl text-xs font-semibold flex items-center justify-between {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200{% endif %} shadow-sm">
+    <div class="flex items-center gap-2">
+      <i data-lucide="{% if message.tags == 'error' %}alert-circle{% else %}check-circle-2{% endif %}" class="w-4 h-4"></i>
+      <span>{{ message }}</span>
+    </div>
+    <button onclick="this.parentElement.remove()" class="text-xs text-slate-400 hover:text-slate-600">✕</button>
   </div>
   {% endfor %}
 </div>
 {% endif %}
 
 <!-- CONTENIDO PRINCIPAL -->
-<main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+<main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
-  <!-- UNIDADES ACTIVA EN SERVICIO (SI EXISTEN) -->
+  <!-- SECCIÓN DE UNIDADES EN SERVICIO ACTIVO -->
   {% if salidas_activas %}
-  <div class="bg-red-900 text-white rounded-3xl p-6 shadow-xl border border-red-700 space-y-4">
-    <div class="flex items-center justify-between">
-      <h3 class="font-black text-sm md:text-base uppercase tracking-wider flex items-center gap-2 text-red-200">
-        <span class="animate-pulse">🚨</span> Unidades Actualmente en Servicio ({{ salidas_activas.count }})
+  <div class="bg-red-950 text-white rounded-2xl p-5 shadow-lg border border-red-800 space-y-4">
+    <div class="flex items-center justify-between border-b border-red-800 pb-3">
+      <h3 class="font-bold text-xs md:text-sm uppercase tracking-wider flex items-center gap-2 text-red-200">
+        <i data-lucide="siren" class="w-4 h-4 text-red-400 animate-pulse"></i> Unidades en Servicio Activo ({{ salidas_activas.count }})
       </h3>
-      <span class="text-[10px] font-extrabold bg-red-800 text-red-100 px-3 py-1 rounded-full border border-red-600">
+      <span class="text-[10px] font-bold bg-red-900 text-red-200 px-3 py-1 rounded-full border border-red-700">
         En Curso
       </span>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {% for s in salidas_activas %}
-      <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 border border-white/20 space-y-3">
+      <div class="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 space-y-3">
         <div class="flex justify-between items-start">
           <div>
-            <h4 class="font-black text-base text-white">{{ s.unidad.nombre_identificador }}</h4>
-            <p class="text-xs text-red-200 font-semibold">👤 Operador: {{ s.operador_nombre }}</p>
+            <h4 class="font-bold text-sm text-white">{{ s.unidad.nombre_identificador }}</h4>
+            <p class="text-xs text-red-300">Operador: {{ s.operador_nombre }}</p>
           </div>
-          <span class="text-[10px] font-extrabold px-2.5 py-1 rounded-md bg-red-500 text-white shadow-sm">
-            🔴 EN SERVICIO
+          <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-red-600 text-white shadow-sm flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> En Servicio
           </span>
         </div>
 
-        <div class="text-xs text-slate-200 space-y-1 bg-black/20 p-2.5 rounded-xl border border-white/10">
-          <p>📍 <strong>Motivo:</strong> {{ s.descripcion_servicio }}</p>
-          <p>🕒 <strong>Hora Salida:</strong> {{ s.fecha_salida|date:"H:i" }} hrs</p>
-          <p>🛞 <strong>Odómetro Inicial:</strong> {{ s.odometro_salida }} km</p>
+        <div class="text-xs text-slate-300 space-y-1 bg-black/30 p-3 rounded-lg border border-white/10">
+          <p><strong>Servicio:</strong> {{ s.descripcion_servicio }}</p>
+          <p><strong>Hora Salida:</strong> {{ s.fecha_salida|date:"H:i" }} hrs</p>
+          <p><strong>Odómetro Inicial:</strong> {{ s.odometro_salida }} km</p>
         </div>
 
-        <a href="{% url 'registrar_retorno_unidad' s.id %}" class="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
-          <i data-lucide="check-circle" class="w-4 h-4"></i> Registrar Retorno a Base
+        <a href="{% url 'registrar_retorno_unidad' s.id %}" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 transition">
+          <i data-lucide="log-in" class="w-4 h-4"></i> Registrar Retorno a Base
         </a>
       </div>
       {% endfor %}
@@ -91,152 +94,166 @@
 
   <!-- CATÁLOGO DE FLOTILLA -->
   <div class="space-y-4">
-    <div class="flex items-center justify-between">
-      <h3 class="text-base font-black text-slate-800 uppercase tracking-tight flex items-center gap-2">
-        <span>🚒</span> Flotilla de Vehículos de Emergencia ({{ unidades.count }})
-      </h3>
-      <span class="text-xs font-bold text-slate-500 bg-white px-3 py-1 rounded-full border border-slate-200">
-        Control de Odómetro & Gasolina
+    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+      <div>
+        <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
+          <i data-lucide="truck" class="w-5 h-5 text-slate-600"></i> Flotilla de Vehículos de Emergencia
+        </h2>
+        <p class="text-xs text-slate-500">Selecciona una unidad para dar salida, registrar retorno o cargar combustible.</p>
+      </div>
+      <span class="text-xs font-semibold text-slate-600 bg-white px-3 py-1 rounded-lg border border-slate-200 shadow-sm">
+        {{ unidades.count }} Unidades Registradas
       </span>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    {% if unidades %}
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
       {% for u in unidades %}
-      <div class="bg-white rounded-3xl p-5 shadow-sm border border-slate-200 flex flex-col justify-between hover:shadow-xl transition duration-300 group space-y-4">
+      <div class="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col justify-between hover:border-slate-300 transition duration-200 group space-y-3">
         
         <div class="space-y-3">
-          <!-- IMAGEN / ILUSTRACIÓN DE LA UNIDAD -->
-          <div class="relative h-44 bg-slate-100 rounded-2xl overflow-hidden flex items-center justify-center border border-slate-200">
+          <!-- CONTENEDOR FOTOGRAFÍA -->
+          <div class="relative h-40 bg-slate-100 rounded-xl overflow-hidden flex items-center justify-center border border-slate-200">
             {% if u.foto_unidad %}
             <img src="{{ u.foto_unidad.url }}" alt="{{ u.nombre_identificador }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
             {% else %}
             <div class="text-center p-4">
-              <i data-lucide="truck" class="w-12 h-12 text-slate-400 mx-auto mb-1"></i>
-              <span class="text-[10px] font-bold text-slate-400">Sin foto de unidad</span>
+              <i data-lucide="truck" class="w-10 h-10 text-slate-300 mx-auto mb-1"></i>
+              <span class="text-[10px] font-semibold text-slate-400">Sin fotografía</span>
             </div>
             {% endif %}
 
-            <!-- BADGE ESTATUS -->
+            <!-- ESTATUS ETIQUETA -->
             <div class="absolute top-2 right-2">
               {% if u.estatus == 'DISPONIBLE' %}
-              <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-emerald-500 text-white shadow-md">
-                🟢 Disponible
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500 text-white shadow-sm flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-white"></span> Disponible
               </span>
               {% elif u.estatus == 'EN_SERVICIO' %}
-              <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-red-600 text-white shadow-md">
-                🔴 En Servicio
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-red-600 text-white shadow-sm flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-white"></span> En Servicio
               </span>
               {% else %}
-              <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full bg-amber-500 text-slate-950 shadow-md">
-                🛠️ Mantenimiento
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-500 text-slate-950 shadow-sm flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-slate-950"></span> Mantenimiento
               </span>
               {% endif %}
             </div>
           </div>
 
-          <!-- DETALLES DE LA UNIDAD -->
+          <!-- DETALLES Y DATOS -->
           <div>
             <div class="flex items-center justify-between">
-              <span class="text-[10px] font-black uppercase text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
+              <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider bg-slate-100 px-2 py-0.5 rounded">
                 Unidad {{ u.numero_unidad }}
               </span>
               {% if u.placas %}
-              <span class="text-[10px] font-bold text-slate-400 uppercase">
+              <span class="text-[10px] font-semibold text-slate-400 uppercase">
                 Placas: {{ u.placas }}
               </span>
               {% endif %}
             </div>
 
-            <h4 class="text-base font-black text-slate-900 tracking-tight mt-1">{{ u.nombre_identificador }}</h4>
+            <h3 class="text-sm font-bold text-slate-900 tracking-tight mt-1">{{ u.nombre_identificador }}</h3>
 
-            <div class="grid grid-cols-2 gap-2 text-[11px] font-bold text-slate-600 mt-3 pt-3 border-t border-slate-100">
-              <div class="bg-slate-50 p-2 rounded-xl border border-slate-200">
-                <span class="text-[9px] text-slate-400 block font-bold uppercase">Odómetro Actual</span>
-                <span class="text-slate-900 font-black text-xs">{{ u.odometro_actual }} km</span>
+            <div class="grid grid-cols-2 gap-2 text-xs font-semibold text-slate-600 mt-2.5 pt-2.5 border-t border-slate-100">
+              <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                <span class="text-[9px] text-slate-400 block font-bold uppercase">Odómetro Base</span>
+                <span class="text-slate-900 font-bold">{{ u.odometro_actual }} km</span>
               </div>
-              <div class="bg-slate-50 p-2 rounded-xl border border-slate-200">
-                <span class="text-[9px] text-slate-400 block font-bold uppercase">Tanque Gasolina</span>
-                <span class="text-slate-900 font-black text-xs">{{ u.nivel_gasolina_actual }}</span>
+              <div class="bg-slate-50 p-2 rounded-lg border border-slate-200">
+                <span class="text-[9px] text-slate-400 block font-bold uppercase">Combustible</span>
+                <span class="text-slate-900 font-bold">{{ u.nivel_gasolina_actual }}</span>
               </div>
             </div>
 
             {% if u.horas_sin_uso != None %}
-            <div class="mt-2 text-[11px] font-semibold text-slate-500 flex items-center justify-between bg-amber-50/80 px-2.5 py-1.5 rounded-xl border border-amber-200">
-              <span>⏳ Tiempo sin uso:</span>
-              <strong class="text-amber-900 font-extrabold">{{ u.horas_sin_uso }} hrs</strong>
+            <div class="mt-2 text-[11px] font-medium text-slate-500 flex items-center justify-between bg-slate-100 px-2.5 py-1 rounded-lg">
+              <span>Tiempo sin servicio:</span>
+              <strong class="text-slate-700 font-bold">{{ u.horas_sin_uso }} hrs</strong>
             </div>
             {% endif %}
           </div>
         </div>
 
-        <!-- BOTONERA DE ACCIÓN -->
-        <div class="space-y-2 pt-2 border-t border-slate-100">
+        <!-- ACCIONES DE UNIDAD -->
+        <div class="space-y-1.5 pt-2 border-t border-slate-100">
           {% if u.estatus == 'DISPONIBLE' %}
-          <a href="{% url 'dar_salida_unidad' u.id %}" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow transition">
-            <i data-lucide="navigation" class="w-4 h-4"></i> 🚀 Dar Salida a Unidad
+          <a href="{% url 'dar_salida_unidad' u.id %}" class="w-full bg-[#0f2942] hover:bg-slate-800 text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
+            <i data-lucide="log-out" class="w-4 h-4"></i> Dar Salida a Unidad
           </a>
           {% else %}
-          <button disabled class="w-full bg-slate-200 text-slate-400 font-extrabold py-2.5 px-3 rounded-xl text-xs cursor-not-allowed flex items-center justify-center gap-1.5">
+          <button disabled class="w-full bg-slate-100 text-slate-400 font-semibold py-2 px-3 rounded-lg text-xs cursor-not-allowed flex items-center justify-center gap-1.5 border border-slate-200">
             <i data-lucide="lock" class="w-4 h-4"></i> Unidad Ocupada
           </button>
           {% endif %}
 
-          <a href="{% url 'registrar_carga_gasolina' u.id %}" class="w-full bg-slate-100 hover:bg-amber-50 hover:text-amber-900 text-slate-700 border border-slate-200 font-bold py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition">
-            <i data-lucide="fuel" class="w-3.5 h-3.5 text-amber-600"></i> Cargar Gasolina
+          <a href="{% url 'registrar_carga_gasolina' u.id %}" class="w-full bg-white hover:bg-slate-50 text-slate-700 border border-slate-300 font-semibold py-1.5 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 transition">
+            <i data-lucide="fuel" class="w-3.5 h-3.5 text-amber-600"></i> Cargar Combustible
           </a>
         </div>
 
       </div>
       {% endfor %}
     </div>
+    {% else %}
+    <div class="bg-white rounded-2xl p-10 text-center space-y-3 border border-slate-200 shadow-sm">
+      <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto">
+        <i data-lucide="truck" class="w-6 h-6"></i>
+      </div>
+      <h3 class="font-bold text-sm text-slate-800">No hay unidades registradas en la flotilla</h3>
+      <p class="text-xs text-slate-500 max-w-md mx-auto">Ingresa al Panel de Administración para dar de alta los vehículos oficiales de Protección Civil y Bomberos.</p>
+      <a href="{% url 'admin_vehiculos_dashboard' %}" class="inline-flex items-center gap-1.5 bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs shadow-sm transition">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i> Ir al Panel de Administración
+      </a>
+    </div>
+    {% endif %}
   </div>
 
-  <!-- BITÁCORA HISTÓRICA RECIENTE -->
-  <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-4">
+  <!-- SECCIÓN BITÁCORA HISTÓRICA RECIENTE -->
+  {% if salidas_recientes %}
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
     <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-      <h3 class="font-black text-slate-800 text-sm uppercase tracking-tight flex items-center gap-2">
-        <span>📋</span> Últimas Salidas Registradas en Bitácora
+      <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="history" class="w-4 h-4 text-slate-600"></i> Historial Reciente de la Bitácora
       </h3>
       <a href="{% url 'admin_vehiculos_dashboard' %}" class="text-xs font-bold text-blue-600 hover:text-blue-800">
         Ver Historial Completo →
       </a>
     </div>
 
-    {% if salidas_recientes %}
     <div class="overflow-x-auto">
       <table class="w-full text-left border-collapse text-xs">
         <thead>
-          <tr class="bg-slate-50 text-slate-500 uppercase text-[10px] font-black border-b border-slate-200">
-            <th class="p-3">Unidad</th>
-            <th class="p-3">Fecha y Salida</th>
-            <th class="p-3">Odómetro Salida</th>
-            <th class="p-3">Descripción del Servicio</th>
-            <th class="p-3">Llegada</th>
-            <th class="p-3">Odómetro Llegada</th>
-            <th class="p-3">Km Recorridos</th>
-            <th class="p-3">Operador</th>
+          <tr class="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold border-b border-slate-200">
+            <th class="p-2.5">Unidad</th>
+            <th class="p-2.5">Fecha / Hora Salida</th>
+            <th class="p-2.5">Odómetro Salida</th>
+            <th class="p-2.5">Servicio Atendido</th>
+            <th class="p-2.5">Hora Llegada</th>
+            <th class="p-2.5">Odómetro Llegada</th>
+            <th class="p-2.5">Km Recorridos</th>
+            <th class="p-2.5">Operador</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-100 text-slate-700 font-semibold">
+        <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
           {% for r in salidas_recientes %}
           <tr class="hover:bg-slate-50/80 transition">
-            <td class="p-3 font-black text-slate-900">{{ r.unidad.nombre_identificador }}</td>
-            <td class="p-3 whitespace-nowrap">{{ r.fecha_salida|date:"d/m/Y H:i" }}</td>
-            <td class="p-3 font-bold">{{ r.odometro_salida }} km</td>
-            <td class="p-3 max-w-xs truncate" title="{{ r.descripcion_servicio }}">{{ r.descripcion_servicio }}</td>
-            <td class="p-3 whitespace-nowrap">{{ r.fecha_llegada|date:"H:i"|default:"-" }}</td>
-            <td class="p-3 font-bold">{{ r.odometro_llegada|default:"-" }} {% if r.odometro_llegada %}km{% endif %}</td>
-            <td class="p-3 font-black text-emerald-600">{{ r.km_recorridos }} km</td>
-            <td class="p-3">{{ r.operador_nombre }}</td>
+            <td class="p-2.5 font-bold text-slate-900">{{ r.unidad.nombre_identificador }}</td>
+            <td class="p-2.5 whitespace-nowrap">{{ r.fecha_salida|date:"d/m/Y H:i" }}</td>
+            <td class="p-2.5 font-semibold">{{ r.odometro_salida }} km</td>
+            <td class="p-2.5 max-w-xs truncate" title="{{ r.descripcion_servicio }}">{{ r.descripcion_servicio }}</td>
+            <td class="p-2.5 whitespace-nowrap">{{ r.fecha_llegada|date:"H:i"|default:"-" }}</td>
+            <td class="p-2.5 font-semibold">{{ r.odometro_llegada|default:"-" }} {% if r.odometro_llegada %}km{% endif %}</td>
+            <td class="p-2.5 font-bold text-emerald-700">{{ r.km_recorridos }} km</td>
+            <td class="p-2.5">{{ r.operador_nombre }}</td>
           </tr>
           {% endfor %}
         </tbody>
       </table>
     </div>
-    {% else %}
-    <p class="text-xs text-slate-400 text-center py-4">No hay registros de salidas en la bitácora todavía.</p>
-    {% endif %}
   </div>
+  {% endif %}
 
 </main>
 
