@@ -1,0 +1,24 @@
+{
+  "short_name": "PCivil Vehículos",
+  "name": "Control de Vehículos y Bitácora Digital - Medellín",
+  "icons": [
+    {
+      "src": "/static/portal/img/logo_pc_circular.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/portal/img/logo_pc_circular.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/control-vehiculos/",
+  "background_color": "#0f2942",
+  "theme_color": "#0f2942",
+  "display": "standalone",
+  "orientation": "portrait",
+  "description": "Sistema de Control de Vehículos de Emergencia y Bitácora Digital de Protección Civil Medellín."
+}
