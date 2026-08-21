@@ -768,6 +768,30 @@ class VehiculoUnidad(models.Model):
     def __str__(self):
         return f"{self.nombre_identificador} ({self.get_estatus_display()})"
 
+    def save(self, *args, **kwargs):
+        if self.foto_unidad:
+            try:
+                from PIL import Image
+                from io import BytesIO
+                from django.core.files.uploadedfile import InMemoryUploadedFile
+
+                if hasattr(self.foto_unidad, 'file') and self.foto_unidad.file:
+                    img = Image.open(self.foto_unidad)
+                    if img.mode in ("RGBA", "P"):
+                        img = img.convert("RGB")
+                    img.thumbnail((1920, 1080), Image.Resampling.LANCZOS)
+                    output = BytesIO()
+                    img.save(output, format='JPEG', quality=80, optimize=True)
+                    output.seek(0)
+                    self.foto_unidad.file = InMemoryUploadedFile(
+                        output, 'ImageField',
+                        f"{self.foto_unidad.name.split('.')[0]}.jpg",
+                        'image/jpeg', output.getbuffer().nbytes, None
+                    )
+            except Exception:
+                pass
+        super().save(*args, **kwargs)
+
     def horas_sin_uso(self):
         if not self.ultima_salida_finalizada:
             return None

@@ -159,6 +159,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# Límite máximo de carga de archivos (50 Megabytes para fotos HD de celulares)
+DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB
+FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB
+
 # ==============================================================================
 # 📧 CONFIGURACIÓN DE ENVÍO DE CORREOS ELECTRÓNICOS SMTP (2FA Y NOTIFICACIONES)
 # ==============================================================================
