@@ -377,16 +377,15 @@
     <!-- Script de Autocompletado de Colonias Oficiales -->
     <script>
         const coloniasData = [
-            { name: "Puente Moreno", loc: "Fraccionamiento Puente Moreno" },
+            { name: "Fraccionamiento Puente Moreno", loc: "Fraccionamiento Puente Moreno" },
             { name: "Lagos de Puente Moreno", loc: "Fraccionamiento Puente Moreno" },
-            { name: "Arboledas San Ramón", loc: "Fraccionamiento Arboledas San Ramón" },
-            { name: "Arboledas de San Miguel", loc: "Fraccionamiento Arboledas de San Miguel" },
+            { name: "Fraccionamiento Arboledas San Ramón", loc: "Fraccionamiento Arboledas San Ramón" },
+            { name: "Fraccionamiento Arboledas de San Miguel", loc: "Fraccionamiento Arboledas de San Miguel" },
             { name: "Las Palmas de Medellín", loc: "Las Palmas de Medellín" },
-            { name: "Residencial Marino", loc: "Fraccionamiento Residencial Marino" },
-            { name: "Paseos del Campestre", loc: "El Tejar" },
-            { name: "Fracc. Leonardo Rodríguez Alcaine", loc: "Fraccionamiento Leonardo Rodríguez Alcaine" },
+            { name: "Fraccionamiento Residencial Marino", loc: "Fraccionamiento Residencial Marino" },
+            { name: "Fraccionamiento Leonardo Rodríguez Alcaine", loc: "Fraccionamiento Leonardo Rodríguez Alcaine" },
+            { name: "Fraccionamiento Nuevo Medellín", loc: "Fraccionamiento Nuevo Medellín" },
             { name: "Colonia El Tejar (Centro)", loc: "El Tejar" },
-            { name: "Colonia El Tejar (Ejido)", loc: "El Tejar" },
             { name: "Casa Blanca (Infonavit)", loc: "El Tejar" },
             { name: "Del Bosque", loc: "El Tejar" },
             { name: "Gutiérrez Rosas", loc: "El Tejar" },
@@ -396,20 +395,19 @@
             { name: "Exhacienda Palma Tejar y Jobo", loc: "El Tejar" },
             { name: "Dra. Teresa Morales de Delgado", loc: "El Tejar" },
             { name: "Centro (Medellín Cabecera)", loc: "Medellín" },
-            { name: "Nuevo Medellín", loc: "Fraccionamiento Nuevo Medellín" },
             { name: "Jardines de Medellín", loc: "Medellín" },
             { name: "Lorenzo Barcelata", loc: "Medellín" },
-            { name: "20 de Noviembre", loc: "Colonia Veinte de Noviembre de Medellín de Bravo" },
+            { name: "Colonia Veinte de Noviembre", loc: "Colonia Veinte de Noviembre de Medellín de Bravo" },
             { name: "Benito Juárez (Marcos Vélez)", loc: "Marcos Vélez Campos" },
             { name: "Cándido Duarte", loc: "Medellín" },
             { name: "Lomas de San Gabriel", loc: "Medellín" },
             { name: "Héroes de Veracruz", loc: "Medellín" },
-            { name: "Clara Córdoba Morán", loc: "Colonia Clara Córdoba Morán" },
+            { name: "Colonia Clara Córdoba Morán", loc: "Colonia Clara Córdoba Morán" },
             { name: "Playa de Vacas", loc: "Playa de Vacas" },
             { name: "Paso del Toro", loc: "Paso del Toro" },
             { name: "La Y Griega", loc: "Paso del Toro" },
             { name: "Los Robles", loc: "Los Robles" },
-            { name: "Los Robles (Ampliación)", loc: "Ampliación de los Robles" },
+            { name: "Ampliación de los Robles", loc: "Ampliación de los Robles" },
             { name: "La Laguna", loc: "La Laguna y Monte del Castillo" },
             { name: "Monte del Castillo", loc: "La Laguna y Monte del Castillo" },
             { name: "La Esperanza", loc: "La Esperanza" },
@@ -439,10 +437,10 @@
             
             function showMatches(val) {
                 dropdown.innerHTML = "";
-                const valLower = val.toLowerCase();
+                const valLower = val.toLowerCase().trim();
                 
                 // 1. Filtrar las colonias predefinidas
-                let matched = coloniasData.filter(item => 
+                let matchedPredefined = coloniasData.filter(item => 
                     item.name.toLowerCase().includes(valLower)
                 );
                 
@@ -451,9 +449,26 @@
                     name.toLowerCase().includes(valLower)
                 );
                 
-                // Añadir localidades encontradas al listado (si no existen con ese mismo nombre)
+                const seen = new Set();
+                const matched = [];
+
+                matchedPredefined.forEach(item => {
+                    const key = item.name.toLowerCase().trim();
+                    if (!seen.has(key)) {
+                        seen.add(key);
+                        matched.push(item);
+                    }
+                });
+
                 matchedLocalidades.forEach(name => {
-                    if (!matched.some(item => item.name.toLowerCase() === name.toLowerCase())) {
+                    const nameClean = name.toLowerCase().trim();
+                    const alreadyExists = matched.some(item => 
+                        item.name.toLowerCase().trim() === nameClean || 
+                        item.loc.toLowerCase().trim() === nameClean
+                    );
+
+                    if (!alreadyExists && !seen.has(nameClean)) {
+                        seen.add(nameClean);
                         matched.push({ name: name, loc: name });
                     }
                 });
