@@ -7,24 +7,40 @@
 <title>Control de Vehículos y Bitácora Digital | Protección Civil Medellín</title>
 <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
 <link rel="manifest" href="{% static 'portal/manifest.json' %}">
-<meta name="theme-color" content="#0f2942">
+<meta name="theme-color" content="#5A123E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="PCivil Vehículos">
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    medellinVino: '#5A123E',
+                    medellinVerde: '#5B7B34',
+                    medellinOro: '#E59E27',
+                    medellinVerdeClaro: '#8BA854',
+                    medellinTurquesa: '#6B9987',
+                    medellinFondo: '#F7F8F6',
+                }
+            }
+        }
+    }
+</script>
 <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-800 font-sans antialiased">
+<body class="bg-medellinFondo min-h-screen text-slate-800 font-sans antialiased">
 
 <!-- HEADER NAVEGACIÓN (1 SOLA LÍNEA EN MÓVIL) -->
-<header class="bg-[#0f2942] text-white shadow-md sticky top-0 z-50">
+<header class="bg-medellinVino text-white shadow-md sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-3 sm:px-4 py-2.5 flex flex-row items-center justify-between gap-2">
     <div class="flex items-center space-x-2 min-w-0">
       <div class="min-w-0">
-        <span class="text-[9px] sm:text-[10px] font-bold text-amber-400 uppercase tracking-wider block truncate">PCivil Medellín</span>
+        <span class="text-[9px] sm:text-[10px] font-bold text-medellinOro uppercase tracking-wider block truncate">PCivil Medellín de Bravo</span>
         <h1 class="text-xs sm:text-sm md:text-base font-extrabold tracking-tight flex items-center gap-1.5 truncate">
-          <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400 shrink-0"></i>
+          <i data-lucide="shield-alert" class="w-4 h-4 text-medellinOro shrink-0"></i>
           <span class="truncate">Control de Vehículos</span>
         </h1>
       </div>
@@ -33,13 +49,13 @@
     <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
       {% if operador_actual %}
       <div class="text-right hidden md:block">
-        <span class="text-[9px] text-slate-400 block font-semibold">Operador Activo</span>
+        <span class="text-[9px] text-pink-200 block font-semibold">Operador Activo</span>
         <span class="text-xs font-bold text-white uppercase">{{ operador_actual.nombre_completo }}</span>
       </div>
       {% endif %}
 
       {% if operador_actual.rol == 'ADMIN' %}
-      <a href="{% url 'admin_vehiculos_dashboard' %}" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0">
+      <a href="{% url 'admin_vehiculos_dashboard' %}" class="bg-medellinOro hover:bg-amber-600 text-slate-950 font-bold px-2.5 sm:px-3.5 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0">
         <i data-lucide="layout-dashboard" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
         <span class="hidden sm:inline">Panel Admin</span>
         <span class="sm:hidden">Admin</span>
@@ -199,8 +215,8 @@
         <!-- ACCIONES DE UNIDAD -->
         <div class="space-y-1.5 pt-2 border-t border-slate-100">
           {% if u.estatus == 'DISPONIBLE' %}
-          <a href="{% url 'dar_salida_unidad' u.id %}" class="w-full bg-[#0f2942] hover:bg-slate-800 text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
-            <i data-lucide="log-out" class="w-4 h-4"></i> Dar Salida a Unidad
+          <a href="{% url 'dar_salida_unidad' u.id %}" class="w-full bg-medellinVino hover:bg-[#430d2e] text-white font-bold py-2 px-3 rounded-lg text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
+            <i data-lucide="log-out" class="w-3.5 h-3.5 text-medellinOro"></i> Registrar Salida de Base
           </a>
           {% else %}
           <button disabled class="w-full bg-slate-100 text-slate-400 font-semibold py-2 px-3 rounded-lg text-xs cursor-not-allowed flex items-center justify-center gap-1.5 border border-slate-200">

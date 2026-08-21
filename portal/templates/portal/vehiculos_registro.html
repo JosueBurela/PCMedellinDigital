@@ -7,24 +7,40 @@
 <title>Registro de Operador | Control de Vehículos PCivil Medellín</title>
 <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
 <link rel="manifest" href="{% static 'portal/manifest.json' %}">
-<meta name="theme-color" content="#0f2942">
+<meta name="theme-color" content="#5A123E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="PCivil Vehículos">
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    medellinVino: '#5A123E',
+                    medellinVerde: '#5B7B34',
+                    medellinOro: '#E59E27',
+                    medellinVerdeClaro: '#8BA854',
+                    medellinTurquesa: '#6B9987',
+                    medellinFondo: '#F7F8F6',
+                }
+            }
+        }
+    }
+</script>
 <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-100 min-h-screen text-slate-800 font-sans antialiased flex items-center justify-center p-4">
+<body class="bg-medellinFondo min-h-screen text-slate-800 font-sans antialiased flex items-center justify-center p-4">
 
 <div class="max-w-md w-full space-y-6">
 
   <!-- ENCABEZADO Y LOGO -->
   <div class="text-center space-y-2">
-    <div class="w-16 h-16 bg-[#0f2942] rounded-2xl flex items-center justify-center mx-auto shadow-md border border-slate-700">
-      <i data-lucide="shield-alert" class="w-8 h-8 text-amber-400"></i>
+    <div class="w-16 h-16 bg-medellinVino rounded-2xl flex items-center justify-center mx-auto shadow-md border border-purple-900">
+      <i data-lucide="shield-alert" class="w-8 h-8 text-medellinOro"></i>
     </div>
-    <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest block">Protección Civil & Bomberos Medellín</span>
+    <span class="text-[10px] font-bold text-medellinVino uppercase tracking-widest block">Protección Civil & Bomberos Medellín de Bravo</span>
     <h1 class="text-xl font-extrabold text-slate-900 tracking-tight">Registro de Operador de Vehículos</h1>
     <p class="text-xs text-slate-500">Completa tus datos para solicitar acceso a la flotilla operativa.</p>
   </div>
@@ -76,8 +92,8 @@
         <p class="text-[11px] text-amber-800 leading-normal">Al registrarte, tu solicitud se enviará al Administrador de Flotilla. Podrás ingresar a la flotilla una vez que tu cuenta sea aprobada.</p>
       </div>
 
-      <button type="submit" class="w-full bg-[#0f2942] hover:bg-slate-800 text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition">
-        <i data-lucide="user-plus" class="w-4 h-4 text-amber-400"></i> Solicitar Registro de Operador
+      <button type="submit" class="w-full bg-medellinVino hover:bg-[#430d2e] text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-sm transition">
+        <i data-lucide="user-plus" class="w-4 h-4 text-medellinOro"></i> Solicitar Registro de Operador
       </button>
     </form>
 

@@ -7,27 +7,43 @@
 <title>Panel de Administración de Vehículos | Protección Civil Medellín</title>
 <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
 <link rel="manifest" href="{% static 'portal/manifest.json' %}">
-<meta name="theme-color" content="#0f2942">
+<meta name="theme-color" content="#5A123E">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="PCivil Vehículos">
 <script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    medellinVino: '#5A123E',
+                    medellinVerde: '#5B7B34',
+                    medellinOro: '#E59E27',
+                    medellinVerdeClaro: '#8BA854',
+                    medellinTurquesa: '#6B9987',
+                    medellinFondo: '#F7F8F6',
+                }
+            }
+        }
+    }
+</script>
 <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-800 font-sans antialiased">
+<body class="bg-medellinFondo min-h-screen text-slate-800 font-sans antialiased">
 
 <!-- HEADER NAVEGACIÓN (1 SOLA LÍNEA EN MÓVIL) -->
-<header class="bg-[#0f2942] text-white shadow-md sticky top-0 z-50">
+<header class="bg-medellinVino text-white shadow-md sticky top-0 z-50">
   <div class="max-w-7xl mx-auto px-3 sm:px-4 py-2.5 flex flex-row items-center justify-between gap-2">
     <div class="flex items-center space-x-2 min-w-0">
       <a href="{% url 'flotilla_vehiculos_hub' %}" class="bg-white/10 hover:bg-white/20 p-1.5 sm:p-2 rounded-xl text-white transition shrink-0" title="Volver a la Flotilla">
         <i data-lucide="arrow-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
       </a>
       <div class="min-w-0">
-        <span class="text-[9px] sm:text-[10px] font-bold text-amber-400 uppercase tracking-wider block truncate">PCivil Medellín</span>
+        <span class="text-[9px] sm:text-[10px] font-bold text-medellinOro uppercase tracking-wider block truncate">PCivil Medellín de Bravo</span>
         <h1 class="text-xs sm:text-sm md:text-base font-extrabold tracking-tight flex items-center gap-1.5 truncate">
-          <i data-lucide="layout-dashboard" class="w-4 h-4 text-amber-400 shrink-0"></i>
+          <i data-lucide="layout-dashboard" class="w-4 h-4 text-medellinOro shrink-0"></i>
           <span class="truncate">Panel de Administración</span>
         </h1>
       </div>
@@ -116,8 +132,8 @@
         <p class="text-xs text-slate-500">Agrega, edita o elimina vehículos de la flotilla oficial de emergencia.</p>
       </div>
 
-      <button onclick="abrirModalCrearUnidad()" class="bg-[#0f2942] hover:bg-slate-800 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition">
-        <i data-lucide="plus" class="w-4 h-4 text-amber-400"></i> Agregar Nueva Unidad
+      <button onclick="abrirModalCrearUnidad()" class="bg-medellinVino hover:bg-[#430d2e] text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition">
+        <i data-lucide="plus" class="w-4 h-4 text-medellinOro"></i> Agregar Nueva Unidad
       </button>
     </div>
 
@@ -171,10 +187,19 @@
       </table>
     </div>
     {% else %}
-    <div class="bg-slate-50 rounded-xl p-8 text-center space-y-2 border border-dashed border-slate-300">
-      <i data-lucide="truck" class="w-10 h-10 text-slate-300 mx-auto"></i>
-      <p class="font-bold text-sm text-slate-700">No hay ninguna unidad registrada en el sistema actualmente.</p>
-      <p class="text-xs text-slate-400">Presiona el botón "Agregar Nueva Unidad" para dar de alta el primer vehículo de la flotilla.</p>
+    <div class="bg-slate-50 rounded-2xl p-8 text-center space-y-3 border border-dashed border-slate-300">
+      <div class="w-12 h-12 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto border border-amber-200">
+        <i data-lucide="truck" class="w-6 h-6"></i>
+      </div>
+      <div>
+        <p class="font-bold text-sm text-slate-800">No hay ninguna unidad registrada en el sistema actualmente.</p>
+        <p class="text-xs text-slate-500">Da de alta el primer vehículo oficial de emergencia para comenzar a gestionar la flotilla.</p>
+      </div>
+      <div>
+        <button onclick="abrirModalCrearUnidad()" class="bg-medellinVino hover:bg-[#430d2e] text-white font-bold px-5 py-2.5 rounded-xl text-xs inline-flex items-center gap-2 shadow-md transition">
+          <i data-lucide="plus-circle" class="w-4 h-4 text-medellinOro"></i> Agregar Nueva Unidad a la Flotilla
+        </button>
+      </div>
     </div>
     {% endif %}
   </div>
@@ -198,7 +223,7 @@
     <div class="overflow-x-auto">
       <table class="w-full text-left border-collapse text-xs">
         <thead>
-          <tr class="bg-[#0f2942] text-white uppercase text-[10px] font-bold border-b border-slate-200">
+          <tr class="bg-medellinVino text-white uppercase text-[10px] font-bold border-b border-slate-200">
             <th class="p-2.5">Unidad</th>
             <th class="p-2.5">Fecha y Hora Salida</th>
             <th class="p-2.5">Odómetro Salida</th>
@@ -531,7 +556,7 @@
         <button type="button" onclick="toggleModal('modal-unidad')" class="px-4 py-2 text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition">
           Cancelar
         </button>
-        <button type="submit" class="px-5 py-2 text-xs font-bold text-white bg-[#0f2942] hover:bg-slate-800 rounded-xl transition shadow">
+        <button type="submit" class="px-5 py-2 text-xs font-bold text-white bg-medellinVino hover:bg-[#430d2e] rounded-xl transition shadow">
           Guardar Unidad
         </button>
       </div>
