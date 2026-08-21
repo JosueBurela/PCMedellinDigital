@@ -156,6 +156,27 @@
                         </div>
                     </div>
 
+                    <!-- GEOLOCALIZACIÓN GPS CAPTURE -->
+                    <div class="bg-amber-50/80 p-3.5 rounded-2xl border border-amber-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+                        <div class="space-y-0.5 text-center sm:text-left">
+                            <span class="text-xs font-bold text-amber-950 flex items-center justify-center sm:justify-start gap-1">
+                                <i data-lucide="crosshair" class="w-4 h-4 text-amber-700"></i> Geolocalización GPS del Incidente (Recomendado)
+                            </span>
+                            <p class="text-[11px] text-amber-800">Captura la posición GPS exacta de tu teléfono para agilizar la llegada de las unidades de emergencia.</p>
+                        </div>
+                        <button type="button" onclick="obtenerUbicacionGPS()" id="btn-gps" class="bg-medellinVino hover:bg-[#430d2e] text-white font-bold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-medellinOro"></i> Obtener mi Ubicación GPS
+                        </button>
+                    </div>
+
+                    <input type="hidden" name="latitud" id="rep-lat">
+                    <input type="hidden" name="longitud" id="rep-lng">
+                    
+                    <div id="gps-status-badge" class="hidden p-2.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold flex items-center gap-2">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600"></i>
+                        <span id="gps-status-text">📍 Coordenadas GPS Capturadas con éxito</span>
+                    </div>
+
                     <!-- Fila 4: Localidad (Seleccionable, auto-seleccionado por Colonia) -->
                     <div class="space-y-1.5">
                         <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-wider">Localidad / Zona *</label>
@@ -526,6 +547,38 @@
                 lucide.createIcons();
             }
         });
+
+        function obtenerUbicacionGPS() {
+            const btn = document.getElementById('btn-gps');
+            const badge = document.getElementById('gps-status-badge');
+            const statusText = document.getElementById('gps-status-text');
+
+            if (!navigator.geolocation) {
+                alert("Tu navegador no soporta geolocalización GPS.");
+                return;
+            }
+
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin text-medellinOro"></i> Obteniendo GPS...';
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    document.getElementById('rep-lat').value = pos.coords.latitude.toFixed(7);
+                    document.getElementById('rep-lng').value = pos.coords.longitude.toFixed(7);
+
+                    btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-emerald-400"></i> GPS Obtenido';
+                    badge.classList.remove('hidden');
+                    statusText.innerText = `📍 Ubicación GPS capturada: ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`;
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                },
+                (err) => {
+                    btn.innerHTML = '<i data-lucide="map-pin" class="w-4 h-4 text-medellinOro"></i> Reintentar GPS';
+                    alert("No se pudo obtener la ubicación GPS automáticamente. Por favor ingresa la calle y colonia manualmente.");
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        }
     </script>
 
     <!-- Modal de Éxito al Generar Reporte (se abre automáticamente si success_folio está en la URL) -->

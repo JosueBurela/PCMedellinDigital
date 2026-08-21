@@ -1,0 +1,302 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa GIS de Emergencias en Tiempo Real | Protección Civil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<link rel="manifest" href="{% static 'portal/manifest.json' %}">
+<meta name="theme-color" content="#5A123E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Mapa GIS PCivil">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    medellinVino: '#5A123E',
+                    medellinVerde: '#5B7B34',
+                    medellinOro: '#E59E27',
+                    medellinVerdeClaro: '#8BA854',
+                    medellinTurquesa: '#6B9987',
+                    medellinFondo: '#F7F8F6',
+                }
+            }
+        }
+    }
+</script>
+
+<!-- LEAFLET MAP CSS & JS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  #map { height: calc(100vh - 60px); width: 100%; z-index: 1; }
+  .custom-popup .leaflet-popup-content-wrapper { border-radius: 1rem; padding: 0; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2); }
+  .custom-popup .leaflet-popup-content { margin: 0; width: 280px !important; }
+</style>
+</head>
+<body class="bg-medellinFondo text-slate-800 font-sans antialiased overflow-hidden flex flex-col h-screen">
+
+<!-- HEADER NAVEGACIÓN (1 SOLA LÍNEA EN MÓVIL) -->
+<header class="bg-medellinVino text-white shadow-md z-50 shrink-0">
+  <div class="max-w-7xl mx-auto px-3 sm:px-4 py-2.5 flex flex-row items-center justify-between gap-2">
+    <div class="flex items-center space-x-2 min-w-0">
+      <a href="{% url 'flotilla_vehiculos_hub' %}" class="bg-white/10 hover:bg-white/20 p-1.5 sm:p-2 rounded-xl text-white transition shrink-0" title="Volver a Flotilla">
+        <i data-lucide="arrow-left" class="w-4 h-4 sm:w-5 sm:h-5"></i>
+      </a>
+      <div class="min-w-0">
+        <span class="text-[9px] sm:text-[10px] font-bold text-medellinOro uppercase tracking-wider block truncate">Centro de Mando GIS</span>
+        <h1 class="text-xs sm:text-sm md:text-base font-extrabold tracking-tight flex items-center gap-1.5 truncate">
+          <i data-lucide="map-pin" class="w-4 h-4 text-medellinOro shrink-0"></i>
+          <span class="truncate">Mapa de Emergencias y Flotilla en Tiempo Real</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <button onclick="cargarDatosMapa()" class="bg-white/10 hover:bg-white/20 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 transition shrink-0">
+        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i> Actualizar
+      </button>
+      <a href="{% url 'logout_operador' %}" class="bg-red-600/90 hover:bg-red-700 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0" title="Cerrar Sesión">
+        <i data-lucide="log-out" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+        <span>Salir</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENEDOR PRINCIPAL: MAPA + SIDEBAR -->
+<div class="flex flex-1 relative overflow-hidden">
+
+  <!-- SIDEBAR LATERAL DESPLEGABLE DE EMERGENCIAS -->
+  <aside id="sidebar" class="absolute top-0 left-0 bottom-0 w-80 sm:w-96 bg-white border-r border-slate-200 z-20 flex flex-col transition-transform duration-300 shadow-xl">
+    
+    <!-- HEADER SIDEBAR -->
+    <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between shrink-0">
+      <div>
+        <h2 class="font-extrabold text-sm text-slate-900 flex items-center gap-2 uppercase tracking-wide">
+          <i data-lucide="radio" class="w-4 h-4 text-red-600 animate-pulse"></i> Incidentes Activos
+        </h2>
+        <span class="text-[10px] text-slate-500 font-semibold" id="stats-resumen">Cargando reporte de mapa...</span>
+      </div>
+      <button onclick="toggleSidebar()" class="sm:hidden text-slate-400 hover:text-slate-600 p-1">✕</button>
+    </div>
+
+    <!-- LEYENDA Y FILTROS -->
+    <div class="p-3 bg-white border-b border-slate-100 flex flex-wrap gap-1.5 shrink-0 text-[10px] font-bold">
+      <button onclick="filtrarMapa('TODOS')" class="bg-slate-900 text-white px-2.5 py-1 rounded-lg">Todos</button>
+      <button onclick="filtrarMapa('CHOQUE')" class="bg-red-100 text-red-800 px-2 py-1 rounded-lg">🚗 Choques</button>
+      <button onclick="filtrarMapa('FUEGO')" class="bg-orange-100 text-orange-800 px-2 py-1 rounded-lg">🔥 Incendios</button>
+      <button onclick="filtrarMapa('GAS')" class="bg-amber-100 text-amber-900 px-2 py-1 rounded-lg">⚡ Fugas Gas</button>
+      <button onclick="filtrarMapa('AGUA')" class="bg-blue-100 text-blue-900 px-2 py-1 rounded-lg">🌊 Inundación</button>
+      <button onclick="filtrarMapa('UNIDAD')" class="bg-emerald-100 text-emerald-900 px-2 py-1 rounded-lg">🚒 Flotilla</button>
+    </div>
+
+    <!-- LISTA DE EMERGENCIAS Y UNIDADES -->
+    <div id="lista-incidentes" class="flex-1 overflow-y-auto p-3 space-y-2 divide-y divide-slate-100">
+      <!-- Se puebla vía JavaScript -->
+    </div>
+  </aside>
+
+  <!-- BOTÓN TOGGLE SIDEBAR EN MÓVIL -->
+  <button onclick="toggleSidebar()" class="absolute top-4 left-4 z-30 bg-medellinVino text-white p-2.5 rounded-xl shadow-lg flex items-center gap-1.5 text-xs font-bold sm:hidden">
+    <i data-lucide="list" class="w-4 h-4 text-medellinOro"></i> Incidentes
+  </button>
+
+  <!-- MAPA DE LEAFLET -->
+  <div id="map" class="flex-1"></div>
+
+</div>
+
+<script>
+  lucide.createIcons();
+
+  // Coordenadas fijas de Medellín de Bravo, Veracruz
+  const MEDELLIN_LAT = 19.0558;
+  const MEDELLIN_LNG = -96.1558;
+
+  // Inicializar mapa de Leaflet
+  const map = L.map('map', {
+    zoomControl: false
+  }).setView([MEDELLIN_LAT, MEDELLIN_LNG], 13);
+
+  // Agregar capa de mapa de OpenStreetMap
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap | Protección Civil Medellín de Bravo'
+  }).addTo(map);
+
+  L.control.zoom({ position: 'bottomright' }).addTo(map);
+
+  let reporteMarkers = [];
+  let unidadMarkers = [];
+  let todosLosReportes = [];
+  let todasLasUnidades = [];
+
+  // Iconos personalizadosSVG para marcadores
+  function crearIcono(colorHex, iconName) {
+    return L.divIcon({
+      className: 'custom-leaflet-icon',
+      html: `
+        <div style="background-color: ${colorHex}; width: 34px; height: 34px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; items-center; justify-content: center; color: white;">
+          <i data-lucide="${iconName}" style="width: 18px; height: 18px;"></i>
+        </div>
+      `,
+      iconSize: [34, 34],
+      iconAnchor: [17, 17],
+      popupAnchor: [0, -17]
+    });
+  }
+
+  const iconosPorTipo = {
+    'CHOQUE': crearIcono('#dc2626', 'car'),
+    'FUEGO': crearIcono('#ea580c', 'flame'),
+    'GAS': crearIcono('#d97706', 'alert-triangle'),
+    'AGUA': crearIcono('#0284c7', 'droplets'),
+    'ARBOL': crearIcono('#16a34a', 'trees'),
+    'ABEJAS': crearIcono('#ca8a04', 'bug'),
+    'OTRO': crearIcono('#6b7280', 'help-circle'),
+    'UNIDAD': crearIcono('#5B7B34', 'truck')
+  };
+
+  async function cargarDatosMapa() {
+    try {
+      const res = await fetch('/api/mapa-datos/');
+      if (!res.ok) throw new Error("Error al obtener datos del mapa");
+      const data = await res.json();
+
+      todosLosReportes = data.reportes;
+      todasLasUnidades = data.unidades;
+
+      dibujarEnMapa(todosLosReportes, todasLasUnidades);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function dibujarEnMapa(reportes, unidades, filtro = 'TODOS') {
+    // Limpiar marcadores existentes
+    reporteMarkers.forEach(m => map.removeLayer(m));
+    unidadMarkers.forEach(m => map.removeLayer(m));
+    reporteMarkers = [];
+    unidadMarkers = [];
+
+    const listaDiv = document.getElementById('lista-incidentes');
+    listaDiv.innerHTML = '';
+
+    let conteoIncidentes = 0;
+
+    // 1. DIBUJAR REPORTES DE RIESGO
+    reportes.forEach(r => {
+      if (filtro !== 'TODOS' && filtro !== 'UNIDAD' && r.tipo_servicio !== filtro) return;
+      if (filtro === 'UNIDAD') return;
+
+      conteoIncidentes++;
+
+      // Asignar coordenadas aleatorias cercanas a Medellín si no tiene lat/lng exactas
+      const lat = r.latitud || (MEDELLIN_LAT + (Math.random() - 0.5) * 0.04);
+      const lng = r.longitud || (MEDELLIN_LNG + (Math.random() - 0.5) * 0.04);
+
+      const icono = iconosPorTipo[r.tipo_servicio] || iconosPorTipo['OTRO'];
+
+      const popupHtml = `
+        <div class="custom-popup overflow-hidden">
+          <div class="bg-medellinVino text-white p-3 space-y-0.5">
+            <span class="text-[10px] font-bold text-medellinOro uppercase block">${r.numero_reporte} • ${r.tipo_display}</span>
+            <h4 class="text-xs font-extrabold truncate">${r.colonia}, ${r.localidad}</h4>
+          </div>
+          <div class="p-3 space-y-2 text-xs">
+            <p class="text-slate-700 leading-snug font-medium">${r.descripcion}</p>
+            <div class="text-[11px] text-slate-500">
+              <span>Reporta: <strong>${r.nombre_ciudadano}</strong></span><br>
+              <span>Teléfono: <strong>${r.telefono_ciudadano}</strong></span>
+            </div>
+            ${r.evidencia_url ? `<a href="${r.evidencia_url}" target="_blank" class="block text-[11px] text-blue-600 font-bold hover:underline">Ver Foto de Evidencia →</a>` : ''}
+            <div class="pt-1">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded ${r.estatus === 'PENDIENTE' ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'}">${r.estatus_display}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      const marker = L.marker([lat, lng], { icon: icono })
+        .addTo(map)
+        .bindPopup(popupHtml);
+
+      reporteMarkers.push(marker);
+
+      // Agregar a la lista lateral
+      const card = document.createElement('div');
+      card.className = 'p-2.5 rounded-xl border border-slate-200 hover:border-medellinVino bg-slate-50 hover:bg-white cursor-pointer transition space-y-1';
+      card.onclick = () => {
+        map.flyTo([lat, lng], 16);
+        marker.openPopup();
+      };
+
+      card.innerHTML = `
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-bold text-medellinVino uppercase">${r.numero_reporte}</span>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded ${r.estatus === 'PENDIENTE' ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'}">${r.estatus_display}</span>
+        </div>
+        <h4 class="text-xs font-bold text-slate-900 truncate">${r.tipo_display} - ${r.colonia}</h4>
+        <p class="text-[11px] text-slate-500 line-clamp-2">${r.descripcion}</p>
+      `;
+
+      listaDiv.appendChild(card);
+    });
+
+    // 2. DIBUJAR UNIDADES DE FLOTILLA
+    if (filtro === 'TODOS' || filtro === 'UNIDAD') {
+      unidades.forEach(u => {
+        const lat = u.latitud_base || (MEDELLIN_LAT + 0.005);
+        const lng = u.longitud_base || (MEDELLIN_LNG - 0.005);
+
+        const popupHtml = `
+          <div class="custom-popup overflow-hidden">
+            <div class="bg-[#5B7B34] text-white p-3 space-y-0.5">
+              <span class="text-[10px] font-bold text-amber-200 uppercase block">Vehículo Oficial</span>
+              <h4 class="text-xs font-extrabold truncate">${u.nombre_identificador}</h4>
+            </div>
+            <div class="p-3 space-y-2 text-xs">
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded ${u.estatus === 'DISPONIBLE' ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">${u.estatus_display}</span>
+              <div class="text-[11px] text-slate-600 space-y-0.5">
+                <div>Odómetro: <strong>${u.odometro_actual} km</strong></div>
+                <div>Combustible: <strong>${u.nivel_gasolina_actual}</strong></div>
+              </div>
+            </div>
+          </div>
+        `;
+
+        const marker = L.marker([lat, lng], { icon: iconosPorTipo['UNIDAD'] })
+          .addTo(map)
+          .bindPopup(popupHtml);
+
+        unidadMarkers.push(marker);
+      });
+    }
+
+    document.getElementById('stats-resumen').innerText = `${conteoIncidentes} incidentes registrados • ${unidades.length} unidades en sistema`;
+    setTimeout(() => lucide.createIcons(), 100);
+  }
+
+  function filtrarMapa(tipo) {
+    dibujarEnMapa(todosLosReportes, todasLasUnidades, tipo);
+  }
+
+  function toggleSidebar() {
+    const sb = document.getElementById('sidebar');
+    sb.classList.toggle('-translate-x-full');
+  }
+
+  // Cargar datos al inicio y actualizar automáticamente cada 15 segundos
+  cargarDatosMapa();
+  setInterval(cargarDatosMapa, 15000);
+</script>
+</body>
+</html>

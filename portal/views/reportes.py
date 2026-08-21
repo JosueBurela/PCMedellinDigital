@@ -41,7 +41,16 @@ def crear_reporte(request):
         descripcion = request.POST.get('descripcion', '').strip()
         foto = request.FILES.get('evidencia_foto')
         prioridad = request.POST.get('prioridad', 'MEDIA')
-        
+        latitud_val = request.POST.get('latitud', '').strip()
+        longitud_val = request.POST.get('longitud', '').strip()
+
+        try:
+            lat_float = float(latitud_val) if latitud_val else None
+            lng_float = float(longitud_val) if longitud_val else None
+        except ValueError:
+            lat_float = None
+            lng_float = None
+
         if nombre and telefono and tipo and direccion and colonia and localidad and descripcion:
             reporte = ReporteRiesgo.objects.create(
                 ciudadano=ciudadano,
@@ -51,6 +60,8 @@ def crear_reporte(request):
                 direccion=direccion,
                 colonia=colonia,
                 localidad=localidad,
+                latitud=lat_float,
+                longitud=lng_float,
                 descripcion=descripcion,
                 evidencia_foto=foto,
                 prioridad=prioridad

@@ -302,6 +302,8 @@ class ReporteRiesgo(models.Model):
     direccion = models.CharField(max_length=255)
     colonia = models.CharField(max_length=100)
     localidad = models.CharField(max_length=100, default='Medellín de Bravo')
+    latitud = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True, help_text="Coordenada GPS Latitud")
+    longitud = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True, help_text="Coordenada GPS Longitud")
     descripcion = models.TextField()
     evidencia_foto = models.FileField(upload_to='reportes/', blank=True, null=True)
     prioridad = models.CharField(max_length=10, choices=PRIORIDAD_CHOICES, default='MEDIA')
@@ -755,6 +757,8 @@ class VehiculoUnidad(models.Model):
     estatus = models.CharField(max_length=30, choices=ESTATUS_CHOICES, default='DISPONIBLE')
     odometro_actual = models.PositiveIntegerField(default=0, help_text="Kilometraje actual del odómetro")
     nivel_gasolina_actual = models.CharField(max_length=30, choices=GASOLINA_CHOICES, default='Lleno')
+    latitud_base = models.DecimalField(max_digits=10, decimal_places=7, default=19.0558, help_text="Coordenada GPS Latitud de Base")
+    longitud_base = models.DecimalField(max_digits=10, decimal_places=7, default=-96.1558, help_text="Coordenada GPS Longitud de Base")
     
     ultima_salida_finalizada = models.DateTimeField(blank=True, null=True, help_text="Fecha y hora del último retorno a base")
     creado_en = models.DateTimeField(auto_now_add=True)
