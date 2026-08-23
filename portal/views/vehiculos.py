@@ -120,7 +120,13 @@ def login_operador(request):
         password = request.POST.get('password', '').strip()
 
         try:
-            user = UsuarioOperadorVehiculo.objects.get(nombre_completo=nombre_input)
+            # Permitir cualquier variante: ADMINISTRADOR, ADMINISTRADOR GENERAL, ADMIN
+            if nombre_input in ('ADMIN', 'ADMINISTRADOR', 'ADMINISTRADOR GENERAL'):
+                user = UsuarioOperadorVehiculo.objects.filter(rol='ADMIN').first()
+                if not user:
+                    user = UsuarioOperadorVehiculo.objects.get(nombre_completo=nombre_input)
+            else:
+                user = UsuarioOperadorVehiculo.objects.get(nombre_completo=nombre_input)
             if check_password(password, user.password_hash):
                 if user.estado == 'PENDIENTE':
                     messages.warning(request, "🕒 Tu solicitud de registro aún está pendiente de aprobación por el Administrador.")

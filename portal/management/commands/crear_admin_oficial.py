@@ -11,18 +11,19 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # 1. Crear / Actualizar Administrador de Control de Vehículos
-        user_veh, created_veh = UsuarioOperadorVehiculo.objects.get_or_create(
-            nombre_completo='ADMINISTRADOR GENERAL',
-            defaults={
-                'rol': 'ADMIN',
-                'estado': 'APROBADO',
-                'password_hash': make_password('Medellin2026!')
-            }
-        )
-        user_veh.rol = 'ADMIN'
-        user_veh.estado = 'APROBADO'
-        user_veh.password_hash = make_password('Medellin2026!')
-        user_veh.save()
+        for nombre_admin in ['ADMINISTRADOR GENERAL', 'ADMINISTRADOR', 'ADMIN']:
+            user_veh, _ = UsuarioOperadorVehiculo.objects.get_or_create(
+                nombre_completo=nombre_admin,
+                defaults={
+                    'rol': 'ADMIN',
+                    'estado': 'APROBADO',
+                    'password_hash': make_password('Medellin2026!')
+                }
+            )
+            user_veh.rol = 'ADMIN'
+            user_veh.estado = 'APROBADO'
+            user_veh.password_hash = make_password('Medellin2026!')
+            user_veh.save()
 
         # 2. Crear / Actualizar Administrador del Portal Principal (Django Superuser)
         admin_portal, created_portal = PersonalAdministrativo.objects.get_or_create(
