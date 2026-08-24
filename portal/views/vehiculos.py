@@ -17,7 +17,8 @@ from portal.models import (
     VehiculoUnidad,
     BitacoraSalidaVehiculo,
     RegistroCargaGasolina,
-    UsuarioOperadorVehiculo
+    UsuarioOperadorVehiculo,
+    ReporteRiesgo
 )
 
 # ==============================================================================
@@ -173,18 +174,41 @@ def logout_operador(request):
 @requiere_operador_aprobado
 def flotilla_vehiculos_hub(request):
     """
-    Panel Principal de Flotilla y Bitácora Digital para Operadores Aprobados.
+    Menú Operativo Unificado (App PWA): Alertas de Emergencia + Flotilla Vehicular.
     """
     unidades = VehiculoUnidad.objects.all()
     salidas_activas = BitacoraSalidaVehiculo.objects.filter(completado=False).select_related('unidad')
     salidas_recientes = BitacoraSalidaVehiculo.objects.filter(completado=True).select_related('unidad')[:15]
 
+    reportes_pendientes = ReporteRiesgo.objects.filter(estatus='PENDIENTE').order_by('-fecha_reporte')
+    reportes_en_proceso = ReporteRiesgo.objects.filter(estatus__in=['LEIDO', 'EN_PROCESO']).order_by('-fecha_reporte')
+
     return render(request, 'portal/vehiculos_flotilla.html', {
         'unidades': unidades,
         'salidas_activas': salidas_activas,
         'salidas_recientes': salidas_recientes,
+        'reportes_pendientes': reportes_pendientes,
+        'reportes_en_proceso': reportes_en_proceso,
         'operador_actual': request.operador_actual
     })
+
+
+@requiere_operador_aprobado
+def cambiar_estado_reporte_operativo(request, reporte_id, nuevo_estatus):
+    """
+    Permite a los brigadistas en campo cambiar el estado de un reporte de emergencia.
+    """
+    reporte = get_object_or_404(ReporteRiesgo, id=reporte_id)
+    if nuevo_estatus in ['PENDIENTE', 'LEIDO', 'EN_PROCESO', 'RESUELTO']:
+        reporte.estatus = nuevo_estatus
+        if nuevo_estatus == 'RESUELTO':
+            reporte.fecha_resolucion = timezone.now()
+        reporte.save()
+        messages.success(request, f"Estatus del reporte {reporte.numero_reporte} actualizado a '{reporte.get_estatus_display()}'.")
+    else:
+        messages.error(request, "Estatus no válido.")
+    
+    return redirect('flotilla_vehiculos_hub')
 
 
 @requiere_operador_aprobado
@@ -192,14 +216,24 @@ def dar_salida_unidad(request, unidad_id):
     """
     Registra la SALIDA de un vehículo de emergencia.
     - El nombre del operador se auto-llena con el usuario autenticado.
-    - Compara el odómetro ingresado con el último registrado para detectar incongruencias.
-    - Exige subir de manera obligatoria la Foto del Odómetro y la Foto de la Gasolina.
+    - Acepta asociar una alerta/reporte previa para auto-llenar la descripción del servicio.
     """
     unidad = get_object_or_404(VehiculoUnidad, id=unidad_id)
 
     if unidad.estatus == 'EN_SERVICIO':
         messages.error(request, f"La unidad {unidad.nombre_identificador} ya se encuentra en servicio.")
         return redirect('flotilla_vehiculos_hub')
+
+    reporte_id = request.GET.get('reporte_id')
+    reporte_asociado = None
+    descripcion_prellenada = ""
+
+    if reporte_id:
+        try:
+            reporte_asociado = ReporteRiesgo.objects.get(id=reporte_id)
+            descripcion_prellenada = f"Atención a Incidente {reporte_asociado.numero_reporte} ({reporte_asociado.get_tipo_servicio_display()}) en {reporte_asociado.direccion}, {reporte_asociado.colonia}."
+        except ReporteRiesgo.DoesNotExist:
+            pass
 
     if request.method == 'POST':
         # El nombre del operador se auto-llena con el usuario en sesión
@@ -217,7 +251,9 @@ def dar_salida_unidad(request, unidad_id):
             messages.error(request, "⚠️ Es obligatorio subir ambas fotografías de evidencia: Foto del Odómetro y Foto del Nivel de Gasolina.")
             return render(request, 'portal/vehiculos_dar_salida.html', {
                 'unidad': unidad,
-                'operador_actual': request.operador_actual
+                'operador_actual': request.operador_actual,
+                'descripcion_prellenada': descripcion_prellenada,
+                'reporte_asociado': reporte_asociado
             })
 
         try:
@@ -267,7 +303,9 @@ def dar_salida_unidad(request, unidad_id):
 
     return render(request, 'portal/vehiculos_dar_salida.html', {
         'unidad': unidad,
-        'operador_actual': request.operador_actual
+        'operador_actual': request.operador_actual,
+        'descripcion_prellenada': descripcion_prellenada,
+        'reporte_asociado': reporte_asociado
     })
 
 

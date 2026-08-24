@@ -67,11 +67,13 @@ def crear_reporte(request):
                 prioridad=prioridad
             )
             
-            # Enviar alerta al grupo de WhatsApp (fire-and-forget)
-            try:
-                enviar_alerta_grupo(reporte)
-            except Exception as e:
-                logger.error(f"Error al enviar alerta WhatsApp para {reporte.numero_reporte}: {e}")
+            # Enviar alerta al grupo de WhatsApp (pausado temporalmente por preferencia de recursos)
+            DESHABILITAR_ALERTAS_WHATSAPP = True
+            if not DESHABILITAR_ALERTAS_WHATSAPP:
+                try:
+                    enviar_alerta_grupo(reporte)
+                except Exception as e:
+                    logger.error(f"Error al enviar alerta WhatsApp para {reporte.numero_reporte}: {e}")
             
             messages.success(request, f"¡Reporte enviado con éxito! Se ha generado tu folio de seguimiento: {reporte.numero_reporte}.")
             return redirect(f'/crear-reporte/?success_folio={reporte.numero_reporte}')
