@@ -34,6 +34,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://unpkg.com/lucide@latest"></script>
+<script src="{% static 'portal/js/medellin_geojson.js' %}"></script>
 
 <style>
   #map { height: calc(100vh - 60px); width: 100%; z-index: 1; }
@@ -96,6 +97,7 @@
       <button onclick="filtrarMapa('GAS')" class="bg-amber-100 text-amber-900 px-2 py-1 rounded-lg">⚡ Fugas Gas</button>
       <button onclick="filtrarMapa('AGUA')" class="bg-blue-100 text-blue-900 px-2 py-1 rounded-lg">🌊 Inundación</button>
       <button onclick="filtrarMapa('UNIDAD')" class="bg-emerald-100 text-emerald-900 px-2 py-1 rounded-lg">🚒 Flotilla</button>
+      <button id="togglePoligonosBtn" onclick="toggleCapaPoligonos()" class="bg-medellinVino text-white px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">🗺️ Polígonos Zonas</button>
     </div>
 
     <!-- LISTA DE EMERGENCIAS Y UNIDADES -->
@@ -317,6 +319,88 @@
     }
   }
 
+  // =========================================================================
+  // 🗺️ CAPA DE POLÍGONOS GEOJSON Y DELIMITACIÓN TERRITORIAL
+  // =========================================================================
+  let geojsonLayer = null;
+  let poligonosVisibles = true;
+
+  function estiloPoligono(feature) {
+    const tipo = feature.properties.tipo;
+    if (tipo === 'MUNICIPAL') {
+      return {
+        color: '#5A123E',
+        weight: 3,
+        dashArray: '6, 6',
+        fillColor: '#5A123E',
+        fillOpacity: 0.05
+      };
+    } else if (tipo === 'FRACCIONAMIENTO') {
+      return {
+        color: '#E59E27',
+        weight: 2,
+        fillColor: '#E59E27',
+        fillOpacity: 0.25
+      };
+    } else {
+      return {
+        color: '#5B7B34',
+        weight: 2,
+        fillColor: '#5B7B34',
+        fillOpacity: 0.20
+      };
+    }
+  }
+
+  function inicializarPoligonosTerritoriales() {
+    if (typeof MEDELLIN_TERRITORIO_GEOJSON === 'undefined') return;
+
+    geojsonLayer = L.geoJSON(MEDELLIN_TERRITORIO_GEOJSON, {
+      style: estiloPoligono,
+      onEachFeature: function(feature, layer) {
+        const props = feature.properties;
+        const tooltipHtml = `
+          <div class="p-1 font-sans text-xs">
+            <strong class="text-medellinVino font-bold uppercase block">${props.nombre}</strong>
+            <span class="text-[10px] text-slate-500 font-semibold">${props.categoria}</span>
+            <p class="text-[11px] text-slate-600 mt-1 leading-tight">${props.descripcion}</p>
+          </div>
+        `;
+        layer.bindTooltip(tooltipHtml, { sticky: true });
+
+        layer.on({
+          mouseover: function(e) {
+            const l = e.target;
+            l.setStyle({
+              weight: 4,
+              fillOpacity: 0.45
+            });
+            l.bringToFront();
+          },
+          mouseout: function(e) {
+            geojsonLayer.resetStyle(e.target);
+          },
+          click: function(e) {
+            map.fitBounds(e.target.getBounds(), { padding: [30, 30] });
+          }
+        });
+      }
+    }).addTo(map);
+  }
+
+  function toggleCapaPoligonos() {
+    if (!geojsonLayer) return;
+    if (poligonosVisibles) {
+      map.removeLayer(geojsonLayer);
+      poligonosVisibles = false;
+      document.getElementById('togglePoligonosBtn').className = "bg-slate-200 text-slate-700 px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm";
+    } else {
+      map.addLayer(geojsonLayer);
+      poligonosVisibles = true;
+      document.getElementById('togglePoligonosBtn').className = "bg-medellinVino text-white px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm";
+    }
+  }
+
   function filtrarMapa(tipo) {
     dibujarEnMapa(todosLosReportes, todasLasUnidades, tipo);
   }
@@ -326,7 +410,8 @@
     sb.classList.toggle('-translate-x-full');
   }
 
-  // Cargar datos al inicio y actualizar automáticamente cada 15 segundos
+  // Inicializar polígonos territoriales y cargar datos del mapa
+  inicializarPoligonosTerritoriales();
   cargarDatosMapa();
   setInterval(cargarDatosMapa, 15000);
 </script>
