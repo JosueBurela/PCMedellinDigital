@@ -138,32 +138,39 @@
   let unidadMarkers = [];
   let todosLosReportes = [];
   let todasLasUnidades = [];
+  let yaEnfocadoTarget = false;
 
-  // Iconos personalizadosSVG para marcadores
-  function crearIcono(colorHex, iconName) {
+  // Iconos personalizados SVG para marcadores
+  function crearIcono(colorHex, iconName, esDestacado = false) {
+    const ringCss = esDestacado ? 'outline: 4px solid #ef4444; outline-offset: 2px; transform: scale(1.25);' : '';
+    const shadowCss = esDestacado ? 'box-shadow: 0 0 25px rgba(239, 68, 68, 0.9);' : 'box-shadow: 0 4px 10px rgba(0,0,0,0.3);';
     return L.divIcon({
       className: 'custom-leaflet-icon',
       html: `
-        <div style="background-color: ${colorHex}; width: 34px; height: 34px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; items-center; justify-content: center; color: white;">
+        <div style="background-color: ${colorHex}; width: 36px; height: 36px; border-radius: 50%; border: 3px solid white; ${shadowCss} ${ringCss} display: flex; align-items: center; justify-content: center; color: white; transition: all 0.3s ease;">
           <i data-lucide="${iconName}" style="width: 18px; height: 18px;"></i>
         </div>
       `,
-      iconSize: [34, 34],
-      iconAnchor: [17, 17],
-      popupAnchor: [0, -17]
+      iconSize: [36, 36],
+      iconAnchor: [18, 18],
+      popupAnchor: [0, -18]
     });
   }
 
-  const iconosPorTipo = {
-    'CHOQUE': crearIcono('#dc2626', 'car'),
-    'FUEGO': crearIcono('#ea580c', 'flame'),
-    'GAS': crearIcono('#d97706', 'alert-triangle'),
-    'AGUA': crearIcono('#0284c7', 'droplets'),
-    'ARBOL': crearIcono('#16a34a', 'trees'),
-    'ABEJAS': crearIcono('#ca8a04', 'bug'),
-    'OTRO': crearIcono('#6b7280', 'help-circle'),
-    'UNIDAD': crearIcono('#5B7B34', 'truck')
-  };
+  function obtenerIconoPorTipo(tipo, esDestacado = false) {
+    const mapa = {
+      'CHOQUE': ['#dc2626', 'car'],
+      'FUEGO': ['#ea580c', 'flame'],
+      'GAS': ['#d97706', 'alert-triangle'],
+      'AGUA': ['#0284c7', 'droplets'],
+      'ARBOL': ['#16a34a', 'trees'],
+      'ABEJAS': ['#ca8a04', 'bug'],
+      'OTRO': ['#6b7280', 'help-circle'],
+      'UNIDAD': ['#5B7B34', 'truck']
+    };
+    const [color, icon] = mapa[tipo] || mapa['OTRO'];
+    return crearIcono(color, icon, esDestacado);
+  }
 
   async function cargarDatosMapa() {
     try {
@@ -192,6 +199,14 @@
 
     let conteoIncidentes = 0;
 
+    // Obtener reporte_id objetivo desde la URL si existe
+    const urlParams = new URLSearchParams(window.location.search);
+    const targetReporteId = urlParams.get('reporte_id');
+
+    let targetMarkerObj = None = null;
+    let targetLat = null;
+    let targetLng = null;
+
     // 1. DIBUJAR REPORTES DE RIESGO
     reportes.forEach(r => {
       if (filtro !== 'TODOS' && filtro !== 'UNIDAD' && r.tipo_servicio !== filtro) return;
@@ -203,7 +218,8 @@
       const lat = r.latitud || (MEDELLIN_LAT + (Math.random() - 0.5) * 0.04);
       const lng = r.longitud || (MEDELLIN_LNG + (Math.random() - 0.5) * 0.04);
 
-      const icono = iconosPorTipo[r.tipo_servicio] || iconosPorTipo['OTRO'];
+      const esElTarget = (targetReporteId && String(r.id) === String(targetReporteId));
+      const icono = obtenerIconoPorTipo(r.tipo_servicio, esElTarget);
 
       const popupHtml = `
         <div class="custom-popup overflow-hidden">
@@ -218,24 +234,31 @@
               <span>Teléfono: <strong>${r.telefono_ciudadano}</strong></span>
             </div>
             ${r.evidencia_url ? `<a href="${r.evidencia_url}" target="_blank" class="block text-[11px] text-blue-600 font-bold hover:underline">Ver Foto de Evidencia →</a>` : ''}
-            <div class="pt-1">
+            <div class="pt-1 flex items-center justify-between">
               <span class="text-[10px] font-bold px-2 py-0.5 rounded ${r.estatus === 'PENDIENTE' ? 'bg-red-100 text-red-800' : 'bg-emerald-100 text-emerald-800'}">${r.estatus_display}</span>
+              <a href="/control-vehiculos/?reporte_id=${r.id}" class="text-[10px] font-bold text-medellinVino hover:underline">Despachar Unidad →</a>
             </div>
           </div>
         </div>
       `;
 
-      const marker = L.marker([lat, lng], { icon: icono })
+      const marker = L.marker([lat, lng], { icon: icono, zIndexOffset: esElTarget ? 1000 : 0 })
         .addTo(map)
         .bindPopup(popupHtml);
 
       reporteMarkers.push(marker);
 
+      if (esElTarget) {
+        targetMarkerObj = marker;
+        targetLat = lat;
+        targetLng = lng;
+      }
+
       // Agregar a la lista lateral
       const card = document.createElement('div');
-      card.className = 'p-2.5 rounded-xl border border-slate-200 hover:border-medellinVino bg-slate-50 hover:bg-white cursor-pointer transition space-y-1';
+      card.className = `p-2.5 rounded-xl border ${esElTarget ? 'border-red-500 bg-red-50 ring-2 ring-red-300' : 'border-slate-200 bg-slate-50'} hover:border-medellinVino hover:bg-white cursor-pointer transition space-y-1`;
       card.onclick = () => {
-        map.flyTo([lat, lng], 16);
+        map.flyTo([lat, lng], 17, { duration: 1.2 });
         marker.openPopup();
       };
 
@@ -273,7 +296,7 @@
           </div>
         `;
 
-        const marker = L.marker([lat, lng], { icon: iconosPorTipo['UNIDAD'] })
+        const marker = L.marker([lat, lng], { icon: obtenerIconoPorTipo('UNIDAD') })
           .addTo(map)
           .bindPopup(popupHtml);
 
@@ -283,6 +306,15 @@
 
     document.getElementById('stats-resumen').innerText = `${conteoIncidentes} incidentes registrados • ${unidades.length} unidades en sistema`;
     setTimeout(() => lucide.createIcons(), 100);
+
+    // SI VENIMOS DE UN ENLACE CON REPORTE DESTACADO (?reporte_id=X)
+    if (targetMarkerObj && !yaEnfocadoTarget) {
+      yaEnfocadoTarget = true;
+      setTimeout(() => {
+        map.flyTo([targetLat, targetLng], 17, { duration: 1.2 });
+        targetMarkerObj.openPopup();
+      }, 300);
+    }
   }
 
   function filtrarMapa(tipo) {
