@@ -8,10 +8,11 @@
 <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- GOOGLE FONTS OFICIALES PARA REPRODUCCIÓN IDÉNTICA 1-A-1 -->
+<!-- GOOGLE FONTS Y HTML2PDF.JS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
   @page {
@@ -56,14 +57,17 @@
     <span class="text-slate-300">Folio: <strong>{{ inscripcion.folio_constancia }}</strong></span>
   </div>
   <div class="flex items-center space-x-2">
-    <button onclick="window.print()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition">
-      🖨️ Imprimir / Guardar en PDF
+    <button onclick="descargarPDFDirecto()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition">
+      ⬇️ Descargar Archivo PDF (.pdf)
+    </button>
+    <button onclick="window.print()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition">
+      🖨️ Imprimir
     </button>
   </div>
 </div>
 
 <!-- CONTENEDOR DE LA CONSTANCIA (HORIZONTE LANDSCAPE 100% REPLICADO IDÉNTICO AL PDF) -->
-<div class="certificate-container bg-white w-full max-w-5xl h-[680px] p-8 sm:p-10 relative flex flex-col justify-between border-[18px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
+<div id="constanciaCertificado" class="certificate-container bg-white w-full max-w-5xl h-[680px] p-8 sm:p-10 relative flex flex-col justify-between border-[18px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
 
   <!-- CAPA DE FONDO: ILUSTRACIÓN DE MEDELLÍN Y TEXTO 'POR LA GRANDEZA DE' -->
   <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
@@ -157,6 +161,28 @@
   </div>
 
 </div>
+
+<script>
+  function descargarPDFDirecto() {
+    const element = document.getElementById('constanciaCertificado');
+    const opt = {
+      margin:       0,
+      filename:     'Constancia_{{ inscripcion.nombre_completo|slugify }}.pdf',
+      image:        { type: 'jpeg', quality: 0.98 },
+      html2canvas:  { scale: 2.5, useCORS: true, logging: false },
+      jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+    };
+    html2pdf().set(opt).from(element).save();
+  }
+
+  // Auto-descargar si viene con parámetro ?download=1
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('download') === '1' || urlParams.get('descargar') === '1') {
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(descargarPDFDirecto, 500);
+    });
+  }
+</script>
 
 </body>
 </html>
