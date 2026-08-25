@@ -1,0 +1,242 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Capacitaciones y Constancias | Protección Civil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    medellinVino: '#5A123E',
+                    medellinVerde: '#5B7B34',
+                    medellinOro: '#E59E27',
+                    medellinFondo: '#F7F8F6',
+                }
+            }
+        }
+    }
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-medellinFondo text-slate-800 font-sans antialiased min-h-screen">
+
+<!-- HEADER NAVEGACIÓN -->
+<header class="bg-medellinVino text-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <a href="{% url 'flotilla_vehiculos_hub' %}" class="bg-white/10 hover:bg-white/20 p-2 rounded-xl text-white transition" title="Volver al Hub">
+        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+      </a>
+      <div>
+        <span class="text-[10px] font-bold text-medellinOro uppercase tracking-wider block">Panel de Control Ejecutivo</span>
+        <h1 class="text-sm sm:text-base font-extrabold tracking-tight flex items-center gap-2">
+          <i data-lucide="award" class="w-4 h-4 text-medellinOro"></i>
+          <span>Gestión de Capacitaciones y Constancias</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <button onclick="document.getElementById('modalCrearCurso').classList.remove('hidden')" class="bg-medellinOro hover:bg-amber-600 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 shadow-sm transition">
+        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+        <span>Nuevo Curso</span>
+      </button>
+      <a href="{% url 'registro_capacitacion_publico' %}" target="_blank" class="bg-white/10 hover:bg-white/20 text-white font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 transition">
+        <i data-lucide="external-link" class="w-4 h-4"></i>
+        <span>Ver Formulario Público</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- MENSAJES DJANGO -->
+{% if messages %}
+<div class="max-w-7xl mx-auto mt-4 px-4 space-y-2">
+  {% for message in messages %}
+  <div class="p-3.5 rounded-xl text-xs font-semibold flex items-center justify-between {% if message.tags == 'error' %}bg-red-50 text-red-700 border border-red-200{% else %}bg-emerald-50 text-emerald-700 border border-emerald-200{% endif %} shadow-sm">
+    <div class="flex items-center gap-2">
+      <i data-lucide="{% if message.tags == 'error' %}alert-circle{% else %}check-circle-2{% endif %}" class="w-4 h-4"></i>
+      <span>{{ message }}</span>
+    </div>
+    <button onclick="this.parentElement.remove()" class="text-xs text-slate-400 hover:text-slate-600">✕</button>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
+
+  <!-- SELECTOR DE CURSOS Y RESUMEN -->
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+    <div class="space-y-1">
+      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Curso Seleccionado Actual</span>
+      <h2 class="text-lg font-black text-slate-900">{{ curso_actual.titulo|default:"No hay cursos registrados" }}</h2>
+      {% if curso_actual %}
+      <p class="text-xs text-slate-500 font-medium">
+        📅 {{ curso_actual.fecha_inicio|date:"d/m/Y" }} ({{ curso_actual.horario }}) • 📍 {{ curso_actual.sede_ubicacion }} • ⏱️ {{ curso_actual.duracion_horas }} Horas
+      </p>
+      {% endif %}
+    </div>
+
+    <!-- NAVEGADOR DE CURSOS -->
+    {% if cursos %}
+    <form method="GET" class="flex items-center gap-2 w-full md:w-auto">
+      <select name="curso_id" onchange="this.form.submit()" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-medellinVino w-full md:w-72">
+        {% for c in cursos %}
+        <option value="{{ c.id }}" {% if c.id == curso_actual.id %}selected{% endif %}>
+          {{ c.titulo }} ({{ c.fecha_inicio|date:"d/m/Y" }})
+        </option>
+        {% endfor %}
+      </select>
+      {% if curso_actual %}
+      <a href="{% url 'exportar_capacitados_excel' curso_actual.id %}" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Exportar Lista a Excel">
+        <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-300"></i>
+        <span>Exportar Excel</span>
+      </a>
+      {% endif %}
+    </form>
+    {% endif %}
+  </div>
+
+  <!-- TABLA DE PARTICIPANTES INSCRITOS -->
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+      <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
+        <i data-lucide="users" class="w-4 h-4 text-slate-600"></i> Lista de Participantes Inscritos ({{ inscripciones.count }})
+      </h3>
+      <span class="text-xs text-slate-500 font-semibold">
+        Marcados con Asistencia: {{ inscripciones.filter.count }}
+      </span>
+    </div>
+
+    {% if inscripciones %}
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse text-xs">
+        <thead>
+          <tr class="bg-slate-50 text-slate-500 uppercase text-[10px] font-bold border-b border-slate-200">
+            <th class="p-3">#</th>
+            <th class="p-3">Folio Constancia</th>
+            <th class="p-3">Nombre del Participante</th>
+            <th class="p-3">CURP</th>
+            <th class="p-3">Empresa / Institución</th>
+            <th class="p-3">Contacto</th>
+            <th class="p-3 text-center">Asistencia / Aprobación</th>
+            <th class="p-3 text-right">Acción Constancia</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100 font-medium">
+          {% for i in inscripciones %}
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="p-3 text-slate-400 font-bold">{{ forloop.counter }}</td>
+            <td class="p-3 font-bold text-medellinVino">{{ i.folio_constancia }}</td>
+            <td class="p-3 font-extrabold text-slate-900">{{ i.nombre_completo }}</td>
+            <td class="p-3 text-slate-500 uppercase">{{ i.curp|default:"-" }}</td>
+            <td class="p-3 text-slate-600 font-bold">{{ i.empresa_institucion|default:"PARTICULAR" }}</td>
+            <td class="p-3 space-y-0.5 text-[11px]">
+              <div>📧 {{ i.correo }}</div>
+              <div>📞 {{ i.telefono }}</div>
+            </td>
+            <td class="p-3 text-center">
+              <a href="{% url 'marcar_asistencia_capacitacion' i.id %}" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold transition shadow-sm {% if i.asistio %}bg-emerald-100 text-emerald-800 border border-emerald-300 hover:bg-emerald-200{% else %}bg-slate-100 text-slate-500 border border-slate-200 hover:bg-slate-200{% endif %}">
+                <i data-lucide="{% if i.asistio %}check-circle-2{% else %}circle{% endif %}" class="w-3.5 h-3.5"></i>
+                <span>{% if i.asistio %}ASISTIÓ Y APROBÓ{% else %}MARCAR ASISTENCIA{% endif %}</span>
+              </a>
+            </td>
+            <td class="p-3 text-right">
+              {% if i.asistio %}
+              <a href="{% url 'imprimir_constancia_pdf' i.folio_constancia %}" target="_blank" class="inline-flex items-center gap-1 bg-medellinVino hover:bg-[#430d2e] text-white font-bold px-3 py-1.5 rounded-xl text-xs shadow-sm transition">
+                <i data-lucide="printer" class="w-3.5 h-3.5 text-medellinOro"></i>
+                <span>Ver Constancia PDF</span>
+              </a>
+              {% else %}
+              <button disabled class="inline-flex items-center gap-1 bg-slate-100 text-slate-400 font-semibold px-3 py-1.5 rounded-xl text-xs cursor-not-allowed border border-slate-200">
+                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                <span>Pendiente</span>
+              </button>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="p-8 text-center space-y-2">
+      <i data-lucide="users" class="w-8 h-8 text-slate-300 mx-auto"></i>
+      <p class="text-xs text-slate-500 font-medium">No hay participantes inscritos en este curso todavía.</p>
+    </div>
+    {% endif %}
+  </div>
+
+</main>
+
+<!-- MODAL CREAR NUEVO CURSO -->
+<div id="modalCrearCurso" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+      <h3 class="font-bold text-slate-900 text-sm flex items-center gap-2">
+        <i data-lucide="plus-circle" class="w-4 h-4 text-medellinVino"></i> Crear Nuevo Curso de Capacitación
+      </h3>
+      <button onclick="document.getElementById('modalCrearCurso').classList.add('hidden')" class="text-slate-400 hover:text-slate-600">✕</button>
+    </div>
+
+    <form action="{% url 'crear_curso_admin' %}" method="POST" class="space-y-4 text-xs">
+      {% csrf_token %}
+
+      <div>
+        <label class="block font-bold text-slate-700 mb-1">Título del Curso *</label>
+        <input type="text" name="titulo" required placeholder="Ej. Primeros Auxilios Básicos y RCP" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900">
+      </div>
+
+      <div>
+        <label class="block font-bold text-slate-700 mb-1">Descripción / Temario *</label>
+        <textarea name="descripcion" rows="2" required placeholder="Temario básico del curso impartido a comercios o ciudadanía..." class="w-full bg-slate-50 border border-slate-300 rounded-xl p-3 font-medium text-slate-900"></textarea>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Duración (Horas) *</label>
+          <input type="number" name="duracion_horas" value="8" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-bold text-slate-900">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Fecha de Inicio *</label>
+          <input type="date" name="fecha_inicio" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-bold text-slate-900">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Horario *</label>
+          <input type="text" name="horario" value="09:00 a 14:00 hrs" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900">
+        </div>
+
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Cupo Máximo *</label>
+          <input type="number" name="cupo_maximo" value="50" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-bold text-slate-900">
+        </div>
+      </div>
+
+      <div>
+        <label class="block font-bold text-slate-700 mb-1">Sede / Ubicación *</label>
+        <input type="text" name="sede_ubicacion" value="Estación Central de Bomberos El Tejar" required class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900">
+      </div>
+
+      <div class="pt-3 border-t border-slate-100 flex justify-end gap-2">
+        <button type="button" onclick="document.getElementById('modalCrearCurso').classList.add('hidden')" class="px-4 py-2 rounded-xl text-slate-600 font-bold hover:bg-slate-100">Cancelar</button>
+        <button type="submit" class="px-5 py-2 bg-medellinVino hover:bg-[#430d2e] text-white font-extrabold rounded-xl shadow-md">Guardar Curso</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

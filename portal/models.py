@@ -5,6 +5,7 @@
 #  Contacto y Soporte: jburela1@gmal.com
 # ==============================================================================
 
+import uuid
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
@@ -896,6 +897,74 @@ class UsuarioOperadorVehiculo(models.Model):
         if self.nombre_completo:
             self.nombre_completo = self.nombre_completo.strip().upper()
         super().save(*args, **kwargs)
+
+
+# ==============================================================================
+#  🎓 MÓDULO DE CAPACITACIONES Y CONSTANCIAS AUTOMATIZADAS
+# ==============================================================================
+
+class CursoCapacitacion(models.Model):
+    titulo = models.CharField(max_length=200, verbose_name="Título del Curso / Capacitación")
+    descripcion = models.TextField(verbose_name="Descripción y Temario del Curso")
+    duracion_horas = models.PositiveIntegerField(default=8, verbose_name="Duración en Horas")
+    fecha_inicio = models.DateField(verbose_name="Fecha de Inicio / Impartición")
+    fecha_fin = models.DateField(blank=True, null=True, verbose_name="Fecha de Finalización (Opcional)")
+    horario = models.CharField(max_length=100, default="09:00 a 14:00 hrs", verbose_name="Horario")
+    sede_ubicacion = models.CharField(max_length=200, default="Estación Central de Bomberos El Tejar", verbose_name="Sede / Ubicación")
+    cupo_maximo = models.PositiveIntegerField(default=50, verbose_name="Cupo Máximo de Participantes")
+    activo = models.BooleanField(default=True, verbose_name="¿Curso Activo para Registro Público?")
+    creado_el = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Curso de Capacitación"
+        verbose_name_plural = "Cursos de Capacitación"
+        ordering = ['-fecha_inicio']
+
+    def __str__(self):
+        return f"{self.titulo} ({self.fecha_inicio.strftime('%d/%m/%Y')})"
+
+
+class InscripcionCapacitacion(models.Model):
+    curso = models.ForeignKey(CursoCapacitacion, on_delete=models.CASCADE, related_name='inscritos')
+    nombre_completo = models.CharField(max_length=200, verbose_name="Nombre Completo (tal como aparecerá en Constancia)")
+    curp = models.CharField(max_length=18, blank=True, null=True, verbose_name="CURP (Opcional)")
+    correo = models.EmailField(verbose_name="Correo Electrónico")
+    telefono = models.CharField(max_length=15, verbose_name="Teléfono / WhatsApp")
+    empresa_institucion = models.CharField(max_length=200, blank=True, null=True, verbose_name="Empresa / Institución Solicitante")
+    
+    asistio = models.BooleanField(default=False, verbose_name="¿Asistió al Curso?")
+    aprobado = models.BooleanField(default=False, verbose_name="¿Aprobó y Cumplió Requisitos?")
+    
+    folio_constancia = models.CharField(max_length=50, unique=True, blank=True, null=True, verbose_name="Folio Único de Constancia")
+    codigo_qr_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_emision = models.DateTimeField(blank=True, null=True, verbose_name="Fecha y Hora de Emisión de Constancia")
+
+    class Meta:
+        verbose_name = "Inscripción a Capacitación"
+        verbose_name_plural = "Inscripciones a Capacitaciones"
+        ordering = ['-fecha_registro']
+
+    def __str__(self):
+        return f"{self.nombre_completo} - {self.curso.titulo}"
+
+    def save(self, *args, **kwargs):
+        if self.nombre_completo:
+            self.nombre_completo = self.nombre_completo.strip().upper()
+        if self.curp:
+            self.curp = self.curp.strip().upper()
+        if self.empresa_institucion:
+            self.empresa_institucion = self.empresa_institucion.strip().upper()
+            
+        # Generar folio único automático si no existe
+        if not self.folio_constancia:
+            ultimo = InscripcionCapacitacion.objects.filter(folio_constancia__isnull=False).count() + 1
+            year = timezone.now().year
+            self.folio_constancia = f"CONST-{year}-PC-{ultimo:04d}"
+            
+        super().save(*args, **kwargs)
+
 
 
 

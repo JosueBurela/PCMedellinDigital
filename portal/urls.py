@@ -99,6 +99,15 @@ urlpatterns = [
     path('api/mapa-datos/', views.api_mapa_datos, name='api_mapa_datos'),
     path('control-vehiculos/admin/usuario/estado/<int:usuario_id>/<str:nuevo_estado>/', views.cambiar_estado_usuario, name='cambiar_estado_usuario'),
 
+    # Módulo de Capacitaciones y Emisión Automatizada de Constancias
+    path('capacitaciones/', views.registro_capacitacion_publico, name='registro_capacitacion_publico'),
+    path('capacitaciones/admin/', views.admin_capacitaciones_dashboard, name='admin_capacitaciones_dashboard'),
+    path('capacitaciones/admin/curso/crear/', views.crear_curso_admin, name='crear_curso_admin'),
+    path('capacitaciones/admin/asistencia/<int:inscripcion_id>/', views.marcar_asistencia_capacitacion, name='marcar_asistencia_capacitacion'),
+    path('capacitaciones/admin/exportar/<int:curso_id>/', views.exportar_capacitados_excel, name='exportar_capacitados_excel'),
+    path('capacitaciones/constancia/<str:folio>/', views.imprimir_constancia_pdf, name='imprimir_constancia_pdf'),
+    path('capacitaciones/validar/<uuid:token>/', views.validar_constancia_qr, name='validar_constancia_qr'),
+
     # Perfil Ciudadano e Historial
     path('perfil/', views.perfil_ciudadano, name='perfil_ciudadano'),
     path('chat/enviar/', views.enviar_mensaje_chat, name='enviar_mensaje_chat'),
