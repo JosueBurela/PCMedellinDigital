@@ -40,18 +40,13 @@
       <div class="min-w-0">
         <span class="text-[9px] sm:text-[10px] font-bold text-medellinOro uppercase tracking-wider block truncate">PCivil Medellín de Bravo</span>
         <h1 class="text-xs sm:text-sm md:text-base font-extrabold tracking-tight flex items-center gap-1.5 truncate">
-          <i data-lucide="shield-alert" class="w-4 h-4 text-medellinOro shrink-0"></i>
-          <span class="truncate">Menú Operativo en Campo</span>
+          <i data-lucide="truck" class="w-4 h-4 text-medellinOro shrink-0"></i>
+          <span class="truncate">Control de Flotilla Vehicular</span>
         </h1>
       </div>
     </div>
 
     <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-      <a href="{% url 'mapa_emergencias_hub' %}" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0" title="Ver Mapa GIS de Emergencias">
-        <i data-lucide="map" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-300"></i>
-        <span>Mapa GIS</span>
-      </a>
-
       {% if operador_actual %}
       <div class="text-right hidden md:block">
         <span class="text-[9px] text-pink-200 block font-semibold">Operador Activo</span>
@@ -133,191 +128,10 @@
   </div>
   {% endif %}
 
-  <!-- PESTAÑAS DE NAVEGACIÓN PRINCIPALES (ALERTAS VS FLOTILLA) -->
-  <div class="flex items-center gap-2 border-b border-slate-200 pb-2">
-    <button id="tabAlertasBtn" onclick="cambiarTab('alertas')" class="px-4 py-2.5 rounded-xl font-extrabold text-xs sm:text-sm flex items-center gap-2 transition shadow-sm bg-medellinVino text-white">
-      <i data-lucide="bell-ring" class="w-4 h-4 text-medellinOro"></i>
-      <span>Alertas de Emergencia</span>
-      {% if reportes_pendientes.count > 0 %}
-      <span class="bg-red-500 text-white text-[10px] px-2 py-0.5 rounded-full animate-bounce">{{ reportes_pendientes.count }}</span>
-      {% endif %}
-    </button>
-
-    <button id="tabFlotillaBtn" onclick="cambiarTab('flotilla')" class="px-4 py-2.5 rounded-xl font-bold text-xs sm:text-sm flex items-center gap-2 transition text-slate-600 hover:bg-white hover:text-slate-900">
-      <i data-lucide="truck" class="w-4 h-4"></i>
-      <span>Flotilla Vehicular</span>
-      <span class="bg-slate-200 text-slate-700 text-[10px] px-2 py-0.5 rounded-full">{{ unidades.count }}</span>
-    </button>
-  </div>
-
   <!-- ============================================================================== -->
-  <!-- SECCIÓN 1: ALERTAS DE EMERGENCIA Y REPORTES DE CAMPO -->
+  <!-- SECCIÓN: FLOTILLA DE VEHÍCULOS DE EMERGENCIA (ÚNICA SECCIÓN VISIBLE) -->
   <!-- ============================================================================== -->
-  <div id="seccionAlertas" class="space-y-6">
-
-    <!-- ALERTAS PENDIENTES (SIN ATENDER) -->
-    <div class="space-y-4">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-          <i data-lucide="alert-triangle" class="w-4 h-4 text-red-600"></i>
-          <span>Alertas Pendientes por Atender</span>
-          <span class="text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full border border-red-200">
-            {{ reportes_pendientes.count }} Reportes
-          </span>
-        </h3>
-        <p class="text-[11px] text-slate-500 hidden sm:block">Incidentes ciudadanos o de campo que requieren atención de la guardia.</p>
-      </div>
-
-      {% if reportes_pendientes %}
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {% for r in reportes_pendientes %}
-        <div class="bg-white rounded-2xl p-4 border-2 border-red-200 shadow-sm flex flex-col justify-between space-y-3 relative overflow-hidden">
-          
-          <div class="space-y-2">
-            <!-- HEADER TARJETA -->
-            <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-              <span class="text-[10px] font-bold text-red-700 bg-red-50 px-2.5 py-0.5 rounded-full border border-red-200">
-                Folio: {{ r.numero_reporte }}
-              </span>
-              <span class="text-[10px] font-semibold text-slate-400">
-                {{ r.fecha_reporte|date:"d/m/Y H:i" }} hrs
-              </span>
-            </div>
-
-            <!-- TIPO E INFORMACIÓN -->
-            <div class="flex items-start gap-3 pt-1">
-              <div class="w-10 h-10 rounded-xl bg-red-100 text-red-700 flex items-center justify-center shrink-0">
-                <i data-lucide="alert-circle" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <h4 class="text-sm font-bold text-slate-900">{{ r.get_tipo_servicio_display }}</h4>
-                <p class="text-xs text-slate-600 font-medium">📍 {{ r.direccion }}, <strong class="text-slate-800">{{ r.colonia }}</strong></p>
-                <span class="text-[10px] text-slate-400 block">{{ r.localidad }}</span>
-              </div>
-            </div>
-
-            <!-- DESCRIPCIÓN Y CONTACTO -->
-            <p class="text-xs text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-100 font-normal leading-relaxed">
-              {{ r.descripcion }}
-            </p>
-
-            <div class="flex items-center justify-between text-xs text-slate-600 pt-1">
-              <span>Ciudadano: <strong>{{ r.nombre_ciudadano }}</strong></span>
-              {% if r.telefono_ciudadano %}
-              <a href="tel:{{ r.telefono_ciudadano }}" class="text-emerald-700 font-bold hover:underline flex items-center gap-1">
-                <i data-lucide="phone" class="w-3.5 h-3.5"></i> {{ r.telefono_ciudadano }}
-              </a>
-              {% endif %}
-            </div>
-
-            {% if r.evidencia_foto %}
-            <div class="pt-1">
-              <a href="{{ r.evidencia_foto.url }}" target="_blank" class="text-[11px] text-blue-600 font-bold hover:underline flex items-center gap-1">
-                <i data-lucide="image" class="w-3.5 h-3.5"></i> Ver foto de evidencia enviada
-              </a>
-            </div>
-            {% endif %}
-          </div>
-
-          <!-- ACCIONES DE RESPUESTA DE ALERTA -->
-          <div class="pt-2 border-t border-slate-100 space-y-2">
-            <!-- BOTÓN DESPACHAR UNIDAD A ESTA ALERTA -->
-            <div class="relative group">
-              <button onclick="toggleSelectorUnidad('modalUnidad_{{ r.id }}')" class="w-full bg-medellinVino hover:bg-[#430d2e] text-white font-bold py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
-                <i data-lucide="truck" class="w-3.5 h-3.5 text-medellinOro"></i>
-                <span>Despachar Unidad a este Incidente</span>
-                <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
-              </button>
-
-              <!-- DESPLEGABLE DE SELECCIÓN DE UNIDAD -->
-              <div id="modalUnidad_{{ r.id }}" class="hidden absolute bottom-full left-0 w-full mb-1 bg-white border border-slate-300 rounded-xl shadow-xl z-20 p-2 space-y-1">
-                <span class="text-[10px] font-bold text-slate-500 uppercase block px-2 py-1">Selecciona Unidad Disponible:</span>
-                {% for u in unidades %}
-                  {% if u.estatus == 'DISPONIBLE' %}
-                  <a href="{% url 'dar_salida_unidad' u.id %}?reporte_id={{ r.id }}" class="block w-full text-left px-2.5 py-1.5 hover:bg-slate-100 rounded-lg text-xs font-bold text-slate-800 flex items-center justify-between">
-                    <span>{{ u.nombre_identificador }}</span>
-                    <span class="text-[10px] text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">Disponible</span>
-                  </a>
-                  {% endif %}
-                {% empty %}
-                <span class="text-xs text-slate-400 block px-2 py-1">No hay unidades disponibles</span>
-                {% endfor %}
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2">
-              <a href="{% url 'cambiar_estado_reporte_operativo' r.id 'EN_PROCESO' %}" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 shadow-sm transition">
-                <i data-lucide="navigation" class="w-3.5 h-3.5"></i> En Camino
-              </a>
-
-              <a href="{% url 'mapa_emergencias_hub' %}?reporte_id={{ r.id }}" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-1.5 px-2 rounded-xl text-[11px] flex items-center justify-center gap-1 border border-slate-200 transition">
-                <i data-lucide="map-pin" class="w-3.5 h-3.5 text-red-600"></i> Ver en Mapa
-              </a>
-            </div>
-          </div>
-
-        </div>
-        {% endfor %}
-      </div>
-      {% else %}
-      <div class="bg-white rounded-2xl p-8 text-center space-y-2 border border-slate-200 shadow-sm">
-        <div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
-          <i data-lucide="check-circle-2" class="w-5 h-5"></i>
-        </div>
-        <h4 class="font-bold text-sm text-slate-800">Cero Alertas Pendientes</h4>
-        <p class="text-xs text-slate-500">No hay reportes de emergencia esperando atención en este momento.</p>
-      </div>
-      {% endif %}
-    </div>
-
-    <!-- ALERTAS EN PROCESO / EN CAMINO -->
-    {% if reportes_en_proceso %}
-    <div class="space-y-4 pt-4 border-t border-slate-200">
-      <div class="flex items-center justify-between border-b border-slate-200 pb-2">
-        <h3 class="text-sm font-bold text-slate-900 flex items-center gap-2">
-          <i data-lucide="loader" class="w-4 h-4 text-amber-600 animate-spin"></i>
-          <span>Alertas En Proceso / En Atención</span>
-          <span class="text-xs font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">
-            {{ reportes_en_proceso.count }} En Servicio
-          </span>
-        </h3>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {% for r in reportes_en_proceso %}
-        <div class="bg-white rounded-2xl p-4 border border-amber-300 shadow-sm space-y-3">
-          <div class="flex items-center justify-between border-b border-slate-100 pb-2">
-            <span class="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
-              Folio: {{ r.numero_reporte }}
-            </span>
-            <span class="text-[10px] font-bold text-amber-700 flex items-center gap-1">
-              <span class="w-2 h-2 rounded-full bg-amber-500 animate-ping"></span> En Atención
-            </span>
-          </div>
-
-          <div>
-            <h4 class="text-sm font-bold text-slate-900">{{ r.get_tipo_servicio_display }}</h4>
-            <p class="text-xs text-slate-600 font-medium">📍 {{ r.direccion }}, {{ r.colonia }}</p>
-            <p class="text-xs text-slate-500 mt-1 line-clamp-2">{{ r.descripcion }}</p>
-          </div>
-
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-            <a href="{% url 'cambiar_estado_reporte_operativo' r.id 'RESUELTO' %}" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-sm transition">
-              <i data-lucide="check-circle" class="w-4 h-4"></i> Concluir / Finalizar Incidente
-            </a>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
-
-  </div>
-
-  <!-- ============================================================================== -->
-  <!-- SECCIÓN 2: FLOTILLA DE VEHÍCULOS DE EMERGENCIA -->
-  <!-- ============================================================================== -->
-  <div id="seccionFlotilla" class="hidden space-y-6">
+  <div id="seccionFlotilla" class="space-y-6">
     <div class="flex items-center justify-between border-b border-slate-200 pb-3">
       <div>
         <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
