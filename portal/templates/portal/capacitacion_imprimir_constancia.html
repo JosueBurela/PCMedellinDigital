@@ -37,7 +37,7 @@
   }
 
   body {
-    background-color: #0f172a;
+    background-color: #F7F8F6;
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
@@ -55,28 +55,38 @@
     height: 816px;
     box-sizing: border-box;
   }
+
+  /* ESCALADO RESPONSIVO AUTOMÁTICO PARA PANTALLAS DE CELULAR EN VISTA PREVIA */
+  @media screen and (max-width: 1080px) {
+    #constanciaCertificado {
+      transform: scale(calc((100vw - 24px) / 1056));
+      transform-origin: top center;
+      margin-bottom: calc(816px * (1 - (100vw - 24px) / 1056) * -1);
+    }
+  }
 </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-2 sm:p-4">
+<body class="min-h-screen flex flex-col items-center justify-start p-2 sm:p-4 bg-[#F7F8F6]">
 
 <!-- BARRA SUPERIOR DE ACCIONES (NO SE IMPRIME) -->
-<div class="no-print w-full max-w-[1056px] mb-3 flex items-center justify-between bg-slate-800/90 text-white p-3 rounded-2xl backdrop-blur-md shadow-xl border border-slate-700 font-sans">
+<div class="no-print w-full max-w-[1056px] mb-3 flex items-center justify-between bg-[#5A123E] text-white p-3.5 rounded-2xl shadow-lg font-sans">
   <div class="flex items-center space-x-2 text-xs">
-    <span class="bg-amber-500 text-slate-950 font-bold px-2 py-0.5 rounded">Constancia Oficial</span>
-    <span class="text-slate-300">Folio: <strong>{{ inscripcion.folio_constancia }}</strong></span>
+    <span class="bg-[#E59E27] text-slate-950 font-black px-2.5 py-0.5 rounded-full uppercase">Constancia Oficial</span>
+    <span class="text-white/90">Folio: <strong>{{ inscripcion.folio_constancia }}</strong></span>
   </div>
   <div class="flex items-center space-x-2">
-    <button onclick="descargarPDFDirecto()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition">
-      ⬇️ Descargar Archivo PDF (.pdf)
+    <button onclick="descargarPDFDirecto()" class="bg-[#5B7B34] hover:bg-[#486328] text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition">
+      ⬇️ Descargar PDF (.pdf)
     </button>
-    <button onclick="window.print()" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition">
+    <button onclick="window.print()" class="bg-[#E59E27] hover:bg-amber-600 text-slate-950 font-extrabold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-md transition">
       🖨️ Imprimir
     </button>
   </div>
 </div>
 
-<!-- CONTENEDOR DE LA CONSTANCIA (BORDE ROJO AL LÍMITE DE PÁGINA 0px MARGEN BLANCO) -->
-<div id="constanciaCertificado" class="certificate-container bg-white p-10 relative flex flex-col justify-between border-[22px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
+<!-- CONTENEDOR DE LA CONSTANCIA CON WRAPPER RESPONSIVO EN CELULAR -->
+<div id="certWrapper" class="w-full max-w-[1056px] flex justify-center overflow-hidden py-1">
+  <div id="constanciaCertificado" class="certificate-container bg-white p-10 relative flex flex-col justify-between border-[22px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
 
   <!-- CAPA DE FONDO: ILUSTRACIÓN DE MEDELLÍN Y TEXTO 'POR LA GRANDEZA DE' -->
   <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
@@ -170,17 +180,19 @@
   </div>
 
 </div>
+</div>
 
 <script>
   function descargarPDFDirecto() {
     window.scrollTo(0, 0);
     const element = document.getElementById('constanciaCertificado');
     
-    // Guardar estilos originales para cero desfase horizontal en captura
+    // Guardar estilos y transformaciones originales para cero desfase horizontal en captura PDF
     const bodyClass = document.body.className;
     const origStyle = element.style.cssText;
     
     document.body.className = "m-0 p-0 bg-white overflow-hidden";
+    element.style.transform = "none";
     element.style.margin = "0";
     element.style.position = "absolute";
     element.style.top = "0";
