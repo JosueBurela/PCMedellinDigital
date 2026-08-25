@@ -211,6 +211,12 @@ def exportar_capacitados_excel(request, curso_id):
     return response
 
 
+MESES_ES = {
+    1: 'Enero', 2: 'Febrero', 3: 'Marzo', 4: 'Abril', 5: 'Mayo', 6: 'Junio',
+    7: 'Julio', 8: 'Agosto', 9: 'Septiembre', 10: 'Octubre', 11: 'Noviembre', 12: 'Diciembre'
+}
+
+
 def imprimir_constancia_pdf(request, folio):
     """
     Vista de impresión oficial de la Constancia en formato horizontal (Landscape) con QR.
@@ -224,10 +230,15 @@ def imprimir_constancia_pdf(request, folio):
     if not inscripcion.fecha_emision:
         inscripcion.fecha_emision = timezone.now()
         inscripcion.save()
+
+    fecha_dt = inscripcion.fecha_emision or timezone.now()
+    mes_nombre = MESES_ES.get(fecha_dt.month, 'Junio')
+    fecha_pie = f"Medellin de Bravo, Ver. {fecha_dt.day} de {mes_nombre} de {fecha_dt.year}"
         
     return render(request, 'portal/capacitacion_imprimir_constancia.html', {
         'inscripcion': inscripcion,
-        'curso': inscripcion.curso
+        'curso': inscripcion.curso,
+        'fecha_pie': fecha_pie
     })
 
 

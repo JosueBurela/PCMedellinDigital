@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Registro a Cursos de Capacitación | Protección Civil Medellín</title>
+<title>Registro a Capacitaciones | Protección Civil Medellín</title>
 <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -27,12 +27,12 @@
 
 <!-- HEADER INSTITUCIONAL -->
 <header class="bg-medellinVino text-white shadow-md">
-  <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-3">
       <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Logo Protección Civil" class="w-10 h-10 object-contain">
       <div>
         <span class="text-[10px] font-bold text-medellinOro uppercase tracking-wider block">H. Ayuntamiento de Medellín de Bravo</span>
-        <h1 class="text-sm sm:text-base font-extrabold tracking-tight">Registro a Cursos de Capacitación</h1>
+        <h1 class="text-sm sm:text-base font-extrabold tracking-tight">Registro a Capacitaciones Oficiales</h1>
       </div>
     </div>
     <a href="{% url 'home' %}" class="text-xs text-white/80 hover:text-white font-semibold flex items-center gap-1">
@@ -41,7 +41,7 @@
   </div>
 </header>
 
-<main class="max-w-4xl mx-auto px-4 py-8 space-y-6 flex-1 w-full">
+<main class="max-w-3xl mx-auto px-4 py-8 space-y-6 flex-1 w-full">
 
   <!-- MENSAJES DJANGO -->
   {% if messages %}
@@ -57,14 +57,14 @@
   </div>
   {% endif %}
 
-  <!-- FICHA DE INSCRIPCIÓN EXITOSA (SI CORRESPONDE) -->
+  <!-- CONFIRMACIÓN DE INSCRIPCIÓN EXITOSA -->
   {% if inscripcion_exitosa %}
-  <div class="bg-white rounded-3xl p-6 border-2 border-emerald-500 shadow-xl space-y-4 text-center">
-    <div class="w-14 h-14 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto">
-      <i data-lucide="check-circle" class="w-8 h-8"></i>
+  <div class="bg-white rounded-3xl p-6 sm:p-8 border-2 border-emerald-500 shadow-xl space-y-4 text-center">
+    <div class="w-16 h-16 bg-emerald-100 text-emerald-700 rounded-full flex items-center justify-center mx-auto shadow-md">
+      <i data-lucide="check-circle" class="w-10 h-10"></i>
     </div>
     <div class="space-y-1">
-      <span class="text-xs font-bold text-emerald-700 uppercase tracking-wider bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+      <span class="text-xs font-bold text-emerald-800 uppercase tracking-wider bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
         Inscripción Confirmada
       </span>
       <h2 class="text-xl font-black text-slate-900 pt-2">{{ inscripcion_exitosa.nombre_completo }}</h2>
@@ -73,47 +73,43 @@
 
     <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 text-xs space-y-2 max-w-lg mx-auto text-left">
       <div class="flex justify-between border-b border-slate-200 pb-1">
-        <span class="text-slate-500">Folio Reservado de Constancia:</span>
-        <strong class="text-medellinVino font-bold">{{ inscripcion_exitosa.folio_constancia }}</strong>
+        <span class="text-slate-500 font-semibold">Folio Reservado de Constancia:</span>
+        <strong class="text-medellinVino font-black text-sm">{{ inscripcion_exitosa.folio_constancia }}</strong>
       </div>
       <div class="flex justify-between border-b border-slate-200 pb-1">
-        <span class="text-slate-500">Duración:</span>
-        <strong>{{ inscripcion_exitosa.curso.duracion_horas }} Horas</strong>
+        <span class="text-slate-500 font-semibold">Fecha e Impartición:</span>
+        <strong>{{ inscripcion_exitosa.curso.fecha_inicio|date:"d/m/Y" }}</strong>
       </div>
       <div class="flex justify-between border-b border-slate-200 pb-1">
-        <span class="text-slate-500">Fecha y Horario:</span>
-        <strong>{{ inscripcion_exitosa.curso.fecha_inicio|date:"d/m/Y" }} ({{ inscripcion_exitosa.curso.horario }})</strong>
+        <span class="text-slate-500 font-semibold">Horario / Turno:</span>
+        <strong>{{ inscripcion_exitosa.curso.horario }}</strong>
       </div>
       <div class="flex justify-between">
-        <span class="text-slate-500">Sede:</span>
+        <span class="text-slate-500 font-semibold">Sede / Ubicación:</span>
         <strong>{{ inscripcion_exitosa.curso.sede_ubicacion }}</strong>
       </div>
     </div>
 
     <p class="text-xs text-slate-500 max-w-md mx-auto">
-      Te hemos asignado tu folio oficial. Una vez completada la capacitación, tu constancia oficial con firmas y código QR estará disponible para su descarga en el sistema.
+      Al finalizar la sesión y confirmar tu asistencia, tu constancia con diseño oficial estará lista para descargarse e imprimirse.
     </p>
 
     <div class="pt-2">
-      <a href="{% url 'registro_capacitacion_publico' %}" class="inline-flex items-center gap-2 bg-medellinVino text-white font-bold px-5 py-2.5 rounded-xl text-xs shadow-md hover:bg-[#430d2e] transition">
+      <a href="{% url 'registro_capacitacion_publico' %}" class="inline-flex items-center gap-2 bg-medellinVino text-white font-bold px-6 py-3 rounded-2xl text-xs shadow-md hover:bg-[#430d2e] transition">
         <i data-lucide="plus-circle" class="w-4 h-4 text-medellinOro"></i> Registrar Otra Persona
       </a>
     </div>
   </div>
   {% else %}
 
-  <!-- ENCABEZADO E INSTRUCCIONES -->
-  <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 space-y-3 text-center sm:text-left">
-    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="space-y-1">
-        <h2 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">Formulario Oficial de Inscripción a Capacitaciones</h2>
-        <p class="text-xs text-slate-500 max-w-2xl">
-          Ingresa tus datos completos para registrarte a las capacitaciones oficiales impartidas por la Dirección de Protección Civil y Bomberos. Tu nombre aparecerá exactamente como lo registres en la constancia final.
-        </p>
-      </div>
-      <div class="w-12 h-12 rounded-2xl bg-medellinVino text-medellinOro flex items-center justify-center shrink-0 shadow-md">
-        <i data-lucide="award" class="w-6 h-6"></i>
-      </div>
+  <!-- ENCABEZADO -->
+  <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 flex items-center justify-between">
+    <div class="space-y-1">
+      <h2 class="text-lg font-black text-slate-900 tracking-tight">Formulario Simplificado de Registro</h2>
+      <p class="text-xs text-slate-500">Ingresa tus datos tal como deseas que aparezcan en tu constancia oficial.</p>
+    </div>
+    <div class="w-12 h-12 rounded-2xl bg-medellinVino text-medellinOro flex items-center justify-center shrink-0 shadow-md">
+      <i data-lucide="award" class="w-6 h-6"></i>
     </div>
   </div>
 
@@ -122,24 +118,33 @@
     <form method="POST" class="space-y-5">
       {% csrf_token %}
 
-      <!-- SELECCIÓN DE CURSO -->
+      <!-- 1. NOMBRE COMPLETO (SE IMPRIME EN EL PDF) -->
       <div>
-        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">1. Selecciona la Capacitación / Curso *</label>
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+          1. Nombre Completo del Participante (Tal cual aparecerá en la Constancia) *
+        </label>
+        <input type="text" name="nombre_completo" required placeholder="Ej. JUAN PEREZ LOPEZ" class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-medellinVino uppercase">
+        <span class="text-[10px] text-slate-400 block mt-1">Verifica bien nombres y apellidos antes de enviar.</span>
+      </div>
+
+      <!-- 2. SELECCIÓN DE CURSO / CAPACITACIÓN -->
+      <div>
+        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+          2. Curso / Capacitación Seleccionada *
+        </label>
         {% if cursos_activos %}
-        <div class="grid grid-cols-1 gap-3">
+        <div class="space-y-2">
           {% for c in cursos_activos %}
-          <label class="relative flex items-start p-4 rounded-2xl border-2 border-slate-200 hover:border-medellinVino bg-slate-50/50 cursor-pointer transition space-x-3 group">
+          <label class="relative flex items-start p-3.5 rounded-2xl border-2 border-slate-200 hover:border-medellinVino bg-slate-50/50 cursor-pointer transition space-x-3 group">
             <input type="radio" name="curso_id" value="{{ c.id }}" required {% if forloop.first %}checked{% endif %} class="mt-1 text-medellinVino focus:ring-medellinVino">
             <div class="flex-1 text-xs">
               <div class="flex items-center justify-between">
                 <span class="font-bold text-slate-900 text-sm group-hover:text-medellinVino transition">{{ c.titulo }}</span>
-                <span class="bg-medellinVino text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">{{ c.duracion_horas }} Horas</span>
+                <span class="text-[10px] font-bold text-slate-500 bg-slate-200 px-2 py-0.5 rounded-full">{{ c.fecha_inicio|date:"d/m/Y" }}</span>
               </div>
-              <p class="text-slate-500 mt-1 font-medium">{{ c.descripcion }}</p>
-              <div class="flex flex-wrap gap-4 text-[11px] font-semibold text-slate-600 mt-2 pt-2 border-t border-slate-200">
-                <span>📅 Fecha: <strong>{{ c.fecha_inicio|date:"d/m/Y" }}</strong></span>
-                <span>⏰ Horario: <strong>{{ c.horario }}</strong></span>
-                <span>📍 Sede: <strong>{{ c.sede_ubicacion }}</strong></span>
+              <div class="flex items-center gap-4 text-[11px] font-semibold text-slate-600 mt-1">
+                <span>⏰ {{ c.horario }}</span>
+                <span>📍 {{ c.sede_ubicacion }}</span>
               </div>
             </div>
           </label>
@@ -147,53 +152,29 @@
         </div>
         {% else %}
         <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-800 text-center">
-          No hay cursos con convocatoria abierta en este momento. Por favor consulta más tarde.
+          No hay cursos disponibles en este momento.
         </div>
         {% endif %}
       </div>
 
-      <!-- DATOS DEL PARTICIPANTE -->
       {% if cursos_activos %}
-      <div class="pt-4 border-t border-slate-100 space-y-4">
-        <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">2. Datos Personales del Participante</h3>
+      <!-- 3. MEDIO DE CONTACTO PARA CONFIRMACIÓN Y ENVÍO DIGITAL -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Teléfono / WhatsApp (10 dígitos) *</label>
+          <input type="tel" name="telefono" required placeholder="Ej. 2291234567" class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-2.5 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-medellinVino">
+        </div>
 
-        <div class="space-y-4">
-          <div>
-            <label class="block text-xs font-bold text-slate-700 mb-1">Nombre Completo (Tal como aparecerá impreso en la Constancia) *</label>
-            <input type="text" name="nombre_completo" required placeholder="Ej. ING. CARLOS EDUARDO RAMÍREZ HERNÁNDEZ" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-medellinVino uppercase">
-            <span class="text-[10px] text-slate-400 block mt-1">Verifica bien la ortografía e inciales antes de enviar.</span>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">CURP (Opcional)</label>
-              <input type="text" name="curp" maxlength="18" placeholder="Ej. RAHC920415HVERNN09" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-medellinVino uppercase">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">Empresa / Institución / Negocio (Opcional)</label>
-              <input type="text" name="empresa_institucion" placeholder="Ej. Restaurante El Marisco / Particular" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-medellinVino uppercase">
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">Correo Electrónico *</label>
-              <input type="email" name="correo" required placeholder="ejemplo@correo.com" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-medellinVino">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-700 mb-1">Teléfono de Contacto / WhatsApp *</label>
-              <input type="tel" name="telefono" required placeholder="Ej. 2291234567" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-medellinVino">
-            </div>
-          </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Correo Electrónico (Para envío digital) *</label>
+          <input type="email" name="correo" required placeholder="ejemplo@correo.com" class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-2.5 text-xs font-semibold text-slate-900 focus:outline-none focus:ring-2 focus:ring-medellinVino">
         </div>
       </div>
 
       <div class="pt-4 border-t border-slate-100 flex justify-end">
         <button type="submit" class="w-full sm:w-auto bg-medellinVino hover:bg-[#430d2e] text-white font-extrabold px-8 py-3 rounded-2xl text-xs flex items-center justify-center gap-2 shadow-lg transition">
           <i data-lucide="check-circle" class="w-4 h-4 text-medellinOro"></i>
-          <span>Confirmar e Inscribirme al Curso</span>
+          <span>Confirmar Registro</span>
         </button>
       </div>
       {% endif %}
