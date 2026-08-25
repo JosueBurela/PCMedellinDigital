@@ -303,7 +303,10 @@ def generar_qr_registro_con_logo(request):
     
     qr_img = qr.make_image(fill_color="#5A123E", back_color="white").convert('RGBA')
     
-    logo_path = os.path.join(settings.BASE_DIR, 'portal', 'static', 'portal', 'img', 'escudo_medellin_oficial.png')
+    logo_path = os.path.join(settings.BASE_DIR, 'portal', 'static', 'portal', 'img', 'logo_qr_pc.png')
+    if not os.path.exists(logo_path):
+        logo_path = os.path.join(settings.BASE_DIR, 'portal', 'static', 'portal', 'img', 'logo_pc_parche.png')
+        
     if os.path.exists(logo_path):
         logo = Image.open(logo_path).convert('RGBA')
         
