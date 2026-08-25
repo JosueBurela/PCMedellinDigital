@@ -39,6 +39,8 @@
   body {
     background-color: #0f172a;
     font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -46,12 +48,19 @@
   .font-cinzel { font-family: 'Cinzel', serif; }
   .font-garamond { font-family: 'Cormorant Garamond', serif; }
   .font-montserrat { font-family: 'Montserrat', sans-serif; }
+
+  /* CONTENEDOR CERTIFICADO CON TAMAÑO CARTA LANDSCAPE FIJO DE BORDES A BORDES */
+  #constanciaCertificado {
+    width: 1056px;
+    height: 816px;
+    box-sizing: border-box;
+  }
 </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-center p-4">
+<body class="min-h-screen flex flex-col items-center justify-center p-2 sm:p-4">
 
 <!-- BARRA SUPERIOR DE ACCIONES (NO SE IMPRIME) -->
-<div class="no-print w-full max-w-5xl mb-3 flex items-center justify-between bg-slate-800/90 text-white p-3 rounded-2xl backdrop-blur-md shadow-xl border border-slate-700 font-sans">
+<div class="no-print w-full max-w-[1056px] mb-3 flex items-center justify-between bg-slate-800/90 text-white p-3 rounded-2xl backdrop-blur-md shadow-xl border border-slate-700 font-sans">
   <div class="flex items-center space-x-2 text-xs">
     <span class="bg-amber-500 text-slate-950 font-bold px-2 py-0.5 rounded">Constancia Oficial</span>
     <span class="text-slate-300">Folio: <strong>{{ inscripcion.folio_constancia }}</strong></span>
@@ -66,8 +75,8 @@
   </div>
 </div>
 
-<!-- CONTENEDOR DE LA CONSTANCIA (HORIZONTE LANDSCAPE 100% REPLICADO IDÉNTICO AL PDF) -->
-<div id="constanciaCertificado" class="certificate-container bg-white w-full max-w-5xl h-[680px] p-8 sm:p-10 relative flex flex-col justify-between border-[18px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
+<!-- CONTENEDOR DE LA CONSTANCIA (BORDE ROJO AL LÍMITE DE PÁGINA 0px MARGEN BLANCO) -->
+<div id="constanciaCertificado" class="certificate-container bg-white p-10 relative flex flex-col justify-between border-[22px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
 
   <!-- CAPA DE FONDO: ILUSTRACIÓN DE MEDELLÍN Y TEXTO 'POR LA GRANDEZA DE' -->
   <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
@@ -168,9 +177,9 @@
     const opt = {
       margin:       0,
       filename:     'Constancia_{{ inscripcion.nombre_completo|slugify }}.pdf',
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2.5, useCORS: true, logging: false },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+      image:        { type: 'jpeg', quality: 1.0 },
+      html2canvas:  { scale: 2, useCORS: true, logging: false, width: 1056, height: 816 },
+      jsPDF:        { unit: 'px', format: [1056, 816], orientation: 'landscape', hotfixes: ['px_scaling'] }
     };
     html2pdf().set(opt).from(element).save();
   }
