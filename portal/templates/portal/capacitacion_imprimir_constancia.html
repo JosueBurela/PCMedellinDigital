@@ -173,15 +173,46 @@
 
 <script>
   function descargarPDFDirecto() {
+    window.scrollTo(0, 0);
     const element = document.getElementById('constanciaCertificado');
+    
+    // Guardar estilos originales para cero desfase horizontal en captura
+    const bodyClass = document.body.className;
+    const origStyle = element.style.cssText;
+    
+    document.body.className = "m-0 p-0 bg-white overflow-hidden";
+    element.style.margin = "0";
+    element.style.position = "absolute";
+    element.style.top = "0";
+    element.style.left = "0";
+    
     const opt = {
       margin:       0,
       filename:     'Constancia_{{ inscripcion.nombre_completo|slugify }}.pdf',
       image:        { type: 'jpeg', quality: 1.0 },
-      html2canvas:  { scale: 2, useCORS: true, logging: false, width: 1056, height: 816 },
+      html2canvas:  { 
+        scale: 2, 
+        useCORS: true, 
+        logging: false, 
+        scrollX: 0, 
+        scrollY: 0, 
+        x: 0, 
+        y: 0,
+        width: 1056,
+        height: 816,
+        windowWidth: 1056,
+        windowHeight: 816
+      },
       jsPDF:        { unit: 'px', format: [1056, 816], orientation: 'landscape', hotfixes: ['px_scaling'] }
     };
-    html2pdf().set(opt).from(element).save();
+    
+    html2pdf().set(opt).from(element).save().then(() => {
+      document.body.className = bodyClass;
+      element.style.cssText = origStyle;
+    }).catch(() => {
+      document.body.className = bodyClass;
+      element.style.cssText = origStyle;
+    });
   }
 
   // Auto-descargar si viene con parámetro ?download=1
