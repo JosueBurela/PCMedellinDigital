@@ -288,39 +288,52 @@ from django.conf import settings
 
 def generar_qr_registro_con_logo(request):
     """
-    Genera dinámicamente la imagen PNG de un Código QR del enlace de registro con el escudo de Medellín en el centro.
+    Genera dinámicamente la imagen PNG del Código QR de registro con la insignia circular oficial recortada en el centro.
     """
     target_url = request.build_absolute_uri('/capacitaciones/')
     
     qr = qrcode.QRCode(
         version=3,
         error_correction=qrcode.constants.ERROR_CORRECT_H,
-        box_size=10,
+        box_size=12,
         border=3,
     )
     qr.add_data(target_url)
     qr.make(fit=True)
     
     qr_img = qr.make_image(fill_color="#5A123E", back_color="white").convert('RGBA')
+    qr_width, qr_height = qr_img.size
     
-    logo_path = os.path.join(settings.BASE_DIR, 'portal', 'static', 'portal', 'img', 'logo_qr_pc.png')
+    logo_path = os.path.join(settings.BASE_DIR, 'portal', 'static', 'portal', 'img', 'logo_qr_pc_clean.png')
     if not os.path.exists(logo_path):
-        logo_path = os.path.join(settings.BASE_DIR, 'portal', 'static', 'portal', 'img', 'logo_pc_parche.png')
+        logo_path = os.path.join(settings.BASE_DIR, 'portal', 'static', 'portal', 'img', 'logo_qr_pc.png')
         
     if os.path.exists(logo_path):
         logo = Image.open(logo_path).convert('RGBA')
         
-        qr_width, qr_height = qr_img.size
-        logo_size = int(qr_width * 0.22)
+        # Si la imagen proviene del origen original con fondo negro, aplicar máscara circular limpia
+        if 'logo_qr_pc_clean.png' not in logo_path:
+            w, h = logo.size
+            mask = Image.new('L', (w, h), 0)
+            draw_m = ImageDraw.Draw(mask)
+            margin = int(w * 0.16)
+            draw_m.ellipse((margin, margin, w - margin, h - margin), fill=255)
+            logo.putalpha(mask)
+            bbox = logo.getbbox()
+            if bbox:
+                logo = logo.crop(bbox)
+        
+        # Aumentar tamaño del logo al 30% del QR sin fondo negro
+        logo_size = int(qr_width * 0.30)
         logo = logo.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
         
-        bg_size = logo_size + 12
-        logo_bg = Image.new('RGBA', (bg_size, bg_size), 'white')
+        bg_size = logo_size + 8
+        logo_bg = Image.new('RGBA', (bg_size, bg_size), (0, 0, 0, 0))
         
         draw = ImageDraw.Draw(logo_bg)
-        draw.rectangle([0, 0, bg_size - 1, bg_size - 1], outline="#E59E27", width=2)
+        draw.ellipse((0, 0, bg_size - 1, bg_size - 1), fill="white", outline="#E59E27", width=3)
         
-        logo_bg.paste(logo, (6, 6), logo)
+        logo_bg.paste(logo, (4, 4), logo)
         
         pos_x = (qr_width - bg_size) // 2
         pos_y = (qr_height - bg_size) // 2
