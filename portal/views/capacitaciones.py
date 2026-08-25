@@ -257,3 +257,73 @@ def validar_constancia_qr(request, token):
         'valido': valido,
         'inscripcion': inscripcion
     })
+
+
+def buscar_mis_constancias(request):
+    """
+    Vista pública para que los ciudadanos busquen sus constancias ingresando su nombre.
+    """
+    query = request.GET.get('q', '').strip()
+    resultados = None
+    buscado = False
+    
+    if query:
+        buscado = True
+        resultados = InscripcionCapacitacion.objects.filter(
+            nombre_completo__icontains=query
+        ).select_related('curso').order_by('-fecha_registro')
+        
+    return render(request, 'portal/capacitacion_buscar_constancias.html', {
+        'query': query,
+        'resultados': resultados,
+        'buscado': buscado
+    })
+
+
+import os
+import io
+import qrcode
+from PIL import Image, ImageDraw
+from django.conf import settings
+
+def generar_qr_registro_con_logo(request):
+    """
+    Genera dinámicamente la imagen PNG de un Código QR del enlace de registro con el escudo de Medellín en el centro.
+    """
+    target_url = request.build_absolute_uri('/capacitaciones/')
+    
+    qr = qrcode.QRCode(
+        version=3,
+        error_correction=qrcode.constants.ERROR_CORRECT_H,
+        box_size=10,
+        border=3,
+    )
+    qr.add_data(target_url)
+    qr.make(fit=True)
+    
+    qr_img = qr.make_image(fill_color="#5A123E", back_color="white").convert('RGBA')
+    
+    logo_path = os.path.join(settings.BASE_DIR, 'portal', 'static', 'portal', 'img', 'escudo_medellin_oficial.png')
+    if os.path.exists(logo_path):
+        logo = Image.open(logo_path).convert('RGBA')
+        
+        qr_width, qr_height = qr_img.size
+        logo_size = int(qr_width * 0.22)
+        logo = logo.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
+        
+        bg_size = logo_size + 12
+        logo_bg = Image.new('RGBA', (bg_size, bg_size), 'white')
+        
+        draw = ImageDraw.Draw(logo_bg)
+        draw.rectangle([0, 0, bg_size - 1, bg_size - 1], outline="#E59E27", width=2)
+        
+        logo_bg.paste(logo, (6, 6), logo)
+        
+        pos_x = (qr_width - bg_size) // 2
+        pos_y = (qr_height - bg_size) // 2
+        qr_img.paste(logo_bg, (pos_x, pos_y), logo_bg)
+        
+    buffer = io.BytesIO()
+    qr_img.save(buffer, format='PNG')
+    return HttpResponse(buffer.getvalue(), content_type='image/png')
+

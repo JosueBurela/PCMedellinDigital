@@ -42,13 +42,17 @@
     </div>
 
     <div class="flex items-center gap-2">
+      <button onclick="document.getElementById('modalQRRegistro').classList.remove('hidden')" class="bg-white/10 hover:bg-white/20 text-white font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 transition">
+        <i data-lucide="qr-code" class="w-4 h-4 text-medellinOro"></i>
+        <span>Proyectar QR Registro</span>
+      </button>
       <button onclick="document.getElementById('modalCrearCurso').classList.remove('hidden')" class="bg-medellinOro hover:bg-amber-600 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 shadow-sm transition">
         <i data-lucide="plus-circle" class="w-4 h-4"></i>
         <span>Nuevo Curso</span>
       </button>
       <a href="{% url 'registro_capacitacion_publico' %}" target="_blank" class="bg-white/10 hover:bg-white/20 text-white font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 transition">
         <i data-lucide="external-link" class="w-4 h-4"></i>
-        <span>Ver Formulario Público</span>
+        <span>Formulario Público</span>
       </a>
     </div>
   </div>
@@ -232,6 +236,38 @@
         <button type="submit" class="px-5 py-2 bg-medellinVino hover:bg-[#430d2e] text-white font-extrabold rounded-xl shadow-md">Guardar Curso</button>
       </div>
     </form>
+  </div>
+</div>
+
+<!-- MODAL CÓDIGO QR REGISTRO CON LOGO INSTITUCIONAL -->
+<div id="modalQRRegistro" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 text-center">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+      <h3 class="font-bold text-slate-900 text-xs flex items-center gap-1.5 uppercase tracking-wider">
+        <i data-lucide="qr-code" class="w-4 h-4 text-medellinVino"></i> Registro de Asistentes
+      </h3>
+      <button onclick="document.getElementById('modalQRRegistro').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 font-bold">✕</button>
+    </div>
+
+    <div class="space-y-1">
+      <h4 class="text-base font-black text-slate-900">Escanea para Registrarte</h4>
+      <p class="text-xs text-slate-500">Apunta con la cámara de tu celular para ingresar tus datos al curso.</p>
+    </div>
+
+    <!-- IMAGEN QR CON LOGO DE MEDELLÍN EN EL CENTRO -->
+    <div class="bg-slate-50 p-4 rounded-2xl border-2 border-medellinVino inline-block shadow-inner">
+      <img src="{% url 'generar_qr_registro_con_logo' %}" alt="Código QR Registro Capacitación" class="w-64 h-64 mx-auto object-contain">
+    </div>
+
+    <p class="text-[11px] font-bold text-medellinVino bg-medellinVino/5 p-2 rounded-xl border border-medellinVino/20">
+      Dirección de Protección Civil y Bomberos de Medellín de Bravo
+    </p>
+
+    <div class="pt-2">
+      <button onclick="document.getElementById('modalQRRegistro').classList.add('hidden')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl text-xs shadow-md transition">
+        Cerrar Ventana
+      </button>
+    </div>
   </div>
 </div>
 

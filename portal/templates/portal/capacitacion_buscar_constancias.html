@@ -1,0 +1,144 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Búsqueda de Constancias | Protección Civil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    medellinVino: '#5A123E',
+                    medellinVerde: '#5B7B34',
+                    medellinOro: '#E59E27',
+                    medellinFondo: '#F7F8F6',
+                }
+            }
+        }
+    }
+</script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-medellinFondo text-slate-800 font-sans antialiased min-h-screen flex flex-col justify-between">
+
+<!-- HEADER INSTITUCIONAL -->
+<header class="bg-medellinVino text-white shadow-md">
+  <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center space-x-3">
+      <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Logo Protección Civil" class="w-10 h-10 object-contain">
+      <div>
+        <span class="text-[10px] font-bold text-medellinOro uppercase tracking-wider block">H. Ayuntamiento de Medellín de Bravo</span>
+        <h1 class="text-sm sm:text-base font-extrabold tracking-tight">Consulta y Descarga de Constancias</h1>
+      </div>
+    </div>
+    <a href="{% url 'registro_capacitacion_publico' %}" class="text-xs text-white/80 hover:text-white font-semibold flex items-center gap-1">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> Ir al Registro
+    </a>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-4 py-8 space-y-6 flex-1 w-full">
+
+  <!-- ENCABEZADO Y BUSCADOR -->
+  <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-200 space-y-4 text-center">
+    <div class="w-14 h-14 bg-medellinVino text-medellinOro rounded-2xl flex items-center justify-center mx-auto shadow-md">
+      <i data-lucide="search" class="w-7 h-7"></i>
+    </div>
+    <div class="space-y-1">
+      <h2 class="text-xl font-black text-slate-900 tracking-tight">Buscar Mis Constancias de Capacitación</h2>
+      <p class="text-xs text-slate-500 max-w-md mx-auto">
+        Ingresa tu nombre completo para consultar el estatus de tus capacitaciones y descargar tu constancia oficial.
+      </p>
+    </div>
+
+    <!-- FORMULARIO DE BÚSQUEDA -->
+    <form method="GET" action="{% url 'buscar_mis_constancias' %}" class="pt-2 max-w-lg mx-auto flex flex-col sm:flex-row gap-2">
+      <input type="text" name="q" value="{{ query }}" required placeholder="Ej. JUAN PEREZ LOPEZ" class="flex-1 bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-xs font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-medellinVino uppercase">
+      <button type="submit" class="bg-medellinVino hover:bg-[#430d2e] text-white font-extrabold px-6 py-3 rounded-2xl text-xs flex items-center justify-center gap-1.5 shadow-md transition">
+        <i data-lucide="search" class="w-4 h-4 text-medellinOro"></i>
+        <span>Buscar</span>
+      </button>
+    </form>
+  </div>
+
+  <!-- RESULTADOS DE LA BÚSQUEDA -->
+  {% if buscado %}
+    <div class="space-y-4">
+      <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">
+        Resultados de la búsqueda para: "<strong class="text-slate-900">{{ query }}</strong>" ({{ resultados.count }})
+      </h3>
+
+      {% if resultados %}
+        <div class="grid grid-cols-1 gap-4">
+          {% for r in resultados %}
+          <div class="bg-white rounded-3xl p-5 border {% if r.asistio %}border-emerald-300 shadow-md{% else %}border-amber-300 bg-amber-50/30{% endif %} space-y-3">
+            
+            <div class="flex items-start justify-between">
+              <div class="space-y-1">
+                <span class="text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider {% if r.asistio %}bg-emerald-100 text-emerald-800 border border-emerald-300{% else %}bg-amber-100 text-amber-800 border border-amber-300{% endif %}">
+                  {% if r.asistio %}✓ CONSTANCIA DISPONIBLE Y VALIDADA{% else %}⏳ EN PROCESO DE VERIFICACIÓN{% endif %}
+                </span>
+                <h4 class="text-base font-black text-slate-900 pt-1">{{ r.nombre_completo }}</h4>
+                <p class="text-xs text-slate-600 font-bold">Curso: {{ r.curso.titulo }}</p>
+              </div>
+              <span class="text-xs font-bold text-medellinVino font-mono bg-slate-100 px-2.5 py-1 rounded-xl border border-slate-200">
+                {{ r.folio_constancia }}
+              </span>
+            </div>
+
+            <div class="flex flex-wrap gap-4 text-xs font-medium text-slate-500 pt-2 border-t border-slate-100">
+              <span>📅 Fecha: <strong>{{ r.curso.fecha_inicio|date:"d/m/Y" }}</strong></span>
+              <span>📍 Sede: <strong>{{ r.curso.sede_ubicacion }}</strong></span>
+              <span>⏱️ Duración: <strong>{{ r.curso.duracion_horas }} Hrs</strong></span>
+            </div>
+
+            <!-- ACCIÓN SEGÚN ESTATUS DE VERIFICACIÓN -->
+            <div class="pt-2">
+              {% if r.asistio %}
+                <a href="{% url 'imprimir_constancia_pdf' r.folio_constancia %}" target="_blank" class="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold px-5 py-2.5 rounded-2xl text-xs shadow-md transition">
+                  <i data-lucide="printer" class="w-4 h-4 text-emerald-200"></i>
+                  <span>📄 Ver / Descargar Constancia PDF</span>
+                </a>
+              {% else %}
+                <div class="p-3.5 bg-amber-50 border border-amber-200 rounded-2xl text-xs text-amber-900 space-y-1">
+                  <div class="flex items-center gap-1.5 font-bold text-amber-800">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600"></i>
+                    <span>Constancia aún pendiente de verificar</span>
+                  </div>
+                  <p class="text-[11px] leading-relaxed text-amber-700">
+                    Tu asistencia a este curso aún no ha sido marcada como verificada por el instructor. Por favor solicita al administrador o instructor a cargo que autorice tu certificación en el sistema.
+                  </p>
+                </div>
+              {% endif %}
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="bg-white rounded-3xl p-8 text-center border border-slate-200 space-y-2">
+          <i data-lucide="user-x" class="w-10 h-10 text-slate-300 mx-auto"></i>
+          <h4 class="text-sm font-bold text-slate-700">No se encontraron registros con ese nombre</h4>
+          <p class="text-xs text-slate-500 max-w-sm mx-auto">
+            Verifica que hayas escrito bien tus nombres y apellidos o asegúrate de haber completado tu registro en el formulario.
+          </p>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+</main>
+
+<footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-500">
+  <p>© 2026 H. Ayuntamiento de Medellín de Bravo, Veracruz. Dirección de Protección Civil y Bomberos.</p>
+</footer>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

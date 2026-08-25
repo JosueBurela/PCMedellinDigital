@@ -101,6 +101,8 @@ urlpatterns = [
 
     # Módulo de Capacitaciones y Emisión Automatizada de Constancias
     path('capacitaciones/', views.registro_capacitacion_publico, name='registro_capacitacion_publico'),
+    path('capacitaciones/mis-constancias/', views.buscar_mis_constancias, name='buscar_mis_constancias'),
+    path('capacitaciones/qr-registro/', views.generar_qr_registro_con_logo, name='generar_qr_registro_con_logo'),
     path('capacitaciones/admin/', views.admin_capacitaciones_dashboard, name='admin_capacitaciones_dashboard'),
     path('capacitaciones/admin/curso/crear/', views.crear_curso_admin, name='crear_curso_admin'),
     path('capacitaciones/admin/asistencia/<int:inscripcion_id>/', views.marcar_asistencia_capacitacion, name='marcar_asistencia_capacitacion'),
