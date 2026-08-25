@@ -96,6 +96,7 @@ urlpatterns = [
     path('control-vehiculos/admin/unidad/historial/<int:unidad_id>/', views.historial_unidad, name='historial_unidad'),
     path('control-vehiculos/mapa/', views.mapa_emergencias_hub, name='mapa_emergencias_hub'),
     path('control-vehiculos/reporte/estado/<int:reporte_id>/<str:nuevo_estatus>/', views.cambiar_estado_reporte_operativo, name='cambiar_estado_reporte_operativo'),
+    path('control-vehiculos/reportes/importar-chat/', views.importar_chat_whatsapp_web, name='importar_chat_whatsapp_web'),
     path('api/mapa-datos/', views.api_mapa_datos, name='api_mapa_datos'),
     path('control-vehiculos/admin/usuario/estado/<int:usuario_id>/<str:nuevo_estado>/', views.cambiar_estado_usuario, name='cambiar_estado_usuario'),
 

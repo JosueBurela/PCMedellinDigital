@@ -288,9 +288,10 @@ from django.conf import settings
 
 def generar_qr_registro_con_logo(request):
     """
-    Genera dinámicamente la imagen PNG del Código QR de registro con la insignia circular oficial recortada en el centro.
+    Genera dinámicamente la imagen PNG del Código QR con la insignia circular oficial recortada en el centro.
+    Por defecto redirige al formulario de Google Forms indicado.
     """
-    target_url = request.build_absolute_uri('/capacitaciones/')
+    target_url = request.GET.get('url', 'https://forms.gle/oCSswi7Zv4zi1HDr5')
     
     qr = qrcode.QRCode(
         version=3,

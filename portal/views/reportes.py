@@ -268,3 +268,186 @@ def consultar_reporte(request):
         'chat_mensajes': chat_mensajes,
         'buscado': buscado
     })
+
+
+# ==============================================================================
+#  📱 HERRAMIENTA WEB DE CLASIFICACIÓN E IMPORTACIÓN DE CHATS DE WHATSAPP
+# ==============================================================================
+
+import re
+import datetime
+import openpyxl
+from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
+from django.http import HttpResponse
+from portal.views.vehiculos import requiere_operador_aprobado
+
+CATEGORIAS_PATTERNS = {
+    'FUEGO': [r'incendio', r'fuego', r'pastizal', r'humo', r'quema', r'basura', r'llanta', r'se quema'],
+    'CHOQUE': [r'choque', r'accidente', r'volcadura', r'atropellad', r'derrapad', r'moto', r'auto', r'vehiculo', r'carro'],
+    'GAS': [r'gas', r'fuga', r'tanque', r'cilindro', r'olor a gas', r'oler'],
+    'ABEJAS': [r'abeja', r'enjambre', r'avispa', r'picadura'],
+    'ARBOL': [r'arbol', r'árbol', r'rama', r'caido', r'caído', r'viento'],
+    'CABLE': [r'cable', r'poste', r'transformador', r'luz', r'corto', r'chispas'],
+    'AGUA': [r'inundac', r'agua', r'rio', r'río', r'anegad', r'inundado', r'drenaje', r'canal'],
+    'OTRO': []
+}
+
+LOCALIDADES_MEDELLIN = [
+    'PUENTE MORENO', 'ARBOLEDAS SAN RAMÓN', 'LAGOS DE PUENTE MORENO', 'EL TEJAR',
+    'MEDELLÍN', 'PLAYA DE VACAS', 'PASO DEL TORO', 'LOS ROBLES', 'DOS BOCAS',
+    'RANCHO DEL PADRE', 'PASO COLORADO', 'LA JOYA', 'PASEO CAMPESTRE', 'HERÓN PROAL',
+    'MARCOS VÉLEZ', 'EMILIANO ZAPATA', 'CLARA CÓRDOBA'
+]
+
+@requiere_operador_aprobado
+def importar_chat_whatsapp_web(request):
+    """
+    Herramienta Web para pegar el texto del chat de WhatsApp o subir un archivo .txt,
+    parsear reportes del mes indicado (ej. Agosto), clasificarlos y exportar a Excel o BD.
+    """
+    reportes_filtrados = []
+    texto_raw = ""
+    mes_target = int(request.POST.get('mes', 8))
+    year_target = int(request.POST.get('year', 2026))
+    action = request.POST.get('action', '')
+
+    if request.method == 'POST':
+        if 'archivo_txt' in request.FILES:
+            texto_raw = request.FILES['archivo_txt'].read().decode('utf-8', errors='ignore')
+        else:
+            texto_raw = request.POST.get('texto_chat', '')
+
+        if texto_raw:
+            lines = texto_raw.splitlines()
+            pattern_ts = re.compile(r'^(?:\[)?(\d{1,2}/\d{1,2}/\d{2,4})[,\s]+(\d{1,2}:\d{2}(?::\d{2})?(?:\s*[ap]\.?\s*m\.?)?)(?:\])?\s*[-–]?\s*(.*?):\s*(.*)$', re.IGNORECASE)
+
+            reportes_extraidos = []
+            msg_buffer = None
+
+            for line in lines:
+                line_str = line.strip()
+                match = pattern_ts.match(line_str)
+
+                if match:
+                    if msg_buffer:
+                        reportes_extraidos.append(msg_buffer)
+                        msg_buffer = None
+
+                    fecha_raw, hora_raw, remitente, texto = match.groups()
+
+                    try:
+                        parts = fecha_raw.split('/')
+                        d = int(parts[0])
+                        m = int(parts[1])
+                        y = int(parts[2])
+                        if y < 100: y += 2000
+                        dt = datetime.date(y, m, d)
+                    except Exception:
+                        continue
+
+                    if dt.month == mes_target and dt.year == year_target:
+                        msg_buffer = {
+                            'fecha_str': dt.strftime('%d/%m/%Y'),
+                            'hora': hora_raw.strip(),
+                            'remitente': remitente.strip(),
+                            'texto': texto.strip()
+                        }
+                else:
+                    if msg_buffer:
+                        msg_buffer['texto'] += f" {line_str}"
+
+            if msg_buffer:
+                reportes_extraidos.append(msg_buffer)
+
+            for r in reportes_extraidos:
+                txt_lower = r['texto'].lower()
+                if any(sys_kw in txt_lower for sys_kw in ['cambió', 'añadió', 'eliminó', 'salio', 'salió', 'cifrado', 'código de seguridad']):
+                    continue
+                if len(r['texto']) < 5:
+                    continue
+
+                tipo_detectado = 'OTRO'
+                for cat, kw_list in CATEGORIAS_PATTERNS.items():
+                    if any(re.search(kw, txt_lower) for kw in kw_list):
+                        tipo_detectado = cat
+                        break
+                r['tipo_servicio'] = tipo_detectado
+
+                loc_detectada = 'MEDELLÍN'
+                for loc in LOCALIDADES_MEDELLIN:
+                    if loc.lower() in txt_lower:
+                        loc_detectada = loc
+                        break
+                r['localidad'] = loc_detectada
+
+                reportes_filtrados.append(r)
+
+            # SI SE SOLICITA EXPORTAR A EXCEL DIRECTAMENTE
+            if action == 'descargar_excel' and reportes_filtrados:
+                wb = openpyxl.Workbook()
+                ws = wb.active
+                ws.title = f"Reportes Mes {mes_target}"
+
+                header_fill = PatternFill(start_color="5A123E", end_color="5A123E", fill_type="solid")
+                header_font = Font(name="Calibri", size=11, bold=True, color="FFFFFF")
+                title_font = Font(name="Calibri", size=14, bold=True, color="5A123E")
+                border = Border(left=Side(style='thin', color='CBD5E1'), right=Side(style='thin', color='CBD5E1'),
+                                top=Side(style='thin', color='CBD5E1'), bottom=Side(style='thin', color='CBD5E1'))
+
+                ws.merge_cells("A1:G1")
+                ws["A1"] = f"DIRECCIÓN DE PROTECCIÓN CIVIL — REPORTES EXTRAÍDOS DE WHATSAPP ({mes_target}/{year_target})"
+                ws["A1"].font = title_font
+
+                headers = ["#", "Fecha", "Hora", "Remitente", "Categoría Incidente", "Colonia / Localidad", "Descripción del Reporte"]
+                ws.append([])
+                ws.append(headers)
+
+                for col_num, header in enumerate(headers, 1):
+                    cell = ws.cell(row=3, column=col_num)
+                    cell.fill = header_fill
+                    cell.font = header_font
+                    cell.alignment = Alignment(horizontal="center", vertical="center")
+
+                for idx, item in enumerate(reportes_filtrados, 1):
+                    row = [idx, item['fecha_str'], item['hora'], item['remitente'], item['tipo_servicio'], item['localidad'], item['texto']]
+                    ws.append(row)
+                    r_num = ws.max_row
+                    for c_i in range(1, 8):
+                        c = ws.cell(row=r_num, column=c_i)
+                        c.border = border
+                        if c_i in [1, 2, 3, 5, 6]:
+                            c.alignment = Alignment(horizontal="center")
+
+                response = HttpResponse(content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+                response['Content-Disposition'] = f'attachment; filename="Reportes_WhatsApp_Mes_{mes_target}_{year_target}.xlsx"'
+                wb.save(response)
+                return response
+
+            # SI SE SOLICITA IMPORTAR A BASE DE DATOS
+            elif action == 'importar_db' and reportes_filtrados:
+                creados = 0
+                for item in reportes_filtrados:
+                    count = ReporteRiesgo.objects.count() + 1
+                    folio = f"REP-{year_target}-WA-{count:04d}"
+
+                    ReporteRiesgo.objects.create(
+                        numero_reporte=folio,
+                        nombre_ciudadano=item['remitente'][:150],
+                        telefono_ciudadano='2290000000',
+                        tipo_servicio=item['tipo_servicio'],
+                        descripcion=item['texto'],
+                        localidad=item['localidad'],
+                        ubicacion_direccion=f"Reportado vía WhatsApp en {item['localidad']}",
+                        estatus='RESUELTO'
+                    )
+                    creados += 1
+                messages.success(request, f"¡Éxito! Se importaron {creados} reportes a la base de datos de Protección Civil.")
+                return redirect('flotilla_vehiculos_hub')
+
+    return render(request, 'portal/reportes_importar_chat.html', {
+        'reportes_filtrados': reportes_filtrados,
+        'texto_raw': texto_raw,
+        'mes_target': mes_target,
+        'year_target': year_target,
+        'operador_actual': request.operador_actual
+    })
