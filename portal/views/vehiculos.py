@@ -5,6 +5,7 @@
 
 import json
 import datetime
+from datetime import timedelta
 from functools import wraps
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
@@ -597,3 +598,238 @@ def historial_unidad(request, unidad_id):
         'total_costo_gasolina': total_costo_gasolina,
         'operador_actual': request.operador_actual
     })
+
+
+# ==============================================================================
+# 📋 HISTORIAL Y EXTRACTOR OFICIAL DE VEHÍCULOS (MODO ADMINISTRADOR)
+# ==============================================================================
+
+def calcular_rango_fechas_vehiculos(periodo, fecha_inicio_str=None, fecha_fin_str=None):
+    ahora = timezone.now()
+    hoy = ahora.date()
+
+    if periodo == 'hoy':
+        dt_inicio = datetime.datetime.combine(hoy, datetime.time.min, tzinfo=ahora.tzinfo)
+        dt_fin = datetime.datetime.combine(hoy, datetime.time.max, tzinfo=ahora.tzinfo)
+        texto_periodo = f"Hoy ({hoy.strftime('%d/%m/%Y')})"
+    elif periodo == '2dias':
+        hace_2_dias = hoy - timedelta(days=1)
+        dt_inicio = datetime.datetime.combine(hace_2_dias, datetime.time.min, tzinfo=ahora.tzinfo)
+        dt_fin = datetime.datetime.combine(hoy, datetime.time.max, tzinfo=ahora.tzinfo)
+        texto_periodo = f"Últimos 2 Días ({hace_2_dias.strftime('%d/%m/%Y')} al {hoy.strftime('%d/%m/%Y')})"
+    elif periodo == '7dias':
+        hace_7_dias = hoy - timedelta(days=6)
+        dt_inicio = datetime.datetime.combine(hace_7_dias, datetime.time.min, tzinfo=ahora.tzinfo)
+        dt_fin = datetime.datetime.combine(hoy, datetime.time.max, tzinfo=ahora.tzinfo)
+        texto_periodo = f"Últimos 7 Días ({hace_7_dias.strftime('%d/%m/%Y')} al {hoy.strftime('%d/%m/%Y')})"
+    elif periodo == 'este_mes':
+        inicio_mes = hoy.replace(day=1)
+        dt_inicio = datetime.datetime.combine(inicio_mes, datetime.time.min, tzinfo=ahora.tzinfo)
+        dt_fin = datetime.datetime.combine(hoy, datetime.time.max, tzinfo=ahora.tzinfo)
+        texto_periodo = f"Este Mes ({inicio_mes.strftime('%d/%m/%Y')} al {hoy.strftime('%d/%m/%Y')})"
+    elif periodo == 'mes_anterior':
+        primer_dia_este_mes = hoy.replace(day=1)
+        ultimo_dia_mes_ant = primer_dia_este_mes - timedelta(days=1)
+        primer_dia_mes_ant = ultimo_dia_mes_ant.replace(day=1)
+        dt_inicio = datetime.datetime.combine(primer_dia_mes_ant, datetime.time.min, tzinfo=ahora.tzinfo)
+        dt_fin = datetime.datetime.combine(ultimo_dia_mes_ant, datetime.time.max, tzinfo=ahora.tzinfo)
+        texto_periodo = f"Mes Anterior ({primer_dia_mes_ant.strftime('%d/%m/%Y')} al {ultimo_dia_mes_ant.strftime('%d/%m/%Y')})"
+    elif periodo == 'este_ano':
+        inicio_ano = hoy.replace(month=1, day=1)
+        dt_inicio = datetime.datetime.combine(inicio_ano, datetime.time.min, tzinfo=ahora.tzinfo)
+        dt_fin = datetime.datetime.combine(hoy, datetime.time.max, tzinfo=ahora.tzinfo)
+        texto_periodo = f"Este Año ({inicio_ano.strftime('%d/%m/%Y')} al {hoy.strftime('%d/%m/%Y')})"
+    elif periodo == 'personalizado' and fecha_inicio_str and fecha_fin_str:
+        try:
+            f_ini = datetime.datetime.strptime(fecha_inicio_str, '%Y-%m-%d').date()
+            f_fin = datetime.datetime.strptime(fecha_fin_str, '%Y-%m-%d').date()
+            if f_ini > f_fin:
+                f_ini, f_fin = f_fin, f_ini
+            dt_inicio = datetime.datetime.combine(f_ini, datetime.time.min, tzinfo=ahora.tzinfo)
+            dt_fin = datetime.datetime.combine(f_fin, datetime.time.max, tzinfo=ahora.tzinfo)
+            texto_periodo = f"Del {f_ini.strftime('%d/%m/%Y')} al {f_fin.strftime('%d/%m/%Y')}"
+        except ValueError:
+            inicio_mes = hoy.replace(day=1)
+            dt_inicio = datetime.datetime.combine(inicio_mes, datetime.time.min, tzinfo=ahora.tzinfo)
+            dt_fin = datetime.datetime.combine(hoy, datetime.time.max, tzinfo=ahora.tzinfo)
+            texto_periodo = f"Este Mes ({inicio_mes.strftime('%d/%m/%Y')} al {hoy.strftime('%d/%m/%Y')})"
+            periodo = 'este_mes'
+    else:
+        periodo = 'este_mes'
+        inicio_mes = hoy.replace(day=1)
+        dt_inicio = datetime.datetime.combine(inicio_mes, datetime.time.min, tzinfo=ahora.tzinfo)
+        dt_fin = datetime.datetime.combine(hoy, datetime.time.max, tzinfo=ahora.tzinfo)
+        texto_periodo = f"Este Mes ({inicio_mes.strftime('%d/%m/%Y')} al {hoy.strftime('%d/%m/%Y')})"
+
+    return dt_inicio, dt_fin, periodo, texto_periodo
+
+
+@requiere_admin_flotilla
+def admin_historial_vehiculos(request):
+    """
+    Panel interactivo de Administrador para consultar, filtrar y extraer el historial de vehículos
+    por período dinámico (1 día, 2 días, 1 semana, 1 mes, 1 año o personalizado)
+    y por unidad específica o flotilla completa.
+    """
+    periodo = request.GET.get('periodo', 'este_mes')
+    fecha_inicio_str = request.GET.get('fecha_inicio', '')
+    fecha_fin_str = request.GET.get('fecha_fin', '')
+    unidad_id = request.GET.get('unidad_id', 'todas')
+
+    dt_inicio, dt_fin, periodo, texto_periodo = calcular_rango_fechas_vehiculos(
+        periodo, fecha_inicio_str, fecha_fin_str
+    )
+
+    unidades = VehiculoUnidad.objects.all().order_by('numero_unidad', 'nombre_identificador')
+    unidad_seleccionada = None
+
+    salidas_qs = BitacoraSalidaVehiculo.objects.filter(
+        fecha_salida__gte=dt_inicio,
+        fecha_salida__lte=dt_fin
+    ).select_related('unidad').order_by('-fecha_salida')
+
+    cargas_qs = RegistroCargaGasolina.objects.filter(
+        fecha_carga__gte=dt_inicio,
+        fecha_carga__lte=dt_fin
+    ).select_related('unidad', 'operador').order_by('-fecha_carga')
+
+    if unidad_id and unidad_id != 'todas':
+        try:
+            unidad_seleccionada = VehiculoUnidad.objects.get(id=int(unidad_id))
+            salidas_qs = salidas_qs.filter(unidad=unidad_seleccionada)
+            cargas_qs = cargas_qs.filter(unidad=unidad_seleccionada)
+        except (ValueError, VehiculoUnidad.DoesNotExist):
+            unidad_id = 'todas'
+            unidad_seleccionada = None
+
+    # Métricas agregadas en el período
+    total_salidas = salidas_qs.count()
+    total_km = salidas_qs.aggregate(Sum('km_recorridos'))['km_recorridos__sum'] or 0
+    total_litros = cargas_qs.aggregate(Sum('litros_cargados'))['litros_cargados__sum'] or 0
+    total_costo = cargas_qs.aggregate(Sum('costo_total'))['costo_total__sum'] or 0
+    rendimiento_promedio = round(total_km / total_litros, 2) if total_litros > 0 else 0
+
+    # Resumen por unidad
+    resumen_unidades = []
+    for u in unidades:
+        u_salidas = salidas_qs.filter(unidad=u)
+        u_cargas = cargas_qs.filter(unidad=u)
+        u_km = u_salidas.aggregate(Sum('km_recorridos'))['km_recorridos__sum'] or 0
+        u_litros = u_cargas.aggregate(Sum('litros_cargados'))['litros_cargados__sum'] or 0
+        u_costo = u_cargas.aggregate(Sum('costo_total'))['costo_total__sum'] or 0
+        
+        if u_salidas.exists() or u_cargas.exists() or unidad_seleccionada == u:
+            resumen_unidades.append({
+                'unidad': u,
+                'viajes': u_salidas.count(),
+                'km': u_km,
+                'litros': u_litros,
+                'costo': u_costo,
+                'rendimiento': round(u_km / u_litros, 2) if u_litros > 0 else 0
+            })
+
+    context = {
+        'unidades': unidades,
+        'unidad_seleccionada': unidad_seleccionada,
+        'unidad_id_actual': str(unidad_id),
+        'periodo': periodo,
+        'texto_periodo': texto_periodo,
+        'fecha_inicio_str': dt_inicio.strftime('%Y-%m-%d'),
+        'fecha_fin_str': dt_fin.strftime('%Y-%m-%d'),
+        'salidas': salidas_qs,
+        'cargas': cargas_qs,
+        'total_salidas': total_salidas,
+        'total_km': total_km,
+        'total_litros': total_litros,
+        'total_costo': total_costo,
+        'rendimiento_promedio': rendimiento_promedio,
+        'resumen_unidades': resumen_unidades,
+        'operador_actual': request.operador_actual,
+        'fecha_emision': timezone.now()
+    }
+
+    return render(request, 'portal/vehiculos_historial_admin.html', context)
+
+
+@requiere_admin_flotilla
+def imprimir_reporte_historial_vehicular(request):
+    """
+    Renderiza la Hoja Oficial de Bitácora de Flotilla en orientación VERTICAL (Letter Portrait)
+    con logos institucionales, metadatos, tablas de servicio y firmas oficiales (estilo Guardias).
+    """
+    periodo = request.GET.get('periodo', 'este_mes')
+    fecha_inicio_str = request.GET.get('fecha_inicio', '')
+    fecha_fin_str = request.GET.get('fecha_fin', '')
+    unidad_id = request.GET.get('unidad_id', 'todas')
+
+    dt_inicio, dt_fin, periodo, texto_periodo = calcular_rango_fechas_vehiculos(
+        periodo, fecha_inicio_str, fecha_fin_str
+    )
+
+    unidades = VehiculoUnidad.objects.all().order_by('numero_unidad', 'nombre_identificador')
+    unidad_seleccionada = None
+
+    salidas_qs = BitacoraSalidaVehiculo.objects.filter(
+        fecha_salida__gte=dt_inicio,
+        fecha_salida__lte=dt_fin
+    ).select_related('unidad').order_by('fecha_salida')
+
+    cargas_qs = RegistroCargaGasolina.objects.filter(
+        fecha_carga__gte=dt_inicio,
+        fecha_carga__lte=dt_fin
+    ).select_related('unidad', 'operador').order_by('fecha_carga')
+
+    if unidad_id and unidad_id != 'todas':
+        try:
+            unidad_seleccionada = VehiculoUnidad.objects.get(id=int(unidad_id))
+            salidas_qs = salidas_qs.filter(unidad=unidad_seleccionada)
+            cargas_qs = cargas_qs.filter(unidad=unidad_seleccionada)
+        except (ValueError, VehiculoUnidad.DoesNotExist):
+            unidad_id = 'todas'
+            unidad_seleccionada = None
+
+    total_salidas = salidas_qs.count()
+    total_km = salidas_qs.aggregate(Sum('km_recorridos'))['km_recorridos__sum'] or 0
+    total_litros = cargas_qs.aggregate(Sum('litros_cargados'))['litros_cargados__sum'] or 0
+    total_costo = cargas_qs.aggregate(Sum('costo_total'))['costo_total__sum'] or 0
+    rendimiento_promedio = round(total_km / total_litros, 2) if total_litros > 0 else 0
+
+    resumen_unidades = []
+    for u in unidades:
+        u_salidas = salidas_qs.filter(unidad=u)
+        u_cargas = cargas_qs.filter(unidad=u)
+        u_km = u_salidas.aggregate(Sum('km_recorridos'))['km_recorridos__sum'] or 0
+        u_litros = u_cargas.aggregate(Sum('litros_cargados'))['litros_cargados__sum'] or 0
+        u_costo = u_cargas.aggregate(Sum('costo_total'))['costo_total__sum'] or 0
+        
+        if u_salidas.exists() or u_cargas.exists() or unidad_seleccionada == u:
+            resumen_unidades.append({
+                'unidad': u,
+                'viajes': u_salidas.count(),
+                'km': u_km,
+                'litros': u_litros,
+                'costo': u_costo,
+                'rendimiento': round(u_km / u_litros, 2) if u_litros > 0 else 0
+            })
+
+    context = {
+        'unidades': unidades,
+        'unidad_seleccionada': unidad_seleccionada,
+        'unidad_id_actual': str(unidad_id),
+        'periodo': periodo,
+        'texto_periodo': texto_periodo,
+        'fecha_inicio_str': dt_inicio.strftime('%d/%m/%Y'),
+        'fecha_fin_str': dt_fin.strftime('%d/%m/%Y'),
+        'salidas': salidas_qs,
+        'cargas': cargas_qs,
+        'total_salidas': total_salidas,
+        'total_km': total_km,
+        'total_litros': total_litros,
+        'total_costo': total_costo,
+        'rendimiento_promedio': rendimiento_promedio,
+        'resumen_unidades': resumen_unidades,
+        'fecha_emision': timezone.now()
+    }
+
+    return render(request, 'portal/vehiculos_reporte_imprimir.html', context)
+

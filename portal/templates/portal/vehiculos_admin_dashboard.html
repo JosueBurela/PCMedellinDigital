@@ -50,6 +50,11 @@
     </div>
 
     <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+      <a href="{% url 'admin_historial_vehiculos' %}" class="bg-medellinOro hover:bg-amber-500 text-slate-950 font-extrabold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Filtrar y extraer historial por fechas">
+        <i data-lucide="calendar-range" class="w-4 h-4"></i>
+        <span>Extractor e Historial</span>
+      </a>
+
       <a href="{% url 'mapa_emergencias_hub' %}" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0" title="Ver Mapa GIS de Emergencias">
         <i data-lucide="map" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-300"></i>
         <span>Mapa GIS</span>
@@ -219,9 +224,16 @@
         <p class="text-xs text-slate-500">Historial completo digitalizado de salidas, servicios, odómetros y evidencias.</p>
       </div>
 
-      <button onclick="window.print()" class="bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 font-bold px-3.5 py-1.5 rounded-xl text-xs flex items-center gap-1.5 transition">
-        <i data-lucide="printer" class="w-4 h-4 text-slate-600"></i> Imprimir Reporte Oficial
-      </button>
+      <div class="flex items-center gap-2">
+        <a href="{% url 'admin_historial_vehiculos' %}" class="bg-medellinVino hover:bg-[#430d2e] text-white font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition">
+          <i data-lucide="filter" class="w-3.5 h-3.5 text-medellinOro"></i>
+          <span>Filtrar por Fechas</span>
+        </a>
+        <a href="{% url 'imprimir_reporte_historial_vehicular' %}?periodo=este_mes" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition">
+          <i data-lucide="printer" class="w-3.5 h-3.5 text-emerald-200"></i>
+          <span>Hoja en Vertical (PDF)</span>
+        </a>
+      </div>
     </div>
 
     {% if salidas_todas %}

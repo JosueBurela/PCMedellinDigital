@@ -1,0 +1,499 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Flotilla Vehicular ({{ texto_periodo }}) | PCivil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+  @page {
+    size: letter portrait;
+    margin: 8mm 10mm;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #1a202c;
+    background-color: #f1f5f9;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #5A123E;
+    color: #ffffff;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .main-wrapper {
+    max-width: 860px;
+    margin: 20px auto 40px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .sheet-container {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .header-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-bottom: 2.5px solid #5A123E;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+  }
+
+  .header-logo-container {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .header-logo-img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .header-title-cell {
+    text-align: center;
+    padding: 0 12px;
+  }
+
+  .institution-name {
+    font-size: 11.5pt;
+    font-weight: 800;
+    color: #5A123E;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-bottom: 2px;
+  }
+
+  .doc-main-title {
+    font-size: 10pt;
+    font-weight: 800;
+    color: #b91c1c;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 2px;
+  }
+
+  .doc-subtext {
+    font-size: 7.5pt;
+    color: #475569;
+    font-weight: 600;
+  }
+
+  .meta-bar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+    background-color: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+  }
+
+  .meta-bar-table td {
+    padding: 6px 12px;
+    font-size: 8pt;
+    vertical-align: middle;
+  }
+
+  .kpi-grid {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+  }
+
+  .kpi-cell {
+    border: 1px solid #cbd5e1;
+    background-color: #f8fafc;
+    padding: 6px 10px;
+    text-align: center;
+    width: 25%;
+  }
+
+  .kpi-label {
+    font-size: 7pt;
+    font-weight: 800;
+    color: #64748B;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  .kpi-val {
+    font-size: 11pt;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  .report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 14px;
+  }
+
+  .report-table th {
+    background-color: #5A123E;
+    color: #ffffff;
+    font-size: 7.5pt;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 5px 6px;
+    border: 1px solid #430d2e;
+    text-align: left;
+  }
+
+  .report-table td {
+    font-size: 7.5pt;
+    padding: 4px 6px;
+    border: 1px solid #cbd5e1;
+    vertical-align: top;
+    color: #1e293b;
+  }
+
+  .report-table tr:nth-child(even) td {
+    background-color: #f8fafc;
+  }
+
+  .section-title {
+    font-size: 8.5pt;
+    font-weight: 800;
+    color: #5A123E;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1.5px solid #e2e8f0;
+    padding-bottom: 3px;
+  }
+
+  .signatures-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+    page-break-inside: avoid;
+  }
+
+  .signature-box {
+    width: 50%;
+    text-align: center;
+    padding: 0 20px;
+    vertical-align: top;
+  }
+
+  .signature-line {
+    border-top: 1px solid #334155;
+    margin-bottom: 4px;
+    width: 85%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .sign-name {
+    font-size: 7.5pt;
+    font-weight: 800;
+    color: #0f172a;
+    text-transform: uppercase;
+  }
+
+  .sign-role {
+    font-size: 6.5pt;
+    font-weight: 600;
+    color: #475569;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  @media print {
+    body {
+      background-color: #ffffff !important;
+    }
+    .toolbar {
+      display: none !important;
+    }
+    .main-wrapper {
+      max-width: 100% !important;
+      margin: 0 !important;
+      gap: 0 !important;
+    }
+    .sheet-container {
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      border-radius: 0 !important;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOOLBAR FLOTANTE DE CONTROL -->
+<div class="toolbar">
+  <div class="flex items-center space-x-3">
+    <a href="{% url 'admin_historial_vehiculos' %}?periodo={{ periodo }}&unidad_id={{ unidad_id_actual }}&fecha_inicio={{ fecha_inicio_str }}&fecha_fin={{ fecha_fin_str }}" class="bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver a Filtros
+    </a>
+    <span class="text-xs font-bold text-medellinOro hidden sm:inline">
+      📄 Vista de Impresión Vertical (Letter Portrait)
+    </span>
+  </div>
+
+  <div class="flex items-center gap-2">
+    <button onclick="window.print()" class="bg-medellinOro hover:bg-amber-500 text-slate-950 font-extrabold px-4 py-1.5 rounded-xl text-xs flex items-center gap-1.5 shadow transition">
+      <i data-lucide="printer" class="w-4 h-4"></i> 🖨️ Imprimir / Guardar como PDF
+    </button>
+    <button onclick="window.close()" class="bg-white/10 hover:bg-white/20 text-white font-bold px-3 py-1.5 rounded-xl text-xs transition">
+      Cerrar
+    </button>
+  </div>
+</div>
+
+<!-- CONTENEDOR PRINCIPAL DE HOJA VERTICAL -->
+<div class="main-wrapper">
+  <div class="sheet-container">
+    
+    <!-- 1. ENCABEZADO INSTITUCIONAL CON LOGOS ARRIBA -->
+    <table class="header-table">
+      <tr>
+        <td class="header-logo-container" style="text-align: left;">
+          <img src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín" class="header-logo-img">
+        </td>
+        <td class="header-title-cell">
+          <div class="institution-name">DIRECCIÓN MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS</div>
+          <div class="doc-main-title">INFORME Y BITÁCORA HISTÓRICA DE CONTROL VEHICULAR</div>
+          <div class="doc-subtext">H. AYUNTAMIENTO DE MEDELLÍN DE BRAVO, VERACRUZ — GESTIÓN 2025-2028</div>
+        </td>
+        <td class="header-logo-container" style="text-align: right;">
+          <img src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Medellín" class="header-logo-img">
+        </td>
+      </tr>
+    </table>
+
+    <!-- 2. BARRA DE METADATOS DEL REPORTE -->
+    <table class="meta-bar-table">
+      <tr>
+        <td style="width: 45%;">
+          <strong style="color: #5A123E;">PERÍODO CONSULTADO:</strong> 
+          <span style="font-weight: 700; color: #0f172a;">{{ texto_periodo }}</span>
+        </td>
+        <td style="width: 35%;">
+          <strong style="color: #5A123E;">UNIDAD / FLOTILLA:</strong> 
+          <span style="font-weight: 700; color: #0f172a;">
+            {% if unidad_seleccionada %}
+              Unidad {{ unidad_seleccionada.numero_unidad }} ({{ unidad_seleccionada.nombre_identificador }})
+            {% else %}
+              Flotilla Completa (Todas las Unidades)
+            {% endif %}
+          </span>
+        </td>
+        <td style="width: 20%; text-align: right;">
+          <strong style="color: #5A123E;">EMISIÓN:</strong> {{ fecha_emision|date:"d/m/Y H:i" }}
+        </td>
+      </tr>
+    </table>
+
+    <!-- 3. CUADRO DE INDICADORES Y KPIS CLAVE -->
+    <table class="kpi-grid">
+      <tr>
+        <td class="kpi-cell">
+          <span class="kpi-label">Servicios / Salidas</span>
+          <span class="kpi-val" style="color: #5A123E;">{{ total_salidas }}</span>
+        </td>
+        <td class="kpi-cell">
+          <span class="kpi-label">Kilometraje Recorrido</span>
+          <span class="kpi-val" style="color: #047857;">{{ total_km }} km</span>
+        </td>
+        <td class="kpi-cell">
+          <span class="kpi-label">Combustible Surtido</span>
+          <span class="kpi-val" style="color: #b45309;">{{ total_litros }} L (${{ total_costo }})</span>
+        </td>
+        <td class="kpi-cell">
+          <span class="kpi-label">Rendimiento Promedio</span>
+          <span class="kpi-val" style="color: #4338ca;">{{ rendimiento_promedio }} km/L</span>
+        </td>
+      </tr>
+    </table>
+
+    <!-- 4. RESUMEN POR UNIDAD VEHICULAR (SI SE CONSULTA FLOTILLA COMPLETA) -->
+    {% if resumen_unidades and not unidad_seleccionada %}
+    <div class="section-title">
+      <i data-lucide="layout-grid" style="width: 13px; height: 13px; color: #5A123E;"></i>
+      <span>Resumen Consolidado por Vehículo</span>
+    </div>
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>Unidad</th>
+          <th>Tipo de Vehículo</th>
+          <th>Placas</th>
+          <th style="text-align: center;">Salidas</th>
+          <th style="text-align: right;">Km Recorridos</th>
+          <th style="text-align: right;">Combustible (L)</th>
+          <th style="text-align: right;">Gasto ($)</th>
+          <th style="text-align: center;">Rendimiento</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in resumen_unidades %}
+        <tr>
+          <td style="font-weight: 700;">Unidad {{ item.unidad.numero_unidad }} — {{ item.unidad.nombre_identificador }}</td>
+          <td>{{ item.unidad.get_tipo_vehiculo_display }}</td>
+          <td style="font-family: monospace;">{{ item.unidad.placas|default:"-" }}</td>
+          <td style="text-align: center; font-weight: 700;">{{ item.viajes }}</td>
+          <td style="text-align: right; font-weight: 700; color: #047857;">{{ item.km }} km</td>
+          <td style="text-align: right; font-weight: 700; color: #b45309;">{{ item.litros }} L</td>
+          <td style="text-align: right; font-weight: 700;">${{ item.costo }}</td>
+          <td style="text-align: center;">{{ item.rendimiento }} km/L</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    <!-- 5. DETALLE CRONOLÓGICO: BITÁCORA DE SALIDAS Y SERVICIOS -->
+    <div class="section-title">
+      <i data-lucide="book-open" style="width: 13px; height: 13px; color: #5A123E;"></i>
+      <span>Bitácora de Salidas y Servicios Operativos Realizados ({{ salidas.count }} Registros)</span>
+    </div>
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th style="width: 25px; text-align: center;">#</th>
+          <th style="width: 95px;">Unidad</th>
+          <th style="width: 85px;">Fecha / Hora Salida</th>
+          <th style="width: 60px; text-align: right;">Km Salida</th>
+          <th>Servicio Atendido / Misión</th>
+          <th style="width: 85px;">Fecha / Hora Retorno</th>
+          <th style="width: 60px; text-align: right;">Km Retorno</th>
+          <th style="width: 50px; text-align: right;">Km Rec.</th>
+          <th style="width: 100px;">Operador</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in salidas %}
+        <tr>
+          <td style="text-align: center; font-weight: 700; color: #64748B;">{{ forloop.counter }}</td>
+          <td style="font-weight: 700;">{{ r.unidad.nombre_identificador }}</td>
+          <td>{{ r.fecha_salida|date:"d/m/Y H:i" }}</td>
+          <td style="text-align: right; font-weight: 600;">{{ r.odometro_salida }}</td>
+          <td>{{ r.descripcion_servicio }}</td>
+          <td>{{ r.fecha_llegada|date:"d/m/Y H:i"|default:"En curso" }}</td>
+          <td style="text-align: right; font-weight: 600;">{{ r.odometro_llegada|default:"-" }}</td>
+          <td style="text-align: right; font-weight: 800; color: #047857;">{{ r.km_recorridos }}</td>
+          <td style="font-weight: 600; text-transform: uppercase;">{{ r.operador_nombre }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="9" style="text-align: center; color: #64748B; padding: 12px;">
+            No se registraron salidas operativas en el período seleccionado.
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- 6. CARGAS DE COMBUSTIBLE EN EL PERÍODO -->
+    {% if cargas %}
+    <div class="section-title">
+      <i data-lucide="fuel" style="width: 13px; height: 13px; color: #b45309;"></i>
+      <span>Registro de Cargas de Combustible en el Período ({{ cargas.count }} Cargas)</span>
+    </div>
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th style="width: 25px; text-align: center;">#</th>
+          <th>Unidad</th>
+          <th>Fecha y Hora</th>
+          <th style="text-align: right;">Litros Cargados</th>
+          <th style="text-align: right;">Importe Total ($)</th>
+          <th style="text-align: right;">Odómetro</th>
+          <th>Operador</th>
+          <th>Notas / Folio</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in cargas %}
+        <tr>
+          <td style="text-align: center; font-weight: 700; color: #64748B;">{{ forloop.counter }}</td>
+          <td style="font-weight: 700;">{{ c.unidad.nombre_identificador }}</td>
+          <td>{{ c.fecha_carga|date:"d/m/Y H:i" }}</td>
+          <td style="text-align: right; font-weight: 700; color: #b45309;">{{ c.litros_cargados }} L</td>
+          <td style="text-align: right; font-weight: 800; color: #0f172a;">${{ c.costo_total }}</td>
+          <td style="text-align: right; font-weight: 600;">{{ c.odometro_al_cargar }} km</td>
+          <td style="text-transform: uppercase;">{{ c.operador.nombre_completo }}</td>
+          <td style="color: #64748B;">{{ c.notas|default:"-" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+
+    <!-- 7. BLOQUE OFICIAL DE FIRMAS Y VALIDEZ INSTITUCIONAL -->
+    <table class="signatures-table">
+      <tr>
+        <td class="signature-box">
+          <div class="signature-line"></div>
+          <div class="sign-name">LIC. DANIEL EDUARDO ROMERO PILAR</div>
+          <div class="sign-role">
+            TITULAR DE LA UNIDAD MUNICIPAL DE PROTECCIÓN CIVIL Y BOMBEROS<br>
+            H. AYUNTAMIENTO DE MEDELLÍN DE BRAVO, VERACRUZ
+          </div>
+        </td>
+        <td class="signature-box">
+          <div class="signature-line"></div>
+          <div class="sign-name">LIC. SAMUEL ACOSTA MARTINEZ</div>
+          <div class="sign-role">
+            PRESIDENTE CONSTITUCIONAL / ADMINISTRADOR MUNICIPAL<br>
+            H. AYUNTAMIENTO DE MEDELLÍN DE BRAVO, VERACRUZ
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

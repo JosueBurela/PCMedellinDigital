@@ -50,9 +50,12 @@
     </div>
 
     <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-      <button onclick="window.print()" class="bg-white/10 hover:bg-white/20 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 transition shrink-0">
-        <i data-lucide="printer" class="w-3.5 h-3.5"></i> Imprimir
-      </button>
+      <a href="{% url 'admin_historial_vehiculos' %}?unidad_id={{ unidad.id }}" class="bg-medellinOro hover:bg-amber-500 text-slate-950 font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0" title="Filtrar por rango de fechas">
+        <i data-lucide="filter" class="w-3.5 h-3.5"></i> Filtrar Fechas
+      </a>
+      <a href="{% url 'imprimir_reporte_historial_vehicular' %}?unidad_id={{ unidad.id }}&periodo=este_ano" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0" title="Ver Hoja Oficial en Vertical">
+        <i data-lucide="printer" class="w-3.5 h-3.5 text-emerald-200"></i> Hoja Vertical (PDF)
+      </a>
       <a href="{% url 'logout_operador' %}" class="bg-red-600/90 hover:bg-red-700 text-white font-bold px-2.5 sm:px-3 py-1.5 rounded-xl text-[11px] sm:text-xs flex items-center gap-1 shadow-sm transition shrink-0" title="Cerrar Sesión">
         <i data-lucide="log-out" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
         <span>Salir</span>
