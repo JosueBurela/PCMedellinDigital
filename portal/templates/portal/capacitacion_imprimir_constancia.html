@@ -88,9 +88,9 @@
 <div id="certWrapper" class="w-full max-w-[1056px] flex justify-center overflow-hidden py-1">
   <div id="constanciaCertificado" class="certificate-container bg-white p-10 relative flex flex-col justify-between border-[22px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
 
-  <!-- CAPA DE FONDO: ILUSTRACIÓN DE MEDELLÍN -->
+  <!-- CAPA DE FONDO: LOGO UNIFICADO 'POR LA GRANDEZA DE MEDELLÍN' EN PROPORCIÓN ORIGINAL -->
   <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
-    <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[440px] opacity-40 object-contain">
+    <img src="{% static 'portal/img/logo_medellin_grandeza.png' %}" alt="Por la Grandeza de Medellín" class="w-[500px] opacity-35 object-contain">
   </div>
 
   <!-- ENCABEZADO SUPERIOR: LOGO PARCHE DE PC (IZQ), TEXTOS Y ESCUDO DE ARMAS (DER) -->
@@ -100,19 +100,14 @@
       <img src="{% static 'portal/img/logo_pc_parche.png' %}" alt="Protección Civil Parche" class="w-32 h-32 object-contain drop-shadow-sm">
     </div>
 
-    <!-- TEXTO CENTRAL SUPERIOR CON MARCA 'POR LA GRANDEZA DE' SUPERPUESTA -->
-    <div class="text-center flex-1 px-2 pt-2 space-y-1">
+    <!-- TEXTO CENTRAL SUPERIOR -->
+    <div class="text-center flex-1 px-2 pt-2 space-y-1.5">
       <h3 class="text-[13px] font-montserrat font-bold text-slate-900 tracking-[0.25em] uppercase leading-tight">
         PROTECCIÓN CIVIL DE MEDELLÍN DE<br>BRAVO
       </h3>
-      <div class="relative inline-block my-1">
-        <span class="text-3xl font-montserrat font-black text-slate-300/60 tracking-[0.2em] uppercase block select-none">
-          POR LA GRANDEZA DE
-        </span>
-        <p class="text-[12px] font-montserrat font-bold text-slate-800 tracking-[0.22em] uppercase absolute inset-0 flex items-center justify-center pt-0.5">
-          OTORGA LA PRESENTE
-        </p>
-      </div>
+      <p class="text-[12px] font-montserrat font-bold text-slate-800 tracking-[0.22em] uppercase pt-1">
+        OTORGA LA PRESENTE
+      </p>
     </div>
 
     <!-- LOGO DERECHO: ESCUDO DE ARMAS DE MEDELLÍN DE BRAVO -->
