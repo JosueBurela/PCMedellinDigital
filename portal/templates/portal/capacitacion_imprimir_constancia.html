@@ -38,15 +38,15 @@
 
   body {
     background-color: #F7F8F6;
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
-  .font-cinzel { font-family: 'Cinzel', 'Times New Roman', serif; }
-  .font-garamond { font-family: 'Cormorant Garamond', Georgia, serif; }
+  .font-cinzel { font-family: 'Cinzel', serif; }
+  .font-garamond { font-family: 'Cormorant Garamond', serif; }
   .font-montserrat { font-family: 'Montserrat', sans-serif; }
 
   /* CONTENEDOR CERTIFICADO CON TAMAÑO CARTA LANDSCAPE FIJO DE BORDES A BORDES */
@@ -87,35 +87,31 @@
 
 <!-- CONTENEDOR DE LA CONSTANCIA CON WRAPPER RESPONSIVO EN CELULAR -->
 <div id="certWrapper" class="w-full max-w-[1056px] flex justify-center overflow-hidden py-1">
-  <div id="constanciaCertificado" class="certificate-container bg-white px-6 py-6 relative flex flex-col justify-between border-[28px] border-[#7a0c14] shadow-2xl overflow-hidden">
+  <div id="constanciaCertificado" class="certificate-container bg-white px-8 py-6 relative flex flex-col justify-between border-[30px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
 
-  <!-- CAPA DE FONDO: MARCA DE AGUA CON MENOR OPACIDAD (OPACITY: 0.15) -->
-  <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none -z-10">
+  <!-- CAPA DE FONDO: ILUSTRACIÓN DE MEDELLÍN CON 'POR LA GRANDEZA DE' PEGADO JUSTO ENCIMA -->
+  <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
     <div class="flex flex-col items-center justify-center translate-y-6">
-      <span class="text-[36px] font-montserrat font-black text-slate-300/60 tracking-[0.2em] uppercase select-none mb-1 opacity-15">
+      <!-- FRASE 'POR LA GRANDEZA DE' PEGADA JUSTO ENCIMA DEL LOGO DE ENMEDIO -->
+      <span class="text-[34px] font-montserrat font-black text-slate-300/80 tracking-[0.2em] uppercase select-none mb-1">
         POR LA GRANDEZA DE
       </span>
-      <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[500px] opacity-15 object-contain">
+      <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[480px] opacity-40 object-contain">
     </div>
   </div>
 
-  <!-- 1. ENCABEZADO SUPERIOR: LOGOS EXPANDIDOS HACIA LOS BORDES Y TÍTULOS -->
-  <div class="relative z-10 flex items-center justify-between pt-1 px-2">
+  <!-- 1. ENCABEZADO SUPERIOR: LOGO PC (IZQ), TÍTULO GRANDE PROTECCIÓN CIVIL (CENTRO) Y ESCUDO (DER) -->
+  <div class="relative z-10 flex items-center justify-between pt-1">
     <!-- LOGO IZQUIERDO: PARCHE OFICIAL DE PROTECCIÓN CIVIL Y BOMBEROS -->
     <div class="w-36 flex justify-start">
       <img src="{% static 'portal/img/logo_pc_parche.png' %}" alt="Protección Civil Parche" class="w-32 h-32 object-contain drop-shadow-sm">
     </div>
 
-    <!-- TÍTULOS CENTRALES SUPERIORES EN ELEGANTE SERIF / MONTSERRAT -->
-    <div class="text-center flex-1 px-4 space-y-1">
-      <h2 class="text-[17px] font-cinzel font-bold text-slate-900 tracking-[0.25em] uppercase leading-snug">
+    <!-- TÍTULO EN LETRA GRANDE ENTRE LOS DOS LOGOS -->
+    <div class="text-center flex-1 px-4">
+      <h2 class="text-[21px] font-montserrat font-black text-slate-900 tracking-[0.25em] uppercase leading-snug">
         PROTECCIÓN CIVIL DE MEDELLÍN DE<br>BRAVO
       </h2>
-      <div class="pt-2">
-        <p class="text-[14px] font-cinzel font-bold text-slate-800 tracking-[0.28em] uppercase">
-          OTORGA LA PRESENTE
-        </p>
-      </div>
     </div>
 
     <!-- LOGO DERECHO: ESCUDO DE ARMAS DE MEDELLÍN DE BRAVO -->
@@ -124,56 +120,60 @@
     </div>
   </div>
 
-  <!-- 2. CUERPO CENTRAL: 'CONSTANCIA' DRÁSTICAMENTE MÁS GRANDE Y ESPACIADO ELEGANTE -->
-  <div class="relative z-10 text-center my-auto py-2">
+  <!-- 2. CUERPO CENTRAL: 'OTORGA LA PRESENTE' UNOS CENTÍMETROS POR ARRIBA DE CONSTANCIA Y DATOS -->
+  <div class="relative z-10 text-center space-y-2 py-1">
     
-    <!-- TÍTULO PRINCIPAL "CONSTANCIA" (EL TEXTO MÁS GRANDE DEL DOCUMENTO) -->
-    <div class="mb-4">
-      <h1 class="text-[64px] font-cinzel font-bold text-[#0c1f38] tracking-[0.2em] uppercase leading-none drop-shadow-sm">
-        CONSTANCIA
-      </h1>
+    <!-- TEXTO 'OTORGA LA PRESENTE' UNOS CENTÍMETROS ARRIBA DE CONSTANCIA -->
+    <div class="pt-1 pb-1">
+      <p class="text-[13px] font-montserrat font-extrabold text-slate-900 tracking-[0.28em] uppercase">
+        OTORGA LA PRESENTE
+      </p>
     </div>
 
-    <!-- RECEPTOR "A: JUAN PEREZ LOPEZ" (MÁS GRANDE, BOLD 700 Y ESPACIADO) -->
-    <div class="mt-4 mb-4">
-      <h2 class="text-[32px] font-cinzel font-bold text-[#0c2340] tracking-[0.24em] uppercase">
+    <!-- TÍTULO PRINCIPAL "CONSTANCIA" -->
+    <h1 class="text-[54px] font-cinzel font-bold text-[#0c1f38] tracking-[0.18em] uppercase leading-none">
+      CONSTANCIA
+    </h1>
+
+    <!-- RECEPTOR "A: JUAN PEREZ LOPEZ" -->
+    <div class="pt-1.5">
+      <h2 class="text-[26px] font-montserrat font-bold text-[#0c2340] tracking-[0.22em] uppercase">
         A:{{ inscripcion.nombre_completo }}
       </h2>
     </div>
 
-    <!-- TEXTO "Por haber participado en el taller de" CON ESPACIADO ELEGANTE -->
-    <div class="mt-4 space-y-1">
-      <p class="text-[22px] font-garamond italic text-slate-800 font-normal leading-snug">
+    <!-- TEXTO "Por haber participado en el taller de" -->
+    <div class="space-y-0.5 pt-0.5">
+      <p class="text-[19px] font-garamond italic text-slate-800 font-normal leading-snug">
         Por haber participado en el taller
       </p>
-      <p class="text-[16px] font-garamond italic text-slate-700 leading-tight">
+      <p class="text-[14px] font-garamond italic text-slate-700 leading-tight">
         de
       </p>
-      <!-- NOMBRE DEL TALLER ('PRIMEROS AUXILIOS' EN TAMAÑO MÁS GRANDE) -->
-      <h3 class="text-[28px] font-garamond font-semibold text-slate-900 tracking-wide pt-1">
+      <!-- NOMBRE DEL CURSO / TALLER -->
+      <h3 class="text-[22px] font-garamond font-semibold text-slate-900 tracking-wide pt-0.5">
         {{ curso.titulo|cut:"Taller de "|cut:"taller de " }}
       </h3>
     </div>
 
     <!-- FECHA EXACTA DE EXPEDICIÓN -->
-    <div class="mt-2">
-      <p class="text-[15px] font-garamond font-medium text-slate-700">
-        {{ fecha_pie }}
-      </p>
-    </div>
+    <p class="text-[13px] font-garamond font-medium text-slate-700 pt-0.5">
+      {{ fecha_pie }}
+    </p>
   </div>
 
-  <!-- 3. SECCIÓN INFERIOR DE FIRMAS (CON ESPACIO DE 80PX PARA FIRMA FÍSICA E INTERLINEADO COMPACTO) -->
-  <div class="relative z-10 flex items-end justify-center pb-2 font-montserrat text-slate-900 mt-16 sm:mt-20">
+  <!-- 3. SECCIÓN INFERIOR DE FIRMAS (ÚNICA FIRMA CENTRADA) -->
+  <div class="relative z-10 flex items-end justify-center font-montserrat text-slate-900 pb-2">
     
-    <!-- FIRMA CENTRADA: LIC. DANIEL EDUARDO ROMERO PILAR CON ESPACIO Y BLOQUE COMPACTO -->
-    <div class="text-center w-[480px] mx-auto">
-      <p class="text-[12px] font-bold tracking-wide uppercase text-slate-950">LIC. DANIEL EDUARDO ROMERO PILAR</p>
-      <p class="text-[9px] font-bold text-slate-800 tracking-wide pt-0.5">Agente Capacitador Externo STPS: ROPD-910123-K75-0005</p>
-      <p class="text-[9px] font-medium text-slate-700 uppercase pt-0.5" style="line-height: 1.2;">
+    <!-- FIRMA CENTRADA: LIC. DANIEL EDUARDO ROMERO PILAR CON REGISTRO STPS -->
+    <div class="text-center w-96 space-y-0.5 mx-auto">
+      <p class="text-[11px] font-bold tracking-wide uppercase">LIC. DANIEL EDUARDO ROMERO PILAR</p>
+      <p class="text-[9px] font-bold text-slate-800 tracking-wide">Agente Capacitador Externo STPS: ROPD-910123-K75-0005</p>
+      <p class="text-[9px] font-medium text-slate-700 leading-tight uppercase pt-0.5">
         TITULAR DE LA UNIDAD MUNICIPAL DE<br>
         PROTECCIÓN CIVIL Y BOMBEROS DEL<br>
-        H. AYUNTAMIENTO DE MEDELLIN DE BRAVO, VER.
+        H. AYUNTAMIENTO DE MEDELLIN DE BRAVO,<br>
+        VER.
       </p>
     </div>
 
