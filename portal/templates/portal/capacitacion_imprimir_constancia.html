@@ -90,9 +90,9 @@
 <div id="certWrapper" class="w-full max-w-[1056px] flex justify-center overflow-hidden py-1">
   <div id="constanciaCertificado" class="certificate-container bg-white p-7 relative flex flex-col justify-between border-[20px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
 
-  <!-- CAPA DE FONDO: ILUSTRACIÓN ORIGINAL DE MEDELLÍN (CENTRADA DETRÁS DEL CUERPO) -->
+  <!-- CAPA DE FONDO: ILUSTRACIÓN ORIGINAL DE MEDELLÍN (BAJADA PARA QUE CONSTANCIA QUEDE EN EL CENTRO Y LA FRASE ARRIBA) -->
   <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
-    <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[430px] opacity-40 object-contain mt-16">
+    <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[430px] opacity-40 object-contain translate-y-16">
   </div>
 
   <!-- 1. ENCABEZADO SUPERIOR: LOGO PC (IZQ), TÍTULO DE PROTECCIÓN CIVIL (CENTRO) Y ESCUDO (DER) -->
@@ -115,11 +115,11 @@
     </div>
   </div>
 
-  <!-- 2. CUERPO CENTRAL: 'POR LA GRANDEZA DE' PEGADO JUSTO ENCIMA DEL LOGO DE ENMEDIO, CONSTANCIA, DATOS -->
+  <!-- 2. CUERPO CENTRAL: 'POR LA GRANDEZA DE' COMPLETAMENTE EN LA PARTE SUPERIOR DEL LOGO -->
   <div class="relative z-10 text-center my-auto space-y-1.5 py-1">
     
-    <!-- FRASE 'POR LA GRANDEZA DE' Y 'OTORGA LA PRESENTE' ELEVADA Y NÍTIDA POR ENCIMA DEL LOGO -->
-    <div class="relative inline-block mb-4 -mt-11">
+    <!-- FRASE 'POR LA GRANDEZA DE' Y 'OTORGA LA PRESENTE' EN LA PARTE SUPERIOR DEL LOGO (FUERA DE LAS LETRAS) -->
+    <div class="relative inline-block mb-6 -mt-16">
       <span class="text-[26px] font-montserrat font-black text-slate-400/90 tracking-wide uppercase block select-none">
         POR LA GRANDEZA DE
       </span>
