@@ -11,7 +11,7 @@
 <!-- GOOGLE FONTS Y HTML2PDF.JS -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
 <style>
@@ -53,7 +53,6 @@
   #constanciaCertificado {
     width: 1056px;
     height: 816px;
-    max-height: 816px;
     box-sizing: border-box;
     overflow: hidden;
   }
@@ -88,85 +87,83 @@
 
 <!-- CONTENEDOR DE LA CONSTANCIA CON WRAPPER RESPONSIVO EN CELULAR -->
 <div id="certWrapper" class="w-full max-w-[1056px] flex justify-center overflow-hidden py-1">
-  <div id="constanciaCertificado" class="certificate-container bg-white p-7 relative flex flex-col justify-between border-[20px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
+  <div id="constanciaCertificado" class="certificate-container bg-white p-9 relative flex flex-col justify-between border-[22px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
 
-  <!-- CAPA DE FONDO: ILUSTRACIÓN ORIGINAL DE MEDELLÍN (BAJADA PARA QUE CONSTANCIA QUEDE EN EL CENTRO Y LA FRASE ARRIBA) -->
+  <!-- CAPA DE FONDO: ILUSTRACIÓN ORIGINAL DE MEDELLÍN (CENTRADA DETRÁS DEL CUERPO) -->
   <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
-    <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[430px] opacity-40 object-contain translate-y-16">
+    <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[450px] opacity-40 object-contain translate-y-10">
   </div>
 
-  <!-- 1. ENCABEZADO SUPERIOR: LOGO PC (IZQ), TÍTULO DE PROTECCIÓN CIVIL (CENTRO) Y ESCUDO (DER) -->
+  <!-- 1. ENCABEZADO SUPERIOR: LOGOS Y TÍTULOS CON PROPORCIONES EXACTAS DEL MODELO -->
   <div class="relative z-10 flex items-start justify-between">
     <!-- LOGO IZQUIERDO: PARCHE OFICIAL DE PROTECCIÓN CIVIL Y BOMBEROS -->
-    <div class="w-32 flex justify-start">
-      <img src="{% static 'portal/img/logo_pc_parche.png' %}" alt="Protección Civil Parche" class="w-28 h-28 object-contain drop-shadow-sm">
+    <div class="w-36 flex justify-start">
+      <img src="{% static 'portal/img/logo_pc_parche.png' %}" alt="Protección Civil Parche" class="w-32 h-32 object-contain drop-shadow-sm">
     </div>
 
-    <!-- TÍTULO SUPERIOR CENTRADO -->
-    <div class="text-center flex-1 px-2 pt-2">
-      <h3 class="text-[13px] font-montserrat font-bold text-slate-900 tracking-[0.25em] uppercase leading-snug">
+    <!-- TÍTULOS CENTRALES SUPERIORES -->
+    <div class="text-center flex-1 px-4 pt-1 space-y-1">
+      <h3 class="text-[15px] font-montserrat font-bold text-slate-900 tracking-[0.25em] uppercase leading-snug">
         PROTECCIÓN CIVIL DE MEDELLÍN DE<br>BRAVO
       </h3>
+      <div class="relative inline-block my-0.5">
+        <span class="text-[32px] font-montserrat font-black text-slate-300/80 tracking-[0.16em] uppercase block select-none">
+          POR LA GRANDEZA DE
+        </span>
+        <p class="text-[13px] font-montserrat font-bold text-slate-900 tracking-[0.22em] uppercase absolute inset-0 flex items-center justify-center">
+          OTORGA LA PRESENTE
+        </p>
+      </div>
     </div>
 
     <!-- LOGO DERECHO: ESCUDO DE ARMAS DE MEDELLÍN DE BRAVO -->
-    <div class="w-32 flex justify-end">
-      <img src="{% static 'portal/img/escudo_medellin_oficial.png' %}" alt="Escudo Medellín Oficial" class="w-28 h-28 object-contain drop-shadow-sm">
+    <div class="w-36 flex justify-end">
+      <img src="{% static 'portal/img/escudo_medellin_oficial.png' %}" alt="Escudo Medellín Oficial" class="w-32 h-32 object-contain drop-shadow-sm">
     </div>
   </div>
 
-  <!-- 2. CUERPO CENTRAL: 'POR LA GRANDEZA DE' COMPLETAMENTE EN LA PARTE SUPERIOR DEL LOGO -->
-  <div class="relative z-10 text-center my-auto space-y-1.5 py-1">
+  <!-- 2. CUERPO CENTRAL: CONSTANCIA Y DATOS CON TIPOGRAFÍA Y TAMAÑOS EXACTOS -->
+  <div class="relative z-10 text-center my-auto space-y-2 py-1">
     
-    <!-- FRASE 'POR LA GRANDEZA DE' Y 'OTORGA LA PRESENTE' EN LA PARTE SUPERIOR DEL LOGO (FUERA DE LAS LETRAS) -->
-    <div class="relative inline-block mb-6 -mt-16">
-      <span class="text-[26px] font-montserrat font-black text-slate-400/90 tracking-wide uppercase block select-none">
-        POR LA GRANDEZA DE
-      </span>
-      <p class="text-[11px] font-montserrat font-bold text-slate-900 tracking-[0.22em] uppercase absolute inset-0 flex items-center justify-center">
-        OTORGA LA PRESENTE
-      </p>
-    </div>
-
     <!-- TÍTULO PRINCIPAL "CONSTANCIA" -->
-    <h1 class="text-5xl font-cinzel font-bold text-[#0c1f38] tracking-[0.18em] uppercase leading-none">
+    <h1 class="text-[54px] font-cinzel font-bold text-[#0c1f38] tracking-[0.18em] uppercase leading-none">
       CONSTANCIA
     </h1>
 
     <!-- RECEPTOR "A: JUAN PEREZ LOPEZ" -->
     <div class="pt-2">
-      <h2 class="text-2xl font-montserrat font-bold text-[#0c2340] tracking-[0.22em] uppercase">
+      <h2 class="text-[26px] font-montserrat font-bold text-[#0c2340] tracking-[0.22em] uppercase">
         A:{{ inscripcion.nombre_completo }}
       </h2>
     </div>
 
     <!-- TEXTO "Por haber participado en el curso de" -->
-    <div class="space-y-0.5 pt-0.5">
-      <p class="text-base font-garamond italic text-slate-800 font-normal">
+    <div class="space-y-0.5 pt-1">
+      <p class="text-[20px] font-garamond italic text-slate-800 font-normal leading-tight">
         Por haber participado en el curso
       </p>
-      <p class="text-xs font-garamond italic text-slate-700">
+      <p class="text-[15px] font-garamond italic text-slate-700 leading-tight">
         de
       </p>
       <!-- NOMBRE DEL CURSO -->
-      <h3 class="text-xl font-montserrat font-bold text-slate-900 tracking-wide uppercase pt-0.5">
+      <h3 class="text-[24px] font-garamond font-semibold text-slate-900 tracking-wide pt-0.5">
         {{ curso.titulo }}
       </h3>
     </div>
 
     <!-- FECHA EXACTA DE EXPEDICIÓN -->
-    <p class="text-xs font-garamond font-semibold text-slate-700 pt-0.5">
+    <p class="text-[14px] font-garamond font-medium text-slate-700 pt-1">
       {{ fecha_pie }}
     </p>
   </div>
 
   <!-- 3. SECCIÓN INFERIOR DE FIRMAS (ÚNICA FIRMA CENTRADA) -->
-  <div class="relative z-10 flex items-end justify-center pt-1 font-montserrat text-slate-900 pb-1">
+  <div class="relative z-10 flex items-end justify-center font-montserrat text-slate-900 pb-1">
     
     <!-- FIRMA CENTRADA: LIC. DANIEL EDUARDO ROMERO PILAR -->
     <div class="text-center w-80 space-y-0.5 mx-auto">
-      <p class="text-[11px] font-bold tracking-wide uppercase">LIC. DANIEL EDUARDO ROMERO PILAR</p>
-      <p class="text-[9px] font-medium text-slate-700 leading-tight uppercase">
+      <p class="text-[12px] font-bold tracking-wide uppercase">LIC. DANIEL EDUARDO ROMERO PILAR</p>
+      <p class="text-[10px] font-medium text-slate-700 leading-tight uppercase">
         TITULAR DE LA UNIDAD MUNICIPAL DE<br>
         PROTECCIÓN CIVIL Y BOMBEROS DEL<br>
         H. AYUNTAMIENTO DE MEDELLIN DE BRAVO,<br>
