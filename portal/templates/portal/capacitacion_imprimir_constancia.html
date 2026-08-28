@@ -128,34 +128,34 @@
     </p>
 
     <!-- TÍTULO PRINCIPAL "CONSTANCIA" -->
-    <h1 class="text-[68px] font-cinzel font-bold text-[#0c1f38] tracking-[0.2em] uppercase leading-none mb-5">
+    <h1 class="text-[68px] font-cinzel font-bold text-[#0c1f38] tracking-[0.2em] uppercase leading-none mb-4">
       CONSTANCIA
     </h1>
 
     <!-- RECEPTOR -->
-    <h2 class="text-[34px] font-montserrat font-bold text-[#0c2340] tracking-[0.15em] uppercase mb-5">
+    <h2 class="text-[34px] font-montserrat font-bold text-[#0c2340] tracking-[0.15em] uppercase mb-6">
       A: {{ inscripcion.nombre_completo }}
     </h2>
 
-    <!-- TEXTO "Por haber participado en el taller de" -->
-    <div class="space-y-1 mb-4">
-      <p class="text-[24px] font-garamond italic text-slate-800 font-normal leading-snug">
+    <!-- TEXTO "Por haber participado en el taller de" CON TAMAÑOS AUMENTADOS -->
+    <div class="space-y-2 mb-6">
+      <p class="text-[30px] font-garamond italic text-slate-800 font-normal leading-snug">
         Por haber participado en el taller de
       </p>
       <!-- NOMBRE DEL CURSO / TALLER -->
-      <h3 class="text-[32px] font-garamond font-bold text-slate-900 tracking-wide mt-1">
+      <h3 class="text-[46px] font-garamond font-bold text-slate-900 tracking-wide mt-2">
         {{ curso.titulo|cut:"Taller de "|cut:"taller de " }}
       </h3>
     </div>
 
-    <!-- FECHA EXACTA DE EXPEDICIÓN -->
-    <p class="text-[18px] font-garamond font-medium text-slate-700">
+    <!-- FECHA EXACTA DE EXPEDICIÓN (MÁS GRANDE Y SEPARADA) -->
+    <p class="text-[22px] font-garamond font-medium text-slate-700 mt-2">
       {{ fecha_pie }}
     </p>
   </div>
 
   <!-- 3. SECCIÓN INFERIOR DE FIRMAS -->
-  <div class="relative z-10 flex items-end justify-center font-montserrat text-slate-900 pb-2 mt-[85px]">
+  <div class="relative z-10 flex items-end justify-center font-montserrat text-slate-900 pb-2 mt-[80px]">
     
     <!-- FIRMA CENTRADA -->
     <div class="text-center w-[480px] space-y-1 mx-auto">
