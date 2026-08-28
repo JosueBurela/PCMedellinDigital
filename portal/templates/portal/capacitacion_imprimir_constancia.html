@@ -142,17 +142,17 @@
       </h2>
     </div>
 
-    <!-- TEXTO "Por haber participado en el curso de" -->
+    <!-- TEXTO "Por haber participado en el taller de" -->
     <div class="space-y-0.5 pt-0.5">
       <p class="text-[19px] font-garamond italic text-slate-800 font-normal leading-snug">
-        Por haber participado en el curso
+        Por haber participado en el taller
       </p>
       <p class="text-[14px] font-garamond italic text-slate-700 leading-tight">
         de
       </p>
-      <!-- NOMBRE DEL CURSO -->
+      <!-- NOMBRE DEL CURSO / TALLER -->
       <h3 class="text-[22px] font-garamond font-semibold text-slate-900 tracking-wide pt-0.5">
-        {{ curso.titulo }}
+        {{ curso.titulo|cut:"Taller de "|cut:"taller de " }}
       </h3>
     </div>
 
