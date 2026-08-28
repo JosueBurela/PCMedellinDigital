@@ -231,9 +231,10 @@ def imprimir_constancia_pdf(request, folio):
         inscripcion.fecha_emision = timezone.now()
         inscripcion.save()
 
-    fecha_dt = inscripcion.fecha_emision or timezone.now()
+    # Usar la fecha del curso para la constancia, como solicitó el usuario
+    fecha_dt = inscripcion.curso.fecha_inicio or inscripcion.fecha_emision or timezone.now()
     mes_nombre = MESES_ES.get(fecha_dt.month, 'Junio')
-    fecha_pie = f"Medellin de Bravo, Ver. {fecha_dt.day} de {mes_nombre} de {fecha_dt.year}"
+    fecha_pie = f"Medellin de Bravo, Ver. {fecha_dt.day} de {mes_nombre} del {fecha_dt.year}"
         
     return render(request, 'portal/capacitacion_imprimir_constancia.html', {
         'inscripcion': inscripcion,
