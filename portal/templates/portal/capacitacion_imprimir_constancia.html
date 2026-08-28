@@ -89,31 +89,29 @@
 <div id="certWrapper" class="w-full max-w-[1056px] flex justify-center overflow-hidden py-1">
   <div id="constanciaCertificado" class="certificate-container bg-white px-10 py-7 relative flex flex-col justify-between border-[22px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
 
-  <!-- CAPA DE FONDO: ILUSTRACIÓN ORIGINAL DE MEDELLÍN (CENTRADA DETRÁS DEL TEXTO) -->
+  <!-- CAPA DE FONDO: ILUSTRACIÓN DE MEDELLÍN CON 'POR LA GRANDEZA DE' PEGADO JUSTO ENCIMA -->
   <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
-    <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[490px] opacity-40 object-contain translate-y-4">
+    <div class="flex flex-col items-center justify-center translate-y-6">
+      <!-- FRASE 'POR LA GRANDEZA DE' PEGADA JUSTO ENCIMA DEL LOGO DE ENMEDIO -->
+      <span class="text-[34px] font-montserrat font-black text-slate-300/80 tracking-[0.2em] uppercase select-none mb-1">
+        POR LA GRANDEZA DE
+      </span>
+      <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[480px] opacity-40 object-contain">
+    </div>
   </div>
 
-  <!-- 1. ENCABEZADO SUPERIOR: LOGOS Y TÍTULOS (ESTRUCTURA Y PROPORCIÓN EXACTA DEL MODELO) -->
-  <div class="relative z-10 flex items-start justify-between">
+  <!-- 1. ENCABEZADO SUPERIOR: LOGO PC (IZQ), TÍTULO GRANDE PROTECCIÓN CIVIL (CENTRO) Y ESCUDO (DER) -->
+  <div class="relative z-10 flex items-center justify-between pt-1">
     <!-- LOGO IZQUIERDO: PARCHE OFICIAL DE PROTECCIÓN CIVIL Y BOMBEROS -->
     <div class="w-36 flex justify-start">
       <img src="{% static 'portal/img/logo_pc_parche.png' %}" alt="Protección Civil Parche" class="w-32 h-32 object-contain drop-shadow-sm">
     </div>
 
-    <!-- TÍTULOS CENTRALES SUPERIORES -->
-    <div class="text-center flex-1 px-4 pt-1 space-y-1">
-      <h3 class="text-[14px] font-montserrat font-bold text-slate-900 tracking-[0.25em] uppercase leading-tight">
+    <!-- TÍTULO EN LETRA GRANDE ENTRE LOS DOS LOGOS -->
+    <div class="text-center flex-1 px-4">
+      <h2 class="text-[21px] font-montserrat font-black text-slate-900 tracking-[0.25em] uppercase leading-snug">
         PROTECCIÓN CIVIL DE MEDELLÍN DE<br>BRAVO
-      </h3>
-      <div class="relative inline-block my-1">
-        <span class="text-[28px] font-montserrat font-black text-slate-300/75 tracking-[0.16em] uppercase block select-none">
-          POR LA GRANDEZA DE
-        </span>
-        <p class="text-[12px] font-montserrat font-bold text-slate-900 tracking-[0.2em] uppercase absolute inset-0 flex items-center justify-center pt-0.5">
-          OTORGA LA PRESENTE
-        </p>
-      </div>
+      </h2>
     </div>
 
     <!-- LOGO DERECHO: ESCUDO DE ARMAS DE MEDELLÍN DE BRAVO -->
@@ -122,16 +120,23 @@
     </div>
   </div>
 
-  <!-- 2. CUERPO CENTRAL: CONSTANCIA Y DATOS CON TIPOGRAFÍA Y FLUJO CONTINUO DEL MODELO -->
-  <div class="relative z-10 text-center space-y-3 py-1 -mt-2">
+  <!-- 2. CUERPO CENTRAL: 'OTORGA LA PRESENTE' UNOS CENTÍMETROS POR ARRIBA DE CONSTANCIA Y DATOS -->
+  <div class="relative z-10 text-center space-y-2 py-1">
     
+    <!-- TEXTO 'OTORGA LA PRESENTE' UNOS CENTÍMETROS ARRIBA DE CONSTANCIA -->
+    <div class="pt-1 pb-1">
+      <p class="text-[13px] font-montserrat font-extrabold text-slate-900 tracking-[0.28em] uppercase">
+        OTORGA LA PRESENTE
+      </p>
+    </div>
+
     <!-- TÍTULO PRINCIPAL "CONSTANCIA" -->
-    <h1 class="text-[52px] font-cinzel font-bold text-[#0c1f38] tracking-[0.16em] uppercase leading-none">
+    <h1 class="text-[54px] font-cinzel font-bold text-[#0c1f38] tracking-[0.18em] uppercase leading-none">
       CONSTANCIA
     </h1>
 
-    <!-- RECEPTOR "A:JUAN PEREZ LOPEZ" -->
-    <div class="pt-1">
+    <!-- RECEPTOR "A: JUAN PEREZ LOPEZ" -->
+    <div class="pt-1.5">
       <h2 class="text-[26px] font-montserrat font-bold text-[#0c2340] tracking-[0.22em] uppercase">
         A:{{ inscripcion.nombre_completo }}
       </h2>
