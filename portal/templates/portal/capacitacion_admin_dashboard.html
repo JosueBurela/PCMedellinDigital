@@ -46,6 +46,10 @@
         <i data-lucide="qr-code" class="w-4 h-4 text-medellinOro"></i>
         <span>Proyectar QR Registro</span>
       </button>
+      <button onclick="document.getElementById('modalGestorCursos').classList.remove('hidden')" class="bg-white/10 hover:bg-white/20 text-white font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 transition">
+        <i data-lucide="folder-clock" class="w-4 h-4 text-amber-300"></i>
+        <span>Cursos & Histórico ({{ cursos_pasados.count }})</span>
+      </button>
       <button onclick="document.getElementById('modalCrearCurso').classList.remove('hidden')" class="bg-medellinOro hover:bg-amber-600 text-slate-950 font-bold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 shadow-sm transition">
         <i data-lucide="plus-circle" class="w-4 h-4"></i>
         <span>Nuevo Curso</span>
@@ -76,9 +80,23 @@
 <main class="max-w-7xl mx-auto px-4 py-6 space-y-6">
 
   <!-- SELECTOR DE CURSOS Y RESUMEN -->
-  <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-    <div class="space-y-1">
-      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Curso Seleccionado Actual</span>
+  <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+    <div class="space-y-1.5">
+      <div class="flex items-center gap-2">
+        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Curso Seleccionado Actual</span>
+        {% if curso_actual %}
+          {% if curso_actual.finalizado %}
+          <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase">
+            <i data-lucide="lock" class="w-3 h-3"></i> Taller Finalizado / Cerrado
+          </span>
+          {% else %}
+          <span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 border border-emerald-300 text-[10px] font-extrabold px-2 py-0.5 rounded-full uppercase">
+            <i data-lucide="sparkles" class="w-3 h-3"></i> Taller Activo
+          </span>
+          {% endif %}
+        {% endif %}
+      </div>
+
       <h2 class="text-lg font-black text-slate-900">{{ curso_actual.titulo|default:"No hay cursos registrados" }}</h2>
       {% if curso_actual %}
       <p class="text-xs text-slate-500 font-medium">
@@ -87,35 +105,90 @@
       {% endif %}
     </div>
 
-    <!-- NAVEGADOR DE CURSOS -->
+    <!-- NAVEGADOR DE CURSOS Y ACCIONES -->
     {% if cursos %}
-    <form method="GET" class="flex items-center gap-2 w-full md:w-auto">
-      <select name="curso_id" onchange="this.form.submit()" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-medellinVino w-full md:w-72">
-        {% for c in cursos %}
-        <option value="{{ c.id }}" {% if c.id == curso_actual.id %}selected{% endif %}>
-          {{ c.titulo }} ({{ c.fecha_inicio|date:"d/m/Y" }})
-        </option>
-        {% endfor %}
-      </select>
+    <div class="flex flex-wrap items-center gap-2 w-full lg:w-auto">
+      <form method="GET" class="flex-1 lg:flex-none">
+        <select name="curso_id" onchange="this.form.submit()" class="bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-medellinVino w-full lg:w-80">
+          {% if cursos_activos %}
+          <optgroup label="🟢 Cursos Activos / Abiertos">
+            {% for c in cursos_activos %}
+            <option value="{{ c.id }}" {% if c.id == curso_actual.id %}selected{% endif %}>
+              {{ c.titulo }} ({{ c.fecha_inicio|date:"d/m/Y" }})
+            </option>
+            {% endfor %}
+          </optgroup>
+          {% endif %}
+
+          {% if cursos_pasados %}
+          <optgroup label="📁 Cursos Pasados / Finalizados">
+            {% for c in cursos_pasados %}
+            <option value="{{ c.id }}" {% if c.id == curso_actual.id %}selected{% endif %}>
+              📁 [Finalizado] {{ c.titulo }} ({{ c.fecha_inicio|date:"d/m/Y" }})
+            </option>
+            {% endfor %}
+          </optgroup>
+          {% endif %}
+        </select>
+      </form>
+
       {% if curso_actual %}
-      <a href="{% url 'exportar_capacitados_excel' curso_actual.id %}" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Exportar Lista a Excel">
+      <!-- BOTÓN FINALIZAR / REABRIR CURSO -->
+      {% if not curso_actual.finalizado %}
+      <a href="{% url 'toggle_finalizar_curso_admin' curso_actual.id %}" onclick="return confirm('¿Deseas marcar como FINALIZADO el taller \'{{ curso_actual.titulo|escapejs }}\'?\n\nAl finalizarlo, se cerrarán las inscripciones públicas y pasará a la sección de Cursos Pasados.');" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Cerrar inscripciones y pasar a Cursos Pasados">
+        <i data-lucide="check-check" class="w-4 h-4"></i>
+        <span>Finalizar Taller</span>
+      </a>
+      {% else %}
+      <a href="{% url 'toggle_finalizar_curso_admin' curso_actual.id %}" onclick="return confirm('¿Deseas REABRIR el taller \'{{ curso_actual.titulo|escapejs }}\'?\n\nVolverá a estar activo y disponible en el formulario público.');" class="bg-slate-700 hover:bg-slate-800 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Reabrir taller">
+        <i data-lucide="rotate-ccw" class="w-4 h-4 text-emerald-400"></i>
+        <span>Reabrir Taller</span>
+      </a>
+      {% endif %}
+
+      <!-- BOTÓN APROBAR A TODOS -->
+      <a href="{% url 'aprobar_todos_capacitacion' curso_actual.id %}" onclick="return confirm('¿Deseas APROBAR A TODOS los {{ inscripciones.count }} participantes de este taller?\n\nSe les marcará asistencia automáticamente y se habilitarán sus constancias oficiales.');" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Aprobar a todos los inscritos del curso">
+        <i data-lucide="check-check" class="w-4 h-4 text-emerald-200"></i>
+        <span>Aprobar a Todos</span>
+      </a>
+
+      <!-- BOTÓN DESCARGAR TODAS LAS CONSTANCIAS 1 POR 1 AUTOMÁTICO -->
+      <button type="button" onclick="descargarTodasConstanciasAuto()" class="bg-[#5B7B34] hover:bg-[#486328] text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Descargar todas las constancias de la lista una por una en automático">
+        <i data-lucide="download-cloud" class="w-4 h-4 text-emerald-200"></i>
+        <span>Descargar Todas (Automático)</span>
+      </button>
+
+      <a href="{% url 'exportar_capacitados_excel' curso_actual.id %}" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Exportar Lista a Excel">
         <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-300"></i>
         <span>Exportar Excel</span>
       </a>
       {% endif %}
-    </form>
+    </div>
     {% endif %}
   </div>
 
   <!-- TABLA DE PARTICIPANTES INSCRITOS -->
   <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 space-y-4">
-    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-      <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
-        <i data-lucide="users" class="w-4 h-4 text-slate-600"></i> Lista de Participantes Inscritos ({{ inscripciones.count }})
-      </h3>
-      <span class="text-xs text-slate-500 font-semibold">
-        Marcados con Asistencia: {{ inscripciones.filter.count }}
-      </span>
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+      <div class="flex flex-wrap items-center gap-3">
+        <h3 class="font-bold text-slate-900 text-xs uppercase tracking-wider flex items-center gap-2">
+          <i data-lucide="users" class="w-4 h-4 text-slate-600"></i> Lista de Participantes (<span id="totalInscritosCount">{{ inscripciones.count }}</span>)
+        </h3>
+        <span class="text-xs text-slate-500 font-semibold bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
+          Asistencia: {{ inscripciones.filter.count }}
+        </span>
+      </div>
+
+      <!-- BUSCADOR EN TIEMPO REAL -->
+      <div class="relative w-full sm:w-80">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+          <i data-lucide="search" class="w-4 h-4"></i>
+        </div>
+        <input type="text" id="buscadorParticipantes" placeholder="Buscar por nombre, folio, CURP o empresa..." class="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white transition">
+        <button type="button" id="limpiarBuscador" class="hidden absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 hover:text-slate-600" title="Limpiar búsqueda">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
     </div>
 
     {% if inscripciones %}
@@ -133,17 +206,17 @@
             <th class="p-3 text-right">Acción Constancia</th>
           </tr>
         </thead>
-        <tbody class="divide-y divide-slate-100 font-medium">
+        <tbody class="divide-y divide-slate-100 font-medium" id="tablaParticipantesBody">
           {% for i in inscripciones %}
-          <tr class="hover:bg-slate-50/80 transition">
+          <tr class="participante-row hover:bg-slate-50/80 transition" data-search="{{ i.nombre_completo|lower }} {{ i.folio_constancia|lower }} {{ i.curp|default:''|lower }} {{ i.empresa_institucion|default:''|lower }} {{ i.telefono|default:'' }} {{ i.correo|default:''|lower }}">
             <td class="p-3 text-slate-400 font-bold">{{ forloop.counter }}</td>
             <td class="p-3 font-bold text-medellinVino">{{ i.folio_constancia }}</td>
             <td class="p-3 font-extrabold text-slate-900">{{ i.nombre_completo }}</td>
             <td class="p-3 text-slate-500 uppercase">{{ i.curp|default:"-" }}</td>
             <td class="p-3 text-slate-600 font-bold">{{ i.empresa_institucion|default:"PARTICULAR" }}</td>
             <td class="p-3 space-y-0.5 text-[11px]">
-              <div>📧 {{ i.correo }}</div>
-              <div>📞 {{ i.telefono }}</div>
+              <div>📧 {{ i.correo|default:"Sin correo" }}</div>
+              <div>📞 {{ i.telefono|default:"Sin teléfono" }}</div>
             </td>
             <td class="p-3 text-center">
               <a href="{% url 'marcar_asistencia_capacitacion' i.id %}" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold transition shadow-sm {% if i.asistio %}bg-emerald-100 text-emerald-800 border border-emerald-300 hover:bg-emerald-200{% else %}bg-slate-100 text-slate-500 border border-slate-200 hover:bg-slate-200{% endif %}">
@@ -151,21 +224,51 @@
                 <span>{% if i.asistio %}ASISTIÓ Y APROBÓ{% else %}MARCAR ASISTENCIA{% endif %}</span>
               </a>
             </td>
-            <td class="p-3 text-right">
-              {% if i.asistio %}
-              <a href="{% url 'imprimir_constancia_pdf' i.folio_constancia %}" target="_blank" class="inline-flex items-center gap-1 bg-medellinVino hover:bg-[#430d2e] text-white font-bold px-3 py-1.5 rounded-xl text-xs shadow-sm transition">
-                <i data-lucide="printer" class="w-3.5 h-3.5 text-medellinOro"></i>
-                <span>Ver Constancia PDF</span>
-              </a>
-              {% else %}
-              <button disabled class="inline-flex items-center gap-1 bg-slate-100 text-slate-400 font-semibold px-3 py-1.5 rounded-xl text-xs cursor-not-allowed border border-slate-200">
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
-                <span>Pendiente</span>
-              </button>
-              {% endif %}
+            <td class="p-3 text-right whitespace-nowrap">
+              <div class="inline-flex items-center gap-1.5">
+                {% if i.asistio %}
+                <a href="{% url 'imprimir_constancia_pdf' i.folio_constancia %}" target="_blank" class="inline-flex items-center gap-1 bg-medellinVino hover:bg-[#430d2e] text-white font-bold px-3 py-1.5 rounded-xl text-xs shadow-sm transition">
+                  <i data-lucide="printer" class="w-3.5 h-3.5 text-medellinOro"></i>
+                  <span>Ver Constancia PDF</span>
+                </a>
+                {% else %}
+                <button disabled class="inline-flex items-center gap-1 bg-slate-100 text-slate-400 font-semibold px-3 py-1.5 rounded-xl text-xs cursor-not-allowed border border-slate-200">
+                  <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                  <span>Pendiente</span>
+                </button>
+                {% endif %}
+
+                <!-- BOTÓN EDITAR PARTICIPANTE -->
+                <button type="button" 
+                        class="btn-editar-participante inline-flex items-center justify-center p-2 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 transition shadow-sm cursor-pointer"
+                        data-id="{{ i.id }}"
+                        data-nombre="{{ i.nombre_completo }}"
+                        data-curp="{{ i.curp|default:'' }}"
+                        data-empresa="{{ i.empresa_institucion|default:'' }}"
+                        data-telefono="{{ i.telefono|default:'' }}"
+                        data-correo="{{ i.correo|default:'' }}"
+                        data-folio="{{ i.folio_constancia }}"
+                        title="Editar nombre o datos del participante">
+                  <i data-lucide="pencil" class="w-4 h-4 pointer-events-none"></i>
+                </button>
+
+                <!-- BOTÓN ELIMINAR CONSTANCIA -->
+                <a href="{% url 'eliminar_inscripcion_capacitacion' i.id %}" onclick="return confirm('¿Estás seguro de eliminar el registro y la constancia de \'{{ i.nombre_completo|escapejs }}\' (Folio: {{ i.folio_constancia }})?\n\nEsta acción eliminará permanentemente al participante.');" class="inline-flex items-center justify-center p-2 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 border border-red-200 transition shadow-sm" title="Eliminar constancia / participante">
+                  <i data-lucide="trash-2" class="w-4 h-4"></i>
+                </a>
+              </div>
             </td>
           </tr>
           {% endfor %}
+          <!-- FILA DE SIN RESULTADOS DE BÚSQUEDA -->
+          <tr id="noResultsRow" class="hidden">
+            <td colspan="8" class="p-8 text-center text-slate-500 text-xs font-medium">
+              <div class="flex flex-col items-center justify-center space-y-2">
+                <i data-lucide="search-x" class="w-7 h-7 text-slate-300"></i>
+                <p>No se encontraron participantes que coincidan con la búsqueda.</p>
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -178,6 +281,98 @@
   </div>
 
 </main>
+
+<!-- MODAL GESTOR DE CURSOS & HISTÓRICO -->
+<div id="modalGestorCursos" class="hidden fixed inset-0 bg-slate-900/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl p-6 max-w-3xl w-full shadow-2xl space-y-5 max-h-[90vh] flex flex-col">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-bold">
+          <i data-lucide="folder-clock" class="w-4 h-4"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Gestor de Cursos & Cursos Pasados</h3>
+          <p class="text-[11px] text-slate-500">Administra los talleres abiertos y consulta o finaliza los talleres pasados.</p>
+        </div>
+      </div>
+      <button onclick="document.getElementById('modalGestorCursos').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 text-sm font-bold">✕</button>
+    </div>
+
+    <div class="overflow-y-auto space-y-6 flex-1 pr-1 text-xs">
+      <!-- SECCIÓN 1: CURSOS ACTIVOS -->
+      <div class="space-y-2">
+        <h4 class="font-black text-emerald-800 text-xs uppercase tracking-wider flex items-center gap-1.5">
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Cursos Activos / Abiertos al Público ({{ cursos_activos.count }})
+        </h4>
+        {% if cursos_activos %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {% for c in cursos_activos %}
+          <div class="p-3.5 rounded-2xl border border-emerald-200 bg-emerald-50/30 space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <h5 class="font-bold text-slate-900 text-xs">{{ c.titulo }}</h5>
+              <span class="text-[10px] font-extrabold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full shrink-0">Activo</span>
+            </div>
+            <p class="text-[11px] text-slate-500">📅 {{ c.fecha_inicio|date:"d/m/Y" }} • 📍 {{ c.sede_ubicacion }}</p>
+            <div class="flex items-center justify-between pt-2 border-t border-emerald-100/60">
+              <span class="text-[11px] font-bold text-slate-600">👥 {{ c.inscritos.count }} inscritos</span>
+              <div class="flex items-center gap-1">
+                <a href="/capacitaciones/admin/?curso_id={{ c.id }}" class="bg-white border border-slate-200 hover:bg-slate-50 text-slate-800 font-bold px-2.5 py-1 rounded-lg text-[11px] transition shadow-xs">
+                  Ver Lista
+                </a>
+                <a href="{% url 'toggle_finalizar_curso_admin' c.id %}" onclick="return confirm('¿Finalizar este taller y cerrar inscripciones?');" class="bg-amber-600 hover:bg-amber-700 text-white font-bold px-2.5 py-1 rounded-lg text-[11px] transition shadow-xs">
+                  Finalizar
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-[11px] text-slate-400 italic p-3 bg-slate-50 rounded-xl">No hay cursos activos en este momento.</p>
+        {% endif %}
+      </div>
+
+      <!-- SECCIÓN 2: CURSOS PASADOS / FINALIZADOS -->
+      <div class="space-y-2">
+        <h4 class="font-black text-amber-900 text-xs uppercase tracking-wider flex items-center gap-1.5">
+          <i data-lucide="archive" class="w-3.5 h-3.5"></i> Cursos Pasados / Finalizados ({{ cursos_pasados.count }})
+        </h4>
+        {% if cursos_pasados %}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {% for c in cursos_pasados %}
+          <div class="p-3.5 rounded-2xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <h5 class="font-bold text-slate-800 text-xs">{{ c.titulo }}</h5>
+              <span class="text-[10px] font-extrabold bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full shrink-0">Finalizado</span>
+            </div>
+            <p class="text-[11px] text-slate-500">📅 {{ c.fecha_inicio|date:"d/m/Y" }} • 📍 {{ c.sede_ubicacion }}</p>
+            <div class="flex items-center justify-between pt-2 border-t border-slate-200">
+              <span class="text-[11px] font-bold text-slate-600">👥 {{ c.inscritos.count }} constancias</span>
+              <div class="flex items-center gap-1">
+                <a href="/capacitaciones/admin/?curso_id={{ c.id }}" class="bg-white border border-slate-200 hover:bg-slate-100 text-slate-800 font-bold px-2.5 py-1 rounded-lg text-[11px] transition shadow-xs">
+                  Ver Lista
+                </a>
+                <a href="{% url 'toggle_finalizar_curso_admin' c.id %}" onclick="return confirm('¿Reabrir este taller al público?');" class="bg-slate-600 hover:bg-slate-700 text-white font-bold px-2.5 py-1 rounded-lg text-[11px] transition shadow-xs">
+                  Reabrir
+                </a>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-[11px] text-slate-400 italic p-3 bg-slate-50 rounded-xl">No hay cursos archivados como pasados todavía.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="pt-3 border-t border-slate-100 flex justify-end">
+      <button onclick="document.getElementById('modalGestorCursos').classList.add('hidden')" class="px-5 py-2 bg-slate-900 hover:bg-slate-800 text-white font-bold rounded-xl text-xs">
+        Cerrar
+      </button>
+    </div>
+  </div>
+</div>
 
 <!-- MODAL CREAR NUEVO CURSO -->
 <div id="modalCrearCurso" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
@@ -271,8 +466,242 @@
   </div>
 </div>
 
+<!-- MODAL PROGRESO DESCARGA AUTOMÁTICA -->
+<div id="modalProgresoDescargaAuto" class="hidden fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4 text-center">
+    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
+      <i data-lucide="download-cloud" class="w-6 h-6 animate-bounce"></i>
+    </div>
+    <div class="space-y-1">
+      <h3 class="font-black text-slate-900 text-base">Descarga Automática en Progreso</h3>
+      <p id="progresoAutoTexto" class="text-xs text-slate-500 font-medium">Iniciando descarga de folios...</p>
+    </div>
+
+    <!-- BARRA -->
+    <div class="space-y-1.5 pt-2">
+      <div class="flex justify-between text-xs font-bold text-slate-700">
+        <span>Progreso</span>
+        <span id="progresoAutoPct">0%</span>
+      </div>
+      <div class="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
+        <div id="progresoAutoBarra" class="bg-gradient-to-r from-emerald-500 to-teal-600 h-3 rounded-full transition-all duration-300" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <p class="text-[11px] text-slate-400">Las constancias se están descargando con el formato oficial exacto desde el primero hasta el último de la lista.</p>
+
+    <div class="pt-2">
+      <button onclick="cancelarDescargaAuto()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+        Detener Descarga
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL EDITAR PARTICIPANTE -->
+<div id="modalEditarParticipante" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl p-6 max-w-md w-full shadow-2xl space-y-4">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-800 flex items-center justify-center font-bold">
+          <i data-lucide="user-cog" class="w-4 h-4"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Editar Datos del Participante</h3>
+          <p id="editModalFolio" class="text-[11px] text-slate-500 font-mono">Folio: -</p>
+        </div>
+      </div>
+      <button onclick="document.getElementById('modalEditarParticipante').classList.add('hidden')" class="text-slate-400 hover:text-slate-600 text-sm font-bold">✕</button>
+    </div>
+
+    <form id="formEditarParticipante" method="POST" action="" class="space-y-3.5 text-xs">
+      {% csrf_token %}
+
+      <div>
+        <label class="block font-bold text-slate-800 mb-1">Nombre Completo (tal como saldrá en la constancia) *</label>
+        <input type="text" id="editNombre" name="nombre_completo" required oninput="this.value = this.value.toUpperCase()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-bold text-slate-900 uppercase focus:ring-2 focus:ring-medellinVino">
+      </div>
+
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">CURP (Opcional)</label>
+          <input type="text" id="editCurp" name="curp" oninput="this.value = this.value.toUpperCase()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 uppercase">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Empresa / Inst.</label>
+          <input type="text" id="editEmpresa" name="empresa_institucion" oninput="this.value = this.value.toUpperCase()" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900 uppercase">
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Teléfono</label>
+          <input type="text" id="editTelefono" name="telefono" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900">
+        </div>
+        <div>
+          <label class="block font-bold text-slate-700 mb-1">Correo Electrónico</label>
+          <input type="email" id="editCorreo" name="correo" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 font-semibold text-slate-900">
+        </div>
+      </div>
+
+      <div class="pt-2 flex items-center justify-end gap-2 border-t border-slate-100">
+        <button type="button" onclick="document.getElementById('modalEditarParticipante').classList.add('hidden')" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-xs transition">
+          Cancelar
+        </button>
+        <button type="submit" class="px-5 py-2 bg-medellinVino hover:bg-[#430d2e] text-white font-bold rounded-xl text-xs shadow-md transition flex items-center gap-1.5">
+          <i data-lucide="save" class="w-3.5 h-3.5 text-medellinOro"></i>
+          <span>Guardar Cambios</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
   lucide.createIcons();
+
+  // Escuchar clics en botones de editar participante
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.btn-editar-participante');
+    if (btn) {
+      e.preventDefault();
+      const d = btn.dataset;
+      const form = document.getElementById('formEditarParticipante');
+      form.action = `/capacitaciones/admin/editar/${d.id}/`;
+      document.getElementById('editModalFolio').textContent = `Folio: ${d.folio}`;
+      document.getElementById('editNombre').value = d.nombre || '';
+      document.getElementById('editCurp').value = d.curp || '';
+      document.getElementById('editEmpresa').value = d.empresa || '';
+      document.getElementById('editTelefono').value = d.telefono || '';
+      document.getElementById('editCorreo').value = d.correo || '';
+      document.getElementById('modalEditarParticipante').classList.remove('hidden');
+      setTimeout(() => document.getElementById('editNombre').focus(), 50);
+    }
+  });
+
+  // Búsqueda en tiempo real de participantes y constancias
+  const buscador = document.getElementById('buscadorParticipantes');
+  const limpiarBtn = document.getElementById('limpiarBuscador');
+  const rows = document.querySelectorAll('.participante-row');
+  const noResultsRow = document.getElementById('noResultsRow');
+  const totalCountSpan = document.getElementById('totalInscritosCount');
+  const totalOriginal = rows.length;
+
+  if (buscador) {
+    buscador.addEventListener('input', function() {
+      const q = this.value.toLowerCase().trim();
+      let visibles = 0;
+
+      if (q.length > 0) {
+        limpiarBtn.classList.remove('hidden');
+      } else {
+        limpiarBtn.classList.add('hidden');
+      }
+
+      rows.forEach(row => {
+        const text = row.getAttribute('data-search') || '';
+        if (text.includes(q)) {
+          row.style.display = '';
+          visibles++;
+        } else {
+          row.style.display = 'none';
+        }
+      });
+
+      if (noResultsRow) {
+        noResultsRow.classList.toggle('hidden', visibles > 0);
+      }
+
+      if (totalCountSpan) {
+        totalCountSpan.textContent = q ? `${visibles} de ${totalOriginal}` : totalOriginal;
+      }
+    });
+
+    limpiarBtn.addEventListener('click', function() {
+      buscador.value = '';
+      buscador.dispatchEvent(new Event('input'));
+      buscador.focus();
+    });
+  }
+
+  // DESCARGA AUTOMÁTICA SECUENCIAL DE FOLIOS
+  let cancelandoDescarga = false;
+
+  function cancelarDescargaAuto() {
+    cancelandoDescarga = true;
+    const txt = document.getElementById('progresoAutoTexto');
+    if (txt) txt.textContent = "Cancelando descarga...";
+  }
+
+  async function descargarTodasConstanciasAuto() {
+    // Buscar todos los botones de "Ver Constancia PDF" que estén aprobados en la tabla
+    const links = Array.from(document.querySelectorAll('a[href*="/capacitaciones/constancia/"]'));
+    if (links.length === 0) {
+      alert("No hay participantes con constancia aprobada en este taller. Primero haz clic en 'Aprobar a Todos'.");
+      return;
+    }
+
+    if (!confirm(`¿Iniciar la descarga automática de ${links.length} constancias una por una?\n\nEl sistema descargará automáticamente cada constancia usando la plantilla oficial exacta.`)) {
+      return;
+    }
+
+    const modal = document.getElementById('modalProgresoDescargaAuto');
+    const txt = document.getElementById('progresoAutoTexto');
+    const barra = document.getElementById('progresoAutoBarra');
+    const pctTxt = document.getElementById('progresoAutoPct');
+
+    modal.classList.remove('hidden');
+    cancelandoDescarga = false;
+
+    // Crear iframe invisible para procesar cada página oficial intacta
+    let iframe = document.getElementById('hiddenDownloadIframe');
+    if (!iframe) {
+      iframe = document.createElement('iframe');
+      iframe.id = 'hiddenDownloadIframe';
+      iframe.style.position = 'fixed';
+      iframe.style.top = '-9999px';
+      iframe.style.left = '-9999px';
+      iframe.style.width = '1056px';
+      iframe.style.height = '816px';
+      iframe.style.visibility = 'hidden';
+      document.body.appendChild(iframe);
+    }
+
+    for (let i = 0; i < links.length; i++) {
+      if (cancelandoDescarga) {
+        alert("Descarga detenida por el usuario.");
+        break;
+      }
+
+      const a = links[i];
+      const url = new URL(a.href, window.location.origin);
+      url.searchParams.set('download', '1');
+
+      const actual = i + 1;
+      const total = links.length;
+      const pct = Math.round((actual / total) * 100);
+
+      txt.textContent = `Descargando constancia ${actual} de ${total}...`;
+      barra.style.width = `${pct}%`;
+      pctTxt.textContent = `${pct}%`;
+
+      // Cargar en el iframe para ejecutar la descarga nativa oficial
+      iframe.src = url.toString();
+
+      // Esperar tiempo prudente para la carga y descarga limpia antes del siguiente
+      await new Promise(r => setTimeout(r, 2200));
+    }
+
+    if (!cancelandoDescarga) {
+      txt.textContent = `✅ ¡Descarga completada! Se procesaron las ${links.length} constancias.`;
+      barra.style.width = '100%';
+      pctTxt.textContent = '100%';
+    }
+
+    setTimeout(() => {
+      modal.classList.add('hidden');
+    }, 2500);
+  }
 </script>
 </body>
 </html>

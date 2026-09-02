@@ -16,8 +16,9 @@ from portal.views.vehiculos import requiere_operador_aprobado
 def registro_capacitacion_publico(request):
     """
     Formulario Público de Registro a Cursos de Capacitación impartidos por Protección Civil.
+    Solo muestra cursos activos y que NO han sido finalizados / cerrados.
     """
-    cursos_activos = CursoCapacitacion.objects.filter(activo=True).order_by('-fecha_inicio')
+    cursos_activos = CursoCapacitacion.objects.filter(activo=True, finalizado=False).order_by('-fecha_inicio')
     
     if request.method == 'POST':
         curso_id = request.POST.get('curso_id')
@@ -27,17 +28,17 @@ def registro_capacitacion_publico(request):
         telefono = request.POST.get('telefono', '').strip()
         empresa = request.POST.get('empresa_institucion', '').strip()
         
-        curso = get_object_or_404(CursoCapacitacion, id=curso_id, activo=True)
+        curso = get_object_or_404(CursoCapacitacion, id=curso_id, activo=True, finalizado=False)
         
-        if not nombre or not correo or not telefono:
-            messages.error(request, "Por favor completa todos los campos obligatorios (*).")
+        if not nombre:
+            messages.error(request, "Por favor ingresa el nombre completo del participante.")
             return render(request, 'portal/capacitacion_registro_publico.html', {
                 'cursos_activos': cursos_activos
             })
             
-        # Verificar si ya está inscrito en el mismo curso con el mismo correo
-        if InscripcionCapacitacion.objects.filter(curso=curso, correo=correo).exists():
-            inscripcion_existente = InscripcionCapacitacion.objects.get(curso=curso, correo=correo)
+        # Verificar si ya está inscrito en el mismo curso con el mismo correo (si se proporcionó)
+        if correo and InscripcionCapacitacion.objects.filter(curso=curso, correo=correo).exists():
+            inscripcion_existente = InscripcionCapacitacion.objects.filter(curso=curso, correo=correo).first()
             messages.warning(request, f"Ya existe una inscripción registrada para este curso a nombre de {inscripcion_existente.nombre_completo}.")
             return render(request, 'portal/capacitacion_registro_publico.html', {
                 'cursos_activos': cursos_activos,
@@ -48,10 +49,10 @@ def registro_capacitacion_publico(request):
         inscripcion = InscripcionCapacitacion.objects.create(
             curso=curso,
             nombre_completo=nombre,
-            curp=curp,
-            correo=correo,
-            telefono=telefono,
-            empresa_institucion=empresa
+            curp=curp or None,
+            correo=correo or None,
+            telefono=telefono or None,
+            empresa_institucion=empresa or None
         )
         
         messages.success(request, f"¡Inscripción registrada con éxito! Tu folio de constancia asignado es {inscripcion.folio_constancia}.")
@@ -69,26 +70,53 @@ def registro_capacitacion_publico(request):
 def admin_capacitaciones_dashboard(request):
     """
     Panel de Administración de Capacitaciones para el personal operativo y directivo.
+    Distingue entre Cursos Activos y Cursos Pasados / Finalizados.
     """
-    cursos = CursoCapacitacion.objects.all().order_by('-fecha_inicio')
+    cursos_todos = CursoCapacitacion.objects.all().order_by('-fecha_inicio')
+    cursos_activos = cursos_todos.filter(finalizado=False)
+    cursos_pasados = cursos_todos.filter(finalizado=True)
+    
     curso_seleccionado_id = request.GET.get('curso_id')
     
     if curso_seleccionado_id:
         curso_actual = get_object_or_404(CursoCapacitacion, id=curso_seleccionado_id)
         inscripciones = InscripcionCapacitacion.objects.filter(curso=curso_actual).order_by('-fecha_registro')
     else:
-        curso_actual = cursos.first()
+        # Priorizar mostrar el primer curso activo, si no hay, el primero general
+        curso_actual = cursos_activos.first() or cursos_todos.first()
         if curso_actual:
             inscripciones = InscripcionCapacitacion.objects.filter(curso=curso_actual).order_by('-fecha_registro')
         else:
             inscripciones = InscripcionCapacitacion.objects.none()
             
     return render(request, 'portal/capacitacion_admin_dashboard.html', {
-        'cursos': cursos,
+        'cursos': cursos_todos,
+        'cursos_activos': cursos_activos,
+        'cursos_pasados': cursos_pasados,
         'curso_actual': curso_actual,
         'inscripciones': inscripciones,
         'operador_actual': request.operador_actual
     })
+
+
+@requiere_operador_aprobado
+def toggle_finalizar_curso_admin(request, curso_id):
+    """
+    Alterna el estatus de un taller entre Activo y Finalizado / Pasado.
+    Al finalizar un curso se cierran automáticamente las inscripciones públicas.
+    """
+    curso = get_object_or_404(CursoCapacitacion, id=curso_id)
+    curso.finalizado = not curso.finalizado
+    if curso.finalizado:
+        curso.activo = False
+        msg = f"El taller '{curso.titulo}' ha sido marcado como FINALIZADO. Se cerraron las inscripciones y pasó a Cursos Pasados."
+    else:
+        curso.activo = True
+        msg = f"El taller '{curso.titulo}' ha sido REABIERTO y vuelve a admitir inscripciones."
+        
+    curso.save()
+    messages.success(request, msg)
+    return redirect(f'/capacitaciones/admin/?curso_id={curso.id}')
 
 
 @requiere_operador_aprobado
@@ -145,6 +173,94 @@ def marcar_asistencia_capacitacion(request, inscripcion_id):
 
 
 @requiere_operador_aprobado
+def aprobar_todos_capacitacion(request, curso_id):
+    """
+    Marca como Asistió y Aprobó a todos los participantes inscritos en el curso.
+    """
+    curso = get_object_or_404(CursoCapacitacion, id=curso_id)
+    ahora = timezone.now()
+    inscritos = InscripcionCapacitacion.objects.filter(curso=curso, asistio=False)
+    total = inscritos.count()
+    
+    for ins in inscritos:
+        ins.asistio = True
+        ins.aprobado = True
+        if not ins.fecha_emision:
+            ins.fecha_emision = ahora
+        ins.save()
+        
+    messages.success(request, f"¡Éxito! Se aprobaron y habilitaron las constancias de {total} participantes del curso '{curso.titulo}'.")
+    return redirect(f'/capacitaciones/admin/?curso_id={curso.id}')
+
+
+@requiere_operador_aprobado
+def descargar_constancias_lote(request, curso_id):
+    """
+    Vista de lote para generar y descargar todas las constancias aprobadas en un archivo ZIP (.zip)
+    o imprimirlas todas en un solo documento multi-página.
+    """
+    curso = get_object_or_404(CursoCapacitacion, id=curso_id)
+    inscritos = InscripcionCapacitacion.objects.filter(curso=curso, asistio=True).order_by('nombre_completo')
+    
+    if not inscritos.exists():
+        messages.warning(request, f"El taller '{curso.titulo}' aún no tiene participantes marcados con Asistencia/Aprobados. Haz clic en 'Aprobar a Todos' o marca la asistencia primero.")
+        return redirect(f'/capacitaciones/admin/?curso_id={curso.id}')
+        
+    fecha_dt = curso.fecha_inicio or timezone.now()
+    mes_nombre = MESES_ES.get(fecha_dt.month, 'Septiembre')
+    fecha_pie = f"Medellin de Bravo, Ver. {fecha_dt.day} de {mes_nombre} del {fecha_dt.year}"
+    
+    return render(request, 'portal/capacitacion_lote_zip.html', {
+        'curso': curso,
+        'inscritos': inscritos,
+        'fecha_pie': fecha_pie,
+        'total': inscritos.count()
+    })
+
+
+@requiere_operador_aprobado
+def editar_inscripcion_capacitacion(request, inscripcion_id):
+    """
+    Permite modificar los datos de un participante (nombre, CURP, empresa, teléfono, correo) desde el panel admin.
+    Fuerza mayúsculas en nombre, CURP y empresa.
+    """
+    inscripcion = get_object_or_404(InscripcionCapacitacion, id=inscripcion_id)
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre_completo', '').strip().upper()
+        curp = request.POST.get('curp', '').strip().upper()
+        empresa = request.POST.get('empresa_institucion', '').strip().upper()
+        telefono = request.POST.get('telefono', '').strip()
+        correo = request.POST.get('correo', '').strip()
+        
+        if nombre:
+            inscripcion.nombre_completo = nombre
+            inscripcion.curp = curp or None
+            inscripcion.empresa_institucion = empresa or None
+            inscripcion.telefono = telefono or None
+            inscripcion.correo = correo or None
+            inscripcion.save()
+            messages.success(request, f"Se actualizaron con éxito los datos de '{inscripcion.nombre_completo}'.")
+        else:
+            messages.error(request, "El nombre completo no puede quedar en blanco.")
+            
+    return redirect(f'/capacitaciones/admin/?curso_id={inscripcion.curso.id}')
+
+
+@requiere_operador_aprobado
+def eliminar_inscripcion_capacitacion(request, inscripcion_id):
+    """
+    Elimina permanentemente una inscripción / registro de constancia desde el panel administrativo.
+    """
+    inscripcion = get_object_or_404(InscripcionCapacitacion, id=inscripcion_id)
+    curso_id = inscripcion.curso.id
+    nombre = inscripcion.nombre_completo
+    folio = inscripcion.folio_constancia
+    inscripcion.delete()
+    messages.success(request, f"Se eliminó correctamente la constancia '{folio}' a nombre de {nombre}.")
+    return redirect(f'/capacitaciones/admin/?curso_id={curso_id}')
+
+
+@requiere_operador_aprobado
 def exportar_capacitados_excel(request, curso_id):
     """
     Genera y descarga la lista oficial de inscritos y aprobados en formato Excel (.xlsx).
@@ -194,7 +310,7 @@ def exportar_capacitados_excel(request, curso_id):
             item.nombre_completo,
             item.curp or "-",
             item.empresa_institucion or "PARTICULAR",
-            item.telefono,
+            item.telefono or "-",
             "APROBADO / ASISTIÓ" if item.asistio else "PENDIENTE"
         ]
         ws.append(row)

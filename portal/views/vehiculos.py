@@ -18,7 +18,8 @@ from portal.models import (
     VehiculoUnidad,
     BitacoraSalidaVehiculo,
     RegistroCargaGasolina,
-    UsuarioOperadorVehiculo,
+    RegistroCargaGasolina,
+    Trabajador,
     ReporteRiesgo
 )
 
@@ -31,23 +32,26 @@ def obtener_operador_actual(request):
     if not operador_id:
         return None
     try:
-        return UsuarioOperadorVehiculo.objects.get(id=operador_id)
-    except UsuarioOperadorVehiculo.DoesNotExist:
+        return Trabajador.objects.get(id=operador_id)
+    except Trabajador.DoesNotExist:
         return None
 
 
 def requiere_operador_aprobado(view_func):
     """
-    Verifica que el operador haya iniciado sesión y su cuenta esté APROBADA.
+    Verifica que el trabajador haya iniciado sesión y su cuenta esté ACTIVA con algún rol_vehicular.
     """
     @wraps(view_func)
     def _wrapped(request, *args, **kwargs):
         operador = obtener_operador_actual(request)
         if not operador:
-            messages.info(request, "Por favor inicia sesión o regístrate para acceder al sistema de vehiculos.")
+            messages.info(request, "Por favor inicia sesión para acceder al sistema de vehiculos.")
             return redirect('login_operador')
-        if operador.estado != 'APROBADO':
-            messages.error(request, "Tu cuenta aún se encuentra pendiente de aprobación por el Administrador.")
+        if not operador.is_active:
+            messages.error(request, "Tu cuenta de trabajador está desactivada.")
+            return redirect('login_operador')
+        if operador.rol_vehicular == 'NINGUNO':
+            messages.error(request, "No tienes permisos de operador vehicular.")
             return redirect('login_operador')
         request.operador_actual = operador
         return view_func(request, *args, **kwargs)
@@ -56,20 +60,20 @@ def requiere_operador_aprobado(view_func):
 
 def requiere_admin_flotilla(view_func):
     """
-    Verifica que el usuario sea exclusivamente ADMINISTRADOR DE FLOTILLA.
-    Los operadores normales NO pueden ingresar.
+    Verifica que el usuario sea ADMINISTRADOR DE FLOTILLA o JEFE_GUARDIA.
+    Los operadores normales NO pueden ingresar a las configuraciones maestras.
     """
     @wraps(view_func)
     def _wrapped(request, *args, **kwargs):
         operador = obtener_operador_actual(request)
         if not operador:
-            messages.error(request, "Acceso denegado. Debes iniciar sesión como Administrador.")
+            messages.error(request, "Acceso denegado. Debes iniciar sesión.")
             return redirect('login_operador')
-        if operador.estado != 'APROBADO':
-            messages.error(request, "Tu cuenta de Administrador está desactivada o pendiente.")
+        if not operador.is_active:
+            messages.error(request, "Tu cuenta está desactivada.")
             return redirect('login_operador')
-        if operador.rol != 'ADMIN':
-            messages.error(request, "⛔ Acceso Denegado: Tu usuario de Operador NO tiene permisos para ingresar al Panel de Administración.")
+        if operador.rol_vehicular not in ['ADMIN', 'JEFE_GUARDIA']:
+            messages.error(request, "⛔ Acceso Denegado: Se requiere rol de Jefe de Guardia o Administrador.")
             return redirect('flotilla_vehiculos_hub')
         request.operador_actual = operador
         return view_func(request, *args, **kwargs)
@@ -82,77 +86,52 @@ def requiere_admin_flotilla(view_func):
 
 def registro_operador(request):
     """
-    Registro por primera vez de un operador.
-    Transforma el nombre a MAYÚSCULAS obligatoriamente y guarda la cuenta como PENDIENTE.
+    Deshabilitado temporalmente o modificado: ahora el registro se hace desde 
+    el panel de administración principal /panel/crear_trabajador.
+    """
+    messages.error(request, "El registro de operadores vehiculares ahora se realiza desde el Panel Principal de Trabajadores.")
+    return redirect('login_operador')
+
+
+def login_operador(request):
+    """
+    Inicio de sesión unificado usando Trabajador para operadores y administradores de flotilla.
     """
     if request.method == 'POST':
         nombre_input = request.POST.get('nombre_completo', '').strip()
         password = request.POST.get('password', '').strip()
 
-        nombre_mayus = nombre_input.upper()
-
-        if len(nombre_mayus) < 3 or len(password) < 4:
-            messages.error(request, "Por favor ingresa un nombre completo válido y una contraseña de al menos 4 caracteres.")
-            return render(request, 'portal/vehiculos_registro.html', {'nombre_input': nombre_input})
-
-        if UsuarioOperadorVehiculo.objects.filter(nombre_completo=nombre_mayus).exists():
-            messages.error(request, f"Ya existe un operador registrado con el nombre '{nombre_mayus}'. Por favor inicia sesión.")
-            return redirect('login_operador')
-
-        # Crear cuenta pendiente de aprobación
-        usuario = UsuarioOperadorVehiculo.objects.create(
-            nombre_completo=nombre_mayus,
-            password_hash=make_password(password),
-            rol='OPERADOR',
-            estado='PENDIENTE'
-        )
-
-        messages.success(request, f"¡Registro completado para {usuario.nombre_completo}! Tu cuenta está en espera de aprobación por el Administrador.")
-        return redirect('login_operador')
-
-    return render(request, 'portal/vehiculos_registro.html')
-
-
-def login_operador(request):
-    """
-    Inicio de sesión para operadores y administradores de flotilla.
-    """
-    if request.method == 'POST':
-        nombre_input = request.POST.get('nombre_completo', '').strip().upper()
-        password = request.POST.get('password', '').strip()
-
         try:
-            # Permitir cualquier variante: ADMINISTRADOR, ADMINISTRADOR GENERAL, ADMIN
-            if nombre_input in ('ADMIN', 'ADMINISTRADOR', 'ADMINISTRADOR GENERAL'):
-                user = UsuarioOperadorVehiculo.objects.filter(rol='ADMIN').first()
-                if not user:
-                    user = UsuarioOperadorVehiculo.objects.get(nombre_completo=nombre_input)
-            else:
-                user = UsuarioOperadorVehiculo.objects.get(nombre_completo=nombre_input)
-            if check_password(password, user.password_hash):
-                if user.estado == 'PENDIENTE':
-                    messages.warning(request, "🕒 Tu solicitud de registro aún está pendiente de aprobación por el Administrador.")
-                    return render(request, 'portal/vehiculos_login.html', {'nombre_input': nombre_input})
-                elif user.estado in ('DESACTIVADO', 'RECHAZADO'):
-                    messages.error(request, "🔴 Tu cuenta ha sido desactivada o rechazada por el Administrador. Contacta a la dirección.")
-                    return render(request, 'portal/vehiculos_login.html', {'nombre_input': nombre_input})
-                elif user.estado == 'APROBADO':
-                    user.ultimo_acceso = timezone.now()
-                    user.save()
+            # Buscar al trabajador de manera case-insensitive
+            user = Trabajador.objects.filter(nombre__iexact=nombre_input).first()
+            if not user:
+                # Caso de contingencia para admins maestros si escriben "ADMIN"
+                if nombre_input.upper() in ('ADMIN', 'ADMINISTRADOR', 'ADMINISTRADOR GENERAL'):
+                    user = Trabajador.objects.filter(rol_vehicular='ADMIN').first()
 
-                    request.session['operador_id'] = user.id
-                    request.session['operador_nombre'] = user.nombre_completo
-                    request.session['operador_rol'] = user.rol
-
-                    messages.success(request, f"Bienvenido/a {user.nombre_completo}")
-                    if user.rol == 'ADMIN':
-                        return redirect('admin_vehiculos_dashboard')
-                    else:
-                        return redirect('flotilla_vehiculos_hub')
+            if user and check_password(password, user.password):
+                if not user.is_active:
+                    messages.error(request, "🔴 Tu cuenta ha sido desactivada. Contacta a la dirección.")
+                    return render(request, 'portal/vehiculos_login.html', {'nombre_input': nombre_input})
+                elif user.rol_vehicular == 'NINGUNO':
+                    messages.error(request, "🚫 No tienes permisos asignados para acceder a Control Vehicular.")
+                    return render(request, 'portal/vehiculos_login.html', {'nombre_input': nombre_input})
+                
+                user.ultimo_acceso_vehicular = timezone.now()
+                user.save(update_fields=['ultimo_acceso_vehicular'])
+                
+                # Iniciar sesión unificada en session dict
+                request.session['operador_id'] = user.id
+                request.session['is_admin_flotilla'] = user.rol_vehicular == 'ADMIN'
+                messages.success(request, f"¡Bienvenido, {user.nombre}!")
+                
+                if user.rol_vehicular == 'ADMIN':
+                    return redirect('admin_vehiculos_dashboard')
+                return redirect('flotilla_vehiculos_hub')
             else:
-                messages.error(request, "Contraseña incorrecta. Por favor verifica tus datos.")
-        except UsuarioOperadorVehiculo.DoesNotExist:
-            messages.error(request, f"No existe ninguna cuenta registrada con el nombre '{nombre_input}'. Te invitamos a registrarte.")
+                messages.error(request, "Nombre o contraseña incorrectos.")
+        except Exception as e:
+            messages.error(request, "Nombre o contraseña incorrectos.")
 
     return render(request, 'portal/vehiculos_login.html')
 
@@ -430,10 +409,10 @@ def admin_vehiculos_dashboard(request):
     salidas_todas = BitacoraSalidaVehiculo.objects.all().select_related('unidad')
     cargas_todas = RegistroCargaGasolina.objects.all().select_related('unidad')
 
-    # Clasificación de Usuarios Operadores
-    usuarios_pendientes = UsuarioOperadorVehiculo.objects.filter(estado='PENDIENTE')
-    usuarios_activos = UsuarioOperadorVehiculo.objects.filter(estado='APROBADO')
-    usuarios_desactivados = UsuarioOperadorVehiculo.objects.filter(estado__in=['DESACTIVADO', 'RECHAZADO'])
+    # Clasificación de Usuarios Operadores en Trabajador
+    usuarios_pendientes = Trabajador.objects.filter(rol_vehicular='NINGUNO') # O podemos ignorar esto
+    usuarios_activos = Trabajador.objects.exclude(rol_vehicular='NINGUNO')
+    usuarios_desactivados = Trabajador.objects.filter(is_active=False)
 
     total_km = salidas_todas.aggregate(Sum('km_recorridos'))['km_recorridos__sum'] or 0
     total_litros = cargas_todas.aggregate(Sum('litros_cargados'))['litros_cargados__sum'] or 0
@@ -444,7 +423,6 @@ def admin_vehiculos_dashboard(request):
         'unidades': unidades,
         'salidas_todas': salidas_todas,
         'cargas_todas': cargas_todas,
-        'usuarios_pendientes': usuarios_pendientes,
         'usuarios_activos': usuarios_activos,
         'usuarios_desactivados': usuarios_desactivados,
         'total_km': total_km,
@@ -454,25 +432,21 @@ def admin_vehiculos_dashboard(request):
         'operador_actual': request.operador_actual
     })
 
-
 @requiere_admin_flotilla
 def cambiar_estado_usuario(request, usuario_id, nuevo_estado):
     """
-    Permite al Administrador aprobar, desactivar o reactivar cuentas de usuario.
+    Permite al Administrador asignar un rol vehicular o desactivar a un Trabajador.
     """
-    usuario = get_object_or_404(UsuarioOperadorVehiculo, id=usuario_id)
+    usuario = get_object_or_404(Trabajador, id=usuario_id)
     
-    if nuevo_estado in ['APROBADO', 'DESACTIVADO', 'RECHAZADO', 'PENDIENTE']:
-        usuario.estado = nuevo_estado
-        usuario.save()
-        
-        nombres_estado = {
-            'APROBADO': '🟢 Aprobado / Activado',
-            'DESACTIVADO': '🔴 Desactivado / Suspendido',
-            'RECHAZADO': '❌ Rechazado',
-            'PENDIENTE': '🕒 Pendiente'
-        }
-        messages.success(request, f"La cuenta de '{usuario.nombre_completo}' fue cambiada a {nombres_estado.get(nuevo_estado)}.")
+    if nuevo_estado in ['NINGUNO', 'OPERADOR', 'JEFE_GUARDIA', 'ADMIN']:
+        usuario.rol_vehicular = nuevo_estado
+        usuario.save(update_fields=['rol_vehicular'])
+        messages.success(request, f"El rol vehicular de '{usuario.nombre}' fue cambiado a {nuevo_estado}.")
+    elif nuevo_estado == 'DESACTIVAR':
+        usuario.is_active = False
+        usuario.save(update_fields=['is_active'])
+        messages.success(request, f"La cuenta de '{usuario.nombre}' ha sido desactivada globalmente.")
     
     return redirect('admin_vehiculos_dashboard')
 

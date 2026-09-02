@@ -444,6 +444,16 @@ class Trabajador(models.Model):
     password = models.CharField(max_length=128, blank=True, default="", help_text="Contraseña encriptada para acceso a la App Móvil")
     is_active = models.BooleanField(default=True)
     creado_en = models.DateTimeField(auto_now_add=True)
+    
+    # Nuevos campos para unificación de Control Vehicular
+    ROL_VEHICULAR_CHOICES = [
+        ('NINGUNO', 'Sin acceso a vehículos'),
+        ('OPERADOR', 'Operador / Paramédico / Bombero'),
+        ('JEFE_GUARDIA', 'Jefe de Guardia (Supervisor)'),
+        ('ADMIN', 'Administrador de Flotilla'),
+    ]
+    rol_vehicular = models.CharField(max_length=20, choices=ROL_VEHICULAR_CHOICES, default='NINGUNO')
+    ultimo_acceso_vehicular = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         verbose_name = "Trabajador de Emergencia"
@@ -928,8 +938,8 @@ class InscripcionCapacitacion(models.Model):
     curso = models.ForeignKey(CursoCapacitacion, on_delete=models.CASCADE, related_name='inscritos')
     nombre_completo = models.CharField(max_length=200, verbose_name="Nombre Completo (tal como aparecerá en Constancia)")
     curp = models.CharField(max_length=18, blank=True, null=True, verbose_name="CURP (Opcional)")
-    correo = models.EmailField(verbose_name="Correo Electrónico")
-    telefono = models.CharField(max_length=15, verbose_name="Teléfono / WhatsApp")
+    correo = models.EmailField(verbose_name="Correo Electrónico", blank=True, null=True)
+    telefono = models.CharField(max_length=15, verbose_name="Teléfono / WhatsApp", blank=True, null=True)
     empresa_institucion = models.CharField(max_length=200, blank=True, null=True, verbose_name="Empresa / Institución Solicitante")
     
     asistio = models.BooleanField(default=False, verbose_name="¿Asistió al Curso?")
