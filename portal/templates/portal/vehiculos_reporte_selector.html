@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reportes de Movimiento Vehicular | PCivil Medellín</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800">
+
+<header class="bg-[#5A123E] text-white shadow-md p-4 flex justify-between items-center">
+    <div class="flex items-center gap-3">
+        <a href="{% url 'admin_vehiculos_dashboard' %}" class="bg-white/20 p-2 rounded-lg hover:bg-white/30 transition">
+            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+        </a>
+        <h1 class="text-xl font-bold flex items-center gap-2">
+            <i data-lucide="file-text" class="w-6 h-6 text-[#E59E27]"></i>
+            Generar Reportes de Guardia
+        </h1>
+    </div>
+</header>
+
+<main class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-sm border border-slate-200">
+    <h2 class="text-lg font-bold mb-4 border-b pb-2 text-[#5A123E]">Seleccionar Parámetros del Reporte</h2>
+    
+    <form action="{% url 'imprimir_reporte_movimiento_vehicular' %}" method="GET" target="_blank" class="space-y-5">
+        
+        <!-- Fecha -->
+        <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Fecha del Turno</label>
+            <input type="date" name="fecha" required class="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-[#5A123E] outline-none">
+        </div>
+
+        <!-- Turno -->
+        <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Turno</label>
+            <select name="turno" class="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-[#5A123E] outline-none">
+                <option value="TURNO_1">Turno 1 (00:00 - 12:00)</option>
+                <option value="TURNO_2">Turno 2 (12:00 - 00:00)</option>
+            </select>
+        </div>
+
+        <!-- Unidad -->
+        <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Vehículo / Unidad</label>
+            <select name="unidad_id" required class="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-[#5A123E] outline-none">
+                {% for u in unidades %}
+                <option value="{{ u.id }}">{{ u.nombre_identificador }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Formato -->
+        <div>
+            <label class="block text-sm font-semibold text-slate-700 mb-1">Tipo de Formato</label>
+            <select name="formato" class="w-full border border-slate-300 rounded-xl p-3 focus:ring-2 focus:ring-[#5A123E] outline-none">
+                <option value="1_turno">Formato de 1 Turno (Hoja completa)</option>
+                <option value="2_turnos">Formato de 2 Turnos (Mitad y mitad)</option>
+            </select>
+        </div>
+
+        <button type="submit" class="w-full bg-[#E59E27] hover:bg-amber-500 text-slate-900 font-bold p-3 rounded-xl flex items-center justify-center gap-2 transition">
+            <i data-lucide="printer" class="w-5 h-5"></i> Generar PDF
+        </button>
+    </form>
+</main>
+
+<script>
+    lucide.createIcons();
+    document.querySelector('input[type="date"]').valueAsDate = new Date();
+</script>
+</body>
+</html>

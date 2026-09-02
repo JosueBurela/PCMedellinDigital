@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reporte de Movimiento Vehicular - {{ unidad.nombre_identificador }}</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+    @page { size: letter landscape; margin: 0; }
+    body { font-family: 'Arial', sans-serif; background: #525659; margin: 0; display: flex; justify-content: center; }
+    #hoja_pdf { width: 11in; height: 8.5in; background: white; padding: 0.3in 0.4in; box-sizing: border-box; position: relative; }
+    
+    .print-btn-container { position: fixed; top: 1rem; right: 1rem; z-index: 50; }
+    .print-btn { background: #5A123E; color: white; padding: 0.75rem 1.5rem; font-weight: bold; border-radius: 0.5rem; cursor: pointer; border: none; font-size: 1rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    .print-btn:hover { background: #4a0f33; }
+
+    /* Estilos del Formato */
+    table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+    th, td { border: 1.5px solid black; padding: 4px; text-align: center; font-size: 10px; font-weight: bold; }
+    th { background-color: #f3f4f6; }
+    
+    .header-table td { border: none; text-align: left; padding: 2px 0; font-size: 11px; }
+    .header-table .underline { border-bottom: 1px solid black; display: inline-block; min-width: 100px; text-align: center; font-weight: normal; }
+    
+    .titulo { font-size: 18px; font-weight: bold; text-align: center; margin: 10px 0; }
+    
+    .cajas-km div { width: 12px; height: 16px; border: 1px solid #666; display: inline-block; margin: 0 1px; }
+</style>
+</head>
+<body>
+
+<div class="print-btn-container" id="hide_in_pdf">
+    <button class="print-btn" onclick="generarPDF()">Descargar PDF</button>
+</div>
+
+<div id="hoja_pdf">
+    <!-- TURNO 1 BLOQUE -->
+    <div style="margin-bottom: 15px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+            <img src="{% static 'portal/img/logo_pc_circular.png' %}" style="height: 60px;">
+            <div class="titulo">REPORTE DE MOVIMIENTO VEHICULAR</div>
+            <img src="{% static 'portal/img/medellin_logo.png' %}" style="height: 50px;">
+        </div>
+
+        <table class="header-table">
+            <tr>
+                <td width="50%">FECHA DE INICIO DEL TURNO: <span class="underline">{{ hora_inicio|date:"d / m / Y" }}</span> HORAS: <span class="underline">{{ hora_inicio|date:"H : i" }}</span></td>
+                <td width="50%" style="text-align: right;">FECHA DE TERMINO DEL TURNO: <span class="underline">{{ hora_fin|date:"d / m / Y" }}</span> HORAS: <span class="underline">{{ hora_fin|date:"H : i" }}</span></td>
+            </tr>
+            <tr>
+                <td># UNIDAD: <span class="underline">{{ unidad.nombre_identificador }}</span> OPERADOR: <span class="underline" style="min-width:180px;"></span></td>
+                <td style="text-align: right;">TECNICO OPERATIVO: <span class="underline" style="min-width:180px;"></span></td>
+            </tr>
+            <tr>
+                <td colspan="2">TANQUE DE COMBUSTIBLE AL INICIO DE LA GUARDIA: <span class="underline">{{ tanque_inicial }}</span> <span style="margin-left: 20px;">TANQUE DE COMBUSTIBLE AL FINAL DE LA GUARDIA:</span> <span class="underline">{{ tanque_final }}</span></td>
+            </tr>
+        </table>
+
+        <!-- Tabla de salidas -->
+        <table>
+            <tr>
+                <th width="8%">FECHA</th>
+                <th width="8%">HORA DE SALIDA</th>
+                <th width="15%">KILOMETRAJE INICIAL</th>
+                <th width="38%">TIPO DE SERVICIO</th>
+                <th width="15%">KILOMETRAJE FINAL</th>
+                <th width="8%">HORA DE LLEGADA</th>
+                <th width="8%">FIRMA</th>
+            </tr>
+            <!-- Mostrar salidas reales -->
+            {% for salida in salidas %}
+            <tr>
+                <td>{{ salida.fecha_salida|date:"d/m/Y" }}</td>
+                <td>{{ salida.fecha_salida|date:"H:i" }}</td>
+                <td>{{ salida.odometro_salida }}</td>
+                <td style="text-align: left; font-weight: normal; font-size: 9px;">{{ salida.descripcion_servicio }}</td>
+                <td>{{ salida.odometro_llegada|default_if_none:"" }}</td>
+                <td>{{ salida.fecha_llegada|date:"H:i"|default_if_none:"" }}</td>
+                <td></td>
+            </tr>
+            {% endfor %}
+            <!-- Filas en blanco para completar diseño -->
+            {% for i in "12345678"|make_list %}
+            <tr>
+                <td style="height: 25px;"></td>
+                <td></td>
+                <td class="cajas-km">{% for j in "123456789"|make_list %}<div></div>{% endfor %}</td>
+                <td></td>
+                <td class="cajas-km">{% for j in "123456789"|make_list %}<div></div>{% endfor %}</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <!-- Tabla de gasolina -->
+        <table style="width: 48%; float: left; margin-top: 5px;">
+            <tr>
+                <th colspan="4" style="background-color: white; border: none; font-size: 11px; padding-bottom: 5px;">CARGAS DE COMBUSTIBLES - {{ turno }}</th>
+            </tr>
+            <tr>
+                <th>CARGAS X UNIDAD</th>
+                <th>HORA</th>
+                <th>LITROS CARGADOS</th>
+                <th>KILOMETRAJE DE LLEGADA</th>
+            </tr>
+            {% for carga in cargas %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ carga.fecha_carga|date:"H:i" }}</td>
+                <td>{{ carga.litros_cargados }}</td>
+                <td>{{ carga.odometro_al_cargar }}</td>
+            </tr>
+            {% empty %}
+            <tr><td style="height: 20px;">1</td><td></td><td></td><td class="cajas-km">{% for j in "123456789"|make_list %}<div></div>{% endfor %}</td></tr>
+            <tr><td style="height: 20px;">2</td><td></td><td></td><td class="cajas-km">{% for j in "123456789"|make_list %}<div></div>{% endfor %}</td></tr>
+            <tr><td style="height: 20px;">3</td><td></td><td></td><td class="cajas-km">{% for j in "123456789"|make_list %}<div></div>{% endfor %}</td></tr>
+            {% endfor %}
+        </table>
+        
+        <div style="clear: both;"></div>
+    </div>
+    
+    {% if formato == '2_turnos' %}
+    <hr style="border-top: 2px dashed #999; margin: 15px 0;">
+    <!-- Aquí iría el segundo bloque (podemos clonar con JS o enviar por el backend) -->
+    <div style="text-align: center; color: #999; font-style: italic; font-size: 12px; margin-top: 40px;">
+        (Espacio para el reporte del Turno 2, autogenerado en la versión final)
+    </div>
+    {% endif %}
+
+</div>
+
+<script>
+    function generarPDF() {
+        const elemento = document.getElementById('hoja_pdf');
+        const btnContainer = document.getElementById('hide_in_pdf');
+        
+        btnContainer.style.display = 'none'; // Ocultar botón durante captura
+        
+        const opt = {
+            margin:       0,
+            filename:     'Reporte_Movimiento_Vehicular_{{ unidad.nombre_identificador }}.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'landscape' }
+        };
+
+        html2pdf().set(opt).from(elemento).save().then(() => {
+            btnContainer.style.display = 'block'; // Restaurar botón
+        });
+    }
+</script>
+
+</body>
+</html>

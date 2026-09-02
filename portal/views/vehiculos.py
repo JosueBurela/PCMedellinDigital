@@ -452,6 +452,78 @@ def cambiar_estado_usuario(request, usuario_id, nuevo_estado):
 
 
 @requiere_admin_flotilla
+def vista_impresion_reportes_jefe(request):
+    """
+    Pantalla intermedia donde el Jefe de Guardia / Admin selecciona
+    qué unidad, fecha y turno desea exportar a PDF.
+    """
+    unidades = VehiculoUnidad.objects.all()
+    return render(request, 'portal/vehiculos_reporte_selector.html', {
+        'unidades': unidades,
+        'operador_actual': request.operador_actual
+    })
+
+
+@requiere_admin_flotilla
+def imprimir_reporte_movimiento_vehicular(request):
+    """
+    Genera el formato HTML para el Reporte de Movimiento Vehicular (PDF).
+    """
+    unidad_id = request.GET.get('unidad_id')
+    fecha_str = request.GET.get('fecha') # YYYY-MM-DD
+    turno = request.GET.get('turno', 'TURNO_1')
+    formato = request.GET.get('formato', '1_turno') # '1_turno' o '2_turnos'
+
+    unidad = get_object_or_404(VehiculoUnidad, id=unidad_id)
+    
+    try:
+        from datetime import datetime
+        fecha_obj = datetime.strptime(fecha_str, "%Y-%m-%d").date()
+    except (ValueError, TypeError):
+        fecha_obj = timezone.now().date()
+
+    # Definir rango de horas según el turno
+    # Turno 1 (00:00 - 12:00), Turno 2 (12:00 - 00:00)
+    if turno == 'TURNO_1':
+        hora_inicio = datetime.combine(fecha_obj, datetime.min.time()).replace(tzinfo=timezone.utc)
+        hora_fin = hora_inicio + timezone.timedelta(hours=12)
+    else:
+        hora_inicio = datetime.combine(fecha_obj, datetime.min.time()).replace(tzinfo=timezone.utc) + timezone.timedelta(hours=12)
+        hora_fin = hora_inicio + timezone.timedelta(hours=12)
+
+    salidas = BitacoraSalidaVehiculo.objects.filter(
+        unidad=unidad,
+        fecha_salida__gte=hora_inicio,
+        fecha_salida__lt=hora_fin
+    ).order_by('fecha_salida')
+
+    cargas = RegistroCargaGasolina.objects.filter(
+        unidad=unidad,
+        fecha_carga__gte=hora_inicio,
+        fecha_carga__lt=hora_fin
+    ).order_by('fecha_carga')
+    
+    # Calcular promedios, tanque inicial/final
+    tanque_inicial = salidas.first().gasolina_salida if salidas.exists() else unidad.nivel_gasolina_actual
+    tanque_final = salidas.last().gasolina_llegada if salidas.exists() else unidad.nivel_gasolina_actual
+    
+    context = {
+        'unidad': unidad,
+        'fecha': fecha_obj,
+        'hora_inicio': hora_inicio,
+        'hora_fin': hora_fin,
+        'turno': turno,
+        'formato': formato,
+        'salidas': salidas,
+        'cargas': cargas,
+        'tanque_inicial': tanque_inicial,
+        'tanque_final': tanque_final,
+        'operador_actual': request.operador_actual,
+    }
+    
+    return render(request, 'portal/vehiculos_imprimir_reporte.html', context)
+
+@requiere_admin_flotilla
 def crear_unidad(request):
     """
     Crea una nueva unidad de vehículo en la flotilla.
