@@ -477,19 +477,20 @@ def imprimir_reporte_movimiento_vehicular(request):
     unidad = get_object_or_404(VehiculoUnidad, id=unidad_id)
     
     try:
-        from datetime import datetime
+        from datetime import datetime, time
         fecha_obj = datetime.strptime(fecha_str, "%Y-%m-%d").date()
     except (ValueError, TypeError):
         fecha_obj = timezone.now().date()
 
     # Definir rango de horas según el turno
     # Turno 1 (00:00 - 12:00), Turno 2 (12:00 - 00:00)
+    import datetime as dt
     if turno == 'TURNO_1':
-        hora_inicio = datetime.combine(fecha_obj, datetime.min.time()).replace(tzinfo=timezone.utc)
-        hora_fin = hora_inicio + timezone.timedelta(hours=12)
+        hora_inicio = timezone.make_aware(dt.datetime.combine(fecha_obj, dt.time.min))
+        hora_fin = hora_inicio + dt.timedelta(hours=12)
     else:
-        hora_inicio = datetime.combine(fecha_obj, datetime.min.time()).replace(tzinfo=timezone.utc) + timezone.timedelta(hours=12)
-        hora_fin = hora_inicio + timezone.timedelta(hours=12)
+        hora_inicio = timezone.make_aware(dt.datetime.combine(fecha_obj, dt.time.min)) + dt.timedelta(hours=12)
+        hora_fin = hora_inicio + dt.timedelta(hours=12)
 
     salidas = BitacoraSalidaVehiculo.objects.filter(
         unidad=unidad,
