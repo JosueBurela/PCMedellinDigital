@@ -923,6 +923,7 @@ class CursoCapacitacion(models.Model):
     sede_ubicacion = models.CharField(max_length=200, default="Estación Central de Bomberos El Tejar", verbose_name="Sede / Ubicación")
     cupo_maximo = models.PositiveIntegerField(default=50, verbose_name="Cupo Máximo de Participantes")
     activo = models.BooleanField(default=True, verbose_name="¿Curso Activo para Registro Público?")
+    finalizado = models.BooleanField(default=False, verbose_name="¿Curso Finalizado / Pasado?")
     creado_el = models.DateTimeField(auto_now_add=True)
 
     class Meta:
