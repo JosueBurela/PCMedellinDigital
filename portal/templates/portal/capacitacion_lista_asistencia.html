@@ -9,17 +9,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
     @page { size: letter portrait; margin: 0; }
-    body { font-family: 'Arial', sans-serif; background: #525659; margin: 0; display: flex; justify-content: center; flex-direction: column; align-items: center; }
+    body { font-family: 'Arial', sans-serif; background: #525659; margin: 0; display: flex; justify-content: center; align-items: flex-start; padding-top: 20px;}
     
     .hoja_pdf { 
         width: 8.5in; 
-        height: 11in; 
         background: white; 
         padding: 0.5in; 
         box-sizing: border-box; 
-        position: relative; 
-        margin-bottom: 10px;
-        page-break-after: always;
     }
     
     .print-btn-container { position: fixed; top: 1rem; right: 1rem; z-index: 50; }
@@ -33,7 +29,7 @@
     .titulo { font-size: 14px; font-weight: bold; color: #5A123E; text-transform: uppercase; margin: 0;}
     .subtitulo { font-size: 10px; font-weight: normal; color: #333; margin-top: 3px; }
     
-    table { width: 100%; border-collapse: collapse; margin-bottom: 5px; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
     th, td { border: 1px solid #000; padding: 3px 4px; text-align: left; font-size: 9px; }
     th { background-color: #f3f4f6; text-align: center; font-weight: bold; font-size: 9px; color: #5A123E; text-transform: uppercase;}
     
@@ -41,7 +37,7 @@
     .firma-espacio { width: 140px; }
     
     /* Footer */
-    .footer { position: absolute; bottom: 0.3in; left: 0.5in; right: 0.5in; font-size: 8px; color: #666; text-align: center; border-top: 1px solid #ccc; padding-top: 3px; }
+    .footer { font-size: 8px; color: #666; text-align: center; border-top: 1px solid #ccc; padding-top: 5px; margin-top: 20px; }
 </style>
 </head>
 <body>
@@ -52,7 +48,7 @@
 
 <div id="contenedor_paginas">
     {% if inscritos %}
-    <div class="hoja_pdf">
+    <div class="hoja_pdf" id="contenido_pdf">
         
         <div class="encabezado">
             <img src="{% static 'portal/img/logo_qr_pc_clean.png' %}" alt="Protección Civil">
@@ -92,7 +88,7 @@
         </div>
     </div>
     {% else %}
-    <div class="hoja_pdf">
+    <div class="hoja_pdf" id="contenido_pdf">
         <h2 style="text-align:center; padding-top: 50px;">No hay participantes registrados.</h2>
     </div>
     {% endif %}
@@ -100,26 +96,28 @@
 
 <script>
     function generarPDF() {
-        const elemento = document.getElementById('contenedor_paginas');
+        const elemento = document.getElementById('contenido_pdf');
         const btnContainer = document.getElementById('hide_in_pdf');
         
-        btnContainer.style.display = 'none'; // Ocultar botón durante captura
+        btnContainer.style.display = 'none';
         
-        // Temporarily reset background to white for PDF capture
+        // Remove padding temporarily for html2pdf to let it use its own margin
+        const originalPadding = elemento.style.padding;
+        elemento.style.padding = '0';
         document.body.style.background = 'white'; 
         
         const opt = {
-            margin:       [0, 0, 0, 0],
+            margin:       0.5,
             filename:     'Lista_Asistencia_{{ curso.id }}.pdf',
             image:        { type: 'jpeg', quality: 0.98 },
             html2canvas:  { scale: 2, useCORS: true },
-            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-            pagebreak:    { mode: 'css', before: '.hoja_pdf' }
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
         };
 
         html2pdf().set(opt).from(elemento).save().then(() => {
-            btnContainer.style.display = 'block'; // Restaurar botón
-            document.body.style.background = '#525659'; // Restaurar fondo oscuro web
+            btnContainer.style.display = 'block';
+            elemento.style.padding = originalPadding || '0.5in';
+            document.body.style.background = '#525659';
         });
     }
 </script>
