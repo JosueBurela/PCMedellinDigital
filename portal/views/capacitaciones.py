@@ -249,15 +249,29 @@ def editar_inscripcion_capacitacion(request, inscripcion_id):
 @requiere_operador_aprobado
 def eliminar_inscripcion_capacitacion(request, inscripcion_id):
     """
-    Elimina permanentemente una inscripción / registro de constancia desde el panel administrativo.
+    Elimina una inscripción (y su constancia si existe) del sistema permanentemente.
     """
     inscripcion = get_object_or_404(InscripcionCapacitacion, id=inscripcion_id)
     curso_id = inscripcion.curso.id
     nombre = inscripcion.nombre_completo
-    folio = inscripcion.folio_constancia
     inscripcion.delete()
-    messages.success(request, f"Se eliminó correctamente la constancia '{folio}' a nombre de {nombre}.")
+    messages.success(request, f"La inscripción y constancia de '{nombre}' fue eliminada permanentemente.")
     return redirect(f'/capacitaciones/admin/?curso_id={curso_id}')
+
+
+@requiere_operador_aprobado
+def imprimir_lista_asistencia(request, curso_id):
+    """
+    Genera el formato HTML de la Lista de Asistencia de un curso para imprimir o guardar como PDF.
+    Contiene espacio para firma y logotipos oficiales.
+    """
+    curso = get_object_or_404(CursoCapacitacion, id=curso_id)
+    inscritos = InscripcionCapacitacion.objects.filter(curso=curso).order_by('nombre_completo')
+    
+    return render(request, 'portal/capacitacion_lista_asistencia.html', {
+        'curso': curso,
+        'inscritos': inscritos
+    })
 
 
 @requiere_operador_aprobado
@@ -460,4 +474,3 @@ def generar_qr_registro_con_logo(request):
     buffer = io.BytesIO()
     qr_img.save(buffer, format='PNG')
     return HttpResponse(buffer.getvalue(), content_type='image/png')
-

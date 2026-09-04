@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lista de Asistencia - {{ curso.titulo }}</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+    @page { size: letter portrait; margin: 0; }
+    body { font-family: 'Arial', sans-serif; background: #525659; margin: 0; display: flex; justify-content: center; flex-direction: column; align-items: center; }
+    
+    .hoja_pdf { 
+        width: 8.5in; 
+        height: 11in; 
+        background: white; 
+        padding: 0.5in; 
+        box-sizing: border-box; 
+        position: relative; 
+        margin-bottom: 10px;
+        page-break-after: always;
+    }
+    
+    .print-btn-container { position: fixed; top: 1rem; right: 1rem; z-index: 50; }
+    .print-btn { background: #5A123E; color: white; padding: 0.75rem 1.5rem; font-weight: bold; border-radius: 0.5rem; cursor: pointer; border: none; font-size: 1rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); }
+    .print-btn:hover { background: #4a0f33; }
+
+    /* Estilos del Formato */
+    .encabezado { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #5A123E; padding-bottom: 10px; margin-bottom: 20px; }
+    .encabezado img { height: 70px; }
+    .titulo-container { text-align: center; flex-grow: 1; padding: 0 15px; }
+    .titulo { font-size: 16px; font-weight: bold; color: #5A123E; text-transform: uppercase; margin: 0;}
+    .subtitulo { font-size: 12px; font-weight: normal; color: #333; margin-top: 5px; }
+    
+    table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+    th, td { border: 1px solid #000; padding: 8px 5px; text-align: left; font-size: 11px; }
+    th { background-color: #f3f4f6; text-align: center; font-weight: bold; font-size: 10px; color: #5A123E; text-transform: uppercase;}
+    
+    .numero { text-align: center; font-weight: bold; width: 30px;}
+    .firma-espacio { width: 180px; }
+    
+    /* Footer */
+    .footer { position: absolute; bottom: 0.5in; left: 0.5in; right: 0.5in; font-size: 9px; color: #666; text-align: center; border-top: 1px solid #ccc; padding-top: 5px; }
+</style>
+</head>
+<body>
+
+<div class="print-btn-container" id="hide_in_pdf">
+    <button class="print-btn" onclick="generarPDF()">Descargar PDF</button>
+</div>
+
+<div id="contenedor_paginas">
+    <!-- Chunking the items so they fit nicely on pages -->
+    {% if inscritos %}
+    <div class="hoja_pdf">
+        
+        <div class="encabezado">
+            <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Protección Civil">
+            <div class="titulo-container">
+                <h1 class="titulo">LISTA OFICIAL DE ASISTENCIA</h1>
+                <div class="subtitulo">
+                    <strong>Curso/Taller:</strong> {{ curso.titulo }} <br>
+                    <strong>Fecha:</strong> {{ curso.fecha_inicio|date:"d \d\e F \d\e Y" }} | <strong>Sede:</strong> {{ curso.sede_ubicacion }}
+                </div>
+            </div>
+            <img src="{% static 'portal/img/medellin_logo.png' %}" alt="Medellín">
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="numero">#</th>
+                    <th>Nombre Completo del Participante</th>
+                    <th>Institución / Empresa</th>
+                    <th class="firma-espacio">Firma de Asistencia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in inscritos %}
+                <tr>
+                    <td class="numero">{{ forloop.counter }}</td>
+                    <td style="font-weight: bold;">{{ p.nombre_completo }}</td>
+                    <td>{{ p.empresa_institucion|default:"PARTICULAR" }}</td>
+                    <td class="firma-espacio"></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="footer">
+            Generado automáticamente por el Sistema Digital de Protección Civil Medellín - {{ request.user.username|default:"Admin" }}
+        </div>
+    </div>
+    {% else %}
+    <div class="hoja_pdf">
+        <h2 style="text-align:center; padding-top: 50px;">No hay participantes registrados.</h2>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    function generarPDF() {
+        const elemento = document.getElementById('contenedor_paginas');
+        const btnContainer = document.getElementById('hide_in_pdf');
+        
+        btnContainer.style.display = 'none'; // Ocultar botón durante captura
+        
+        // Temporarily reset background to white for PDF capture
+        document.body.style.background = 'white'; 
+        
+        const opt = {
+            margin:       [0, 0, 0, 0],
+            filename:     'Lista_Asistencia_{{ curso.id }}.pdf',
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2, useCORS: true },
+            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+            pagebreak:    { mode: 'css', before: '.hoja_pdf' }
+        };
+
+        html2pdf().set(opt).from(elemento).save().then(() => {
+            btnContainer.style.display = 'block'; // Restaurar botón
+            document.body.style.background = '#525659'; // Restaurar fondo oscuro web
+        });
+    }
+</script>
+
+</body>
+</html>
