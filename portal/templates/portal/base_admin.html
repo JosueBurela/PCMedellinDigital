@@ -222,6 +222,18 @@
         }, 5000);
     </script>
     
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw-intranet.js').then((registration) => {
+                    console.log('ServiceWorker PWA registrado con éxito: ', registration.scope);
+                }, (err) => {
+                    console.log('Fallo al registrar ServiceWorker PWA: ', err);
+                });
+            });
+        }
+    </script>
+    
     {% block extra_scripts %}{% endblock %}
 </body>
 </html>
