@@ -1,0 +1,229 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Intranet Administrativa{% endblock %} | PCivil Medellín</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        medellinVino: '#5A123E',
+                        medellinOro: '#E59E27',
+                        medellinFondo: '#F8FAFC',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- PWA Setup -->
+    <link rel="manifest" href="{% static 'portal/intranet_manifest.json' %}">
+    <meta name="theme-color" content="#5A123E">
+    <link rel="apple-touch-icon" href="{% static 'portal/img/logo_qr_pc_clean.png' %}">
+    
+    <style>
+        /* Custom scrollbar for a native app feel */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body class="bg-medellinFondo min-h-screen text-slate-800 font-sans antialiased flex overflow-hidden">
+
+    <!-- SIDEBAR (Menú Lateral) -->
+    <aside class="w-64 bg-medellinVino text-white flex-shrink-0 flex flex-col transition-all duration-300 z-40 hidden md:flex h-screen border-r border-[#430d2e]">
+        <!-- Brand -->
+        <div class="h-16 flex items-center px-4 border-b border-[#731950]">
+            <img src="{% static 'portal/img/logo_qr_pc_clean.png' %}" alt="Logo PC" class="h-10 w-10 object-contain mr-3">
+            <div class="flex flex-col">
+                <span class="text-xs font-bold text-medellinOro tracking-widest uppercase">Intranet</span>
+                <span class="text-sm font-extrabold leading-tight">PC Medellín</span>
+            </div>
+        </div>
+
+        <!-- Navigation Links -->
+        <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+            
+            <a href="{% url 'intranet_hub' %}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {% if request.resolver_match.url_name == 'intranet_hub' %}bg-white/10 text-white font-bold shadow-inner{% else %}text-white/70 hover:bg-white/5 hover:text-white font-medium{% endif %}">
+                <i data-lucide="layout-grid" class="w-5 h-5 {% if request.resolver_match.url_name == 'intranet_hub' %}text-medellinOro{% endif %}"></i>
+                Panel Principal
+            </a>
+
+            <div class="pt-4 pb-1">
+                <p class="px-3 text-[10px] font-black tracking-wider text-white/40 uppercase">Módulos Administrativos</p>
+            </div>
+
+            <a href="{% url 'admin_vehiculos_dashboard' %}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {% if 'vehiculos' in request.path %}bg-white/10 text-white font-bold shadow-inner{% else %}text-white/70 hover:bg-white/5 hover:text-white font-medium{% endif %}">
+                <i data-lucide="ambulance" class="w-5 h-5 {% if 'vehiculos' in request.path %}text-medellinOro{% endif %}"></i>
+                Control de Flotilla
+            </a>
+
+            <a href="{% url 'admin_capacitaciones_dashboard' %}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {% if 'capacitaciones' in request.path %}bg-white/10 text-white font-bold shadow-inner{% else %}text-white/70 hover:bg-white/5 hover:text-white font-medium{% endif %}">
+                <i data-lucide="graduation-cap" class="w-5 h-5 {% if 'capacitaciones' in request.path %}text-medellinOro{% endif %}"></i>
+                Capacitaciones
+            </a>
+
+            <!-- Módulos Futuros (Deshabilitados por ahora o links al admin de django) -->
+            <a href="/admin/" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition text-white/70 hover:bg-white/5 hover:text-white font-medium">
+                <i data-lucide="newspaper" class="w-5 h-5"></i>
+                Noticias y Avisos
+            </a>
+
+            <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded-xl transition text-white/40 font-medium cursor-not-allowed">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="file-signature" class="w-5 h-5"></i>
+                    Trámites
+                </div>
+                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+            </a>
+
+            <div class="pt-4 pb-1">
+                <p class="px-3 text-[10px] font-black tracking-wider text-white/40 uppercase">Configuración</p>
+            </div>
+
+            <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded-xl transition text-white/40 font-medium cursor-not-allowed">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="users-round" class="w-5 h-5"></i>
+                    Personal y Roles
+                </div>
+                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+            </a>
+
+        </nav>
+
+        <!-- User Profile (Bottom) -->
+        <div class="p-4 border-t border-[#731950] bg-black/10">
+            <div class="flex items-center gap-3 mb-3">
+                <div class="w-9 h-9 rounded-full bg-medellinOro flex items-center justify-center text-medellinVino font-black">
+                    {{ request.user.username|first|upper|default:"A" }}
+                </div>
+                <div class="flex flex-col overflow-hidden">
+                    <span class="text-xs font-bold text-white truncate">{{ request.user.username|default:"Administrador" }}</span>
+                    <span class="text-[10px] text-white/60 truncate">Nivel Administrador</span>
+                </div>
+            </div>
+            <a href="/" class="w-full flex items-center justify-center gap-2 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-bold transition">
+                <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Cerrar Sesión
+            </a>
+        </div>
+    </aside>
+
+    <!-- CONTENT AREA -->
+    <div class="flex-1 flex flex-col h-screen overflow-hidden">
+        
+        <!-- TOP NAVBAR (Mobile Menu & Breadcrumbs) -->
+        <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 sm:px-6 z-30">
+            <div class="flex items-center gap-3">
+                <!-- Botón Menú Móvil -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 text-slate-500 hover:text-medellinVino hover:bg-slate-100 rounded-xl transition">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+                <!-- Título o Breadcrumbs -->
+                <h2 class="text-sm sm:text-base font-extrabold text-slate-800 flex items-center gap-2">
+                    {% block page_title %}Módulo de Administración{% endblock %}
+                </h2>
+            </div>
+
+            <!-- Botones de Acción Globales (Opcional) -->
+            <div class="flex items-center gap-2">
+                {% block top_actions %}{% endblock %}
+            </div>
+        </header>
+
+        <!-- DJANGO MESSAGES -->
+        <div id="messages-container" class="absolute top-16 left-0 right-0 z-50 px-4 pt-4 md:px-8 max-w-5xl mx-auto pointer-events-none">
+            {% if messages %}
+                {% for message in messages %}
+                <div class="pointer-events-auto p-4 mb-2 rounded-xl text-sm font-semibold flex items-center justify-between shadow-lg {% if message.tags == 'error' %}bg-red-50 text-red-700 border-l-4 border-red-500{% elif message.tags == 'warning' %}bg-amber-50 text-amber-700 border-l-4 border-amber-500{% else %}bg-emerald-50 text-emerald-700 border-l-4 border-emerald-500{% endif %} animate-fade-in-down">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="{% if message.tags == 'error' %}alert-octagon{% elif message.tags == 'warning' %}alert-triangle{% else %}check-circle{% endif %}" class="w-5 h-5"></i>
+                        <span>{{ message }}</span>
+                    </div>
+                    <button onclick="this.parentElement.remove()" class="ml-4 opacity-50 hover:opacity-100"><i data-lucide="x" class="w-4 h-4"></i></button>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <!-- MAIN SCROLLABLE CONTENT -->
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6 md:p-8 bg-slate-50">
+            <div class="max-w-6xl mx-auto">
+                {% block content %}
+                <!-- Contenido principal aquí -->
+                {% endblock %}
+            </div>
+        </main>
+        
+    </div>
+
+    <!-- Menú Lateral Móvil (Overlay) -->
+    <div id="mobileSidebar" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden md:hidden">
+        <div class="w-64 h-full bg-medellinVino flex flex-col shadow-2xl relative" id="mobileSidebarContent">
+            <!-- Close btn -->
+            <button id="closeMobileMenuBtn" class="absolute top-4 right-4 text-white/50 hover:text-white p-2">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            
+            <div class="p-6">
+                <h2 class="text-white font-extrabold text-xl">Intranet PC</h2>
+            </div>
+            
+            <nav class="flex-1 overflow-y-auto px-4 space-y-2">
+                <a href="{% url 'intranet_hub' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl transition {% if request.resolver_match.url_name == 'intranet_hub' %}bg-white/10 text-white font-bold{% else %}text-white/70 hover:bg-white/5{% endif %}">
+                    <i data-lucide="layout-grid" class="w-5 h-5"></i> Panel Principal
+                </a>
+                <a href="{% url 'admin_vehiculos_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl transition {% if 'vehiculos' in request.path %}bg-white/10 text-white font-bold{% else %}text-white/70 hover:bg-white/5{% endif %}">
+                    <i data-lucide="ambulance" class="w-5 h-5"></i> Flotilla
+                </a>
+                <a href="{% url 'admin_capacitaciones_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl transition {% if 'capacitaciones' in request.path %}bg-white/10 text-white font-bold{% else %}text-white/70 hover:bg-white/5{% endif %}">
+                    <i data-lucide="graduation-cap" class="w-5 h-5"></i> Capacitaciones
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        
+        // Lógica del menú móvil
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const closeBtn = document.getElementById('closeMobileMenuBtn');
+        const mobileSidebar = document.getElementById('mobileSidebar');
+        
+        if(mobileBtn && mobileSidebar) {
+            mobileBtn.addEventListener('click', () => {
+                mobileSidebar.classList.remove('hidden');
+            });
+            closeBtn.addEventListener('click', () => {
+                mobileSidebar.classList.add('hidden');
+            });
+            mobileSidebar.addEventListener('click', (e) => {
+                if(e.target === mobileSidebar) mobileSidebar.classList.add('hidden');
+            });
+        }
+
+        // Auto ocultar mensajes después de 5 segundos
+        setTimeout(() => {
+            const msgs = document.querySelectorAll('#messages-container > div');
+            msgs.forEach(msg => {
+                msg.style.transition = 'opacity 0.5s, transform 0.5s';
+                msg.style.opacity = '0';
+                msg.style.transform = 'translateY(-10px)';
+                setTimeout(() => msg.remove(), 500);
+            });
+        }, 5000);
+    </script>
+    
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

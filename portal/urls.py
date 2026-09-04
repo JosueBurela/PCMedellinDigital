@@ -10,6 +10,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('intranet/', views.intranet_hub, name='intranet_hub'),
     path('admin-login/', views.login_administrativo, name='login_admin'),
     path('acceso-ciudadano/', views.login_ciudadano, name='login_ciudadano'),
     path('login/', views.acceso_unificado, name='login_unificado'),

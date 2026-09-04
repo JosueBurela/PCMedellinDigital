@@ -1,0 +1,342 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lote de Constancias ({{ total }}) - {{ curso.titulo }} | Protección Civil Medellín</title>
+<link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- GOOGLE FONTS, JSZIP, FILESAVER Y HTML2PDF -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+  @page {
+    size: letter landscape;
+    margin: 0;
+  }
+
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+    body {
+      background: white !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    .cert-page {
+      page-break-after: always !important;
+      break-after: page !important;
+      width: 100vw !important;
+      height: 100vh !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .cert-container {
+      width: 100% !important;
+      height: 100% !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      margin: 0 !important;
+    }
+  }
+
+  body {
+    background-color: #0F172A;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .font-cinzel { font-family: 'Cinzel', serif; }
+  .font-garamond { font-family: 'Cormorant Garamond', serif; }
+  .font-montserrat { font-family: 'Montserrat', sans-serif; }
+
+  .cert-container {
+    width: 1056px;
+    height: 816px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+</style>
+</head>
+<body class="min-h-screen flex flex-col items-center">
+
+<!-- BARRA SUPERIOR FIJA DE ACCIONES MASIVAS -->
+<header class="no-print sticky top-0 z-50 w-full bg-[#5A123E] border-b border-amber-500/30 text-white px-4 py-3 shadow-xl backdrop-blur-md">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-2xl bg-amber-500 text-slate-950 flex items-center justify-center font-black shadow-md">
+        <i data-lucide="archive" class="w-5 h-5"></i>
+      </div>
+      <div>
+        <h1 class="text-sm font-black text-white flex items-center gap-2">
+          {{ curso.titulo }}
+          <span class="bg-emerald-500 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-full">{{ total }} Constancias Aprobadas</span>
+        </h1>
+        <p class="text-[11px] text-amber-200">Generación masiva oficial de certificados en formato PDF.</p>
+      </div>
+    </div>
+
+    <!-- BOTONES DE ACCIÓN MASIVA -->
+    <div class="flex items-center gap-2">
+      <button id="btnGenerarZip" onclick="iniciarDescargaZIP()" class="bg-[#5B7B34] hover:bg-[#486328] text-white font-extrabold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow-lg transition transform active:scale-95">
+        <i data-lucide="folder-down" class="w-4 h-4 text-emerald-300"></i>
+        <span id="btnZipText">Descargar Todas en ZIP (.zip)</span>
+      </button>
+
+      <button onclick="window.print()" class="bg-medellinOro hover:bg-amber-600 text-slate-950 font-extrabold px-3.5 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-lg transition">
+        <i data-lucide="printer" class="w-4 h-4"></i>
+        <span>Imprimir Lote ({{ total }} Páginas)</span>
+      </button>
+
+      <a href="/capacitaciones/admin/?curso_id={{ curso.id }}" class="bg-white/10 hover:bg-white/20 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1 transition">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+        <span>Volver al Panel</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- BARRA DE PROGRESO DE DESCARGA ZIP -->
+  <div id="progresoZipContainer" class="hidden max-w-7xl mx-auto mt-2 pt-2 border-t border-white/10 space-y-1">
+    <div class="flex items-center justify-between text-[11px] font-bold">
+      <span id="progresoZipTexto" class="text-amber-200 flex items-center gap-2">
+        <i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Generando constancias en PDF...
+      </span>
+      <span id="progresoZipPorcentaje" class="text-white">0%</span>
+    </div>
+    <div class="w-full bg-black/30 rounded-full h-2.5 overflow-hidden">
+      <div id="progresoZipBarra" class="bg-gradient-to-r from-amber-400 to-emerald-400 h-2.5 rounded-full transition-all duration-200" style="width: 0%"></div>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENEDOR DE TODAS LAS CONSTANCIAS EN CASCADA -->
+<div class="w-full flex flex-col items-center gap-8 py-6">
+  {% for ins in inscritos %}
+  <div class="cert-page flex justify-center w-full">
+    <div id="cert-{{ forloop.counter }}" data-nombre="{{ ins.nombre_completo|slugify }}" data-folio="{{ ins.folio_constancia }}" class="cert-container certificate-container bg-white px-10 py-8 relative flex flex-col justify-between border-[25px] border-[#7a0c14] shadow-2xl overflow-hidden font-sans">
+      
+      <!-- CAPA DE FONDO: ILUSTRACIÓN DE MEDELLÍN -->
+      <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-0">
+        <div class="flex flex-col items-center justify-center translate-y-6">
+          <span class="text-[34px] font-montserrat font-black text-slate-300/40 tracking-[0.2em] uppercase select-none mb-1">
+            POR LA GRANDEZA DE
+          </span>
+          <img src="{% static 'portal/img/fondo_medellin_ilustracion.jpg' %}" alt="Ilustración Medellín" class="w-[500px] opacity-[0.15] object-contain">
+        </div>
+      </div>
+
+      <!-- ENCABEZADO SUPERIOR INSTITUCIONAL -->
+      <div class="flex items-center justify-between w-full relative z-10">
+        <!-- LOGO PROTECCIÓN CIVIL MEDELLÍN -->
+        <div class="w-24 h-24 flex items-center justify-center">
+          <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Protección Civil" class="max-h-full max-w-full object-contain filter drop-shadow-sm">
+        </div>
+
+        <!-- TÍTULOS CENTRALES -->
+        <div class="text-center flex-1 px-4 space-y-1">
+          <h1 class="text-[20px] font-montserrat font-black text-slate-900 tracking-wider uppercase leading-snug">
+            Protección Civil de Medellín<br>de Bravo
+          </h1>
+          <h2 class="text-[13px] font-montserrat font-bold text-slate-900 tracking-[0.25em] uppercase">
+            Otorga la Presente
+          </h2>
+        </div>
+
+        <!-- ESCUDO OFICIAL DE MEDELLÍN DE BRAVO -->
+        <div class="w-24 h-24 flex items-center justify-center">
+          <img src="{% static 'portal/img/escudo_medellin_vector.png' %}" alt="Escudo Medellín de Bravo" class="max-h-full max-w-full object-contain filter drop-shadow-sm">
+        </div>
+      </div>
+
+      <!-- CUERPO PRINCIPAL DEL DIPLOMA -->
+      <div class="text-center my-auto py-2 relative z-10 space-y-4">
+        <div class="space-y-1">
+          <h3 class="text-[54px] font-cinzel font-bold text-[#1E3A5F] tracking-wide uppercase leading-none">
+            Constancia
+          </h3>
+          <p class="text-[20px] font-cinzel font-bold text-slate-900 tracking-widest uppercase">
+            A: {{ ins.nombre_completo }}
+          </p>
+        </div>
+
+        <div class="space-y-1.5 max-w-3xl mx-auto">
+          <p class="text-[19px] font-garamond italic text-slate-700 font-medium">
+            Por haber participado en el taller de
+          </p>
+          <h4 class="text-[28px] font-cinzel font-bold text-slate-900 tracking-wide uppercase leading-tight">
+            {{ ins.curso.titulo }}
+          </h4>
+          <p class="text-[14px] font-garamond italic text-slate-600 font-medium">
+            {{ fecha_pie }}
+          </p>
+        </div>
+      </div>
+
+      <!-- PIE DE PÁGINA: FIRMA OFICIAL Y CÓDIGO QR -->
+      <div class="relative z-10 w-full pt-1 flex items-end justify-between">
+        <div class="w-16"></div>
+
+        <!-- BLOQUE CENTRAL DE FIRMA -->
+        <div class="text-center flex flex-col items-center">
+          <div class="w-64 border-b-2 border-slate-900 mb-1.5"></div>
+          <p class="text-[11px] font-montserrat font-extrabold text-slate-900 uppercase tracking-wider">
+            Lic. Daniel Eduardo Romero Pilar
+          </p>
+          <p class="text-[8.5px] font-montserrat font-bold text-slate-800 uppercase tracking-normal leading-tight">
+            Agente Capacitador Externo STPS: ROPD-910123-K75-0005
+          </p>
+          <p class="text-[8px] font-montserrat font-semibold text-slate-600 uppercase tracking-tight leading-tight">
+            Titular de la Unidad Municipal de Protección Civil y Bomberos de Medellín de Bravo
+          </p>
+        </div>
+
+        <!-- CÓDIGO QR OFICIAL -->
+        <div class="flex flex-col items-center">
+          <div class="bg-white p-1 rounded-lg border border-slate-300 shadow-sm">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://107-170-59-223.sslip.io/capacitaciones/validar/{{ ins.codigo_qr_token }}/" alt="Código QR Validación" class="w-14 h-14 object-contain">
+          </div>
+          <span class="text-[7.5px] font-mono font-bold text-slate-500 mt-0.5 tracking-tighter">
+            {{ ins.folio_constancia }}
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<script>
+  lucide.createIcons();
+
+  let zipGenerando = false;
+
+  async function iniciarDescargaZIP() {
+    if (zipGenerando) return;
+    zipGenerando = true;
+
+    const certs = document.querySelectorAll('.certificate-container');
+    if (certs.length === 0) {
+      alert("No hay constancias disponibles para empaquetar.");
+      zipGenerando = false;
+      return;
+    }
+
+    const btn = document.getElementById('btnGenerarZip');
+    const btnText = document.getElementById('btnZipText');
+    const progresoContainer = document.getElementById('progresoZipContainer');
+    const progresoTexto = document.getElementById('progresoZipTexto');
+    const progresoPorcentaje = document.getElementById('progresoZipPorcentaje');
+    const progresoBarra = document.getElementById('progresoZipBarra');
+
+    btn.disabled = true;
+    btn.classList.add('opacity-50', 'cursor-not-allowed');
+    progresoContainer.classList.remove('hidden');
+
+    const zip = new JSZip();
+    const total = certs.length;
+
+    // Asegurar scroll al inicio
+    window.scrollTo(0, 0);
+
+    const opt = {
+      margin: 0,
+      image: { type: 'jpeg', quality: 1.0 },
+      html2canvas: {
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        scrollX: 0,
+        scrollY: 0,
+        x: 0,
+        y: 0,
+        width: 1056,
+        height: 816,
+        windowWidth: 1056,
+        windowHeight: 816
+      },
+      jsPDF: { unit: 'px', format: [1056, 816], orientation: 'landscape', hotfixes: ['px_scaling'] }
+    };
+
+    try {
+      for (let i = 0; i < total; i++) {
+        const el = certs[i];
+        const folio = el.getAttribute('data-folio') || `folio_${i+1}`;
+        const nombre = el.getAttribute('data-nombre') || `participante_${i+1}`;
+        const filename = `Constancia_${folio}_${nombre}.pdf`;
+
+        // Actualizar progreso
+        const actual = i + 1;
+        const pct = Math.round((actual / total) * 100);
+        progresoTexto.innerHTML = `<i data-lucide="loader-2" class="w-3.5 h-3.5 animate-spin"></i> Generando PDF (${actual} de ${total}): ${nombre.toUpperCase()}`;
+        progresoPorcentaje.textContent = `${pct}%`;
+        progresoBarra.style.width = `${pct}%`;
+        lucide.createIcons();
+
+        // Fijar temporalmente el elemento exactamente en (0, 0) sin desfase ni scrolls
+        const origCss = el.style.cssText;
+        el.style.position = 'fixed';
+        el.style.top = '0px';
+        el.style.left = '0px';
+        el.style.margin = '0px';
+        el.style.zIndex = '99999';
+        el.style.transform = 'none';
+
+        await new Promise(r => setTimeout(r, 60));
+
+        // Generar Blob PDF exactamente como en la vista individual perfecta
+        const pdfBlob = await html2pdf().set(opt).from(el).outputPdf('blob');
+        zip.file(filename, pdfBlob);
+
+        // Restaurar estilos originales
+        el.style.cssText = origCss;
+      }
+
+      progresoTexto.innerHTML = `<i data-lucide="package-check" class="w-3.5 h-3.5 text-emerald-400"></i> Empaquetando archivo ZIP...`;
+      lucide.createIcons();
+
+      const zipBlob = await zip.generateAsync({ type: 'blob' }, (metadata) => {
+        const pct = Math.round(metadata.percent);
+        progresoPorcentaje.textContent = `${pct}%`;
+        progresoBarra.style.width = `${pct}%`;
+      });
+
+      const cursoNombre = '{{ curso.titulo|slugify }}';
+      saveAs(zipBlob, `Constancias_Oficiales_${cursoNombre}.zip`);
+
+      progresoTexto.innerHTML = `✅ ¡Descarga completa! Archivo ZIP guardado.`;
+      setTimeout(() => {
+        progresoContainer.classList.add('hidden');
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+        btnText.textContent = "Descargar Todas en ZIP (.zip)";
+        zipGenerando = false;
+      }, 3000);
+
+    } catch (err) {
+      console.error("Error al generar lote ZIP:", err);
+      alert("Ocurrió un error al procesar el lote: " + err.message);
+      progresoContainer.classList.add('hidden');
+      btn.disabled = false;
+      btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      zipGenerando = false;
+    }
+  }
+</script>
+
+</body>
+</html>
