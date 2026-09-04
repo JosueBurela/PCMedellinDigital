@@ -970,9 +970,16 @@ class InscripcionCapacitacion(models.Model):
             
         # Generar folio único automático si no existe
         if not self.folio_constancia:
-            ultimo = InscripcionCapacitacion.objects.filter(folio_constancia__isnull=False).count() + 1
+            last_inscripcion = InscripcionCapacitacion.objects.order_by('id').last()
+            ultimo = (last_inscripcion.id + 1) if last_inscripcion else 1
             year = timezone.now().year
-            self.folio_constancia = f"CONST-{year}-PC-{ultimo:04d}"
+            
+            folio_temporal = f"CONST-{year}-PC-{ultimo:04d}"
+            while InscripcionCapacitacion.objects.filter(folio_constancia=folio_temporal).exists():
+                ultimo += 1
+                folio_temporal = f"CONST-{year}-PC-{ultimo:04d}"
+                
+            self.folio_constancia = folio_temporal
             
         super().save(*args, **kwargs)
 
