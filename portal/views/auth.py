@@ -25,7 +25,9 @@ def login_ciudadano(request):
 
 def acceso_unificado(request):
     if request.user.is_authenticated:
-        return redirect('dashboard_admin')
+        if request.user.is_staff or hasattr(request.user, 'rol_nivel'):
+            return redirect('intranet_hub')
+        return redirect('home')
     if request.session.get('ciudadano_curp') or request.session.get('ciudadano_id'):
         return redirect('home')
         
@@ -72,7 +74,7 @@ def acceso_unificado(request):
                 else:
                     login(request, user)
                     messages.success(request, f"Sesión de personal iniciada: {user.first_name or user.username}.")
-                    return redirect('dashboard_admin')
+                    return redirect('intranet_hub')
             else:
                 messages.error(request, "Credenciales incorrectas. Por favor verifica tu usuario o correo y contraseña.")
                 
@@ -125,7 +127,7 @@ def reenviar_codigo_2fa(request):
 
 def registro_personal(request):
     if request.user.is_authenticated:
-        return redirect('dashboard_admin')
+        return redirect('intranet_hub')
         
     if request.method == 'POST':
         usuario = request.POST.get('username')
@@ -180,7 +182,7 @@ def logout_vista(request):
 def aprobar_personal(request, usuario_id):
     if request.user.rol_nivel != 'SUPER':
         messages.error(request, "Acceso denegado.")
-        return redirect('dashboard_admin')
+        return redirect('intranet_hub')
         
     usuario = get_object_or_404(PersonalAdministrativo, id=usuario_id)
     usuario.is_active = True
@@ -192,7 +194,7 @@ def aprobar_personal(request, usuario_id):
 def desactivar_personal(request, usuario_id):
     if request.user.rol_nivel != 'SUPER':
         messages.error(request, "Acceso denegado.")
-        return redirect('dashboard_admin')
+        return redirect('intranet_hub')
         
     usuario = get_object_or_404(PersonalAdministrativo, id=usuario_id)
     if usuario == request.user:
@@ -208,7 +210,7 @@ def desactivar_personal(request, usuario_id):
 def eliminar_personal(request, usuario_id):
     if request.user.rol_nivel != 'SUPER':
         messages.error(request, "Acceso denegado.")
-        return redirect('dashboard_admin')
+        return redirect('intranet_hub')
         
     usuario = get_object_or_404(PersonalAdministrativo, id=usuario_id)
     if usuario == request.user:

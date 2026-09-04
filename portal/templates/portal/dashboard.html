@@ -185,6 +185,13 @@
         </div>
 
         <nav class="flex-1 p-4 space-y-2 text-sm font-medium overflow-y-auto">
+            <a href="{% url 'intranet_hub' %}" class="flex items-center space-x-3 bg-medellinOro hover:bg-amber-500 text-slate-900 font-extrabold p-3 rounded-xl transition shadow-lg mb-4">
+                <span class="flex items-center space-x-2">
+                    <i data-lucide="layout-grid" class="w-4 h-4"></i>
+                    <span>Ir al Panel Maestro</span>
+                </span>
+            </a>
+
             <a href="{% url 'dashboard_admin' %}" class="flex items-center space-x-3 {% if seccion == 'resumen' or not seccion %}bg-[#43082B] text-white border-l-4 border-medellinOro{% else %}hover:bg-white/5 text-purple-100{% endif %} p-3 rounded-xl transition">
                 <span class="flex items-center space-x-2">
                     <i data-lucide="layout-dashboard" class="w-4 h-4 text-purple-200"></i>

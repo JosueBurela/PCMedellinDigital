@@ -73,30 +73,28 @@
                 Capacitaciones
             </a>
 
-            <!-- Módulos Futuros (Deshabilitados por ahora o links al admin de django) -->
+            <!-- Módulos Adicionales -->
             <a href="/admin/" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition text-white/70 hover:bg-white/5 hover:text-white font-medium">
                 <i data-lucide="newspaper" class="w-5 h-5"></i>
                 Noticias y Avisos
             </a>
 
-            <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded-xl transition text-white/40 font-medium cursor-not-allowed">
+            <a href="{% url 'dashboard_admin' %}" class="flex items-center justify-between px-3 py-2.5 rounded-xl transition text-white/70 hover:bg-white/5 hover:text-white font-medium">
                 <div class="flex items-center gap-3">
                     <i data-lucide="file-signature" class="w-5 h-5"></i>
                     Trámites
                 </div>
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
             </a>
 
             <div class="pt-4 pb-1">
                 <p class="px-3 text-[10px] font-black tracking-wider text-white/40 uppercase">Configuración</p>
             </div>
 
-            <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded-xl transition text-white/40 font-medium cursor-not-allowed">
+            <a href="{% url 'dashboard_admin' %}?seccion=personal" class="flex items-center justify-between px-3 py-2.5 rounded-xl transition text-white/70 hover:bg-white/5 hover:text-white font-medium">
                 <div class="flex items-center gap-3">
                     <i data-lucide="users-round" class="w-5 h-5"></i>
                     Personal y Roles
                 </div>
-                <i data-lucide="lock" class="w-3.5 h-3.5"></i>
             </a>
 
         </nav>
