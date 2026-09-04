@@ -27,21 +27,21 @@
     .print-btn:hover { background: #4a0f33; }
 
     /* Estilos del Formato */
-    .encabezado { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #5A123E; padding-bottom: 10px; margin-bottom: 20px; }
-    .encabezado img { height: 70px; }
-    .titulo-container { text-align: center; flex-grow: 1; padding: 0 15px; }
-    .titulo { font-size: 16px; font-weight: bold; color: #5A123E; text-transform: uppercase; margin: 0;}
-    .subtitulo { font-size: 12px; font-weight: normal; color: #333; margin-top: 5px; }
+    .encabezado { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #5A123E; padding-bottom: 5px; margin-bottom: 10px; }
+    .encabezado img { height: 60px; }
+    .titulo-container { text-align: center; flex-grow: 1; padding: 0 10px; }
+    .titulo { font-size: 14px; font-weight: bold; color: #5A123E; text-transform: uppercase; margin: 0;}
+    .subtitulo { font-size: 10px; font-weight: normal; color: #333; margin-top: 3px; }
     
-    table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
-    th, td { border: 1px solid #000; padding: 8px 5px; text-align: left; font-size: 11px; }
-    th { background-color: #f3f4f6; text-align: center; font-weight: bold; font-size: 10px; color: #5A123E; text-transform: uppercase;}
+    table { width: 100%; border-collapse: collapse; margin-bottom: 5px; }
+    th, td { border: 1px solid #000; padding: 3px 4px; text-align: left; font-size: 9px; }
+    th { background-color: #f3f4f6; text-align: center; font-weight: bold; font-size: 9px; color: #5A123E; text-transform: uppercase;}
     
-    .numero { text-align: center; font-weight: bold; width: 30px;}
-    .firma-espacio { width: 180px; }
+    .numero { text-align: center; font-weight: bold; width: 20px;}
+    .firma-espacio { width: 140px; }
     
     /* Footer */
-    .footer { position: absolute; bottom: 0.5in; left: 0.5in; right: 0.5in; font-size: 9px; color: #666; text-align: center; border-top: 1px solid #ccc; padding-top: 5px; }
+    .footer { position: absolute; bottom: 0.3in; left: 0.5in; right: 0.5in; font-size: 8px; color: #666; text-align: center; border-top: 1px solid #ccc; padding-top: 3px; }
 </style>
 </head>
 <body>
@@ -51,7 +51,6 @@
 </div>
 
 <div id="contenedor_paginas">
-    <!-- Chunking the items so they fit nicely on pages -->
     {% if inscritos %}
     <div class="hoja_pdf">
         
@@ -64,7 +63,7 @@
                     <strong>Fecha:</strong> {{ curso.fecha_inicio|date:"d \d\e F \d\e Y" }} | <strong>Sede:</strong> {{ curso.sede_ubicacion }}
                 </div>
             </div>
-            <img src="{% static 'portal/img/medellin_logo.png' %}" alt="Medellín">
+            <img src="{% static 'portal/img/logo_pc_oficial.png' %}" alt="Protección Civil Oficial">
         </div>
 
         <table>
