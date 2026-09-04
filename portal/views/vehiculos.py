@@ -40,18 +40,25 @@ def obtener_operador_actual(request):
 def requiere_operador_aprobado(view_func):
     """
     Verifica que el trabajador haya iniciado sesión y su cuenta esté ACTIVA con algún rol_vehicular.
+    O que sea un administrador de sistema de la Intranet (Django Auth).
     """
     @wraps(view_func)
     def _wrapped(request, *args, **kwargs):
+        # 1. Checar si es Admin de Sistema (Intranet)
+        if request.user.is_authenticated and (request.user.is_staff or getattr(request.user, 'rol_nivel', '') in ['SUPER', 'VALIDADOR']):
+            request.operador_actual = request.user
+            return view_func(request, *args, **kwargs)
+            
+        # 2. Flujo normal Operadores
         operador = obtener_operador_actual(request)
         if not operador:
-            messages.info(request, "Por favor inicia sesión para acceder al sistema de vehiculos.")
+            messages.info(request, "Por favor inicia sesión para acceder a este módulo.")
             return redirect('login_operador')
         if not operador.is_active:
             messages.error(request, "Tu cuenta de trabajador está desactivada.")
             return redirect('login_operador')
-        if operador.rol_vehicular == 'NINGUNO':
-            messages.error(request, "No tienes permisos de operador vehicular.")
+        if getattr(operador, 'rol_vehicular', 'NINGUNO') == 'NINGUNO':
+            messages.error(request, "No tienes permisos operativos.")
             return redirect('login_operador')
         request.operador_actual = operador
         return view_func(request, *args, **kwargs)
@@ -60,11 +67,17 @@ def requiere_operador_aprobado(view_func):
 
 def requiere_admin_flotilla(view_func):
     """
-    Verifica que el usuario sea ADMINISTRADOR DE FLOTILLA o JEFE_GUARDIA.
-    Los operadores normales NO pueden ingresar a las configuraciones maestras.
+    Verifica que el usuario sea ADMINISTRADOR DE FLOTILLA o JEFE_GUARDIA,
+    o que sea un administrador de sistema (Django Auth).
     """
     @wraps(view_func)
     def _wrapped(request, *args, **kwargs):
+        # 1. Checar si es Admin de Sistema (Intranet)
+        if request.user.is_authenticated and (request.user.is_staff or getattr(request.user, 'rol_nivel', '') in ['SUPER', 'VALIDADOR']):
+            request.operador_actual = request.user # Falso operador_actual para que no truene si lo busca
+            return view_func(request, *args, **kwargs)
+            
+        # 2. Flujo normal para Trabajadores (Operadores de campo)
         operador = obtener_operador_actual(request)
         if not operador:
             messages.error(request, "Acceso denegado. Debes iniciar sesión.")
@@ -72,8 +85,8 @@ def requiere_admin_flotilla(view_func):
         if not operador.is_active:
             messages.error(request, "Tu cuenta está desactivada.")
             return redirect('login_operador')
-        if operador.rol_vehicular not in ['ADMIN', 'JEFE_GUARDIA']:
-            messages.error(request, "⛔ Acceso Denegado: Se requiere rol de Jefe de Guardia o Administrador.")
+        if getattr(operador, 'rol_vehicular', 'NINGUNO') not in ['ADMIN', 'JEFE_GUARDIA']:
+            messages.error(request, "🚨 Acceso Denegado: Se requiere rol de Jefe de Guardia o Administrador.")
             return redirect('flotilla_vehiculos_hub')
         request.operador_actual = operador
         return view_func(request, *args, **kwargs)
