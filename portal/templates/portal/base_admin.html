@@ -42,6 +42,7 @@
 
     <!-- SIDEBAR (Menú Lateral) -->
     <aside class="w-64 bg-medellinVino text-white flex-shrink-0 flex flex-col transition-all duration-300 z-40 hidden md:flex h-screen border-r border-[#430d2e]">
+        {% block sidebar %}
         <!-- Brand -->
         <div class="h-16 flex items-center px-4 border-b border-[#731950]">
             <img src="{% static 'portal/img/logo_qr_pc_clean.png' %}" alt="Logo PC" class="h-10 w-10 object-contain mr-3">
@@ -114,6 +115,7 @@
                 <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Cerrar Sesión
             </a>
         </div>
+        {% endblock sidebar %}
     </aside>
 
     <!-- CONTENT AREA -->
@@ -172,6 +174,7 @@
                 <i data-lucide="x" class="w-6 h-6"></i>
             </button>
             
+            {% block mobile_sidebar %}
             <div class="p-6">
                 <h2 class="text-white font-extrabold text-xl">Intranet PC</h2>
             </div>
@@ -186,7 +189,11 @@
                 <a href="{% url 'admin_capacitaciones_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl transition {% if 'capacitaciones' in request.path %}bg-white/10 text-white font-bold{% else %}text-white/70 hover:bg-white/5{% endif %}">
                     <i data-lucide="graduation-cap" class="w-5 h-5"></i> Capacitaciones
                 </a>
+                <a href="{% url 'dashboard_admin' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl transition {% if request.resolver_match.url_name == 'dashboard_admin' %}bg-white/10 text-white font-bold{% else %}text-white/70 hover:bg-white/5{% endif %}">
+                    <i data-lucide="file-signature" class="w-5 h-5"></i> Trámites
+                </a>
             </nav>
+            {% endblock mobile_sidebar %}
         </div>
     </div>
 
