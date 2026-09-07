@@ -1,4 +1,4 @@
-const CACHE_NAME = 'intranet-pc-v1';
+const CACHE_NAME = 'intranet-pc-v2';
 const ASSETS_TO_CACHE = [
   '/intranet/',
   '/static/portal/intranet_manifest.json',
@@ -6,7 +6,6 @@ const ASSETS_TO_CACHE = [
   '/static/portal/img/logo_medellin.jpg'
 ];
 
-// Instalar el Service Worker
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
@@ -17,7 +16,6 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Activar y limpiar cachés viejos
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -33,7 +31,6 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Estrategia de Fetch (Red primero, si falla va a caché)
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(event.request).catch(() => {

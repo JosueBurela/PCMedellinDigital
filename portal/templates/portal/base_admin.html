@@ -63,8 +63,8 @@
                 <p class="px-3 text-[10px] font-black tracking-wider text-white/40 uppercase">Módulos Administrativos</p>
             </div>
 
-            <a href="{% url 'admin_vehiculos_dashboard' %}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {% if 'vehiculos' in request.path %}bg-white/10 text-white font-bold shadow-inner{% else %}text-white/70 hover:bg-white/5 hover:text-white font-medium{% endif %}">
-                <i data-lucide="ambulance" class="w-5 h-5 {% if 'vehiculos' in request.path %}text-medellinOro{% endif %}"></i>
+            <a href="{% url 'admin_vehiculos_dashboard' %}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {% if 'flotilla' in request.path or 'vehiculos' in request.path %}bg-white/10 text-white font-bold shadow-inner{% else %}text-white/70 hover:bg-white/5 hover:text-white font-medium{% endif %}">
+                <i data-lucide="ambulance" class="w-5 h-5 {% if 'flotilla' in request.path or 'vehiculos' in request.path %}text-medellinOro{% endif %}"></i>
                 Control de Flotilla
             </a>
 
@@ -180,7 +180,7 @@
                 <a href="{% url 'intranet_hub' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl transition {% if request.resolver_match.url_name == 'intranet_hub' %}bg-white/10 text-white font-bold{% else %}text-white/70 hover:bg-white/5{% endif %}">
                     <i data-lucide="layout-grid" class="w-5 h-5"></i> Panel Principal
                 </a>
-                <a href="{% url 'admin_vehiculos_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl transition {% if 'vehiculos' in request.path %}bg-white/10 text-white font-bold{% else %}text-white/70 hover:bg-white/5{% endif %}">
+                <a href="{% url 'admin_vehiculos_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl transition {% if 'flotilla' in request.path or 'vehiculos' in request.path %}bg-white/10 text-white font-bold{% else %}text-white/70 hover:bg-white/5{% endif %}">
                     <i data-lucide="ambulance" class="w-5 h-5"></i> Flotilla
                 </a>
                 <a href="{% url 'admin_capacitaciones_dashboard' %}" class="flex items-center gap-3 px-3 py-3 rounded-xl transition {% if 'capacitaciones' in request.path %}bg-white/10 text-white font-bold{% else %}text-white/70 hover:bg-white/5{% endif %}">

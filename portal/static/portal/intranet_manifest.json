@@ -16,6 +16,7 @@
     }
   ],
   "start_url": "/intranet/",
+  "scope": "/",
   "background_color": "#F8FAFC",
   "theme_color": "#5A123E",
   "display": "standalone",
