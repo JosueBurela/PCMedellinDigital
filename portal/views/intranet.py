@@ -419,7 +419,7 @@ def intranet_historial_vehiculos(request):
     cargas_qs = RegistroCargaGasolina.objects.filter(
         fecha_carga__gte=dt_inicio,
         fecha_carga__lte=dt_fin
-    ).select_related('unidad', 'operador').order_by('-fecha_carga')
+    ).select_related('unidad').order_by('-fecha_carga')
 
     if unidad_id and unidad_id != 'todas':
         try:
@@ -503,7 +503,7 @@ def intranet_imprimir_reporte_historial(request):
     cargas_qs = RegistroCargaGasolina.objects.filter(
         fecha_carga__gte=dt_inicio,
         fecha_carga__lte=dt_fin
-    ).select_related('unidad', 'operador').order_by('fecha_carga')
+    ).select_related('unidad').order_by('fecha_carga')
 
     if unidad_id and unidad_id != 'todas':
         try:
