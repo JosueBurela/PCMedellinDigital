@@ -116,6 +116,12 @@ urlpatterns = [
     path('control-vehiculos/admin/reportes/imprimir/', views.imprimir_reporte_movimiento_vehicular),
     path('control-vehiculos/admin/usuario/estado/<int:usuario_id>/<str:nuevo_estado>/', views.cambiar_estado_usuario),
 
+    # Operaciones de Campo y Mapas
+    path('control-vehiculos/mapa/', views.mapa_emergencias_hub, name='mapa_emergencias_hub'),
+    path('control-vehiculos/reporte/estado/<int:reporte_id>/<str:nuevo_estatus>/', views.cambiar_estado_reporte_operativo, name='cambiar_estado_reporte_operativo'),
+    path('control-vehiculos/reportes/importar-chat/', views.importar_chat_whatsapp_web, name='importar_chat_whatsapp_web'),
+    path('api/mapa-datos/', views.api_mapa_datos, name='api_mapa_datos'),
+
     # Módulo de Capacitaciones y Emisión Automatizada de Constancias
     path('capacitaciones/', views.registro_capacitacion_publico, name='registro_capacitacion_publico'),
     path('capacitaciones/mis-constancias/', views.buscar_mis_constancias, name='buscar_mis_constancias'),
