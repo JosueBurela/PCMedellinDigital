@@ -151,20 +151,20 @@
         line-height: 1.15;
     }
     th { 
-        background-color: #5A123E; 
-        color: #ffffff;
+        background-color: #5A123E !important; 
+        color: #ffffff !important; 
         text-align: center; 
         font-weight: 800; 
-        font-size: 9.5px; 
+        font-size: 10px; 
         text-transform: uppercase;
-        letter-spacing: 0.3px;
-        padding: 5px 6px;
+        letter-spacing: 0.4px;
+        padding: 6px 6px;
     }
     
     .col-num { width: 34px; text-align: center; font-weight: 700; color: #475569; }
-    .col-nombre { width: 48%; font-weight: 700; color: #0f172a; text-transform: uppercase; }
-    .col-empresa { width: 28%; font-weight: 600; color: #334155; text-transform: uppercase; font-size: 9px; }
-    .col-firma { width: 24%; height: 28px; }
+    .col-nombre { width: 50%; font-weight: 700; color: #0f172a; text-transform: uppercase; }
+    .col-telefono { width: 24%; text-align: center; font-weight: 700; color: #1e293b; font-size: 10px; }
+    .col-firma { width: 26%; height: 28px; }
     
     /* Pie de Página */
     .footer { 
@@ -249,11 +249,11 @@
         <div class="tabla-container">
             <table>
                 <thead>
-                    <tr>
-                        <th class="col-num">#</th>
-                        <th class="col-nombre">Nombre Completo del Participante</th>
-                        <th class="col-empresa">Institución / Empresa</th>
-                        <th class="col-firma">Firma de Asistencia</th>
+                    <tr style="background-color: #5A123E !important;">
+                        <th class="col-num" style="color: #ffffff !important; background-color: #5A123E !important;">#</th>
+                        <th class="col-nombre" style="color: #ffffff !important; background-color: #5A123E !important;">NOMBRE DEL PARTICIPANTE</th>
+                        <th class="col-telefono" style="color: #ffffff !important; background-color: #5A123E !important;">NÚMERO DE TELÉFONO</th>
+                        <th class="col-firma" style="color: #ffffff !important; background-color: #5A123E !important;">FIRMA DE ASISTENCIA</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -261,7 +261,7 @@
                     <tr>
                         <td class="col-num">{{ item.numero }}</td>
                         <td class="col-nombre">{{ item.obj.nombre_completo }}</td>
-                        <td class="col-empresa">{{ item.obj.empresa_institucion|default:"PARTICULAR" }}</td>
+                        <td class="col-telefono">{{ item.obj.telefono|default:"-" }}</td>
                         <td class="col-firma"></td>
                     </tr>
                     {% empty %}
