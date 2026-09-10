@@ -344,47 +344,62 @@ def imprimir_lista_asistencia(request, curso_id):
     Genera el formato HTML de la Lista de Asistencia de un curso para imprimir o guardar como PDF.
     Garantiza bloques de 35 lugares fijos por hoja tamaño Carta (8.5 x 11 in) con renglones
     en blanco para participantes adicionales o firmas manuales en campo.
+    Soporta '?vacia=1' para generar un formato con los datos del curso pero con los 35 renglones
+    completamente en blanco para registro presencial manual.
     """
     curso = get_object_or_404(CursoCapacitacion, id=curso_id)
-    inscritos_qs = list(InscripcionCapacitacion.objects.filter(curso=curso).order_by('nombre_completo'))
-    total_inscritos = len(inscritos_qs)
+    es_vacia = request.GET.get('vacia') == '1'
     
-    # Capacidad por página: 35 lugares fijos por hoja
-    TAMANO_PAGINA = 35
-    total_lugares = max(35, ((total_inscritos + 34) // 35) * 35)
-    
-    paginas = []
-    for page_idx in range(0, total_lugares, TAMANO_PAGINA):
-        items_pagina = []
-        for row_idx in range(page_idx, page_idx + TAMANO_PAGINA):
-            numero_consecutivo = row_idx + 1
-            if row_idx < total_inscritos:
-                items_pagina.append({
-                    'numero': numero_consecutivo,
-                    'obj': inscritos_qs[row_idx],
-                    'es_vacio': False
-                })
-            else:
-                items_pagina.append({
-                    'numero': numero_consecutivo,
-                    'obj': None,
-                    'es_vacio': True
-                })
-                
-        paginas.append({
-            'numero_pagina': len(paginas) + 1,
-            'items': items_pagina,
-            'es_primera': (len(paginas) == 0)
-        })
+    if es_vacia:
+        total_inscritos = 0
+        total_lugares = 35
+        paginas = [{
+            'numero_pagina': 1,
+            'items': [{'numero': i + 1, 'obj': None, 'es_vacio': True} for i in range(35)],
+            'es_primera': True
+        }]
+        total_paginas = 1
+    else:
+        inscritos_qs = list(InscripcionCapacitacion.objects.filter(curso=curso).order_by('nombre_completo'))
+        total_inscritos = len(inscritos_qs)
         
-    total_paginas = len(paginas)
-    
+        # Capacidad por página: 35 lugares fijos por hoja
+        TAMANO_PAGINA = 35
+        total_lugares = max(35, ((total_inscritos + 34) // 35) * 35)
+        
+        paginas = []
+        for page_idx in range(0, total_lugares, TAMANO_PAGINA):
+            items_pagina = []
+            for row_idx in range(page_idx, page_idx + TAMANO_PAGINA):
+                numero_consecutivo = row_idx + 1
+                if row_idx < total_inscritos:
+                    items_pagina.append({
+                        'numero': numero_consecutivo,
+                        'obj': inscritos_qs[row_idx],
+                        'es_vacio': False
+                    })
+                else:
+                    items_pagina.append({
+                        'numero': numero_consecutivo,
+                        'obj': None,
+                        'es_vacio': True
+                    })
+                    
+            paginas.append({
+                'numero_pagina': len(paginas) + 1,
+                'items': items_pagina,
+                'es_primera': (len(paginas) == 0)
+            })
+            
+        total_paginas = len(paginas)
+        
     return render(request, 'portal/capacitacion_lista_asistencia.html', {
         'curso': curso,
         'paginas': paginas,
         'total_paginas': total_paginas,
         'total_inscritos': total_inscritos,
         'total_lugares': total_lugares,
+        'es_vacia': es_vacia,
     })
 
 

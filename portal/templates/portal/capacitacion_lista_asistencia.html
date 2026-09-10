@@ -289,7 +289,7 @@
         <!-- PIE DE PÁGINA INSTITUCIONAL -->
         <div class="footer">
             <span>Sistema Digital de Protección Civil Medellín &bull; Generado el {% now "d/m/Y H:i" %}</span>
-            <span><strong>Página {{ pagina.numero_pagina }} de {{ total_paginas }}</strong> &nbsp;|&nbsp; Registrados: {{ total_inscritos }} &bull; Capacidad: {{ total_lugares }} lugares</span>
+            <span><strong>Página {{ pagina.numero_pagina }} de {{ total_paginas }}</strong> &nbsp;|&nbsp; {% if es_vacia %}Formato en Blanco para Registro en Campo (35 lugares){% else %}Registrados: {{ total_inscritos }} &bull; Capacidad: {{ total_lugares }} lugares{% endif %}</span>
         </div>
     </div>
     {% endfor %}
@@ -342,7 +342,7 @@
                 pdf.addImage(imgData, 'JPEG', 0, 0, 8.5, 11);
             }
 
-            pdf.save('Lista_Asistencia_{{ curso.id }}.pdf');
+            pdf.save('{% if es_vacia %}Lista_Asistencia_Vacia_{{ curso.id }}.pdf{% else %}Lista_Asistencia_{{ curso.id }}.pdf{% endif %}');
         } catch (err) {
             console.error('Error generando PDF:', err);
             alert('Ocurrió un error al compilar el PDF. Puedes utilizar el botón "Imprimir / Guardar PDF".');

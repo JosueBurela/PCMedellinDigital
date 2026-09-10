@@ -102,6 +102,12 @@
         <span>Descargar Lista (PDF)</span>
       </a>
 
+      <!-- BOTÓN DESCARGAR LISTA VACÍA (FORMATO EN BLANCO CON DATOS DEL CURSO) -->
+      <a href="{% url 'imprimir_lista_asistencia' curso_actual.id %}?vacia=1" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Descargar Lista de Asistencia en blanco con datos del curso (35 renglones vacíos para registro manual en campo)">
+        <i data-lucide="file-edit" class="w-4 h-4 text-indigo-200"></i>
+        <span>Descargar Lista Vacía</span>
+      </a>
+
       <a href="{% url 'exportar_capacitados_excel' curso_actual.id %}" class="bg-emerald-800 hover:bg-emerald-900 text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Exportar Lista a Excel">
         <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-300"></i>
         <span>Exportar Excel</span>
