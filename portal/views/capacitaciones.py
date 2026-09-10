@@ -276,6 +276,47 @@ def eliminar_inscripcion_capacitacion(request, inscripcion_id):
 
 
 @requiere_operador_aprobado
+def agregar_participante_admin(request, curso_id):
+    """
+    Permite registrar un nuevo participante directamente desde el panel de administración
+    sin tener que usar el formulario público y sin tener que seleccionar el curso nuevamente.
+    """
+    curso = get_object_or_404(CursoCapacitacion, id=curso_id)
+    
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre_completo', '').strip().upper()
+        curp = request.POST.get('curp', '').strip().upper()
+        empresa = request.POST.get('empresa_institucion', '').strip().upper() or 'PARTICULAR'
+        telefono = request.POST.get('telefono', '').strip()
+        correo = request.POST.get('correo', '').strip()
+        marcar_asistencia = request.POST.get('marcar_asistencia') == '1'
+        
+        if not nombre:
+            messages.error(request, "Por favor ingresa el nombre completo del participante.")
+            return redirect(f'/capacitaciones/admin/?curso_id={curso.id}')
+            
+        inscripcion = InscripcionCapacitacion(
+            curso=curso,
+            nombre_completo=nombre,
+            curp=curp or None,
+            correo=correo or None,
+            telefono=telefono or None,
+            empresa_institucion=empresa,
+        )
+        
+        if marcar_asistencia:
+            inscripcion.asistio = True
+            inscripcion.aprobado = True
+            inscripcion.fecha_emision = timezone.now()
+            
+        inscripcion.save()
+        
+        messages.success(request, f"Participante '{inscripcion.nombre_completo}' registrado exitosamente con folio {inscripcion.folio_constancia}.")
+        
+    return redirect(f'/capacitaciones/admin/?curso_id={curso.id}')
+
+
+@requiere_operador_aprobado
 def imprimir_lista_asistencia(request, curso_id):
     """
     Genera el formato HTML de la Lista de Asistencia de un curso para imprimir o guardar como PDF.

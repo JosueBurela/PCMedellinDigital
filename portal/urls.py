@@ -134,6 +134,7 @@ urlpatterns = [
     path('capacitaciones/admin/asistencia/<int:inscripcion_id>/', views.marcar_asistencia_capacitacion, name='marcar_asistencia_capacitacion'),
     path('capacitaciones/admin/editar/<int:inscripcion_id>/', views.editar_inscripcion_capacitacion, name='editar_inscripcion_capacitacion'),
     path('capacitaciones/admin/eliminar/<int:inscripcion_id>/', views.eliminar_inscripcion_capacitacion, name='eliminar_inscripcion_capacitacion'),
+    path('capacitaciones/admin/participante/agregar/<int:curso_id>/', views.agregar_participante_admin, name='agregar_participante_admin'),
     path('capacitaciones/admin/exportar/<int:curso_id>/', views.exportar_capacitados_excel, name='exportar_capacitados_excel'),
     path('capacitaciones/admin/imprimir-lista/<int:curso_id>/', views.imprimir_lista_asistencia, name='imprimir_lista_asistencia'),
     path('capacitaciones/constancia/<str:folio>/', views.imprimir_constancia_pdf, name='imprimir_constancia_pdf'),

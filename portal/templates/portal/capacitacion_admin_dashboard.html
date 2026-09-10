@@ -66,6 +66,12 @@
       </form>
 
       {% if curso_actual %}
+      <!-- BOTÓN AGREGAR PARTICIPANTE -->
+      <button type="button" onclick="abrirModalAgregarParticipante()" class="bg-medellinVino hover:bg-[#430d2e] text-white font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Agregar participante a este taller">
+        <i data-lucide="user-plus" class="w-4 h-4 text-medellinOro"></i>
+        <span>Agregar Participante</span>
+      </button>
+
       <!-- BOTÓN FINALIZAR / REABRIR CURSO -->
       {% if not curso_actual.finalizado %}
       <a href="{% url 'toggle_finalizar_curso_admin' curso_actual.id %}" onclick="return confirm('¿Deseas marcar como FINALIZADO el taller \'{{ curso_actual.titulo|escapejs }}\'?\n\nAl finalizarlo, se cerrarán las inscripciones públicas y pasará a la sección de Cursos Pasados.');" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow-sm transition shrink-0" title="Cerrar inscripciones y pasar a Cursos Pasados">
@@ -115,6 +121,12 @@
         <span class="text-xs text-slate-500 font-semibold bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
           Asistencia: <span id="totalAsistenciaCount">{{ total_asistieron|default:0 }}</span>
         </span>
+        {% if curso_actual %}
+        <button type="button" onclick="abrirModalAgregarParticipante()" class="inline-flex items-center gap-1.5 bg-medellinVino hover:bg-[#430d2e] text-white font-bold px-3 py-1.5 rounded-xl text-xs shadow-sm transition">
+          <i data-lucide="user-plus" class="w-3.5 h-3.5 text-medellinOro"></i>
+          <span>Agregar Participante</span>
+        </button>
+        {% endif %}
       </div>
 
       <!-- BUSCADOR EN TIEMPO REAL -->
@@ -269,6 +281,67 @@
   </div>
 </div>
 
+{% if curso_actual %}
+<!-- MODAL AGREGAR PARTICIPANTE -->
+<div id="modalAgregarParticipante" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-medellinVino/10 text-medellinVino flex items-center justify-center font-bold">
+          <i data-lucide="user-plus" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Agregar Participante al Taller</h3>
+          <p class="text-[11px] text-slate-500 truncate max-w-xs sm:max-w-sm">{{ curso_actual.titulo }}</p>
+        </div>
+      </div>
+      <button type="button" onclick="cerrarModalAgregar()" class="text-slate-400 hover:text-slate-600 text-sm font-bold p-1">✕</button>
+    </div>
+
+    <form id="formAgregarParticipante" method="POST" action="{% url 'agregar_participante_admin' curso_actual.id %}" class="space-y-3">
+      {% csrf_token %}
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nombre Completo <span class="text-red-500">*</span> (como saldrá en constancia)</label>
+        <input type="text" name="nombre_completo" id="add_nombre" required placeholder="EJ. JUAN PÉREZ LÓPEZ" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 uppercase placeholder-slate-400 focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">CURP <span class="text-slate-400 font-normal">(Opcional)</span></label>
+          <input type="text" name="curp" id="add_curp" maxlength="18" placeholder="18 DÍGITOS" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 uppercase placeholder-slate-400 focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Empresa / Institución</label>
+          <input type="text" name="empresa_institucion" id="add_empresa" value="PARTICULAR" placeholder="PARTICULAR" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 uppercase placeholder-slate-400 focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Teléfono / WhatsApp</label>
+          <input type="tel" name="telefono" id="add_telefono" placeholder="10 dígitos (Ej: 2291234567)" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Correo Electrónico <span class="text-slate-400 font-normal">(Opcional)</span></label>
+          <input type="email" name="correo" id="add_correo" placeholder="correo@ejemplo.com" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 placeholder-slate-400 focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+        </div>
+      </div>
+      <div class="pt-1">
+        <label class="inline-flex items-center gap-2 cursor-pointer p-2 bg-slate-50 hover:bg-slate-100 rounded-xl border border-slate-200 w-full transition">
+          <input type="checkbox" name="marcar_asistencia" value="1" class="rounded text-medellinVino focus:ring-medellinVino w-4 h-4">
+          <span class="text-xs font-bold text-slate-700">Acreditar de inmediato (Marcar Asistencia y Habilitar Constancia)</span>
+        </label>
+      </div>
+      <div class="pt-3 flex items-center justify-end gap-2 border-t border-slate-100">
+        <button type="button" onclick="cerrarModalAgregar()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">Cancelar</button>
+        <button type="submit" class="px-4 py-2 bg-medellinVino hover:bg-[#430d2e] text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5">
+          <i data-lucide="check" class="w-4 h-4"></i>
+          <span>Registrar Participante</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endif %}
+
 {% endblock %}
 
 {% block extra_scripts %}
@@ -393,6 +466,31 @@ document.addEventListener('DOMContentLoaded', function() {
         modalEditar.addEventListener('click', function(e) {
             if (e.target === modalEditar) {
                 cerrarModalEditar();
+            }
+        });
+    }
+
+    // -------------------------------------------------------------
+    // 2.1. MODAL AGREGAR PARTICIPANTE
+    // -------------------------------------------------------------
+    const modalAgregar = document.getElementById('modalAgregarParticipante');
+
+    window.abrirModalAgregarParticipante = function() {
+        if (modalAgregar) {
+            modalAgregar.classList.remove('hidden');
+            const inputNombre = document.getElementById('add_nombre');
+            if (inputNombre) inputNombre.focus();
+        }
+    };
+
+    window.cerrarModalAgregar = function() {
+        if (modalAgregar) modalAgregar.classList.add('hidden');
+    };
+
+    if (modalAgregar) {
+        modalAgregar.addEventListener('click', function(e) {
+            if (e.target === modalAgregar) {
+                cerrarModalAgregar();
             }
         });
     }
