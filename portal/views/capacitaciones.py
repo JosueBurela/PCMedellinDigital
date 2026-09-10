@@ -342,43 +342,49 @@ def agregar_participante_admin(request, curso_id):
 def imprimir_lista_asistencia(request, curso_id):
     """
     Genera el formato HTML de la Lista de Asistencia de un curso para imprimir o guardar como PDF.
-    Soporta paginación inteligente en hojas tamaño Carta (8.5 x 11 in) con encabezados y logos repetidos.
+    Garantiza bloques de 35 lugares fijos por hoja tamaño Carta (8.5 x 11 in) con renglones
+    en blanco para participantes adicionales o firmas manuales en campo.
     """
     curso = get_object_or_404(CursoCapacitacion, id=curso_id)
     inscritos_qs = list(InscripcionCapacitacion.objects.filter(curso=curso).order_by('nombre_completo'))
     total_inscritos = len(inscritos_qs)
     
-    # Capacidad por página:
-    # Si son 28 o menos, caben todos en 1 sola página.
-    # Si son más de 28, se distribuyen en páginas de 26 renglones.
-    TAMANO_PAGINA = 26 if total_inscritos > 28 else 28
+    # Capacidad por página: 35 lugares fijos por hoja
+    TAMANO_PAGINA = 35
+    total_lugares = max(35, ((total_inscritos + 34) // 35) * 35)
     
     paginas = []
-    if total_inscritos == 0:
+    for page_idx in range(0, total_lugares, TAMANO_PAGINA):
+        items_pagina = []
+        for row_idx in range(page_idx, page_idx + TAMANO_PAGINA):
+            numero_consecutivo = row_idx + 1
+            if row_idx < total_inscritos:
+                items_pagina.append({
+                    'numero': numero_consecutivo,
+                    'obj': inscritos_qs[row_idx],
+                    'es_vacio': False
+                })
+            else:
+                items_pagina.append({
+                    'numero': numero_consecutivo,
+                    'obj': None,
+                    'es_vacio': True
+                })
+                
         paginas.append({
-            'numero_pagina': 1,
-            'items': [],
-            'es_primera': True
+            'numero_pagina': len(paginas) + 1,
+            'items': items_pagina,
+            'es_primera': (len(paginas) == 0)
         })
-    else:
-        for i in range(0, total_inscritos, TAMANO_PAGINA):
-            chunk = inscritos_qs[i:i + TAMANO_PAGINA]
-            paginas.append({
-                'numero_pagina': len(paginas) + 1,
-                'items': [
-                    {'numero': i + idx + 1, 'obj': item} 
-                    for idx, item in enumerate(chunk)
-                ],
-                'es_primera': (len(paginas) == 0)
-            })
-            
+        
     total_paginas = len(paginas)
     
     return render(request, 'portal/capacitacion_lista_asistencia.html', {
         'curso': curso,
         'paginas': paginas,
         'total_paginas': total_paginas,
-        'total_inscritos': total_inscritos
+        'total_inscritos': total_inscritos,
+        'total_lugares': total_lugares,
     })
 
 
