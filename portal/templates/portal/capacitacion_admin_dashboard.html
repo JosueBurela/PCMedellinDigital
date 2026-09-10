@@ -300,6 +300,9 @@
 
     <form id="formAgregarParticipante" method="POST" action="{% url 'agregar_participante_admin' curso_actual.id %}" class="space-y-3">
       {% csrf_token %}
+      <input type="hidden" name="accion" id="add_accion" value="crear">
+      <input type="hidden" name="reemplazar_id" id="add_reemplazar_id" value="">
+      <input type="hidden" name="forzar_duplicado" id="add_forzar_duplicado" value="0">
       <div>
         <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nombre Completo <span class="text-red-500">*</span> (como saldrá en constancia)</label>
         <input type="text" name="nombre_completo" id="add_nombre" required placeholder="EJ. JUAN PÉREZ LÓPEZ" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 uppercase placeholder-slate-400 focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
@@ -332,7 +335,7 @@
       </div>
       <div class="pt-3 flex items-center justify-end gap-2 border-t border-slate-100">
         <button type="button" onclick="cerrarModalAgregar()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">Cancelar</button>
-        <button type="submit" class="px-4 py-2 bg-medellinVino hover:bg-[#430d2e] text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5">
+        <button type="submit" id="btnSubmitAgregarParticipante" class="px-4 py-2 bg-medellinVino hover:bg-[#430d2e] text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5">
           <i data-lucide="check" class="w-4 h-4"></i>
           <span>Registrar Participante</span>
         </button>
@@ -340,6 +343,151 @@
     </form>
   </div>
 </div>
+
+<!-- MODAL RESOLUCIÓN DE COINCIDENCIA / DUPLICADOS -->
+<div id="modalCoincidenciaParticipante" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[60] flex items-center justify-center p-4 overflow-y-auto">
+  <div class="bg-white rounded-3xl p-6 max-w-xl w-full shadow-2xl space-y-4 border border-amber-200 animate-in fade-in zoom-in-95 duration-200 my-auto">
+    
+    <!-- ENCABEZADO DE ADVERTENCIA -->
+    <div class="flex items-start gap-3.5 pb-3 border-b border-slate-100">
+      <div class="w-11 h-11 rounded-2xl bg-amber-500/15 text-amber-700 flex items-center justify-center shrink-0">
+        <i data-lucide="alert-triangle" class="w-6 h-6"></i>
+      </div>
+      <div class="flex-1">
+        <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300 mb-1">
+          <i data-lucide="sparkles" class="w-3 h-3"></i> Posible Duplicado / Coincidencia
+        </div>
+        <h3 class="font-extrabold text-slate-900 text-base leading-snug">Se detectó una coincidencia en este taller</h3>
+        <p class="text-xs text-slate-500 font-medium mt-0.5" id="coincidenciaMotivoTexto">El participante que intentas registrar coincide con uno existente.</p>
+      </div>
+      <button type="button" onclick="resolverCoincidencia('cancelar')" class="text-slate-400 hover:text-slate-600 font-bold p-1 text-sm">✕</button>
+    </div>
+
+    <!-- COMPARATIVA VISUAL: EXISTENTE VS NUEVO -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-3 rounded-2xl border border-slate-200">
+      <!-- TARJETA EXISTENTE -->
+      <div class="bg-white p-3 rounded-xl border-2 border-slate-200 shadow-xs space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider">📁 Ya en este taller</span>
+          <span id="coincidenciaExistenteFolio" class="text-[10px] font-extrabold text-medellinVino bg-medellinVino/10 px-1.5 py-0.5 rounded">CONST-...</span>
+        </div>
+        <div>
+          <div class="text-[10px] font-bold text-slate-400 uppercase">Nombre Registrado:</div>
+          <div id="coincidenciaExistenteNombre" class="text-xs font-black text-slate-900 break-words">-</div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-[11px]">
+          <div>
+            <span class="text-slate-400 font-semibold block text-[10px]">CURP:</span>
+            <span id="coincidenciaExistenteCurp" class="font-bold text-slate-700 uppercase">-</span>
+          </div>
+          <div>
+            <span class="text-slate-400 font-semibold block text-[10px]">Teléfono:</span>
+            <span id="coincidenciaExistenteTel" class="font-bold text-slate-700">-</span>
+          </div>
+        </div>
+        <div class="text-[11px]">
+          <span class="text-slate-400 font-semibold block text-[10px]">Empresa:</span>
+          <span id="coincidenciaExistenteEmpresa" class="font-bold text-slate-700 uppercase truncate block">-</span>
+        </div>
+      </div>
+
+      <!-- TARJETA NUEVO INGRESADO -->
+      <div class="bg-amber-50/70 p-3 rounded-xl border-2 border-amber-300 shadow-xs space-y-1.5">
+        <div class="flex items-center justify-between">
+          <span class="text-[10px] font-black uppercase text-amber-800 tracking-wider">✍️ Lo que escribiste</span>
+          <span class="text-[10px] font-extrabold text-amber-900 bg-amber-200/70 px-1.5 py-0.5 rounded">Nuevo</span>
+        </div>
+        <div>
+          <div class="text-[10px] font-bold text-amber-800/80 uppercase">Nuevo Nombre:</div>
+          <div id="coincidenciaNuevoNombre" class="text-xs font-black text-slate-900 break-words">-</div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-[11px]">
+          <div>
+            <span class="text-amber-800/80 font-semibold block text-[10px]">CURP:</span>
+            <span id="coincidenciaNuevoCurp" class="font-bold text-slate-700 uppercase">-</span>
+          </div>
+          <div>
+            <span class="text-amber-800/80 font-semibold block text-[10px]">Teléfono:</span>
+            <span id="coincidenciaNuevoTel" class="font-bold text-slate-700">-</span>
+          </div>
+        </div>
+        <div class="text-[11px]">
+          <span class="text-amber-800/80 font-semibold block text-[10px]">Empresa:</span>
+          <span id="coincidenciaNuevoEmpresa" class="font-bold text-slate-700 uppercase truncate block">-</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREGUNTA DE DECISIÓN -->
+    <div class="text-xs font-bold text-slate-700">
+      ¿Qué deseas hacer? Selecciona una de las 3 opciones:
+    </div>
+
+    <!-- LAS 3 OPCIONES SOLICITADAS POR EL USUARIO -->
+    <div class="space-y-2">
+      <!-- OPCIÓN 1: QUEDARSE CON EL NUEVO Y REEMPLAZAR EL ANTIGUO -->
+      <button type="button" onclick="resolverCoincidencia('reemplazar')" class="w-full text-left p-3 rounded-2xl bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold transition shadow-sm hover:shadow flex items-center justify-between gap-3 group cursor-pointer">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-black/10 flex items-center justify-center shrink-0">
+            <i data-lucide="refresh-cw" class="w-4 h-4 text-slate-950"></i>
+          </div>
+          <div>
+            <div class="text-xs font-black">Quedarme con el nuevo y reemplazar el antiguo</div>
+            <div class="text-[11px] font-medium text-slate-900">Actualiza los datos del participante anterior y conserva su constancia oficial.</div>
+          </div>
+        </div>
+        <i data-lucide="chevron-right" class="w-4 h-4 opacity-75 group-hover:translate-x-0.5 transition"></i>
+      </button>
+
+      <!-- OPCIÓN 2: AGREGAR AL NUEVO Y DEJAR EL QUE YA EXISTÍA (CONSERVAR AMBOS) -->
+      <button type="button" onclick="resolverCoincidencia('conservar_ambos')" class="w-full text-left p-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold transition shadow-sm hover:shadow flex items-center justify-between gap-3 group cursor-pointer">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+            <i data-lucide="user-plus" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <div class="text-xs font-black">Agregar al nuevo y dejar el que ya existía (Conservar ambos)</div>
+            <div class="text-[11px] font-medium text-emerald-100">Son dos personas distintas. Registra al nuevo con su propio folio independiente.</div>
+          </div>
+        </div>
+        <i data-lucide="chevron-right" class="w-4 h-4 opacity-75 group-hover:translate-x-0.5 transition"></i>
+      </button>
+
+      <!-- OPCIÓN 3: CANCELAR REGISTRO DEJANDO EL QUE YA EXISTÍA -->
+      <button type="button" onclick="resolverCoincidencia('cancelar')" class="w-full text-left p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold transition flex items-center justify-between gap-3 group cursor-pointer border border-slate-200">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-xl bg-slate-200 text-slate-600 flex items-center justify-center shrink-0">
+            <i data-lucide="x-circle" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <div class="text-xs font-black text-slate-800">Cancelar el registro del nuevo</div>
+            <div class="text-[11px] font-medium text-slate-500">Descartar este formulario y dejar al participante existente intacto.</div>
+          </div>
+        </div>
+        <i data-lucide="arrow-left" class="w-4 h-4 text-slate-400 group-hover:-translate-x-0.5 transition"></i>
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- JSON CON LOS PARTICIPANTES DEL CURSO ACTUAL PARA DETECCIÓN INSTANTÁNEA -->
+<script id="participantesCursoData" type="application/json">
+[
+  {% for i in inscripciones %}
+  {
+    "id": {{ i.id }},
+    "nombre": "{{ i.nombre_completo|escapejs }}",
+    "curp": "{{ i.curp|default:''|escapejs }}",
+    "telefono": "{{ i.telefono|default:''|escapejs }}",
+    "correo": "{{ i.correo|default:''|escapejs }}",
+    "empresa": "{{ i.empresa_institucion|default:'PARTICULAR'|escapejs }}",
+    "folio": "{{ i.folio_constancia|escapejs }}",
+    "asistio": {% if i.asistio %}true{% else %}false{% endif %}
+  }{% if not forloop.last %},{% endif %}
+  {% endfor %}
+]
+</script>
 {% endif %}
 
 {% endblock %}
@@ -471,12 +619,251 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // -------------------------------------------------------------
-    // 2.1. MODAL AGREGAR PARTICIPANTE
+    // 2.1. MODAL AGREGAR PARTICIPANTE Y DETECTOR DE COINCIDENCIAS / DUPLICADOS
     // -------------------------------------------------------------
     const modalAgregar = document.getElementById('modalAgregarParticipante');
+    const formAgregar = document.getElementById('formAgregarParticipante');
+    const modalCoincidencia = document.getElementById('modalCoincidenciaParticipante');
+    const scriptParticipantesData = document.getElementById('participantesCursoData');
+    
+    let participantesCurso = [];
+    try {
+        if (scriptParticipantesData) {
+            participantesCurso = JSON.parse(scriptParticipantesData.textContent);
+        }
+    } catch(e) {
+        console.error('Error al parsear participantes del curso:', e);
+    }
+
+    let coincidenciaActual = null;
+
+    // Normalización de texto sin acentos, espacios extra ni símbolos
+    function normalizarCadena(str) {
+        return (str || '')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-z0-9]/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    // Algoritmo de Distancia Levenshtein (tolerancia a errores ortográficos / cambio de letras)
+    function distanciaLevenshtein(s1, s2) {
+        const a = normalizarCadena(s1);
+        const b = normalizarCadena(s2);
+        const m = a.length;
+        const n = b.length;
+        if (m === 0) return n;
+        if (n === 0) return m;
+
+        const d = [];
+        for (let i = 0; i <= m; i++) {
+            d[i] = [i];
+        }
+        for (let j = 0; j <= n; j++) {
+            d[0][j] = j;
+        }
+
+        for (let j = 1; j <= n; j++) {
+            for (let i = 1; i <= m; i++) {
+                if (a[i - 1] === b[j - 1]) {
+                    d[i][j] = d[i - 1][j - 1];
+                } else {
+                    d[i][j] = Math.min(
+                        d[i - 1][j] + 1,      // Eliminación
+                        d[i][j - 1] + 1,      // Inserción
+                        d[i - 1][j - 1] + 1   // Sustitución
+                    );
+                }
+            }
+        }
+        return d[m][n];
+    }
+
+    // Verificador de coincidencias exactas y difusas (1 letra, cambio de 's', etc.)
+    function buscarCoincidencia(nuevoNombre, nuevoCurp, nuevoTel, nuevoCorreo) {
+        if (!participantesCurso || participantesCurso.length === 0) return null;
+
+        const normNuevoNombre = normalizarCadena(nuevoNombre);
+        const cleanNuevoCurp = (nuevoCurp || '').trim().toUpperCase();
+        const digitsNuevoTel = (nuevoTel || '').replace(/\D/g, '');
+        const cleanNuevoCorreo = (nuevoCorreo || '').trim().toLowerCase();
+
+        for (let i = 0; i < participantesCurso.length; i++) {
+            const p = participantesCurso[i];
+            const normPNombre = normalizarCadena(p.nombre);
+            const cleanPCurp = (p.curp || '').trim().toUpperCase();
+            const digitsPTel = (p.telefono || '').replace(/\D/g, '');
+            const cleanPCorreo = (p.correo || '').trim().toLowerCase();
+
+            // 1. Coincidencia por CURP (si ambos tienen al menos 10 caracteres)
+            if (cleanNuevoCurp.length >= 10 && cleanPCurp.length >= 10 && cleanNuevoCurp === cleanPCurp) {
+                return {
+                    existente: p,
+                    motivo: `Misma clave CURP registrada (${p.curp}) con el participante ${p.nombre}.`
+                };
+            }
+
+            // 2. Coincidencia por Teléfono (si ambos tienen al menos 8 dígitos)
+            if (digitsNuevoTel.length >= 8 && digitsPTel.length >= 8 && digitsNuevoTel === digitsPTel) {
+                return {
+                    existente: p,
+                    motivo: `Mismo número de teléfono (${p.telefono}) que ${p.nombre}.`
+                };
+            }
+
+            // 3. Coincidencia por Correo Electrónico
+            if (cleanNuevoCorreo.length >= 5 && cleanPCorreo.length >= 5 && cleanNuevoCorreo === cleanPCorreo) {
+                return {
+                    existente: p,
+                    motivo: `Mismo correo electrónico (${p.correo}) registrado.`
+                };
+            }
+
+            // 4. Coincidencia exacta de nombre
+            if (normNuevoNombre === normPNombre) {
+                return {
+                    existente: p,
+                    motivo: `El nombre es exactamente idéntico al participante ya registrado.`
+                };
+            }
+
+            // 5. Coincidencia difusa por diferencia de 1 o 2 letras (ej: una 's' de más, cambio de letra, falta de letra)
+            const dist = distanciaLevenshtein(normNuevoNombre, normPNombre);
+            const maxLen = Math.max(normNuevoNombre.length, normPNombre.length);
+            const diffLen = Math.abs(normNuevoNombre.length - normP滄ombre.length);
+
+            // Si la diferencia es exactamente de 1 letra (ej: 's' de más o cambiada)
+            if (dist === 1 && maxLen >= 4) {
+                return {
+                    existente: p,
+                    motivo: `Nombre casi idéntico: solo 1 letra de diferencia (posible falta ortográfica, 's' extra o cambio de letra).`
+                };
+            }
+
+            // Si la diferencia es de 2 letras y el nombre tiene longitud considerable
+            if (dist === 2 && maxLen >= 7 && diffLen <= 2) {
+                return {
+                    existente: p,
+                    motivo: `Nombre muy similar: 2 letras de diferencia o letras intercambiadas.`
+                };
+            }
+
+            // Similitud porcentual superior al 82% en nombres largos
+            if (maxLen >= 10) {
+                const similitud = ((maxLen - dist) / maxLen) * 100;
+                if (similitud >= 82) {
+                    return {
+                        existente: p,
+                        motivo: `Alta similitud en el nombre (${Math.round(similitud)}% de coincidencia).`
+                    };
+                }
+            }
+        }
+
+        return null;
+    }
+
+    // Interceptar envío del formulario de registro para comprobar duplicados
+    if (formAgregar) {
+        formAgregar.addEventListener('submit', function(e) {
+            const accion = document.getElementById('add_accion').value;
+            const forzarDuplicado = document.getElementById('add_forzar_duplicado').value;
+
+            // Si el usuario ya decidió reemplazar o forzar agregar ambos, dejamos enviar naturalmente
+            if (accion === 'reemplazar' || forzarDuplicado === '1') {
+                return true;
+            }
+
+            const inputNombre = document.getElementById('add_nombre');
+            const inputCurp = document.getElementById('add_curp');
+            const inputTel = document.getElementById('add_telefono');
+            const inputCorreo = document.getElementById('add_correo');
+            const inputEmpresa = document.getElementById('add_empresa');
+
+            const nombreVal = inputNombre ? inputNombre.value.trim() : '';
+            const curpVal = inputCurp ? inputCurp.value.trim() : '';
+            const telVal = inputTel ? inputTel.value.trim() : '';
+            const correoVal = inputCorreo ? inputCorreo.value.trim() : '';
+            const empresaVal = inputEmpresa ? inputEmpresa.value.trim() : 'PARTICULAR';
+
+            const coincidencia = buscarCoincidencia(nombreVal, curpVal, telVal, correoVal);
+
+            if (coincidencia) {
+                e.preventDefault();
+                coincidenciaActual = coincidencia;
+
+                // Rellenar datos en el modal de resolución
+                const motivoEl = document.getElementById('coincidenciaMotivoTexto');
+                const exFolio = document.getElementById('coincidenciaExistenteFolio');
+                const exNombre = document.getElementById('coincidenciaExistenteNombre');
+                const exCurp = document.getElementById('coincidenciaExistenteCurp');
+                const exTel = document.getElementById('coincidenciaExistenteTel');
+                const exEmpresa = document.getElementById('coincidenciaExistenteEmpresa');
+
+                const nuNombre = document.getElementById('coincidenciaNuevoNombre');
+                const nuCurp = document.getElementById('coincidenciaNuevoCurp');
+                const nuTel = document.getElementById('coincidenciaNuevoTel');
+                const nuEmpresa = document.getElementById('coincidenciaNuevoEmpresa');
+
+                if (motivoEl) motivoEl.textContent = coincidencia.motivo;
+                if (exFolio) exFolio.textContent = coincidencia.existente.folio;
+                if (exNombre) exNombre.textContent = coincidencia.existente.nombre;
+                if (exCurp) exCurp.textContent = coincidencia.existente.curp || 'NO REGISTRADO';
+                if (exTel) exTel.textContent = coincidencia.existente.telefono || 'NO REGISTRADO';
+                if (exEmpresa) exEmpresa.textContent = coincidencia.existente.empresa || 'PARTICULAR';
+
+                if (nuNombre) nuNombre.textContent = nombreVal.toUpperCase();
+                if (nuCurp) nuCurp.textContent = curpVal ? curpVal.toUpperCase() : 'NO INGRESADO';
+                if (nuTel) nuTel.textContent = telVal || 'NO INGRESADO';
+                if (nuEmpresa) nuEmpresa.textContent = empresaVal.toUpperCase();
+
+                if (modalCoincidencia) {
+                    modalCoincidencia.classList.remove('hidden');
+                    if (window.lucide) lucide.createIcons();
+                }
+                return false;
+            }
+
+            // Si no hay coincidencias, el formulario se envía de inmediato y directo
+            return true;
+        });
+    }
+
+    // Manejador de las 3 opciones de resolución de coincidencia
+    window.resolverCoincidencia = function(opcion) {
+        if (!formAgregar) return;
+
+        if (opcion === 'reemplazar') {
+            if (!coincidenciaActual || !coincidenciaActual.existente) return;
+            document.getElementById('add_accion').value = 'reemplazar';
+            document.getElementById('add_reemplazar_id').value = coincidenciaActual.existente.id;
+            document.getElementById('add_forzar_duplicado').value = '0';
+            if (modalCoincidencia) modalCoincidencia.classList.add('hidden');
+            formAgregar.submit();
+        } else if (opcion === 'conservar_ambos') {
+            document.getElementById('add_accion').value = 'crear';
+            document.getElementById('add_reemplazar_id').value = '';
+            document.getElementById('add_forzar_duplicado').value = '1';
+            if (modalCoincidencia) modalCoincidencia.classList.add('hidden');
+            formAgregar.submit();
+        } else if (opcion === 'cancelar') {
+            if (modalCoincidencia) modalCoincidencia.classList.add('hidden');
+            coincidenciaActual = null;
+            document.getElementById('add_accion').value = 'crear';
+            document.getElementById('add_reemplazar_id').value = '';
+            document.getElementById('add_forzar_duplicado').value = '0';
+            cerrarModalAgregar();
+        }
+    };
 
     window.abrirModalAgregarParticipante = function() {
         if (modalAgregar) {
+            document.getElementById('add_accion').value = 'crear';
+            document.getElementById('add_reemplazar_id').value = '';
+            document.getElementById('add_forzar_duplicado').value = '0';
+            coincidenciaActual = null;
             modalAgregar.classList.remove('hidden');
             const inputNombre = document.getElementById('add_nombre');
             if (inputNombre) inputNombre.focus();
@@ -485,12 +872,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.cerrarModalAgregar = function() {
         if (modalAgregar) modalAgregar.classList.add('hidden');
+        if (modalCoincidencia) modalCoincidencia.classList.add('hidden');
+        coincidenciaActual = null;
     };
 
     if (modalAgregar) {
         modalAgregar.addEventListener('click', function(e) {
             if (e.target === modalAgregar) {
                 cerrarModalAgregar();
+            }
+        });
+    }
+
+    if (modalCoincidencia) {
+        modalCoincidencia.addEventListener('click', function(e) {
+            if (e.target === modalCoincidencia) {
+                resolverCoincidencia('cancelar');
             }
         });
     }

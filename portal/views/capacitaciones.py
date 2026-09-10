@@ -280,10 +280,13 @@ def agregar_participante_admin(request, curso_id):
     """
     Permite registrar un nuevo participante directamente desde el panel de administración
     sin tener que usar el formulario público y sin tener que seleccionar el curso nuevamente.
+    Soporta resolución de duplicados (reemplazar participante existente o registrar como nuevo).
     """
     curso = get_object_or_404(CursoCapacitacion, id=curso_id)
     
     if request.method == 'POST':
+        accion = request.POST.get('accion', 'crear')
+        reemplazar_id = request.POST.get('reemplazar_id')
         nombre = request.POST.get('nombre_completo', '').strip().upper()
         curp = request.POST.get('curp', '').strip().upper()
         empresa = request.POST.get('empresa_institucion', '').strip().upper() or 'PARTICULAR'
@@ -295,6 +298,25 @@ def agregar_participante_admin(request, curso_id):
             messages.error(request, "Por favor ingresa el nombre completo del participante.")
             return redirect(f'/capacitaciones/admin/?curso_id={curso.id}')
             
+        # Opción 1: Reemplazar el antiguo con los nuevos datos
+        if accion == 'reemplazar' and reemplazar_id:
+            inscripcion = get_object_or_404(InscripcionCapacitacion, id=reemplazar_id, curso=curso)
+            nombre_antiguo = inscripcion.nombre_completo
+            inscripcion.nombre_completo = nombre
+            inscripcion.curp = curp or None
+            inscripcion.empresa_institucion = empresa
+            inscripcion.telefono = telefono or None
+            inscripcion.correo = correo or None
+            if marcar_asistencia:
+                inscripcion.asistio = True
+                inscripcion.aprobado = True
+                if not inscripcion.fecha_emision:
+                    inscripcion.fecha_emision = timezone.now()
+            inscripcion.save()
+            messages.success(request, f"¡Actualización exitosa! Se reemplazaron los datos del participante anterior ({nombre_antiguo}) por '{inscripcion.nombre_completo}' (Folio: {inscripcion.folio_constancia}).")
+            return redirect(f'/capacitaciones/admin/?curso_id={curso.id}')
+            
+        # Opción 2 o Registro normal: Crear nuevo participante
         inscripcion = InscripcionCapacitacion(
             curso=curso,
             nombre_completo=nombre,
