@@ -6,7 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista de Asistencia - {{ curso.titulo }}</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -78,13 +79,11 @@
         padding: 0.4in 0.45in 0.35in 0.45in; 
         box-sizing: border-box; 
         position: relative; 
-        margin-bottom: 24px;
+        margin: 0 auto 24px auto;
         box-shadow: 0 12px 28px rgba(0,0,0,0.35);
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        page-break-after: always;
-        break-after: page;
         overflow: hidden;
     }
 
@@ -182,10 +181,15 @@
     }
 
     @media print {
-        body { 
+        @page { 
+            size: letter portrait; 
+            margin: 0; 
+        }
+        html, body { 
             background: white !important; 
             padding: 0 !important;
             margin: 0 !important;
+            width: 8.5in !important;
         }
         .toolbar-container { 
             display: none !important; 
@@ -194,11 +198,17 @@
             margin: 0 !important; 
             box-shadow: none !important; 
             border: none !important;
-            page-break-after: always !important;
-            break-after: page !important;
             width: 8.5in !important;
             height: 11in !important;
             max-height: 11in !important;
+        }
+        .hoja_pdf:not(:last-child) {
+            page-break-after: always !important;
+            break-after: page !important;
+        }
+        .hoja_pdf:last-child {
+            page-break-after: avoid !important;
+            break-after: avoid !important;
         }
     }
 </style>
@@ -210,9 +220,9 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
         <span>Imprimir / Guardar PDF</span>
     </button>
-    <button class="btn-action" onclick="generarPDF()">
+    <button class="btn-action" id="btnDescargar" onclick="generarPDF()">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-        <span>Descargar PDF</span>
+        <span id="btnDescargarTexto">Descargar PDF</span>
     </button>
 </div>
 
@@ -275,32 +285,60 @@
 </div>
 
 <script>
-    function generarPDF() {
-        const elemento = document.getElementById('contenedor_paginas');
+    async function generarPDF() {
         const toolbar = document.getElementById('toolbar_acciones');
+        const btnTexto = document.getElementById('btnDescargarTexto');
         
         if (toolbar) toolbar.style.display = 'none';
-        
-        const opt = {
-            margin:       0,
-            filename:     'Lista_Asistencia_{{ curso.id }}.pdf',
-            image:        { type: 'jpeg', quality: 0.98 },
-            html2canvas:  { 
-                scale: 2, 
-                useCORS: true,
-                scrollY: 0,
-                scrollX: 0
-            },
-            jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
-            pagebreak:    { mode: ['css', 'legacy'] }
-        };
 
-        html2pdf().set(opt).from(elemento).save().then(() => {
-            if (toolbar) toolbar.style.display = 'flex';
-        }).catch(err => {
+        try {
+            const jsPDFClass = (window.jspdf && window.jspdf.jsPDF) ? window.jspdf.jsPDF : window.jsPDF;
+            if (!jsPDFClass) {
+                alert('No se pudo inicializar el motor de PDF. Por favor utiliza el botón "Imprimir / Guardar PDF".');
+                if (toolbar) toolbar.style.display = 'flex';
+                return;
+            }
+
+            const hojas = Array.from(document.querySelectorAll('.hoja_pdf'));
+            const totalHojas = hojas.length;
+
+            const pdf = new jsPDFClass({
+                unit: 'in',
+                format: 'letter',
+                orientation: 'portrait'
+            });
+
+            for (let i = 0; i < totalHojas; i++) {
+                if (i > 0) {
+                    pdf.addPage('letter', 'portrait');
+                }
+                
+                const hoja = hojas[i];
+                const prevShadow = hoja.style.boxShadow;
+                hoja.style.boxShadow = 'none';
+
+                const canvas = await html2canvas(hoja, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false,
+                    scrollY: 0,
+                    scrollX: 0
+                });
+
+                hoja.style.boxShadow = prevShadow;
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                pdf.addImage(imgData, 'JPEG', 0, 0, 8.5, 11);
+            }
+
+            pdf.save('Lista_Asistencia_{{ curso.id }}.pdf');
+        } catch (err) {
             console.error('Error generando PDF:', err);
+            alert('Ocurrió un error al compilar el PDF. Puedes utilizar el botón "Imprimir / Guardar PDF".');
+        } finally {
             if (toolbar) toolbar.style.display = 'flex';
-        });
+            if (btnTexto) btnTexto.textContent = 'Descargar PDF';
+        }
     }
 </script>
 
