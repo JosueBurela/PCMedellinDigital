@@ -279,14 +279,43 @@ def eliminar_inscripcion_capacitacion(request, inscripcion_id):
 def imprimir_lista_asistencia(request, curso_id):
     """
     Genera el formato HTML de la Lista de Asistencia de un curso para imprimir o guardar como PDF.
-    Contiene espacio para firma y logotipos oficiales.
+    Soporta paginación inteligente en hojas tamaño Carta (8.5 x 11 in) con encabezados y logos repetidos.
     """
     curso = get_object_or_404(CursoCapacitacion, id=curso_id)
-    inscritos = InscripcionCapacitacion.objects.filter(curso=curso).order_by('nombre_completo')
+    inscritos_qs = list(InscripcionCapacitacion.objects.filter(curso=curso).order_by('nombre_completo'))
+    total_inscritos = len(inscritos_qs)
+    
+    # Capacidad por página:
+    # Si son 28 o menos, caben todos en 1 sola página.
+    # Si son más de 28, se distribuyen en páginas de 26 renglones.
+    TAMANO_PAGINA = 26 if total_inscritos > 28 else 28
+    
+    paginas = []
+    if total_inscritos == 0:
+        paginas.append({
+            'numero_pagina': 1,
+            'items': [],
+            'es_primera': True
+        })
+    else:
+        for i in range(0, total_inscritos, TAMANO_PAGINA):
+            chunk = inscritos_qs[i:i + TAMANO_PAGINA]
+            paginas.append({
+                'numero_pagina': len(paginas) + 1,
+                'items': [
+                    {'numero': i + idx + 1, 'obj': item} 
+                    for idx, item in enumerate(chunk)
+                ],
+                'es_primera': (len(paginas) == 0)
+            })
+            
+    total_paginas = len(paginas)
     
     return render(request, 'portal/capacitacion_lista_asistencia.html', {
         'curso': curso,
-        'inscritos': inscritos
+        'paginas': paginas,
+        'total_paginas': total_paginas,
+        'total_inscritos': total_inscritos
     })
 
 
