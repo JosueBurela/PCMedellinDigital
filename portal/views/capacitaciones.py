@@ -9,6 +9,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.http import HttpResponse, JsonResponse
 from django.utils import timezone
+from django.db.models import Q
 from portal.models import CursoCapacitacion, InscripcionCapacitacion
 from portal.views.vehiculos import requiere_operador_aprobado
 
@@ -77,6 +78,7 @@ def admin_capacitaciones_dashboard(request):
     cursos_pasados = cursos_todos.filter(finalizado=True)
     
     curso_seleccionado_id = request.GET.get('curso_id')
+    busqueda_q = request.GET.get('q', '').strip()
     
     if curso_seleccionado_id:
         curso_actual = get_object_or_404(CursoCapacitacion, id=curso_seleccionado_id)
@@ -88,6 +90,18 @@ def admin_capacitaciones_dashboard(request):
             inscripciones = InscripcionCapacitacion.objects.filter(curso=curso_actual).order_by('-fecha_registro')
         else:
             inscripciones = InscripcionCapacitacion.objects.none()
+
+    total_asistieron = inscripciones.filter(asistio=True).count() if inscripciones.exists() else 0
+
+    if busqueda_q and inscripciones.exists():
+        inscripciones = inscripciones.filter(
+            Q(nombre_completo__icontains=busqueda_q) |
+            Q(folio_constancia__icontains=busqueda_q) |
+            Q(curp__icontains=busqueda_q) |
+            Q(empresa_institucion__icontains=busqueda_q) |
+            Q(correo__icontains=busqueda_q) |
+            Q(telefono__icontains=busqueda_q)
+        )
             
     return render(request, 'portal/capacitacion_admin_dashboard.html', {
         'cursos': cursos_todos,
@@ -95,6 +109,8 @@ def admin_capacitaciones_dashboard(request):
         'cursos_pasados': cursos_pasados,
         'curso_actual': curso_actual,
         'inscripciones': inscripciones,
+        'total_asistieron': total_asistieron,
+        'busqueda_q': busqueda_q,
         'operador_actual': request.operador_actual
     })
 

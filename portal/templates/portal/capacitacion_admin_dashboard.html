@@ -113,7 +113,7 @@
           <i data-lucide="users" class="w-4 h-4 text-slate-600"></i> Lista de Participantes (<span id="totalInscritosCount">{{ inscripciones.count }}</span>)
         </h3>
         <span class="text-xs text-slate-500 font-semibold bg-slate-100 px-2.5 py-1 rounded-full border border-slate-200">
-          Asistencia: {{ inscripciones.filter.count }}
+          Asistencia: <span id="totalAsistenciaCount">{{ total_asistieron|default:0 }}</span>
         </span>
       </div>
 
@@ -122,7 +122,7 @@
         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
           <i data-lucide="search" class="w-4 h-4"></i>
         </div>
-        <input type="text" id="buscadorParticipantes" placeholder="Buscar por nombre, folio, CURP o empresa..." class="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white transition">
+        <input type="text" id="buscadorParticipantes" value="{{ busqueda_q|default:'' }}" placeholder="Buscar por nombre, folio, CURP o empresa..." class="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white transition">
         <button type="button" id="limpiarBuscador" class="hidden absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 hover:text-slate-600" title="Limpiar búsqueda">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
@@ -217,5 +217,208 @@
     </div>
     {% endif %}
   </div>
+</div>
 
+<!-- MODAL EDITAR PARTICIPANTE -->
+<div id="modalEditarParticipante" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div class="bg-white rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
+    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+      <div class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-bold">
+          <i data-lucide="pencil" class="w-4 h-4"></i>
+        </div>
+        <div>
+          <h3 class="font-bold text-slate-900 text-sm">Editar Participante</h3>
+          <p class="text-[11px] text-slate-500" id="editModalSubtitulo">Folio: -</p>
+        </div>
+      </div>
+      <button type="button" onclick="cerrarModalEditar()" class="text-slate-400 hover:text-slate-600 text-sm font-bold">✕</button>
+    </div>
+
+    <form id="formEditarParticipante" method="POST" action="" class="space-y-3">
+      {% csrf_token %}
+      <div>
+        <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Nombre Completo (en constancia)</label>
+        <input type="text" name="nombre_completo" id="edit_nombre" required class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 uppercase focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">CURP</label>
+          <input type="text" name="curp" id="edit_curp" maxlength="18" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 uppercase focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Empresa / Institución</label>
+          <input type="text" name="empresa_institucion" id="edit_empresa" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 uppercase focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Teléfono</label>
+          <input type="text" name="telefono" id="edit_telefono" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-slate-700 uppercase mb-1">Correo Electrónico</label>
+          <input type="email" name="correo" id="edit_correo" class="w-full px-3 py-2 bg-slate-50 border border-slate-300 rounded-xl text-xs font-semibold text-slate-900 focus:ring-2 focus:ring-medellinVino focus:bg-white outline-none">
+        </div>
+      </div>
+      <div class="pt-2 flex items-center justify-end gap-2 border-t border-slate-100">
+        <button type="button" onclick="cerrarModalEditar()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-bold transition">Cancelar</button>
+        <button type="submit" class="px-4 py-2 bg-medellinVino hover:bg-[#430d2e] text-white rounded-xl text-xs font-bold shadow-md transition">Guardar Cambios</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // -------------------------------------------------------------
+    // 1. BUSCADOR EN TIEMPO REAL CON FILTRADO INSTANTÁNEO Y SIN ACENTOS
+    // -------------------------------------------------------------
+    const buscador = document.getElementById('buscadorParticipantes');
+    const btnLimpiar = document.getElementById('limpiarBuscador');
+    const filas = Array.from(document.querySelectorAll('.participante-row'));
+    const noResultsRow = document.getElementById('noResultsRow');
+    const totalCountSpan = document.getElementById('totalInscritosCount');
+    const totalOriginal = filas.length;
+
+    function normalizar(texto) {
+        return (texto || '')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .trim();
+    }
+
+    function ejecutarBusqueda() {
+        if (!buscador) return;
+        const query = normalizar(buscador.value);
+        let visibles = 0;
+
+        if (query.length === 0) {
+            if (btnLimpiar) btnLimpiar.classList.add('hidden');
+            filas.forEach(f => f.style.display = '');
+            if (noResultsRow) noResultsRow.classList.add('hidden');
+            if (totalCountSpan) totalCountSpan.textContent = totalOriginal;
+            return;
+        }
+
+        if (btnLimpiar) btnLimpiar.classList.remove('hidden');
+
+        filas.forEach(fila => {
+            const rawData = fila.getAttribute('data-search') || fila.innerText;
+            const searchable = normalizar(rawData);
+
+            if (searchable.includes(query)) {
+                fila.style.display = '';
+                visibles++;
+            } else {
+                fila.style.display = 'none';
+            }
+        });
+
+        if (totalCountSpan) totalCountSpan.textContent = visibles;
+
+        if (noResultsRow) {
+            if (visibles === 0) {
+                noResultsRow.classList.remove('hidden');
+            } else {
+                noResultsRow.classList.add('hidden');
+            }
+        }
+    }
+
+    if (buscador) {
+        buscador.addEventListener('input', ejecutarBusqueda);
+        buscador.addEventListener('keyup', ejecutarBusqueda);
+        if (buscador.value && buscador.value.trim().length > 0) {
+            ejecutarBusqueda();
+        }
+    }
+
+    if (btnLimpiar) {
+        btnLimpiar.addEventListener('click', function() {
+            if (buscador) {
+                buscador.value = '';
+                ejecutarBusqueda();
+                buscador.focus();
+            }
+        });
+    }
+
+    // -------------------------------------------------------------
+    // 2. MODAL DE EDICIÓN DE PARTICIPANTES
+    // -------------------------------------------------------------
+    const modalEditar = document.getElementById('modalEditarParticipante');
+    const formEditar = document.getElementById('formEditarParticipante');
+    const editSubtitulo = document.getElementById('editModalSubtitulo');
+    const editNombre = document.getElementById('edit_nombre');
+    const editCurp = document.getElementById('edit_curp');
+    const editEmpresa = document.getElementById('edit_empresa');
+    const editTelefono = document.getElementById('edit_telefono');
+    const editCorreo = document.getElementById('edit_correo');
+
+    window.cerrarModalEditar = function() {
+        if (modalEditar) modalEditar.classList.add('hidden');
+    };
+
+    document.querySelectorAll('.btn-editar-participante').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const id = this.dataset.id;
+            const nombre = this.dataset.nombre || '';
+            const curp = this.dataset.curp || '';
+            const empresa = this.dataset.empresa || '';
+            const tel = this.dataset.telefono || '';
+            const correo = this.dataset.correo || '';
+            const folio = this.dataset.folio || '';
+
+            if (formEditar) formEditar.action = `/capacitaciones/admin/editar/${id}/`;
+            if (editSubtitulo) editSubtitulo.textContent = `Folio Oficial: ${folio}`;
+            if (editNombre) editNombre.value = nombre;
+            if (editCurp) editCurp.value = curp;
+            if (editEmpresa) editEmpresa.value = empresa;
+            if (editTelefono) editTelefono.value = tel;
+            if (editCorreo) editCorreo.value = correo;
+
+            if (modalEditar) {
+                modalEditar.classList.remove('hidden');
+                if (editNombre) editNombre.focus();
+            }
+        });
+    });
+
+    if (modalEditar) {
+        modalEditar.addEventListener('click', function(e) {
+            if (e.target === modalEditar) {
+                cerrarModalEditar();
+            }
+        });
+    }
+
+    // -------------------------------------------------------------
+    // 3. DESCARGA AUTOMÁTICA DE TODAS LAS CONSTANCIAS
+    // -------------------------------------------------------------
+    window.descargarTodasConstanciasAuto = function() {
+        const links = Array.from(document.querySelectorAll('a[href*="/capacitaciones/constancia/"]'));
+        if (!links.length) {
+            alert('No hay constancias aprobadas disponibles para descargar en este taller. Primero aprueba a los participantes marcando asistencia.');
+            return;
+        }
+        if (!confirm(`Se abrirán y generarán ${links.length} constancias oficiales una por una. ¿Deseas continuar?`)) {
+            return;
+        }
+        links.forEach((link, idx) => {
+            setTimeout(() => {
+                window.open(link.href, '_blank');
+            }, idx * 600);
+        });
+    };
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+});
+</script>
 {% endblock %}
