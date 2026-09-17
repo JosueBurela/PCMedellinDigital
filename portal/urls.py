@@ -128,6 +128,7 @@ urlpatterns = [
     path('capacitaciones/qr-registro/', views.generar_qr_registro_con_logo, name='generar_qr_registro_con_logo'),
     path('capacitaciones/admin/', views.admin_capacitaciones_dashboard, name='admin_capacitaciones_dashboard'),
     path('capacitaciones/admin/curso/crear/', views.crear_curso_admin, name='crear_curso_admin'),
+    path('capacitaciones/admin/curso/editar/<int:curso_id>/', views.editar_curso_admin, name='editar_curso_admin'),
     path('capacitaciones/admin/curso/finalizar/<int:curso_id>/', views.toggle_finalizar_curso_admin, name='toggle_finalizar_curso_admin'),
     path('capacitaciones/admin/curso/aprobar-todos/<int:curso_id>/', views.aprobar_todos_capacitacion, name='aprobar_todos_capacitacion'),
     path('capacitaciones/admin/curso/descargar-lote/<int:curso_id>/', views.descargar_constancias_lote, name='descargar_constancias_lote'),

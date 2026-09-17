@@ -168,6 +168,39 @@ def crear_curso_admin(request):
 
 
 @requiere_operador_aprobado
+def editar_curso_admin(request, curso_id):
+    """
+    Permite modificar los datos de un curso existente (título, fecha, horario, sede, duración, cupo, descripción)
+    sin alterar ni perder ningún participante, registro o constancia ya asociada.
+    """
+    curso = get_object_or_404(CursoCapacitacion, id=curso_id)
+    if request.method == 'POST':
+        titulo = request.POST.get('titulo', '').strip()
+        fecha_inicio = request.POST.get('fecha_inicio')
+        horario = request.POST.get('horario', '').strip()
+        sede = request.POST.get('sede_ubicacion', '').strip()
+        duracion_horas = request.POST.get('duracion_horas', 8)
+        cupo = request.POST.get('cupo_maximo', 50)
+        descripcion = request.POST.get('descripcion', '').strip()
+
+        if titulo and fecha_inicio:
+            curso.titulo = titulo
+            curso.fecha_inicio = fecha_inicio
+            curso.horario = horario or '09:00 a 14:00 hrs'
+            curso.sede_ubicacion = sede or 'Estación Central de Bomberos El Tejar'
+            curso.duracion_horas = int(duracion_horas) if duracion_horas else 8
+            curso.cupo_maximo = int(cupo) if cupo else 50
+            curso.descripcion = descripcion
+            curso.save()
+            messages.success(request, f"Se actualizaron exitosamente los datos del curso '{curso.titulo}'.")
+        else:
+            messages.error(request, "El título y la fecha de inicio no pueden quedar vacíos.")
+
+    return redirect(f'/capacitaciones/admin/?curso_id={curso.id}')
+
+
+
+@requiere_operador_aprobado
 def marcar_asistencia_capacitacion(request, inscripcion_id):
     """
     Alterna el estado de asistencia y aprobación de un participante.

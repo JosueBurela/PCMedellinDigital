@@ -50,6 +50,13 @@ staticfiles/
 # 🖼️ Archivos Temporales y Pruebas Locales
 qr_reconnect.png
 scratch_*
+temp_charts/
+fauna_debug.txt
+casos_general.csv
+
+# 📄 Archivos y Reportes Generados
+pdf/
+*.db
 
 # 💻 IDEs, Editores de Código y Archivos del SO
 .idea/
