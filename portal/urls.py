@@ -145,8 +145,14 @@ urlpatterns = [
     path('perfil/', views.perfil_ciudadano, name='perfil_ciudadano'),
     path('chat/enviar/', views.enviar_mensaje_chat, name='enviar_mensaje_chat'),
     
-    # Webhook de WhatsApp
+    # Webhook y Gestión de Conexión de WhatsApp 24/7
+    path('intranet/whatsapp/', views.admin_whatsapp_dashboard, name='admin_whatsapp_dashboard'),
     path('api/whatsapp/webhook/', views.whatsapp_webhook, name='whatsapp_webhook'),
+    path('api/whatsapp/estado/', views.api_whatsapp_estado, name='api_whatsapp_estado'),
+    path('api/whatsapp/qr/', views.api_whatsapp_qr, name='api_whatsapp_qr'),
+    path('api/whatsapp/reiniciar/', views.api_whatsapp_reiniciar, name='api_whatsapp_reiniciar'),
+    path('api/whatsapp/desconectar/', views.api_whatsapp_desconectar, name='api_whatsapp_desconectar'),
+    path('api/whatsapp/probar-mensaje/', views.api_whatsapp_probar_mensaje, name='api_whatsapp_probar_mensaje'),
     
     # API de Cintillo de Avisos SMN CONAGUA
     path('api/clima/cintillo/', views.api_cintillo_clima, name='api_cintillo_clima'),

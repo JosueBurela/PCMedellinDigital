@@ -8,11 +8,17 @@
 import json
 import re
 import logging
+from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from portal.models import ReporteRiesgo, HistorialReporte, Trabajador, SesionAtencionWhatsApp
-from portal.utils.whatsapp_utils import enviar_mensaje_whatsapp, GRUPO_ALERTAS_JID
+from portal.views.vehiculos import requiere_operador_aprobado
+from portal.utils.whatsapp_utils import (
+    enviar_mensaje_whatsapp, GRUPO_ALERTAS_JID, INSTANCE_NAME, EVOLUTION_API_URL,
+    obtener_estado_instancia_whatsapp, obtener_qr_whatsapp,
+    reiniciar_instancia_whatsapp, desconectar_instancia_whatsapp
+)
 
 logger = logging.getLogger(__name__)
 
@@ -386,3 +392,90 @@ def whatsapp_webhook(request):
     except Exception as e:
         logger.error(f"Error en whatsapp_webhook: {e}")
         return JsonResponse({"status": "error", "message": str(e)}, status=400)
+
+
+# ==============================================================================
+# 📱 PANEL DE ADMINISTRACIÓN Y RECONEXIÓN DE WHATSAPP (INTRANET)
+# ==============================================================================
+
+@requiere_operador_aprobado
+def admin_whatsapp_dashboard(request):
+    """
+    Panel central de visualización y reconexión de WhatsApp 24/7 en la Intranet.
+    Muestra el estado en tiempo real, genera código QR al vuelo y permite
+    reiniciar o desvincular el teléfono si se atora o se reinicia.
+    """
+    estado_inicial = obtener_estado_instancia_whatsapp()
+    
+    context = {
+        'estado_whatsapp': estado_inicial,
+        'instancia_nombre': INSTANCE_NAME,
+        'grupo_alertas_jid': GRUPO_ALERTAS_JID,
+        'webhook_url': 'https://107-170-59-223.sslip.io/api/whatsapp/webhook/',
+    }
+    return render(request, 'portal/whatsapp_admin_dashboard.html', context)
+
+
+@requiere_operador_aprobado
+def api_whatsapp_estado(request):
+    """
+    Endpoint para sondeo (polling) en tiempo real del estado de conexión de WhatsApp.
+    Permite a la interfaz web detectar automáticamente cuando el usuario escaneó el QR.
+    """
+    estado = obtener_estado_instancia_whatsapp()
+    return JsonResponse(estado)
+
+
+@requiere_operador_aprobado
+def api_whatsapp_qr(request):
+    """
+    Genera y devuelve el código QR en base64 para vincular WhatsApp.
+    """
+    qr_data = obtener_qr_whatsapp()
+    return JsonResponse(qr_data)
+
+
+@requiere_operador_aprobado
+def api_whatsapp_reiniciar(request):
+    """
+    Fuerza el reinicio de la instancia de WhatsApp cuando se queda trabada ('apendejada').
+    """
+    if request.method != 'POST':
+        return JsonResponse({'ok': False, 'error': 'Método no permitido'}, status=405)
+
+    exito = reiniciar_instancia_whatsapp()
+    if exito:
+        return JsonResponse({'ok': True, 'mensaje': 'Instancia de WhatsApp reiniciada con éxito.'})
+    return JsonResponse({'ok': False, 'error': 'No se pudo reiniciar la instancia.'}, status=500)
+
+
+@requiere_operador_aprobado
+def api_whatsapp_desconectar(request):
+    """
+    Cierra la sesión actual de WhatsApp para permitir vincular un nuevo teléfono limpio.
+    """
+    if request.method != 'POST':
+        return JsonResponse({'ok': False, 'error': 'Método no permitido'}, status=405)
+
+    exito = desconectar_instancia_whatsapp()
+    if exito:
+        return JsonResponse({'ok': True, 'mensaje': 'Sesión de WhatsApp cerrada exitosamente.'})
+    return JsonResponse({'ok': False, 'error': 'No se pudo cerrar la sesión de WhatsApp.'}, status=500)
+
+
+@requiere_operador_aprobado
+def api_whatsapp_probar_mensaje(request):
+    """
+    Envía un mensaje de prueba al teléfono del solicitante o al grupo para validar conectividad.
+    """
+    if request.method != 'POST':
+        return JsonResponse({'ok': False, 'error': 'Método no permitido'}, status=405)
+
+    destino = request.POST.get('destino', '').strip() or GRUPO_ALERTAS_JID
+    texto = "🛡️ *PRUEBA DE CONEXIÓN - PC MEDELLÍN*\n\n✅ El enlace con WhatsApp se encuentra activo y operando correctamente 24/7."
+
+    exito = enviar_mensaje_whatsapp(destino, texto)
+    if exito:
+        return JsonResponse({'ok': True, 'mensaje': f'Mensaje de prueba enviado exitosamente a {destino}.'})
+    return JsonResponse({'ok': False, 'error': 'No se pudo enviar el mensaje. Verifica que el teléfono esté vinculado.'}, status=500)
+

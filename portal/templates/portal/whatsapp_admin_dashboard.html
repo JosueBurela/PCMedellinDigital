@@ -1,0 +1,479 @@
+{% extends 'portal/base_admin.html' %}
+{% load static %}
+
+{% block page_title %}
+    <i data-lucide="message-square" class="w-5 h-5 text-emerald-400"></i>
+    Conexión de WhatsApp Operativo 24/7
+{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto space-y-6 pb-12">
+
+  <!-- ENCABEZADO Y ESTADO GENERAL -->
+  <div class="bg-gradient-to-r from-[#5A123E] via-[#430d2e] to-[#2b081d] rounded-3xl p-6 md:p-8 text-white shadow-xl relative overflow-hidden flex flex-col md:flex-row items-start md:items-center justify-between gap-6 border border-white/10">
+    <div class="relative z-10 space-y-2">
+      <div class="flex items-center gap-2.5">
+        <span id="badgeEstadoHeader" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider {% if estado_whatsapp.conectado %}bg-emerald-500/20 text-emerald-300 border border-emerald-400/40{% else %}bg-amber-500/20 text-amber-300 border border-amber-400/40{% endif %}">
+          <span id="dotPulseHeader" class="w-2 h-2 rounded-full {% if estado_whatsapp.conectado %}bg-emerald-400 animate-ping{% else %}bg-amber-400 animate-pulse{% endif %}"></span>
+          <span id="textoBadgeHeader">{% if estado_whatsapp.conectado %}En Línea 24/7{% else %}Requiere Vinculación{% endif %}</span>
+        </span>
+        <span class="text-white/60 text-xs font-semibold">Instancia: <strong class="text-white">{{ instancia_nombre }}</strong></span>
+      </div>
+      <h1 class="text-2xl md:text-3xl font-black tracking-tight">Centro de Conexión WhatsApp</h1>
+      <p class="text-white/80 text-xs md:text-sm font-medium max-w-2xl leading-relaxed">
+        Monitorea el enlace activo del bot de Protección Civil Medellín con WhatsApp. Si la sesión se cierra, se reinicia el teléfono o se queda trabada, puedes volver a escanear el código QR aquí mismo en 5 segundos.
+      </p>
+    </div>
+
+    <div class="relative z-10 flex flex-wrap md:flex-col gap-2 shrink-0">
+      <button type="button" onclick="recargarEstado()" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition flex items-center gap-2 border border-white/15 cursor-pointer shadow-sm">
+        <i data-lucide="refresh-cw" id="iconRefresh" class="w-4 h-4"></i>
+        <span>Comprobar Estado</span>
+      </button>
+      <button type="button" onclick="reiniciarInstancia()" class="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-slate-950 rounded-xl text-xs font-extrabold transition flex items-center gap-2 shadow cursor-pointer">
+        <i data-lucide="power" class="w-4 h-4"></i>
+        <span>Reiniciar Conexión</span>
+      </button>
+    </div>
+
+    <!-- Elementos decorativos de fondo -->
+    <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-0 right-1/3 w-40 h-40 bg-medellinOro/10 rounded-full blur-2xl pointer-events-none"></div>
+  </div>
+
+  <!-- NOTIFICACIÓN FLOTANTE / ALERTAS DINÁMICAS -->
+  <div id="contenedorAlerta" class="hidden p-4 rounded-2xl text-xs font-bold flex items-center justify-between gap-3 shadow-md transition-all duration-300">
+    <div class="flex items-center gap-2.5">
+      <i data-lucide="info" id="alertaIcono" class="w-5 h-5 shrink-0"></i>
+      <span id="alertaTexto">-</span>
+    </div>
+    <button type="button" onclick="cerrarAlerta()" class="text-slate-400 hover:text-slate-600 p-1 font-bold">✕</button>
+  </div>
+
+  <!-- VISTA DINÁMICA: CONECTADO VS DESCONECTADO -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+    <!-- COLUMNA PRINCIPAL (ESTADO / CÓDIGO QR) -->
+    <div class="lg:col-span-8 space-y-6">
+
+      <!-- TARJETA CUANDO ESTÁ CONECTADO -->
+      <div id="tarjetaConectado" class="{% if not estado_whatsapp.conectado %}hidden{% endif %} bg-white rounded-3xl p-6 md:p-8 border border-emerald-200 shadow-xl space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+          <div class="flex items-center gap-4">
+            <div class="w-14 h-14 rounded-2xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-500/20">
+              <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+            </div>
+            <div>
+              <div class="inline-flex items-center gap-1 text-[11px] font-black uppercase text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md mb-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Operativo 24/7
+              </div>
+              <h2 class="text-lg md:text-xl font-black text-slate-900">WhatsApp Conectado y Sincronizado</h2>
+              <p class="text-xs text-slate-500 font-medium">El bot está activo y escuchando en tiempo real todas las salidas y mensajes.</p>
+            </div>
+          </div>
+          <span class="text-xs font-extrabold text-slate-400 uppercase tracking-wider bg-slate-100 px-3 py-1.5 rounded-xl text-center">
+            Estado: <strong class="text-emerald-700 font-black">OPEN</strong>
+          </span>
+        </div>
+
+        <!-- DETALLES DEL DISPOSITIVO CONECTADO -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+          <div>
+            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider">📱 Teléfono Vinculado</span>
+            <div id="infoTelefonoConectado" class="text-sm font-black text-slate-800 mt-0.5">
+              {{ estado_whatsapp.numero|default:"Teléfono Operativo PC" }}
+            </div>
+            <p class="text-[11px] text-slate-500 mt-0.5">Conectado vía WhatsApp Baileys</p>
+          </div>
+          <div>
+            <span class="text-[10px] font-black uppercase text-slate-400 tracking-wider">📡 Webhook Receptor</span>
+            <div class="text-xs font-bold text-emerald-700 mt-0.5 flex items-center gap-1.5">
+              <i data-lucide="check" class="w-3.5 h-3.5"></i> Activo en Django
+            </div>
+            <p class="text-[11px] text-slate-400 truncate mt-0.5" title="{{ webhook_url }}">{{ webhook_url }}</p>
+          </div>
+        </div>
+
+        <!-- ACCIONES RÁPIDAS -->
+        <div class="flex flex-wrap items-center gap-3 pt-2">
+          <button type="button" onclick="enviarMensajePrueba()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-2 cursor-pointer">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            <span>Enviar Mensaje de Prueba</span>
+          </button>
+          <button type="button" onclick="confirmarDesconexion()" class="px-4 py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-700 rounded-xl text-xs font-bold border border-rose-200 transition flex items-center gap-2 cursor-pointer ml-auto">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span>Desvincular Teléfono</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- TARJETA CUANDO ESTÁ DESCONECTADO (VINCULACIÓN QR) -->
+      <div id="tarjetaDesconectado" class="{% if estado_whatsapp.conectado %}hidden{% endif %} bg-white rounded-3xl p-6 md:p-8 border-2 border-amber-200 shadow-xl space-y-6">
+        
+        <!-- ALERTA SUPERIOR -->
+        <div class="flex items-start gap-4 p-4 rounded-2xl bg-amber-50 border border-amber-300 text-amber-900">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-700 flex items-center justify-center shrink-0">
+            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+          </div>
+          <div class="flex-1">
+            <h3 class="font-extrabold text-sm text-amber-950">WhatsApp Requiere Vinculación</h3>
+            <p class="text-xs text-amber-800 font-medium mt-0.5 leading-relaxed">
+              La sesión no está activa en este momento. Escanea el código QR de abajo con el teléfono que tiene la cuenta del grupo para reactivar la escucha automática.
+            </p>
+          </div>
+        </div>
+
+        <!-- CONTENEDOR DEL CÓDIGO QR -->
+        <div class="flex flex-col items-center justify-center p-6 bg-slate-50 rounded-2xl border border-slate-200 text-center relative overflow-hidden">
+          
+          <div class="mb-4">
+            <h4 class="text-base font-black text-slate-900">Escanea este Código QR en tu WhatsApp</h4>
+            <p class="text-xs text-slate-500 font-medium mt-1">El sistema detectará la conexión automáticamente en segundos.</p>
+          </div>
+
+          <!-- CONTENEDOR IMAGEN QR -->
+          <div class="relative p-4 bg-white rounded-2xl shadow-lg border-2 border-slate-200 inline-block min-w-[260px] min-h-[260px] flex items-center justify-center">
+            <img id="imgQrCode" src="" alt="Código QR de WhatsApp" class="w-64 h-64 object-contain rounded-xl hidden" />
+            
+            <div id="qrLoading" class="flex flex-col items-center justify-center gap-3 p-8 text-slate-400">
+              <i data-lucide="loader-2" class="w-10 h-10 animate-spin text-medellinVino"></i>
+              <span class="text-xs font-bold text-slate-600">Generando código QR seguro...</span>
+            </div>
+
+            <div id="qrError" class="hidden flex flex-col items-center justify-center gap-2 p-8 text-rose-500">
+              <i data-lucide="x-circle" class="w-10 h-10 text-rose-500"></i>
+              <span class="text-xs font-bold text-slate-700" id="qrErrorMensaje">No se pudo cargar el código QR</span>
+              <button type="button" onclick="cargarCodigoQR()" class="mt-2 px-3 py-1.5 bg-rose-100 hover:bg-rose-200 text-rose-800 rounded-lg text-xs font-bold">Reintentar</button>
+            </div>
+          </div>
+
+          <!-- BOTÓN REFRESCAR QR -->
+          <div class="mt-4 flex items-center gap-2">
+            <button type="button" onclick="cargarCodigoQR()" class="px-3.5 py-1.5 bg-white hover:bg-slate-100 text-slate-700 rounded-xl text-xs font-bold border border-slate-200 shadow-xs transition flex items-center gap-1.5 cursor-pointer">
+              <i data-lucide="rotate-cw" class="w-3.5 h-3.5 text-slate-500"></i>
+              <span>Refrescar Código QR</span>
+            </button>
+            <span class="text-[11px] text-slate-400 font-semibold">• Se actualiza automáticamente</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- COLUMNA LATERAL (PASOS DE VINCULACIÓN Y SOLUCIÓN DE PROBLEMAS) -->
+    <div class="lg:col-span-4 space-y-6">
+
+      <!-- GUÍA PASO A PASO -->
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-lg space-y-4">
+        <div class="flex items-center gap-2.5 pb-3 border-b border-slate-100">
+          <div class="w-8 h-8 rounded-xl bg-emerald-500/10 text-emerald-700 flex items-center justify-center font-bold">
+            <i data-lucide="smartphone" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-black text-slate-900">¿Cómo vincular el teléfono?</h3>
+            <p class="text-[11px] text-slate-500 font-medium">3 sencillos pasos desde la app</p>
+          </div>
+        </div>
+
+        <div class="space-y-3.5 text-xs text-slate-600 font-medium">
+          <div class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-medellinVino text-white text-[11px] font-black flex items-center justify-center shrink-0 shadow-xs">1</span>
+            <div>
+              <strong class="text-slate-800 block">Abre WhatsApp</strong>
+              En el celular que pertenece al grupo operativo de emergencias.
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-medellinVino text-white text-[11px] font-black flex items-center justify-center shrink-0 shadow-xs">2</span>
+            <div>
+              <strong class="text-slate-800 block">Entra a Dispositivos vinculados</strong>
+              Toca los tres puntos <strong class="text-slate-900">⋮</strong> (Android) o <strong class="text-slate-900">Ajustes</strong> (iPhone) y selecciona <em class="text-slate-900 not-italic font-bold">"Dispositivos vinculados"</em>.
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <span class="w-6 h-6 rounded-full bg-medellinVino text-white text-[11px] font-black flex items-center justify-center shrink-0 shadow-xs">3</span>
+            <div>
+              <strong class="text-slate-800 block">Apunta al código QR</strong>
+              Toca <strong class="text-emerald-700">"Vincular un dispositivo"</strong> y apunta la cámara a la pantalla.
+            </div>
+          </div>
+        </div>
+
+        <div class="p-3 bg-emerald-50 rounded-2xl border border-emerald-200 text-[11px] text-emerald-900 font-semibold flex items-center gap-2">
+          <i data-lucide="sparkles" class="w-4 h-4 text-emerald-600 shrink-0"></i>
+          <span>No tienes que recargar la página, el sistema te avisará en cuanto se vincule.</span>
+        </div>
+      </div>
+
+      <!-- TARJETA: QUÉ HACER SI SE QUEDA TRABADO -->
+      <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-lg space-y-3">
+        <div class="flex items-center gap-2.5 pb-2 border-b border-slate-100">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-700 flex items-center justify-center font-bold">
+            <i data-lucide="help-circle" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-black text-slate-900">¿Se quedó trabado?</h3>
+            <p class="text-[11px] text-slate-500 font-medium">Soluciones en un clic</p>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-600 font-medium leading-relaxed">
+          Si el teléfono se apagó, se reinició o WhatsApp muestra error de sincronización:
+        </p>
+
+        <ul class="space-y-2 text-xs text-slate-600 font-medium list-disc list-inside">
+          <li>Usa el botón <strong class="text-amber-700">"Reiniciar Conexión"</strong> arriba a la derecha para forzar un reinicio limpio del servicio.</li>
+          <li>Si el problema persiste, usa <strong class="text-rose-700">"Desvincular Teléfono"</strong> para limpiar la memoria y volver a escanear un QR fresco.</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let intervaloPolling = null;
+    let estadoActual = "{{ estado_whatsapp.estado }}";
+    let yaConectado = {% if estado_whatsapp.conectado %}true{% else %}false{% endif %};
+
+    const tarjetaConectado = document.getElementById('tarjetaConectado');
+    const tarjetaDesconectado = document.getElementById('tarjetaDesconectado');
+    const badgeEstadoHeader = document.getElementById('badgeEstadoHeader');
+    const dotPulseHeader = document.getElementById('dotPulseHeader');
+    const textoBadgeHeader = document.getElementById('textoBadgeHeader');
+    const imgQrCode = document.getElementById('imgQrCode');
+    const qrLoading = document.getElementById('qrLoading');
+    const qrError = document.getElementById('qrError');
+    const qrErrorMensaje = document.getElementById('qrErrorMensaje');
+    const infoTelefonoConectado = document.getElementById('infoTelefonoConectado');
+
+    // Función para mostrar alertas sutiles
+    window.mostrarAlerta = function(mensaje, tipo = 'info') {
+        const c = document.getElementById('contenedorAlerta');
+        const t = document.getElementById('alertaTexto');
+        const ico = document.getElementById('alertaIcono');
+        if (!c || !t) return;
+
+        c.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-900', 'border-emerald-300', 'bg-amber-50', 'text-amber-900', 'border-amber-300', 'bg-rose-50', 'text-rose-900', 'border-rose-300');
+
+        if (tipo === 'exito') {
+            c.classList.add('bg-emerald-50', 'text-emerald-900', 'border', 'border-emerald-300');
+        } else if (tipo === 'advertencia') {
+            c.classList.add('bg-amber-50', 'text-amber-900', 'border', 'border-amber-300');
+        } else if (tipo === 'error') {
+            c.classList.add('bg-rose-50', 'text-rose-900', 'border', 'border-rose-300');
+        } else {
+            c.classList.add('bg-slate-100', 'text-slate-800', 'border', 'border-slate-300');
+        }
+
+        t.textContent = mensaje;
+        if (window.lucide) lucide.createIcons();
+    };
+
+    window.cerrarAlerta = function() {
+        const c = document.getElementById('contenedorAlerta');
+        if (c) c.classList.add('hidden');
+    };
+
+    // Actualizar la interfaz visual
+    function actualizarUI(data) {
+        const estaConectado = (data.estado === 'open' || data.conectado === true);
+        
+        if (estaConectado) {
+            tarjetaConectado.classList.remove('hidden');
+            tarjetaDesconectado.classList.add('hidden');
+            
+            badgeEstadoHeader.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/40";
+            dotPulseHeader.className = "w-2 h-2 rounded-full bg-emerald-400 animate-ping";
+            textoBadgeHeader.textContent = "En Línea 24/7";
+
+            if (data.numero && infoTelefonoConectado) {
+                infoTelefonoConectado.textContent = `+${data.numero}`;
+            }
+
+            // Si antes no estaba conectado y ahora sí, felicitar
+            if (!yaConectado) {
+                yaConectado = true;
+                mostrarAlerta('¡Dispositivo vinculado con éxito! WhatsApp se encuentra ahora en línea y escuchando salidas.', 'exito');
+            }
+        } else {
+            tarjetaConectado.classList.add('hidden');
+            tarjetaDesconectado.classList.remove('hidden');
+
+            badgeEstadoHeader.className = "inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-400/40";
+            dotPulseHeader.className = "w-2 h-2 rounded-full bg-amber-400 animate-pulse";
+            textoBadgeHeader.textContent = "Requiere Vinculación";
+
+            if (yaConectado) {
+                yaConectado = false;
+                mostrarAlerta('La sesión de WhatsApp se cerró o se desconectó. Escanea el código QR para reconectar.', 'advertencia');
+                cargarCodigoQR();
+            }
+        }
+        if (window.lucide) lucide.createIcons();
+    }
+
+    // Consulta del estado actual
+    window.recargarEstado = async function(silencioso = false) {
+        const icon = document.getElementById('iconRefresh');
+        if (icon && !silencioso) icon.classList.add('animate-spin');
+
+        try {
+            const resp = await fetch("{% url 'api_whatsapp_estado' %}");
+            const data = await resp.json();
+            actualizarUI(data);
+            if (!silencioso) {
+                mostrarAlerta(`Estado comprobado: ${data.mensaje || data.estado}`, data.conectado ? 'exito' : 'advertencia');
+            }
+        } catch (err) {
+            console.error('Error al comprobar estado:', err);
+            if (!silencioso) mostrarAlerta('No se pudo comprobar el estado del servidor de WhatsApp.', 'error');
+        } finally {
+            if (icon && !silencioso) icon.classList.remove('animate-spin');
+        }
+    };
+
+    // Cargar código QR
+    window.cargarCodigoQR = async function() {
+        if (!qrLoading || !imgQrCode || !qrError) return;
+
+        qrLoading.classList.remove('hidden');
+        imgQrCode.classList.add('hidden');
+        qrError.classList.add('hidden');
+
+        try {
+            const resp = await fetch("{% url 'api_whatsapp_qr' %}");
+            const data = await resp.json();
+
+            if (data.ok && data.qrcode) {
+                imgQrCode.src = data.qrcode;
+                imgQrCode.classList.remove('hidden');
+                qrLoading.classList.add('hidden');
+            } else if (data.estado === 'open') {
+                recargarEstado(true);
+            } else {
+                throw new Error(data.error || 'No se recibió imagen del código QR.');
+            }
+        } catch (err) {
+            console.error('Error al cargar QR:', err);
+            qrLoading.classList.add('hidden');
+            qrError.classList.remove('hidden');
+            if (qrErrorMensaje) qrErrorMensaje.textContent = err.message || 'Error al obtener código QR';
+        }
+    };
+
+    // Reiniciar instancia si se queda trabada
+    window.reiniciarInstancia = async function() {
+        if (!confirm('¿Deseas reiniciar la conexión de WhatsApp?\n\nEsto recargará el servicio en segundo plano sin perder la vinculación si el teléfono sigue activo.')) {
+            return;
+        }
+
+        mostrarAlerta('Reiniciando conexión de WhatsApp...', 'advertencia');
+        try {
+            const resp = await fetch("{% url 'api_whatsapp_reiniciar' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await resp.json();
+            if (data.ok) {
+                mostrarAlerta('Conexión reiniciada. Comprobando nuevo estado...', 'exito');
+                setTimeout(() => {
+                    recargarEstado(false);
+                    cargarCodigoQR();
+                }, 3000);
+            } else {
+                mostrarAlerta(data.error || 'Error al reiniciar', 'error');
+            }
+        } catch (err) {
+            mostrarAlerta('Error de comunicación con el servidor.', 'error');
+        }
+    };
+
+    // Desvincular teléfono limpio
+    window.confirmarDesconexion = async function() {
+        if (!confirm('¿Seguro que deseas DESVINCULAR este teléfono?\n\nSe cerrará la sesión de WhatsApp y se generará un nuevo código QR para vincular cualquier otro número.')) {
+            return;
+        }
+
+        mostrarAlerta('Cerrando sesión de WhatsApp...', 'advertencia');
+        try {
+            const resp = await fetch("{% url 'api_whatsapp_desconectar' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                }
+            });
+            const data = await resp.json();
+            if (data.ok) {
+                mostrarAlerta('Sesión cerrada. Generando nuevo código QR...', 'exito');
+                yaConectado = false;
+                setTimeout(() => {
+                    recargarEstado(true);
+                    cargarCodigoQR();
+                }, 2000);
+            } else {
+                mostrarAlerta(data.error || 'No se pudo cerrar la sesión.', 'error');
+            }
+        } catch (err) {
+            mostrarAlerta('Error de red al intentar desvincular.', 'error');
+        }
+    };
+
+    // Enviar mensaje de prueba
+    window.enviarMensajePrueba = async function() {
+        const destino = prompt('Ingresa el número a 10 dígitos o deja en blanco para enviar al grupo oficial:', '');
+        if (destino === null) return;
+
+        mostrarAlerta('Enviando mensaje de prueba...', 'info');
+        const formData = new FormData();
+        formData.append('destino', destino);
+
+        try {
+            const resp = await fetch("{% url 'api_whatsapp_probar_mensaje' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body: formData
+            });
+            const data = await resp.json();
+            if (data.ok) {
+                mostrarAlerta(data.mensaje, 'exito');
+            } else {
+                mostrarAlerta(data.error || 'Fallo al enviar mensaje de prueba.', 'error');
+            }
+        } catch (err) {
+            mostrarAlerta('Error al enviar mensaje de prueba.', 'error');
+        }
+    };
+
+    // Si al cargar no está conectado, pedir el QR de inmediato
+    if (!yaConectado) {
+        cargarCodigoQR();
+    }
+
+    // Polling inteligente cada 4 segundos
+    intervaloPolling = setInterval(() => {
+        recargarEstado(true);
+    }, 4000);
+
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+});
+</script>
+{% endblock %}

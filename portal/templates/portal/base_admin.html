@@ -74,6 +74,14 @@
                 Capacitaciones
             </a>
 
+            <a href="{% url 'admin_whatsapp_dashboard' %}" class="flex items-center justify-between px-3 py-2.5 rounded-xl transition {% if 'whatsapp' in request.path %}bg-white/10 text-white font-bold shadow-inner{% else %}text-white/70 hover:bg-white/5 hover:text-white font-medium{% endif %}">
+                <div class="flex items-center gap-3">
+                    <i data-lucide="message-square" class="w-5 h-5 {% if 'whatsapp' in request.path %}text-emerald-400{% else %}text-emerald-400/80{% endif %}"></i>
+                    <span>WhatsApp 24/7</span>
+                </div>
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" title="Monitor WhatsApp"></span>
+            </a>
+
             <!-- Módulos Adicionales -->
             <a href="/admin/" target="_blank" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition text-white/70 hover:bg-white/5 hover:text-white font-medium">
                 <i data-lucide="newspaper" class="w-5 h-5"></i>

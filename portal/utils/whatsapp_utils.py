@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 # ── Configuración de Evolution API (Leída desde .env) ───────────────────────
 EVOLUTION_API_URL = os.getenv("EVOLUTION_API_URL", "http://localhost:8080")
-EVOLUTION_API_KEY = os.getenv("EVOLUTION_API_KEY", "")
+EVOLUTION_API_KEY = os.getenv("EVOLUTION_API_KEY", "MedellinPCSecretToken2026")
 INSTANCE_NAME = os.getenv("INSTANCE_NAME", "PCMedellin")
 GRUPO_ALERTAS_JID = os.getenv("GRUPO_ALERTAS_JID", "120363409447790752@g.us")
 
@@ -377,5 +377,179 @@ def enviar_actualizacion_grupo(reporte, cambios_texto=""):
     except Exception as e:
         logger.error(f"Error inesperado al enviar actualización WhatsApp para {reporte.numero_reporte}: {e}")
         return False
+
+
+# ==============================================================================
+# 🔄 GESTIÓN DE CONEXIÓN, ESTADO EN VIVO Y CÓDIGO QR (EVOLUTION API)
+# ==============================================================================
+
+def asegurar_instancia_creada():
+    """Crea la instancia en Evolution API si no existe."""
+    url = f"{EVOLUTION_API_URL}/instance/create"
+    headers = {"Content-Type": "application/json", "apikey": EVOLUTION_API_KEY}
+    payload = {
+        "instanceName": INSTANCE_NAME,
+        "token": EVOLUTION_API_KEY,
+        "qrcode": True,
+        "integration": "WHATSAPP-BAILEYS"
+    }
+    try:
+        req_data = json.dumps(payload).encode('utf-8')
+        req = urllib.request.Request(url, data=req_data, headers=headers, method='POST')
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            return json.loads(resp.read().decode('utf-8'))
+    except Exception as e:
+        logger.warning(f"Asegurar instancia retornó: {e}")
+        return None
+
+
+def obtener_estado_instancia_whatsapp():
+    """
+    Consulta a Evolution API el estado de conexión de la instancia de WhatsApp.
+    Retorna un diccionario con:
+      - conectado: bool
+      - estado: 'open' | 'connecting' | 'close' | 'offline'
+      - numero: teléfono vinculado
+      - perfil_nombre: nombre del perfil de WhatsApp
+      - perfil_foto: url foto de perfil
+      - instancia: nombre de la instancia
+      - mensaje: texto legible
+    """
+    url_state = f"{EVOLUTION_API_URL}/instance/connectionState/{INSTANCE_NAME}"
+    url_fetch = f"{EVOLUTION_API_URL}/instance/fetchInstances?instanceName={INSTANCE_NAME}"
+    headers = {
+        "Content-Type": "application/json",
+        "apikey": EVOLUTION_API_KEY
+    }
+
+    try:
+        req = urllib.request.Request(url_state, headers=headers, method='GET')
+        with urllib.request.urlopen(req, timeout=6) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            state = data.get("instance", {}).get("state", "close")
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            asegurar_instancia_creada()
+            return {
+                "conectado": False,
+                "estado": "close",
+                "numero": None,
+                "perfil_nombre": None,
+                "perfil_foto": None,
+                "instancia": INSTANCE_NAME,
+                "mensaje": "Instancia inicializada. Listo para generar código QR."
+            }
+        logger.error(f"Error HTTP al consultar estado de WhatsApp: {e}")
+        return {
+            "conectado": False,
+            "estado": "offline",
+            "numero": None,
+            "perfil_nombre": None,
+            "perfil_foto": None,
+            "instancia": INSTANCE_NAME,
+            "mensaje": f"Error de comunicación con el servicio (HTTP {e.code})"
+        }
+    except Exception as e:
+        logger.error(f"Error al conectar con Evolution API: {e}")
+        return {
+            "conectado": False,
+            "estado": "offline",
+            "numero": None,
+            "perfil_nombre": None,
+            "perfil_foto": None,
+            "instancia": INSTANCE_NAME,
+            "mensaje": "Servidor Evolution API desconectado o en reinicio."
+        }
+
+    numero = None
+    perfil_nombre = None
+    perfil_foto = None
+
+    try:
+        req_f = urllib.request.Request(url_fetch, headers=headers, method='GET')
+        with urllib.request.urlopen(req_f, timeout=6) as resp_f:
+            arr = json.loads(resp_f.read().decode('utf-8'))
+            if isinstance(arr, list) and len(arr) > 0:
+                inst_info = arr[0]
+                numero = inst_info.get("number")
+                perfil_nombre = inst_info.get("profileName")
+                perfil_foto = inst_info.get("profilePicUrl")
+                if not numero and inst_info.get("ownerJid"):
+                    numero = inst_info.get("ownerJid", "").split("@")[0]
+    except Exception as e:
+        logger.warning(f"No se pudo obtener detalles extendidos de la instancia: {e}")
+
+    conectado = (state == 'open')
+    return {
+        "conectado": conectado,
+        "estado": state,
+        "numero": numero,
+        "perfil_nombre": perfil_nombre,
+        "perfil_foto": perfil_foto,
+        "instancia": INSTANCE_NAME,
+        "mensaje": "Conexión activa y escuchando 24/7" if conectado else ("Esperando vinculación QR..." if state == "connecting" else "Sesión cerrada o desconectada.")
+    }
+
+
+def obtener_qr_whatsapp():
+    """
+    Solicita un código QR fresco a Evolution API para vincular el teléfono.
+    Retorna {"ok": True, "qrcode": base64_str, "estado": state, ...}
+    """
+    asegurar_instancia_creada()
+    url = f"{EVOLUTION_API_URL}/instance/connect/{INSTANCE_NAME}"
+    headers = {"Content-Type": "application/json", "apikey": EVOLUTION_API_KEY}
+
+    try:
+        req = urllib.request.Request(url, headers=headers, method='GET')
+        with urllib.request.urlopen(req, timeout=10) as response:
+            data = json.loads(response.read().decode('utf-8'))
+            base64_qr = data.get("base64")
+            code = data.get("code")
+            pairing_code = data.get("pairingCode")
+            return {
+                "ok": True,
+                "qrcode": base64_qr,
+                "pairing_code": pairing_code,
+                "code": code,
+                "estado": "connecting"
+            }
+    except urllib.error.HTTPError as e:
+        logger.error(f"HTTPError al obtener QR: {e}")
+        return {"ok": False, "error": f"Error del servidor (HTTP {e.code})"}
+    except Exception as e:
+        logger.error(f"Excepción al obtener QR: {e}")
+        return {"ok": False, "error": str(e)}
+
+
+def reiniciar_instancia_whatsapp():
+    """
+    Reinicia limpiamente la instancia cuando se queda trabada ('apendejada').
+    """
+    url = f"{EVOLUTION_API_URL}/instance/restart/{INSTANCE_NAME}"
+    headers = {"Content-Type": "application/json", "apikey": EVOLUTION_API_KEY}
+    try:
+        req = urllib.request.Request(url, data=b"{}", headers=headers, method='POST')
+        with urllib.request.urlopen(req, timeout=10) as response:
+            return True
+    except Exception as e:
+        logger.error(f"Error al reiniciar instancia: {e}")
+        return False
+
+
+def desconectar_instancia_whatsapp():
+    """
+    Cierra la sesión actual de WhatsApp (logout) para permitir vincular un nuevo teléfono desde cero.
+    """
+    url = f"{EVOLUTION_API_URL}/instance/logout/{INSTANCE_NAME}"
+    headers = {"Content-Type": "application/json", "apikey": EVOLUTION_API_KEY}
+    try:
+        req = urllib.request.Request(url, headers=headers, method='DELETE')
+        with urllib.request.urlopen(req, timeout=10) as response:
+            return True
+    except Exception as e:
+        logger.error(f"Error al desconectar instancia: {e}")
+        return False
+
 
 
