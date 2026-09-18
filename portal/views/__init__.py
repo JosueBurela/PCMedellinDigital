@@ -18,3 +18,4 @@ from .vehiculos import *
 from .mapa import *
 from .capacitaciones import *
 from .intranet import *
+from .salidas import *

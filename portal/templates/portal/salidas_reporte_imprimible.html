@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Parte Diario de Salidas y Atenciones - {{ fecha|date:"d/m/Y" }} | PC Medellín</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @media print {
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .no-print { display: none !important; }
+      @page { margin: 12mm; size: letter portrait; }
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-900 font-sans p-6 md:p-10 max-w-5xl mx-auto text-xs">
+
+  <!-- BOTÓN DE IMPRESIÓN (SOLO EN PANTALLA) -->
+  <div class="no-print mb-6 flex items-center justify-between bg-slate-100 p-4 rounded-2xl border border-slate-300">
+    <div>
+      <h2 class="font-bold text-slate-800 text-sm">Vista Previa de Impresión Oficial</h2>
+      <p class="text-[11px] text-slate-500">Parte Oficial de Movimientos Operativos de Guardia</p>
+    </div>
+    <div class="flex gap-2">
+      <button onclick="window.close()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold rounded-xl text-xs">Cerrar</button>
+      <button onclick="window.print()" class="px-5 py-2 bg-rose-900 hover:bg-rose-950 text-white font-bold rounded-xl text-xs shadow flex items-center gap-1.5">
+        <span>🖨️ Imprimir Documento</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ENCABEZADO INSTITUCIONAL OFICIAL -->
+  <div class="border-b-2 border-slate-900 pb-4 mb-4 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <img src="{% static 'portal/img/logo_qr_pc_clean.png' %}" class="w-16 h-16 object-contain" alt="Logo PC Medellín">
+      <div>
+        <h1 class="text-sm font-black tracking-wider uppercase text-slate-900">H. Ayuntamiento de Medellín de Bravo, Ver.</h1>
+        <h2 class="text-xs font-extrabold uppercase text-rose-900">Secretaría de Protección Civil y Bomberos</h2>
+        <p class="text-[10px] font-bold text-slate-500 uppercase tracking-wide">Dirección Operativa • Parte Diario de Movimientos y Despachos</p>
+      </div>
+    </div>
+    <div class="text-right border-l-2 border-slate-200 pl-4">
+      <div class="text-[10px] font-bold uppercase text-slate-400">Fecha del Reporte:</div>
+      <div class="text-sm font-black text-slate-900">{{ fecha|date:"d \d\e F, Y" }}</div>
+      <div class="text-[10px] font-semibold text-slate-500">Total Servicios: <strong>{{ total_servicios }}</strong></div>
+    </div>
+  </div>
+
+  <!-- TABLA CRONOLÓGICA DE MOVIMIENTOS -->
+  <table class="w-full border-collapse text-left border border-slate-300 mb-8">
+    <thead>
+      <tr class="bg-slate-100 text-[10px] font-black uppercase text-slate-700 border-b border-slate-300">
+        <th class="p-2 border-r border-slate-300 text-center w-10">No.</th>
+        <th class="p-2 border-r border-slate-300 w-20">Unidad</th>
+        <th class="p-2 border-r border-slate-300 w-36">Personal a Cargo</th>
+        <th class="p-2 border-r border-slate-300">Motivo / Tipo de Servicio / Ubicación</th>
+        <th class="p-2 border-r border-slate-300 text-center w-16">Salida</th>
+        <th class="p-2 border-r border-slate-300 text-center w-16">Llegada</th>
+        <th class="p-2 border-r border-slate-300 text-center w-16">Tiempo</th>
+        <th class="p-2 text-center w-20">Estatus</th>
+      </tr>
+    </thead>
+    <tbody class="divide-y divide-slate-200 text-[11px]">
+      {% for s in salidas %}
+      <tr>
+        <td class="p-2 border-r border-slate-200 text-center font-bold text-slate-500">{{ forloop.counter }}</td>
+        <td class="p-2 border-r border-slate-200 font-black text-slate-900 uppercase">
+          {{ s.unidad.numero_unidad }}
+          <div class="text-[9px] font-normal text-slate-400">{{ s.unidad.tipo_vehiculo }}</div>
+        </td>
+        <td class="p-2 border-r border-slate-200 font-bold text-slate-800 uppercase">{{ s.operador_nombre }}</td>
+        <td class="p-2 border-r border-slate-200 font-medium text-slate-700">{{ s.descripcion_servicio }}</td>
+        <td class="p-2 border-r border-slate-200 text-center font-bold text-slate-900">{{ s.fecha_salida|date:"H:i" }}</td>
+        <td class="p-2 border-r border-slate-200 text-center font-bold text-slate-900">
+          {% if s.fecha_llegada %}{{ s.fecha_llegada|date:"H:i" }}{% else %}--:--{% endif %}
+        </td>
+        <td class="p-2 border-r border-slate-200 text-center font-bold">
+          {% if s.completado %}{{ s.duracion_minutos }} min{% else %}En curso{% endif %}
+        </td>
+        <td class="p-2 text-center font-bold">
+          {% if s.completado %}
+          <span class="text-emerald-800 uppercase text-[10px]">Concluido</span>
+          {% else %}
+          <span class="text-rose-700 uppercase text-[10px]">En Servicio</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="8" class="p-6 text-center text-slate-400 italic">
+          No se registraron salidas de unidades en esta fecha.
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- SECCIÓN DE FIRMAS OFICIALES -->
+  <div class="mt-14 pt-8 grid grid-cols-2 gap-12 text-center">
+    <div>
+      <div class="border-t border-slate-900 w-3/4 mx-auto pt-2">
+        <p class="font-bold text-slate-900 uppercase text-[11px]">Jefe de Guardia en Turno</p>
+        <p class="text-[10px] text-slate-500 uppercase">Firma y Sello Operativo</p>
+      </div>
+    </div>
+    <div>
+      <div class="border-t border-slate-900 w-3/4 mx-auto pt-2">
+        <p class="font-bold text-slate-900 uppercase text-[11px]">Lic. Daniel Eduardo Romero Pilar</p>
+        <p class="text-[10px] text-slate-500 uppercase">Titular de Protección Civil y Bomberos</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

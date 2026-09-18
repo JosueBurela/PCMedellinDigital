@@ -51,6 +51,12 @@ def whatsapp_webhook(request):
 
         # ── Determinación de JIDs (Grupo vs Chat Privado del Trabajador) ───────
         chat_jid = raw_remote_jid
+
+        # ── INTERCEPTOR EXCLUSIVO: GRUPO PROTECCIÓN CIVIL MEDELLÍN (SALIDAS/ENTRADAS) ──
+        from portal.utils.whatsapp_salidas_tracker import procesar_mensaje_grupo_salidas, GRUPO_SALIDAS_JID
+        if chat_jid == GRUPO_SALIDAS_JID:
+            resultado_salida = procesar_mensaje_grupo_salidas(data)
+            return JsonResponse({"status": "grupo_salidas_procesado", "detalle": resultado_salida})
         
         # Extraer dígitos telefónicos para resolver el JID individual del trabajador (@s.whatsapp.net)
         participant_digits = re.sub(r'\D', '', raw_participant or raw_remote_jid)

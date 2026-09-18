@@ -69,6 +69,11 @@
                 Control de Flotilla
             </a>
 
+            <a href="{% url 'intranet_registro_salidas' %}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {% if 'salidas' in request.path %}bg-white/10 text-white font-bold shadow-inner{% else %}text-white/70 hover:bg-white/5 hover:text-white font-medium{% endif %}">
+                <i data-lucide="route" class="w-5 h-5 {% if 'salidas' in request.path %}text-medellinOro{% endif %}"></i>
+                Registro de Salidas
+            </a>
+
             <a href="{% url 'admin_capacitaciones_dashboard' %}" class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition {% if 'capacitaciones' in request.path %}bg-white/10 text-white font-bold shadow-inner{% else %}text-white/70 hover:bg-white/5 hover:text-white font-medium{% endif %}">
                 <i data-lucide="graduation-cap" class="w-5 h-5 {% if 'capacitaciones' in request.path %}text-medellinOro{% endif %}"></i>
                 Capacitaciones
