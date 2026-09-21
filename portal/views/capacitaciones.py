@@ -161,6 +161,7 @@ def crear_curso_admin(request):
                 activo=True
             )
             messages.success(request, f"Curso '{curso.titulo}' creado exitosamente.")
+            return redirect(f'/capacitaciones/admin/?curso_id={curso.id}')
         else:
             messages.error(request, "Por favor ingresa un título y fecha de inicio válidos.")
             
