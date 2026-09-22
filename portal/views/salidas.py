@@ -58,11 +58,15 @@ def intranet_registro_salidas(request):
     unidades_en_servicio_count = unidades_flotilla.filter(estatus='EN_SERVICIO').count()
     unidades_disponibles_count = unidades_flotilla.filter(estatus='DISPONIBLE').count()
 
+    ayer = hoy - datetime.timedelta(days=1)
+
     context = {
         'fecha_seleccionada': fecha_seleccionada,
         'fecha_str': fecha_seleccionada.strftime('%Y-%m-%d'),
         'es_hoy': (fecha_seleccionada == hoy),
         'hoy_str': hoy.strftime('%Y-%m-%d'),
+        'es_ayer': (fecha_seleccionada == ayer),
+        'ayer_str': ayer.strftime('%Y-%m-%d'),
         'salidas': salidas_dia,
         'salidas_activas': salidas_activas,
         'unidades_flotilla': unidades_flotilla,
