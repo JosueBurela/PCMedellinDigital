@@ -53,10 +53,7 @@ def extraer_unidad(texto_original):
     for num in digitos:
         if num in ['10', '108', '104', '1020']:  # evitar códigos clave 10
             continue
-        # Si tiene 3 dígitos o empieza con 0 (ej: 041, 098, 072, 096, 208)
-        if num.startswith('0') or len(num) == 3:
-            return num
-        # Si coincide con alguna unidad en la base de datos
+        # Validar estrictamente contra la base de datos
         num_clean = num.lstrip('0') or '0'
         if VehiculoUnidad.objects.filter(
             Q(numero_unidad__icontains=num) |
@@ -68,9 +65,9 @@ def extraer_unidad(texto_original):
     return None
 
 
-def buscar_o_crear_vehiculo(num_unidad):
+def buscar_vehiculo(num_unidad):
     """
-    Encuentra la unidad en VehiculoUnidad o la crea automáticamente si es nueva.
+    Encuentra la unidad en VehiculoUnidad. No crea unidades nuevas automáticamente.
     """
     if not num_unidad:
         return None
@@ -92,28 +89,6 @@ def buscar_o_crear_vehiculo(num_unidad):
             Q(numero_unidad__icontains=num_sin_ceros) |
             Q(nombre_identificador__icontains=num_sin_ceros)
         ).first()
-
-    if not unidad:
-        # Crear la unidad para no perder el registro
-        tipo = 'PickUp'
-        try:
-            val_int = int(num_sin_ceros)
-            if val_int in [97, 98, 208]:
-                tipo = 'Ambulancia'
-            elif val_int in [72, 73]:
-                tipo = 'Pipa'
-            elif val_int in [47]:
-                tipo = 'Moto'
-        except Exception:
-            pass
-
-        unidad = VehiculoUnidad.objects.create(
-            numero_unidad=f"U-{num_limpio}",
-            nombre_identificador=f"Unidad {num_limpio}",
-            tipo_vehiculo=tipo,
-            estatus='DISPONIBLE'
-        )
-        logger.info(f"Unidad creada automáticamente en base de datos: {unidad.nombre_identificador}")
 
     return unidad
 
@@ -237,7 +212,7 @@ def procesar_mensaje_grupo_salidas(data):
     # verificar si el remitente tiene una salida activa reciente para asociarla
     vehiculo = None
     if num_unidad:
-        vehiculo = buscar_o_crear_vehiculo(num_unidad)
+        vehiculo = buscar_vehiculo(num_unidad)
     else:
         # Buscar la salida activa más reciente si dice 'llegando a base' o 'en base'
         salida_pendiente = BitacoraSalidaVehiculo.objects.filter(
