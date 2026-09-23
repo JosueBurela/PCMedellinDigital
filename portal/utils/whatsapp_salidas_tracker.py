@@ -112,7 +112,9 @@ def procesar_mensaje_grupo_salidas(data):
     if not vehiculo:
         if salida_activa_usuario:
             vehiculo = salida_activa_usuario.unidad
-        elif tipo_evento == 'ENTRADA':
+        else:
+            # Cualquier otro mensaje (texto, enterado, fotos, novedades) que no mencione unidad explícita
+            # se anexa a la salida activa más reciente de toda la flotilla (asumiendo que hablan de ese servicio)
             salida_pendiente = BitacoraSalidaVehiculo.objects.filter(completado=False, fecha_salida__gte=dt_evento - datetime.timedelta(hours=14)).order_by('-fecha_salida').first()
             if salida_pendiente: vehiculo = salida_pendiente.unidad
 
@@ -169,6 +171,7 @@ def procesar_mensaje_grupo_salidas(data):
             salida.fecha_llegada = dt_evento
             salida.duracion_minutos = max(1, int((dt_evento - salida.fecha_salida).total_seconds() / 60))
             salida.completado = True
+            salida.descripcion_servicio += f" | [Retorno {push_name}] {detalle_evento}"
             if foto_archivo: salida.foto_odometro_llegada = foto_archivo
             salida.save()
         else:

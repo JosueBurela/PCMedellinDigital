@@ -172,7 +172,7 @@
             <!-- MOTIVO / DESCRIPCIÓN -->
             <td class="p-4 max-w-xs">
               <p class="font-bold text-slate-800 text-xs leading-snug break-words line-clamp-2" title="{{ s.descripcion_servicio }}">{{ s.descripcion_servicio }}</p>
-              <button type="button" onclick="verBitacoraSalida('{{ s.descripcion_servicio|escapejs }}', '{{ s.unidad.numero_unidad }}', '{{ s.operador_nombre|escapejs }}')" class="mt-1.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-[10px] font-bold transition border border-indigo-100 cursor-pointer">
+              <button type="button" onclick="verBitacoraSalida('{{ s.descripcion_servicio|escapejs }}', '{{ s.unidad.numero_unidad }}', '{{ s.operador_nombre|escapejs }}', '{{ s.fecha_llegada|date:'H:i' }}')" class="mt-1.5 inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-[10px] font-bold transition border border-indigo-100 cursor-pointer">
                 <i data-lucide="align-left" class="w-3 h-3"></i>
                 <span>Ver Timeline Completo</span>
               </button>
@@ -365,7 +365,7 @@
 
 {% block extra_scripts %}
 <script>
-function verBitacoraSalida(descripcion, unidad, operador) {
+function verBitacoraSalida(descripcion, unidad, operador, fecha_llegada) {
     const modal = document.getElementById('modalTimeline');
     const subtitulo = document.getElementById('modalTimelineSubtitulo');
     const lista = document.getElementById('modalTimelineLista');
@@ -373,9 +373,17 @@ function verBitacoraSalida(descripcion, unidad, operador) {
     subtitulo.textContent = `Unidad ${unidad} — ${operador}`;
     lista.innerHTML = '';
     
+    // Convertir \n literales a <br>
+    descripcion = descripcion.replace(/\n/g, '<br>');
+    
     let eventos = descripcion.split(' | ');
     if (eventos.length === 0 || (eventos.length === 1 && !eventos[0].trim())) {
         eventos = ["No hay detalles operativos registrados."];
+    }
+    
+    // Si la salida está completada (hay fecha de llegada) pero el último mensaje no dice "Retorno", añadimos uno fantasma
+    if (fecha_llegada && !eventos[eventos.length - 1].toLowerCase().includes("retorno")) {
+        eventos.push(`[Retorno] Unidad en base a las ${fecha_llegada} hrs`);
     }
 
     eventos.forEach((ev, idx) => {
@@ -387,15 +395,20 @@ function verBitacoraSalida(descripcion, unidad, operador) {
         let evText = ev.trim();
         let boldTitle = "";
 
-        if (idx === 0 && evText.toLowerCase().includes("salida")) {
+        // El primer elemento siempre es el inicio de salida
+        if (idx === 0) {
             bgColor = "bg-medellinOro";
             iconHtml = '<i data-lucide="play" class="w-2.5 h-2.5 text-white"></i>';
             boldTitle = "Inicio de Salida";
-        } else if (idx === eventos.length - 1 && evText.toLowerCase().includes("retorno")) {
+        } 
+        // El último elemento si incluye retorno
+        else if (idx === eventos.length - 1 && evText.toLowerCase().includes("retorno")) {
             bgColor = "bg-blue-500";
             iconHtml = '<i data-lucide="check" class="w-3 h-3 text-white"></i>';
             boldTitle = "Retorno a Base";
-        } else {
+        } 
+        // Mensajes intermedios
+        else {
             bgColor = "bg-indigo-500";
             iconHtml = '<i data-lucide="message-square" class="w-2.5 h-2.5 text-white"></i>';
         }
