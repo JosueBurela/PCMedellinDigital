@@ -817,6 +817,7 @@ class VehiculoUnidad(models.Model):
 class BitacoraSalidaVehiculo(models.Model):
     unidad = models.ForeignKey(VehiculoUnidad, on_delete=models.CASCADE, related_name='salidas')
     operador_nombre = models.CharField(max_length=200, help_text="Nombre del operador o paramédico a cargo")
+    operador_telefono = models.CharField(max_length=50, blank=True, null=True, help_text="Número de WhatsApp del operador")
     guardia_turno = models.CharField(max_length=100, blank=True, null=True, help_text="Ej. Paco / Guardia 1")
     descripcion_servicio = models.TextField(help_text="Motivo / Descripción del servicio o llamada de emergencia")
     

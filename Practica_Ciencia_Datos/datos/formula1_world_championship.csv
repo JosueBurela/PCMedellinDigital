@@ -1,0 +1,1213 @@
+race_year,grand_prix,driver_name,constructor,driver_country,grid_position,finish_position,points_awarded,laps_completed,fastest_lap_speed_kmh,pit_stops,race_status
+2021,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,15,16,0,52,250.28,1,Finished
+2024,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,8,6,8,58,225.7,1,Finished
+2024,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,17,9,2,71,239.24,1,Finished
+2023,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,20,18,0,52,233.33,2,Finished
+2024,Silverstone,Fernando Alonso,Aston Martin,Spain,14,12,0,71,243.37,1,Finished
+2021,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,8,10,1,58,217.35,1,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,18,18,0,45,,3,Collision
+2024,Interlagos,Oscar Piastri,McLaren,Australia,16,16,0,71,251.7,2,Finished
+2023,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,13,10,1,71,239.34,1,Finished
+2023,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,3,1,25,71,228.29,2,Finished
+2024,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,5,7,6,58,248.27,2,Finished
+2022,Suzuka,Carlos Sainz,Ferrari,Spain,3,4,12,58,250.46,2,Finished
+2023,Suzuka,Oscar Piastri,McLaren,Australia,10,5,10,58,228.63,2,Finished
+2021,Interlagos,Sergio Perez,Red Bull Racing,Mexico,7,11,0,45,,1,Collision
+2024,Interlagos,Charles Leclerc,Ferrari,Monaco,2,1,25,58,242.71,1,Finished
+2022,Interlagos,Sergio Perez,Red Bull Racing,Mexico,11,8,4,71,227.68,1,Finished
+2023,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,20,15,0,58,219.77,1,Finished
+2023,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,10,11,0,58,230.01,1,Finished
+2021,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,17,14,0,71,222.13,2,Finished
+2024,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,17,15,0,71,230.99,1,Finished
+2024,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,6,8,4,52,218.2,2,Finished
+2021,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,20,19,0,71,234.6,2,Finished
+2023,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,6,8,4,52,237.18,1,Finished
+2023,Monza,Pierre Gasly,Alpine,France,19,16,0,58,228.76,3,Finished
+2024,Silverstone,Fernando Alonso,Aston Martin,Spain,1,4,12,58,242.48,1,Finished
+2023,Monza,Pierre Gasly,Alpine,France,16,16,0,52,247.69,2,Finished
+2024,Autodromo Hermanos Rodriguez,Carlos Sainz,Ferrari,Spain,9,11,0,71,219.22,2,Finished
+2021,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,20,20,0,52,242.17,1,Finished
+2021,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,18,18,0,71,217.4,2,Finished
+2021,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,4,1,25,71,218.43,2,Finished
+2021,Monza,Fernando Alonso,Aston Martin,Spain,1,2,18,58,268.73,2,Finished
+2021,Interlagos,Lando Norris,McLaren,United Kingdom,19,19,0,58,241.93,2,Finished
+2024,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,16,12,0,71,237.79,3,Finished
+2023,Interlagos,Carlos Sainz,Ferrari,Spain,9,8,4,58,236.1,2,Finished
+2023,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,1,1,25,71,225.84,2,Finished
+2024,Monza,Pierre Gasly,Alpine,France,14,14,0,52,222.29,3,Finished
+2022,Silverstone,Pierre Gasly,Alpine,France,17,18,0,58,253.35,1,Finished
+2024,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,13,9,2,58,237.94,1,Finished
+2023,Suzuka,Charles Leclerc,Ferrari,Monaco,2,2,18,58,221.73,1,Finished
+2022,Silverstone,Lando Norris,McLaren,United Kingdom,17,14,0,71,227.98,2,Finished
+2024,Suzuka,Carlos Sainz,Ferrari,Spain,6,6,8,71,224.18,2,Finished
+2021,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,18,11,0,58,234.24,2,Finished
+2022,Suzuka,Pierre Gasly,Alpine,France,5,10,1,71,223.87,1,Finished
+2022,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,16,16,0,58,258.94,2,Finished
+2024,Monza,Fernando Alonso,Aston Martin,Spain,16,13,0,58,228.84,1,Finished
+2024,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,16,15,0,52,220.81,2,Finished
+2022,Suzuka,Carlos Sainz,Ferrari,Spain,10,10,1,71,241.07,2,Finished
+2023,Circuit of the Americas,George Russell,Mercedes,United Kingdom,2,2,18,58,227.38,3,Finished
+2024,Monza,Lewis Hamilton,Mercedes,United Kingdom,1,7,6,58,208.57,3,Finished
+2022,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,11,11,0,58,224.53,1,Finished
+2022,Silverstone,Pierre Gasly,Alpine,France,2,1,25,58,211.4,2,Finished
+2021,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,4,5,10,71,223.48,2,Finished
+2021,Silverstone,Sergio Perez,Red Bull Racing,Mexico,7,10,1,52,234.75,2,Finished
+2023,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,3,6,8,71,232.25,1,Finished
+2024,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,9,7,6,71,243.81,3,Finished
+2022,Monza,Sergio Perez,Red Bull Racing,Mexico,15,18,0,71,257.72,1,Finished
+2021,Suzuka,Oscar Piastri,McLaren,Australia,10,15,0,71,236.85,3,Finished
+2021,Spa-Francorchamps,Pierre Gasly,Alpine,France,6,6,8,71,225.92,1,Finished
+2021,Silverstone,Pierre Gasly,Alpine,France,5,6,8,71,214.46,2,Finished
+2023,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,13,11,0,71,248.32,1,Finished
+2023,Suzuka,Lando Norris,McLaren,United Kingdom,10,9,2,45,,2,Accident
+2021,Suzuka,Oscar Piastri,McLaren,Australia,3,4,12,58,233.07,1,Finished
+2022,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,6,1,25,71,239.19,1,Finished
+2023,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,19,19,0,71,237.98,2,Finished
+2022,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,3,2,18,58,243.72,2,Finished
+2024,Silverstone,Sergio Perez,Red Bull Racing,Mexico,18,15,0,58,215.95,1,Finished
+2021,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,20,15,0,45,,1,Engine Failure
+2024,Monza,Lewis Hamilton,Mercedes,United Kingdom,5,1,25,71,253.98,3,Finished
+2024,Suzuka,Carlos Sainz,Ferrari,Spain,1,1,25,58,250.33,3,Finished
+2021,Suzuka,Pierre Gasly,Alpine,France,17,16,0,58,246.85,1,Finished
+2024,Interlagos,Fernando Alonso,Aston Martin,Spain,17,20,0,58,234.7,3,Finished
+2022,Autodromo Hermanos Rodriguez,Carlos Sainz,Ferrari,Spain,10,5,10,58,224.35,1,Finished
+2021,Interlagos,Sergio Perez,Red Bull Racing,Mexico,17,6,8,58,228.78,2,Finished
+2024,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,5,3,15,71,262.47,1,Finished
+2023,Monza,Lewis Hamilton,Mercedes,United Kingdom,7,10,1,58,210.9,1,Finished
+2021,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,6,8,4,58,230.76,1,Finished
+2021,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,4,7,6,45,,2,Accident
+2021,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,2,5,10,45,,1,Accident
+2024,Suzuka,Fernando Alonso,Aston Martin,Spain,11,12,0,58,220.72,1,Finished
+2023,Circuit of the Americas,Charles Leclerc,Ferrari,Monaco,18,13,0,58,238.05,2,Finished
+2022,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,6,5,10,58,219.58,1,Finished
+2023,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,9,8,4,58,221.2,2,Finished
+2024,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,1,1,25,58,222.7,3,Finished
+2022,Interlagos,George Russell,Mercedes,United Kingdom,14,18,0,58,229.01,1,Finished
+2023,Monza,Fernando Alonso,Aston Martin,Spain,14,12,0,52,242.82,1,Finished
+2024,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,10,13,0,58,234.68,1,Finished
+2021,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,20,13,0,58,227.31,2,Finished
+2022,Suzuka,Sergio Perez,Red Bull Racing,Mexico,2,8,4,58,248.69,2,Finished
+2024,Interlagos,Carlos Sainz,Ferrari,Spain,2,1,25,71,212.34,1,Finished
+2021,Interlagos,Carlos Sainz,Ferrari,Spain,6,5,10,45,,2,Engine Failure
+2021,Suzuka,George Russell,Mercedes,United Kingdom,3,1,25,52,240.22,3,Finished
+2024,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,11,11,0,52,235.28,1,Finished
+2021,Interlagos,Charles Leclerc,Ferrari,Monaco,2,8,4,71,251.44,1,Finished
+2022,Silverstone,Lando Norris,McLaren,United Kingdom,4,4,12,52,199.11,1,Finished
+2024,Interlagos,Pierre Gasly,Alpine,France,6,2,18,58,235.21,2,Finished
+2022,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,10,15,0,71,255.81,1,Finished
+2023,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,5,12,0,52,224.75,2,Finished
+2024,Interlagos,Carlos Sainz,Ferrari,Spain,12,14,0,52,230.27,3,Finished
+2021,Monza,Charles Leclerc,Ferrari,Monaco,8,9,2,71,237.97,2,Finished
+2021,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,5,6,8,58,216.51,3,Finished
+2022,Monaco Grand Prix,Pierre Gasly,Alpine,France,8,13,0,71,227.22,2,Finished
+2023,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,15,9,2,58,243.96,1,Finished
+2024,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,19,12,0,71,249.19,1,Finished
+2024,Circuit of the Americas,Pierre Gasly,Alpine,France,15,14,0,58,244.65,2,Finished
+2021,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,5,3,15,71,236.65,1,Finished
+2022,Monza,Carlos Sainz,Ferrari,Spain,1,1,25,58,220.63,1,Finished
+2023,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,8,6,8,71,225.37,2,Finished
+2024,Monza,Charles Leclerc,Ferrari,Monaco,4,6,8,71,250.81,2,Finished
+2022,Interlagos,George Russell,Mercedes,United Kingdom,8,2,18,71,224.74,2,Finished
+2022,Interlagos,George Russell,Mercedes,United Kingdom,1,1,25,71,240.71,2,Finished
+2022,Suzuka,George Russell,Mercedes,United Kingdom,17,20,0,71,248.15,1,Finished
+2022,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,11,8,4,71,230.49,3,Finished
+2021,Suzuka,Lando Norris,McLaren,United Kingdom,1,1,25,58,245.13,2,Finished
+2021,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,10,6,8,71,212.14,2,Finished
+2022,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,2,2,18,71,241.31,1,Finished
+2021,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,7,10,1,52,223.62,1,Finished
+2021,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,7,6,8,71,237.15,2,Finished
+2023,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,1,1,25,71,212.66,1,Finished
+2021,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,16,13,0,58,233.28,2,Finished
+2024,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,17,20,0,52,207.12,1,Finished
+2023,Suzuka,Fernando Alonso,Aston Martin,Spain,10,12,0,0,,1,Engine Failure
+2024,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,1,1,25,58,236.09,1,Finished
+2021,Interlagos,George Russell,Mercedes,United Kingdom,15,17,0,71,234.07,2,Finished
+2024,Circuit of the Americas,Charles Leclerc,Ferrari,Monaco,14,17,0,71,237.04,3,Finished
+2022,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,16,16,0,71,223.41,2,Finished
+2021,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,18,14,0,58,222.2,1,Finished
+2021,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,6,4,12,52,247.02,2,Finished
+2024,Interlagos,Pierre Gasly,Alpine,France,17,16,0,71,245.24,2,Finished
+2023,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,17,17,0,58,211.48,2,Finished
+2023,Interlagos,Lando Norris,McLaren,United Kingdom,14,14,0,58,236.17,1,Finished
+2024,Silverstone,Lando Norris,McLaren,United Kingdom,10,5,10,71,238.62,2,Finished
+2023,Spa-Francorchamps,Pierre Gasly,Alpine,France,10,8,4,71,224.25,1,Finished
+2021,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,7,10,1,71,235.09,1,Finished
+2022,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,11,10,1,71,246.49,3,Finished
+2022,Monza,George Russell,Mercedes,United Kingdom,2,3,15,58,230.58,1,Finished
+2023,Spa-Francorchamps,Pierre Gasly,Alpine,France,20,20,0,71,228.63,2,Finished
+2022,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,2,1,25,58,253.25,2,Finished
+2023,Monza,Fernando Alonso,Aston Martin,Spain,18,19,0,58,243.67,1,Finished
+2024,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,17,13,0,71,229.29,2,Finished
+2021,Suzuka,George Russell,Mercedes,United Kingdom,17,20,0,52,244.75,2,Finished
+2023,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,9,10,1,58,234.49,1,Finished
+2022,Suzuka,Pierre Gasly,Alpine,France,15,11,0,71,244.64,3,Finished
+2022,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,20,18,0,0,,2,Collision
+2024,Monza,George Russell,Mercedes,United Kingdom,13,13,0,71,226.26,1,Finished
+2024,Suzuka,Fernando Alonso,Aston Martin,Spain,17,20,0,58,237.82,2,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,2,4,12,71,232.56,2,Finished
+2022,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,17,15,0,71,202.18,2,Finished
+2022,Silverstone,Oscar Piastri,McLaren,Australia,7,12,0,58,234.02,1,Finished
+2022,Interlagos,George Russell,Mercedes,United Kingdom,4,6,8,71,251.37,1,Finished
+2021,Suzuka,Oscar Piastri,McLaren,Australia,4,6,8,58,229.43,3,Finished
+2023,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,20,19,0,52,224.09,2,Finished
+2022,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,10,9,2,71,225.99,1,Finished
+2021,Interlagos,George Russell,Mercedes,United Kingdom,5,1,25,58,238.86,2,Finished
+2023,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,10,4,12,71,270.01,3,Finished
+2021,Interlagos,Charles Leclerc,Ferrari,Monaco,15,14,0,58,245.51,1,Finished
+2021,Monza,Oscar Piastri,McLaren,Australia,2,2,18,58,236.01,2,Finished
+2024,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,15,15,0,52,224.43,3,Finished
+2021,Autodromo Hermanos Rodriguez,Carlos Sainz,Ferrari,Spain,18,7,6,71,221.56,2,Finished
+2022,Circuit of the Americas,George Russell,Mercedes,United Kingdom,8,3,15,71,237.55,2,Finished
+2021,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,16,18,0,71,238.09,2,Finished
+2023,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,5,3,15,52,222.0,2,Finished
+2022,Silverstone,Sergio Perez,Red Bull Racing,Mexico,13,12,0,71,232.04,1,Finished
+2021,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,8,10,1,71,215.8,2,Finished
+2022,Monza,Lando Norris,McLaren,United Kingdom,7,8,4,71,232.58,1,Finished
+2022,Autodromo Hermanos Rodriguez,Carlos Sainz,Ferrari,Spain,4,5,10,52,224.5,3,Finished
+2022,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,1,1,25,58,254.93,2,Finished
+2023,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,1,1,25,71,207.58,2,Finished
+2022,Silverstone,Pierre Gasly,Alpine,France,2,1,25,71,229.87,2,Finished
+2022,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,15,18,0,71,247.73,1,Finished
+2021,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,15,20,0,58,219.16,1,Finished
+2021,Monza,Charles Leclerc,Ferrari,Monaco,6,3,15,71,223.97,1,Finished
+2024,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,16,12,0,45,,1,Collision
+2023,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,3,1,25,71,243.25,3,Finished
+2023,Interlagos,Sergio Perez,Red Bull Racing,Mexico,14,18,0,58,250.01,1,Finished
+2023,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,2,1,25,0,,2,Engine Failure
+2023,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,6,9,2,71,218.88,2,Finished
+2022,Monza,George Russell,Mercedes,United Kingdom,19,18,0,52,227.16,3,Finished
+2024,Interlagos,Lando Norris,McLaren,United Kingdom,20,20,0,45,,3,Accident
+2021,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,1,1,25,71,244.9,1,Finished
+2022,Interlagos,Pierre Gasly,Alpine,France,18,19,0,71,233.59,1,Finished
+2021,Interlagos,Oscar Piastri,McLaren,Australia,7,2,18,71,242.33,3,Finished
+2023,Interlagos,Sergio Perez,Red Bull Racing,Mexico,7,8,4,71,255.72,2,Finished
+2021,Suzuka,Charles Leclerc,Ferrari,Monaco,10,15,0,71,226.48,2,Finished
+2023,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,19,20,0,58,225.12,2,Finished
+2022,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,19,19,0,71,233.44,1,Finished
+2023,Suzuka,Lando Norris,McLaren,United Kingdom,1,1,25,58,236.22,3,Finished
+2021,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,4,6,8,58,241.22,2,Finished
+2021,Circuit of the Americas,Charles Leclerc,Ferrari,Monaco,4,3,15,58,227.52,2,Finished
+2023,Interlagos,Sergio Perez,Red Bull Racing,Mexico,10,6,8,71,213.41,2,Finished
+2022,Monza,Max Verstappen,Red Bull Racing,Netherlands,8,12,0,58,213.51,2,Finished
+2021,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,5,4,12,58,223.17,1,Finished
+2021,Suzuka,George Russell,Mercedes,United Kingdom,20,16,0,71,235.83,1,Finished
+2021,Monza,Lewis Hamilton,Mercedes,United Kingdom,5,8,4,71,223.5,1,Finished
+2022,Monza,Pierre Gasly,Alpine,France,14,12,0,52,208.57,2,Finished
+2024,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,11,7,6,58,213.85,2,Finished
+2021,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,12,15,0,58,230.07,2,Finished
+2022,Silverstone,Sergio Perez,Red Bull Racing,Mexico,2,1,25,71,226.59,1,Finished
+2021,Interlagos,Charles Leclerc,Ferrari,Monaco,5,5,10,58,221.27,2,Finished
+2023,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,11,11,0,58,236.8,1,Finished
+2022,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,20,17,0,71,238.07,1,Finished
+2023,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,15,17,0,71,237.95,3,Finished
+2021,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,8,9,2,71,238.08,1,Finished
+2021,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,19,20,0,52,253.78,1,Finished
+2021,Suzuka,Lando Norris,McLaren,United Kingdom,1,4,12,58,228.97,2,Finished
+2024,Monza,Oscar Piastri,McLaren,Australia,2,1,25,71,220.8,2,Finished
+2021,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,19,18,0,71,243.38,1,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,12,15,0,58,256.34,1,Finished
+2024,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,17,16,0,52,231.58,2,Finished
+2022,Silverstone,Pierre Gasly,Alpine,France,9,11,0,58,228.1,2,Finished
+2022,Autodromo Hermanos Rodriguez,Carlos Sainz,Ferrari,Spain,12,12,0,58,217.82,1,Finished
+2022,Interlagos,Fernando Alonso,Aston Martin,Spain,18,18,0,58,253.85,2,Finished
+2023,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,4,3,15,58,238.64,1,Finished
+2022,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,15,20,0,71,243.75,1,Finished
+2021,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,4,4,12,71,247.77,1,Finished
+2023,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,7,9,2,71,224.05,1,Finished
+2022,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,7,5,10,52,245.83,2,Finished
+2022,Interlagos,Fernando Alonso,Aston Martin,Spain,9,10,1,58,245.93,1,Finished
+2024,Circuit of the Americas,Pierre Gasly,Alpine,France,16,11,0,71,236.5,1,Finished
+2023,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,10,11,0,58,240.17,1,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,3,2,18,52,245.12,2,Finished
+2023,Suzuka,Carlos Sainz,Ferrari,Spain,7,2,18,58,235.21,1,Finished
+2024,Silverstone,Oscar Piastri,McLaren,Australia,3,8,4,58,243.08,1,Finished
+2023,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,7,10,1,58,225.76,2,Finished
+2022,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,4,2,18,58,219.82,1,Finished
+2021,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,2,1,25,58,234.47,2,Finished
+2023,Silverstone,George Russell,Mercedes,United Kingdom,12,8,4,71,217.2,2,Finished
+2021,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,3,2,18,58,252.72,1,Finished
+2021,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,15,15,0,58,215.04,1,Finished
+2024,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,8,6,8,71,215.11,1,Finished
+2024,Circuit of the Americas,George Russell,Mercedes,United Kingdom,1,1,25,45,,2,Collision
+2024,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,12,14,0,58,243.48,1,Finished
+2022,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,9,3,15,58,238.1,1,Finished
+2023,Silverstone,Sergio Perez,Red Bull Racing,Mexico,6,5,10,71,242.06,3,Finished
+2023,Spa-Francorchamps,Pierre Gasly,Alpine,France,17,17,0,71,230.81,1,Finished
+2024,Monza,Lando Norris,McLaren,United Kingdom,7,5,10,52,229.16,1,Finished
+2022,Monza,Lewis Hamilton,Mercedes,United Kingdom,14,14,0,52,234.05,2,Finished
+2024,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,14,12,0,71,243.18,3,Finished
+2024,Silverstone,Carlos Sainz,Ferrari,Spain,2,1,25,71,232.43,1,Finished
+2021,Silverstone,Sergio Perez,Red Bull Racing,Mexico,6,1,25,58,247.08,1,Finished
+2021,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,2,6,8,58,230.81,2,Finished
+2021,Monza,Fernando Alonso,Aston Martin,Spain,3,1,25,71,225.27,2,Finished
+2024,Suzuka,Sergio Perez,Red Bull Racing,Mexico,17,14,0,71,223.58,1,Finished
+2022,Suzuka,Lando Norris,McLaren,United Kingdom,5,4,12,58,243.87,1,Finished
+2023,Interlagos,Lando Norris,McLaren,United Kingdom,5,6,8,52,230.78,1,Finished
+2022,Interlagos,Carlos Sainz,Ferrari,Spain,15,20,0,71,241.53,1,Finished
+2022,Silverstone,Carlos Sainz,Ferrari,Spain,13,12,0,58,238.95,1,Finished
+2024,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,4,2,18,71,238.65,2,Finished
+2022,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,10,10,1,71,234.49,3,Finished
+2021,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,2,1,25,0,,2,Accident
+2024,Silverstone,Fernando Alonso,Aston Martin,Spain,8,9,2,71,228.92,2,Finished
+2024,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,1,1,25,71,231.09,1,Finished
+2023,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,3,1,25,58,247.59,1,Finished
+2023,Suzuka,Charles Leclerc,Ferrari,Monaco,19,20,0,0,,1,Accident
+2024,Circuit of the Americas,George Russell,Mercedes,United Kingdom,9,5,10,71,225.97,1,Finished
+2021,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,18,15,0,52,227.55,2,Finished
+2023,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,16,17,0,58,244.87,1,Finished
+2023,Silverstone,George Russell,Mercedes,United Kingdom,9,5,10,71,208.4,1,Finished
+2022,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,20,19,0,71,228.68,2,Finished
+2024,Silverstone,Charles Leclerc,Ferrari,Monaco,7,9,2,71,222.24,2,Finished
+2023,Interlagos,George Russell,Mercedes,United Kingdom,12,11,0,58,227.63,2,Finished
+2021,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,15,11,0,58,231.52,1,Finished
+2021,Autodromo Hermanos Rodriguez,Carlos Sainz,Ferrari,Spain,3,4,12,71,210.87,2,Finished
+2021,Circuit of the Americas,Oscar Piastri,McLaren,Australia,15,15,0,71,217.54,2,Finished
+2024,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,8,8,4,58,229.63,2,Finished
+2022,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,7,11,0,58,243.34,1,Finished
+2022,Interlagos,Sergio Perez,Red Bull Racing,Mexico,12,9,2,58,239.78,3,Finished
+2023,Suzuka,Charles Leclerc,Ferrari,Monaco,6,3,15,71,206.87,2,Finished
+2021,Silverstone,Charles Leclerc,Ferrari,Monaco,6,11,0,71,222.99,1,Finished
+2021,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,13,13,0,71,221.97,2,Finished
+2024,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,20,20,0,71,246.5,2,Finished
+2023,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,14,15,0,71,222.19,2,Finished
+2024,Suzuka,Carlos Sainz,Ferrari,Spain,19,15,0,58,229.68,1,Finished
+2024,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,17,20,0,71,239.57,3,Finished
+2022,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,4,1,25,71,231.81,2,Finished
+2022,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,16,16,0,52,215.48,3,Finished
+2022,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,13,14,0,45,,2,Collision
+2021,Monza,Pierre Gasly,Alpine,France,5,1,25,71,222.41,3,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,7,6,8,58,220.01,3,Finished
+2024,Interlagos,Carlos Sainz,Ferrari,Spain,12,9,2,71,220.56,2,Finished
+2022,Suzuka,Lando Norris,McLaren,United Kingdom,13,10,1,0,,2,Engine Failure
+2021,Monza,Pierre Gasly,Alpine,France,4,7,6,52,223.26,1,Finished
+2024,Monza,George Russell,Mercedes,United Kingdom,15,14,0,71,243.12,2,Finished
+2022,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,18,19,0,58,223.56,1,Finished
+2021,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,12,9,2,52,228.22,1,Finished
+2023,Monaco Grand Prix,Pierre Gasly,Alpine,France,1,1,25,71,232.74,2,Finished
+2022,Suzuka,Oscar Piastri,McLaren,Australia,17,14,0,58,233.03,2,Finished
+2022,Autodromo Hermanos Rodriguez,Carlos Sainz,Ferrari,Spain,16,15,0,58,230.3,2,Finished
+2024,Interlagos,Fernando Alonso,Aston Martin,Spain,15,19,0,45,,2,Collision
+2024,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,7,7,6,71,244.79,2,Finished
+2021,Circuit of the Americas,George Russell,Mercedes,United Kingdom,15,14,0,71,213.24,3,Finished
+2024,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,3,3,15,52,242.58,2,Finished
+2021,Suzuka,Sergio Perez,Red Bull Racing,Mexico,18,17,0,52,221.47,1,Finished
+2024,Circuit of the Americas,George Russell,Mercedes,United Kingdom,9,14,0,58,244.96,2,Finished
+2022,Silverstone,George Russell,Mercedes,United Kingdom,20,16,0,58,234.55,2,Finished
+2024,Monza,Lewis Hamilton,Mercedes,United Kingdom,6,4,12,71,227.16,1,Finished
+2022,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,6,7,6,71,225.49,1,Finished
+2021,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,13,14,0,0,,1,Engine Failure
+2022,Interlagos,Pierre Gasly,Alpine,France,5,6,8,71,229.18,1,Finished
+2022,Monza,Oscar Piastri,McLaren,Australia,15,11,0,71,245.0,1,Finished
+2021,Circuit of the Americas,Pierre Gasly,Alpine,France,1,1,25,58,227.07,1,Finished
+2021,Monza,Pierre Gasly,Alpine,France,16,20,0,71,238.16,2,Finished
+2024,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,16,15,0,71,223.89,1,Finished
+2024,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,1,1,25,71,241.33,2,Finished
+2022,Suzuka,Oscar Piastri,McLaren,Australia,15,18,0,71,216.2,3,Finished
+2023,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,13,13,0,0,,2,Collision
+2022,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,6,4,12,58,216.15,1,Finished
+2021,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,8,8,4,71,234.29,1,Finished
+2023,Interlagos,Charles Leclerc,Ferrari,Monaco,3,5,10,71,239.38,1,Finished
+2024,Monza,Oscar Piastri,McLaren,Australia,19,20,0,52,254.06,1,Finished
+2024,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,14,9,2,71,241.35,1,Finished
+2024,Monza,Sergio Perez,Red Bull Racing,Mexico,8,6,8,71,241.53,1,Finished
+2021,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,17,15,0,71,211.69,1,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,5,2,18,71,223.41,2,Finished
+2021,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,4,2,18,58,234.89,3,Finished
+2022,Monza,Oscar Piastri,McLaren,Australia,20,20,0,58,218.64,2,Finished
+2023,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,7,5,10,71,225.97,2,Finished
+2022,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,9,15,0,58,233.28,1,Finished
+2024,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,6,5,10,71,207.19,1,Finished
+2021,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,13,16,0,71,233.45,1,Finished
+2021,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,7,7,6,58,248.09,2,Finished
+2024,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,5,7,6,71,225.1,2,Finished
+2023,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,13,12,0,71,233.36,2,Finished
+2024,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,19,20,0,71,229.82,2,Finished
+2022,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,7,9,2,71,238.42,1,Finished
+2024,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,1,1,25,58,223.37,1,Finished
+2021,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,12,11,0,71,224.2,3,Finished
+2022,Silverstone,Oscar Piastri,McLaren,Australia,19,18,0,71,232.23,2,Finished
+2024,Suzuka,Oscar Piastri,McLaren,Australia,3,1,25,45,,3,Engine Failure
+2021,Silverstone,George Russell,Mercedes,United Kingdom,9,3,15,58,224.25,2,Finished
+2021,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,17,16,0,45,,2,Accident
+2022,Monza,Lando Norris,McLaren,United Kingdom,4,1,25,71,243.03,1,Finished
+2023,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,3,1,25,58,223.68,2,Finished
+2024,Interlagos,Oscar Piastri,McLaren,Australia,1,5,10,71,269.05,1,Finished
+2021,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,1,1,25,58,237.17,2,Finished
+2023,Monza,Charles Leclerc,Ferrari,Monaco,11,14,0,58,217.8,2,Finished
+2024,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,6,11,0,58,226.45,1,Finished
+2023,Circuit of the Americas,George Russell,Mercedes,United Kingdom,3,2,18,0,,1,Collision
+2022,Monza,Pierre Gasly,Alpine,France,6,5,10,71,251.18,1,Finished
+2024,Silverstone,Carlos Sainz,Ferrari,Spain,5,1,25,58,217.35,3,Finished
+2021,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,16,20,0,52,210.33,1,Finished
+2023,Monza,Fernando Alonso,Aston Martin,Spain,10,11,0,58,242.19,1,Finished
+2023,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,7,3,15,71,234.0,2,Finished
+2024,Monza,Lewis Hamilton,Mercedes,United Kingdom,19,20,0,58,242.26,1,Finished
+2023,Silverstone,George Russell,Mercedes,United Kingdom,5,2,18,71,237.46,2,Finished
+2023,Monza,Lando Norris,McLaren,United Kingdom,2,2,18,52,253.23,2,Finished
+2021,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,17,15,0,71,255.61,1,Finished
+2022,Monza,Charles Leclerc,Ferrari,Monaco,16,16,0,58,227.84,2,Finished
+2023,Interlagos,Sergio Perez,Red Bull Racing,Mexico,1,1,25,71,255.24,2,Finished
+2021,Silverstone,Charles Leclerc,Ferrari,Monaco,19,18,0,71,243.46,1,Finished
+2021,Suzuka,Sergio Perez,Red Bull Racing,Mexico,3,2,18,58,230.18,2,Finished
+2024,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,8,9,2,71,196.72,2,Finished
+2022,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,11,11,0,71,244.95,2,Finished
+2024,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,3,5,10,0,,1,Accident
+2021,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,1,1,25,52,233.74,2,Finished
+2022,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,14,16,0,58,218.47,1,Finished
+2022,Monza,George Russell,Mercedes,United Kingdom,13,13,0,45,,1,Collision
+2024,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,16,12,0,71,231.14,2,Finished
+2023,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,8,5,10,0,,1,Collision
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,17,17,0,58,232.28,2,Finished
+2022,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,17,19,0,71,236.87,2,Finished
+2024,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,18,20,0,71,220.32,2,Finished
+2023,Interlagos,Lando Norris,McLaren,United Kingdom,4,5,10,58,225.89,1,Finished
+2024,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,2,1,25,52,243.23,1,Finished
+2021,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,18,20,0,71,219.61,1,Finished
+2021,Interlagos,Oscar Piastri,McLaren,Australia,12,9,2,58,245.51,1,Finished
+2023,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,2,5,10,58,224.04,2,Finished
+2024,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,12,9,2,58,236.1,1,Finished
+2023,Circuit of the Americas,Oscar Piastri,McLaren,Australia,10,8,4,52,224.7,2,Finished
+2023,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,17,18,0,58,233.89,1,Finished
+2021,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,10,9,2,71,220.36,1,Finished
+2024,Suzuka,Charles Leclerc,Ferrari,Monaco,18,20,0,71,239.57,1,Finished
+2021,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,4,2,18,58,237.79,2,Finished
+2021,Interlagos,George Russell,Mercedes,United Kingdom,4,6,8,52,251.23,1,Finished
+2022,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,3,6,8,71,215.58,1,Finished
+2024,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,11,9,2,58,230.05,1,Finished
+2022,Silverstone,Carlos Sainz,Ferrari,Spain,13,8,4,52,218.39,1,Finished
+2021,Monza,Pierre Gasly,Alpine,France,3,5,10,0,,2,Collision
+2022,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,6,5,10,52,250.78,1,Finished
+2023,Spa-Francorchamps,Pierre Gasly,Alpine,France,10,12,0,58,239.1,1,Finished
+2021,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,7,3,15,58,214.39,1,Finished
+2023,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,4,4,12,58,234.93,2,Finished
+2024,Monza,Lando Norris,McLaren,United Kingdom,8,7,6,58,212.28,2,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,8,8,4,45,,3,Accident
+2022,Monza,Max Verstappen,Red Bull Racing,Netherlands,12,14,0,58,235.02,2,Finished
+2021,Monza,Charles Leclerc,Ferrari,Monaco,8,4,12,58,250.94,2,Finished
+2024,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,6,5,10,71,209.97,2,Finished
+2021,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,18,14,0,58,230.13,3,Finished
+2022,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,5,6,8,58,234.22,2,Finished
+2022,Interlagos,Charles Leclerc,Ferrari,Monaco,8,9,2,71,236.45,1,Finished
+2024,Monza,Sergio Perez,Red Bull Racing,Mexico,16,17,0,52,230.65,2,Finished
+2022,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,19,17,0,0,,1,Collision
+2023,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,11,12,0,52,232.23,2,Finished
+2024,Interlagos,George Russell,Mercedes,United Kingdom,4,6,8,52,216.48,2,Finished
+2022,Silverstone,George Russell,Mercedes,United Kingdom,12,13,0,71,229.51,1,Finished
+2024,Silverstone,George Russell,Mercedes,United Kingdom,8,9,2,58,240.57,1,Finished
+2023,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,12,9,2,58,236.07,1,Finished
+2021,Monza,Lewis Hamilton,Mercedes,United Kingdom,7,2,18,71,212.76,2,Finished
+2023,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,14,17,0,71,209.01,1,Finished
+2022,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,13,14,0,71,239.89,1,Finished
+2024,Silverstone,Lando Norris,McLaren,United Kingdom,13,11,0,58,214.46,2,Finished
+2024,Monza,Carlos Sainz,Ferrari,Spain,19,16,0,71,216.04,2,Finished
+2021,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,14,13,0,52,250.13,2,Finished
+2024,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,19,17,0,58,233.04,2,Finished
+2023,Suzuka,Pierre Gasly,Alpine,France,5,2,18,0,,2,Engine Failure
+2022,Circuit of the Americas,George Russell,Mercedes,United Kingdom,4,1,25,0,,1,Engine Failure
+2021,Interlagos,Carlos Sainz,Ferrari,Spain,6,3,15,52,219.72,1,Finished
+2023,Interlagos,Charles Leclerc,Ferrari,Monaco,4,7,6,58,241.85,2,Finished
+2022,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,5,7,6,58,238.96,1,Finished
+2023,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,16,14,0,71,249.07,2,Finished
+2022,Suzuka,Fernando Alonso,Aston Martin,Spain,10,4,12,58,233.6,2,Finished
+2024,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,20,17,0,71,235.96,2,Finished
+2024,Monza,Oscar Piastri,McLaren,Australia,17,20,0,71,243.95,2,Finished
+2023,Silverstone,Fernando Alonso,Aston Martin,Spain,17,15,0,52,226.48,2,Finished
+2021,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,12,9,2,58,254.51,2,Finished
+2024,Suzuka,Pierre Gasly,Alpine,France,4,3,15,0,,2,Engine Failure
+2022,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,4,4,12,58,267.08,2,Finished
+2021,Monza,George Russell,Mercedes,United Kingdom,1,1,25,71,208.62,1,Finished
+2024,Monza,Charles Leclerc,Ferrari,Monaco,16,14,0,71,221.65,1,Finished
+2021,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,8,10,1,71,215.61,2,Finished
+2022,Monza,Charles Leclerc,Ferrari,Monaco,20,18,0,58,233.72,2,Finished
+2024,Monza,Carlos Sainz,Ferrari,Spain,17,16,0,71,240.44,2,Finished
+2021,Monza,George Russell,Mercedes,United Kingdom,18,20,0,45,,1,Collision
+2021,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,13,15,0,71,242.26,1,Finished
+2024,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,20,17,0,71,220.51,1,Finished
+2021,Interlagos,Pierre Gasly,Alpine,France,10,9,2,71,220.91,2,Finished
+2023,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,17,12,0,58,224.2,1,Finished
+2024,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,10,7,6,52,237.23,2,Finished
+2023,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,9,9,2,71,222.25,2,Finished
+2022,Silverstone,Carlos Sainz,Ferrari,Spain,3,6,8,71,207.93,2,Finished
+2023,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,4,10,1,71,220.27,1,Finished
+2024,Monza,Carlos Sainz,Ferrari,Spain,4,7,6,0,,1,Collision
+2024,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,19,18,0,52,237.97,2,Finished
+2022,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,17,20,0,71,231.84,1,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,15,13,0,0,,2,Accident
+2022,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,18,16,0,71,235.16,1,Finished
+2024,Suzuka,Sergio Perez,Red Bull Racing,Mexico,1,1,25,45,,1,Accident
+2022,Monza,Lewis Hamilton,Mercedes,United Kingdom,1,1,25,71,234.87,3,Finished
+2023,Suzuka,Lando Norris,McLaren,United Kingdom,4,4,12,71,240.91,1,Finished
+2024,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,14,16,0,52,222.97,1,Finished
+2021,Suzuka,Oscar Piastri,McLaren,Australia,1,1,25,58,240.66,2,Finished
+2023,Monza,Pierre Gasly,Alpine,France,6,1,25,71,207.57,2,Finished
+2023,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,11,7,6,58,237.13,2,Finished
+2024,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,15,17,0,58,219.92,1,Finished
+2021,Interlagos,Lando Norris,McLaren,United Kingdom,16,20,0,71,233.02,3,Finished
+2023,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,20,20,0,71,229.13,1,Finished
+2023,Silverstone,George Russell,Mercedes,United Kingdom,20,20,0,71,233.51,1,Finished
+2022,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,10,5,10,58,222.63,1,Finished
+2023,Interlagos,Oscar Piastri,McLaren,Australia,13,8,4,71,232.17,2,Finished
+2023,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,16,14,0,52,251.09,2,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,14,13,0,71,203.09,1,Finished
+2021,Silverstone,Carlos Sainz,Ferrari,Spain,6,3,15,58,243.56,2,Finished
+2022,Monza,Pierre Gasly,Alpine,France,10,13,0,52,254.01,1,Finished
+2023,Suzuka,Fernando Alonso,Aston Martin,Spain,19,20,0,71,222.52,2,Finished
+2021,Suzuka,Oscar Piastri,McLaren,Australia,1,6,8,52,236.68,2,Finished
+2023,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,13,13,0,52,243.09,2,Finished
+2024,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,7,8,4,58,222.33,1,Finished
+2023,Monza,Max Verstappen,Red Bull Racing,Netherlands,17,20,0,58,235.84,2,Finished
+2024,Monza,Carlos Sainz,Ferrari,Spain,16,19,0,71,233.58,2,Finished
+2023,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,9,12,0,58,269.46,2,Finished
+2021,Monza,Charles Leclerc,Ferrari,Monaco,14,17,0,52,226.51,3,Finished
+2022,Interlagos,George Russell,Mercedes,United Kingdom,12,13,0,58,223.01,2,Finished
+2022,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,2,2,18,71,232.1,1,Finished
+2023,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,19,19,0,71,228.6,2,Finished
+2024,Monza,Sergio Perez,Red Bull Racing,Mexico,20,19,0,58,227.26,3,Finished
+2024,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,17,20,0,52,215.33,1,Finished
+2024,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,9,13,0,71,236.98,2,Finished
+2021,Spa-Francorchamps,Pierre Gasly,Alpine,France,3,6,8,52,250.31,2,Finished
+2024,Suzuka,Oscar Piastri,McLaren,Australia,6,7,6,58,234.62,2,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,5,9,2,58,235.08,1,Finished
+2024,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,8,4,12,58,222.58,1,Finished
+2023,Spa-Francorchamps,Pierre Gasly,Alpine,France,15,20,0,58,249.06,1,Finished
+2022,Silverstone,Fernando Alonso,Aston Martin,Spain,17,19,0,71,218.82,1,Finished
+2021,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,14,15,0,71,215.59,1,Finished
+2023,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,6,7,6,52,240.37,2,Finished
+2021,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,6,8,4,71,229.55,2,Finished
+2022,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,14,13,0,71,240.78,3,Finished
+2022,Silverstone,Lando Norris,McLaren,United Kingdom,8,9,2,45,,1,Collision
+2021,Monza,Pierre Gasly,Alpine,France,3,1,25,71,239.66,1,Finished
+2022,Monza,Carlos Sainz,Ferrari,Spain,11,7,6,58,245.36,1,Finished
+2023,Monza,Pierre Gasly,Alpine,France,16,10,1,45,,1,Accident
+2022,Monza,Charles Leclerc,Ferrari,Monaco,10,10,1,71,219.14,2,Finished
+2024,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,5,3,15,58,258.64,1,Finished
+2022,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,20,20,0,71,240.58,3,Finished
+2022,Interlagos,Fernando Alonso,Aston Martin,Spain,11,11,0,71,216.68,2,Finished
+2022,Interlagos,Oscar Piastri,McLaren,Australia,19,20,0,52,239.19,1,Finished
+2022,Interlagos,Lando Norris,McLaren,United Kingdom,15,16,0,71,231.2,1,Finished
+2023,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,11,5,10,71,207.4,2,Finished
+2022,Silverstone,George Russell,Mercedes,United Kingdom,13,13,0,71,218.19,1,Finished
+2024,Monza,Pierre Gasly,Alpine,France,12,10,1,58,230.19,1,Finished
+2024,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,20,20,0,58,219.07,2,Finished
+2023,Circuit of the Americas,George Russell,Mercedes,United Kingdom,9,9,2,58,241.84,3,Finished
+2022,Interlagos,Carlos Sainz,Ferrari,Spain,20,17,0,71,208.77,1,Finished
+2021,Interlagos,Pierre Gasly,Alpine,France,19,20,0,52,235.09,1,Finished
+2022,Silverstone,Sergio Perez,Red Bull Racing,Mexico,10,9,2,71,222.75,2,Finished
+2024,Circuit of the Americas,Oscar Piastri,McLaren,Australia,8,9,2,0,,1,Engine Failure
+2021,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,4,2,18,71,234.18,1,Finished
+2022,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,2,3,15,52,242.2,2,Finished
+2024,Silverstone,Lando Norris,McLaren,United Kingdom,14,14,0,71,230.79,1,Finished
+2023,Monaco Grand Prix,Pierre Gasly,Alpine,France,10,7,6,58,215.4,1,Finished
+2024,Monza,Lewis Hamilton,Mercedes,United Kingdom,8,4,12,52,239.07,1,Finished
+2021,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,8,4,12,71,226.01,2,Finished
+2024,Monza,Lando Norris,McLaren,United Kingdom,7,7,6,71,228.85,1,Finished
+2022,Circuit of the Americas,Oscar Piastri,McLaren,Australia,8,8,4,58,216.94,2,Finished
+2024,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,7,7,6,52,234.05,1,Finished
+2021,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,3,1,25,58,225.53,2,Finished
+2023,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,8,11,0,71,225.25,1,Finished
+2023,Monza,Max Verstappen,Red Bull Racing,Netherlands,5,6,8,52,220.27,1,Finished
+2023,Spa-Francorchamps,Pierre Gasly,Alpine,France,4,5,10,52,246.75,2,Finished
+2023,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,13,12,0,0,,3,Engine Failure
+2023,Circuit of the Americas,George Russell,Mercedes,United Kingdom,15,14,0,71,242.68,2,Finished
+2022,Silverstone,Fernando Alonso,Aston Martin,Spain,18,20,0,58,233.43,3,Finished
+2023,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,16,16,0,71,206.43,2,Finished
+2023,Spa-Francorchamps,Pierre Gasly,Alpine,France,20,20,0,71,226.56,3,Finished
+2022,Monza,Charles Leclerc,Ferrari,Monaco,16,14,0,58,235.95,2,Finished
+2024,Monza,Max Verstappen,Red Bull Racing,Netherlands,10,14,0,71,224.62,1,Finished
+2021,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,8,7,6,0,,1,Collision
+2021,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,17,14,0,71,217.54,1,Finished
+2023,Monza,George Russell,Mercedes,United Kingdom,17,13,0,71,238.55,1,Finished
+2024,Monza,Carlos Sainz,Ferrari,Spain,4,6,8,58,229.06,1,Finished
+2021,Circuit of the Americas,Pierre Gasly,Alpine,France,9,6,8,58,208.77,2,Finished
+2023,Circuit of the Americas,George Russell,Mercedes,United Kingdom,1,1,25,58,232.33,3,Finished
+2023,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,9,11,0,58,220.16,1,Finished
+2022,Suzuka,Oscar Piastri,McLaren,Australia,3,2,18,71,212.43,2,Finished
+2023,Silverstone,George Russell,Mercedes,United Kingdom,3,1,25,71,227.84,3,Finished
+2021,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,12,6,8,71,213.36,2,Finished
+2023,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,16,12,0,52,243.09,1,Finished
+2021,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,20,20,0,58,252.55,1,Finished
+2024,Interlagos,Pierre Gasly,Alpine,France,15,11,0,58,229.14,1,Finished
+2024,Monza,Max Verstappen,Red Bull Racing,Netherlands,12,14,0,71,247.02,3,Finished
+2023,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,3,7,6,45,,3,Collision
+2021,Silverstone,Carlos Sainz,Ferrari,Spain,5,9,2,71,239.23,1,Finished
+2021,Silverstone,Fernando Alonso,Aston Martin,Spain,8,9,2,71,230.14,2,Finished
+2023,Suzuka,Oscar Piastri,McLaren,Australia,15,15,0,71,226.39,1,Finished
+2021,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,10,13,0,58,226.35,2,Finished
+2023,Interlagos,George Russell,Mercedes,United Kingdom,17,13,0,58,224.36,1,Finished
+2022,Monza,Lando Norris,McLaren,United Kingdom,14,17,0,58,226.44,2,Finished
+2021,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,3,2,18,71,222.89,2,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,6,9,2,71,250.43,1,Finished
+2024,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,15,16,0,45,,2,Collision
+2023,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,16,15,0,71,228.49,1,Finished
+2023,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,4,9,2,45,,2,Collision
+2023,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,16,12,0,58,228.49,2,Finished
+2024,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,15,16,0,71,228.93,3,Finished
+2021,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,16,20,0,71,225.26,2,Finished
+2022,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,11,11,0,71,241.03,1,Finished
+2023,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,6,7,6,58,226.32,2,Finished
+2024,Silverstone,Carlos Sainz,Ferrari,Spain,6,5,10,0,,1,Accident
+2024,Suzuka,Sergio Perez,Red Bull Racing,Mexico,17,14,0,71,247.35,2,Finished
+2024,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,16,13,0,71,258.19,2,Finished
+2021,Interlagos,Fernando Alonso,Aston Martin,Spain,18,19,0,58,218.18,1,Finished
+2021,Interlagos,Fernando Alonso,Aston Martin,Spain,2,1,25,71,217.49,2,Finished
+2022,Interlagos,Oscar Piastri,McLaren,Australia,9,7,6,71,229.3,1,Finished
+2023,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,17,18,0,58,227.7,3,Finished
+2023,Monza,Lando Norris,McLaren,United Kingdom,16,10,1,58,247.82,1,Finished
+2024,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,11,10,1,58,231.55,2,Finished
+2022,Interlagos,Fernando Alonso,Aston Martin,Spain,15,16,0,58,228.79,1,Finished
+2024,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,13,14,0,52,237.64,1,Finished
+2021,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,16,11,0,58,242.29,1,Finished
+2024,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,5,4,12,58,253.21,2,Finished
+2024,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,5,3,15,58,237.47,1,Finished
+2022,Silverstone,Sergio Perez,Red Bull Racing,Mexico,16,17,0,58,227.35,2,Finished
+2023,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,4,1,25,52,222.97,1,Finished
+2021,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,4,5,10,0,,1,Engine Failure
+2022,Monaco Grand Prix,Pierre Gasly,Alpine,France,7,10,1,71,223.57,2,Finished
+2022,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,20,20,0,58,220.56,2,Finished
+2023,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,11,9,2,71,227.29,1,Finished
+2023,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,17,14,0,58,223.88,2,Finished
+2024,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,19,20,0,71,237.41,1,Finished
+2022,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,17,19,0,58,253.38,1,Finished
+2021,Circuit of the Americas,Oscar Piastri,McLaren,Australia,10,6,8,71,241.09,2,Finished
+2021,Suzuka,Pierre Gasly,Alpine,France,16,14,0,52,228.71,2,Finished
+2022,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,2,1,25,71,229.15,1,Finished
+2024,Silverstone,Oscar Piastri,McLaren,Australia,20,20,0,71,230.86,2,Finished
+2022,Monza,Lando Norris,McLaren,United Kingdom,14,17,0,52,226.97,2,Finished
+2021,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,10,13,0,71,234.01,1,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,6,3,15,71,244.44,2,Finished
+2021,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,1,2,18,58,245.22,2,Finished
+2021,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,8,7,6,71,219.38,1,Finished
+2023,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,14,13,0,71,193.75,1,Finished
+2024,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,14,11,0,0,,1,Collision
+2023,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,20,20,0,58,265.19,1,Finished
+2021,Silverstone,Lando Norris,McLaren,United Kingdom,5,1,25,58,224.86,1,Finished
+2023,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,7,6,8,71,235.3,2,Finished
+2022,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,3,1,25,58,244.18,1,Finished
+2024,Interlagos,Sergio Perez,Red Bull Racing,Mexico,16,17,0,58,220.74,1,Finished
+2024,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,9,8,4,45,,3,Collision
+2024,Interlagos,Oscar Piastri,McLaren,Australia,20,20,0,52,231.54,1,Finished
+2022,Silverstone,George Russell,Mercedes,United Kingdom,16,13,0,71,219.3,1,Finished
+2024,Monza,George Russell,Mercedes,United Kingdom,7,6,8,0,,1,Engine Failure
+2023,Silverstone,Lando Norris,McLaren,United Kingdom,19,15,0,71,242.02,1,Finished
+2024,Monza,Max Verstappen,Red Bull Racing,Netherlands,8,12,0,71,238.89,1,Finished
+2024,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,6,1,25,0,,3,Accident
+2022,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,20,17,0,58,251.54,2,Finished
+2023,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,13,13,0,58,220.25,3,Finished
+2023,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,1,1,25,71,232.26,2,Finished
+2021,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,15,15,0,71,231.64,1,Finished
+2022,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,20,17,0,71,205.08,1,Finished
+2021,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,9,7,6,52,222.81,2,Finished
+2021,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,12,8,4,52,227.7,2,Finished
+2021,Spa-Francorchamps,Pierre Gasly,Alpine,France,7,9,2,58,235.06,2,Finished
+2022,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,20,20,0,58,222.5,3,Finished
+2023,Suzuka,Charles Leclerc,Ferrari,Monaco,4,5,10,58,260.34,1,Finished
+2022,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,11,6,8,71,219.87,1,Finished
+2023,Silverstone,Pierre Gasly,Alpine,France,13,17,0,58,213.05,2,Finished
+2022,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,5,6,8,58,226.13,2,Finished
+2024,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,1,1,25,0,,2,Engine Failure
+2023,Monza,Lewis Hamilton,Mercedes,United Kingdom,11,15,0,71,228.87,3,Finished
+2024,Monza,Pierre Gasly,Alpine,France,18,18,0,52,211.18,1,Finished
+2021,Silverstone,Lando Norris,McLaren,United Kingdom,16,15,0,0,,1,Accident
+2021,Silverstone,Oscar Piastri,McLaren,Australia,5,9,2,52,238.65,2,Finished
+2023,Silverstone,Fernando Alonso,Aston Martin,Spain,7,3,15,52,229.48,1,Finished
+2024,Interlagos,Charles Leclerc,Ferrari,Monaco,15,13,0,58,238.9,1,Finished
+2023,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,13,16,0,52,265.01,3,Finished
+2023,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,15,16,0,58,238.29,3,Finished
+2023,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,16,14,0,52,241.85,1,Finished
+2022,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,14,9,2,71,233.44,1,Finished
+2021,Monza,Carlos Sainz,Ferrari,Spain,18,20,0,45,,1,Collision
+2024,Circuit of the Americas,Oscar Piastri,McLaren,Australia,20,18,0,0,,3,Engine Failure
+2024,Interlagos,George Russell,Mercedes,United Kingdom,16,15,0,45,,1,Engine Failure
+2022,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,13,15,0,58,231.42,1,Finished
+2023,Suzuka,Oscar Piastri,McLaren,Australia,19,19,0,58,232.61,1,Finished
+2023,Monza,Charles Leclerc,Ferrari,Monaco,19,20,0,58,221.48,1,Finished
+2023,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,20,17,0,58,237.09,1,Finished
+2022,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,16,19,0,0,,3,Collision
+2021,Interlagos,Fernando Alonso,Aston Martin,Spain,8,7,6,58,219.98,1,Finished
+2023,Monza,Fernando Alonso,Aston Martin,Spain,13,17,0,58,254.29,1,Finished
+2021,Monza,Fernando Alonso,Aston Martin,Spain,12,14,0,58,222.25,1,Finished
+2024,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,6,9,2,52,222.16,1,Finished
+2021,Circuit of the Americas,George Russell,Mercedes,United Kingdom,13,7,6,45,,3,Accident
+2022,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,18,20,0,45,,1,Collision
+2023,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,3,1,25,58,248.54,1,Finished
+2021,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,13,9,2,58,231.82,2,Finished
+2023,Suzuka,Charles Leclerc,Ferrari,Monaco,16,12,0,52,221.66,1,Finished
+2022,Suzuka,George Russell,Mercedes,United Kingdom,2,8,4,45,,2,Accident
+2022,Suzuka,Fernando Alonso,Aston Martin,Spain,10,5,10,58,233.13,1,Finished
+2023,Suzuka,Oscar Piastri,McLaren,Australia,4,8,4,71,246.19,2,Finished
+2024,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,5,11,0,71,214.25,2,Finished
+2021,Silverstone,Sergio Perez,Red Bull Racing,Mexico,10,8,4,58,228.21,2,Finished
+2021,Interlagos,Oscar Piastri,McLaren,Australia,11,9,2,58,227.61,2,Finished
+2024,Silverstone,Carlos Sainz,Ferrari,Spain,9,6,8,52,244.98,1,Finished
+2023,Circuit of the Americas,George Russell,Mercedes,United Kingdom,14,16,0,52,228.61,1,Finished
+2023,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,17,20,0,58,219.43,2,Finished
+2023,Silverstone,Charles Leclerc,Ferrari,Monaco,20,17,0,58,241.17,1,Finished
+2024,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,15,16,0,52,235.2,2,Finished
+2023,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,19,19,0,71,233.32,1,Finished
+2024,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,20,20,0,71,221.05,3,Finished
+2024,Silverstone,Pierre Gasly,Alpine,France,6,6,8,58,233.7,2,Finished
+2024,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,11,7,6,71,232.35,1,Finished
+2022,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,19,18,0,71,236.09,2,Finished
+2024,Monza,George Russell,Mercedes,United Kingdom,16,18,0,71,226.88,1,Finished
+2022,Circuit of the Americas,George Russell,Mercedes,United Kingdom,4,8,4,71,247.98,1,Finished
+2024,Monza,Max Verstappen,Red Bull Racing,Netherlands,6,7,6,58,243.74,2,Finished
+2023,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,17,20,0,71,230.18,2,Finished
+2022,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,16,13,0,71,248.88,2,Finished
+2022,Silverstone,Fernando Alonso,Aston Martin,Spain,14,12,0,71,229.5,1,Finished
+2023,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,3,5,10,71,236.1,1,Finished
+2021,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,1,1,25,58,233.3,1,Finished
+2024,Suzuka,Fernando Alonso,Aston Martin,Spain,6,5,10,58,224.33,2,Finished
+2022,Circuit of the Americas,Oscar Piastri,McLaren,Australia,20,20,0,71,227.42,1,Finished
+2021,Circuit of the Americas,Pierre Gasly,Alpine,France,11,6,8,58,228.57,2,Finished
+2022,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,17,16,0,58,232.25,3,Finished
+2024,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,9,4,12,71,227.1,1,Finished
+2022,Interlagos,Lando Norris,McLaren,United Kingdom,6,7,6,52,236.42,2,Finished
+2024,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,4,3,15,71,231.39,2,Finished
+2023,Monaco Grand Prix,Pierre Gasly,Alpine,France,4,6,8,71,222.22,1,Finished
+2022,Silverstone,George Russell,Mercedes,United Kingdom,13,15,0,71,245.38,2,Finished
+2022,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,19,19,0,71,226.0,1,Finished
+2023,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,8,10,1,58,223.48,2,Finished
+2021,Monza,Lewis Hamilton,Mercedes,United Kingdom,14,12,0,52,242.27,3,Finished
+2024,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,6,6,8,58,218.6,1,Finished
+2024,Suzuka,Oscar Piastri,McLaren,Australia,3,1,25,71,207.96,3,Finished
+2022,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,2,1,25,71,243.58,2,Finished
+2023,Interlagos,Lando Norris,McLaren,United Kingdom,15,13,0,52,235.46,2,Finished
+2022,Monza,Lewis Hamilton,Mercedes,United Kingdom,1,1,25,71,247.64,1,Finished
+2024,Autodromo Hermanos Rodriguez,Carlos Sainz,Ferrari,Spain,12,9,2,52,198.71,1,Finished
+2024,Silverstone,Sergio Perez,Red Bull Racing,Mexico,11,11,0,71,234.92,2,Finished
+2022,Interlagos,Sergio Perez,Red Bull Racing,Mexico,16,17,0,58,221.58,1,Finished
+2022,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,9,6,8,45,,2,Engine Failure
+2021,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,13,11,0,58,230.52,1,Finished
+2021,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,2,1,25,58,235.23,3,Finished
+2023,Monza,Pierre Gasly,Alpine,France,3,1,25,71,228.03,3,Finished
+2024,Silverstone,Charles Leclerc,Ferrari,Monaco,18,20,0,71,240.19,3,Finished
+2022,Silverstone,Pierre Gasly,Alpine,France,4,1,25,71,235.79,1,Finished
+2024,Monza,Pierre Gasly,Alpine,France,12,16,0,71,241.94,1,Finished
+2022,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,18,11,0,58,225.78,2,Finished
+2024,Suzuka,Oscar Piastri,McLaren,Australia,1,2,18,45,,1,Accident
+2022,Circuit of the Americas,George Russell,Mercedes,United Kingdom,1,1,25,58,229.41,1,Finished
+2021,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,18,18,0,58,251.84,2,Finished
+2022,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,16,18,0,71,212.66,1,Finished
+2023,Silverstone,Sergio Perez,Red Bull Racing,Mexico,20,20,0,58,253.12,1,Finished
+2023,Suzuka,Carlos Sainz,Ferrari,Spain,20,20,0,71,230.46,1,Finished
+2022,Monza,Carlos Sainz,Ferrari,Spain,1,1,25,71,242.2,2,Finished
+2021,Monza,Charles Leclerc,Ferrari,Monaco,3,1,25,0,,2,Engine Failure
+2021,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,10,9,2,58,224.59,2,Finished
+2024,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,16,12,0,58,239.88,1,Finished
+2021,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,13,10,1,58,228.93,2,Finished
+2024,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,17,17,0,58,243.39,2,Finished
+2022,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,16,18,0,52,237.55,2,Finished
+2024,Suzuka,Charles Leclerc,Ferrari,Monaco,8,2,18,45,,2,Engine Failure
+2024,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,19,19,0,52,215.85,2,Finished
+2021,Monza,Carlos Sainz,Ferrari,Spain,16,20,0,71,218.84,1,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,5,5,10,71,209.99,2,Finished
+2022,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,3,1,25,52,221.25,2,Finished
+2022,Interlagos,Fernando Alonso,Aston Martin,Spain,9,10,1,45,,2,Engine Failure
+2021,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,4,1,25,71,234.64,1,Finished
+2021,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,19,17,0,58,231.86,1,Finished
+2024,Monza,Pierre Gasly,Alpine,France,4,5,10,45,,1,Accident
+2021,Silverstone,Lando Norris,McLaren,United Kingdom,12,13,0,58,229.66,3,Finished
+2022,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,6,5,10,71,225.45,1,Finished
+2021,Interlagos,Pierre Gasly,Alpine,France,19,18,0,71,252.46,1,Finished
+2021,Interlagos,George Russell,Mercedes,United Kingdom,7,1,25,52,224.44,1,Finished
+2022,Monza,Pierre Gasly,Alpine,France,14,12,0,58,245.44,3,Finished
+2021,Silverstone,Fernando Alonso,Aston Martin,Spain,20,14,0,58,217.35,2,Finished
+2022,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,18,17,0,71,221.89,2,Finished
+2022,Silverstone,Lando Norris,McLaren,United Kingdom,8,7,6,71,222.21,1,Finished
+2022,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,4,1,25,71,233.69,2,Finished
+2022,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,19,17,0,45,,1,Engine Failure
+2024,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,18,18,0,52,241.19,2,Finished
+2024,Silverstone,Charles Leclerc,Ferrari,Monaco,12,12,0,71,236.8,2,Finished
+2021,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,7,7,6,58,240.52,1,Finished
+2023,Circuit of the Americas,Oscar Piastri,McLaren,Australia,5,1,25,58,233.99,2,Finished
+2022,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,7,9,2,52,245.53,1,Finished
+2021,Interlagos,Carlos Sainz,Ferrari,Spain,4,5,10,58,216.11,1,Finished
+2023,Monza,Max Verstappen,Red Bull Racing,Netherlands,8,9,2,0,,1,Engine Failure
+2024,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,1,1,25,58,221.69,3,Finished
+2021,Monza,George Russell,Mercedes,United Kingdom,2,2,18,71,237.01,1,Finished
+2021,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,7,10,1,52,241.24,3,Finished
+2022,Suzuka,Oscar Piastri,McLaren,Australia,15,14,0,58,224.5,1,Finished
+2022,Suzuka,Sergio Perez,Red Bull Racing,Mexico,16,19,0,71,226.08,1,Finished
+2023,Monza,Lewis Hamilton,Mercedes,United Kingdom,2,1,25,58,249.02,2,Finished
+2024,Circuit of the Americas,Pierre Gasly,Alpine,France,20,19,0,58,209.32,1,Finished
+2022,Monza,George Russell,Mercedes,United Kingdom,10,13,0,58,224.78,1,Finished
+2023,Suzuka,Sergio Perez,Red Bull Racing,Mexico,2,2,18,58,249.29,2,Finished
+2024,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,17,18,0,71,251.66,2,Finished
+2024,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,12,16,0,71,230.14,2,Finished
+2024,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,17,18,0,52,236.55,1,Finished
+2023,Suzuka,Sergio Perez,Red Bull Racing,Mexico,16,10,1,71,233.35,2,Finished
+2022,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,4,6,8,52,223.46,2,Finished
+2023,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,2,1,25,58,225.98,1,Finished
+2023,Interlagos,Pierre Gasly,Alpine,France,19,15,0,71,232.73,3,Finished
+2021,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,17,15,0,71,236.31,2,Finished
+2023,Monza,Lando Norris,McLaren,United Kingdom,19,20,0,58,235.16,1,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,6,6,8,71,233.08,2,Finished
+2023,Interlagos,George Russell,Mercedes,United Kingdom,20,14,0,52,227.54,3,Finished
+2022,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,19,19,0,52,224.48,1,Finished
+2023,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,20,18,0,71,228.9,1,Finished
+2023,Interlagos,Fernando Alonso,Aston Martin,Spain,13,16,0,71,224.91,2,Finished
+2022,Suzuka,George Russell,Mercedes,United Kingdom,10,10,1,58,238.7,1,Finished
+2021,Monza,Sergio Perez,Red Bull Racing,Mexico,5,10,1,52,259.37,1,Finished
+2021,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,12,10,1,45,,1,Collision
+2022,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,11,9,2,58,218.43,1,Finished
+2021,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,3,1,25,52,242.7,2,Finished
+2021,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,10,10,1,71,258.35,1,Finished
+2023,Monza,Lewis Hamilton,Mercedes,United Kingdom,17,20,0,71,234.39,2,Finished
+2022,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,6,7,6,52,213.15,2,Finished
+2022,Monza,Charles Leclerc,Ferrari,Monaco,5,10,1,58,233.73,2,Finished
+2022,Monza,Lewis Hamilton,Mercedes,United Kingdom,16,15,0,58,225.72,1,Finished
+2024,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,18,20,0,71,232.92,2,Finished
+2023,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,9,11,0,71,250.35,1,Finished
+2022,Silverstone,Lando Norris,McLaren,United Kingdom,13,10,1,0,,2,Engine Failure
+2024,Silverstone,Carlos Sainz,Ferrari,Spain,3,3,15,45,,1,Accident
+2021,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,2,1,25,52,223.83,1,Finished
+2022,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,9,7,6,71,217.12,1,Finished
+2024,Monza,Charles Leclerc,Ferrari,Monaco,5,4,12,58,226.43,1,Finished
+2024,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,14,12,0,58,244.07,2,Finished
+2021,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,2,1,25,71,230.71,1,Finished
+2023,Interlagos,Pierre Gasly,Alpine,France,11,9,2,71,242.81,1,Finished
+2023,Suzuka,Sergio Perez,Red Bull Racing,Mexico,13,15,0,71,218.16,2,Finished
+2024,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,16,16,0,52,211.5,2,Finished
+2024,Silverstone,Pierre Gasly,Alpine,France,2,1,25,58,231.38,1,Finished
+2023,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,20,16,0,52,221.86,2,Finished
+2023,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,6,4,12,71,235.81,2,Finished
+2021,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,15,18,0,71,237.35,2,Finished
+2023,Silverstone,Lando Norris,McLaren,United Kingdom,5,5,10,58,228.11,1,Finished
+2022,Suzuka,Pierre Gasly,Alpine,France,16,16,0,58,221.28,2,Finished
+2023,Circuit of the Americas,Oscar Piastri,McLaren,Australia,5,7,6,71,236.33,2,Finished
+2023,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,7,5,10,71,224.6,1,Finished
+2023,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,16,16,0,71,225.61,1,Finished
+2024,Suzuka,Charles Leclerc,Ferrari,Monaco,3,4,12,71,247.8,2,Finished
+2023,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,6,7,6,52,244.86,2,Finished
+2021,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,11,9,2,71,231.14,1,Finished
+2021,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,2,6,8,58,229.73,3,Finished
+2021,Interlagos,Sergio Perez,Red Bull Racing,Mexico,17,18,0,71,229.0,3,Finished
+2021,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,13,9,2,58,245.23,1,Finished
+2021,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,3,1,25,71,205.23,1,Finished
+2022,Silverstone,Lando Norris,McLaren,United Kingdom,6,6,8,52,213.06,1,Finished
+2023,Interlagos,Charles Leclerc,Ferrari,Monaco,20,20,0,58,235.92,2,Finished
+2022,Suzuka,Oscar Piastri,McLaren,Australia,10,6,8,52,236.02,1,Finished
+2023,Suzuka,Lando Norris,McLaren,United Kingdom,9,9,2,58,224.88,2,Finished
+2023,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,13,16,0,71,254.19,2,Finished
+2024,Silverstone,Fernando Alonso,Aston Martin,Spain,9,11,0,71,237.01,3,Finished
+2022,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,3,1,25,45,,2,Engine Failure
+2024,Silverstone,Fernando Alonso,Aston Martin,Spain,5,6,8,0,,1,Collision
+2024,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,13,9,2,52,235.43,2,Finished
+2024,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,13,14,0,71,225.06,2,Finished
+2022,Monza,Max Verstappen,Red Bull Racing,Netherlands,15,16,0,71,221.4,2,Finished
+2023,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,5,5,10,58,231.46,1,Finished
+2023,Silverstone,Pierre Gasly,Alpine,France,7,7,6,71,229.75,1,Finished
+2023,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,2,1,25,71,237.87,3,Finished
+2024,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,3,1,25,52,228.68,1,Finished
+2021,Monza,Pierre Gasly,Alpine,France,5,1,25,52,238.5,1,Finished
+2021,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,18,20,0,71,216.87,2,Finished
+2023,Suzuka,Fernando Alonso,Aston Martin,Spain,17,17,0,71,243.34,2,Finished
+2024,Silverstone,Carlos Sainz,Ferrari,Spain,16,18,0,71,224.35,1,Finished
+2024,Silverstone,Carlos Sainz,Ferrari,Spain,4,1,25,58,255.34,1,Finished
+2022,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,10,11,0,71,215.94,2,Finished
+2021,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,18,15,0,0,,2,Accident
+2022,Silverstone,Sergio Perez,Red Bull Racing,Mexico,17,15,0,58,239.86,2,Finished
+2022,Circuit of the Americas,Pierre Gasly,Alpine,France,13,15,0,0,,1,Accident
+2024,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,14,10,1,71,241.07,1,Finished
+2021,Interlagos,Carlos Sainz,Ferrari,Spain,13,11,0,71,228.41,1,Finished
+2022,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,9,5,10,71,253.85,1,Finished
+2021,Suzuka,Fernando Alonso,Aston Martin,Spain,2,2,18,58,220.19,3,Finished
+2022,Silverstone,Carlos Sainz,Ferrari,Spain,12,12,0,71,232.46,1,Finished
+2022,Suzuka,Fernando Alonso,Aston Martin,Spain,3,2,18,58,233.9,2,Finished
+2022,Monaco Grand Prix,Pierre Gasly,Alpine,France,12,17,0,58,214.28,2,Finished
+2024,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,20,17,0,58,223.96,2,Finished
+2021,Silverstone,George Russell,Mercedes,United Kingdom,15,14,0,52,244.44,2,Finished
+2024,Monza,Fernando Alonso,Aston Martin,Spain,19,18,0,71,232.11,1,Finished
+2023,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,1,3,15,52,225.13,2,Finished
+2024,Silverstone,Carlos Sainz,Ferrari,Spain,5,10,1,0,,2,Collision
+2023,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,18,19,0,71,217.36,1,Finished
+2021,Circuit of the Americas,Pierre Gasly,Alpine,France,17,19,0,58,233.54,2,Finished
+2023,Silverstone,George Russell,Mercedes,United Kingdom,9,4,12,52,231.59,2,Finished
+2022,Interlagos,Lando Norris,McLaren,United Kingdom,6,8,4,71,231.73,2,Finished
+2022,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,13,9,2,45,,1,Engine Failure
+2022,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,19,18,0,58,231.03,2,Finished
+2023,Monza,Max Verstappen,Red Bull Racing,Netherlands,18,14,0,71,240.78,2,Finished
+2021,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,9,5,10,58,222.54,3,Finished
+2023,Monza,Sergio Perez,Red Bull Racing,Mexico,14,15,0,52,244.2,1,Finished
+2024,Monza,Oscar Piastri,McLaren,Australia,10,10,1,58,224.71,1,Finished
+2023,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,19,19,0,71,231.33,2,Finished
+2023,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,18,20,0,58,224.49,2,Finished
+2022,Monza,Pierre Gasly,Alpine,France,12,14,0,45,,3,Collision
+2022,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,14,15,0,71,236.28,1,Finished
+2021,Monza,Charles Leclerc,Ferrari,Monaco,2,9,2,0,,2,Collision
+2022,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,8,10,1,71,233.34,2,Finished
+2021,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,20,17,0,58,231.98,2,Finished
+2021,Interlagos,Pierre Gasly,Alpine,France,3,1,25,71,237.68,2,Finished
+2023,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,3,1,25,58,232.41,2,Finished
+2024,Monza,Lando Norris,McLaren,United Kingdom,20,10,1,52,233.54,2,Finished
+2024,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,16,15,0,71,222.08,2,Finished
+2023,Circuit of the Americas,George Russell,Mercedes,United Kingdom,12,13,0,71,224.07,1,Finished
+2024,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,17,13,0,71,240.03,2,Finished
+2023,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,4,1,25,52,234.99,1,Finished
+2023,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,14,11,0,58,233.78,1,Finished
+2022,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,20,20,0,71,236.56,1,Finished
+2024,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,18,20,0,71,233.65,2,Finished
+2024,Monza,Lando Norris,McLaren,United Kingdom,5,12,0,71,246.99,3,Finished
+2021,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,17,16,0,58,230.36,2,Finished
+2021,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,18,14,0,58,220.84,1,Finished
+2022,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,9,13,0,58,226.97,1,Finished
+2022,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,15,15,0,71,229.03,1,Finished
+2023,Monza,George Russell,Mercedes,United Kingdom,10,10,1,52,211.11,1,Finished
+2023,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,20,14,0,71,235.99,2,Finished
+2022,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,10,5,10,58,233.61,1,Finished
+2023,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,4,2,18,71,236.09,2,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,18,16,0,71,220.14,2,Finished
+2022,Silverstone,Lando Norris,McLaren,United Kingdom,19,12,0,71,225.65,1,Finished
+2023,Silverstone,Carlos Sainz,Ferrari,Spain,18,17,0,52,227.53,3,Finished
+2023,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,14,20,0,71,232.72,1,Finished
+2022,Circuit of the Americas,Charles Leclerc,Ferrari,Monaco,20,16,0,58,222.05,1,Finished
+2021,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,19,20,0,58,242.31,1,Finished
+2021,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,11,5,10,58,241.43,2,Finished
+2024,Interlagos,Fernando Alonso,Aston Martin,Spain,14,11,0,52,243.61,1,Finished
+2024,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,6,3,15,71,237.7,1,Finished
+2024,Monza,Oscar Piastri,McLaren,Australia,8,5,10,71,251.31,3,Finished
+2021,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,10,7,6,45,,1,Engine Failure
+2021,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,8,7,6,58,225.89,2,Finished
+2021,Monaco Grand Prix,Pierre Gasly,Alpine,France,2,1,25,58,211.18,2,Finished
+2022,Silverstone,Carlos Sainz,Ferrari,Spain,4,3,15,58,224.89,2,Finished
+2024,Monza,Carlos Sainz,Ferrari,Spain,15,18,0,71,227.49,2,Finished
+2023,Suzuka,Charles Leclerc,Ferrari,Monaco,7,7,6,71,221.21,2,Finished
+2024,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,13,14,0,58,242.59,1,Finished
+2024,Suzuka,Fernando Alonso,Aston Martin,Spain,8,7,6,71,221.12,1,Finished
+2022,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,19,18,0,71,234.26,3,Finished
+2022,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,6,5,10,58,224.87,2,Finished
+2022,Suzuka,Oscar Piastri,McLaren,Australia,1,2,18,71,247.64,2,Finished
+2023,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,1,1,25,71,240.04,2,Finished
+2022,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,2,5,10,71,221.73,3,Finished
+2022,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,3,1,25,58,229.17,2,Finished
+2023,Suzuka,George Russell,Mercedes,United Kingdom,3,1,25,58,247.7,1,Finished
+2024,Silverstone,George Russell,Mercedes,United Kingdom,15,13,0,71,245.69,2,Finished
+2024,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,17,18,0,0,,2,Collision
+2021,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,20,17,0,71,229.3,1,Finished
+2024,Monza,Charles Leclerc,Ferrari,Monaco,10,10,1,52,253.39,2,Finished
+2024,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,1,1,25,52,215.68,1,Finished
+2022,Suzuka,Sergio Perez,Red Bull Racing,Mexico,11,12,0,58,237.54,2,Finished
+2022,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,7,5,10,71,232.26,2,Finished
+2021,Circuit of the Americas,Pierre Gasly,Alpine,France,9,8,4,71,238.31,1,Finished
+2021,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,18,12,0,58,244.57,1,Finished
+2024,Silverstone,Sergio Perez,Red Bull Racing,Mexico,5,6,8,52,229.74,3,Finished
+2021,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,5,7,6,52,260.73,1,Finished
+2022,Suzuka,Fernando Alonso,Aston Martin,Spain,3,2,18,71,246.49,2,Finished
+2021,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,10,15,0,58,210.18,2,Finished
+2021,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,18,17,0,58,240.89,1,Finished
+2022,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,12,10,1,58,225.49,1,Finished
+2022,Suzuka,Oscar Piastri,McLaren,Australia,15,15,0,45,,2,Engine Failure
+2021,Interlagos,George Russell,Mercedes,United Kingdom,5,6,8,71,213.34,2,Finished
+2024,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,6,11,0,52,256.65,1,Finished
+2022,Interlagos,Lando Norris,McLaren,United Kingdom,8,10,1,58,259.9,3,Finished
+2022,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,18,19,0,71,228.68,1,Finished
+2022,Monza,Charles Leclerc,Ferrari,Monaco,20,16,0,71,222.04,2,Finished
+2024,Monza,Pierre Gasly,Alpine,France,18,16,0,71,243.64,1,Finished
+2022,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,11,11,0,71,232.94,2,Finished
+2024,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,8,4,12,58,232.97,2,Finished
+2023,Circuit of the Americas,Charles Leclerc,Ferrari,Monaco,15,14,0,58,215.15,3,Finished
+2021,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,17,12,0,52,241.8,1,Finished
+2021,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,20,19,0,71,231.16,1,Finished
+2023,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,11,11,0,58,228.82,1,Finished
+2022,Monza,Fernando Alonso,Aston Martin,Spain,5,6,8,52,237.44,2,Finished
+2023,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,11,13,0,71,248.64,2,Finished
+2021,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,17,19,0,58,242.84,1,Finished
+2021,Silverstone,Carlos Sainz,Ferrari,Spain,11,10,1,71,229.46,2,Finished
+2023,Silverstone,Fernando Alonso,Aston Martin,Spain,4,5,10,58,225.65,3,Finished
+2021,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,1,1,25,58,267.02,1,Finished
+2021,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,5,4,12,71,232.19,2,Finished
+2022,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,4,1,25,52,225.36,2,Finished
+2024,Interlagos,Sergio Perez,Red Bull Racing,Mexico,13,9,2,58,247.13,2,Finished
+2024,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,4,4,12,45,,2,Accident
+2023,Circuit of the Americas,George Russell,Mercedes,United Kingdom,19,19,0,58,224.54,1,Finished
+2022,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,13,12,0,58,249.27,1,Finished
+2023,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,16,16,0,58,234.43,1,Finished
+2024,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,11,3,15,71,256.75,1,Finished
+2024,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,11,9,2,58,233.7,2,Finished
+2021,Circuit of the Americas,Oscar Piastri,McLaren,Australia,15,20,0,58,232.16,1,Finished
+2022,Monza,Lando Norris,McLaren,United Kingdom,1,1,25,71,236.99,2,Finished
+2023,Silverstone,Pierre Gasly,Alpine,France,7,3,15,58,228.92,2,Finished
+2024,Circuit of the Americas,Pierre Gasly,Alpine,France,9,9,2,58,242.05,1,Finished
+2023,Suzuka,Lando Norris,McLaren,United Kingdom,11,13,0,58,231.84,1,Finished
+2022,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,6,8,4,71,237.09,1,Finished
+2024,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,2,1,25,58,214.2,1,Finished
+2023,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,1,1,25,71,256.27,1,Finished
+2024,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,4,7,6,52,222.18,1,Finished
+2022,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,4,1,25,58,240.69,2,Finished
+2023,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,19,19,0,58,227.49,2,Finished
+2021,Spa-Francorchamps,Pierre Gasly,Alpine,France,11,12,0,58,224.9,2,Finished
+2024,Interlagos,Pierre Gasly,Alpine,France,10,12,0,71,246.69,1,Finished
+2022,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,7,10,1,58,228.51,2,Finished
+2024,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,8,7,6,52,206.44,1,Finished
+2023,Monza,Pierre Gasly,Alpine,France,9,10,1,58,222.38,1,Finished
+2021,Monza,Max Verstappen,Red Bull Racing,Netherlands,7,6,8,45,,2,Engine Failure
+2021,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,1,1,25,0,,1,Engine Failure
+2024,Circuit of the Americas,George Russell,Mercedes,United Kingdom,5,6,8,52,233.12,1,Finished
+2021,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,19,20,0,71,246.37,2,Finished
+2021,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,15,16,0,45,,1,Collision
+2021,Monza,Oscar Piastri,McLaren,Australia,6,2,18,52,220.29,1,Finished
+2022,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,14,20,0,58,237.24,1,Finished
+2024,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,16,15,0,71,217.55,1,Finished
+2022,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,7,6,8,58,205.59,2,Finished
+2023,Silverstone,Sergio Perez,Red Bull Racing,Mexico,9,3,15,52,249.18,1,Finished
+2024,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,15,13,0,45,,2,Collision
+2023,Circuit of the Americas,Pierre Gasly,Alpine,France,17,15,0,58,251.07,1,Finished
+2022,Interlagos,Carlos Sainz,Ferrari,Spain,17,20,0,45,,2,Engine Failure
+2023,Monaco Grand Prix,Pierre Gasly,Alpine,France,9,10,1,71,238.63,3,Finished
+2022,Interlagos,Lando Norris,McLaren,United Kingdom,2,2,18,71,223.46,1,Finished
+2022,Circuit of the Americas,George Russell,Mercedes,United Kingdom,13,8,4,58,219.99,3,Finished
+2022,Suzuka,Charles Leclerc,Ferrari,Monaco,11,7,6,45,,2,Engine Failure
+2023,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,19,14,0,71,241.64,3,Finished
+2022,Circuit of the Americas,Pierre Gasly,Alpine,France,19,17,0,71,240.06,1,Finished
+2022,Silverstone,Oscar Piastri,McLaren,Australia,16,14,0,71,223.72,1,Finished
+2024,Silverstone,Lando Norris,McLaren,United Kingdom,9,5,10,71,230.91,2,Finished
+2021,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,9,9,2,0,,2,Engine Failure
+2021,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,17,17,0,71,217.72,2,Finished
+2023,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,14,16,0,0,,2,Engine Failure
+2021,Suzuka,Oscar Piastri,McLaren,Australia,19,20,0,71,243.76,2,Finished
+2024,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,17,15,0,45,,3,Collision
+2021,Monza,Sergio Perez,Red Bull Racing,Mexico,15,19,0,58,224.25,2,Finished
+2022,Suzuka,Lando Norris,McLaren,United Kingdom,12,11,0,71,234.36,2,Finished
+2024,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,9,11,0,45,,1,Engine Failure
+2023,Circuit of the Americas,Charles Leclerc,Ferrari,Monaco,17,11,0,58,228.77,2,Finished
+2022,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,9,10,1,58,241.91,1,Finished
+2022,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,13,10,1,45,,3,Accident
+2022,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,16,11,0,58,223.74,1,Finished
+2022,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,12,7,6,71,243.61,1,Finished
+2022,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,15,10,1,45,,2,Accident
+2023,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,20,20,0,71,215.42,3,Finished
+2023,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,5,1,25,0,,1,Accident
+2023,Interlagos,Max Verstappen,Red Bull Racing,Netherlands,6,2,18,71,204.84,2,Finished
+2021,Monza,Max Verstappen,Red Bull Racing,Netherlands,11,12,0,58,239.52,1,Finished
+2021,Suzuka,Charles Leclerc,Ferrari,Monaco,12,8,4,52,241.62,1,Finished
+2023,Silverstone,Pierre Gasly,Alpine,France,16,15,0,71,230.68,1,Finished
+2021,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,18,17,0,71,262.01,1,Finished
+2024,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,19,15,0,58,243.43,2,Finished
+2024,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,16,20,0,58,237.63,2,Finished
+2022,Interlagos,Oscar Piastri,McLaren,Australia,3,2,18,58,214.59,2,Finished
+2023,Monza,Charles Leclerc,Ferrari,Monaco,9,5,10,52,231.68,2,Finished
+2022,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,16,20,0,58,220.66,2,Finished
+2022,Silverstone,George Russell,Mercedes,United Kingdom,10,8,4,71,218.53,1,Finished
+2021,Silverstone,Carlos Sainz,Ferrari,Spain,1,1,25,58,244.29,1,Finished
+2021,Suzuka,Sergio Perez,Red Bull Racing,Mexico,2,5,10,45,,1,Accident
+2024,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,1,1,25,71,221.39,2,Finished
+2022,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,7,2,18,0,,1,Engine Failure
+2021,Circuit of the Americas,Pierre Gasly,Alpine,France,7,4,12,71,240.27,1,Finished
+2021,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,12,13,0,52,253.2,3,Finished
+2023,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,1,1,25,71,228.09,1,Finished
+2022,Silverstone,Fernando Alonso,Aston Martin,Spain,8,5,10,71,237.72,2,Finished
+2021,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,7,9,2,58,240.9,2,Finished
+2024,Silverstone,Sergio Perez,Red Bull Racing,Mexico,3,5,10,45,,2,Collision
+2023,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,2,4,12,58,225.29,2,Finished
+2021,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,20,18,0,71,250.82,2,Finished
+2023,Circuit of the Americas,Oscar Piastri,McLaren,Australia,6,3,15,71,243.2,3,Finished
+2021,Monza,Charles Leclerc,Ferrari,Monaco,19,17,0,58,256.7,1,Finished
+2021,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,4,1,25,71,248.01,2,Finished
+2021,Monza,Charles Leclerc,Ferrari,Monaco,18,14,0,58,232.24,2,Finished
+2023,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,15,12,0,52,227.9,2,Finished
+2022,Monza,Oscar Piastri,McLaren,Australia,5,3,15,71,214.07,1,Finished
+2021,Silverstone,George Russell,Mercedes,United Kingdom,16,15,0,52,234.31,1,Finished
+2023,Monza,Fernando Alonso,Aston Martin,Spain,15,13,0,71,227.48,1,Finished
+2021,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,10,9,2,0,,1,Accident
+2022,Monza,Oscar Piastri,McLaren,Australia,14,11,0,71,254.78,2,Finished
+2022,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,5,5,10,52,227.85,2,Finished
+2021,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,1,1,25,71,251.51,1,Finished
+2021,Circuit of the Americas,Pierre Gasly,Alpine,France,13,11,0,58,244.99,2,Finished
+2023,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,5,3,15,58,217.42,2,Finished
+2024,Silverstone,Carlos Sainz,Ferrari,Spain,2,2,18,71,225.27,1,Finished
+2021,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,6,6,8,71,244.42,2,Finished
+2023,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,1,1,25,45,,2,Accident
+2023,Silverstone,Pierre Gasly,Alpine,France,17,13,0,71,247.7,3,Finished
+2022,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,4,8,4,58,218.72,1,Finished
+2024,Silverstone,Oscar Piastri,McLaren,Australia,17,11,0,45,,1,Accident
+2022,Circuit of the Americas,Lando Norris,McLaren,United Kingdom,2,3,15,58,231.04,1,Finished
+2021,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,15,17,0,58,221.97,1,Finished
+2021,Monza,Oscar Piastri,McLaren,Australia,3,1,25,0,,1,Collision
+2021,Suzuka,Sergio Perez,Red Bull Racing,Mexico,11,10,1,58,239.09,2,Finished
+2022,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,11,11,0,0,,2,Accident
+2024,Monaco Grand Prix,Pierre Gasly,Alpine,France,19,19,0,58,229.14,2,Finished
+2021,Monza,Sergio Perez,Red Bull Racing,Mexico,2,1,25,58,227.67,2,Finished
+2024,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,8,8,4,45,,1,Collision
+2023,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,7,6,8,71,221.89,1,Finished
+2022,Silverstone,Fernando Alonso,Aston Martin,Spain,18,16,0,58,228.64,3,Finished
+2023,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,16,16,0,45,,1,Collision
+2022,Monza,Max Verstappen,Red Bull Racing,Netherlands,6,2,18,52,244.83,2,Finished
+2022,Interlagos,Lando Norris,McLaren,United Kingdom,5,6,8,58,263.46,2,Finished
+2023,Monaco Grand Prix,Oscar Piastri,McLaren,Australia,4,1,25,58,227.78,2,Finished
+2024,Monza,Lewis Hamilton,Mercedes,United Kingdom,3,1,25,58,239.53,2,Finished
+2023,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,4,9,2,71,234.4,1,Finished
+2021,Silverstone,Fernando Alonso,Aston Martin,Spain,3,2,18,71,216.54,2,Finished
+2023,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,1,1,25,71,250.01,2,Finished
+2021,Suzuka,Charles Leclerc,Ferrari,Monaco,9,11,0,58,216.78,1,Finished
+2023,Silverstone,Oscar Piastri,McLaren,Australia,6,8,4,71,235.3,3,Finished
+2021,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,19,17,0,58,233.32,3,Finished
+2024,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,19,14,0,0,,2,Collision
+2022,Circuit of the Americas,Oscar Piastri,McLaren,Australia,1,7,6,71,231.58,1,Finished
+2022,Monza,Charles Leclerc,Ferrari,Monaco,20,19,0,58,218.82,2,Finished
+2021,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,5,2,18,52,238.29,1,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,5,5,10,58,201.17,3,Finished
+2022,Silverstone,Lando Norris,McLaren,United Kingdom,1,1,25,71,221.67,2,Finished
+2021,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,13,16,0,52,236.84,1,Finished
+2023,Monaco Grand Prix,Pierre Gasly,Alpine,France,19,20,0,71,247.26,3,Finished
+2021,Silverstone,Charles Leclerc,Ferrari,Monaco,18,20,0,45,,1,Collision
+2022,Suzuka,Oscar Piastri,McLaren,Australia,11,9,2,52,195.23,1,Finished
+2021,Silverstone,George Russell,Mercedes,United Kingdom,9,11,0,58,227.43,2,Finished
+2021,Silverstone,Oscar Piastri,McLaren,Australia,6,1,25,71,229.03,3,Finished
+2022,Monza,Fernando Alonso,Aston Martin,Spain,4,4,12,71,245.88,1,Finished
+2024,Interlagos,Sergio Perez,Red Bull Racing,Mexico,14,11,0,58,235.91,2,Finished
+2024,Circuit of the Americas,George Russell,Mercedes,United Kingdom,6,4,12,71,235.07,3,Finished
+2024,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,4,8,4,71,239.48,3,Finished
+2022,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,9,12,0,58,244.22,2,Finished
+2023,Autodromo Hermanos Rodriguez,Lewis Hamilton,Mercedes,United Kingdom,1,2,18,52,241.04,2,Finished
+2021,Interlagos,Charles Leclerc,Ferrari,Monaco,8,10,1,58,217.32,1,Finished
+2022,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,7,8,4,52,217.96,1,Finished
+2024,Suzuka,Carlos Sainz,Ferrari,Spain,6,4,12,45,,2,Accident
+2024,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,5,5,10,71,226.61,1,Finished
+2021,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,9,6,8,0,,2,Engine Failure
+2022,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,3,2,18,45,,2,Engine Failure
+2021,Monaco Grand Prix,Pierre Gasly,Alpine,France,16,15,0,71,226.94,1,Finished
+2022,Suzuka,Max Verstappen,Red Bull Racing,Netherlands,4,9,2,0,,2,Collision
+2021,Monza,Lando Norris,McLaren,United Kingdom,8,10,1,71,241.81,2,Finished
+2022,Monza,Oscar Piastri,McLaren,Australia,7,9,2,58,237.9,1,Finished
+2023,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,16,18,0,71,238.16,1,Finished
+2022,Monza,George Russell,Mercedes,United Kingdom,4,8,4,45,,3,Collision
+2023,Monza,George Russell,Mercedes,United Kingdom,7,11,0,58,257.2,2,Finished
+2023,Monza,Lewis Hamilton,Mercedes,United Kingdom,17,20,0,71,241.65,2,Finished
+2024,Monza,Charles Leclerc,Ferrari,Monaco,11,11,0,71,237.43,1,Finished
+2024,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,13,8,4,0,,1,Collision
+2022,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,19,16,0,58,209.46,1,Finished
+2023,Suzuka,Carlos Sainz,Ferrari,Spain,6,5,10,58,241.27,3,Finished
+2024,Monaco Grand Prix,Charles Leclerc,Ferrari,Monaco,16,15,0,58,221.55,3,Finished
+2024,Interlagos,George Russell,Mercedes,United Kingdom,11,11,0,52,223.38,3,Finished
+2024,Interlagos,George Russell,Mercedes,United Kingdom,16,13,0,71,236.71,2,Finished
+2022,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,20,17,0,52,244.77,2,Finished
+2021,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,6,8,4,71,221.96,1,Finished
+2024,Silverstone,Lando Norris,McLaren,United Kingdom,16,13,0,71,234.52,1,Finished
+2021,Suzuka,Oscar Piastri,McLaren,Australia,18,15,0,71,214.54,1,Finished
+2022,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,1,2,18,71,229.4,1,Finished
+2022,Suzuka,Carlos Sainz,Ferrari,Spain,3,5,10,58,230.74,2,Finished
+2022,Suzuka,George Russell,Mercedes,United Kingdom,19,19,0,58,246.19,2,Finished
+2022,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,3,1,25,71,238.82,1,Finished
+2022,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,13,10,1,52,213.65,3,Finished
+2023,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,3,1,25,58,214.31,2,Finished
+2023,Circuit of the Americas,Oscar Piastri,McLaren,Australia,5,10,1,45,,2,Collision
+2022,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,7,8,4,71,252.88,2,Finished
+2021,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,16,14,0,71,216.15,1,Finished
+2021,Monza,Max Verstappen,Red Bull Racing,Netherlands,17,9,2,71,222.38,1,Finished
+2023,Circuit of the Americas,Lewis Hamilton,Mercedes,United Kingdom,13,16,0,52,236.65,2,Finished
+2022,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,10,12,0,58,240.03,1,Finished
+2024,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,13,15,0,58,236.04,1,Finished
+2024,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,12,6,8,58,216.2,1,Finished
+2021,Suzuka,Sergio Perez,Red Bull Racing,Mexico,7,11,0,58,237.93,2,Finished
+2023,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,14,13,0,58,228.42,1,Finished
+2022,Interlagos,Lando Norris,McLaren,United Kingdom,11,11,0,58,221.08,2,Finished
+2023,Circuit of the Americas,Charles Leclerc,Ferrari,Monaco,11,10,1,71,240.16,2,Finished
+2024,Monza,Fernando Alonso,Aston Martin,Spain,13,16,0,58,231.61,2,Finished
+2023,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,10,13,0,58,223.88,2,Finished
+2021,Monza,Max Verstappen,Red Bull Racing,Netherlands,16,14,0,71,247.41,2,Finished
+2023,Monza,Lando Norris,McLaren,United Kingdom,15,17,0,52,218.57,1,Finished
+2021,Interlagos,Sergio Perez,Red Bull Racing,Mexico,7,4,12,71,238.75,1,Finished
+2021,Monza,Sergio Perez,Red Bull Racing,Mexico,18,19,0,71,237.94,1,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,15,13,0,58,227.71,2,Finished
+2024,Suzuka,Lando Norris,McLaren,United Kingdom,16,18,0,58,235.2,1,Finished
+2023,Suzuka,Pierre Gasly,Alpine,France,2,1,25,58,233.68,2,Finished
+2024,Suzuka,Lewis Hamilton,Mercedes,United Kingdom,7,5,10,58,240.9,1,Finished
+2021,Suzuka,Carlos Sainz,Ferrari,Spain,19,15,0,58,237.05,3,Finished
+2021,Monaco Grand Prix,Max Verstappen,Red Bull Racing,Netherlands,9,11,0,52,244.23,1,Finished
+2024,Circuit of the Americas,George Russell,Mercedes,United Kingdom,10,12,0,71,226.25,1,Finished
+2022,Interlagos,Oscar Piastri,McLaren,Australia,12,15,0,71,256.82,3,Finished
+2023,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,18,18,0,45,,2,Engine Failure
+2023,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,20,17,0,0,,2,Accident
+2021,Monaco Grand Prix,Sergio Perez,Red Bull Racing,Mexico,4,6,8,58,218.95,2,Finished
+2024,Silverstone,Lando Norris,McLaren,United Kingdom,10,13,0,58,231.91,2,Finished
+2022,Monza,Sergio Perez,Red Bull Racing,Mexico,2,1,25,71,239.43,2,Finished
+2022,Monza,Lewis Hamilton,Mercedes,United Kingdom,14,11,0,58,242.53,2,Finished
+2021,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,18,20,0,58,239.41,1,Finished
+2023,Monaco Grand Prix,Lando Norris,McLaren,United Kingdom,12,15,0,52,239.98,1,Finished
+2022,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,7,2,18,52,240.81,3,Finished
+2021,Circuit of the Americas,Carlos Sainz,Ferrari,Spain,2,1,25,58,229.18,1,Finished
+2022,Monza,Lewis Hamilton,Mercedes,United Kingdom,1,3,15,52,245.5,2,Finished
+2023,Spa-Francorchamps,Lewis Hamilton,Mercedes,United Kingdom,10,9,2,52,204.38,1,Finished
+2024,Silverstone,Oscar Piastri,McLaren,Australia,9,12,0,71,247.29,3,Finished
+2024,Circuit of the Americas,Pierre Gasly,Alpine,France,13,19,0,58,215.38,3,Finished
+2022,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,1,3,15,58,224.71,2,Finished
+2023,Spa-Francorchamps,Sergio Perez,Red Bull Racing,Mexico,10,9,2,71,214.93,2,Finished
+2022,Circuit of the Americas,Pierre Gasly,Alpine,France,11,10,1,71,227.44,1,Finished
+2023,Spa-Francorchamps,Oscar Piastri,McLaren,Australia,16,19,0,71,237.12,3,Finished
+2024,Monaco Grand Prix,Fernando Alonso,Aston Martin,Spain,13,15,0,58,226.01,1,Finished
+2021,Interlagos,Lewis Hamilton,Mercedes,United Kingdom,5,3,15,71,235.85,1,Finished
+2022,Monza,Lando Norris,McLaren,United Kingdom,16,17,0,58,223.84,2,Finished
+2022,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,6,7,6,58,229.25,1,Finished
+2021,Silverstone,Charles Leclerc,Ferrari,Monaco,4,2,18,58,238.12,2,Finished
+2022,Monza,Carlos Sainz,Ferrari,Spain,17,10,1,45,,1,Collision
+2023,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,1,2,18,58,238.33,2,Finished
+2021,Interlagos,Oscar Piastri,McLaren,Australia,8,6,8,71,228.5,1,Finished
+2023,Monza,Oscar Piastri,McLaren,Australia,10,7,6,71,226.46,1,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,6,1,25,58,219.52,1,Finished
+2021,Circuit of the Americas,George Russell,Mercedes,United Kingdom,16,17,0,71,230.33,1,Finished
+2021,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,2,2,18,71,235.0,3,Finished
+2024,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,16,16,0,52,233.96,2,Finished
+2021,Suzuka,Charles Leclerc,Ferrari,Monaco,3,4,12,58,232.77,2,Finished
+2024,Suzuka,Sergio Perez,Red Bull Racing,Mexico,7,8,4,58,247.85,1,Finished
+2024,Interlagos,Carlos Sainz,Ferrari,Spain,18,20,0,71,242.42,2,Finished
+2021,Autodromo Hermanos Rodriguez,Charles Leclerc,Ferrari,Monaco,5,4,12,71,226.42,2,Finished
+2024,Silverstone,Lewis Hamilton,Mercedes,United Kingdom,4,7,6,71,228.9,1,Finished
+2024,Circuit of the Americas,Oscar Piastri,McLaren,Australia,12,15,0,58,213.05,2,Finished
+2022,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,9,5,10,52,237.39,1,Finished
+2021,Silverstone,Max Verstappen,Red Bull Racing,Netherlands,9,10,1,71,238.76,1,Finished
+2024,Autodromo Hermanos Rodriguez,Pierre Gasly,Alpine,France,10,14,0,58,228.19,1,Finished
+2021,Monza,Pierre Gasly,Alpine,France,8,5,10,58,239.95,1,Finished
+2021,Suzuka,Lando Norris,McLaren,United Kingdom,12,16,0,71,237.7,3,Finished
+2023,Monza,Charles Leclerc,Ferrari,Monaco,10,9,2,52,239.83,1,Finished
+2021,Suzuka,Sergio Perez,Red Bull Racing,Mexico,8,13,0,71,236.43,1,Finished
+2021,Spa-Francorchamps,George Russell,Mercedes,United Kingdom,4,3,15,58,216.93,1,Finished
+2024,Circuit of the Americas,Sergio Perez,Red Bull Racing,Mexico,11,14,0,52,212.62,2,Finished
+2021,Silverstone,Fernando Alonso,Aston Martin,Spain,1,3,15,58,239.11,1,Finished
+2024,Interlagos,Carlos Sainz,Ferrari,Spain,11,10,1,71,247.22,2,Finished
+2021,Monza,Charles Leclerc,Ferrari,Monaco,6,4,12,71,244.21,1,Finished
+2024,Silverstone,Sergio Perez,Red Bull Racing,Mexico,6,3,15,71,231.0,2,Finished
+2022,Suzuka,Oscar Piastri,McLaren,Australia,3,1,25,58,228.65,1,Finished
+2023,Circuit of the Americas,Fernando Alonso,Aston Martin,Spain,18,20,0,71,211.21,1,Finished
+2024,Spa-Francorchamps,Lando Norris,McLaren,United Kingdom,13,10,1,45,,2,Collision
+2023,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,9,9,2,58,223.73,1,Finished
+2022,Autodromo Hermanos Rodriguez,Carlos Sainz,Ferrari,Spain,10,10,1,71,234.12,1,Finished
+2021,Suzuka,Lando Norris,McLaren,United Kingdom,18,10,1,71,234.31,1,Finished
+2023,Suzuka,Charles Leclerc,Ferrari,Monaco,20,18,0,71,240.55,1,Finished
+2022,Spa-Francorchamps,Carlos Sainz,Ferrari,Spain,15,19,0,71,227.21,1,Finished
+2023,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,11,2,18,58,230.87,1,Finished
+2023,Suzuka,Sergio Perez,Red Bull Racing,Mexico,13,10,1,71,253.58,1,Finished
+2022,Circuit of the Americas,George Russell,Mercedes,United Kingdom,1,2,18,71,245.02,1,Finished
+2021,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,15,11,0,58,250.43,3,Finished
+2023,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,8,10,1,58,224.44,3,Finished
+2023,Suzuka,Fernando Alonso,Aston Martin,Spain,15,12,0,52,220.91,1,Finished
+2021,Monza,George Russell,Mercedes,United Kingdom,1,1,25,58,237.19,1,Finished
+2023,Circuit of the Americas,Oscar Piastri,McLaren,Australia,4,6,8,58,241.32,1,Finished
+2024,Spa-Francorchamps,Pierre Gasly,Alpine,France,20,20,0,71,232.81,3,Finished
+2022,Spa-Francorchamps,Max Verstappen,Red Bull Racing,Netherlands,4,1,25,71,229.35,1,Finished
+2023,Suzuka,Charles Leclerc,Ferrari,Monaco,16,18,0,52,234.15,1,Finished
+2024,Monza,Lewis Hamilton,Mercedes,United Kingdom,7,3,15,71,245.96,1,Finished
+2024,Monza,Lewis Hamilton,Mercedes,United Kingdom,15,14,0,52,246.23,1,Finished
+2022,Suzuka,Lando Norris,McLaren,United Kingdom,10,9,2,71,227.28,2,Finished
+2023,Monaco Grand Prix,George Russell,Mercedes,United Kingdom,15,15,0,58,227.89,2,Finished
+2024,Autodromo Hermanos Rodriguez,Sergio Perez,Red Bull Racing,Mexico,2,2,18,71,243.8,2,Finished
+2024,Suzuka,George Russell,Mercedes,United Kingdom,6,7,6,52,238.34,2,Finished
+2023,Autodromo Hermanos Rodriguez,Max Verstappen,Red Bull Racing,Netherlands,14,14,0,58,233.89,1,Finished
+2021,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,20,20,0,58,240.87,2,Finished
+2022,Autodromo Hermanos Rodriguez,Fernando Alonso,Aston Martin,Spain,4,3,15,58,243.04,1,Finished
+2024,Interlagos,Lando Norris,McLaren,United Kingdom,2,1,25,58,217.67,2,Finished
+2023,Silverstone,Pierre Gasly,Alpine,France,3,2,18,58,236.39,2,Finished
+2021,Silverstone,Fernando Alonso,Aston Martin,Spain,9,15,0,0,,2,Collision
+2021,Monaco Grand Prix,Carlos Sainz,Ferrari,Spain,17,20,0,71,235.38,1,Finished
+2022,Interlagos,Fernando Alonso,Aston Martin,Spain,8,1,25,52,217.98,2,Finished
+2021,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,15,16,0,52,250.28,1,Finished
+2024,Autodromo Hermanos Rodriguez,George Russell,Mercedes,United Kingdom,8,6,8,58,225.7,1,Finished
+2024,Autodromo Hermanos Rodriguez,Lando Norris,McLaren,United Kingdom,17,9,2,71,239.24,1,Finished
+2023,Spa-Francorchamps,Charles Leclerc,Ferrari,Monaco,20,18,0,52,233.33,2,Finished
+2024,Silverstone,Fernando Alonso,Aston Martin,Spain,14,12,0,71,243.37,1,Finished
+2021,Spa-Francorchamps,Fernando Alonso,Aston Martin,Spain,8,10,1,58,217.35,1,Finished
+2022,Spa-Francorchamps,Pierre Gasly,Alpine,France,18,18,0,45,,3,Collision
+2024,Interlagos,Oscar Piastri,McLaren,Australia,16,16,0,71,251.7,2,Finished
+2023,Autodromo Hermanos Rodriguez,Oscar Piastri,McLaren,Australia,13,10,1,71,239.34,1,Finished
+2023,Circuit of the Americas,Max Verstappen,Red Bull Racing,Netherlands,3,1,25,71,228.29,2,Finished
+2024,Monaco Grand Prix,Lewis Hamilton,Mercedes,United Kingdom,5,7,6,58,248.27,2,Finished
+2022,Suzuka,Carlos Sainz,Ferrari,Spain,3,4,12,58,250.46,2,Finished

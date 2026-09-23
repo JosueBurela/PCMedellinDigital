@@ -547,6 +547,11 @@ def desconectar_instancia_whatsapp():
         req = urllib.request.Request(url, headers=headers, method='DELETE')
         with urllib.request.urlopen(req, timeout=10) as response:
             return True
+    except urllib.error.HTTPError as e:
+        if e.code in [400, 404]: # Ya estaba desconectado o no existe
+            return True
+        logger.error(f"HTTPError al desconectar instancia: {e}")
+        return False
     except Exception as e:
         logger.error(f"Error al desconectar instancia: {e}")
         return False

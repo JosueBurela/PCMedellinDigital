@@ -1,0 +1,1516 @@
+Rank,Name,Platform,Year,Genre,Publisher,NA_Sales,EU_Sales,JP_Sales,Other_Sales,Global_Sales
+1,Halo Remastered,Switch,2022.0,Adventure,Nintendo,1.0,0.14,0.05,0.01,1.2
+2,Cyberpunk 2024,PC,2022.0,Racing,Activision,1.97,0.19,0.06,0.05,2.27
+3,Red Dead Redemption 2022,PS4,2017.0,Shooter,Nintendo,0.53,3.27,0.19,0.49,4.48
+4,FIFA Soccer Remastered,PS4,2016.0,Role-Playing,Take-Two Interactive,0.54,0.01,0.08,0.07,0.7
+5,Cyberpunk Infinite,XOne,2018.0,Platform,Electronic Arts,0.22,1.13,0.17,0.06,1.58
+6,FIFA Soccer 2023,XSX,2018.0,Sports,Activision,1.0,2.04,0.03,0.05,3.12
+7,FIFA Soccer Infinite,Switch,2023.0,Sports,Electronic Arts,0.39,0.14,0.0,0.14,0.67
+8,Pokemon 2024,PS4,2015.0,Shooter,Nintendo,1.02,2.09,0.32,0.62,4.05
+9,Call of Duty Ultra,X360,2022.0,Adventure,Take-Two Interactive,1.21,0.72,0.1,0.21,2.24
+10,Mario Kart 2022,Switch,2021.0,Sports,Take-Two Interactive,0.05,0.99,0.04,0.14,1.22
+11,Call of Duty Remastered,Switch,2019.0,Role-Playing,Take-Two Interactive,0.32,0.42,0.42,0.06,1.22
+12,Minecraft Remastered,PS5,2023.0,Sports,Ubisoft,0.12,0.49,0.07,0.13,0.81
+13,Halo Remastered,PS4,2015.0,Adventure,Take-Two Interactive,0.35,0.83,0.0,0.11,1.29
+14,Pokemon 2022,PC,2017.0,Racing,Electronic Arts,0.35,0.22,0.06,0.06,0.69
+15,Call of Duty 2023,XSX,2021.0,Role-Playing,Take-Two Interactive,0.76,0.29,0.1,0.01,1.16
+16,Minecraft Infinite,Switch,2017.0,Action,Electronic Arts,1.26,0.61,0.18,0.2,2.25
+17,Cyberpunk 2024,PS4,2022.0,Adventure,Take-Two Interactive,0.7,3.28,0.15,0.42,4.55
+18,Pokemon V,PS3,2018.0,Racing,Nintendo,0.43,0.2,0.37,0.41,1.41
+19,God of War 2022,PS3,2022.0,Adventure,Activision,0.16,0.33,0.04,0.65,1.18
+20,Red Dead Redemption Ultra,PS5,2015.0,Action,Sony Computer Entertainment,0.3,0.08,0.68,0.58,1.64
+21,Mario Kart 2024,PS3,2022.0,Shooter,Sony Computer Entertainment,0.57,1.75,0.57,0.69,3.58
+22,Mario Kart Ultra,PC,2023.0,Action,Nintendo,0.01,0.14,0.24,0.29,0.68
+23,Call of Duty Remastered,PS4,2018.0,Platform,Ubisoft,0.5,1.09,0.38,0.09,2.06
+24,Minecraft Infinite,PC,2020.0,Platform,Take-Two Interactive,4.24,0.53,0.71,0.14,5.62
+25,Call of Duty Origins,XSX,2018.0,Racing,Nintendo,0.03,0.83,0.06,0.71,1.63
+26,Mario Kart Remastered,PS4,2015.0,Racing,Ubisoft,0.89,0.68,1.18,0.02,2.77
+27,Call of Duty Ultra,XOne,2020.0,Sports,Electronic Arts,1.31,0.68,0.03,0.24,2.26
+28,Pokemon 2023,PS5,2022.0,Sports,Electronic Arts,1.31,0.97,0.13,0.09,2.5
+29,God of War Ultra,Switch,2021.0,Role-Playing,Activision,0.77,1.28,0.31,0.3,2.66
+30,Halo Infinite,XSX,2021.0,Sports,Activision,1.23,0.32,0.05,1.0,2.6
+31,Call of Duty Remastered,PS5,2019.0,Platform,Take-Two Interactive,0.81,1.18,0.07,0.24,2.3
+32,Grand Theft Auto V,X360,2016.0,Shooter,Sony Computer Entertainment,0.8,0.31,0.48,0.08,1.67
+33,The Legend of Zelda 2023,Switch,2019.0,Platform,Electronic Arts,0.07,1.97,0.18,0.07,2.29
+34,The Legend of Zelda 2022,PS3,2020.0,Racing,Ubisoft,1.44,0.04,0.25,0.04,1.77
+35,Red Dead Redemption Origins,X360,2018.0,Action,Take-Two Interactive,0.21,0.01,0.43,0.41,1.06
+36,The Legend of Zelda Infinite,PS5,2019.0,Sports,Take-Two Interactive,2.4,0.24,0.0,0.68,3.32
+37,Grand Theft Auto Ultra,PS3,2015.0,Adventure,Activision,2.22,0.81,0.48,0.28,3.79
+38,Mario Kart 2024,Switch,2015.0,Role-Playing,,3.57,1.89,0.07,0.02,5.55
+39,Mario Kart 2023,XOne,2022.0,Adventure,Electronic Arts,0.54,0.92,0.12,0.08,1.66
+40,FIFA Soccer Origins,XOne,2023.0,Racing,Sony Computer Entertainment,1.79,0.27,0.06,0.35,2.47
+41,Grand Theft Auto 2023,PS4,2019.0,Adventure,Take-Two Interactive,0.3,0.91,0.4,0.07,1.68
+42,Grand Theft Auto Ultra,PS4,2017.0,Platform,Ubisoft,0.54,0.01,0.71,0.02,1.28
+43,Grand Theft Auto 2024,PS5,2019.0,Adventure,Ubisoft,0.38,0.32,0.33,0.35,1.38
+44,The Legend of Zelda 2023,PS5,2019.0,Adventure,Take-Two Interactive,1.47,0.63,0.37,0.87,3.34
+45,Call of Duty Origins,PC,2022.0,Adventure,Take-Two Interactive,0.08,1.38,0.37,0.02,1.85
+46,Call of Duty V,XSX,2018.0,Action,Electronic Arts,0.47,0.99,0.2,0.12,1.78
+47,Mario Kart Infinite,PC,2016.0,Shooter,Ubisoft,0.7,0.05,0.04,0.03,0.82
+48,Red Dead Redemption V,PS4,2015.0,Adventure,Sony Computer Entertainment,0.1,0.6,0.17,0.41,1.28
+49,The Legend of Zelda Ultra,PC,2019.0,Racing,Nintendo,0.32,0.95,0.02,0.05,1.34
+50,Call of Duty Origins,PC,2021.0,Platform,Nintendo,0.05,0.26,0.9,0.55,1.76
+51,Cyberpunk 2023,XSX,2022.0,Role-Playing,Activision,0.48,0.7,0.02,0.92,2.12
+52,Call of Duty 2022,PS4,2017.0,Racing,Sony Computer Entertainment,1.9,2.39,0.39,0.24,4.92
+53,FIFA Soccer 2024,Switch,2020.0,Racing,Electronic Arts,1.83,3.49,0.05,0.23,5.6
+54,Pokemon 2022,Switch,2023.0,Action,Activision,0.59,0.26,0.02,0.5,1.37
+55,Minecraft 2024,Switch,2019.0,Adventure,Ubisoft,3.19,1.52,0.09,0.15,4.95
+56,Grand Theft Auto V,PS4,2022.0,Action,Activision,0.02,0.55,0.19,0.45,1.21
+57,Red Dead Redemption Origins,PC,2023.0,Platform,Nintendo,0.98,0.52,0.16,0.38,2.04
+58,Halo V,PS3,2020.0,Role-Playing,Activision,1.03,0.81,0.24,0.02,2.1
+59,Call of Duty Ultra,X360,2021.0,Role-Playing,Take-Two Interactive,0.82,0.96,0.48,0.15,2.41
+60,Grand Theft Auto Ultra,Switch,2019.0,Sports,Take-Two Interactive,0.47,0.19,0.26,0.1,1.02
+61,Pokemon V,PS3,2022.0,Role-Playing,Sony Computer Entertainment,0.58,1.66,0.22,0.9,3.36
+62,The Legend of Zelda Origins,PS5,2020.0,Role-Playing,Activision,0.1,0.1,0.19,0.06,0.45
+63,Pokemon 2022,PS5,2020.0,Action,Electronic Arts,0.09,1.65,0.76,0.02,2.52
+64,Call of Duty 2024,Switch,2021.0,Role-Playing,Take-Two Interactive,0.83,1.02,0.02,0.04,1.91
+65,Halo V,XOne,2016.0,Adventure,Sony Computer Entertainment,0.65,0.61,0.08,0.08,1.42
+66,God of War 2022,X360,2023.0,Platform,Activision,2.43,0.72,0.34,0.39,3.88
+67,Minecraft 2023,X360,2017.0,Action,Sony Computer Entertainment,0.52,0.33,0.69,0.23,1.77
+68,Minecraft Origins,PS4,2020.0,Action,Ubisoft,0.28,0.36,0.2,0.48,1.32
+69,Cyberpunk Infinite,PS4,2017.0,Adventure,Nintendo,0.02,0.96,1.77,0.57,3.32
+70,Minecraft V,PS4,2017.0,Platform,Take-Two Interactive,1.89,1.01,0.23,0.16,3.29
+71,Forza Horizon V,XSX,2015.0,Shooter,Sony Computer Entertainment,1.47,0.6,0.37,0.37,2.81
+72,Grand Theft Auto Origins,XOne,2020.0,Shooter,Electronic Arts,0.45,0.12,0.02,1.15,1.74
+73,Call of Duty Infinite,Switch,2023.0,Action,Electronic Arts,1.0,0.51,0.16,0.11,1.78
+74,Red Dead Redemption 2023,PC,2023.0,Racing,Nintendo,0.25,0.38,0.78,0.32,1.73
+75,Pokemon 2022,Switch,2017.0,Platform,Sony Computer Entertainment,0.2,1.35,0.33,0.19,2.07
+76,God of War 2023,PS3,2017.0,Adventure,Take-Two Interactive,1.08,0.62,0.17,0.22,2.09
+77,FIFA Soccer V,Switch,2020.0,Shooter,Nintendo,3.09,0.79,0.12,0.04,4.04
+78,Grand Theft Auto V,X360,2020.0,Shooter,Sony Computer Entertainment,1.54,0.98,0.45,0.04,3.01
+79,The Legend of Zelda 2024,PS5,2020.0,Action,Take-Two Interactive,0.85,0.38,0.18,0.23,1.64
+80,Grand Theft Auto Remastered,Switch,2017.0,Sports,Nintendo,1.3,0.63,0.09,0.11,2.13
+81,Minecraft V,PS3,2022.0,Adventure,Activision,0.78,0.76,0.01,0.51,2.06
+82,Grand Theft Auto Origins,PS3,2015.0,Racing,Activision,0.94,0.75,0.17,0.33,2.19
+83,Halo 2022,PC,2018.0,Racing,Ubisoft,0.15,2.03,0.61,0.18,2.97
+84,God of War Origins,PS4,2023.0,Sports,Sony Computer Entertainment,0.01,0.32,0.15,0.19,0.67
+85,FIFA Soccer 2024,PS5,2017.0,Shooter,Electronic Arts,0.31,0.69,0.05,0.01,1.06
+86,Pokemon V,PS5,2019.0,Role-Playing,Activision,0.8,2.97,0.18,0.2,4.15
+87,Cyberpunk 2022,X360,2021.0,Action,Ubisoft,0.61,1.29,0.13,0.16,2.19
+88,Cyberpunk 2024,PS5,2017.0,Action,Take-Two Interactive,0.66,0.59,0.17,0.13,1.55
+89,Call of Duty Ultra,Switch,2017.0,Adventure,Nintendo,1.14,0.42,0.01,0.04,1.61
+90,Call of Duty 2022,X360,2022.0,Shooter,Nintendo,0.12,1.29,0.06,0.26,1.73
+91,Cyberpunk V,PS3,2018.0,Platform,Nintendo,3.18,0.12,0.16,0.1,3.56
+92,Call of Duty Infinite,Switch,2017.0,Shooter,Ubisoft,0.96,0.44,0.67,0.43,2.5
+93,FIFA Soccer 2024,X360,2018.0,Adventure,Sony Computer Entertainment,1.08,0.42,0.24,0.14,1.88
+94,Minecraft Remastered,PS3,2022.0,Action,Activision,4.65,0.51,0.06,0.17,5.39
+95,FIFA Soccer Origins,PS4,2020.0,Adventure,Electronic Arts,1.14,0.44,0.04,0.58,2.2
+96,Minecraft 2023,PS3,2018.0,Racing,Activision,0.76,0.06,0.16,0.17,1.15
+97,Minecraft Origins,XOne,2022.0,Action,Take-Two Interactive,0.32,0.8,0.2,0.21,1.53
+98,Forza Horizon V,PS3,2020.0,Sports,Sony Computer Entertainment,1.47,0.07,0.28,0.07,1.89
+99,Grand Theft Auto 2022,XOne,2020.0,Adventure,Nintendo,0.71,0.87,0.83,0.33,2.74
+100,Grand Theft Auto 2024,XOne,2015.0,Role-Playing,Nintendo,0.75,0.73,0.12,0.37,1.97
+101,Call of Duty 2022,PS4,2022.0,Racing,Nintendo,0.63,0.23,0.51,0.4,1.77
+102,FIFA Soccer Remastered,XOne,2015.0,Racing,Sony Computer Entertainment,0.16,2.4,0.18,0.05,2.79
+103,Cyberpunk Infinite,Switch,2020.0,Action,Ubisoft,1.12,3.15,0.7,0.26,5.23
+104,Forza Horizon Infinite,PS3,2021.0,Sports,Electronic Arts,0.89,0.51,0.11,0.03,1.54
+105,Cyberpunk 2023,XOne,2016.0,Adventure,Ubisoft,1.5,0.05,0.18,0.18,1.91
+106,Cyberpunk 2024,XSX,2016.0,Role-Playing,Ubisoft,2.38,0.6,0.17,0.13,3.28
+107,Grand Theft Auto Origins,PC,2016.0,Action,Ubisoft,0.81,0.45,0.63,0.14,2.03
+108,Pokemon Infinite,Switch,2017.0,Racing,Activision,0.08,0.01,0.02,0.02,0.13
+109,Cyberpunk Remastered,X360,2023.0,Action,Activision,0.45,0.59,0.4,0.0,1.44
+110,FIFA Soccer Remastered,PS5,2023.0,Platform,Ubisoft,0.36,1.93,0.01,0.03,2.33
+111,Pokemon 2023,Switch,2020.0,Racing,Ubisoft,4.44,1.72,0.28,0.59,7.03
+112,Grand Theft Auto 2024,PS3,2020.0,Role-Playing,Ubisoft,1.03,0.58,0.08,0.05,1.74
+113,Mario Kart Ultra,PC,2020.0,Racing,Ubisoft,3.82,1.72,0.79,1.32,7.65
+114,FIFA Soccer 2023,PC,2017.0,Action,Nintendo,0.28,0.2,0.23,0.22,0.93
+115,God of War Ultra,XOne,2023.0,Shooter,Sony Computer Entertainment,0.05,1.53,0.01,0.1,1.69
+116,FIFA Soccer Ultra,XSX,2022.0,Adventure,Take-Two Interactive,1.31,0.04,0.23,0.82,2.4
+117,Call of Duty 2023,PS3,2017.0,Racing,Take-Two Interactive,1.92,0.34,0.34,0.21,2.81
+118,Mario Kart Ultra,PS3,2023.0,Role-Playing,Electronic Arts,0.45,0.22,0.8,0.03,1.5
+119,The Legend of Zelda 2024,Switch,2017.0,Sports,,2.32,0.0,0.51,0.06,2.89
+120,FIFA Soccer V,Switch,2021.0,Racing,Sony Computer Entertainment,0.24,0.07,0.12,0.21,0.64
+121,Cyberpunk Origins,XOne,2021.0,Platform,Nintendo,0.86,2.64,0.13,0.25,3.88
+122,Grand Theft Auto Remastered,PS3,2018.0,Role-Playing,Activision,0.39,0.99,0.02,0.22,1.62
+123,Pokemon 2023,PS5,2018.0,Platform,Ubisoft,1.15,0.72,0.15,0.02,2.04
+124,Mario Kart 2024,PS5,2016.0,Adventure,Activision,0.35,4.68,0.17,0.15,5.35
+125,Pokemon Remastered,PS3,2018.0,Sports,Take-Two Interactive,1.17,0.26,0.9,0.04,2.37
+126,The Legend of Zelda 2024,XSX,2023.0,Platform,Nintendo,0.64,0.3,0.12,0.32,1.38
+127,Call of Duty 2022,PS3,2022.0,Role-Playing,Activision,0.19,0.18,0.03,0.04,0.44
+128,Halo 2024,Switch,2022.0,Role-Playing,Ubisoft,2.79,0.77,0.48,0.16,4.2
+129,Red Dead Redemption Remastered,XSX,2023.0,Action,Take-Two Interactive,0.19,0.84,0.12,0.22,1.37
+130,Call of Duty Ultra,Switch,2016.0,Sports,Take-Two Interactive,0.72,0.73,0.1,0.3,1.85
+131,Cyberpunk 2024,PC,2015.0,Shooter,Electronic Arts,0.12,0.68,0.01,0.16,0.97
+132,Cyberpunk Ultra,PS5,2016.0,Role-Playing,Electronic Arts,0.84,1.71,0.03,0.44,3.02
+133,Minecraft Infinite,PS5,2016.0,Platform,Activision,1.9,0.03,0.33,0.76,3.02
+134,God of War V,PS4,2016.0,Adventure,Electronic Arts,3.01,2.36,0.29,0.38,6.04
+135,Pokemon Remastered,PS3,2020.0,Role-Playing,Take-Two Interactive,0.66,0.83,0.22,0.33,2.04
+136,Halo Remastered,Switch,2017.0,Action,Ubisoft,0.27,2.98,0.12,0.05,3.42
+137,Mario Kart Remastered,PS5,2017.0,Platform,Activision,0.29,4.49,1.1,0.26,6.14
+138,Minecraft Infinite,X360,2015.0,Action,Sony Computer Entertainment,2.23,1.04,0.41,0.14,3.82
+139,Grand Theft Auto Remastered,PS3,2017.0,Sports,Electronic Arts,0.95,0.46,0.39,0.17,1.97
+140,Minecraft Infinite,PS5,2020.0,Shooter,Nintendo,0.49,0.39,0.19,0.45,1.52
+141,Grand Theft Auto Ultra,PC,2016.0,Adventure,Activision,0.22,1.54,0.2,0.07,2.03
+142,Cyberpunk Infinite,PS4,2021.0,Role-Playing,Activision,0.2,0.4,1.05,0.07,1.72
+143,Cyberpunk Remastered,PS3,2021.0,Role-Playing,Ubisoft,0.67,0.22,0.02,0.05,0.96
+144,God of War 2022,Switch,2015.0,Role-Playing,Nintendo,0.32,0.36,0.14,0.23,1.05
+145,Call of Duty 2022,PS3,2020.0,Role-Playing,Sony Computer Entertainment,0.25,0.09,0.09,0.01,0.44
+146,Call of Duty Infinite,XOne,2019.0,Platform,Ubisoft,0.1,0.09,0.26,0.29,0.74
+147,Pokemon 2024,PC,2016.0,Sports,Electronic Arts,3.98,0.69,0.09,0.18,4.94
+148,Halo Ultra,PC,2016.0,Racing,Sony Computer Entertainment,0.25,0.9,1.05,0.02,2.22
+149,The Legend of Zelda Infinite,PC,2015.0,Adventure,Activision,2.0,2.31,0.34,0.17,4.82
+150,Cyberpunk 2022,XSX,2018.0,Shooter,Electronic Arts,1.24,0.19,0.32,0.13,1.88
+151,Red Dead Redemption 2023,PS5,2015.0,Platform,Electronic Arts,0.57,1.64,0.46,0.21,2.88
+152,Minecraft V,XSX,2020.0,Platform,Nintendo,2.55,1.68,0.11,0.51,4.85
+153,Halo 2022,Switch,2021.0,Adventure,Electronic Arts,0.91,0.38,0.24,0.23,1.76
+154,Minecraft 2023,XOne,2016.0,Shooter,Take-Two Interactive,0.68,0.38,0.6,0.18,1.84
+155,Forza Horizon 2022,XSX,2019.0,Racing,Activision,0.31,0.52,0.15,0.2,1.18
+156,Pokemon Origins,Switch,2021.0,Adventure,Nintendo,2.5,0.06,0.93,0.27,3.76
+157,Minecraft 2024,PS5,2018.0,Platform,Ubisoft,0.33,0.27,0.11,0.41,1.12
+158,Grand Theft Auto V,PS5,2018.0,Sports,Electronic Arts,1.91,0.59,0.04,0.49,3.03
+159,Cyberpunk 2022,PS5,2022.0,Racing,Activision,3.62,0.53,0.49,0.2,4.84
+160,Pokemon Origins,X360,2019.0,Platform,Take-Two Interactive,2.37,0.21,0.07,0.24,2.89
+161,Cyberpunk Ultra,PS3,2019.0,Action,Activision,0.4,1.05,0.57,0.28,2.3
+162,Forza Horizon 2022,X360,,Sports,Ubisoft,1.47,1.59,0.07,0.03,3.16
+163,Red Dead Redemption Infinite,PS3,2023.0,Shooter,Activision,0.55,0.72,0.21,1.1,2.58
+164,Mario Kart 2023,PC,2015.0,Racing,Electronic Arts,0.02,0.33,0.51,0.23,1.09
+165,Grand Theft Auto Ultra,Switch,2017.0,Action,Sony Computer Entertainment,0.56,0.37,0.13,0.24,1.3
+166,Red Dead Redemption Origins,XSX,2022.0,Shooter,Ubisoft,2.33,0.84,0.23,0.1,3.5
+167,Halo Remastered,PS5,2017.0,Platform,Electronic Arts,1.44,0.5,0.02,0.21,2.17
+168,God of War Infinite,PS3,2023.0,Sports,Take-Two Interactive,1.9,0.0,0.11,0.99,3.0
+169,Halo Remastered,XOne,2018.0,Platform,Ubisoft,2.88,0.62,0.55,0.18,4.23
+170,Halo Ultra,PS4,2020.0,Racing,Sony Computer Entertainment,0.19,0.05,0.04,0.06,0.34
+171,FIFA Soccer 2024,PS4,2017.0,Action,Electronic Arts,0.56,0.47,0.28,0.18,1.49
+172,Minecraft Remastered,Switch,2015.0,Role-Playing,Activision,0.14,1.36,0.14,0.53,2.17
+173,Halo Remastered,PC,2017.0,Action,Ubisoft,0.21,0.95,0.13,0.93,2.22
+174,God of War Origins,PC,2015.0,Action,Sony Computer Entertainment,1.03,1.16,0.06,0.17,2.42
+175,The Legend of Zelda 2023,PS3,2018.0,Racing,Activision,0.16,2.64,0.24,0.84,3.88
+176,Grand Theft Auto 2023,Switch,2016.0,Role-Playing,Take-Two Interactive,1.16,0.13,0.02,0.38,1.69
+177,Pokemon 2023,Switch,2021.0,Adventure,Electronic Arts,0.3,0.12,0.04,0.09,0.55
+178,Red Dead Redemption 2022,XSX,2019.0,Role-Playing,Electronic Arts,1.05,0.29,0.29,0.19,1.82
+179,Grand Theft Auto Infinite,PC,2021.0,Racing,Nintendo,0.82,0.53,0.06,0.12,1.53
+180,Pokemon Origins,PC,2021.0,Platform,Ubisoft,0.16,0.61,0.07,0.0,0.84
+181,FIFA Soccer Origins,Switch,2017.0,Role-Playing,Electronic Arts,0.34,0.83,0.21,0.08,1.46
+182,FIFA Soccer Remastered,PS3,2022.0,Role-Playing,Activision,1.83,0.76,0.59,0.12,3.3
+183,Call of Duty Ultra,PS4,2016.0,Action,Electronic Arts,0.63,0.24,0.55,0.01,1.43
+184,Pokemon Infinite,PS5,2022.0,Shooter,Take-Two Interactive,0.28,1.76,0.18,0.54,2.76
+185,Halo Origins,PS3,2021.0,Racing,Electronic Arts,1.39,0.06,0.02,0.0,1.47
+186,Forza Horizon Infinite,PC,2018.0,Role-Playing,Nintendo,1.64,0.87,0.06,0.05,2.62
+187,Cyberpunk Ultra,PS5,2015.0,Platform,Sony Computer Entertainment,0.39,1.17,0.29,0.12,1.97
+188,Grand Theft Auto V,PS4,2021.0,Action,Electronic Arts,0.05,2.77,0.48,0.09,3.39
+189,The Legend of Zelda Ultra,X360,2015.0,Role-Playing,Activision,2.9,0.2,0.14,0.14,3.38
+190,Minecraft Remastered,PC,2017.0,Role-Playing,Ubisoft,2.4,0.83,0.1,0.42,3.75
+191,God of War Infinite,PS5,2019.0,Racing,Ubisoft,4.22,1.1,0.24,0.05,5.61
+192,Minecraft 2024,PS4,2016.0,Platform,Sony Computer Entertainment,0.13,0.92,0.03,0.84,1.92
+193,Red Dead Redemption Origins,PC,2015.0,Shooter,Ubisoft,0.78,0.28,0.25,0.29,1.6
+194,The Legend of Zelda Infinite,PS3,2022.0,Sports,Activision,0.31,1.04,1.44,0.03,2.82
+195,Pokemon 2022,PS5,2021.0,Racing,Take-Two Interactive,1.05,0.93,0.14,0.19,2.31
+196,Forza Horizon V,XSX,2023.0,Action,Take-Two Interactive,3.49,0.37,0.12,0.04,4.02
+197,The Legend of Zelda 2023,XSX,2018.0,Adventure,Ubisoft,1.41,1.74,0.27,0.12,3.54
+198,The Legend of Zelda 2023,PC,2023.0,Platform,Sony Computer Entertainment,0.54,0.41,0.62,0.18,1.75
+199,Forza Horizon Infinite,XSX,2022.0,Role-Playing,Take-Two Interactive,1.24,1.31,0.09,0.44,3.08
+200,Minecraft Ultra,Switch,2020.0,Role-Playing,Take-Two Interactive,0.26,1.39,0.22,0.12,1.99
+201,Call of Duty 2023,X360,2023.0,Role-Playing,Electronic Arts,2.98,0.82,0.16,0.25,4.21
+202,Minecraft Infinite,PC,2021.0,Role-Playing,Nintendo,0.93,0.71,0.06,0.11,1.81
+203,Call of Duty V,PC,2020.0,Platform,Ubisoft,0.8,0.28,0.85,0.08,2.01
+204,The Legend of Zelda Remastered,PS4,2019.0,Racing,Activision,1.35,0.8,0.02,0.59,2.76
+205,Grand Theft Auto V,PS4,2023.0,Platform,Take-Two Interactive,1.53,0.86,0.94,0.02,3.35
+206,Red Dead Redemption Infinite,XOne,2022.0,Adventure,Sony Computer Entertainment,4.05,0.37,0.17,0.47,5.06
+207,Grand Theft Auto Ultra,XOne,2023.0,Role-Playing,Activision,0.47,0.3,0.44,0.02,1.23
+208,Pokemon Remastered,PS3,2022.0,Adventure,Ubisoft,0.33,1.05,1.19,0.07,2.64
+209,Cyberpunk 2022,XOne,2019.0,Shooter,Electronic Arts,1.03,0.34,0.04,0.04,1.45
+210,Halo V,X360,2022.0,Action,Electronic Arts,0.13,1.57,0.38,0.02,2.1
+211,Minecraft V,PC,2019.0,Sports,Electronic Arts,0.17,0.87,0.07,0.03,1.14
+212,Halo V,XSX,2017.0,Adventure,Take-Two Interactive,0.06,1.23,0.07,0.07,1.43
+213,Grand Theft Auto V,X360,2018.0,Racing,Take-Two Interactive,2.25,0.22,0.18,1.05,3.7
+214,God of War Ultra,PC,2015.0,Shooter,Sony Computer Entertainment,0.55,1.28,0.14,0.15,2.12
+215,The Legend of Zelda 2024,XOne,2022.0,Role-Playing,Activision,0.37,1.26,0.26,0.25,2.14
+216,Cyberpunk 2023,PS5,2020.0,Role-Playing,Sony Computer Entertainment,1.73,0.3,0.58,0.59,3.2
+217,Call of Duty Remastered,PS4,2019.0,Adventure,Ubisoft,0.64,0.76,0.03,0.54,1.97
+218,Call of Duty Infinite,Switch,2019.0,Adventure,Ubisoft,1.42,0.31,1.75,0.98,4.46
+219,The Legend of Zelda 2022,XOne,2023.0,Action,Sony Computer Entertainment,1.9,0.19,0.14,0.91,3.14
+220,Minecraft 2023,PC,2023.0,Shooter,Sony Computer Entertainment,0.7,1.38,0.18,0.11,2.37
+221,Red Dead Redemption V,PS5,2022.0,Racing,Sony Computer Entertainment,0.1,1.02,0.16,0.59,1.87
+222,Pokemon 2022,X360,2019.0,Platform,Electronic Arts,1.8,1.48,0.09,0.01,3.38
+223,Mario Kart Ultra,PS3,2023.0,Role-Playing,Take-Two Interactive,1.17,3.84,0.02,0.02,5.05
+224,Minecraft Infinite,X360,2023.0,Racing,Nintendo,0.4,0.85,0.84,0.51,2.6
+225,FIFA Soccer 2024,PS4,2021.0,Platform,Nintendo,0.2,0.4,0.14,0.06,0.8
+226,Mario Kart V,X360,2018.0,Platform,Nintendo,0.02,0.44,0.01,0.85,1.32
+227,Mario Kart 2024,PS5,2018.0,Shooter,Electronic Arts,4.41,0.78,0.25,0.25,5.69
+228,Grand Theft Auto V,PS3,2018.0,Platform,Ubisoft,0.11,0.22,0.0,0.16,0.49
+229,Mario Kart 2022,XOne,2023.0,Platform,Take-Two Interactive,0.05,1.87,0.57,0.28,2.77
+230,Halo Ultra,Switch,2017.0,Platform,Electronic Arts,0.34,1.25,0.26,0.27,2.12
+231,Red Dead Redemption 2022,Switch,2023.0,Racing,Electronic Arts,1.22,1.41,0.63,0.21,3.47
+232,Red Dead Redemption V,XSX,2017.0,Platform,Electronic Arts,2.45,0.47,0.28,0.25,3.45
+233,Grand Theft Auto Infinite,X360,2018.0,Role-Playing,Sony Computer Entertainment,0.53,0.54,0.32,0.75,2.14
+234,Call of Duty Ultra,X360,2020.0,Platform,Take-Two Interactive,0.32,0.36,0.19,0.01,0.88
+235,Call of Duty 2022,Switch,2017.0,Racing,,0.24,0.75,0.1,0.06,1.15
+236,Call of Duty V,PS3,2015.0,Shooter,Sony Computer Entertainment,0.46,1.3,0.25,0.18,2.19
+237,God of War Ultra,Switch,2015.0,Action,Electronic Arts,0.13,0.34,0.21,0.52,1.2
+238,Mario Kart 2024,Switch,2015.0,Adventure,Take-Two Interactive,0.54,1.05,0.64,0.28,2.51
+239,Call of Duty Origins,PS5,2019.0,Adventure,Sony Computer Entertainment,0.0,0.81,0.02,0.07,0.9
+240,FIFA Soccer 2023,PS5,2015.0,Role-Playing,Take-Two Interactive,0.67,0.37,0.04,0.14,1.22
+241,Forza Horizon 2024,X360,2023.0,Action,Activision,1.14,1.75,0.27,0.17,3.33
+242,Halo Remastered,XOne,,Role-Playing,Take-Two Interactive,2.56,0.06,0.23,0.04,2.89
+243,Mario Kart 2024,PS4,2019.0,Adventure,Ubisoft,0.14,0.65,0.13,0.33,1.25
+244,Minecraft 2024,PS5,2021.0,Role-Playing,Nintendo,0.86,1.58,0.27,0.06,2.77
+245,Red Dead Redemption Infinite,PS4,2023.0,Adventure,Nintendo,0.03,0.4,0.22,0.18,0.83
+246,The Legend of Zelda Ultra,PS4,2017.0,Action,Sony Computer Entertainment,0.03,0.83,0.3,0.1,1.26
+247,Call of Duty 2022,PC,2018.0,Racing,Activision,0.95,0.66,0.03,0.05,1.69
+248,Cyberpunk 2024,XOne,2018.0,Shooter,Ubisoft,0.12,0.19,0.78,0.13,1.22
+249,The Legend of Zelda V,PS5,2019.0,Racing,Activision,3.43,0.3,0.66,0.23,4.62
+250,Pokemon Infinite,PC,2020.0,Role-Playing,Electronic Arts,0.86,0.13,0.24,0.2,1.43
+251,Mario Kart 2024,PS5,2017.0,Sports,Ubisoft,0.21,0.57,0.34,0.07,1.19
+252,Call of Duty Remastered,X360,2016.0,Racing,Nintendo,0.74,0.41,1.53,0.53,3.21
+253,Forza Horizon 2024,Switch,2022.0,Adventure,Ubisoft,0.04,0.52,0.23,0.06,0.85
+254,Pokemon V,Switch,2020.0,Adventure,Sony Computer Entertainment,0.15,1.25,0.04,0.4,1.84
+255,Red Dead Redemption V,PS4,2018.0,Shooter,Nintendo,2.19,0.71,0.14,0.08,3.12
+256,Pokemon 2024,PS3,2016.0,Action,Nintendo,1.42,1.8,0.18,0.15,3.55
+257,Halo Origins,XOne,2022.0,Adventure,Electronic Arts,2.12,0.46,0.56,0.56,3.7
+258,Pokemon Origins,Switch,2021.0,Adventure,Take-Two Interactive,0.02,0.52,0.35,0.32,1.21
+259,The Legend of Zelda Ultra,XSX,2022.0,Sports,Electronic Arts,1.45,0.6,0.47,1.17,3.69
+260,Cyberpunk Infinite,PC,2015.0,Adventure,Nintendo,0.46,0.8,0.02,0.0,1.28
+261,God of War Infinite,PS4,2016.0,Role-Playing,Nintendo,0.12,0.41,0.39,0.08,1.0
+262,Pokemon 2024,PS3,2016.0,Shooter,Take-Two Interactive,0.01,0.09,0.61,0.29,1.0
+263,Red Dead Redemption Ultra,PC,2016.0,Role-Playing,Activision,1.36,0.88,0.07,0.5,2.81
+264,Cyberpunk V,X360,2021.0,Shooter,Take-Two Interactive,0.71,0.2,0.31,0.97,2.19
+265,God of War 2022,PC,2021.0,Adventure,Electronic Arts,0.77,0.48,0.26,0.25,1.76
+266,FIFA Soccer Remastered,PC,2022.0,Role-Playing,Ubisoft,0.38,0.66,0.04,0.62,1.7
+267,FIFA Soccer 2023,PS3,2023.0,Sports,Nintendo,1.52,0.31,0.0,0.18,2.01
+268,Minecraft 2022,X360,2020.0,Sports,Electronic Arts,0.31,1.08,0.11,0.03,1.53
+269,Pokemon 2023,XSX,2016.0,Role-Playing,Sony Computer Entertainment,2.45,0.46,0.72,0.12,3.75
+270,Forza Horizon Infinite,PS5,2023.0,Racing,Electronic Arts,1.34,0.0,0.05,0.31,1.7
+271,Red Dead Redemption 2024,PS4,2023.0,Role-Playing,Electronic Arts,0.12,1.22,0.31,0.01,1.66
+272,Red Dead Redemption Ultra,PS4,2017.0,Shooter,Activision,0.51,0.04,0.44,0.13,1.12
+273,God of War 2022,PC,2022.0,Shooter,Take-Two Interactive,1.15,1.27,0.42,0.01,2.85
+274,Grand Theft Auto 2023,XOne,2019.0,Role-Playing,Take-Two Interactive,1.26,0.51,0.26,0.02,2.05
+275,Call of Duty V,PC,2019.0,Sports,Ubisoft,1.28,0.22,0.73,0.46,2.69
+276,Mario Kart 2022,XOne,2015.0,Adventure,Take-Two Interactive,2.6,0.25,0.39,0.53,3.77
+277,Call of Duty Remastered,X360,2022.0,Role-Playing,Electronic Arts,0.16,1.56,0.26,0.02,2.0
+278,The Legend of Zelda V,X360,2015.0,Racing,Electronic Arts,1.48,0.2,0.31,0.21,2.2
+279,Halo Remastered,X360,2022.0,Shooter,Electronic Arts,1.68,1.21,0.18,0.13,3.2
+280,God of War Origins,PS5,2021.0,Sports,Sony Computer Entertainment,1.23,0.7,1.39,0.07,3.39
+281,Pokemon Infinite,PS3,2023.0,Role-Playing,Take-Two Interactive,0.25,1.03,0.29,0.57,2.14
+282,Mario Kart 2024,Switch,2015.0,Racing,Sony Computer Entertainment,0.47,2.0,0.1,0.16,2.73
+283,FIFA Soccer 2023,PS4,2018.0,Sports,Ubisoft,1.1,0.47,0.04,0.79,2.4
+284,Forza Horizon Origins,PC,2020.0,Racing,Take-Two Interactive,2.9,1.14,0.24,0.05,4.33
+285,Minecraft Origins,PS3,2015.0,Role-Playing,Ubisoft,0.16,4.24,0.22,0.12,4.74
+286,Grand Theft Auto 2024,XSX,2023.0,Shooter,,0.27,0.49,0.76,0.05,1.57
+287,Minecraft Remastered,XSX,2016.0,Shooter,Ubisoft,1.32,0.4,0.92,0.85,3.49
+288,Grand Theft Auto Infinite,PC,2021.0,Action,Nintendo,1.67,2.58,0.43,0.48,5.16
+289,Grand Theft Auto Origins,XSX,2019.0,Role-Playing,Activision,0.28,0.31,0.57,0.33,1.49
+290,God of War Origins,XOne,2018.0,Role-Playing,Ubisoft,0.38,0.41,0.76,1.25,2.8
+291,Call of Duty 2024,XSX,2017.0,Role-Playing,Ubisoft,0.07,0.47,0.1,0.24,0.88
+292,The Legend of Zelda 2024,PS5,2016.0,Role-Playing,Electronic Arts,2.56,1.68,1.1,0.01,5.35
+293,The Legend of Zelda 2023,PS4,2016.0,Action,Take-Two Interactive,1.25,0.2,0.17,0.32,1.94
+294,Red Dead Redemption 2023,XOne,2021.0,Shooter,Ubisoft,2.47,2.34,0.67,0.14,5.62
+295,FIFA Soccer Remastered,Switch,2017.0,Racing,Electronic Arts,0.99,0.03,0.3,0.11,1.43
+296,Call of Duty 2024,X360,2018.0,Shooter,Ubisoft,1.3,1.18,0.32,0.04,2.84
+297,Cyberpunk Remastered,X360,2019.0,Racing,Ubisoft,1.6,0.0,0.16,0.18,1.94
+298,Halo Infinite,PC,2018.0,Racing,Ubisoft,0.29,0.0,0.39,0.85,1.53
+299,God of War Origins,Switch,2016.0,Adventure,Activision,2.49,1.36,0.09,0.08,4.02
+300,Minecraft Remastered,X360,2020.0,Platform,Ubisoft,0.98,0.87,0.02,0.2,2.07
+301,God of War 2022,XOne,2023.0,Sports,Take-Two Interactive,0.49,2.38,0.3,0.03,3.2
+302,God of War 2024,XSX,2022.0,Action,Electronic Arts,0.19,0.16,0.03,0.41,0.79
+303,God of War 2022,PS5,2023.0,Shooter,Electronic Arts,0.47,0.33,1.15,0.49,2.44
+304,Halo Ultra,PS4,2018.0,Action,,1.7,1.06,0.15,0.01,2.92
+305,Forza Horizon 2022,PC,2021.0,Sports,Ubisoft,0.29,0.98,0.51,0.2,1.98
+306,Call of Duty Origins,XOne,2017.0,Platform,Ubisoft,3.35,0.21,0.63,0.41,4.6
+307,FIFA Soccer Ultra,PC,2019.0,Shooter,Electronic Arts,0.08,0.3,0.82,0.48,1.68
+308,Grand Theft Auto Ultra,PS3,2015.0,Role-Playing,Electronic Arts,0.02,0.4,0.06,0.13,0.61
+309,Red Dead Redemption V,Switch,2015.0,Platform,Nintendo,0.37,0.45,0.35,0.1,1.27
+310,Grand Theft Auto 2022,Switch,2021.0,Role-Playing,Take-Two Interactive,1.1,0.18,0.16,0.35,1.79
+311,FIFA Soccer Infinite,PS5,2022.0,Action,Electronic Arts,0.08,0.59,0.06,0.88,1.61
+312,The Legend of Zelda 2023,PS5,2015.0,Role-Playing,Electronic Arts,0.47,0.41,0.09,0.06,1.03
+313,Red Dead Redemption Ultra,PS5,2021.0,Platform,Take-Two Interactive,0.09,0.06,0.91,0.09,1.15
+314,Grand Theft Auto 2024,X360,2019.0,Sports,Take-Two Interactive,0.02,2.68,0.09,0.28,3.07
+315,God of War 2024,XSX,2016.0,Shooter,Sony Computer Entertainment,2.21,2.35,0.03,0.04,4.63
+316,The Legend of Zelda 2024,PS3,2016.0,Platform,Sony Computer Entertainment,0.51,0.04,0.3,0.12,0.97
+317,Mario Kart 2022,PS5,2020.0,Role-Playing,Electronic Arts,4.15,0.09,0.0,0.14,4.38
+318,God of War Remastered,X360,2023.0,Adventure,Sony Computer Entertainment,0.63,4.47,0.08,0.2,5.38
+319,Cyberpunk Infinite,PS4,2015.0,Racing,Sony Computer Entertainment,0.27,0.25,0.09,0.02,0.63
+320,Forza Horizon 2022,XOne,2021.0,Sports,Take-Two Interactive,2.01,1.31,0.52,0.67,4.51
+321,Forza Horizon V,PS4,2022.0,Adventure,Nintendo,0.08,0.37,0.76,0.22,1.43
+322,Red Dead Redemption 2022,PC,2016.0,Racing,Electronic Arts,1.7,0.48,0.3,0.07,2.55
+323,Grand Theft Auto 2023,XSX,2016.0,Shooter,Ubisoft,1.92,0.28,0.18,0.01,2.39
+324,Pokemon V,PS3,2015.0,Role-Playing,Sony Computer Entertainment,1.59,0.42,0.32,0.08,2.41
+325,The Legend of Zelda 2022,PS5,2016.0,Role-Playing,Ubisoft,2.35,1.35,0.35,0.03,4.08
+326,Red Dead Redemption 2024,PS3,2019.0,Sports,Electronic Arts,1.49,0.06,0.62,0.44,2.61
+327,The Legend of Zelda Remastered,PC,2021.0,Sports,Electronic Arts,0.29,0.31,0.7,0.02,1.32
+328,God of War V,Switch,2021.0,Sports,Electronic Arts,0.68,0.43,0.0,0.09,1.2
+329,Grand Theft Auto Infinite,PS3,2015.0,Adventure,Ubisoft,1.48,1.59,0.23,0.39,3.69
+330,Call of Duty V,XOne,2017.0,Sports,Nintendo,0.28,0.59,0.28,0.07,1.22
+331,Mario Kart V,X360,2022.0,Platform,Sony Computer Entertainment,1.05,0.65,0.16,0.14,2.0
+332,Forza Horizon 2022,Switch,2017.0,Sports,Activision,0.87,0.69,0.01,0.73,2.3
+333,Halo Ultra,PS3,2021.0,Sports,Electronic Arts,0.13,1.16,0.34,0.37,2.0
+334,Call of Duty 2024,PS4,,Shooter,Ubisoft,0.9,0.79,0.35,0.07,2.11
+335,Cyberpunk Ultra,PS4,2020.0,Racing,Electronic Arts,2.04,0.53,0.12,0.39,3.08
+336,FIFA Soccer 2022,Switch,2019.0,Adventure,Nintendo,0.58,0.83,0.0,0.08,1.49
+337,Minecraft Remastered,X360,2018.0,Action,Sony Computer Entertainment,1.15,0.06,0.14,0.41,1.76
+338,Pokemon 2023,Switch,2017.0,Shooter,Nintendo,0.47,0.37,0.02,0.12,0.98
+339,Forza Horizon Infinite,XOne,2016.0,Shooter,Take-Two Interactive,1.19,0.53,0.0,0.41,2.13
+340,God of War Remastered,PS3,,Action,Activision,0.81,0.34,0.34,0.36,1.85
+341,Red Dead Redemption Origins,XOne,2023.0,Adventure,Sony Computer Entertainment,0.47,0.4,0.05,0.07,0.99
+342,Forza Horizon Remastered,PS5,2020.0,Racing,Ubisoft,1.56,0.29,0.16,0.31,2.32
+343,God of War Ultra,Switch,2015.0,Shooter,Activision,0.97,0.11,0.18,0.15,1.41
+344,Minecraft 2022,X360,2017.0,Shooter,Take-Two Interactive,1.11,0.31,0.09,0.05,1.56
+345,Grand Theft Auto Infinite,PC,2018.0,Sports,Ubisoft,0.68,3.27,0.46,0.37,4.78
+346,Cyberpunk 2022,Switch,2020.0,Adventure,Take-Two Interactive,0.59,1.75,0.52,0.25,3.11
+347,God of War Ultra,PC,2021.0,Shooter,Ubisoft,6.12,1.4,0.56,0.07,8.15
+348,Pokemon Remastered,XSX,2017.0,Shooter,Ubisoft,6.65,0.22,0.01,0.13,7.01
+349,Pokemon Origins,XOne,2019.0,Platform,Nintendo,0.29,0.01,0.43,0.24,0.97
+350,Pokemon 2023,XOne,2019.0,Shooter,Ubisoft,0.57,0.4,0.02,0.25,1.24
+351,Pokemon 2022,XSX,2016.0,Shooter,Nintendo,0.46,0.6,0.07,1.36,2.49
+352,Call of Duty 2023,XSX,2016.0,Platform,Electronic Arts,0.5,1.59,0.03,0.65,2.77
+353,Pokemon Infinite,PS4,2020.0,Action,Take-Two Interactive,0.19,0.81,0.27,0.05,1.32
+354,Call of Duty Origins,PC,2018.0,Platform,Activision,1.27,0.02,0.06,0.15,1.5
+355,Minecraft 2024,XSX,2016.0,Sports,Take-Two Interactive,0.94,0.26,0.76,0.22,2.18
+356,Minecraft Remastered,PS3,2015.0,Racing,Activision,1.03,1.7,0.64,0.27,3.64
+357,Cyberpunk Ultra,XOne,2017.0,Racing,Electronic Arts,0.25,0.19,0.35,0.23,1.02
+358,The Legend of Zelda V,PC,2021.0,Role-Playing,Sony Computer Entertainment,0.63,0.4,0.33,0.56,1.92
+359,FIFA Soccer 2023,X360,2016.0,Role-Playing,Activision,0.71,0.05,0.86,0.02,1.64
+360,The Legend of Zelda V,PS4,2022.0,Role-Playing,Nintendo,0.27,0.02,0.53,0.11,0.93
+361,Grand Theft Auto Origins,PS5,2016.0,Platform,Sony Computer Entertainment,0.46,1.6,0.05,0.02,2.13
+362,Red Dead Redemption V,PS3,2020.0,Platform,Ubisoft,1.67,0.29,0.11,0.0,2.07
+363,Call of Duty Infinite,X360,2023.0,Adventure,Activision,1.38,0.26,0.14,0.05,1.83
+364,Red Dead Redemption Ultra,PS4,2021.0,Adventure,Activision,2.02,3.64,0.66,0.12,6.44
+365,God of War Infinite,XSX,2017.0,Role-Playing,Take-Two Interactive,1.18,0.1,0.48,0.03,1.79
+366,Cyberpunk Origins,Switch,2019.0,Action,Electronic Arts,0.79,1.07,0.22,0.51,2.59
+367,Cyberpunk 2022,Switch,2020.0,Shooter,Take-Two Interactive,2.12,0.14,0.58,0.17,3.01
+368,Minecraft Ultra,X360,2020.0,Platform,Electronic Arts,0.52,1.28,0.14,0.02,1.96
+369,The Legend of Zelda V,XSX,2019.0,Action,Electronic Arts,2.28,0.23,0.09,0.0,2.6
+370,Grand Theft Auto Remastered,Switch,2018.0,Action,Take-Two Interactive,0.67,0.35,0.03,0.17,1.22
+371,Cyberpunk Ultra,XOne,2021.0,Sports,Nintendo,0.01,1.18,0.36,0.24,1.79
+372,Halo Origins,PS3,2016.0,Sports,Ubisoft,0.21,0.02,0.07,0.1,0.4
+373,God of War Remastered,PS5,2021.0,Role-Playing,Ubisoft,1.08,0.26,0.58,0.66,2.58
+374,Pokemon 2023,PS3,2015.0,Action,Sony Computer Entertainment,1.63,1.97,0.06,0.64,4.3
+375,Forza Horizon V,XOne,2015.0,Shooter,Nintendo,0.26,0.65,0.58,0.45,1.94
+376,Minecraft Origins,Switch,2022.0,Shooter,Take-Two Interactive,1.64,0.21,0.13,0.01,1.99
+377,Mario Kart Infinite,XSX,2020.0,Shooter,Electronic Arts,1.25,0.31,0.57,0.74,2.87
+378,Forza Horizon 2022,XOne,2018.0,Role-Playing,Activision,1.25,0.63,0.13,0.14,2.15
+379,Cyberpunk Ultra,XOne,2016.0,Role-Playing,Electronic Arts,5.27,0.62,1.26,0.7,7.85
+380,Pokemon 2022,X360,2023.0,Role-Playing,Take-Two Interactive,2.69,0.17,0.0,0.02,2.88
+381,Cyberpunk 2023,XOne,2017.0,Shooter,Ubisoft,1.56,0.05,0.0,0.06,1.67
+382,FIFA Soccer Infinite,X360,2021.0,Sports,Sony Computer Entertainment,0.38,0.28,0.03,0.14,0.83
+383,The Legend of Zelda 2022,XSX,2020.0,Action,Sony Computer Entertainment,0.21,0.53,0.04,0.29,1.07
+384,God of War Origins,PS3,2019.0,Action,Activision,0.48,0.04,0.07,0.0,0.59
+385,Mario Kart V,PS3,2022.0,Adventure,Nintendo,0.56,0.32,0.0,0.44,1.32
+386,The Legend of Zelda Infinite,Switch,2020.0,Shooter,Ubisoft,0.27,0.06,0.27,0.34,0.94
+387,Red Dead Redemption Remastered,XSX,2022.0,Adventure,Activision,0.39,2.23,0.51,1.03,4.16
+388,The Legend of Zelda Ultra,X360,2023.0,Sports,Sony Computer Entertainment,1.3,0.49,0.08,0.24,2.11
+389,Minecraft 2023,Switch,2020.0,Adventure,Electronic Arts,0.71,0.35,0.14,0.41,1.61
+390,Call of Duty V,PS4,2020.0,Platform,Ubisoft,0.92,0.16,0.05,0.21,1.34
+391,The Legend of Zelda Ultra,XOne,2019.0,Role-Playing,Take-Two Interactive,2.99,0.92,0.23,0.01,4.15
+392,Minecraft 2024,PS3,2018.0,Sports,Activision,0.91,1.0,0.02,0.14,2.07
+393,Pokemon Infinite,XSX,2017.0,Shooter,Electronic Arts,0.48,0.64,0.15,0.45,1.72
+394,Call of Duty Infinite,XOne,2017.0,Sports,Electronic Arts,0.48,0.43,0.34,0.27,1.52
+395,Grand Theft Auto Ultra,XOne,2018.0,Role-Playing,Take-Two Interactive,0.6,0.15,0.63,0.2,1.58
+396,Pokemon Infinite,PS4,2016.0,Adventure,Ubisoft,2.39,2.18,0.74,0.25,5.56
+397,Forza Horizon V,PS5,2019.0,Sports,Ubisoft,0.62,1.05,0.52,0.04,2.23
+398,Forza Horizon Origins,PC,2021.0,Role-Playing,Sony Computer Entertainment,0.76,0.46,0.09,0.2,1.51
+399,Minecraft Ultra,PS3,2015.0,Shooter,Nintendo,1.31,0.31,0.08,0.06,1.76
+400,Mario Kart V,PS4,2021.0,Role-Playing,Take-Two Interactive,0.34,3.71,0.01,0.23,4.29
+401,Call of Duty 2024,PS4,2017.0,Action,Activision,2.4,0.44,0.21,0.62,3.67
+402,Cyberpunk Ultra,X360,2023.0,Action,Activision,1.29,0.33,0.49,0.01,2.12
+403,Forza Horizon 2024,XOne,2019.0,Shooter,Ubisoft,3.26,0.29,0.09,0.08,3.72
+404,FIFA Soccer V,XOne,2017.0,Shooter,Electronic Arts,0.55,0.02,0.26,0.0,0.83
+405,Forza Horizon Remastered,XSX,2021.0,Racing,Sony Computer Entertainment,0.01,0.05,0.23,0.21,0.5
+406,Halo V,X360,2015.0,Role-Playing,Sony Computer Entertainment,0.28,0.31,0.09,0.02,0.7
+407,Minecraft Origins,X360,2021.0,Role-Playing,Ubisoft,0.26,1.12,0.02,0.17,1.57
+408,Grand Theft Auto Infinite,PC,2019.0,Role-Playing,Nintendo,1.8,1.14,0.05,0.04,3.03
+409,Minecraft Ultra,PS3,2020.0,Sports,Ubisoft,0.04,0.4,0.36,0.05,0.85
+410,Minecraft Remastered,XSX,2023.0,Adventure,Sony Computer Entertainment,0.29,0.42,0.08,0.28,1.07
+411,Grand Theft Auto 2023,PS5,2021.0,Racing,Sony Computer Entertainment,1.47,0.36,0.33,0.08,2.24
+412,Forza Horizon Infinite,X360,2017.0,Role-Playing,Nintendo,0.95,1.61,0.1,0.16,2.82
+413,FIFA Soccer 2023,XSX,2021.0,Action,,3.0,0.93,0.52,0.2,4.65
+414,FIFA Soccer Remastered,X360,2015.0,Action,Electronic Arts,1.16,1.21,0.47,0.23,3.07
+415,Pokemon Ultra,PS5,2017.0,Shooter,Nintendo,0.43,0.9,0.27,0.23,1.83
+416,Grand Theft Auto V,XSX,2022.0,Action,Ubisoft,0.43,0.87,0.32,0.07,1.69
+417,God of War Remastered,PS5,2023.0,Shooter,Nintendo,6.36,0.16,0.27,0.13,6.92
+418,Forza Horizon Ultra,PS4,2021.0,Sports,Sony Computer Entertainment,1.1,0.44,0.24,0.05,1.83
+419,FIFA Soccer Origins,X360,2018.0,Role-Playing,Ubisoft,0.91,0.55,0.02,0.02,1.5
+420,Forza Horizon Remastered,PC,2018.0,Platform,Sony Computer Entertainment,1.43,1.23,1.56,0.23,4.45
+421,Grand Theft Auto 2023,PC,2019.0,Shooter,Ubisoft,1.19,0.8,0.27,0.0,2.26
+422,Halo V,Switch,2015.0,Adventure,Take-Two Interactive,1.96,2.0,0.31,0.03,4.3
+423,Pokemon V,X360,2019.0,Shooter,Electronic Arts,1.37,0.35,0.09,0.0,1.81
+424,Pokemon Remastered,XOne,2020.0,Racing,Electronic Arts,1.84,0.39,0.33,1.12,3.68
+425,Call of Duty Remastered,XSX,2021.0,Adventure,Nintendo,4.81,0.47,0.23,0.52,6.03
+426,Call of Duty Infinite,PS5,2015.0,Racing,Electronic Arts,0.74,1.57,0.27,0.3,2.88
+427,The Legend of Zelda 2024,XSX,2018.0,Role-Playing,Sony Computer Entertainment,1.54,1.65,0.21,0.33,3.73
+428,Red Dead Redemption 2022,PC,2019.0,Role-Playing,Sony Computer Entertainment,1.75,0.21,0.08,0.2,2.24
+429,Halo 2024,Switch,2018.0,Role-Playing,Electronic Arts,1.16,1.43,1.11,0.16,3.86
+430,Forza Horizon 2024,XOne,2017.0,Platform,Activision,1.29,0.23,0.11,0.24,1.87
+431,Pokemon Remastered,PC,2021.0,Adventure,Nintendo,0.69,0.17,0.36,0.2,1.42
+432,The Legend of Zelda Ultra,PS3,2023.0,Action,Ubisoft,1.97,0.29,1.02,0.25,3.53
+433,Forza Horizon 2024,XSX,2021.0,Platform,Electronic Arts,1.72,0.31,0.26,0.11,2.4
+434,Call of Duty Remastered,PC,2015.0,Platform,Nintendo,0.12,0.1,0.85,0.52,1.59
+435,Minecraft 2023,XOne,2020.0,Adventure,Ubisoft,1.15,0.05,0.5,0.71,2.41
+436,God of War 2023,PS5,2016.0,Action,Ubisoft,0.56,0.33,0.04,0.12,1.05
+437,Pokemon V,PS5,2021.0,Role-Playing,Electronic Arts,0.99,1.64,0.26,0.11,3.0
+438,Pokemon 2024,XOne,2016.0,Platform,Electronic Arts,0.21,1.69,0.25,0.51,2.66
+439,Halo Ultra,PC,2018.0,Sports,Electronic Arts,0.25,0.3,0.47,0.62,1.64
+440,Halo Origins,PS4,2021.0,Adventure,Activision,0.43,0.4,0.28,0.4,1.51
+441,The Legend of Zelda V,PS4,,Sports,Electronic Arts,1.7,0.77,0.13,0.52,3.12
+442,Pokemon V,Switch,2018.0,Adventure,Activision,0.03,0.1,0.04,0.05,0.22
+443,Forza Horizon 2022,XSX,2018.0,Shooter,Activision,0.24,0.25,0.21,0.02,0.72
+444,Forza Horizon 2022,X360,,Action,Ubisoft,0.31,1.61,0.05,0.13,2.1
+445,Forza Horizon Origins,PC,2019.0,Racing,Ubisoft,0.82,0.21,0.33,0.02,1.38
+446,Mario Kart 2023,XSX,2020.0,Racing,Nintendo,0.53,1.54,0.91,0.54,3.52
+447,Grand Theft Auto 2024,Switch,2022.0,Shooter,Ubisoft,0.94,0.67,0.63,0.2,2.44
+448,Halo V,PS5,2022.0,Action,Take-Two Interactive,0.82,0.48,0.12,0.22,1.64
+449,FIFA Soccer Remastered,PS4,2023.0,Action,Sony Computer Entertainment,0.2,0.05,0.35,0.33,0.93
+450,Pokemon V,XSX,2023.0,Sports,Nintendo,0.06,0.32,0.44,0.13,0.95
+451,Grand Theft Auto V,PS4,2022.0,Sports,Nintendo,0.88,2.64,0.04,0.17,3.73
+452,FIFA Soccer Infinite,PS5,2021.0,Sports,Activision,0.13,0.32,0.46,0.14,1.05
+453,Mario Kart 2024,X360,2020.0,Racing,,1.44,0.54,0.3,0.34,2.62
+454,Mario Kart 2023,XSX,2015.0,Adventure,Sony Computer Entertainment,1.97,1.3,0.6,0.02,3.89
+455,Mario Kart Ultra,PS3,2021.0,Platform,,0.92,0.05,0.3,0.37,1.64
+456,Halo Infinite,PC,2022.0,Racing,Activision,0.15,0.42,0.13,0.09,0.79
+457,Pokemon 2023,X360,2019.0,Adventure,Electronic Arts,0.7,0.65,0.25,0.06,1.66
+458,Forza Horizon Infinite,PS5,2020.0,Role-Playing,Nintendo,0.44,1.09,0.16,0.05,1.74
+459,Call of Duty Infinite,XSX,2019.0,Racing,Take-Two Interactive,0.07,0.95,0.06,0.1,1.18
+460,Minecraft V,Switch,2016.0,Shooter,Take-Two Interactive,3.12,0.15,0.19,0.02,3.48
+461,Cyberpunk Origins,XOne,2018.0,Platform,Electronic Arts,0.35,0.55,0.04,0.22,1.16
+462,Halo 2024,PS4,2023.0,Platform,Nintendo,0.93,0.16,0.09,0.06,1.24
+463,Minecraft Origins,PS5,,Platform,Electronic Arts,1.41,1.19,0.38,0.22,3.2
+464,Grand Theft Auto Infinite,PS3,2023.0,Action,Ubisoft,0.38,0.25,0.12,0.2,0.95
+465,FIFA Soccer Infinite,PS5,2018.0,Racing,Ubisoft,6.37,1.02,0.1,0.53,8.02
+466,God of War V,Switch,2019.0,Shooter,Nintendo,0.16,1.57,0.21,0.28,2.22
+467,Grand Theft Auto Infinite,PS5,2021.0,Platform,Sony Computer Entertainment,1.07,1.3,0.03,0.12,2.52
+468,God of War Infinite,PS5,2021.0,Role-Playing,Sony Computer Entertainment,0.15,0.89,0.39,0.21,1.64
+469,Forza Horizon 2024,PS5,2018.0,Shooter,Take-Two Interactive,1.5,0.21,0.16,0.08,1.95
+470,Cyberpunk 2022,XSX,,Adventure,Electronic Arts,1.59,0.12,0.32,0.26,2.29
+471,Minecraft Ultra,XOne,2018.0,Sports,Sony Computer Entertainment,0.73,0.63,0.78,0.51,2.65
+472,Minecraft Ultra,PS5,2023.0,Adventure,Take-Two Interactive,0.06,0.89,0.08,0.07,1.1
+473,Pokemon V,Switch,2019.0,Platform,Nintendo,1.26,0.21,0.86,0.51,2.84
+474,Halo 2022,Switch,2022.0,Action,Ubisoft,1.25,0.23,0.62,0.05,2.15
+475,Pokemon Ultra,PC,2021.0,Adventure,Sony Computer Entertainment,0.2,1.45,0.24,0.05,1.94
+476,Call of Duty 2024,PS3,2018.0,Racing,Nintendo,2.99,0.41,0.19,0.31,3.9
+477,Red Dead Redemption Ultra,XSX,2016.0,Adventure,Activision,0.4,0.32,0.02,0.11,0.85
+478,Mario Kart V,X360,2016.0,Racing,Electronic Arts,1.64,0.4,0.04,0.0,2.08
+479,Red Dead Redemption V,PS4,2016.0,Racing,Activision,0.64,1.7,0.21,0.18,2.73
+480,Minecraft 2023,PS4,2023.0,Racing,Take-Two Interactive,1.0,0.43,0.16,0.38,1.97
+481,Forza Horizon Ultra,PS4,2021.0,Shooter,Electronic Arts,1.53,0.58,0.12,0.23,2.46
+482,Grand Theft Auto Ultra,PS3,2019.0,Shooter,Electronic Arts,0.25,0.43,0.07,0.0,0.75
+483,Minecraft 2023,X360,2015.0,Racing,Take-Two Interactive,1.42,2.11,0.17,0.03,3.73
+484,Pokemon 2024,PS3,2023.0,Action,Sony Computer Entertainment,1.52,2.0,0.03,0.07,3.62
+485,Call of Duty Origins,PS3,2015.0,Sports,,0.65,0.9,0.21,0.49,2.25
+486,Forza Horizon 2023,PS5,2021.0,Role-Playing,Nintendo,0.73,3.47,0.42,0.07,4.69
+487,Grand Theft Auto 2023,XOne,2023.0,Racing,Ubisoft,0.01,0.41,0.08,0.43,0.93
+488,Minecraft Ultra,PS4,2015.0,Platform,Electronic Arts,0.29,0.06,0.06,0.2,0.61
+489,Minecraft 2024,XSX,2017.0,Platform,Ubisoft,0.44,0.09,0.92,0.02,1.47
+490,Halo 2022,X360,2017.0,Platform,Take-Two Interactive,1.11,0.11,0.02,0.6,1.84
+491,Minecraft Origins,PS4,2019.0,Shooter,Electronic Arts,2.16,0.15,0.58,0.0,2.89
+492,Forza Horizon Ultra,XOne,2021.0,Action,Electronic Arts,4.35,0.74,0.21,0.53,5.83
+493,Halo Ultra,XOne,2016.0,Sports,Activision,0.41,0.56,0.48,0.34,1.79
+494,The Legend of Zelda 2023,PC,2020.0,Shooter,Activision,0.59,0.03,0.1,0.78,1.5
+495,Grand Theft Auto Origins,X360,2019.0,Shooter,Electronic Arts,0.17,1.15,0.03,0.99,2.34
+496,Forza Horizon 2024,X360,2016.0,Shooter,Ubisoft,0.66,0.61,0.41,0.44,2.12
+497,God of War 2022,Switch,2020.0,Platform,Sony Computer Entertainment,0.48,0.13,0.27,0.42,1.3
+498,Forza Horizon 2024,X360,2017.0,Adventure,Activision,1.13,0.73,0.36,0.11,2.33
+499,Pokemon 2023,PS5,2016.0,Sports,Sony Computer Entertainment,2.37,0.34,0.35,0.01,3.07
+500,Forza Horizon 2022,Switch,2020.0,Shooter,Ubisoft,0.25,0.63,0.07,0.2,1.15
+501,God of War Remastered,PC,2015.0,Action,Sony Computer Entertainment,0.13,0.68,0.26,0.31,1.38
+502,Cyberpunk 2023,Switch,2018.0,Action,Activision,2.73,0.32,0.14,0.36,3.55
+503,Grand Theft Auto Ultra,PS3,2023.0,Adventure,Nintendo,0.41,0.55,0.07,0.52,1.55
+504,Forza Horizon 2023,PC,2016.0,Role-Playing,Electronic Arts,1.95,0.17,0.75,0.2,3.07
+505,Cyberpunk Infinite,XOne,2021.0,Shooter,Electronic Arts,1.97,3.4,0.47,0.23,6.07
+506,Cyberpunk Origins,PC,2015.0,Platform,Electronic Arts,0.02,0.05,0.15,0.22,0.44
+507,Grand Theft Auto Ultra,X360,2021.0,Action,Take-Two Interactive,0.73,0.02,0.14,0.03,0.92
+508,FIFA Soccer V,XSX,2015.0,Platform,,1.35,0.23,0.18,0.03,1.79
+509,FIFA Soccer 2023,PS4,2021.0,Adventure,Ubisoft,0.54,0.12,0.4,0.49,1.55
+510,Cyberpunk 2023,PS3,2017.0,Role-Playing,Take-Two Interactive,0.46,0.84,0.02,0.57,1.89
+511,Pokemon V,PC,2022.0,Racing,Nintendo,0.71,1.54,0.12,0.51,2.88
+512,Pokemon Origins,XOne,2019.0,Adventure,Nintendo,1.35,0.61,0.3,0.05,2.31
+513,The Legend of Zelda 2022,XOne,2022.0,Platform,Activision,1.48,0.29,0.09,0.3,2.16
+514,FIFA Soccer 2022,PS5,2015.0,Sports,Electronic Arts,1.73,1.34,0.2,0.01,3.28
+515,The Legend of Zelda V,PS4,2019.0,Role-Playing,Activision,0.15,0.1,0.38,0.05,0.68
+516,God of War Infinite,XSX,2022.0,Action,Activision,0.36,0.12,0.39,0.42,1.29
+517,Forza Horizon Remastered,Switch,2016.0,Platform,Take-Two Interactive,0.36,0.65,0.13,0.68,1.82
+518,Call of Duty 2023,PC,2020.0,Platform,Take-Two Interactive,0.45,2.03,0.0,0.2,2.68
+519,Forza Horizon Ultra,PS3,2019.0,Racing,Take-Two Interactive,0.36,0.49,0.19,0.38,1.42
+520,Red Dead Redemption Ultra,PS5,2023.0,Shooter,Activision,1.61,0.05,0.26,0.03,1.95
+521,Halo Origins,X360,2019.0,Adventure,Electronic Arts,0.32,0.08,0.15,0.24,0.79
+522,FIFA Soccer V,PC,2019.0,Racing,Take-Two Interactive,0.12,1.16,1.02,0.88,3.18
+523,Cyberpunk 2022,XSX,2016.0,Sports,Nintendo,0.67,0.53,0.43,0.08,1.71
+524,The Legend of Zelda 2022,PS3,2019.0,Sports,Electronic Arts,0.2,0.05,0.11,0.06,0.42
+525,Red Dead Redemption 2023,XOne,2016.0,Role-Playing,Sony Computer Entertainment,0.52,0.74,0.02,0.29,1.57
+526,Halo Ultra,PC,2019.0,Role-Playing,Electronic Arts,0.85,0.17,0.38,0.08,1.48
+527,Cyberpunk Infinite,X360,2018.0,Role-Playing,Nintendo,1.55,0.51,0.08,0.24,2.38
+528,Call of Duty 2024,X360,2018.0,Racing,Nintendo,2.01,1.32,0.11,0.0,3.44
+529,Call of Duty Remastered,PS4,2020.0,Role-Playing,Ubisoft,1.11,0.78,0.04,0.94,2.87
+530,Forza Horizon V,XOne,2018.0,Sports,Take-Two Interactive,1.09,0.19,0.3,0.64,2.22
+531,Minecraft Infinite,Switch,2020.0,Racing,Nintendo,0.37,0.29,1.22,0.26,2.14
+532,Red Dead Redemption 2023,XSX,2023.0,Racing,Nintendo,2.24,0.16,0.89,0.06,3.35
+533,Grand Theft Auto Origins,PS4,2016.0,Adventure,Ubisoft,1.49,0.21,0.02,0.09,1.81
+534,Forza Horizon 2022,PS3,2022.0,Shooter,Nintendo,0.96,1.73,0.05,0.23,2.97
+535,Call of Duty 2024,PS4,2015.0,Role-Playing,Activision,1.29,0.87,0.01,0.11,2.28
+536,FIFA Soccer Infinite,PS3,2023.0,Action,Sony Computer Entertainment,1.76,1.6,0.18,0.16,3.7
+537,Minecraft 2022,PC,2016.0,Sports,Electronic Arts,0.72,0.06,0.24,0.13,1.15
+538,Halo V,Switch,2019.0,Role-Playing,Sony Computer Entertainment,0.57,0.56,0.55,0.26,1.94
+539,Grand Theft Auto Remastered,XSX,,Role-Playing,Nintendo,0.01,0.06,0.14,0.43,0.64
+540,God of War Origins,X360,2020.0,Racing,Activision,0.48,0.98,0.22,0.03,1.71
+541,The Legend of Zelda 2022,PS4,2023.0,Action,Ubisoft,0.23,0.43,0.82,0.15,1.63
+542,Cyberpunk 2022,PC,2015.0,Racing,Nintendo,4.75,0.23,0.21,0.6,5.79
+543,Red Dead Redemption Infinite,PS3,2018.0,Platform,Sony Computer Entertainment,0.87,1.77,0.09,0.16,2.89
+544,Mario Kart Ultra,PS4,2017.0,Action,Ubisoft,1.89,0.4,0.18,0.33,2.8
+545,Grand Theft Auto Remastered,XSX,2019.0,Racing,Activision,0.7,1.0,0.15,0.07,1.92
+546,FIFA Soccer 2024,XOne,2018.0,Adventure,Take-Two Interactive,1.71,0.02,0.23,0.29,2.25
+547,FIFA Soccer Origins,PC,2021.0,Shooter,Electronic Arts,0.57,0.15,1.14,0.48,2.34
+548,God of War Remastered,XOne,2016.0,Platform,,0.1,0.88,0.04,0.48,1.5
+549,Call of Duty Infinite,PS3,2022.0,Role-Playing,Electronic Arts,0.45,0.58,0.48,0.1,1.61
+550,Call of Duty 2023,X360,2021.0,Shooter,Nintendo,0.79,0.47,1.02,0.21,2.49
+551,FIFA Soccer Remastered,PS3,2016.0,Platform,Take-Two Interactive,0.51,0.08,0.18,0.13,0.9
+552,Mario Kart 2024,PS5,2018.0,Racing,Take-Two Interactive,2.0,0.31,0.66,0.04,3.01
+553,Grand Theft Auto Origins,PC,2022.0,Adventure,,0.16,1.1,0.01,0.74,2.01
+554,Red Dead Redemption Remastered,X360,2015.0,Sports,Activision,0.3,0.91,0.38,0.23,1.82
+555,Minecraft 2023,PC,2017.0,Racing,Activision,0.26,1.47,0.01,0.46,2.2
+556,Minecraft V,PS5,2015.0,Shooter,Nintendo,1.07,0.63,0.04,0.09,1.83
+557,The Legend of Zelda Ultra,PS5,2017.0,Action,Nintendo,0.17,1.61,0.62,0.14,2.54
+558,Minecraft 2024,X360,2022.0,Role-Playing,Electronic Arts,0.11,1.1,0.0,0.26,1.47
+559,Call of Duty 2022,PS5,2018.0,Action,Ubisoft,0.28,0.15,0.6,0.15,1.18
+560,Red Dead Redemption 2023,XSX,2021.0,Racing,Sony Computer Entertainment,4.81,0.2,0.33,0.24,5.58
+561,Cyberpunk V,PS3,2017.0,Racing,Nintendo,0.33,0.58,0.38,0.05,1.34
+562,Mario Kart Ultra,X360,2021.0,Shooter,Ubisoft,0.39,2.12,0.04,0.26,2.81
+563,Red Dead Redemption Infinite,X360,2020.0,Action,Ubisoft,1.35,0.09,0.45,0.41,2.3
+564,Red Dead Redemption 2022,Switch,2018.0,Racing,Electronic Arts,0.34,1.32,0.09,0.43,2.18
+565,Mario Kart Infinite,PS3,2016.0,Sports,Activision,0.27,0.09,0.26,0.17,0.79
+566,Pokemon Origins,X360,2021.0,Role-Playing,Ubisoft,1.94,0.79,0.02,0.03,2.78
+567,Forza Horizon Infinite,Switch,2019.0,Shooter,Take-Two Interactive,3.15,0.75,0.54,0.31,4.75
+568,Minecraft Origins,PS5,2017.0,Shooter,Sony Computer Entertainment,1.71,0.74,0.32,1.58,4.35
+569,Halo Infinite,PC,2018.0,Platform,Activision,1.9,0.83,0.31,0.03,3.07
+570,God of War 2024,PC,2017.0,Role-Playing,Nintendo,0.11,0.05,0.27,0.44,0.87
+571,Minecraft Origins,X360,2018.0,Sports,Activision,0.82,0.05,1.08,0.11,2.06
+572,The Legend of Zelda Origins,PS5,2022.0,Platform,Sony Computer Entertainment,0.46,0.88,0.03,0.0,1.37
+573,Cyberpunk Ultra,X360,2016.0,Shooter,Ubisoft,1.22,1.38,0.08,0.14,2.82
+574,Cyberpunk 2022,Switch,2019.0,Adventure,Take-Two Interactive,0.32,0.8,0.01,0.32,1.45
+575,FIFA Soccer 2022,Switch,2020.0,Action,Take-Two Interactive,0.23,0.17,0.06,0.01,0.47
+576,Minecraft Remastered,PS3,,Platform,Take-Two Interactive,0.44,0.34,0.27,0.08,1.13
+577,Pokemon Remastered,XSX,2019.0,Adventure,Ubisoft,2.46,0.94,0.1,0.3,3.8
+578,Pokemon 2022,X360,2018.0,Sports,Activision,0.46,0.32,0.28,0.1,1.16
+579,FIFA Soccer Infinite,PS5,2019.0,Role-Playing,Take-Two Interactive,0.76,2.4,0.11,0.0,3.27
+580,God of War Infinite,XOne,2022.0,Platform,Nintendo,0.3,0.55,0.74,0.06,1.65
+581,Red Dead Redemption Remastered,PS3,2017.0,Shooter,Electronic Arts,0.29,0.14,0.35,0.23,1.01
+582,Pokemon Origins,XOne,2016.0,Racing,Activision,4.54,1.89,0.02,0.45,6.9
+583,Call of Duty 2023,PS4,2023.0,Racing,Activision,1.05,0.2,0.24,0.29,1.78
+584,Red Dead Redemption Ultra,XOne,2018.0,Platform,Take-Two Interactive,0.17,0.09,0.16,0.4,0.82
+585,Pokemon Origins,XSX,2018.0,Racing,Ubisoft,0.2,2.06,0.52,0.11,2.89
+586,The Legend of Zelda Remastered,PS3,2020.0,Role-Playing,Ubisoft,0.21,0.45,0.21,0.04,0.91
+587,FIFA Soccer Remastered,PS3,2015.0,Platform,Take-Two Interactive,4.66,0.93,0.08,0.4,6.07
+588,The Legend of Zelda 2023,PS3,2021.0,Role-Playing,Sony Computer Entertainment,0.27,0.07,0.26,0.03,0.63
+589,The Legend of Zelda Origins,PS5,2015.0,Action,Electronic Arts,0.71,1.67,0.1,0.0,2.48
+590,Minecraft Ultra,PS5,2018.0,Racing,Ubisoft,1.08,0.13,0.52,0.07,1.8
+591,Forza Horizon Ultra,PC,2016.0,Racing,Activision,2.68,0.16,0.0,0.41,3.25
+592,Call of Duty Remastered,XSX,2016.0,Racing,Sony Computer Entertainment,1.74,0.12,1.14,0.83,3.83
+593,FIFA Soccer Remastered,Switch,2023.0,Shooter,Activision,0.33,0.08,0.15,0.14,0.7
+594,Halo Remastered,XOne,2016.0,Adventure,Electronic Arts,0.08,0.05,0.04,0.22,0.39
+595,The Legend of Zelda 2023,PS5,2022.0,Role-Playing,Activision,0.21,0.36,0.3,0.02,0.89
+596,Mario Kart 2023,PS4,2020.0,Platform,Ubisoft,1.75,0.72,0.65,0.13,3.25
+597,Forza Horizon 2023,Switch,2020.0,Role-Playing,Sony Computer Entertainment,0.36,0.48,0.13,0.05,1.02
+598,God of War 2024,XSX,2019.0,Action,Nintendo,0.46,0.02,0.35,0.73,1.56
+599,Mario Kart Ultra,PS5,2021.0,Sports,Ubisoft,1.51,0.13,0.63,0.08,2.35
+600,Red Dead Redemption Ultra,Switch,2019.0,Sports,Sony Computer Entertainment,1.95,0.43,0.09,0.5,2.97
+601,Pokemon 2023,PS5,2021.0,Racing,Take-Two Interactive,0.78,0.47,0.04,0.09,1.38
+602,Forza Horizon Ultra,PS5,2022.0,Shooter,Electronic Arts,1.06,0.07,0.07,0.07,1.27
+603,Forza Horizon Infinite,XSX,2020.0,Shooter,Take-Two Interactive,2.52,0.49,0.05,0.66,3.72
+604,Halo 2024,PS4,2016.0,Adventure,Sony Computer Entertainment,2.11,2.17,0.81,0.03,5.12
+605,Pokemon V,X360,2017.0,Action,Nintendo,0.62,0.29,0.98,0.83,2.72
+606,Call of Duty 2024,XSX,2016.0,Adventure,Ubisoft,0.12,0.57,0.01,0.13,0.83
+607,Pokemon Infinite,PS5,2017.0,Platform,Ubisoft,1.11,0.03,0.07,0.65,1.86
+608,Mario Kart 2023,PS3,2020.0,Adventure,Activision,2.15,0.42,1.18,0.26,4.01
+609,The Legend of Zelda 2024,PC,2023.0,Sports,Activision,1.08,0.12,0.04,0.46,1.7
+610,Red Dead Redemption Remastered,XSX,2022.0,Racing,Electronic Arts,0.46,0.19,0.5,0.06,1.21
+611,The Legend of Zelda 2022,Switch,2017.0,Shooter,Ubisoft,0.92,0.38,1.01,0.08,2.39
+612,Red Dead Redemption Infinite,XOne,2016.0,Adventure,Electronic Arts,1.33,0.01,0.02,0.23,1.59
+613,The Legend of Zelda Origins,XSX,2020.0,Adventure,Ubisoft,1.21,0.11,0.44,0.06,1.82
+614,Call of Duty 2024,Switch,2023.0,Racing,Nintendo,0.1,0.82,0.43,0.22,1.57
+615,Minecraft 2024,XSX,2019.0,Racing,Sony Computer Entertainment,0.67,1.12,0.04,0.2,2.03
+616,Red Dead Redemption Origins,Switch,2022.0,Sports,Electronic Arts,0.09,0.47,0.03,0.0,0.59
+617,FIFA Soccer Infinite,XSX,2020.0,Action,Ubisoft,0.42,1.15,0.49,0.12,2.18
+618,Halo Ultra,XOne,2021.0,Sports,Activision,2.11,0.7,0.02,0.05,2.88
+619,Forza Horizon V,Switch,2017.0,Role-Playing,Take-Two Interactive,1.75,0.33,0.49,0.1,2.67
+620,God of War 2022,PS3,2015.0,Racing,Take-Two Interactive,2.75,1.91,0.28,0.19,5.13
+621,Cyberpunk Origins,XOne,2015.0,Shooter,Activision,0.04,0.31,0.24,0.2,0.79
+622,FIFA Soccer 2024,XSX,,Action,Electronic Arts,0.67,1.14,0.07,0.31,2.19
+623,Minecraft Infinite,PS4,2019.0,Adventure,Electronic Arts,0.25,1.08,0.02,0.48,1.83
+624,Forza Horizon Infinite,PS3,2015.0,Shooter,Ubisoft,0.81,0.21,0.04,0.03,1.09
+625,Pokemon Ultra,XSX,2016.0,Sports,Take-Two Interactive,2.71,0.54,0.18,0.01,3.44
+626,The Legend of Zelda Remastered,XOne,2015.0,Shooter,Nintendo,1.7,0.57,0.11,0.04,2.42
+627,FIFA Soccer 2024,PS5,2018.0,Role-Playing,Activision,0.12,0.42,0.81,0.25,1.6
+628,Cyberpunk 2023,XOne,2019.0,Racing,Nintendo,1.55,0.08,0.01,0.13,1.77
+629,Red Dead Redemption Remastered,XOne,2022.0,Racing,Take-Two Interactive,0.23,0.03,0.41,0.32,0.99
+630,Red Dead Redemption Remastered,XSX,2019.0,Sports,Ubisoft,0.32,0.54,0.16,1.08,2.1
+631,Call of Duty Ultra,XOne,2016.0,Action,Electronic Arts,2.38,0.01,0.64,0.21,3.24
+632,Call of Duty Ultra,X360,2015.0,Platform,Sony Computer Entertainment,0.02,0.36,0.03,0.07,0.48
+633,Minecraft 2023,PS3,2020.0,Adventure,Nintendo,0.19,0.22,0.55,0.06,1.02
+634,Halo Origins,PS5,2017.0,Shooter,Take-Two Interactive,1.6,2.09,0.2,0.09,3.98
+635,Minecraft Origins,Switch,2018.0,Role-Playing,Nintendo,1.63,1.3,0.05,0.11,3.09
+636,FIFA Soccer Infinite,X360,2021.0,Role-Playing,Take-Two Interactive,0.12,0.79,0.04,1.07,2.02
+637,Halo V,XSX,2018.0,Racing,Nintendo,0.19,0.35,0.16,0.12,0.82
+638,FIFA Soccer 2023,XOne,2017.0,Sports,Electronic Arts,1.03,0.15,0.48,0.32,1.98
+639,Halo Infinite,PS3,2018.0,Shooter,Activision,0.88,0.77,0.33,0.45,2.43
+640,Minecraft 2024,Switch,2016.0,Action,Activision,0.06,1.59,0.13,0.57,2.35
+641,FIFA Soccer Origins,PS4,2021.0,Sports,Activision,1.64,0.78,0.28,0.47,3.17
+642,Pokemon 2022,XOne,2022.0,Role-Playing,Electronic Arts,0.17,0.09,0.23,0.02,0.51
+643,FIFA Soccer Infinite,X360,2018.0,Racing,,1.32,0.28,0.33,0.3,2.23
+644,Cyberpunk Infinite,XOne,2020.0,Shooter,Electronic Arts,0.92,0.56,0.0,0.11,1.59
+645,Call of Duty Infinite,PC,2023.0,Role-Playing,Take-Two Interactive,0.46,0.17,0.25,0.09,0.97
+646,Mario Kart 2022,Switch,2023.0,Action,Sony Computer Entertainment,0.61,0.47,0.33,0.09,1.5
+647,Call of Duty 2022,PS4,2020.0,Shooter,Take-Two Interactive,0.34,0.44,0.03,0.03,0.84
+648,Red Dead Redemption Ultra,XOne,2020.0,Racing,Sony Computer Entertainment,1.91,0.43,0.02,0.08,2.44
+649,Pokemon Infinite,XSX,2021.0,Adventure,Nintendo,1.65,0.47,0.18,0.78,3.08
+650,Halo Remastered,PS4,2016.0,Role-Playing,Electronic Arts,0.7,0.49,0.26,0.11,1.56
+651,Grand Theft Auto 2023,XSX,2021.0,Racing,Electronic Arts,3.02,1.95,0.07,0.01,5.05
+652,Forza Horizon 2024,PC,2023.0,Racing,Ubisoft,1.14,1.78,0.4,0.18,3.5
+653,Halo 2023,PC,2018.0,Platform,Electronic Arts,1.53,0.95,1.4,0.08,3.96
+654,Halo Remastered,PS5,2016.0,Racing,Electronic Arts,2.27,0.05,0.66,0.1,3.08
+655,God of War Remastered,PS5,2021.0,Adventure,Sony Computer Entertainment,0.55,0.18,0.17,0.12,1.02
+656,Minecraft 2023,XSX,2017.0,Shooter,Sony Computer Entertainment,0.45,0.71,0.03,0.33,1.52
+657,Forza Horizon Remastered,PC,2022.0,Adventure,Nintendo,0.74,0.06,0.29,0.27,1.36
+658,Minecraft V,PC,2017.0,Shooter,Sony Computer Entertainment,0.24,0.12,2.26,0.24,2.86
+659,Red Dead Redemption 2023,PS5,2015.0,Adventure,Activision,0.04,0.55,0.28,0.02,0.89
+660,Grand Theft Auto 2023,PS4,2015.0,Role-Playing,Sony Computer Entertainment,3.26,0.53,0.36,0.48,4.63
+661,Call of Duty Remastered,X360,2020.0,Adventure,Activision,1.75,0.63,0.31,0.35,3.04
+662,Red Dead Redemption Origins,PS3,2016.0,Shooter,Nintendo,0.49,0.42,1.06,0.03,2.0
+663,Pokemon Infinite,PS3,2021.0,Action,Electronic Arts,0.58,0.2,1.01,0.03,1.82
+664,Forza Horizon 2022,Switch,2021.0,Platform,Electronic Arts,0.71,0.01,0.03,0.41,1.16
+665,Halo 2024,PS5,2016.0,Racing,Electronic Arts,1.77,0.57,0.08,0.47,2.89
+666,Pokemon 2023,X360,2016.0,Role-Playing,Nintendo,3.53,0.9,0.71,0.33,5.47
+667,Cyberpunk Origins,Switch,2022.0,Sports,Electronic Arts,0.43,0.2,0.78,0.51,1.92
+668,FIFA Soccer 2024,XSX,2015.0,Sports,Take-Two Interactive,0.9,0.33,0.22,0.97,2.42
+669,Minecraft 2023,PS5,,Role-Playing,Nintendo,0.42,0.53,0.1,0.07,1.12
+670,Call of Duty Infinite,PC,2019.0,Racing,Sony Computer Entertainment,2.35,0.72,0.28,0.13,3.48
+671,Minecraft Remastered,Switch,2019.0,Racing,Take-Two Interactive,0.46,1.1,0.24,0.15,1.95
+672,Cyberpunk Remastered,Switch,2023.0,Role-Playing,Nintendo,1.19,1.95,0.62,0.17,3.93
+673,Call of Duty Origins,PS5,2023.0,Racing,Nintendo,0.67,0.29,0.15,0.48,1.59
+674,Red Dead Redemption Remastered,XSX,2015.0,Racing,Nintendo,0.65,0.64,0.87,0.06,2.22
+675,Forza Horizon 2024,XSX,2022.0,Platform,Sony Computer Entertainment,1.68,0.17,0.03,0.23,2.11
+676,FIFA Soccer V,PS4,2022.0,Action,Ubisoft,1.42,0.1,0.16,0.17,1.85
+677,Grand Theft Auto 2023,XSX,2016.0,Platform,Nintendo,1.32,0.42,0.04,0.27,2.05
+678,Cyberpunk 2022,PS3,2023.0,Adventure,Ubisoft,0.57,0.91,0.08,0.23,1.79
+679,Pokemon Infinite,Switch,2020.0,Role-Playing,Sony Computer Entertainment,1.27,1.57,0.03,0.5,3.37
+680,Cyberpunk Remastered,PS5,2021.0,Shooter,Activision,0.43,0.12,0.11,0.21,0.87
+681,Grand Theft Auto Origins,X360,2020.0,Racing,Sony Computer Entertainment,0.55,1.26,0.1,0.26,2.17
+682,Red Dead Redemption Infinite,X360,2022.0,Racing,,2.28,0.04,0.09,0.52,2.93
+683,The Legend of Zelda 2022,PS5,2017.0,Platform,Activision,0.08,1.25,0.07,0.28,1.68
+684,Forza Horizon 2024,PS4,2016.0,Racing,Activision,0.4,0.02,0.0,0.06,0.48
+685,Call of Duty 2022,XSX,2018.0,Racing,Nintendo,0.28,0.33,0.21,0.14,0.96
+686,Halo 2022,PC,2021.0,Shooter,Take-Two Interactive,0.7,0.72,0.65,0.55,2.62
+687,Forza Horizon V,PC,2015.0,Racing,Ubisoft,2.15,0.51,0.0,0.0,2.66
+688,The Legend of Zelda Remastered,Switch,2016.0,Action,Ubisoft,2.41,0.47,0.05,0.36,3.29
+689,Halo Origins,PS5,2019.0,Action,Activision,0.63,1.1,2.49,0.32,4.54
+690,Halo Infinite,PS3,2023.0,Adventure,Sony Computer Entertainment,0.21,0.16,0.74,0.16,1.27
+691,Red Dead Redemption V,Switch,2023.0,Adventure,Activision,0.86,0.66,0.22,0.24,1.98
+692,The Legend of Zelda Remastered,XSX,2017.0,Platform,Take-Two Interactive,0.37,1.07,0.18,1.13,2.75
+693,Halo Origins,PS4,2018.0,Adventure,Sony Computer Entertainment,2.29,2.23,0.49,0.48,5.49
+694,Minecraft Remastered,PS4,2019.0,Racing,Electronic Arts,0.69,0.27,0.98,0.09,2.03
+695,Pokemon Remastered,PS5,2015.0,Shooter,Ubisoft,1.48,0.44,0.12,0.1,2.14
+696,Call of Duty 2024,XSX,2019.0,Action,Activision,0.06,0.61,0.82,0.23,1.72
+697,FIFA Soccer 2024,PS5,2020.0,Platform,Take-Two Interactive,0.29,0.05,0.22,0.03,0.59
+698,FIFA Soccer Origins,X360,2022.0,Racing,Sony Computer Entertainment,3.01,0.36,0.15,0.03,3.55
+699,Grand Theft Auto Origins,PS5,2016.0,Action,Activision,0.1,1.92,0.06,0.13,2.21
+700,Grand Theft Auto 2023,X360,2017.0,Adventure,Electronic Arts,1.67,0.02,0.12,0.25,2.06
+701,Halo 2023,PS3,2017.0,Platform,Electronic Arts,1.85,0.21,0.07,0.31,2.44
+702,God of War Remastered,Switch,2019.0,Shooter,Electronic Arts,0.45,0.32,0.1,0.16,1.03
+703,Forza Horizon Remastered,Switch,2023.0,Action,Electronic Arts,0.09,0.61,0.58,0.0,1.28
+704,Call of Duty Ultra,XOne,2023.0,Sports,Nintendo,2.54,2.13,0.15,0.17,4.99
+705,Forza Horizon 2023,PS3,2023.0,Sports,Take-Two Interactive,0.29,0.18,0.01,0.26,0.74
+706,Call of Duty Remastered,PS4,2023.0,Platform,Nintendo,0.73,0.43,1.14,0.06,2.36
+707,Pokemon Remastered,PS3,2022.0,Role-Playing,Nintendo,0.11,1.34,0.6,0.05,2.1
+708,Pokemon Origins,Switch,2023.0,Action,Sony Computer Entertainment,1.32,0.81,0.12,0.02,2.27
+709,Mario Kart 2022,Switch,2019.0,Racing,,0.53,1.13,0.11,0.22,1.99
+710,Call of Duty 2022,PS3,2016.0,Platform,Take-Two Interactive,0.31,1.91,0.03,0.16,2.41
+711,Pokemon Origins,PS4,2015.0,Adventure,Take-Two Interactive,0.83,0.41,0.92,0.26,2.42
+712,Call of Duty Origins,PC,2020.0,Adventure,Sony Computer Entertainment,1.13,1.52,0.1,0.05,2.8
+713,Cyberpunk 2022,XOne,2018.0,Sports,Take-Two Interactive,1.4,0.35,0.12,0.16,2.03
+714,Cyberpunk Ultra,PC,2015.0,Racing,Sony Computer Entertainment,0.3,0.07,0.79,0.22,1.38
+715,Call of Duty Infinite,X360,2023.0,Action,Nintendo,0.23,1.42,0.44,0.11,2.2
+716,The Legend of Zelda Infinite,XSX,2019.0,Platform,Sony Computer Entertainment,0.32,1.31,0.1,0.05,1.78
+717,God of War Origins,XSX,2018.0,Shooter,Nintendo,0.28,1.08,0.11,0.49,1.96
+718,Pokemon Remastered,PC,2022.0,Role-Playing,Electronic Arts,0.18,0.88,0.1,0.22,1.38
+719,Red Dead Redemption V,PS5,,Platform,Sony Computer Entertainment,2.19,0.25,0.27,0.18,2.89
+720,God of War 2024,XSX,2015.0,Action,Take-Two Interactive,0.16,0.47,0.53,0.09,1.25
+721,FIFA Soccer Ultra,PS4,2015.0,Sports,Take-Two Interactive,0.57,0.49,0.0,0.08,1.14
+722,Halo Infinite,XOne,2017.0,Sports,Activision,0.81,0.01,0.01,0.9,1.73
+723,Grand Theft Auto Ultra,X360,2015.0,Action,Electronic Arts,0.01,0.24,0.16,0.15,0.56
+724,Cyberpunk 2024,XOne,2023.0,Platform,Activision,5.74,0.53,0.42,0.15,6.84
+725,The Legend of Zelda V,Switch,2021.0,Sports,Take-Two Interactive,2.43,0.01,0.07,0.8,3.31
+726,Halo 2023,PS4,2021.0,Sports,Activision,1.42,0.19,0.03,0.29,1.93
+727,Red Dead Redemption Remastered,X360,2021.0,Action,Activision,2.62,0.1,0.23,0.53,3.48
+728,Minecraft 2022,PS4,2016.0,Platform,Activision,0.37,0.49,0.33,0.04,1.23
+729,God of War Origins,PS4,2017.0,Adventure,Electronic Arts,1.17,0.51,0.25,0.01,1.94
+730,Minecraft V,Switch,2018.0,Racing,Electronic Arts,1.17,0.22,0.1,0.43,1.92
+731,Minecraft Remastered,PS4,2016.0,Racing,Sony Computer Entertainment,0.08,1.6,0.21,0.14,2.03
+732,Pokemon V,PC,2022.0,Role-Playing,Activision,2.59,1.36,0.13,0.41,4.49
+733,Red Dead Redemption V,PS3,2018.0,Sports,Sony Computer Entertainment,0.77,0.21,0.16,0.38,1.52
+734,Mario Kart Infinite,PS5,2015.0,Action,Electronic Arts,0.32,1.97,0.04,0.35,2.68
+735,Mario Kart Infinite,XSX,2017.0,Action,Ubisoft,0.69,0.25,0.4,0.25,1.59
+736,Call of Duty 2022,XOne,2021.0,Platform,Ubisoft,0.64,1.14,0.16,0.72,2.66
+737,Cyberpunk V,PC,2019.0,Action,Sony Computer Entertainment,1.38,2.22,0.73,0.73,5.06
+738,Forza Horizon V,XSX,2018.0,Racing,Electronic Arts,0.93,0.34,0.25,0.02,1.54
+739,Pokemon Infinite,XSX,2017.0,Role-Playing,Electronic Arts,1.31,0.14,0.42,0.86,2.73
+740,Grand Theft Auto 2023,PS3,2020.0,Shooter,Ubisoft,0.06,0.52,0.23,0.05,0.86
+741,Pokemon 2023,PC,2015.0,Platform,Nintendo,0.06,0.04,0.38,0.15,0.63
+742,Minecraft V,Switch,2019.0,Platform,Take-Two Interactive,0.23,0.39,0.2,0.11,0.93
+743,FIFA Soccer Ultra,X360,2016.0,Sports,Activision,1.19,0.45,0.43,1.23,3.3
+744,Pokemon Remastered,PS4,2023.0,Racing,Electronic Arts,0.87,0.27,0.89,0.46,2.49
+745,God of War 2022,PS4,2017.0,Action,Activision,0.19,0.53,0.14,0.25,1.11
+746,Grand Theft Auto Origins,PS4,2018.0,Action,Sony Computer Entertainment,0.33,1.0,0.2,0.13,1.66
+747,Call of Duty Ultra,XOne,2020.0,Adventure,Sony Computer Entertainment,1.21,2.88,0.28,0.03,4.4
+748,Red Dead Redemption 2022,PC,2017.0,Action,Sony Computer Entertainment,0.24,0.19,0.4,0.05,0.88
+749,God of War 2024,Switch,2019.0,Shooter,Ubisoft,0.29,0.04,0.09,0.27,0.69
+750,Grand Theft Auto V,PC,2017.0,Adventure,Electronic Arts,0.67,0.51,0.37,0.71,2.26
+751,Grand Theft Auto Ultra,PS3,2023.0,Racing,Activision,1.57,3.36,0.87,0.05,5.85
+752,Call of Duty Remastered,XSX,2016.0,Shooter,Ubisoft,0.72,0.37,0.2,0.22,1.51
+753,FIFA Soccer 2023,XSX,2023.0,Shooter,Take-Two Interactive,0.34,0.14,0.14,0.07,0.69
+754,Minecraft Ultra,PC,,Sports,Ubisoft,0.95,0.77,0.1,0.56,2.38
+755,Halo Ultra,X360,2019.0,Racing,Take-Two Interactive,0.07,0.14,0.68,0.29,1.18
+756,Red Dead Redemption Infinite,PC,2019.0,Platform,Take-Two Interactive,0.97,0.58,0.21,0.1,1.86
+757,Grand Theft Auto Infinite,Switch,2019.0,Role-Playing,Electronic Arts,0.4,0.93,0.6,0.09,2.02
+758,Cyberpunk Infinite,Switch,2019.0,Role-Playing,Activision,0.18,0.65,0.22,0.33,1.38
+759,Halo 2023,PS4,2015.0,Shooter,Ubisoft,2.5,0.19,0.08,0.08,2.85
+760,Grand Theft Auto 2022,PC,2015.0,Sports,Nintendo,0.46,0.98,0.24,0.07,1.75
+761,The Legend of Zelda 2023,PS4,2020.0,Sports,Nintendo,1.02,1.64,2.05,0.23,4.94
+762,Mario Kart V,PS4,2015.0,Platform,Take-Two Interactive,2.7,0.37,0.14,0.12,3.33
+763,Minecraft Infinite,PS4,2019.0,Action,Ubisoft,0.04,1.64,0.22,0.13,2.03
+764,Forza Horizon 2022,X360,2016.0,Racing,Nintendo,0.06,1.03,0.03,0.32,1.44
+765,Cyberpunk Origins,PS3,2021.0,Shooter,Ubisoft,0.13,0.41,0.12,0.21,0.87
+766,Halo 2022,Switch,2022.0,Action,Sony Computer Entertainment,0.57,0.56,1.07,0.08,2.28
+767,Call of Duty Remastered,X360,2015.0,Platform,Activision,2.93,1.45,1.62,0.01,6.01
+768,Grand Theft Auto 2023,XSX,2023.0,Action,Activision,0.06,0.37,0.21,0.21,0.85
+769,Mario Kart 2023,PS4,2016.0,Sports,Electronic Arts,0.33,0.07,0.04,0.06,0.5
+770,The Legend of Zelda Infinite,PS3,2019.0,Role-Playing,Activision,0.55,0.17,0.02,0.22,0.96
+771,Minecraft 2022,XSX,2018.0,Action,Take-Two Interactive,1.95,0.97,0.87,0.13,3.92
+772,The Legend of Zelda Origins,PS4,2018.0,Action,Nintendo,0.83,1.33,0.4,0.27,2.83
+773,Halo Origins,XSX,2020.0,Shooter,Electronic Arts,1.45,0.08,0.91,0.24,2.68
+774,Grand Theft Auto 2024,XSX,2018.0,Racing,Nintendo,1.46,0.37,0.38,0.28,2.49
+775,Cyberpunk Ultra,PS5,2015.0,Racing,Nintendo,0.08,0.17,0.55,0.32,1.12
+776,Mario Kart V,Switch,2023.0,Shooter,Activision,1.46,0.29,0.06,0.39,2.2
+777,God of War Infinite,PS3,2023.0,Adventure,Take-Two Interactive,0.26,0.3,0.06,0.58,1.2
+778,Grand Theft Auto Origins,PS3,2019.0,Role-Playing,Electronic Arts,3.9,0.46,0.59,0.21,5.16
+779,God of War V,PS5,2023.0,Role-Playing,Electronic Arts,0.57,0.1,0.26,0.01,0.94
+780,The Legend of Zelda V,XOne,2016.0,Adventure,Take-Two Interactive,1.07,0.05,0.01,0.15,1.28
+781,The Legend of Zelda Origins,PC,2018.0,Action,Take-Two Interactive,0.73,0.93,0.45,0.01,2.12
+782,Cyberpunk 2024,PS4,2018.0,Action,Sony Computer Entertainment,0.13,1.02,0.05,0.47,1.67
+783,The Legend of Zelda 2022,PC,2023.0,Action,Take-Two Interactive,0.04,1.04,0.54,0.13,1.75
+784,Cyberpunk 2024,PS5,2015.0,Role-Playing,Activision,3.68,0.06,0.02,0.69,4.45
+785,Cyberpunk 2024,Switch,2015.0,Platform,Activision,1.07,1.02,0.25,0.34,2.68
+786,Pokemon Infinite,PS4,2017.0,Action,Nintendo,2.05,1.82,0.09,0.31,4.27
+787,Halo V,PS3,2017.0,Role-Playing,Sony Computer Entertainment,0.89,1.15,0.23,0.46,2.73
+788,Red Dead Redemption V,PC,2021.0,Sports,Ubisoft,0.28,2.04,0.17,1.06,3.55
+789,Cyberpunk Ultra,PC,2022.0,Racing,Activision,0.06,0.44,0.37,0.16,1.03
+790,Pokemon Ultra,PS4,2020.0,Sports,Activision,0.91,0.58,0.39,0.22,2.1
+791,Cyberpunk 2023,X360,2023.0,Shooter,Activision,0.65,0.04,0.0,0.64,1.33
+792,Grand Theft Auto 2022,X360,2015.0,Role-Playing,,0.92,0.89,0.98,0.23,3.02
+793,Cyberpunk Origins,X360,2023.0,Shooter,Sony Computer Entertainment,4.46,0.6,0.47,0.46,5.99
+794,Minecraft Origins,PC,2019.0,Action,Ubisoft,0.45,0.02,0.13,0.41,1.01
+795,FIFA Soccer V,PS3,2022.0,Role-Playing,Electronic Arts,0.38,0.41,0.57,0.17,1.53
+796,Red Dead Redemption 2022,XSX,2018.0,Sports,Nintendo,0.25,0.13,0.58,0.29,1.25
+797,Cyberpunk Origins,PS4,,Sports,Ubisoft,0.12,1.02,0.58,0.07,1.79
+798,Call of Duty 2024,XSX,2023.0,Sports,Electronic Arts,0.29,0.58,0.09,0.71,1.67
+799,FIFA Soccer 2022,PS5,2020.0,Adventure,Activision,0.66,1.55,0.87,0.1,3.18
+800,Grand Theft Auto 2023,X360,2020.0,Role-Playing,Take-Two Interactive,0.83,0.87,0.07,0.59,2.36
+801,God of War V,XOne,2017.0,Sports,Ubisoft,0.16,0.91,0.55,0.06,1.68
+802,Grand Theft Auto 2022,PC,2021.0,Sports,Electronic Arts,1.72,0.28,0.21,0.14,2.35
+803,God of War 2024,XOne,2022.0,Adventure,Activision,1.09,0.3,1.09,0.05,2.53
+804,Halo 2023,PS3,2022.0,Shooter,Electronic Arts,2.45,0.61,0.24,0.27,3.57
+805,Grand Theft Auto V,PC,2015.0,Sports,Nintendo,0.79,0.66,0.2,0.33,1.98
+806,The Legend of Zelda Ultra,PC,2021.0,Action,Electronic Arts,0.09,0.98,0.2,0.57,1.84
+807,The Legend of Zelda Remastered,XOne,2017.0,Sports,Electronic Arts,1.67,1.14,0.2,0.01,3.02
+808,Halo Infinite,XSX,2022.0,Adventure,Nintendo,0.59,0.62,0.02,0.0,1.23
+809,Halo Origins,XOne,2020.0,Racing,Sony Computer Entertainment,1.15,1.0,0.06,0.02,2.23
+810,Call of Duty 2023,XOne,2018.0,Racing,Electronic Arts,1.9,1.17,0.27,0.1,3.44
+811,Minecraft Infinite,PS3,2020.0,Adventure,Activision,2.55,0.14,0.14,0.04,2.87
+812,Halo 2024,Switch,2017.0,Sports,Sony Computer Entertainment,0.07,0.74,0.02,0.56,1.39
+813,Red Dead Redemption Infinite,PC,2021.0,Shooter,Activision,0.97,0.24,1.2,0.57,2.98
+814,Forza Horizon 2024,PS5,2017.0,Racing,Nintendo,0.33,0.02,0.01,0.62,0.98
+815,God of War 2023,Switch,2019.0,Adventure,Take-Two Interactive,0.26,0.93,0.07,0.14,1.4
+816,Mario Kart Origins,PC,2020.0,Racing,Electronic Arts,2.69,0.75,0.25,0.81,4.5
+817,Halo 2022,PS5,2016.0,Role-Playing,Electronic Arts,1.28,0.08,0.77,0.21,2.34
+818,FIFA Soccer Ultra,X360,2023.0,Shooter,Activision,1.23,1.48,0.15,0.18,3.04
+819,Minecraft Infinite,PC,2019.0,Sports,Sony Computer Entertainment,0.25,0.23,0.12,0.22,0.82
+820,FIFA Soccer Origins,XSX,2022.0,Racing,Ubisoft,1.9,0.05,0.28,0.12,2.35
+821,The Legend of Zelda V,XOne,2021.0,Sports,Take-Two Interactive,4.29,0.25,0.01,0.31,4.86
+822,Mario Kart 2022,PS3,2020.0,Role-Playing,Nintendo,0.15,0.15,0.97,0.3,1.57
+823,Minecraft Ultra,XSX,2020.0,Racing,Electronic Arts,0.88,0.8,0.09,0.74,2.51
+824,God of War 2023,XOne,2015.0,Adventure,Electronic Arts,0.26,0.22,0.04,0.31,0.83
+825,God of War V,PS5,2023.0,Sports,Sony Computer Entertainment,0.41,0.12,0.07,0.03,0.63
+826,Call of Duty Infinite,X360,2018.0,Platform,Activision,0.3,0.37,0.08,0.21,0.96
+827,Mario Kart Remastered,PS5,2015.0,Racing,Sony Computer Entertainment,0.31,1.32,0.43,0.12,2.18
+828,Forza Horizon 2024,PS4,,Sports,Sony Computer Entertainment,1.08,0.92,0.04,0.39,2.43
+829,Grand Theft Auto 2024,PS5,2017.0,Adventure,Electronic Arts,0.21,0.6,0.1,0.25,1.16
+830,God of War Infinite,PS3,2023.0,Platform,Ubisoft,2.22,0.21,0.45,0.23,3.11
+831,Minecraft Origins,XOne,2023.0,Role-Playing,Ubisoft,1.29,0.41,0.62,0.13,2.45
+832,Call of Duty Origins,PS5,2022.0,Platform,Nintendo,1.67,0.36,0.08,0.28,2.39
+833,Cyberpunk 2024,XSX,2016.0,Shooter,Activision,0.53,0.41,0.46,0.82,2.22
+834,God of War 2022,X360,2021.0,Platform,Take-Two Interactive,1.8,0.09,1.3,0.24,3.43
+835,Mario Kart Infinite,X360,2020.0,Role-Playing,Electronic Arts,4.44,0.18,0.04,0.01,4.67
+836,Pokemon 2024,Switch,2022.0,Racing,,5.18,0.59,0.07,0.1,5.94
+837,Minecraft 2022,PS5,2015.0,Racing,Activision,0.48,1.13,0.26,0.29,2.16
+838,Pokemon 2024,PS4,2019.0,Sports,Ubisoft,1.62,0.46,0.88,0.16,3.12
+839,Halo Ultra,PS3,2015.0,Racing,Ubisoft,0.5,0.09,0.35,0.96,1.9
+840,Minecraft 2023,X360,2015.0,Racing,,0.2,0.7,1.11,0.36,2.37
+841,Cyberpunk Origins,X360,2019.0,Action,Ubisoft,1.33,1.26,0.3,0.04,2.93
+842,Cyberpunk 2023,Switch,2019.0,Platform,Take-Two Interactive,0.49,0.88,0.01,0.12,1.5
+843,FIFA Soccer 2023,XSX,2022.0,Role-Playing,Electronic Arts,0.22,0.11,0.12,0.06,0.51
+844,Red Dead Redemption Ultra,X360,2021.0,Role-Playing,Nintendo,1.02,0.52,0.51,0.02,2.07
+845,Forza Horizon Origins,PS4,2017.0,Role-Playing,Activision,0.04,0.12,0.28,0.05,0.49
+846,Mario Kart Infinite,PC,2019.0,Sports,Nintendo,3.84,0.95,0.02,0.05,4.86
+847,Mario Kart Origins,PS3,2016.0,Platform,Activision,1.94,1.24,0.09,0.31,3.58
+848,Red Dead Redemption V,PC,2017.0,Shooter,Nintendo,0.78,0.52,0.09,0.01,1.4
+849,Halo 2024,X360,2018.0,Action,Nintendo,0.15,0.95,0.07,0.15,1.32
+850,Cyberpunk Remastered,Switch,2020.0,Role-Playing,Take-Two Interactive,0.62,0.11,0.25,0.13,1.11
+851,Call of Duty 2023,Switch,2021.0,Action,Activision,0.01,1.69,0.01,0.33,2.04
+852,The Legend of Zelda V,PS3,2023.0,Shooter,Sony Computer Entertainment,0.74,1.15,0.54,0.11,2.54
+853,Pokemon 2022,PS4,2020.0,Action,Sony Computer Entertainment,1.08,0.97,0.32,0.86,3.23
+854,Mario Kart 2022,Switch,2023.0,Role-Playing,Take-Two Interactive,1.5,0.7,0.15,0.05,2.4
+855,Cyberpunk 2024,PS5,2022.0,Racing,Ubisoft,1.2,1.53,0.09,0.17,2.99
+856,God of War Remastered,XOne,2020.0,Platform,Ubisoft,3.84,1.1,0.06,0.02,5.02
+857,Cyberpunk Ultra,X360,2020.0,Racing,,2.95,0.7,0.23,0.15,4.03
+858,The Legend of Zelda 2023,X360,2015.0,Role-Playing,Take-Two Interactive,0.46,4.68,0.44,0.36,5.94
+859,Cyberpunk Ultra,XOne,2019.0,Action,Nintendo,0.7,0.8,0.72,0.14,2.36
+860,Pokemon Origins,Switch,2020.0,Action,Ubisoft,0.97,0.05,0.6,0.81,2.43
+861,Pokemon Remastered,X360,2019.0,Adventure,Take-Two Interactive,0.06,0.63,0.09,0.22,1.0
+862,Call of Duty Ultra,PS5,2017.0,Adventure,Electronic Arts,0.64,2.32,0.05,0.26,3.27
+863,Cyberpunk Origins,X360,2020.0,Racing,Electronic Arts,1.79,4.34,0.09,0.14,6.36
+864,Minecraft Infinite,PS4,2018.0,Role-Playing,Activision,0.21,1.65,0.37,0.02,2.25
+865,Minecraft Origins,Switch,2022.0,Role-Playing,Electronic Arts,2.96,1.02,0.44,0.02,4.44
+866,Red Dead Redemption Remastered,XSX,2022.0,Racing,Electronic Arts,3.12,1.62,0.1,0.1,4.94
+867,Call of Duty 2022,XOne,2020.0,Role-Playing,Nintendo,2.88,0.88,0.35,0.39,4.5
+868,Cyberpunk Origins,PS4,2016.0,Racing,Nintendo,0.66,1.56,0.01,0.04,2.27
+869,Mario Kart Remastered,X360,2017.0,Racing,Ubisoft,0.74,1.26,0.32,0.03,2.35
+870,Pokemon Remastered,Switch,2022.0,Adventure,Ubisoft,3.81,0.08,0.15,0.13,4.17
+871,Red Dead Redemption Origins,PC,2018.0,Role-Playing,Ubisoft,1.46,0.87,0.51,0.03,2.87
+872,Grand Theft Auto V,PS3,2021.0,Role-Playing,Take-Two Interactive,0.54,0.08,0.74,0.02,1.38
+873,Forza Horizon Remastered,PS3,2018.0,Adventure,Activision,1.63,1.41,0.06,0.57,3.67
+874,Pokemon 2024,X360,2018.0,Racing,Activision,2.53,0.48,0.1,0.12,3.23
+875,FIFA Soccer V,XOne,2020.0,Sports,Ubisoft,1.25,0.15,0.13,0.02,1.55
+876,God of War Remastered,PS3,2015.0,Adventure,Electronic Arts,0.7,1.65,0.43,0.18,2.96
+877,Mario Kart V,XSX,2019.0,Adventure,Ubisoft,0.08,0.37,0.15,0.0,0.6
+878,Forza Horizon Ultra,XSX,2023.0,Action,Take-Two Interactive,0.74,0.13,0.14,0.1,1.11
+879,Mario Kart V,PC,2019.0,Platform,Sony Computer Entertainment,0.12,1.49,0.26,1.07,2.94
+880,God of War Remastered,PS5,2020.0,Adventure,Nintendo,1.23,0.2,0.01,0.13,1.57
+881,Mario Kart 2024,PS5,2022.0,Shooter,Nintendo,0.61,0.26,0.09,0.19,1.15
+882,Halo 2022,XSX,2019.0,Sports,Sony Computer Entertainment,0.24,0.43,0.08,0.22,0.97
+883,Grand Theft Auto Infinite,PS5,2016.0,Sports,Ubisoft,0.63,0.42,0.01,0.17,1.23
+884,Minecraft Origins,X360,2017.0,Adventure,Activision,3.23,0.12,0.21,0.06,3.62
+885,Forza Horizon 2024,XSX,2017.0,Action,Sony Computer Entertainment,0.17,0.01,0.5,0.05,0.73
+886,Red Dead Redemption 2024,XSX,2021.0,Platform,,0.28,0.17,0.17,0.27,0.89
+887,Forza Horizon V,PS4,2021.0,Sports,Nintendo,0.98,0.51,0.26,0.66,2.41
+888,God of War 2022,PC,2020.0,Role-Playing,Ubisoft,0.08,1.03,0.49,0.09,1.69
+889,Forza Horizon 2024,PS3,2019.0,Adventure,Electronic Arts,2.54,1.39,0.34,0.3,4.57
+890,Red Dead Redemption Remastered,XOne,2018.0,Action,Electronic Arts,0.26,0.86,0.17,0.04,1.33
+891,Grand Theft Auto Ultra,PS4,2016.0,Adventure,Take-Two Interactive,0.09,0.08,0.27,0.23,0.67
+892,FIFA Soccer Origins,XOne,2018.0,Role-Playing,Electronic Arts,1.57,0.52,0.8,0.31,3.2
+893,Call of Duty V,XSX,,Shooter,Take-Two Interactive,0.29,0.32,0.07,0.17,0.85
+894,Red Dead Redemption Infinite,PS4,2020.0,Role-Playing,Activision,0.08,0.02,0.09,0.19,0.38
+895,Pokemon V,PC,2019.0,Role-Playing,Take-Two Interactive,0.46,0.09,0.1,0.37,1.02
+896,Grand Theft Auto 2023,Switch,2017.0,Racing,Ubisoft,0.66,0.01,0.04,0.05,0.76
+897,Call of Duty Ultra,PC,2018.0,Sports,Sony Computer Entertainment,0.57,0.12,0.21,0.03,0.93
+898,Cyberpunk V,XSX,2020.0,Adventure,Activision,1.28,1.47,0.16,0.37,3.28
+899,Halo Ultra,X360,2015.0,Shooter,Take-Two Interactive,0.38,0.07,0.43,0.09,0.97
+900,Cyberpunk V,PC,2020.0,Adventure,Take-Two Interactive,0.4,0.84,0.12,0.12,1.48
+901,Red Dead Redemption Ultra,XOne,2016.0,Platform,Take-Two Interactive,3.16,0.03,0.21,0.22,3.62
+902,Grand Theft Auto Origins,PS5,2023.0,Role-Playing,Take-Two Interactive,0.09,0.11,0.06,0.18,0.44
+903,Forza Horizon Origins,PS4,2021.0,Platform,Ubisoft,0.17,2.02,0.17,1.3,3.66
+904,God of War V,X360,2022.0,Shooter,Activision,1.69,1.39,0.39,0.45,3.92
+905,Halo 2023,XOne,2016.0,Adventure,Ubisoft,0.0,2.07,0.04,0.02,2.13
+906,Call of Duty Origins,PS5,2015.0,Action,Electronic Arts,0.42,1.33,0.35,0.32,2.42
+907,Cyberpunk Ultra,XSX,2022.0,Platform,Activision,0.75,0.01,0.05,0.1,0.91
+908,Halo Remastered,PS4,2018.0,Sports,Ubisoft,1.55,0.75,0.3,0.25,2.85
+909,Forza Horizon 2023,PS5,2020.0,Adventure,Take-Two Interactive,0.27,0.07,0.2,0.18,0.72
+910,Mario Kart Remastered,PS3,2019.0,Action,Nintendo,1.16,0.56,0.38,0.0,2.1
+911,Red Dead Redemption 2024,XSX,2021.0,Racing,Sony Computer Entertainment,0.21,0.88,0.28,0.26,1.63
+912,Cyberpunk 2022,PS5,2023.0,Role-Playing,Sony Computer Entertainment,2.19,2.12,0.11,0.5,4.92
+913,Red Dead Redemption 2023,XSX,2021.0,Action,Take-Two Interactive,0.01,0.67,0.12,0.1,0.9
+914,FIFA Soccer 2023,X360,2023.0,Platform,Sony Computer Entertainment,1.17,2.46,0.45,0.41,4.49
+915,Minecraft 2024,X360,2015.0,Action,Sony Computer Entertainment,0.55,0.25,0.06,0.3,1.16
+916,Cyberpunk Remastered,Switch,2023.0,Shooter,Electronic Arts,1.63,0.49,0.28,0.12,2.52
+917,FIFA Soccer Origins,PS4,2017.0,Shooter,Electronic Arts,1.25,0.65,0.29,0.03,2.22
+918,Cyberpunk Origins,XSX,2016.0,Sports,Ubisoft,0.82,1.03,0.17,0.25,2.27
+919,Grand Theft Auto 2022,XOne,2020.0,Racing,Electronic Arts,2.89,0.49,0.32,0.61,4.31
+920,Minecraft 2022,PC,2021.0,Platform,Nintendo,1.27,1.27,0.04,0.19,2.77
+921,FIFA Soccer Remastered,PS3,2021.0,Platform,Take-Two Interactive,0.15,0.03,0.1,0.07,0.35
+922,Forza Horizon Origins,PS5,2020.0,Platform,Electronic Arts,1.46,0.19,0.05,0.1,1.8
+923,Red Dead Redemption 2022,XOne,2019.0,Platform,Activision,0.93,2.45,0.22,0.43,4.03
+924,Cyberpunk Infinite,X360,2016.0,Action,Ubisoft,3.13,0.99,0.11,0.22,4.45
+925,Red Dead Redemption Ultra,PS3,2016.0,Adventure,Take-Two Interactive,0.36,2.13,0.14,0.49,3.12
+926,Pokemon V,XOne,2021.0,Adventure,Activision,0.05,2.17,0.37,0.34,2.93
+927,Forza Horizon Origins,Switch,2020.0,Action,Ubisoft,4.3,0.2,0.28,0.14,4.92
+928,Cyberpunk Ultra,X360,2018.0,Racing,Electronic Arts,0.38,0.07,0.83,0.12,1.4
+929,Mario Kart Infinite,PS5,2016.0,Adventure,Take-Two Interactive,2.93,1.29,0.17,0.17,4.56
+930,Red Dead Redemption Infinite,X360,2022.0,Shooter,Electronic Arts,1.02,3.41,0.83,0.5,5.76
+931,Call of Duty Infinite,Switch,2022.0,Action,Take-Two Interactive,3.08,0.23,0.23,0.29,3.83
+932,Red Dead Redemption 2022,XOne,2016.0,Sports,Activision,3.07,0.61,0.27,0.01,3.96
+933,Cyberpunk Infinite,PC,2016.0,Action,Ubisoft,0.86,0.63,0.21,0.04,1.74
+934,Pokemon Origins,PS5,2023.0,Adventure,Ubisoft,1.19,0.41,0.72,0.25,2.57
+935,Red Dead Redemption 2024,Switch,2022.0,Sports,Electronic Arts,0.35,0.27,0.09,0.48,1.19
+936,The Legend of Zelda Remastered,XOne,2017.0,Racing,Activision,3.0,0.01,0.01,0.05,3.07
+937,Cyberpunk 2023,PS4,2019.0,Platform,Nintendo,0.41,3.32,0.53,0.16,4.42
+938,God of War V,PC,2018.0,Shooter,Sony Computer Entertainment,0.18,0.56,0.16,0.52,1.42
+939,Mario Kart 2022,Switch,2017.0,Platform,Activision,1.28,1.26,0.26,0.6,3.4
+940,Mario Kart 2024,PS3,2022.0,Shooter,Take-Two Interactive,0.66,0.23,0.47,0.25,1.61
+941,Cyberpunk Remastered,PC,2020.0,Shooter,Nintendo,0.65,0.24,0.04,0.03,0.96
+942,Mario Kart 2023,PS3,2018.0,Shooter,Take-Two Interactive,0.12,0.55,0.35,0.1,1.12
+943,Minecraft Remastered,Switch,2019.0,Platform,Activision,0.24,0.29,0.01,0.25,0.79
+944,Mario Kart 2023,XSX,2023.0,Platform,Nintendo,0.34,0.24,0.44,0.14,1.16
+945,Call of Duty Ultra,XOne,2019.0,Shooter,Ubisoft,0.17,0.27,0.11,0.18,0.73
+946,The Legend of Zelda Ultra,PS4,2022.0,Role-Playing,Sony Computer Entertainment,0.36,4.56,0.67,0.18,5.77
+947,Forza Horizon 2022,XSX,2018.0,Racing,Take-Two Interactive,1.89,0.41,0.08,0.18,2.56
+948,The Legend of Zelda Ultra,X360,2019.0,Platform,Electronic Arts,2.29,1.29,0.86,0.03,4.47
+949,Pokemon 2024,PS3,2016.0,Racing,Take-Two Interactive,1.45,0.14,0.13,0.08,1.8
+950,God of War 2023,XSX,2022.0,Racing,Nintendo,1.69,2.36,0.13,0.07,4.25
+951,The Legend of Zelda 2023,XOne,2015.0,Shooter,Take-Two Interactive,4.17,1.48,0.06,0.59,6.3
+952,Call of Duty 2024,XOne,2019.0,Racing,Electronic Arts,0.26,0.8,1.12,0.09,2.27
+953,Pokemon 2022,PS4,2018.0,Shooter,Activision,2.33,0.31,0.15,0.13,2.92
+954,Halo 2022,PS5,2023.0,Role-Playing,Ubisoft,1.99,0.14,0.58,0.29,3.0
+955,Minecraft Origins,PS3,2017.0,Role-Playing,Sony Computer Entertainment,1.79,1.32,0.08,0.24,3.43
+956,Forza Horizon Infinite,PS3,2022.0,Racing,Sony Computer Entertainment,0.75,0.66,0.32,0.64,2.37
+957,Mario Kart 2024,PS4,2021.0,Adventure,Electronic Arts,0.84,1.67,0.73,0.08,3.32
+958,The Legend of Zelda V,Switch,2022.0,Adventure,Electronic Arts,0.52,0.01,0.0,0.15,0.68
+959,Forza Horizon 2024,XOne,2015.0,Shooter,Sony Computer Entertainment,0.41,0.01,0.03,0.09,0.54
+960,Red Dead Redemption 2022,PC,2015.0,Action,Sony Computer Entertainment,0.07,0.29,0.68,0.26,1.3
+961,Minecraft Origins,X360,2015.0,Racing,Activision,4.56,0.02,1.97,0.24,6.79
+962,The Legend of Zelda 2023,XSX,2023.0,Adventure,Nintendo,1.19,6.07,0.09,0.21,7.56
+963,Minecraft Ultra,PS3,2016.0,Platform,Take-Two Interactive,1.38,0.06,1.07,0.0,2.51
+964,FIFA Soccer Origins,PC,2018.0,Role-Playing,Electronic Arts,2.4,0.27,0.17,0.11,2.95
+965,The Legend of Zelda 2024,PS4,2019.0,Action,Activision,0.65,0.47,0.18,0.07,1.37
+966,The Legend of Zelda Origins,Switch,2019.0,Adventure,Take-Two Interactive,1.29,1.72,0.07,0.63,3.71
+967,Mario Kart 2022,PS4,2017.0,Sports,,0.38,0.76,0.49,0.57,2.2
+968,Halo Remastered,PS3,2018.0,Racing,Sony Computer Entertainment,0.05,0.34,0.06,0.26,0.71
+969,FIFA Soccer 2024,X360,2022.0,Platform,Ubisoft,0.8,1.07,0.24,0.66,2.77
+970,Halo V,PS5,2017.0,Action,Take-Two Interactive,0.19,0.63,0.23,0.02,1.07
+971,Pokemon Remastered,PS5,2015.0,Racing,Activision,0.27,0.23,0.2,0.85,1.55
+972,Forza Horizon Remastered,Switch,2016.0,Role-Playing,Sony Computer Entertainment,4.95,2.38,0.02,0.68,8.03
+973,Call of Duty 2024,XOne,2023.0,Action,Take-Two Interactive,0.04,0.72,0.06,0.11,0.93
+974,FIFA Soccer Remastered,X360,2022.0,Racing,Take-Two Interactive,0.11,0.97,0.12,0.09,1.29
+975,Call of Duty 2023,XSX,2019.0,Platform,Activision,1.7,1.71,0.55,0.22,4.18
+976,Pokemon Remastered,PS5,2018.0,Action,Activision,0.75,1.39,0.15,0.03,2.32
+977,Minecraft V,PS5,2017.0,Sports,Electronic Arts,0.27,0.26,0.24,0.04,0.81
+978,Minecraft Remastered,PS3,2018.0,Shooter,Take-Two Interactive,0.48,1.25,0.21,0.03,1.97
+979,Halo V,PC,2022.0,Sports,Ubisoft,0.23,1.92,0.22,0.39,2.76
+980,God of War Origins,X360,2017.0,Sports,Sony Computer Entertainment,0.31,0.13,0.59,0.16,1.19
+981,Pokemon 2022,PS5,2020.0,Action,Ubisoft,0.2,2.04,0.17,0.08,2.49
+982,The Legend of Zelda 2024,PS3,2020.0,Shooter,Nintendo,0.29,4.17,0.94,0.46,5.86
+983,Halo 2023,XOne,2020.0,Racing,Nintendo,0.02,0.46,0.01,0.17,0.66
+984,Red Dead Redemption Infinite,PC,2021.0,Sports,Ubisoft,1.68,0.61,0.27,0.06,2.62
+985,Forza Horizon Infinite,Switch,2019.0,Sports,Activision,0.24,0.82,0.51,0.21,1.78
+986,God of War Ultra,PC,2015.0,Action,Take-Two Interactive,1.35,1.22,0.18,0.3,3.05
+987,The Legend of Zelda Remastered,PS3,2021.0,Sports,Sony Computer Entertainment,0.71,0.32,0.38,0.02,1.43
+988,Mario Kart 2023,PS5,2017.0,Sports,Take-Two Interactive,0.01,0.26,0.03,0.27,0.57
+989,Forza Horizon 2024,XOne,2017.0,Role-Playing,Sony Computer Entertainment,0.84,1.32,0.46,0.06,2.68
+990,Minecraft Ultra,PC,2022.0,Role-Playing,Electronic Arts,0.89,0.17,0.59,0.07,1.72
+991,The Legend of Zelda V,Switch,2021.0,Shooter,Sony Computer Entertainment,0.2,1.01,0.44,0.16,1.81
+992,The Legend of Zelda 2023,XSX,2020.0,Action,Activision,0.15,0.49,0.09,0.46,1.19
+993,Mario Kart 2023,PS3,2019.0,Adventure,Nintendo,1.07,0.4,0.44,0.14,2.05
+994,The Legend of Zelda Ultra,X360,2023.0,Sports,Take-Two Interactive,2.97,0.34,0.03,0.17,3.51
+995,Red Dead Redemption 2024,PS5,2015.0,Platform,Electronic Arts,0.24,0.69,0.78,0.04,1.75
+996,FIFA Soccer 2024,XOne,2019.0,Adventure,Take-Two Interactive,4.7,0.16,0.44,0.1,5.4
+997,Mario Kart Infinite,X360,2021.0,Sports,Take-Two Interactive,0.04,0.42,0.03,0.59,1.08
+998,God of War Remastered,PS5,2018.0,Role-Playing,Electronic Arts,1.15,0.03,0.0,0.02,1.2
+999,God of War V,XSX,2015.0,Platform,Sony Computer Entertainment,2.99,0.32,0.04,0.07,3.42
+1000,FIFA Soccer V,PS4,2017.0,Role-Playing,Electronic Arts,1.48,0.79,1.29,0.19,3.75
+1001,Cyberpunk Ultra,XOne,2021.0,Sports,Ubisoft,1.59,0.02,0.21,0.08,1.9
+1002,The Legend of Zelda V,PC,,Adventure,Nintendo,2.35,0.68,0.15,0.11,3.29
+1003,Red Dead Redemption 2022,Switch,2019.0,Sports,Take-Two Interactive,0.06,0.13,0.47,0.11,0.77
+1004,Forza Horizon V,XSX,2015.0,Sports,Ubisoft,1.86,0.07,0.29,0.0,2.22
+1005,Forza Horizon Origins,XSX,2020.0,Adventure,Take-Two Interactive,2.24,0.53,0.12,0.04,2.93
+1006,God of War V,XSX,2021.0,Sports,Take-Two Interactive,0.01,0.45,0.07,0.6,1.13
+1007,FIFA Soccer 2022,XOne,2016.0,Platform,Take-Two Interactive,0.33,0.55,0.16,0.38,1.42
+1008,Cyberpunk 2023,PC,2019.0,Adventure,Take-Two Interactive,0.27,1.0,0.14,0.08,1.49
+1009,Red Dead Redemption V,PS3,2016.0,Sports,Nintendo,1.44,0.08,0.38,0.28,2.18
+1010,Grand Theft Auto 2022,X360,2019.0,Platform,Nintendo,2.92,0.34,0.99,0.6,4.85
+1011,Cyberpunk Infinite,PS4,2023.0,Platform,Nintendo,0.18,0.25,0.89,0.11,1.43
+1012,The Legend of Zelda 2022,PS3,2023.0,Action,Ubisoft,0.84,0.08,0.18,1.9,3.0
+1013,Red Dead Redemption 2022,PS4,2021.0,Adventure,Activision,3.36,0.39,0.46,0.24,4.45
+1014,Call of Duty Remastered,Switch,2022.0,Role-Playing,Ubisoft,0.11,0.45,0.04,0.61,1.21
+1015,Forza Horizon 2024,X360,2022.0,Sports,Sony Computer Entertainment,0.47,1.08,0.42,0.27,2.24
+1016,Call of Duty 2024,PC,2022.0,Sports,Activision,0.74,0.67,0.38,0.03,1.82
+1017,Pokemon 2023,XOne,2021.0,Shooter,Activision,1.53,1.48,0.19,0.12,3.32
+1018,Mario Kart Remastered,PS3,2020.0,Role-Playing,Sony Computer Entertainment,2.65,1.63,0.25,0.1,4.63
+1019,Halo 2022,XOne,2020.0,Platform,Electronic Arts,0.15,1.56,0.68,0.73,3.12
+1020,Halo Ultra,XSX,2017.0,Sports,Ubisoft,2.21,0.03,0.31,0.36,2.91
+1021,Grand Theft Auto 2022,PS3,2016.0,Platform,Nintendo,0.77,0.01,0.0,0.07,0.85
+1022,Forza Horizon 2024,PS3,2022.0,Adventure,Sony Computer Entertainment,0.01,0.03,0.36,0.08,0.48
+1023,God of War Origins,PS4,2015.0,Shooter,Activision,3.52,0.19,0.11,0.37,4.19
+1024,Call of Duty Remastered,PS4,2022.0,Shooter,Take-Two Interactive,0.7,0.1,0.14,0.01,0.95
+1025,Grand Theft Auto 2024,Switch,2018.0,Adventure,Ubisoft,0.82,0.52,0.18,0.37,1.89
+1026,God of War 2023,XSX,2016.0,Adventure,Ubisoft,0.29,0.13,0.32,0.29,1.03
+1027,Halo 2024,Switch,2020.0,Racing,Activision,0.1,0.33,0.04,0.19,0.66
+1028,Call of Duty 2023,PS5,2022.0,Action,Sony Computer Entertainment,0.76,0.03,0.28,0.31,1.38
+1029,Call of Duty Ultra,PS3,2023.0,Adventure,Sony Computer Entertainment,4.23,2.69,0.16,0.08,7.16
+1030,FIFA Soccer Remastered,X360,2021.0,Sports,Ubisoft,0.45,0.97,0.08,0.08,1.58
+1031,Call of Duty V,PS4,2021.0,Racing,Nintendo,0.03,0.78,0.09,0.28,1.18
+1032,The Legend of Zelda Ultra,XSX,2015.0,Shooter,Activision,1.26,0.83,0.0,0.49,2.58
+1033,Cyberpunk V,PS4,2022.0,Role-Playing,Activision,1.08,0.49,0.01,0.0,1.58
+1034,Cyberpunk Infinite,PS3,2020.0,Adventure,Activision,2.71,1.62,0.14,0.02,4.49
+1035,Cyberpunk 2022,XSX,2016.0,Role-Playing,Ubisoft,0.21,0.52,0.2,0.17,1.1
+1036,Minecraft Ultra,XOne,2023.0,Action,Electronic Arts,0.67,1.33,0.53,0.13,2.66
+1037,Call of Duty Remastered,X360,2022.0,Action,Activision,0.67,0.59,0.05,0.18,1.49
+1038,The Legend of Zelda Infinite,PS5,2022.0,Adventure,Activision,0.64,0.47,0.16,0.19,1.46
+1039,Halo Remastered,XOne,2023.0,Shooter,Sony Computer Entertainment,0.16,0.8,0.11,0.0,1.07
+1040,Pokemon Remastered,Switch,2017.0,Racing,Ubisoft,0.31,1.01,0.27,0.06,1.65
+1041,Grand Theft Auto 2022,PS3,2019.0,Shooter,Ubisoft,0.77,1.52,0.34,0.57,3.2
+1042,Minecraft Origins,Switch,2016.0,Role-Playing,Electronic Arts,0.38,0.27,0.08,0.52,1.25
+1043,FIFA Soccer 2022,PS4,2015.0,Shooter,Activision,0.33,0.57,0.12,0.49,1.51
+1044,Red Dead Redemption 2024,Switch,2023.0,Sports,Electronic Arts,0.35,0.63,0.07,0.16,1.21
+1045,God of War Remastered,PS5,2023.0,Racing,Nintendo,0.02,0.96,0.09,0.01,1.08
+1046,FIFA Soccer Infinite,PS3,2021.0,Platform,Take-Two Interactive,0.1,0.92,0.34,0.28,1.64
+1047,Mario Kart Remastered,X360,2017.0,Racing,Electronic Arts,4.26,0.07,0.77,0.16,5.26
+1048,Call of Duty V,XSX,2021.0,Sports,Activision,2.86,1.41,0.03,0.03,4.33
+1049,Minecraft Infinite,XOne,2020.0,Adventure,Take-Two Interactive,0.73,3.06,0.62,0.11,4.52
+1050,Pokemon Ultra,X360,,Shooter,Take-Two Interactive,0.09,1.0,0.0,0.01,1.1
+1051,Red Dead Redemption Remastered,PS5,2019.0,Action,Electronic Arts,0.24,0.39,0.85,0.14,1.62
+1052,Call of Duty Infinite,Switch,2015.0,Platform,Ubisoft,0.32,0.44,0.46,0.91,2.13
+1053,God of War Infinite,XSX,2022.0,Racing,Activision,0.45,0.03,0.05,0.62,1.15
+1054,Halo V,PC,2023.0,Platform,Activision,0.17,0.98,0.71,0.14,2.0
+1055,FIFA Soccer Ultra,XSX,2022.0,Action,Sony Computer Entertainment,0.7,0.31,0.29,0.26,1.56
+1056,Halo V,PC,2022.0,Shooter,Nintendo,0.53,0.32,0.18,0.11,1.14
+1057,The Legend of Zelda Remastered,X360,2023.0,Action,Take-Two Interactive,0.22,0.11,0.27,0.25,0.85
+1058,Mario Kart Remastered,PS5,2020.0,Action,Nintendo,2.18,1.79,0.06,0.03,4.06
+1059,Halo Origins,X360,2016.0,Action,Ubisoft,0.7,2.38,0.56,0.1,3.74
+1060,Cyberpunk Ultra,PS3,2023.0,Action,Take-Two Interactive,0.19,0.17,1.08,0.04,1.48
+1061,FIFA Soccer Ultra,X360,2015.0,Action,Sony Computer Entertainment,0.37,2.22,0.52,0.3,3.41
+1062,Pokemon V,XOne,2017.0,Adventure,Take-Two Interactive,1.01,0.32,0.46,0.46,2.25
+1063,FIFA Soccer Remastered,Switch,2023.0,Role-Playing,Sony Computer Entertainment,1.22,3.68,0.32,0.33,5.55
+1064,Grand Theft Auto Infinite,Switch,2020.0,Sports,Take-Two Interactive,3.97,0.25,0.38,0.13,4.73
+1065,God of War V,PS5,2021.0,Role-Playing,Nintendo,2.57,1.35,0.18,0.07,4.17
+1066,God of War Infinite,Switch,2019.0,Racing,Take-Two Interactive,4.02,1.94,0.05,0.12,6.13
+1067,Halo 2024,PS5,2022.0,Platform,Activision,1.26,0.19,0.19,0.6,2.24
+1068,Grand Theft Auto 2022,XOne,,Action,Nintendo,1.61,0.22,0.02,0.47,2.32
+1069,Forza Horizon Origins,PS5,2017.0,Sports,Activision,0.01,0.21,0.04,0.24,0.5
+1070,Minecraft Ultra,X360,2015.0,Shooter,Take-Two Interactive,0.27,0.05,0.23,0.02,0.57
+1071,Halo Origins,PS3,2015.0,Adventure,Electronic Arts,0.44,0.47,0.31,0.17,1.39
+1072,Red Dead Redemption Origins,PS5,2020.0,Role-Playing,Take-Two Interactive,0.1,0.11,0.53,0.5,1.24
+1073,The Legend of Zelda V,Switch,2022.0,Role-Playing,Take-Two Interactive,3.37,0.04,0.27,0.14,3.82
+1074,God of War Infinite,Switch,2018.0,Role-Playing,Take-Two Interactive,0.21,0.3,0.12,0.27,0.9
+1075,Mario Kart Origins,X360,2018.0,Adventure,Take-Two Interactive,0.69,0.11,0.31,0.02,1.13
+1076,Call of Duty Remastered,X360,2022.0,Sports,Sony Computer Entertainment,3.49,0.08,0.08,0.01,3.66
+1077,Minecraft Ultra,PS3,2020.0,Sports,Activision,0.23,0.2,0.1,0.15,0.68
+1078,Minecraft Remastered,X360,2021.0,Action,Sony Computer Entertainment,2.47,0.01,0.34,0.16,2.98
+1079,Mario Kart Remastered,X360,,Adventure,Take-Two Interactive,0.91,0.72,0.31,0.17,2.11
+1080,Grand Theft Auto Remastered,PS5,2022.0,Sports,Sony Computer Entertainment,0.24,0.19,0.32,0.61,1.36
+1081,Minecraft Infinite,PC,2017.0,Adventure,Ubisoft,0.17,0.34,0.15,0.18,0.84
+1082,FIFA Soccer 2022,XOne,2021.0,Role-Playing,Take-Two Interactive,0.13,0.68,0.01,0.13,0.95
+1083,Minecraft Ultra,XSX,2019.0,Sports,Take-Two Interactive,0.4,0.92,0.56,0.3,2.18
+1084,Grand Theft Auto Infinite,XOne,2015.0,Action,Activision,0.71,2.32,0.07,0.02,3.12
+1085,FIFA Soccer 2024,Switch,2021.0,Shooter,Activision,1.93,1.49,0.25,0.12,3.79
+1086,Forza Horizon Ultra,PS5,,Racing,Activision,2.35,0.47,0.27,0.04,3.13
+1087,God of War V,X360,2022.0,Adventure,Electronic Arts,0.25,0.16,0.0,0.37,0.78
+1088,Halo Ultra,X360,2023.0,Platform,Electronic Arts,3.4,0.23,0.39,0.14,4.16
+1089,Call of Duty Origins,PS5,2016.0,Role-Playing,Take-Two Interactive,3.41,0.17,0.64,0.41,4.63
+1090,Red Dead Redemption V,PS4,2018.0,Role-Playing,Activision,0.64,0.14,1.21,0.03,2.02
+1091,FIFA Soccer 2024,PS4,2023.0,Sports,Nintendo,3.1,1.15,1.08,0.01,5.34
+1092,FIFA Soccer V,PS5,2018.0,Action,Activision,2.41,0.95,0.15,0.12,3.63
+1093,Grand Theft Auto Infinite,PS4,2021.0,Racing,Activision,1.04,0.36,0.07,0.37,1.84
+1094,The Legend of Zelda Origins,PC,2015.0,Shooter,Sony Computer Entertainment,0.29,0.6,0.18,0.22,1.29
+1095,God of War Origins,PS4,2018.0,Platform,Activision,1.16,0.13,0.31,0.05,1.65
+1096,Call of Duty V,PS3,2023.0,Racing,Ubisoft,1.34,0.21,0.48,0.25,2.28
+1097,Forza Horizon 2023,XOne,2019.0,Action,Take-Two Interactive,0.63,0.18,0.07,0.0,0.88
+1098,Red Dead Redemption 2023,PC,2017.0,Adventure,Activision,0.42,0.36,0.33,0.25,1.36
+1099,Forza Horizon V,Switch,2019.0,Adventure,,1.35,0.89,0.07,0.28,2.59
+1100,The Legend of Zelda 2022,PC,2020.0,Sports,Ubisoft,0.82,2.35,0.27,0.27,3.71
+1101,Minecraft 2024,PS5,2023.0,Role-Playing,Ubisoft,0.14,1.43,0.37,0.22,2.16
+1102,Cyberpunk Ultra,XSX,2018.0,Sports,Activision,0.06,2.47,0.04,0.3,2.87
+1103,Pokemon Origins,PS4,2017.0,Platform,Ubisoft,0.29,0.1,0.14,0.07,0.6
+1104,Halo V,PC,2022.0,Racing,Sony Computer Entertainment,2.12,0.51,0.61,0.09,3.33
+1105,Halo Infinite,PS5,2016.0,Sports,Activision,0.75,1.56,0.03,0.15,2.49
+1106,Minecraft Ultra,XSX,2020.0,Adventure,Nintendo,3.29,0.33,0.03,0.18,3.83
+1107,Mario Kart 2023,Switch,2016.0,Platform,Activision,1.07,0.7,0.1,0.6,2.47
+1108,Red Dead Redemption 2024,PC,2017.0,Platform,Sony Computer Entertainment,0.63,0.65,0.16,0.06,1.5
+1109,Cyberpunk Remastered,PS4,2016.0,Sports,Ubisoft,1.98,0.36,0.28,0.04,2.66
+1110,Mario Kart Infinite,PS4,2021.0,Shooter,Electronic Arts,1.73,0.55,0.11,0.04,2.43
+1111,Pokemon Infinite,XOne,2022.0,Racing,Take-Two Interactive,0.38,0.23,0.29,0.19,1.09
+1112,Red Dead Redemption V,X360,2016.0,Sports,Take-Two Interactive,0.01,0.52,0.16,0.03,0.72
+1113,Mario Kart 2024,XSX,2021.0,Racing,Sony Computer Entertainment,0.39,0.7,0.16,0.87,2.12
+1114,Forza Horizon Remastered,PS3,2019.0,Racing,Activision,1.19,0.3,0.12,0.1,1.71
+1115,Mario Kart 2023,X360,2023.0,Shooter,Nintendo,0.23,0.03,0.87,0.65,1.78
+1116,FIFA Soccer Remastered,PS5,2017.0,Sports,Ubisoft,1.5,1.82,0.78,0.12,4.22
+1117,Minecraft Infinite,XSX,,Sports,Take-Two Interactive,0.54,0.42,0.05,0.64,1.65
+1118,Pokemon Remastered,XSX,2018.0,Role-Playing,Take-Two Interactive,1.3,0.72,0.63,0.11,2.76
+1119,Grand Theft Auto Infinite,XOne,2023.0,Sports,Electronic Arts,1.25,0.86,0.29,0.47,2.87
+1120,Cyberpunk Infinite,XOne,2017.0,Adventure,Ubisoft,2.44,0.71,0.75,0.2,4.1
+1121,Pokemon Infinite,PS5,2017.0,Shooter,Nintendo,5.56,0.08,0.08,0.52,6.24
+1122,The Legend of Zelda Infinite,PC,2021.0,Role-Playing,Ubisoft,1.33,0.03,0.71,0.17,2.24
+1123,Call of Duty Infinite,PS4,2021.0,Action,Take-Two Interactive,0.02,0.25,0.0,0.13,0.4
+1124,Red Dead Redemption V,PC,2018.0,Platform,Sony Computer Entertainment,0.08,2.76,0.65,0.08,3.57
+1125,Halo 2022,PS4,2015.0,Role-Playing,Ubisoft,1.63,0.15,0.44,0.35,2.57
+1126,Forza Horizon 2023,PC,2021.0,Role-Playing,Electronic Arts,0.32,0.37,0.03,0.07,0.79
+1127,The Legend of Zelda Infinite,PS5,2019.0,Sports,Electronic Arts,0.45,0.57,0.23,0.08,1.33
+1128,Forza Horizon 2023,PC,2016.0,Adventure,Sony Computer Entertainment,0.58,0.26,0.04,0.43,1.31
+1129,Cyberpunk 2022,Switch,2018.0,Adventure,Take-Two Interactive,0.7,1.17,0.03,0.37,2.27
+1130,Red Dead Redemption Origins,PC,2017.0,Platform,Nintendo,3.49,0.71,0.0,0.02,4.22
+1131,Cyberpunk V,X360,2017.0,Action,Take-Two Interactive,0.12,1.25,0.23,0.09,1.69
+1132,Forza Horizon 2022,XSX,2023.0,Shooter,Ubisoft,0.21,1.35,0.15,0.69,2.4
+1133,The Legend of Zelda Infinite,XSX,2017.0,Shooter,Ubisoft,0.02,1.03,0.54,0.13,1.72
+1134,Minecraft 2023,PS3,2020.0,Shooter,Nintendo,0.91,0.14,0.11,0.58,1.74
+1135,Forza Horizon V,X360,2019.0,Role-Playing,Electronic Arts,1.06,0.13,0.05,0.0,1.24
+1136,Grand Theft Auto 2024,XSX,2017.0,Adventure,Activision,1.96,0.3,0.86,0.05,3.17
+1137,Halo Infinite,PC,2022.0,Role-Playing,Nintendo,0.47,0.69,0.08,0.02,1.26
+1138,Call of Duty Ultra,X360,2018.0,Adventure,Sony Computer Entertainment,0.51,0.26,0.1,0.05,0.92
+1139,Grand Theft Auto Origins,X360,2022.0,Platform,Activision,0.43,0.22,0.23,0.63,1.51
+1140,Red Dead Redemption Infinite,PS3,2022.0,Role-Playing,Ubisoft,0.15,0.25,0.54,0.1,1.04
+1141,Grand Theft Auto Remastered,Switch,2015.0,Racing,Take-Two Interactive,1.55,1.86,0.74,0.37,4.52
+1142,Minecraft Origins,XSX,2016.0,Role-Playing,Activision,0.35,1.44,0.1,0.01,1.9
+1143,Mario Kart 2022,Switch,2021.0,Sports,Activision,2.71,0.43,0.17,0.3,3.61
+1144,Forza Horizon 2024,PS4,2017.0,Action,,0.03,0.5,0.19,0.2,0.92
+1145,The Legend of Zelda 2022,XSX,2020.0,Shooter,Sony Computer Entertainment,0.71,0.35,0.13,0.48,1.67
+1146,The Legend of Zelda 2022,PS3,2019.0,Adventure,Take-Two Interactive,0.03,0.38,0.68,0.08,1.17
+1147,Red Dead Redemption 2024,X360,2021.0,Platform,Sony Computer Entertainment,0.26,0.31,0.3,0.53,1.4
+1148,Red Dead Redemption Infinite,PS3,2021.0,Adventure,Nintendo,0.05,0.22,0.44,0.02,0.73
+1149,Minecraft Origins,PS3,2021.0,Sports,Activision,1.05,0.04,0.28,0.06,1.43
+1150,The Legend of Zelda 2024,PS5,2023.0,Adventure,Ubisoft,1.98,0.3,0.16,0.11,2.55
+1151,Cyberpunk 2023,XOne,2023.0,Platform,Sony Computer Entertainment,3.39,0.12,0.37,0.02,3.9
+1152,Cyberpunk 2023,XOne,2017.0,Action,Activision,1.01,0.49,0.13,0.73,2.36
+1153,The Legend of Zelda 2022,PS4,2017.0,Sports,Activision,0.64,0.1,0.54,0.01,1.29
+1154,Grand Theft Auto Origins,PS4,2016.0,Action,Sony Computer Entertainment,0.68,0.14,0.27,0.34,1.43
+1155,Red Dead Redemption V,PS3,2018.0,Role-Playing,Nintendo,0.75,0.1,0.17,0.46,1.48
+1156,Forza Horizon 2022,XSX,2022.0,Adventure,Nintendo,0.02,0.11,0.46,0.86,1.45
+1157,Forza Horizon 2023,XSX,2020.0,Adventure,Nintendo,1.54,2.21,0.03,0.2,3.98
+1158,Cyberpunk 2023,PS3,2019.0,Platform,Activision,0.62,2.0,0.18,0.34,3.14
+1159,Red Dead Redemption 2023,PS5,2016.0,Shooter,Electronic Arts,0.02,1.03,0.13,0.09,1.27
+1160,FIFA Soccer 2024,Switch,2020.0,Role-Playing,Activision,1.11,0.11,0.4,0.08,1.7
+1161,Halo Ultra,PS3,2020.0,Sports,Electronic Arts,0.06,1.5,0.3,0.17,2.03
+1162,Forza Horizon V,PS5,2022.0,Role-Playing,Take-Two Interactive,1.9,0.9,0.03,0.29,3.12
+1163,Red Dead Redemption Origins,XOne,2015.0,Adventure,Ubisoft,3.13,0.6,0.53,0.11,4.37
+1164,Grand Theft Auto Origins,Switch,2018.0,Platform,Sony Computer Entertainment,1.82,0.11,0.99,0.25,3.17
+1165,Grand Theft Auto V,Switch,2017.0,Shooter,Take-Two Interactive,0.39,2.57,0.3,0.2,3.46
+1166,Cyberpunk 2024,X360,2021.0,Racing,Activision,0.03,0.41,1.28,0.03,1.75
+1167,FIFA Soccer Origins,X360,2021.0,Action,Sony Computer Entertainment,0.09,0.79,0.12,0.28,1.28
+1168,Halo 2023,PS3,2018.0,Platform,Nintendo,0.27,5.23,0.17,0.3,5.97
+1169,Halo Remastered,PC,2015.0,Racing,Sony Computer Entertainment,1.02,0.39,0.24,0.21,1.86
+1170,Grand Theft Auto 2024,PS5,2018.0,Platform,Ubisoft,0.72,2.25,0.1,0.13,3.2
+1171,Red Dead Redemption V,Switch,2016.0,Shooter,Electronic Arts,0.35,5.85,0.11,0.54,6.85
+1172,Minecraft V,PS3,2020.0,Sports,Take-Two Interactive,0.19,0.33,0.12,0.01,0.65
+1173,Mario Kart Origins,XSX,2017.0,Platform,,0.52,0.12,0.37,0.48,1.49
+1174,FIFA Soccer 2023,PS4,2022.0,Sports,Activision,0.32,0.69,1.0,0.06,2.07
+1175,FIFA Soccer Origins,PS3,2018.0,Shooter,Take-Two Interactive,1.14,0.63,0.41,0.1,2.28
+1176,Forza Horizon Infinite,XSX,2016.0,Action,Sony Computer Entertainment,1.04,0.04,0.04,0.5,1.62
+1177,God of War Origins,XSX,2019.0,Platform,Electronic Arts,2.17,1.38,0.04,0.47,4.06
+1178,Forza Horizon Infinite,PC,2017.0,Platform,Sony Computer Entertainment,0.99,0.17,0.66,0.41,2.23
+1179,Mario Kart Infinite,XSX,2017.0,Shooter,Take-Two Interactive,0.15,2.36,0.25,0.09,2.85
+1180,Forza Horizon Infinite,X360,2017.0,Adventure,Ubisoft,0.78,0.22,0.12,0.5,1.62
+1181,The Legend of Zelda Origins,PC,2019.0,Adventure,Electronic Arts,2.27,1.28,0.22,0.04,3.81
+1182,Cyberpunk 2022,XOne,2018.0,Shooter,Activision,1.71,0.35,0.05,0.01,2.12
+1183,Forza Horizon Origins,PC,2020.0,Action,Nintendo,1.69,0.31,0.01,0.62,2.63
+1184,God of War Remastered,PS3,2021.0,Adventure,Activision,0.94,0.49,0.1,0.16,1.69
+1185,Cyberpunk 2023,PS3,2020.0,Adventure,Nintendo,0.42,0.38,0.29,0.24,1.33
+1186,Cyberpunk V,PS3,2022.0,Adventure,Nintendo,0.03,0.39,0.22,0.28,0.92
+1187,Mario Kart V,Switch,2018.0,Adventure,Activision,0.62,0.04,0.06,0.15,0.87
+1188,The Legend of Zelda Remastered,XOne,2020.0,Sports,Electronic Arts,0.94,1.43,0.35,0.01,2.73
+1189,Call of Duty 2022,PS4,2020.0,Sports,Activision,0.41,0.77,0.23,0.06,1.47
+1190,God of War V,XSX,2023.0,Racing,Ubisoft,0.14,1.13,0.03,0.15,1.45
+1191,The Legend of Zelda Remastered,PS3,2023.0,Sports,Sony Computer Entertainment,0.05,0.15,0.04,0.05,0.29
+1192,Mario Kart 2022,X360,2021.0,Platform,Activision,0.18,0.81,0.9,1.43,3.32
+1193,Grand Theft Auto 2024,PS4,2016.0,Role-Playing,Take-Two Interactive,0.58,0.18,0.15,0.02,0.93
+1194,Grand Theft Auto Remastered,PS5,2017.0,Sports,Ubisoft,0.07,0.02,1.09,0.05,1.23
+1195,Call of Duty V,XOne,2019.0,Sports,Sony Computer Entertainment,1.32,1.88,0.49,0.08,3.77
+1196,Pokemon Remastered,XOne,2020.0,Action,Electronic Arts,4.62,1.35,0.05,0.0,6.02
+1197,Call of Duty Remastered,XSX,2019.0,Racing,Sony Computer Entertainment,0.27,0.41,0.21,0.42,1.31
+1198,God of War Remastered,Switch,2017.0,Adventure,Take-Two Interactive,1.12,0.47,0.33,0.31,2.23
+1199,Pokemon Origins,PS3,2016.0,Adventure,Activision,0.28,3.46,0.11,0.03,3.88
+1200,Red Dead Redemption Infinite,PC,2015.0,Racing,Electronic Arts,1.38,1.04,0.33,0.51,3.26
+1201,Red Dead Redemption 2022,Switch,2018.0,Action,Electronic Arts,5.31,0.16,0.19,0.51,6.17
+1202,Forza Horizon Origins,XSX,2022.0,Action,Electronic Arts,0.51,3.99,1.58,0.03,6.11
+1203,Grand Theft Auto 2024,XSX,2021.0,Platform,Nintendo,3.11,0.17,0.05,0.07,3.4
+1204,The Legend of Zelda Infinite,XSX,2018.0,Role-Playing,Ubisoft,1.18,0.46,0.47,0.43,2.54
+1205,Halo V,X360,2016.0,Platform,Activision,0.68,5.6,0.55,0.34,7.17
+1206,FIFA Soccer Origins,PS4,2020.0,Sports,Electronic Arts,0.61,0.6,0.13,0.25,1.59
+1207,God of War Infinite,PS3,2018.0,Adventure,Ubisoft,0.91,0.1,0.23,0.11,1.35
+1208,Call of Duty 2022,PS5,2015.0,Platform,Ubisoft,1.71,0.11,0.03,0.01,1.86
+1209,Grand Theft Auto Ultra,XOne,2022.0,Action,Ubisoft,0.04,0.22,0.05,0.54,0.85
+1210,Grand Theft Auto 2023,PS4,2018.0,Role-Playing,Sony Computer Entertainment,0.0,1.01,0.04,0.07,1.12
+1211,FIFA Soccer 2024,Switch,2023.0,Adventure,Nintendo,0.76,0.33,0.11,0.02,1.22
+1212,Forza Horizon 2024,PS3,2019.0,Shooter,Activision,1.26,0.43,0.36,0.35,2.4
+1213,The Legend of Zelda Ultra,PC,2019.0,Platform,Sony Computer Entertainment,1.41,1.72,0.29,0.03,3.45
+1214,Red Dead Redemption Infinite,PS5,2020.0,Platform,,0.29,0.08,1.17,0.09,1.63
+1215,Cyberpunk Infinite,PS3,2017.0,Adventure,Activision,1.5,1.35,0.35,0.14,3.34
+1216,Forza Horizon 2023,Switch,2020.0,Adventure,Activision,0.36,0.17,0.09,0.35,0.97
+1217,Pokemon Origins,PC,2020.0,Role-Playing,Ubisoft,5.52,0.11,0.02,0.3,5.95
+1218,The Legend of Zelda 2023,XSX,2019.0,Racing,Activision,2.07,0.3,0.07,0.2,2.64
+1219,Cyberpunk 2022,Switch,2015.0,Sports,Electronic Arts,1.25,1.65,0.14,0.46,3.5
+1220,God of War Origins,XSX,2023.0,Racing,Ubisoft,1.2,0.13,0.03,0.21,1.57
+1221,Halo V,XOne,2021.0,Racing,Electronic Arts,0.02,0.03,0.35,0.45,0.85
+1222,Halo Ultra,PC,2020.0,Adventure,Activision,0.42,0.85,0.03,0.07,1.37
+1223,God of War 2022,X360,2018.0,Sports,Activision,0.66,3.1,0.96,0.1,4.82
+1224,God of War 2022,XOne,2016.0,Action,Nintendo,0.08,0.41,0.26,0.48,1.23
+1225,Mario Kart V,XSX,2020.0,Sports,Nintendo,0.41,0.56,0.12,0.35,1.44
+1226,Pokemon Remastered,XSX,2021.0,Shooter,Take-Two Interactive,0.25,0.78,0.13,0.47,1.63
+1227,Pokemon Remastered,PS4,2019.0,Shooter,Electronic Arts,0.13,0.82,0.22,0.57,1.74
+1228,Pokemon Remastered,PS4,2020.0,Role-Playing,Activision,0.94,0.19,0.07,0.03,1.23
+1229,Pokemon Remastered,XOne,2021.0,Sports,Take-Two Interactive,0.43,0.5,0.16,0.04,1.13
+1230,Red Dead Redemption Remastered,PS3,2022.0,Platform,Activision,0.03,1.16,0.26,0.25,1.7
+1231,FIFA Soccer 2024,Switch,2015.0,Role-Playing,Nintendo,0.92,0.76,0.24,0.08,2.0
+1232,Halo 2024,PS5,2019.0,Racing,Nintendo,0.21,1.65,0.41,0.27,2.54
+1233,Call of Duty V,PS3,2016.0,Sports,Nintendo,1.56,0.28,0.17,0.05,2.06
+1234,Halo V,X360,2016.0,Platform,Electronic Arts,0.09,0.51,0.49,0.39,1.48
+1235,Minecraft Origins,PC,2021.0,Action,Nintendo,0.44,2.05,0.09,1.13,3.71
+1236,FIFA Soccer V,XSX,2016.0,Action,Activision,0.13,0.1,0.13,0.36,0.72
+1237,Mario Kart 2022,Switch,2016.0,Sports,Activision,1.64,0.19,0.18,0.04,2.05
+1238,God of War Ultra,PC,,Action,Ubisoft,0.16,0.9,0.27,0.09,1.42
+1239,FIFA Soccer V,PS5,2016.0,Sports,Take-Two Interactive,1.09,0.63,0.08,0.11,1.91
+1240,The Legend of Zelda Remastered,PS4,2016.0,Platform,Take-Two Interactive,0.5,1.69,0.01,1.11,3.31
+1241,Mario Kart 2023,X360,2022.0,Adventure,Electronic Arts,0.89,1.5,0.22,0.23,2.84
+1242,Call of Duty Origins,X360,2023.0,Action,Sony Computer Entertainment,0.63,0.72,0.08,0.71,2.14
+1243,Cyberpunk Ultra,Switch,2022.0,Adventure,Ubisoft,0.77,0.15,0.32,0.93,2.17
+1244,God of War 2023,X360,2015.0,Shooter,Sony Computer Entertainment,1.06,0.57,1.43,1.02,4.08
+1245,FIFA Soccer 2023,X360,2023.0,Sports,Electronic Arts,0.44,0.15,0.19,0.03,0.81
+1246,Cyberpunk Remastered,PS4,2023.0,Action,Electronic Arts,1.05,3.02,0.04,0.06,4.17
+1247,Minecraft Origins,PS4,2021.0,Sports,Sony Computer Entertainment,0.06,1.55,0.79,0.02,2.42
+1248,Halo 2022,XOne,2017.0,Adventure,Electronic Arts,1.66,1.2,0.23,0.4,3.49
+1249,Grand Theft Auto Infinite,X360,2015.0,Role-Playing,Electronic Arts,0.58,1.15,0.03,0.37,2.13
+1250,FIFA Soccer Infinite,PS5,2020.0,Action,Take-Two Interactive,0.2,1.45,0.97,0.01,2.63
+1251,Halo Ultra,PS4,2016.0,Shooter,Nintendo,5.05,0.19,0.16,0.09,5.49
+1252,God of War V,PC,2015.0,Platform,Nintendo,0.61,0.42,1.34,0.16,2.53
+1253,Call of Duty 2024,PS5,2022.0,Shooter,Nintendo,0.25,0.3,0.11,0.09,0.75
+1254,Pokemon Remastered,PS3,2019.0,Action,Sony Computer Entertainment,1.4,0.76,0.34,0.11,2.61
+1255,The Legend of Zelda 2024,X360,,Racing,Activision,2.61,1.8,1.02,0.54,5.97
+1256,Cyberpunk Remastered,PS3,2021.0,Platform,Nintendo,2.67,0.17,0.28,1.06,4.18
+1257,Halo 2024,XSX,2021.0,Action,Activision,0.25,2.9,0.13,0.47,3.75
+1258,FIFA Soccer Ultra,PS4,2019.0,Shooter,Sony Computer Entertainment,0.07,0.17,0.32,0.48,1.04
+1259,Halo Infinite,XSX,2020.0,Sports,Nintendo,1.63,0.13,0.19,0.37,2.32
+1260,God of War Ultra,XSX,2022.0,Adventure,Activision,1.84,0.44,0.43,0.77,3.48
+1261,Grand Theft Auto 2022,PS3,2018.0,Action,Activision,1.38,0.6,0.69,0.09,2.76
+1262,Minecraft 2023,PS3,2015.0,Action,Sony Computer Entertainment,1.91,1.69,0.34,0.19,4.13
+1263,Forza Horizon Remastered,PS4,2022.0,Adventure,Ubisoft,0.19,0.61,0.08,0.34,1.22
+1264,FIFA Soccer 2023,XSX,2017.0,Adventure,Sony Computer Entertainment,0.05,0.2,1.06,0.97,2.28
+1265,Grand Theft Auto V,X360,2015.0,Role-Playing,Activision,0.12,0.1,0.26,0.38,0.86
+1266,The Legend of Zelda 2022,PS3,2020.0,Racing,Nintendo,1.96,0.49,0.27,0.08,2.8
+1267,FIFA Soccer Origins,XSX,2023.0,Racing,Activision,0.32,2.48,0.2,0.1,3.1
+1268,FIFA Soccer Remastered,PS5,2015.0,Role-Playing,Ubisoft,1.05,0.13,0.26,0.44,1.88
+1269,Grand Theft Auto 2023,XSX,2020.0,Adventure,Take-Two Interactive,0.92,1.25,0.25,0.11,2.53
+1270,Mario Kart Origins,X360,2022.0,Shooter,Ubisoft,1.13,1.22,0.17,0.23,2.75
+1271,Red Dead Redemption Remastered,X360,2016.0,Action,Take-Two Interactive,1.25,0.63,0.15,0.14,2.17
+1272,FIFA Soccer Infinite,PC,2018.0,Sports,Activision,0.67,0.02,0.25,0.18,1.12
+1273,FIFA Soccer 2024,PS3,2016.0,Role-Playing,Take-Two Interactive,0.11,0.78,0.75,0.09,1.73
+1274,Red Dead Redemption 2024,XOne,2019.0,Platform,Sony Computer Entertainment,1.17,0.38,1.21,0.27,3.03
+1275,Mario Kart 2023,PS3,2019.0,Shooter,Take-Two Interactive,0.19,0.58,0.47,0.14,1.38
+1276,Halo Infinite,XSX,2017.0,Action,Take-Two Interactive,2.49,0.25,0.74,0.44,3.92
+1277,Halo 2022,XSX,2018.0,Racing,Electronic Arts,0.95,0.87,0.38,0.07,2.27
+1278,The Legend of Zelda V,PC,2019.0,Role-Playing,Take-Two Interactive,1.77,0.29,0.19,0.0,2.25
+1279,The Legend of Zelda 2024,X360,2020.0,Racing,Sony Computer Entertainment,1.11,0.7,0.46,0.09,2.36
+1280,Halo Origins,PS4,2018.0,Shooter,Nintendo,2.53,0.27,0.69,0.04,3.53
+1281,Cyberpunk Ultra,PS3,2023.0,Shooter,Ubisoft,0.51,0.08,0.25,0.03,0.87
+1282,Red Dead Redemption Ultra,XSX,2017.0,Platform,Nintendo,0.34,0.19,0.43,0.74,1.7
+1283,Forza Horizon Infinite,Switch,2016.0,Adventure,Activision,0.09,0.03,0.36,0.14,0.62
+1284,Cyberpunk 2024,PS3,2018.0,Shooter,Take-Two Interactive,0.54,1.37,0.18,0.23,2.32
+1285,Grand Theft Auto 2024,XOne,2022.0,Shooter,Take-Two Interactive,1.47,0.98,1.29,0.18,3.92
+1286,Cyberpunk 2022,XSX,2023.0,Role-Playing,Take-Two Interactive,3.11,0.18,0.11,0.07,3.47
+1287,God of War Origins,PC,2018.0,Shooter,Activision,0.85,1.01,0.07,0.32,2.25
+1288,God of War 2022,PS5,2018.0,Sports,Activision,1.59,3.86,0.13,0.13,5.71
+1289,Cyberpunk 2023,PS3,2021.0,Role-Playing,,0.37,0.49,0.1,0.07,1.03
+1290,Forza Horizon Infinite,XSX,2017.0,Sports,Nintendo,1.02,0.88,0.32,0.15,2.37
+1291,Call of Duty Origins,PS5,2016.0,Action,Ubisoft,0.11,0.7,0.02,0.1,0.93
+1292,Cyberpunk Origins,Switch,2017.0,Sports,Take-Two Interactive,1.52,0.41,0.07,0.18,2.18
+1293,Minecraft 2024,PC,2017.0,Adventure,Sony Computer Entertainment,0.28,3.49,0.25,0.3,4.32
+1294,Grand Theft Auto Ultra,PS5,2017.0,Role-Playing,Nintendo,0.74,0.24,0.42,0.32,1.72
+1295,FIFA Soccer 2024,PS3,2020.0,Shooter,Nintendo,0.42,0.82,0.17,0.02,1.43
+1296,Call of Duty Remastered,X360,2023.0,Sports,Sony Computer Entertainment,1.04,0.15,0.01,0.01,1.21
+1297,Forza Horizon 2023,PS4,2016.0,Role-Playing,Activision,0.27,0.4,0.25,0.29,1.21
+1298,Mario Kart 2023,X360,2019.0,Racing,Nintendo,1.52,0.88,0.26,0.17,2.83
+1299,Forza Horizon V,PS3,2018.0,Platform,Take-Two Interactive,0.51,0.02,0.04,0.05,0.62
+1300,Call of Duty Origins,XSX,2022.0,Platform,Activision,0.79,0.36,0.39,0.09,1.63
+1301,Grand Theft Auto Ultra,XOne,2015.0,Role-Playing,Sony Computer Entertainment,0.41,0.14,0.52,0.22,1.29
+1302,Minecraft 2024,Switch,2020.0,Sports,Activision,1.45,0.76,0.07,0.04,2.32
+1303,Halo Remastered,Switch,2015.0,Racing,Electronic Arts,0.04,3.31,0.18,0.11,3.64
+1304,The Legend of Zelda V,Switch,2017.0,Adventure,Electronic Arts,1.52,0.26,0.14,0.12,2.04
+1305,Call of Duty Origins,PC,2022.0,Racing,Activision,0.19,0.72,0.68,0.03,1.62
+1306,FIFA Soccer Infinite,X360,2019.0,Role-Playing,Electronic Arts,6.03,0.16,1.21,0.12,7.52
+1307,Halo Ultra,PS4,2023.0,Platform,Sony Computer Entertainment,7.61,0.31,0.05,0.39,8.36
+1308,Red Dead Redemption Origins,XOne,2018.0,Platform,Ubisoft,1.18,2.01,0.15,0.05,3.39
+1309,Mario Kart 2022,XSX,2022.0,Adventure,Nintendo,0.36,2.29,0.65,0.02,3.32
+1310,Halo Remastered,PS4,2020.0,Shooter,Nintendo,0.26,1.29,0.29,0.16,2.0
+1311,Cyberpunk Origins,Switch,2022.0,Sports,Nintendo,2.11,0.41,0.39,0.19,3.1
+1312,Pokemon 2022,PS4,2019.0,Action,Electronic Arts,1.07,0.88,0.24,0.06,2.25
+1313,God of War Infinite,XSX,2015.0,Action,Activision,0.1,0.33,0.11,0.77,1.31
+1314,Forza Horizon 2023,X360,2016.0,Role-Playing,Take-Two Interactive,0.61,1.64,0.15,0.1,2.5
+1315,Forza Horizon Ultra,PS4,2023.0,Role-Playing,Ubisoft,0.94,1.34,0.46,0.55,3.29
+1316,Forza Horizon Ultra,PS5,2017.0,Action,Take-Two Interactive,2.01,0.38,0.23,0.71,3.33
+1317,The Legend of Zelda V,Switch,2021.0,Sports,Take-Two Interactive,1.04,0.41,0.0,0.03,1.48
+1318,Halo Infinite,XSX,2020.0,Sports,Nintendo,0.5,0.78,0.02,0.19,1.49
+1319,Red Dead Redemption 2022,PS4,2023.0,Platform,Sony Computer Entertainment,1.95,0.95,0.26,0.05,3.21
+1320,The Legend of Zelda Remastered,XSX,2021.0,Action,,1.35,2.9,0.67,0.1,5.02
+1321,Cyberpunk Ultra,PS3,2018.0,Racing,Activision,0.07,0.22,0.17,0.33,0.79
+1322,Call of Duty 2022,PC,2019.0,Racing,Take-Two Interactive,4.44,0.99,0.02,0.01,5.46
+1323,FIFA Soccer 2024,XSX,2022.0,Adventure,Take-Two Interactive,2.09,0.06,0.13,0.58,2.86
+1324,Mario Kart 2023,PC,2017.0,Shooter,Take-Two Interactive,2.79,2.19,0.05,0.01,5.04
+1325,God of War Infinite,PS3,2018.0,Sports,Nintendo,1.84,0.17,0.08,0.52,2.61
+1326,Cyberpunk 2022,X360,2018.0,Racing,Nintendo,0.59,0.03,0.12,0.36,1.1
+1327,Grand Theft Auto Ultra,Switch,2016.0,Platform,Activision,3.37,0.9,0.24,0.0,4.51
+1328,FIFA Soccer Infinite,PS4,2019.0,Adventure,Activision,0.49,0.44,0.03,0.01,0.97
+1329,Grand Theft Auto 2023,PS3,2018.0,Adventure,Electronic Arts,0.61,0.82,0.92,0.46,2.81
+1330,God of War 2023,PC,2019.0,Sports,Take-Two Interactive,2.89,0.42,2.03,0.22,5.56
+1331,Red Dead Redemption Infinite,XOne,2023.0,Role-Playing,Ubisoft,0.6,0.15,0.05,0.31,1.11
+1332,Minecraft 2024,X360,2019.0,Role-Playing,Ubisoft,0.57,1.59,0.06,0.2,2.42
+1333,FIFA Soccer 2023,PS5,2022.0,Shooter,Take-Two Interactive,3.18,0.25,0.06,0.17,3.66
+1334,Pokemon V,XOne,2020.0,Sports,Ubisoft,1.0,0.26,0.09,0.93,2.28
+1335,Cyberpunk 2023,PS4,2017.0,Racing,Ubisoft,0.48,0.45,0.52,0.36,1.81
+1336,Call of Duty Infinite,PC,2021.0,Shooter,Nintendo,3.23,0.03,0.01,0.11,3.38
+1337,Forza Horizon Origins,XSX,2018.0,Action,Take-Two Interactive,1.17,0.92,0.81,0.04,2.94
+1338,Call of Duty V,X360,2016.0,Role-Playing,Activision,0.55,2.07,0.56,0.12,3.3
+1339,The Legend of Zelda Infinite,PS4,2020.0,Platform,Sony Computer Entertainment,0.48,1.32,0.08,0.15,2.03
+1340,Pokemon Infinite,XSX,2023.0,Platform,Activision,0.51,0.89,0.78,0.42,2.6
+1341,Minecraft 2023,PC,2020.0,Sports,Nintendo,0.15,1.97,0.05,0.19,2.36
+1342,Forza Horizon 2022,Switch,2016.0,Racing,Activision,0.91,0.94,0.23,0.14,2.22
+1343,Cyberpunk V,Switch,2021.0,Shooter,Nintendo,0.39,0.51,0.03,0.01,0.94
+1344,The Legend of Zelda Origins,PC,2017.0,Platform,Electronic Arts,0.55,3.44,0.17,0.09,4.25
+1345,Minecraft 2022,PS4,2015.0,Role-Playing,Activision,0.47,0.16,0.0,0.18,0.81
+1346,Forza Horizon Infinite,X360,2020.0,Shooter,Sony Computer Entertainment,2.02,0.13,0.58,0.28,3.01
+1347,Red Dead Redemption 2023,PC,2018.0,Sports,Activision,0.24,2.26,0.43,0.3,3.23
+1348,FIFA Soccer 2023,PS4,2015.0,Role-Playing,Nintendo,0.58,1.01,0.03,0.08,1.7
+1349,FIFA Soccer V,PS4,2016.0,Shooter,Activision,2.97,0.22,0.35,0.92,4.46
+1350,Mario Kart V,PC,2016.0,Platform,Electronic Arts,1.42,0.9,0.12,0.05,2.49
+1351,Grand Theft Auto Ultra,PS3,2016.0,Adventure,Nintendo,0.26,0.25,0.03,0.11,0.65
+1352,Cyberpunk V,XOne,2023.0,Shooter,Activision,0.37,0.23,0.35,0.05,1.0
+1353,Red Dead Redemption 2023,PS3,2017.0,Action,Activision,0.42,0.62,0.35,0.14,1.53
+1354,God of War 2023,XSX,2022.0,Racing,Sony Computer Entertainment,2.32,0.41,0.1,0.07,2.9
+1355,Halo 2023,PC,2022.0,Sports,Electronic Arts,3.9,1.04,0.13,0.02,5.09
+1356,Minecraft 2022,Switch,2018.0,Adventure,Take-Two Interactive,0.86,2.1,0.81,0.18,3.95
+1357,The Legend of Zelda Remastered,PS4,2022.0,Platform,Activision,0.62,0.11,0.17,0.33,1.23
+1358,Pokemon 2022,PS5,2018.0,Racing,Activision,0.44,0.68,0.08,0.26,1.46
+1359,Halo 2024,PS3,2015.0,Sports,Electronic Arts,0.59,1.09,0.58,0.09,2.35
+1360,Pokemon 2022,PC,2022.0,Action,Electronic Arts,4.56,1.39,0.24,0.09,6.28
+1361,FIFA Soccer Origins,XOne,2018.0,Shooter,Ubisoft,0.12,0.11,0.34,0.07,0.64
+1362,FIFA Soccer 2024,PS5,2016.0,Racing,Ubisoft,0.51,0.31,0.29,0.04,1.15
+1363,Halo Origins,PS5,2023.0,Role-Playing,Activision,1.06,0.49,0.25,0.57,2.37
+1364,The Legend of Zelda 2022,PS3,2020.0,Sports,Activision,0.75,0.36,0.62,0.52,2.25
+1365,FIFA Soccer 2023,X360,2015.0,Adventure,Take-Two Interactive,3.06,1.03,0.24,0.37,4.7
+1366,Red Dead Redemption Infinite,X360,2018.0,Adventure,Sony Computer Entertainment,1.28,0.49,0.25,0.3,2.32
+1367,Mario Kart 2022,XSX,2018.0,Racing,Activision,0.04,0.12,0.75,0.15,1.06
+1368,Forza Horizon 2022,XOne,2019.0,Racing,Ubisoft,1.99,0.94,0.61,0.4,3.94
+1369,God of War 2023,PC,2022.0,Action,Ubisoft,0.81,0.4,0.97,0.1,2.28
+1370,God of War Origins,XOne,2019.0,Sports,Activision,2.68,1.12,0.08,0.55,4.43
+1371,Forza Horizon 2023,Switch,2021.0,Role-Playing,Sony Computer Entertainment,0.75,0.77,0.02,0.31,1.85
+1372,Call of Duty Ultra,PS3,2019.0,Shooter,Nintendo,0.07,1.06,0.12,0.11,1.36
+1373,Grand Theft Auto 2022,PS5,2023.0,Role-Playing,Take-Two Interactive,0.45,0.51,0.01,0.02,0.99
+1374,Mario Kart V,PS3,2016.0,Adventure,Nintendo,2.2,0.69,0.04,0.06,2.99
+1375,Mario Kart 2022,X360,2016.0,Platform,Ubisoft,0.34,0.47,0.37,0.12,1.3
+1376,The Legend of Zelda Infinite,PS3,2022.0,Shooter,Activision,1.18,0.14,0.02,0.03,1.37
+1377,Pokemon Remastered,PC,2020.0,Adventure,Sony Computer Entertainment,0.75,2.33,0.41,0.33,3.82
+1378,FIFA Soccer Ultra,XOne,2018.0,Action,Activision,0.58,0.22,0.04,0.49,1.33
+1379,Forza Horizon Remastered,XOne,2023.0,Role-Playing,Nintendo,0.57,0.4,0.11,0.15,1.23
+1380,The Legend of Zelda V,X360,2023.0,Sports,Activision,0.34,0.04,0.77,0.27,1.42
+1381,Halo 2022,XOne,2016.0,Platform,Nintendo,0.47,0.62,0.5,0.06,1.65
+1382,Red Dead Redemption Origins,XOne,2022.0,Role-Playing,Sony Computer Entertainment,0.56,0.7,0.4,0.1,1.76
+1383,Call of Duty 2023,X360,2017.0,Role-Playing,Take-Two Interactive,1.04,0.27,0.32,0.27,1.9
+1384,FIFA Soccer Remastered,PC,2016.0,Role-Playing,Ubisoft,1.64,2.86,0.13,0.13,4.76
+1385,Pokemon Infinite,PC,2021.0,Role-Playing,Nintendo,0.19,0.09,0.35,0.23,0.86
+1386,Minecraft 2022,PS3,2015.0,Action,Take-Two Interactive,0.24,1.09,0.65,0.22,2.2
+1387,Pokemon Ultra,PS3,2016.0,Racing,,0.16,0.54,0.41,0.03,1.14
+1388,Minecraft Infinite,PS4,2018.0,Action,Nintendo,1.01,0.48,0.16,0.17,1.82
+1389,Cyberpunk V,PS4,2019.0,Shooter,Take-Two Interactive,3.03,1.86,0.24,0.22,5.35
+1390,The Legend of Zelda 2024,Switch,2018.0,Racing,Take-Two Interactive,1.14,0.76,0.38,0.26,2.54
+1391,Red Dead Redemption Ultra,PS3,2015.0,Racing,Activision,0.9,0.71,1.07,0.11,2.79
+1392,Pokemon Infinite,XOne,2020.0,Adventure,Electronic Arts,1.03,0.93,0.19,0.52,2.67
+1393,The Legend of Zelda Ultra,Switch,2017.0,Platform,Electronic Arts,2.86,1.28,0.29,0.03,4.46
+1394,Mario Kart 2023,PS5,2016.0,Shooter,Electronic Arts,2.04,0.57,0.47,0.05,3.13
+1395,Cyberpunk 2023,X360,2015.0,Action,Electronic Arts,1.58,0.15,0.3,0.02,2.05
+1396,The Legend of Zelda Infinite,X360,2019.0,Role-Playing,Nintendo,2.2,0.45,0.26,0.35,3.26
+1397,Minecraft 2022,X360,2018.0,Platform,Nintendo,0.41,0.3,0.08,0.1,0.89
+1398,Pokemon 2023,PS3,2019.0,Sports,Electronic Arts,0.28,0.2,0.88,0.77,2.13
+1399,God of War Ultra,PS4,2017.0,Racing,Take-Two Interactive,0.32,0.18,0.04,0.14,0.68
+1400,Cyberpunk 2023,XOne,2019.0,Sports,Ubisoft,1.25,2.23,0.31,0.11,3.9
+1401,Red Dead Redemption Ultra,XOne,2016.0,Sports,Activision,0.31,0.21,0.06,0.21,0.79
+1402,Forza Horizon Infinite,X360,2021.0,Racing,Electronic Arts,3.05,0.12,0.14,0.08,3.39
+1403,The Legend of Zelda Remastered,X360,2015.0,Racing,Ubisoft,1.85,1.17,0.49,0.53,4.04
+1404,Grand Theft Auto 2024,PS4,2017.0,Sports,Nintendo,0.27,0.24,0.11,0.37,0.99
+1405,God of War Origins,XOne,2015.0,Action,Ubisoft,0.32,0.23,0.3,0.36,1.21
+1406,FIFA Soccer Remastered,XSX,2016.0,Platform,Take-Two Interactive,1.82,1.8,0.0,0.84,4.46
+1407,Forza Horizon Infinite,PC,2020.0,Racing,Ubisoft,0.14,1.31,0.0,0.09,1.54
+1408,Minecraft 2023,XSX,2017.0,Role-Playing,Activision,1.16,0.1,0.06,0.07,1.39
+1409,Cyberpunk 2023,XSX,2017.0,Shooter,Take-Two Interactive,0.04,0.51,0.15,0.04,0.74
+1410,Call of Duty 2022,PS5,2023.0,Adventure,Nintendo,1.54,0.2,0.01,0.97,2.72
+1411,Halo 2024,X360,2022.0,Racing,Activision,0.67,0.61,0.05,0.04,1.37
+1412,The Legend of Zelda Infinite,XOne,2018.0,Action,Electronic Arts,0.08,1.67,0.22,0.13,2.1
+1413,Cyberpunk 2023,PS3,2019.0,Shooter,Ubisoft,0.02,1.87,0.01,0.1,2.0
+1414,Minecraft V,X360,2019.0,Shooter,Ubisoft,0.25,1.9,0.09,0.08,2.32
+1415,Minecraft Remastered,X360,2020.0,Adventure,Ubisoft,0.18,0.49,0.01,0.0,0.68
+1416,Pokemon 2022,PS3,2015.0,Role-Playing,Activision,0.05,0.37,0.1,0.12,0.64
+1417,FIFA Soccer Origins,PS3,2022.0,Racing,Ubisoft,0.81,0.58,0.35,0.01,1.75
+1418,Halo Ultra,XSX,2023.0,Action,Nintendo,1.51,1.31,0.4,0.65,3.87
+1419,Pokemon 2023,PS4,2020.0,Adventure,Activision,0.22,0.03,0.01,0.45,0.71
+1420,God of War Infinite,PS5,2021.0,Platform,Electronic Arts,2.27,0.33,0.29,0.08,2.97
+1421,The Legend of Zelda 2024,PS5,2019.0,Shooter,Electronic Arts,1.49,0.02,0.96,0.11,2.58
+1422,Mario Kart 2024,XSX,2022.0,Action,Ubisoft,1.35,0.07,0.15,0.26,1.83
+1423,Call of Duty Remastered,PS4,,Sports,Sony Computer Entertainment,0.28,0.85,0.35,0.29,1.77
+1424,Minecraft 2023,X360,2023.0,Role-Playing,Activision,1.16,0.4,0.28,0.01,1.85
+1425,Mario Kart Ultra,Switch,2021.0,Adventure,Activision,0.52,0.01,0.1,0.03,0.66
+1426,Red Dead Redemption V,XOne,2019.0,Adventure,Sony Computer Entertainment,2.18,0.44,0.74,0.17,3.53
+1427,Minecraft 2023,XOne,2016.0,Shooter,Nintendo,0.73,1.25,0.74,0.12,2.84
+1428,Mario Kart 2023,Switch,2015.0,Racing,Activision,1.3,0.33,0.03,0.21,1.87
+1429,Forza Horizon V,PS5,2019.0,Platform,Take-Two Interactive,0.21,0.72,0.23,0.17,1.33
+1430,Mario Kart Remastered,PS4,2019.0,Sports,Nintendo,1.85,1.75,0.08,0.21,3.89
+1431,Pokemon V,PS5,2015.0,Sports,Ubisoft,0.03,0.13,0.3,0.02,0.48
+1432,Minecraft Remastered,PS4,,Adventure,Ubisoft,0.34,0.32,0.24,0.06,0.96
+1433,The Legend of Zelda V,PS4,2021.0,Action,Activision,1.62,2.7,0.22,0.16,4.7
+1434,Cyberpunk 2024,PS4,,Adventure,Electronic Arts,0.83,0.26,0.6,0.23,1.92
+1435,Grand Theft Auto Remastered,PS4,2017.0,Shooter,Sony Computer Entertainment,1.09,0.47,0.3,0.04,1.9
+1436,Red Dead Redemption Remastered,PC,2018.0,Racing,Ubisoft,0.13,0.16,0.01,0.41,0.71
+1437,Cyberpunk Remastered,PC,2022.0,Shooter,Nintendo,1.28,1.8,0.36,0.33,3.77
+1438,Mario Kart Remastered,PC,2016.0,Adventure,Ubisoft,0.32,1.36,0.04,0.44,2.16
+1439,Minecraft V,PS4,2020.0,Platform,Nintendo,0.08,0.5,0.06,0.04,0.68
+1440,Grand Theft Auto Infinite,XSX,2023.0,Adventure,Activision,0.13,0.86,0.1,0.01,1.1
+1441,Cyberpunk 2023,PS5,2020.0,Racing,Take-Two Interactive,0.42,0.05,0.35,0.21,1.03
+1442,Forza Horizon Origins,XOne,2020.0,Action,Nintendo,1.11,0.86,0.1,0.04,2.11
+1443,God of War 2024,PS3,2021.0,Sports,,1.55,1.43,0.64,0.23,3.85
+1444,Grand Theft Auto Ultra,Switch,2015.0,Sports,Nintendo,2.5,0.32,0.87,0.0,3.69
+1445,Cyberpunk Infinite,XSX,2017.0,Role-Playing,Take-Two Interactive,4.13,0.2,0.05,0.18,4.56
+1446,Halo Remastered,XSX,2023.0,Shooter,Take-Two Interactive,0.47,0.66,0.17,0.15,1.45
+1447,Call of Duty Ultra,XOne,2018.0,Adventure,Electronic Arts,1.85,0.08,0.02,0.04,1.99
+1448,Cyberpunk Infinite,X360,2020.0,Action,Sony Computer Entertainment,1.84,1.34,0.31,0.15,3.64
+1449,God of War V,X360,2020.0,Sports,Nintendo,2.34,1.8,0.22,0.04,4.4
+1450,Pokemon Origins,PS3,2015.0,Action,Ubisoft,4.36,0.83,0.62,0.23,6.04
+1451,Minecraft V,PS3,2023.0,Shooter,Ubisoft,0.99,0.3,0.13,0.36,1.78
+1452,Pokemon Ultra,PC,2020.0,Racing,Sony Computer Entertainment,0.62,1.14,0.03,0.01,1.8
+1453,God of War Remastered,PS5,2023.0,Shooter,Activision,0.84,2.49,0.11,0.09,3.53
+1454,Cyberpunk Origins,PS4,2018.0,Adventure,Nintendo,1.4,0.2,0.05,0.45,2.1
+1455,Forza Horizon 2022,XSX,2021.0,Platform,Ubisoft,1.32,0.94,0.21,0.19,2.66
+1456,Call of Duty Remastered,XSX,2023.0,Shooter,Electronic Arts,1.21,0.48,0.35,0.02,2.06
+1457,Red Dead Redemption Infinite,XOne,2021.0,Adventure,Take-Two Interactive,0.52,0.16,0.02,0.06,0.76
+1458,FIFA Soccer 2023,Switch,2020.0,Shooter,Nintendo,0.14,0.45,0.17,0.17,0.93
+1459,Minecraft 2023,X360,2023.0,Action,Sony Computer Entertainment,0.55,0.85,0.17,0.37,1.94
+1460,Grand Theft Auto Remastered,PS5,2018.0,Sports,Ubisoft,0.02,0.79,0.26,1.08,2.15
+1461,Cyberpunk Ultra,PC,2016.0,Adventure,Activision,0.16,0.1,0.08,0.09,0.43
+1462,Call of Duty Remastered,PC,2018.0,Sports,Take-Two Interactive,4.46,1.32,0.37,0.28,6.43
+1463,Grand Theft Auto Infinite,Switch,2021.0,Role-Playing,Activision,1.73,0.08,0.02,0.4,2.23
+1464,Red Dead Redemption Origins,XOne,2023.0,Sports,Nintendo,1.72,0.86,0.58,0.02,3.18
+1465,Mario Kart Infinite,XSX,2019.0,Racing,Take-Two Interactive,1.35,1.14,0.22,0.65,3.36
+1466,Pokemon 2024,XSX,2020.0,Racing,Electronic Arts,3.02,0.71,0.11,0.04,3.88
+1467,Pokemon 2022,PS4,2017.0,Platform,Electronic Arts,0.4,0.01,0.54,0.02,0.97
+1468,Mario Kart Remastered,PS3,2021.0,Racing,Sony Computer Entertainment,0.06,0.03,0.17,0.02,0.28
+1469,The Legend of Zelda 2024,PS5,2023.0,Action,Sony Computer Entertainment,1.04,0.2,0.28,0.25,1.77
+1470,Minecraft 2024,PS5,2023.0,Adventure,Electronic Arts,0.85,0.89,0.03,0.12,1.89
+1471,Mario Kart V,XSX,2020.0,Racing,Activision,0.67,0.34,0.3,0.01,1.32
+1472,Pokemon 2023,XOne,2016.0,Action,Sony Computer Entertainment,2.39,0.23,0.54,0.15,3.31
+1473,Forza Horizon Ultra,PS3,2015.0,Adventure,Nintendo,0.2,0.51,1.07,0.12,1.9
+1474,God of War Remastered,PC,2020.0,Sports,Ubisoft,0.5,0.05,0.57,1.24,2.36
+1475,The Legend of Zelda 2024,PC,2023.0,Platform,Take-Two Interactive,1.22,0.04,0.24,0.18,1.68
+1476,FIFA Soccer Infinite,Switch,2019.0,Adventure,Sony Computer Entertainment,0.09,0.66,0.0,0.13,0.88
+1477,The Legend of Zelda 2022,PS4,2019.0,Action,Take-Two Interactive,0.44,1.63,0.41,0.06,2.54
+1478,The Legend of Zelda 2022,PS5,2018.0,Shooter,Take-Two Interactive,0.47,0.48,0.41,0.58,1.94
+1479,God of War Origins,PS3,2021.0,Action,Take-Two Interactive,0.49,2.16,0.3,0.68,3.63
+1480,FIFA Soccer Remastered,PS5,2015.0,Role-Playing,Activision,0.18,1.92,0.84,0.0,2.94
+1481,Red Dead Redemption V,PS4,2020.0,Racing,Ubisoft,0.8,0.7,0.19,0.3,1.99
+1482,Call of Duty Ultra,PC,2015.0,Adventure,Electronic Arts,1.04,0.22,0.61,0.1,1.97
+1483,Minecraft 2023,PS3,2018.0,Shooter,Ubisoft,1.01,0.67,0.32,0.09,2.09
+1484,Red Dead Redemption 2023,PS5,2020.0,Sports,Sony Computer Entertainment,0.88,0.1,0.15,0.15,1.28
+1485,Forza Horizon 2022,PS3,2016.0,Platform,Activision,4.62,1.76,0.44,0.13,6.95
+1486,Grand Theft Auto Origins,PC,2020.0,Adventure,Sony Computer Entertainment,0.17,0.15,0.05,0.03,0.4
+1487,Pokemon Infinite,PS5,2018.0,Racing,Take-Two Interactive,0.48,3.24,0.06,0.22,4.0
+1488,Cyberpunk 2023,X360,2017.0,Role-Playing,Nintendo,1.18,0.19,0.04,0.13,1.54
+1489,Call of Duty Remastered,PS4,2021.0,Action,Electronic Arts,1.1,0.58,0.37,0.12,2.17
+1490,Red Dead Redemption Remastered,XSX,2022.0,Role-Playing,Ubisoft,2.51,0.3,0.27,0.28,3.36
+1491,FIFA Soccer 2022,PS3,2023.0,Platform,Electronic Arts,0.05,0.85,0.11,0.05,1.06
+1492,The Legend of Zelda V,XSX,2015.0,Racing,Activision,0.84,1.17,0.43,0.24,2.68
+1493,The Legend of Zelda Infinite,PS5,2019.0,Racing,Take-Two Interactive,0.27,0.63,0.14,0.3,1.34
+1494,Pokemon Remastered,X360,2023.0,Role-Playing,Sony Computer Entertainment,1.71,0.32,0.23,0.04,2.3
+1495,Grand Theft Auto V,XOne,2016.0,Adventure,Activision,2.29,0.19,0.3,0.02,2.8
+1496,FIFA Soccer Remastered,XSX,2015.0,Action,Activision,0.4,0.66,0.81,0.09,1.96
+1497,Cyberpunk 2023,X360,2017.0,Shooter,Take-Two Interactive,0.55,1.49,0.49,0.25,2.78
+1498,Halo 2023,PC,2023.0,Sports,Sony Computer Entertainment,0.94,1.96,0.21,0.2,3.31
+1499,Mario Kart V,PC,2022.0,Shooter,Ubisoft,0.4,0.61,0.04,0.67,1.72
+1500,Halo Origins,X360,2016.0,Racing,Activision,0.32,1.98,0.57,0.22,3.09
+1,Halo Remastered,Switch,2022.0,Adventure,Nintendo,1.0,0.14,0.05,0.01,1.2
+2,Cyberpunk 2024,PC,2022.0,Racing,Activision,1.97,0.19,0.06,0.05,2.27
+3,Red Dead Redemption 2022,PS4,2017.0,Shooter,Nintendo,0.53,3.27,0.19,0.49,4.48
+4,FIFA Soccer Remastered,PS4,2016.0,Role-Playing,Take-Two Interactive,0.54,0.01,0.08,0.07,0.7
+5,Cyberpunk Infinite,XOne,2018.0,Platform,Electronic Arts,0.22,1.13,0.17,0.06,1.58
+6,FIFA Soccer 2023,XSX,2018.0,Sports,Activision,1.0,2.04,0.03,0.05,3.12
+7,FIFA Soccer Infinite,Switch,2023.0,Sports,Electronic Arts,0.39,0.14,0.0,0.14,0.67
+8,Pokemon 2024,PS4,2015.0,Shooter,Nintendo,1.02,2.09,0.32,0.62,4.05
+9,Call of Duty Ultra,X360,2022.0,Adventure,Take-Two Interactive,1.21,0.72,0.1,0.21,2.24
+10,Mario Kart 2022,Switch,2021.0,Sports,Take-Two Interactive,0.05,0.99,0.04,0.14,1.22
+11,Call of Duty Remastered,Switch,2019.0,Role-Playing,Take-Two Interactive,0.32,0.42,0.42,0.06,1.22
+12,Minecraft Remastered,PS5,2023.0,Sports,Ubisoft,0.12,0.49,0.07,0.13,0.81
+13,Halo Remastered,PS4,2015.0,Adventure,Take-Two Interactive,0.35,0.83,0.0,0.11,1.29
+14,Pokemon 2022,PC,2017.0,Racing,Electronic Arts,0.35,0.22,0.06,0.06,0.69
+15,Call of Duty 2023,XSX,2021.0,Role-Playing,Take-Two Interactive,0.76,0.29,0.1,0.01,1.16

@@ -1,0 +1,907 @@
+
+======================================================================
+TIPO: frap_con_asteriscos (Total: 0)
+======================================================================
+
+======================================================================
+TIPO: resumen_guardia_multisalida (Total: 36)
+======================================================================
+--- FECHA: 2026-01-29 14:17:39 ---
+Buenos días reportes de servicios PC U_208 
+
+1_  Sale unidad U_208 a puente moreno por persona desvanecida salida 10:32 termino 10:45
+
+2_ sale unidad en apoyo a traslado de puente moreno a clínica gaínza salida 11:00 termino 11:59
+
+3_ sale unidad U_208 a la localidad de el tejar por persona con posible IAM salida 12;09 termino 12:42 
+
+3_ sale unidad U_208 a el  fraccionamiento paseos de el campestre por persona caída de escaleras salida 12:42 termino 2:10
+
+4 sale unidad U_208 y unidad 097 a carga de combustible salida 1:16 termino 2:10 
+
+5_ sale unidad 072 a incendio de lote baldío a la localidad de el tejar salida 3:57 termino 9:23
+
+6_ sale unidad U_208 a fraccionamiento san ramon por persona para cambio de sonda salida 4:22 termino 6:15
+
+7_ sale unidad U_208 por persona con posible IAM y posible ACB se traslado a el hospital de Pemex salida 7:53 termino 8:33
+
+8_ sale unidad 097 en apoyo a personas con discapacidad de San Ramón a clínica 61 salida 6:34 termino 6:46 
+
+9_ sale unidad U_208 por persona inconciente en rancho de el padre llegando a el lugar y no se encontró nada salida 6:46 termino 7:10 
+
+10_ sale unidad 072 a incendio de pastizal a la desviación de los robles salida 8:03 termino 9:23
+
+11_ sale unidad 097 a palacio municipal por pipa
+
+--- FECHA: 2026-01-30 14:19:35 ---
+Buen día 🙋🏻‍♂️ novedades del día 30/01/26 PC Medellín guardia (1)
+
+10:47 sale unidad 208 en apoyo al compañero Aurelio para checar a su suegra k se sentía mal en el atrancon tejar 11:40 termina servicio 
+
+11:50 sale unidad 208 a traslado programado del fraccionamiento puente moreno a la clínica GAINZA 13:15 termina trasladó 
+
+12:42 sale el compañero Rodolfo (gato) a atender un servicio en su moto particular en la localidad de los coyotes ya k la ambulancia 🚑 estaba ocupada en el hospital GAINZA con paciente de traslado al llegar al lugar se percata el compañero k la persona ya era 14 se tomaron los datos correspondientes y retorno a su domicilio 12:58 
+
+13:47 sale unidad 208 a atender esposa del compañero Luis Alberto (chapo) k se sentía mal en dos bocas el rajar 14:29 termino de servicio 
+
+14:30 se lleva pipa de agua de 20 mil litros a taller ubicado por la Pepsi de puente moreno 
+
+14:55 sale unidad 72 a incendio de pastizal en la localidad de ixcualco Medellín también sale en apoyo la unidad 208 15:35 termino de servicio 
+
+17:53 sale unidad motorizada a checar un reporte de una tapa de alcantarilla k está eschando humo frente a la plaza Medellín de puente moreno 18:15 retorna a base 
+
+18:40 vuelve a salir la unidad motorizada a checar mismo reporte de plaza Medellín en puente moreno ya ke el compañero no tenía bien la ubicación del lugar 18:55 retorna a base 
+
+18:52 sale unidad 208 a accidente con múltiples lesionados en la carretera paso de toro santa fe como referencia adelante de la reayker 19:50 termina servicio 
+
+19:08 sale unidad 72 a checar el punto de alcantarilla de CFE k estaba saliendo humo en la plaza Medellín de el fraccionamiento puente moreno con apoyo de la unidad colorado del director de procedió a abrir y checar cuál era el problema del humo k salia y se percató k eran un corto de los cables posterior se acordonó el área para pedir apoyo a alumbrado público para cortar la corriente y kitar el peligro después se procedió a llamar a CFE para k compusieran el problema esperándolos en el punto hasta k llegaran para poder entregarles la escena 21:10 retornamos a base 
+
+20:00 sale unidad de apoyo a checar fuga de gas en el circuito búho de puente moreno 20:30 termina servicio 
+
+20:10 sale unidad 208 a atender femenina k la golpeó su marido y la dejo inconsciente en puente moreno en el circuito cuba 22:25 termina servicio
+
+--- FECHA: 2026-01-31 14:15:22 ---
+Buenos días reportes de servicios PC U_208 
+
+1_ sale unidad U_208 en apoyo de traslado de puente moreno a clínica gaínza salida 10:15 termino 12:00
+
+2_ sale unidad 072 a incendio de pastizal a puente moreno salida 2;49 termino 3:35
+
+3_ sale unidad 072 a cabecera municipal para hacer barrido de agua estancada salida 6:26 termino 6:42 
+
+4_ sale unidad 097 a accidente de moto carretera desviación de los robles salida 8:34 termino 10:11
+
+5_ sale unidad U_208 a la localidad de los robles por persona infartada salida 10:11 termino 10:56
+
+--- FECHA: 2026-02-01 14:28:54 ---
+Buen día 🙋🏻‍♂️ novedades del día 31/01/26 PC Medellín 
+
+10:00 sale unidad 208 y unidad de apoyo a carga de combustible ⛽ 10:40 retornan a base 
+
+11:34 sale unidad 208 a atender un elemento de la policía municipal 
+
+13:40 sale unidad 208 a accidente en paso de toro de moto y carro como referencia frente a gasolinera los mangos 14:37 termina servicio 
+
+14:44 atiende persona lesionada por derrape de moto la unidad 208 cuando venía camino a base a la altura del fraccionamiento el dorado de boca del río 
+
+14:50 sale Unidad 208 a traslado de paciente de la localidad el guasimal a la 71 de días mirón 17:21 termina servicio 
+
+14:59 sale unidad 208 a atender volcadura en el camino a san Miguel como referencia adelante del puente el canalizo llegan al lugar y las personas las movieron por sus medios 15:30 termina servicio 
+
+20:12 sale 208 a traslado de paciente de rancho del padre a el hospital 20 de noviembre 22:41 termina servicio 
+
+23:37 se atiende masculino k trae la policía municipal en la base de PC Medellín por riña familiar se le hacen curaciones y recomendaciones 
+
+23:30 sale unidad de apoyo a atender fuga de gas de tanke de 20 kilos en arboledas san Ramón calle serranía de seyal 23:50 termina servicio se trae tanke a base 
+
+04:58 sale 208 a atender femenina con dificultad para respirar en puente moreno circuito rubí norte 23602 se atiende y se niega al traslado firmando para su responsabilidad 05:52 termina servicio 
+
+08:15 sale unidad motorizada abordo el coordinador para checar un árbol k se está prendiendo por cables de alta tensión en paso de toro como referencia en la caseta de ferrocarril 
+
+08:15 sale unidad 208 a atender accidente de moto en paso de toro como referencia frente a la báscula de paso de toro antes de llegar al puente de la y reportando dos lesionados
+
+--- FECHA: 2026-02-02 14:01:42 ---
+Buenos días reportes de servicios PC U_208 
+
+1_ sale unidad U_208 y 097 a volcadura a la localidad de paso del toro salida 957 termino 10:25
+
+2_ sale unidad U_208 y 072 a conato de incendio a puente moreno salida 5:10 termino 5:24 
+
+3_ sale unidad U_208 a carga de combustible salida 5:39 termino 5:55
+
+4_ sale unidad U_208 a accidente de carro con moto en fraccionamiento puente moreno salida 6:03 termino 7:09
+
+--- FECHA: 2026-02-03 14:13:18 ---
+Buen día 🙋🏻‍♂️ novedades del día 02/02/26 PC Medellín guardia (1)
+
+ 12:51 Sale unidad motorizada a checar reporte de serpiente 🐍 en dos bocas en la calle playa de vacas se captura y se deja en libertad en una área segura 13:25 termina servicio 
+
+19:37 sale unidad 097 a buscar carro camilla k estaba en el hospital 20 de noviembre desde la guardia pasada ya k no avía camas para el paciente 20:50 retornan a base 
+
+Se realizó en base la puesta de los tornillos faltantes  para la puerta de la ambulancia 🚑 por la parte de atrás lado derecho y en donde la el cuerno de la camilla así mismo se nivelo un poco la puerta principal de la entrada a base ya k estaba muy caída y rosa en el piso a la hora de abrir de igual forma Sele colocó a la 208 el sujetador del suero
+
+--- FECHA: 2026-02-04 14:22:37 ---
+Buenos días novedades de PC Medellín U_208 
+
+1_ sale unidad U_208 a la localidad de los robles por persona con enfermedad general salida 10:36 termino 11:46
+
+2_ sale unidad U_208 a la localidad de los robles por persona con enfermedad general salida 1:51 termino 2:59
+
+3_ sale unidad U_208 a derrape de moto a carretera rancho del padre salida 4:38 termino 6:14
+
+4_ sale unidad U_208 por persona caída de su nivel de sustentación salida 7:26 termino 8:40
+
+5_ sale unidad 072 a combate de enjambre a la localidad de paso del toro salida 6:50 termino 8:15 
+
+6_ sale unidad U_208 por persona golpeada enfrente de Soriana salida 7:27 termino :823
+
+--- FECHA: 2026-02-05 14:18:56 ---
+Buen día 🙋🏻‍♂️ novedades del día 4/02/26 PC Medellín guardia (1)
+
+ 10:10 Se atiende masculino k llega a base por una cortada en la mano 🫱🏻 k se hizo con una sierra de carnicería 
+
+11:09 salen unidades a cargar gasolina 072-208-las dos motos y la pipa de 20 mil litros
+
+14:09 sale unidad 208 a puente moreno a el circuito Saturno sur para atender a masculino con dificultad para respirar se procede a trasladarlo a la 71 de días mirón 16:00 retornan a base sin camilla ya k no hubo cama en la 71 para el paciente y posterior se regresó por ella 
+
+14:40 sale unidad 72 a recargar agua a grupo más 13:35 retor a base 
+
+16:15 sale unidad motorizada a checar enjambre de abejas en puente moreno en el circuito noruega sur se procede a acordonar y dar recomendaciones para regresar en la noche a retirarlas 
+
+19:14 sale unidad 208 a la 71 de días mirón para recoger la camilla k estaba con el paciente k se llevó de puente moreno del circuito Saturno 
+
+20:12 sale unidad de apoyo 🛻 colorado a el municipio de Jamapa para entregar invitaciones a seguridad publica de Jamapa 
+
+03 sale unidad de apoyo a atender el enjambre del circuito noruega en puente moreno
+
+--- FECHA: 2026-02-07 14:07:08 ---
+Buen día 🙋🏻‍♂️novedades del día 06/02/26 PC Medellín guardia (1)
+
+09:00 sale unidad 097 208  a  el DIF municipal de Medellín con todos los elementos para evento de el consejo municipal  12:35 termina evento y se retorna a base 
+
+12:50 sale unidad 208 del DIF municipal de Medellín para realizar traslado de menor de la torre pediatría a domicilio en el tejar 15:30 termina trasladó y retorna a base 
+
+16:17 sale unidad 096 estakita a checar enjambre de abejas en paso del toro 17:35 retorna a base 
+
+21:55 salen las unidades 72 y la de apoyo 🛻 del director a incendio de pastizal en paso del toro como referencia aldente de la Pepsi casi llegando a la posta 22:30 termina servicio y retornamos a base 
+
+24:00 sale unidad 208 a derrape de moto en la localidad de ixcualco Medellín 24:35 termino servicio retorna a base 
+
+01:21 Sale unidad 208 a derrape de moto en el tejar en la avenida principal como referencia frente al empeño fácil 01:30 se niega a ser atendido y se keda en el lugar 208 retorna a base
+
+--- FECHA: 2026-03-08 14:15:38 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad 097 a derrape de moto a la localidad el 12 salida 9:57 termino 11:00
+
+2_ sale unidad 072 a incendio de pastizal a la localidad de rancho de el padre salida 10:37 termino 11:37
+
+3_ sale unidad 097 a medellín por reporte de persona inconsciente salida 11:20 termino 11:50
+
+4_sale unidad 097 a la localidad de los robles salida 11:50 termino 12:21
+
+5_ sale unidad 072 a incendio de pastizal a la entrada de Ixcualco salida 3:29 termino 4:03
+
+6_ sale unidad 097 a volcadura a la localidad el 12 salida 4:09 termino 4:53 
+
+7_ sale unidad 097 y unidad de apoyo a cabalgata a la localidad de la candelaria salida 2:00 termino 11:56
+
+8_ sale unidad 097 a carga de combustible salida 7:49 termino 8;10 
+
+9_ sale unidad de apoyo a fuga de gas a fraccionamiento San Miguel salida 11:56 termino 12:30 
+
+10_ sale unidad 097 a puente moreno a checar persona con enfermedad general salida 3:36 termino 4:47
+
+--- FECHA: 2026-03-09 14:58:31 ---
+Buen día novedades del día 08/03/26 PC Medellín guardia (1)
+
+15:55 sale unidad 72,097 y la de apoyo colorado a incendio de casa aviación en puente moreno en el circuito azucena sur se llega al lugar y se atienden a los dueños de la casa por crisis nerviosa y kemadiras de segundo grado de igual forma se procede a apoyar para sacar las cosas kemadas de su garaje ya k fue por un corto del motor del portón automático solo kemandose cosas k tenían ahí mismo como ropa guardada y juguetes de sus hijas la casa no le ocasionó daño el fuego 16:27 termina servicio 
+
+19:27 sale unidad 097 a atender una persona del sexo masculino inconsciente en puente moreno en el Oxxo k se encuentra en avenida las joyas se llega al lugar y se percatan k estaba alcoholizado se procede a dar recomendaciones a familiares 19:45 termina servicio 
+
+19:30 sale unidad de apoyo colorado a atender masculino k callo dentro de una alcantarilla en arboledas san Miguel en la calle moralillo se procede a checar y posterior ver si necesita ser trasladado
+
+19:47 se mueve la unidad 097 del punto de puente moreno de avenida las joyas a apoyar a la unidad de apoyo colorado en arboledas san Miguel para trasladar a masculino k callo en una alcantarilla al HG de boca del río 22:05 termino servicio 
+
+19:55 sale unidad 72 a incendio de pastizal en puente moreno como referencia a un costado de bodega Aurrerá por el lado de la carretera Medellín Veracruz 20:20 termina servicio 
+
+20:25 sale unidad de apoyo colorado a checar kema de basura en jardines de Medellín en la calle girasol se checa y se dan recomendaciones para k no kemen 
+
+22:25 sale unidad 096 a checar un reporte de cables caídos con energía en paso de toro en la calle insurgentes se procede a checar y acordonar el área hasta k llegue CFE 
+
+23:07 sale unidad 097 a  checar femenina con cirugía de columna k reporta k tiene mucho mareo y vomito se procede a checarla y llevarla al ISSSTE 24:55 termina servicio 
+
+01:20 sale unidad 097 a checar femenina k fue golpeada por asaltante en puente moreno por la avenida paseo del mar como referencia por el Oxxo kemado 
+
+07:08 sale unidad 097 a checar persona k al parecer esta agonizando en puente moreno en el circuito belice sur 43620  se atiende y se keda en el domicilio 
+
+07:30 sale unidad 72 a incendio de pastizal en arboledas san Miguel en la calle playa de vacas se procede a apagar ya k era kema de basura fuera de control 08:00 termina servicio
+
+--- FECHA: 2026-03-11 14:29:37 ---
+Buen día novedades del día 10/03/26 PC Medellín guardia (1)
+
+10:38 sale unidad 72 y 096 a paso de toro para apoyar con poda de árboles k estaban llegando a los cables de alta tensión nos apoya CFE para kitar la energía y poder trabajar sin riesgos 13:17 terminamos servicio 
+
+13:04 sale unidad motorizada con el compañero José Rodolfo a checar una serpiente en un domicilio en puente moreno en el circuito malakita llega al circuito y no lo deja pasar el guardia porke no tenía conocimiento de la serpiente se retorna a la base 13:15
+
+13:21 Sale unidad 097 a persona inconsciente en lagos de puente moreno en el circuito esmeralda oeste se atiende femenina k tubo crisis de ansiedad por una discusión familiar y se keda en su domicilio con recomendaciones de la paramedico 13:50 retornan a base 
+
+13:51 sale unidad 72 a carga de combustible en las Vegas 
+
+14:17 sale unidad de apoyo colorado a atender fuga de gas en tanke de 5 kilos en lagos de puente moreno circuito África sur #09 se procede a checar tanke y también instalaciones 14:40 termina servicio 
+
+14:47 sale unidad 097 a atender una persona inconsciente en puente moreno en la escuela Edgar morin se atiende y se keda en el lugar con recomendaciones de la paramedico 15:12 retornan a base 
+
+14:30 sale unidad 096 a derrame de árbol en el tejar en la calle Francisco Contreras 18:41 termina servicio 
+
+17:40 sale Unidad de apoyo colorado a checar señaléticas y rutas de evacuación en el centro de box k está en puente moreno a un lado de Elektra 
+
+20:50 sale unidad 72 a incendio de pastizal en la localidad de los arrieron a un lado de la carretera federal paso de toro Córdova 21:55 termina servicio 
+
+21:49 sale unidad 097 a atender una femenina por violencia familiar en lagos de puente moreno en el circuito Europa como referencia cerca del Oxxo se atiende y se keda en su domicilio con recomendaciones del paramedico 22:40 retornan a base 
+
+21:55 sale unidad de apoyo colorado a atender fuga de gas en un tanke estacionario en puente moreno circuito ágata centro 21517 interior 02 se procede a checar instalación y tanke y se dejan recomendaciones sobre la mala instalación 22:38 retorna a base
+
+--- FECHA: 2026-03-12 13:55:14 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad 096 a capturar un mapache en la localidad de paso del toro salida 9:09 termino 9:48
+
+2_ sale unidad 097 y unidad 096 a incendio de vehículo en el fraccionamiento puente moreno salida 9:57 termino 10:13 
+
+3_ sale unidad 097 en apoyo a el HG boca del río para traslado de PX salida 11:51 termino 1:49 
+
+4_ sale unidad 097 por personas caídas en fraccionamiento puente moreno salida 3:07 termino 4:17 
+
+5_ sale unidad 097 a taller mecánico salida 5:59 termino _ _ _ _
+
+6_ sale unidad U_208 a recargar gas para el clima y posterior a carga de combustible salida 6:11 termino 7:16
+
+7_ sale unidad U_208 por persona herida por arma blanca en la localidad de Ixcualco salida 9:33 termino 10:52 
+
+8_ sale unidad U_208 en apoyo a el hospital de boca del río salida 6:58 termino _ _ _ _ _ _
+
+--- FECHA: 2026-03-13 14:03:09 ---
+Buen día novedades del día 12/03/25 PC Medellín guardia (1)
+
+09:11 sale unidad 72 a apoyar en riego al centro de acopio de basura en puente moreno 
+
+10:40 sale Unidad 72 y colorado a incendio de pastizal en la localidad de los robles como referencia atrás de la gasolinera 12:09 termina servicio 
+
+11:23 sale unidad 208 a cubrir evento de futbolito Bimbo en el campo de Medellín 12:07 termina servicio 
+
+12:14 sale unidad 72 del incendio de los robles a seguir apoyando con riego en el centro de acopio de basura en puente moreno 12:55 termina servicio 
+
+13:27 sale unidad 72 a incendio de pastizal en la localidad de ixcualco 14:18 termina servicio 
+
+14:20 sale unidad 72 de incendio de pastizal en ixcualco a pastizal en la localidad de paso de toro como referencia frente a la pepinera k está atrás de la Pepsi de paso de toro 17:18 termina servicio 
+
+15:49 sale unidad de apoyo colorado a verificar una keja ciudadana sobre el estacionamiento del pollo feliz de puente moreno de la avenida las flores 
+
+18:30 sale unidad 72 y colorado a atender nuevamente incendio de pastizal en la localidad de los robles como referencia atrás de la gasolinera 19:27 termina servicio 
+
+19:35 salen unidades 72 y colorado de pastizal de los robles y se encuentran sobre la carretera 180 k va rumbo a la laguna un pastizal a orilla de carretera como referencia a un lado de las casas del nuevo Medellín 20:05 termino servicio 
+
+22:20 sale unidad 72 y colorado a incendio de pastizal en arboledas San Miguel en la calle playa de vacas 22:40 termina servicio y procede 72 a recargar agua para posterior ir a base 
+
+23:17 sale unidad 208 a atender un caso de abuso sexual a menor en lagos de puente moreno en el circuito Mónaco se traslada a la 71 de días mirón 
+
+24:00 sale unidad colorado a atender choke de moto con auto en lagos de puente moreno en avenida europa 24:45 termina servicio 
+
+24:50 sale unidad 208 de la 71 a apoyar en accidente de moto en lagos de puente moreno en la avenida europa para trasladar a masculino a la 61 de días mirón 
+
+02:45 sale unidad 208 de la 61 a lagos de puente moreno al circuito cuba este 44508 para atender femenina con fuerte dolor de pecho y dificultad para respirar se traslada de igual manera a la 61 de días mirón para su atención 
+
+04:37 sale unidad 208 de la 61 de días mirón a la localidad de la laguna para atender persona con descompensación de la diabetes la trasladan a la 71 de días mirón para su atención
+
+--- FECHA: 2026-03-14 14:08:53 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad U_208 a accidente sobre la carretera Santa fe pasó del toro salida 11:47 termino 12:30
+
+2_ sale unidad a carga de combustible salida 12:51 termino 1:46 
+
+3_ sale unidad 072 a centro de box salida 1:23 termino 2:06
+
+4_ sale unidad U_208 por camilla a la clínica 71 salida 1:50 termino 2:30
+
+5_ sale unidad motorizado a checar incendio de pastizal a playa de vacas salida 2:56 termino 3:10
+
+6_ sale unidad U_208 a accidente en el fraccionamiento puente moreno salida 3:19 termino 4:10 
+
+7_ sale unidad U_208 a derrape de moto a fraccionamiento puente moreno salida 4:15 termino 5:07 
+
+8_ sale unidad U_208 a fraccionamiento nuevo medellín por persona con sobre dosis salida 9:01 termino 10:11
+
+9_ sale unidad U_208 por el señor Agustín Mendoza a la clínica santa Lucia salida 11:06 termino 12:10
+
+11_ sale unidad U_208 por persona con enfermedad general salida 2:26 termino 4:40 
+
+12_ sale unidad U_ 208 a checar persona en la comandancia de la política municipal salida 6:52 termino 6:58
+
+13_ sale unidad 072 a incendio de pastizal a la localidad de la gloria salida 7:04 termino ______
+
+13_ sale unidad a supuesta volcadura carretera puente moreno playa de vacas 8:05 ______
+
+--- FECHA: 2026-03-16 14:13:50 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad U_208 a derrape de moto no se llega a el punto por qué se lo llevaron por sus medios salida 12:34 termino 12:47 
+
+2_ sale unidad U_208 a carga de combustible salida 12:47 termino 1_12 
+
+3_ sale unidad U_208 y unidad de apoyo a derrape de moto  carretera el tejar moralillo llegando a el punto y no se encontró nada salida 2:35 termino 3:08 
+
+4_ sale unidad U_208 y unidad de apoyo a la localidad de el cedral a cubrir evento de box salida 5:00 termino 9:00
+
+5_ sale unidad 072 a incendio de pastizal a la localidad de paso del toro salida 6:49 termino 9:12 
+
+6_ sale unidad de apoyo de el compañero Damián el sombra a derrape de moto en la entrada a la esperanza salida 8:15 termino 9:57 
+
+7_ sale unidad U_208 a el fraccionamiento nuevo medellín por persona golpeada salida 9:03 termino 10:07 
+
+8_ sale unidad 072 a el fraccionamiento casa blanca a incendio de basura salida 10:57 termino 11:04
+
+--- FECHA: 2026-03-17 15:20:20 ---
+Buen día reporte de novedades del día 16/03/26 PC Medellín guardia (1)
+
+09:28 sale unidad 208 a atender persona inconsciente en lagos de puente moreno en circuito España norte como referencia por dónde está la tienda el bebote 
+
+10:10 sale unidad 72 a apoyar con agua para lavar el piso del centro de box 
+
+10:31 sale unidad 72 a un reporte de un árbol prendido en la entrada de grupo más 
+
+12:05 sale unidad 208 a checar una persona de la tercera edad caída en lagos de puente moreno en avenida las aves frente al tecnológico de Alvarado 
+
+12:58 sale unidad 208 para checar el desprendimiento de un plafón de una casa en puente moreno en circuito laguna de nogales norte 
+
+13:04 sale unidad 72 a pastizal en el tejar por la colonia el bosque al fondo 
+
+13:25 sale unidad 72 a incendio de pastizal en carretera paso de toro la candelaria como referencia adelante de la Pepsi casi llegando a la posta 
+
+14:20 sale unidad 72 a incendio de pastizal en la carretera paso de toro Alvarado como referencia frente a las bodegas del ofertón 
+
+17:02 sale unidad 208 a traslado de arboledas san Ramón a hospital Santa Lucia con paciente de hemodiálisis 
+
+19:10 sale unidad 72 a incendio de pastizal en la carretera paso de toro Alvarado como referencia antes de llegar a la báscula de la laguna 
+
+20:19 sale unidad 72 a incendio de pastizal en la localidad de Juan de Alfaro a orilla de carretera 
+
+22:52 sale unidad 208 a traslado de paciente de hemodiálisis del hospital Santa Lucia a su domicilio en arboledas san Ramón 
+
+07:55 sale unidad 72 a carga de combustible ⛽ 
+
+Reporte de árboles caídos 
+
+12:35 reportan árbol caído en puente moreno en circuito paloma y paseo de las aves como referencia frente a una casa color amarilla sale unidad de apoyo colorado a checar el servicio 
+
+12:49 reportan laminas a punto de desprenderse en calle colima número 5 entre Fuji y mandalu en el tejar de igual manera la unidad de apoyo sale al punto a checar el tema 
+
+13:06 reportan cables caídos en la calle campesino 44 entre lustre como referencia frente a taller de carpintería en playa de vacas acude la unidad de apoyo colorado para checar reporte 
+
+13:21 reportan árbol caído sobre la avenida vergel de san Pedro en arboledas san Ramón acude el compañero Daniel y el compañero Arturo al punto para kitar el árbol y liberar la vialidad
+
+--- FECHA: 2026-03-18 13:59:26 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad 097 en apoyo a el hospital de boca del río salida 9:35 termino 12:34 
+
+2_ sale unidad U_208 a clínica 61 en apoyo a paciente con discapacidad salida 10:03 termino 10:43 
+
+3_ sale unidad 097 y unidad carro tanque de apoyo a incendio de pastizal en fraccionamiento las palmas salida 12:24 termino 15:38 
+
+4_ sale unidad 072 a lavado de banquetas salida 16:02 termino 17:06 
+
+5_ sale unidad 097 a fraccionamiento puente moreno por persona caída de su propia altura salida 17:06 termino 18:13
+
+6_ sale unidad 072 y unidad carro tanque de apoyo a supesta casa en llamas se llega a el lugar y es falsa alarma salida 17:32 termino 17:53 
+
+7_ sale unidad 072 y unidad carro tanque de apoyo a la localidad de paso del toro a incendio de pastizal salida 18:36 termino 23:01 
+
+8_ sale unidad 097 a derrape de moto en el fraccionamiento puente moreno se llega a el punto y nos indican que se lo llevan por sus medios salida 20:15 termino 20:27 
+
+9_ sale unidad 097 a la localidad de Ixcualco por persona con violencia familiar salida 21:20 termino 22:07
+
+--- FECHA: 2026-03-19 14:02:08 ---
+Buen día novedades del día 18/03/26 PC Medellín guardia (1)
+
+09:10 sale unidad 097 a atender masculino k se lastimo el pie en su trabajo con una makina en la empresa de alimentos ojai de paso de toro se traslada a la 14 de cuauhtémoc para su atención 10:27 termina servicio 
+
+09:18 sale unidad 208 a atender derrape de moto en la carretera Veracruz tejar como referencia frente a la gasolinera Repsol de las Vegas se llega al lugar y celo llevan por sus medios 09:27 retorna a base 
+
+11:15 sale unidad 097 a accidente de moto en la desviación a los robles se lleva al HG de boca para su atención 12:56 termina servicio 
+
+11:40 sale unidad pipa de renta a apoyar con agua para la localidad de los robles 16:50 retorna a base 
+
+12:25 sale unidad 72 a incendio de pastizal en el fraccionamiento San Miguel en la calle san Francisco 13:34 termina servicio 
+
+13:35 sale unidad 097 a el HG de boca para apoyar con traslado del hospital a domicilio del paciente por alta voluntaria 
+
+15:35 sale unidad 097 a atender femenina de la tercera edad k se golpeó la cabeza con el mueble de su cama se checa y se hacen curaciones no rekiere traslado 16:17 retornan a base 
+
+17:25 sale unidad 097 a traslado programado de arboledas san Ramón a el hospital Santa Lucia de cuauhtémoc con el paciente Agustín Mendoza 18:53 retorna a base 
+
+19:14 sale unidad 208 a atender persona con convulsiones en playa de vacas como referencia en la calle del kinder Chapultepec se traslada al ISSSTE de Miguel alemán para su atención 
+
+21:02 sale unidad 097 a derrape de moto en lagos de puente moreno en el circuito cuba se checa y se hacen curaciones se keda en el lugar con familiares 21:31 retornan a base 
+
+22:43 sale unidad 097 a checar persona k sangraba de su boca y tenía mucho vomito en la calle san Francisco se traslada al HG boca para su atención 12:34 termina servicio 
+
+12:45 sale unidad 097 del HG boca a buscar paciente de hemodiálisis Agustín Mendoza a la clínica santa Lucia para traer a su domicilio en arboledas san Ramón 01:50 termina servicio 
+
+01:58 sale unidad 097 a atender masculino de la tercera edad ke se callo y no se puede levantar en su domicilio en árboledas san Ramón en la calle avellano número (1) se atiende se le hacen curaciones y se keda en el domicilio 02:22 retornan a base
+
+--- FECHA: 2026-03-20 14:23:50 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad 097 a accidente en la carretera paso del toro Santa fe salida 11:30 termino 11:55
+
+2_ sale unidad U_208 por paciente caído de su propia altura a la fraccionamiento casa blanca de salida 11:53 termino 12:15 
+
+3_ sale unidad 097 a la colonia los cedros salida 1:20 termino 1:39 
+
+4_ sale unidad 097 en apoyo a traslado de la clínica 71 a el fraccionamiento nuevo medellín salida 2:50 termino 4:11
+
+5_ sale unidad 097 en apoyo a el traslado de el hospital español a la localidad de la laguna salida 4:25 termino 6:18 
+
+6_ sale unidad U_208 a reporte de violencia familiar a el fraccionamiento puente moreno salida 4:59 termino 5:33 
+
+7_ sale unidad 097 en apoyo a traslado de la torre pediátrica a la localidad de la laguna salida 6:42 termino 8:32
+
+8_ sale unidad 097a carga de combustible salida 8:32 termino 9:20 
+
+9_ sale unidad de apoyo a incendio de llantas a el crucero de medellín salida 11:06 termino 12:04 
+
+10_ sale unidad 097 en apoyo a desfile de la primavera en la localidad paso colorado salida 8:10 termino _______
+
+--- FECHA: 2026-03-21 13:48:30 ---
+Buen día novedades del día 20/03/26 PC Medellín guardia (1)
+
+
+09:38 sale unidad 097 a cubrir desfile de la primavera en el tejar de plaza 3000 a la curva del tejar por la kinta iguana 10:43 retorna a base 
+
+11:18 cele apoya a ciudadano en silla de ruedas para llevarlo a la clínica 61 de días mirón 11:39 retorna a base 
+
+ 12:55 sale unidad de apoyo colorado a derrame de árbol en la localidad de los robles 15:40 retornan a base 
+
+18:27 sale unidad 097 a checar femenina con hipotensión en arboledas san Ramón 19:55 retornan a base 
+
+20:41 sale unidad 72 a incendio de pastizal en playa de vacas como referencia frente al salón de eventos villa Romina 21:16 retornan a base 
+
+21:29 sale unidad 097 a  derrape de moto en lagos de puente moreno en paseo las flores avenida principal 22:04 retornan a base 
+
+23:38 sale unidad 097 a una volcadura en la localidad de la laguna como referencia en la desviación a tlaliscoyan 
+24:07 retornan 
+
+24:35 sale unidad 097 a atender femenina con fuerte dolor en el estómago por una caída en arboledas san Ramón en la calle Avendaño 01:30 retorna a base
+
+--- FECHA: 2026-03-22 14:25:34 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad 097 a fraccionamiento puente moreno por persona con combulciones salida 9:18 termino 10:20 
+
+2 sale unidad U_208 en apoyo a traslado de el fraccionamiento San Ramón a la clínica 61 salida 9:35 termino 1031
+
+3_ sale unidad a carga de combustible salida 10:30 termino 11:02
+
+4_ sale unidad motorizado a el fraccionamiento puente moreno a checar cables caídos salida 11:05 termino 11:24 
+
+5_ sale unidad motorizado a checar enjambre de abejas en el fraccionamiento San Ramón salida 10:56 termino 12:22
+
+6_ sale unidad 097 por persona herida por arma blanca el la localidad de la bocana salida 2:02 termino 3:00 
+
+7_ sale unidad 097 en apoyo a evento en la localidad de paso del toro salida 5:13 termino 9:30 
+
+8_ sale unidad U_208 a accidente de moto en el fraccionamiento puente moreno salida 5:39 termino 6:30
+
+9_ sale unidad 097 a derrape de moto en la localidad de rancho de el padre salida 6:26 termino 7:13 
+
+10_ sale unidad U_208 por persona caída de su propia altura salida 7:28 termino 9:02 
+
+11_ sale unidad U_208 a carga de combustible salida 9:03 termino 9:36
+
+12_ sale unidad 097 por persona herida con arma blanca en la localidad de el tejar salida 9:24 termino 11:33 
+
+14_ sale unidad 072 _208 y unidad de apoyo motorizado a incendio de casa abitacion en el fraccionamiento puente moreno salida 6:49 termino 7:54
+
+--- FECHA: 2026-03-23 14:00:01 ---
+Buen día novedades del día 22/03/26 PC Medellín guardia (1)
+
+09:38 sale unidad 72 a carga de combustible ⛽ en las Vegas gasolinera Repsol 10:52 retorna a base 
+
+
+09:42 sale unidad de apoyo colorado a apoyar con faena en la localidad de el cedral 
+
+10:35 sale unidad 097 a atender persona inconsciente por caída de su propia altura se traslada a la 61 para su atención 12:53 retornan a base 
+
+13:30 sale unidad 097 a accidente de motocicleta en el tejar 14:32 retornan a base 
+
+13:47 sale unidad 72 a incendio de pastizal en la localidad de la laguna como referencia pasando la báscula 16:45 termina servicio 
+
+15:48 sale unidad 097 a accidente de auto en paso de toro antes de subir el puente como referencia en el retorno k está frente al Oxxo 16:23 retorna a base 
+
+18:05 sale unidad 72 del incendio de la laguna a el mismo panteón de la laguna para apoyar con agua 18:25 retorna a base 
+
+18:35 sale unidad 208 a apoyo de traslado del hospital 61 de días mirón a domicilio en la localidad de los robles 19:41 retornan a base 
+
+19:05 sale unidad 72 a incendio de basura en arboledas san Ramón como referencia atrás de la primaria y el kinder del mismo fraccionamiento 19:30 retorna a base 
+
+21:43 sale unidad 208 a atender un masculino lastimado por violencia familiar en lagos de puente moreno en el circuito Luxemburgo sur 50709
+
+22:15 sale unidad 72 a incendio de pastizal en la localidad de la gloria en paso de toro 23:24 retorna a base 
+
+02:54 sale unidad 208 a atender masculino diabético e hipertenso con fuerte dolor de pecho en el centro de Medellín como referencia a un lado del Modelorama 04:01 retorna unidad a base ya k se checa y se traslada por sus medios a su médico de confianza
+
+--- FECHA: 2026-03-24 13:57:59 ---
+Buenos días novedades de PC Medellín 
+
+1_ salen las 2 unidades carro tanque a carga de combustible salida 10:47 termino 11:10
+
+2_ sale unidad de apoyo a el fraccionamiento puente moreno a reporte de ave salida 11:20 termino 11:59
+
+3_ sale unidad 097 a traslado de un menor de edad a torre pediátrica por combulciones salida 12:30 termino 1:10 
+
+4_ sale unidad 072 a incendio de pastizal a el fraccionamiento puente moreno salida 11:26 termino 12:10 
+
+5_ sale unidad U_208 a carga de combustible salida 1:24 termino 2:09 
+
+6_ sale unidad 097 a carga de combustible salida 1:30 termino 1:41 
+
+7_ sale unidad 072 a incendio de pastizal a la localidad de moralillo salida 2:03 termino ___
+
+8 _ sale unidad  carro tanque a incendio de pastizal carretera puente moreno playa de vacas unidad PAC 09 salida 3:18 termino 5:41 
+
+9_ sale unidad 097 a fraccionamiento San Ramón por persona con enfermedad general salida 2:55 termino 3:55 
+
+10_ sale unidad 072 a la localidad de la bocana salida 4:43 termino 5:39
+
+11_ sale unidad 097 a fraccionamiento San Miguel a checar persona con enfermedad general salida 7:55 termino 9:10 
+
+12_ sale unidad 097 a fraccionamiento San Miguel por persona inconciente llegando a el punto y se encuentra a la PX_14 salida 9:15 termino 9:28 
+
+13_ sale unidad 097 y unidad 072 a volcadura a la localidad de la laguna salida 9:30 termino 11:23
+
+14_ sale unidad U_208 a comandancia municipal a checar a persona salida 10:11 termino 11:20
+
+--- FECHA: 2026-03-25 14:39:15 ---
+Buen día novedades del día 24/03/26 PC Medellín guardia (1)
+
+09:35 sale unidad 097 a atender femenina en la localidad de rancho del padre en la telesecundaria de la misma 11:07 termina servicio 
+
+11:41 sale unidad 097 a atender femenina inconsciente en el centro de salud de el tejar se traslada al HG de boca para su atención 12:27 termina servicio 
+
+13:12 sale unidad 72 a incendio de pastizal sobre la carretera 180 paso de toro santa fe pasando el puente de los pichones 13:50 termina servicio 
+
+14:29 sale unidad 72 a kema de basura fuera de control en el tejar en la calle franboyanes colonia centro 14:50 termina servicio 
+
+16:14 sale unidad 72 a atender reporte de fuga de gas de un tanke de 20 kilos en la localidad de la heron proal en la calle Alberto Martínez 18:25 termina servicio 
+
+18:12 sale unidad 097 a atender un reporte de intento de suicidio en la localidad de la gloria en paso de toro 19:32 termina servicio 
+
+20:59 sale unidad 097 a atender accidente de auto en la localidad de los arrieros como referencia frente a la gasolinera 21:20 termina servicio 
+
+22:05 sale unidad 097 a atender accidente de auto con camión en la localidad de el 12 pasando la desviación de tlaliscoyan 22:41 termina servicio 
+
+02:55 sale unidad 097 a  atender accidente de moto sobre la carretera santa fe a Alvarado como referencia frente al hotel villa vicencio de la localidad de el nuevo Medellín 03:19 termina servicio 
+
+03:20 sale unidad 097 a atender femenina con posible aborto en lagos de puente moreno en el circuito Brasil norte 43802 03:50 termina servicio 
+
+06:35 sale unidad 097 a atender derrape de moto en la localidad de la laguna como referencia frente a la gasolinera de la misma se traslada masculino al HG 20 de noviembre para su atención
+
+--- FECHA: 2026-03-26 13:44:18 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad 097 por persona lesionada carretera el tejar las Vegas como referencia el criver salida 10:32 termino 11:25 
+
+2_ sale unidad 097 a carga de combustible salida 11:49 termino 12:05 
+
+3_ sale unidad 097 a la localidad de Mozambique por derrape de moto salida 12:33 termino 2::59  
+
+4_ sale unidad U_208  a traslado salida 3:39 termino 5:07 
+
+5_ sale unidad 072 a incendio de pastizal carretera puente moreno playa de vacas pac_09 y unidad 097  salida  4:52 termino 8:11
+
+--- FECHA: 2026-03-27 14:12:38 ---
+Buen día estás son las novedades del día 26/03/26 PC Medellín guardia (1)
+
+10:38 sale unidad 208 a atender una volcadura de un vehículo en lagos de puente moreno frente al circuito rivera 5 se atienden dos masculinos de 21 años ambos k iban en el vehículo solo policontundidos y raspones los trasladan familiares por sus medios 10:57 retorna a base 
+
+10:00 sale unidad de apoyo carro polo con el compañero Aurelio y Arturo para atender derrame de un árbol de mango en la localidad de los robles 
+
+11:21 Sale unidad 208 para taller de rotulación en boca del río 
+
+11:50 sale unidad motorizada con el compañero Rodolfo para ir a checar humo k salia de un lote valdio k se kemo el día 25 en playa de vacas se da recorrido y verifica k solo era la bruma k kedo de lo caliente y ceniza k volaba por el aire 12:30 retorna a base 
+
+14:40 sale unidad 097 a checar masculino con posible intoxicación en la localidad de la laguna se atiende y se estaviliza kedando en el domicilio con recomendaciones para los familiares 16:10 retorna a base 
+
+16:57 sale unidad pipa de renta para cargar combustible en la gasolinera Repsol de las Vegas 17:30 retorna a base 
+
+17:01 sale unidad 097 a atender una volcadura en la desviación a tlaliscoyan pasando la laguna para atender un masculino lesionado k se traslada al hospital español de Veracruz para su atención 18:38 retorna a base 
+
+17:30 sale unidad motorizada con el compañero Rodolfo para checar masculino con fiebre y con mucho vomito y dolor de cuerpo se checa y se traslada al HG de boca con apoyo de la unidad de rescate del compañero Damián sombra 
+
+20:17 sale unidad 097 a atender masculino con problemas cardíacos y dolor en pecho en lagos de puente moreno en el circuito bolivia centro se atiende se estaviliza y se keda en el domicilio con recomendaciones 20:30 retorna a base 
+
+20:32 sale unidad de apoyo polo a atender choke de motocicleta en la carretera Veracruz tejar como referencia frente a la pastelería champlite se trasladan dos masculinos al HG de 20 con apoyo de la unidad 097 k llegó al punto para el traslado 22:50 retorna la unidad 097 a base 
+
+07:30 sale unidad 097 a cubrir evento de deportes en boca del río en la facultad de educación física de la uv
+
+--- FECHA: 2026-03-28 13:59:31 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad 097 en apoyo a traslado de la clínica D, María a la localidad de buena vista salida 1:22 termino 3:54
+
+2_ sale unidad 072 y unidad PAC 09 a incendio de pastizal en el fraccionamiento San Miguel salida 1:07 termino 3:07
+
+3_ sale unidad 072 a fuga de gas en el fraccionamiento puente moreno salida 3:59 termino 4:51 
+
+4_ sale unidad 096 a retirar enjambre a la localidad de el copital y paso del toro salida 6:31 termino 8:00 
+
+5_ sale unidad 072 a incendio de pastizal a la localidad de playa de vacas salida 8:10 termino 9:05 
+
+6_ sale unidad 097 a accidente en puente moreno salida 8:21 termino 10:02 
+
+7_ sale unidad 072 a incendio de lote baldío en medellín salida 6:09 termino 6:53 
+
+8_ sale unidad 097 a cubrir evento a el domo de san Ramón salida 8:00 termino _______
+
+--- FECHA: 2026-03-29 14:04:13 ---
+Buen día novedades del día 28/03/26 PC Medellín guardia (1)
+
+10:09 sale unidad  72 a taller en los robles para cambio de tanke de 10 mil litros 
+
+10:20 sale unidad 096 a checar un reporte de cables caídos de alta tensión en lagos de puente moreno en circuito perla entre avenida las joyas 11:30 retorna a base 
+
+12:27 sale unidad motorizada a checar reporte de un perro agresivo en puente moreno 12:40 retornan a base 
+
+14:20 sale unidad 096 y motorizada a checar un percance entre una moto y un auto frente a soriana del tejar 14:50 retornan a base 
+
+14:48 sale unidad 097 a traslado del hospital 71 de días mirón a la 14 de cuauhtémoc 17:19 retorna a base 
+
+14:54 sale unidad motorizada a carga de combustible en la gasolinera Repsol de las Vegas 
+
+24:23 sale unidad 097 a atender un choke de un vehículo en la carretera puente moreno el tejar a la altura del centro de box k chocó contra un pilar de ferrozur 24:47 termina servicio 
+
+
+24:55 sale unidad 097 a atender masculino golpeado por una riña familiar en puente moreno circuito rivera de la laguna sur 01:35 termino servicio 
+
+01:40 sale unidad 097 a clínica 14 de cuauhtémoc a recuperar camilla k kedo a resguardo del paciente k se llevó de la 71 de días mirón 02:10 retornan a base
+
+02:20 sale unidad 096 la pipa de apoyo y la 097 a accidente de un choke de un taxi contra un postel de luz en playa de vacas como referencia frente al Oxxo y a un lado del restaurante camarero se checo el lugar y solo fueron daños materiales se procedió a acordonar el lugar para la espera de CFE
+
+--- FECHA: 2026-03-30 14:08:12 ---
+Buenos días novedades de PC Medellín 
+
+1_ sale unidad 096 a fuga de gas a la colonia el angel en el tejar salida 10:29 termino 11:31 
+
+2_ sale unidad 097 a la localidad de la bocana por reporte de persona tirada en vía pública salida 10:32 termino 10:53 
+
+3_ sale unidad 097 a la localidad de paso del toro a reporte de persona tirada en vía pública PX 14 salida 11:13 termino 11:50 
+
+4_ sale unidad 097 a fraccionamiento puente moreno a reporte de persona atropellada salida 6:30 termino 7:49 
+
+5_ sale unidad motorizada a reporte a la localidad de playa de vacas salida 7:28 termino 7:36 
+
+6_ sale unidad 097 a reporte de persona caída de su propia altura en la localidad de el tejar salida 8:38 termino 9:05 
+
+7_ sale unidad 097 a accidente en el fraccionamiento las palmas de medellín salida 9:05 termino 9:25
+
+8_ sale unidad 096 a reporte de poste tirando chispa en la localidad de playa de vacas salida 9:07 termino 9:56
+
+9_ sale unidad 097 a carga de combustible salida 9:45 termino 10:00
+
+10_ sale unidad 096 a capturar una culebra en el fraccionamiento puente moreno salida 11:37 termino 12:02 
+
+11_ sale unidad 097 a accidente en puente moreno a la altura de la gravera salida 12:11 termino 12:37
+
+--- FECHA: 2026-03-31 13:58:12 ---
+Buen día estás son las novedades del día 30/03/26 PC Medellín guardia (1)
+
+11:10 sale unidad 097 a atender masculino k derrapó de su moto en lagos de  puente moreno se atiende y se keda en el punto 11:50 retornan a base 
+
+13:30 sale unidad motorizada a checar un tlacuache k estaba en el patio de una casa en puente moreno en el circuito delfín en el área verde 13:47 retorna a base liberando al animalito en su avita 
+
+14:21 Sale unidad motorizada a checar fuga de gas de un tanke estacionario en lagos de puente moreno en circuito Guatemala de igual forma sale para el punto la unidad pipa de apoyo con la escalera para poder subir a la azotea para cerrar el tenke 15:17 retornan a base 
+
+15:47 sale unidad 097 a  la clínica 71 del IMSS para recoger material k kedo a resguardo 16:22 retornan a base 
+
+16:54 sale unidad 097 a checar menor k le pico una abeja en las instalaciones del centro de box en el área de la alberca se checa y se encuentra estable 17:00 retornan a base 
+
+21:05 sale unidad 097 a checar femenina de 80 años k callo de su propio nivel en la localidad de los robles se lleva a la 61 para su atención 23:00 retorna a base 
+
+04:23 sale unidad 097 a checar femenina k fuerte dolor estomacal en lagos de puente moreno 04:30 retornan a base 
+
+04:50 sale unidad 097 a checar menor con dolor en abdomen en paso de toro se llega al punto y indican k se lo llevaron por sus medios 05:23 retorna a base
+
+--- FECHA: 2026-04-14 14:09:16 ---
+Buen día novedades del día 13/04/26 PC Medellín guardia (1)
+
+12:13 sale unidad 097 a buscar tankes de oxígeno al HG de boca 12:47 retornan a base pero pasan a cargar combustible 
+
+12:47 salen las unidades 072 y 073 pipas de bomberos a cargar combustible ⛽ 13:25 retornan a base 
+
+14:30 sale unidad 208 a checar persona inconsciente en el tejar como referencia en la escuela Emiliano Zapata se traslada al ISSSTE para su atención 
+
+20:17 sale unidad 097 a accidente en paso de toro como referencia bajando el puente hacia boca del río 
+
+20:50 sale unidad 096 a atender fuga de gas en un tanke de 20 kilos en el tejar como referencia atrás del bachillerato lima del tejar se procede a retirarlo del punto y llevarlo a la gasera express del tejar para su desabasto 21:25 retorna a base 
+
+21:30 sale unidad 208 a  accidente automovilístico en la carretera paso del toro santa fe a la altura del puente de la Y de paso de toro 22:51 retornan a base 
+
+24:43 sale unidad 208 a atender un llamado por violencia familiar en lagos de puente moreno en el circuito jade sur 26708 01:17 retornan a base 
+
+06:20 sale la unidad 096 a continuar con la buskeda de la persona desaparecida en el río de playa de vacas con la embarcación inmensa 
+
+06:42 se localiza el cuerpo de un masculino en el río de playa de vacas a la altura de la bocana 
+
+07:45 sale unidad 208 a traslado programado de dos bocas a la 71 de días mirón para estudios
+
+--- FECHA: 2026-04-16 14:27:52 ---
+Buen día novedades del día 15/04/26 PC Medellín guardia (1)
+
+10:53 sale unidad 097 a  el campo de Medellín para checar una persona con golpe de calor en el partido de futbolito Bimbo se atiende y se dan recomendaciones 
+
+10:50 salen las unidades 208 y 093 a cubrir mandato de la fiscalía para trasvase de productos derivadodos del petróleo en la localidad de los pichones como referencia a un lado del puente de mata loma 13:30 termina operativo y retornan a base 
+
+11:24 sale unidad 097 a cubrir evento de futbolito Bimbo en el campo de Medellín 13:53 termina partido y retornan a base 
+
+11:50 acude unidad 097 a checar femenina inconsciente en el tejar como referencia a la entrada de la primera ceiba se traslada al HG de boca para su atención 
+
+12:31 sale unidad 208 a checar menor con problema respiratorio en lagos de puente moreno en el circuito lapizlazuli
+
+12:50 sale unidad 096 a carga de combustible ⛽ en las Vegas 
+
+13:42 sale unidad 073 a incendio de pastizal en rancho del padre como referencia frente a la chapera 14:50 termina servicio 
+
+18:25 sale unidad 208 a accidente de moto en paso de toro como referencia arriba del puente k está por las vías de tren se traslada al hospital 20 de noviembre para su atención 
+
+18:47 sale unidad 72 a checar kema de basura en arboledas San Ramón en la calle playa de Peral 
+
+19:30 sale unidad 096 a checar fuga de gas en la localidad de alvaradito 20:07 retornan a base 
+
+06:21 Sale unidad 097 a accidente de moto en la carretera playa de vacas boca del río a la altura del brack panel 07:13
+
+--- FECHA: 2026-04-18 14:14:08 ---
+Buen día novedades del día 17/04/26 PC Medellín guardia (1)
+
+10:55 sale unidad 72 a el panteón de la laguna a apoyar con agua 11:30 termina servicio 
+
+11:57 sale unidad 72 a incendio de pastizal en la localidad de ixcualco 12:30 termina servicio 
+
+12:35 sale unidad 097 a traslado programado del HG 20 a el HG boca 
+
+12:44 sale unidad 208 a atender un derrape de moto en la localidad de los robles 13:20 retorna a base 
+
+13:48 sale unidad 208 a accidente automovilístico en el tejar a la altura de la primera ceiba 14:15 retorna a base 
+
+14:20 sale unidad 72 a incendio de pastizal en la localidad de ixcualco 14:45 retorna a base 
+
+16:15 sale unidad 097 a atender adulto mayor k sufrió desmayo en puente moreno 17:02 retorna a base 
+
+17:30 sale unidad 096 a atender fuga de gas de un tanke de 10 kilos en puente moreno 18:20 termina servicio
+
+--- FECHA: 2026-04-22 14:00:45 ---
+Novedades del día 21/04/26 PC Medellín guardia (1)
+
+13:05 sale unidad 073 a recargar agua a grupo más 14:00 llega a base 
+
+13:33 sale unidad 097 a llevar una persona k llegó a base con una cortada en el brazo a el hospital de boca del río para su atención 14:15 retorna a base 
+
+14:05 sale unidad 073 a apoyar con agua para los baños del parke del tejar 14:57 retorna a base 
+
+15:03 sale unidad 097 a atender persona k se callo de su propio nivel  en Medellín como referencia por el registro civil 15:45 retorna a base 
+
+20:51 sale unidad 097 a atender persona atropellada en la parada de dos bocas se atiende y se lleva al HG de boca para su atención 22:25 retornan a base
+
+--- FECHA: 2026-04-24 15:11:39 ---
+Buen día novedades del día 23/04/26 PC Medellín guardia (1)
+
+10:00 sale unidad 096 a buscar la unidad 072 pipa a la gloria k se llevó para instalación de la bomba posterior se pasa a cargar agua y a checar las luces al rastro parke vehicular 11:40 retorna a base 
+
+11:15 sale unidad 097 a checar una persona inconsciente en arboledas San Ramón 
+
+12:37 sale unidad 096 a cargar combustible y a llenar 4 garrafas de gasolina dos de 20 y dos de 10 litros 12:55 retorna a base 
+
+13:02 sale unidad 097 al mimos punto de arboledas San Ramón para checar a un familiar de la persona antes atendida 13:15 retornan a base 
+
+13:41 Seva por la ambulancia 208 al taller en Veracruz 
+
+13:50 sale unidad 072 a cargar combustible en las Vegas 14:25 retorna a base 
+
+14:43 sale la unidad 073 a cargar combustible en las Vegas 15:05 retorna a base 
+
+17:20 sale unidad 097 a checar una persona por enfermedad general 18:21 retornan a base 
+
+22:15 sale unidad 72 a checar una kema de basura fuera de control en arboledas San Miguel 22:38 retorna a base 
+
+23:30 sale unidad 72 y 097 a incendio de vehículo sobre la carretera principal Veracruz tejar a la altura de las oficinas de puente moreno 
+
+24:05 sale unidad 097 a checar una femenina por enfermedad general en puente moreno en el circuito Holanda sur 24:39 retorna a base 
+
+01:31 sale unidad 097 a checar una persona por intento de suicidio en lagos de puente moreno en el circuito zafiro oeste 02:25 retornan a base
+
+
+======================================================================
+TIPO: nota_clinica_paramedico (Total: 195)
+======================================================================
+--- FECHA: 2026-01-02 03:31:45 ---
+Nombre de la femenina y sus signos vitales Alejandra días días saes 54 años t/a 120/80 fc100 fr 12 temperatura de 35.5 glicemia de 88 se le brinda la información para que acuda a su clínica para descartar posible dengue y se le recomienda no tomar medicamentos para no provocar una hipotermia se queda en su domicilio al cuidado de sus familiares
+
+--- FECHA: 2026-01-02 12:23:27 ---
+Emiliano escobar morales de 37 consumo de cristal desde hace tres días se le brinda las siguientes recomendaciones a sus familiares que lo tiene que acudir a su médico familiar signos vitales t/a 130/90 saturación de oxígeno 97 tmp 36.2 nos pasamos a retirar
+
+--- FECHA: 2026-01-04 01:42:15 ---
+PX gediatrica de nombre Isabel espinosa Ortega de 98 años con los siguientes signos vitales t/a16/100 SAT 97 FC110 FR20 Tmp 36.6 se traslada al Hg de boca del río para su atención médica
+
+--- FECHA: 2026-01-04 05:30:33 ---
+Reporta C5 en el tejar en la calle ferrocarriles entre camino real y Francisco y madero una casa color azul un masculino de 70 años no puede respirar al parecer se intoxico con un medicamento k se inyectó comentan k está consiente pero desorientado y k le cuesta respirar cuenta con seguro medico
+
+--- FECHA: 2026-01-04 05:44:11 ---
+Se atiende a femenina de nombre Brigitte assandra Ruiz de 20 años quien prenceta una Cris de iría signos vitales t/a 110/70 FC72 FR12 SAT 97 tmp 36.2 se queda en su domicilio ya que solo son golpes que no ponen en riesgo su vida nos pasamos a retirar para acudir al otro servicio
+
+
+======================================================================
+TIPO: despacho_tiempo_real (Total: 16)
+======================================================================
+--- FECHA: 2026-01-02 23:16:40 ---
+Sale U-208 para traslado de san Ramón a clínica Santa Lucia
+
+--- FECHA: 2026-01-29 00:45:18 ---
+Sale Unidad 97 A Traslado De Bace Ala Clínica 61
+
+--- FECHA: 2026-01-29 19:46:39 ---
+Sale U208 en apoyo a compañero Luis Alberto para revisión de un familiar
+
+--- FECHA: 2026-02-05 15:56:55 ---
+Sale U208 a traslado de Puente Moreno a Clínica Gainza
+
+--- FECHA: 2026-02-05 17:55:17 ---
+Sale U208 en apoyo a traslado a px con Fx cadera del Hospital Covadonga a Los Robles
+
+
+======================================================================
+TIPO: arribo_hospital (Total: 91)
+======================================================================
+--- FECHA: 2026-01-02 19:25:56 ---
+Unidad 208 en  hospital ISSSTE en espera de equipo
+
+--- FECHA: 2026-01-02 23:53:35 ---
+U-208 en clínica Santa Lucia
+
+--- FECHA: 2026-01-28 23:07:12 ---
+Unidad U_208 en HG boca en espera de equipo
+
+--- FECHA: 2026-01-29 00:15:06 ---
+Unidad U_208 aun en espera de equipo
+
+--- FECHA: 2026-01-29 02:45:17 ---
+Unidad 208 procede al hospital de Pemex con paciente
+
+
+======================================================================
+TIPO: reporte_c5_911 (Total: 49)
+======================================================================
+--- FECHA: 2026-01-01 23:18:31 ---
+Reporta c5 femenina 70 años inconsciente col héroe proal frente la entrada de los robles junto a un six
+
+--- FECHA: 2026-01-01 23:41:40 ---
+Reporta c5 accidente de moto y carro en los robles
+
+--- FECHA: 2026-01-03 17:59:15 ---
+Reporta c5 choque de 2 vehículos con 2 lecionados costera del golfo ala altura de la laguna  en el punto la ssp4425 requiren apollo de ambulancia
+
+--- FECHA: 2026-01-03 18:38:29 ---
+Reporta c5 femenina con combulciones se encuentra inconsciente  calle José maría morelos esquina aldama
+
+--- FECHA: 2026-01-29 00:32:58 ---
+Reporta C5
+
+Persona Inconsciente En La Carretera A Rancho Del Padre Localidad El Tejar, Esquina Calle Francisco I Madero Junto Al Pozo De Grupo Más
+
+Número Que Le Solicito Al 911 
+2201399287
+
+
+======================================================================
+TIPO: otros (Total: 11676)
+======================================================================
