@@ -26,9 +26,10 @@ def procesar():
     cur = conn.cursor()
     
     cur.execute(f'''
-        SELECT "messageTimestamp", "pushName", "keyId", "participant", "message"
+        SELECT "messageTimestamp", "pushName", "key", "message"
         FROM "Message"
         WHERE "messageTimestamp" >= {timestamp_15_dias}
+        AND "key"->>'remoteJid' = '{GRUPO_SALIDAS_JID}'
         ORDER BY "messageTimestamp" ASC
     ''')
     
@@ -39,7 +40,10 @@ def procesar():
     ignorados = 0
     
     for row in filas:
-        timestamp, push_name, key_id, participant, message_json = row
+        timestamp, push_name, key_json, message_json = row
+        key_dict = key_json if isinstance(key_json, dict) else json.loads(key_json)
+        key_id = key_dict.get("id")
+        participant = key_dict.get("participant")
         
         if isinstance(message_json, str):
             try:
