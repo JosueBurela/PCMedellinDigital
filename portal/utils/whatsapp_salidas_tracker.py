@@ -8,11 +8,12 @@ import json
 import logging
 from portal.models import BitacoraSalidaVehiculo, VehiculoUnidad
 from .whatsapp_utils import (
-    GRUPO_SALIDAS_JID,
     EVOLUTION_API_URL,
     EVOLUTION_API_KEY,
     INSTANCE_NAME
 )
+
+GRUPO_SALIDAS_JID = "120363042493725288@g.us"
 
 logger = logging.getLogger(__name__)
 
