@@ -373,17 +373,30 @@ function verBitacoraSalida(descripcion, unidad, operador, fecha_llegada) {
     subtitulo.textContent = `Unidad ${unidad} — ${operador}`;
     lista.innerHTML = '';
     
-    // Convertir \n literales a <br>
-    descripcion = descripcion.replace(/\n/g, '<br>');
+    // No convertimos \n a <br> todavía, lo hacemos al renderizar
     
-    let eventos = descripcion.split(' | ');
-    if (eventos.length === 0 || (eventos.length === 1 && !eventos[0].trim())) {
+    // Extraer eventos basados en el formato "[HH:MM]"
+    // Dividimos por saltos de línea y juntamos las líneas que no empiecen con "[" al evento anterior
+    let lineas = descripcion.split('\n');
+    let eventos = [];
+    
+    lineas.forEach(linea => {
+        if (linea.trim() === "") return;
+        // Si empieza con un timestamp como [14:30] o con [CORTESÍA
+        if (linea.match(/^\[(\d{2}:\d{2}|CORTESÍA)/) || eventos.length === 0) {
+            eventos.push(linea);
+        } else {
+            // Es una línea nueva dentro del mismo mensaje de WhatsApp
+            eventos[eventos.length - 1] += "<br>" + linea;
+        }
+    });
+
+    if (eventos.length === 0) {
         eventos = ["No hay detalles operativos registrados."];
     }
     
-    // Si la salida está completada (hay fecha de llegada) pero el último mensaje no dice "Retorno", añadimos uno fantasma
-    if (fecha_llegada && !eventos[eventos.length - 1].toLowerCase().includes("retorno")) {
-        eventos.push(`[Retorno] Unidad en base a las ${fecha_llegada} hrs`);
+    if (fecha_llegada && !eventos[eventos.length - 1].toLowerCase().includes("retorno") && !eventos[eventos.length - 1].toLowerCase().includes("llegada") && !eventos[eventos.length - 1].toLowerCase().includes("base")) {
+        eventos.push(`[${fecha_llegada}] Sistema: Unidad marcada en base`);
     }
 
     eventos.forEach((ev, idx) => {
@@ -395,28 +408,43 @@ function verBitacoraSalida(descripcion, unidad, operador, fecha_llegada) {
         let evText = ev.trim();
         let boldTitle = "";
 
-        // El primer elemento siempre es el inicio de salida
-        if (idx === 0) {
+        // Si es CORTESIA
+        if (evText.includes("[CORTESÍA")) {
+            bgColor = "bg-rose-500";
+            iconHtml = '<i data-lucide="alert-triangle" class="w-3 h-3 text-white"></i>';
+            boldTitle = "Retorno sin salida previa";
+            evText = evText.replace("[CORTESÍA / RETORNO SIN SALIDA PREVIA]", "").replace("[CORTESÍA - RETORNO SIN SALIDA PREVIA]", "").replace(/<br>/g, "").trim();
+        }
+        else if (idx === 0) {
             bgColor = "bg-medellinOro";
             iconHtml = '<i data-lucide="play" class="w-2.5 h-2.5 text-white"></i>';
             boldTitle = "Inicio de Salida";
         } 
-        // El último elemento si incluye retorno
-        else if (idx === eventos.length - 1 && evText.toLowerCase().includes("retorno")) {
+        else if (idx === eventos.length - 1 && (evText.toLowerCase().includes("retorno") || evText.toLowerCase().includes("base") || evText.toLowerCase().includes("llegada"))) {
             bgColor = "bg-blue-500";
             iconHtml = '<i data-lucide="check" class="w-3 h-3 text-white"></i>';
             boldTitle = "Retorno a Base";
         } 
-        // Mensajes intermedios
         else {
             bgColor = "bg-indigo-500";
             iconHtml = '<i data-lucide="message-square" class="w-2.5 h-2.5 text-white"></i>';
         }
 
-        let match = evText.match(/^\[(.*?)\] (.*)$/);
+        // Buscar el formato [HH:MM] Nombre: Mensaje
+        let match = evText.match(/^\[(.*?)\] (.*?): (.*)$/s); // /s allows matching newlines if any
         if (match) {
-            boldTitle = match[1];
-            evText = match[2];
+            let time = match[1];
+            let name = match[2];
+            let msg = match[3];
+            boldTitle = boldTitle ? `${boldTitle} — ${time} (${name})` : `${time} — ${name}`;
+            evText = msg;
+        } else {
+            // Tratar de buscar si solo tiene [HH:MM] pero no tiene Nombre:
+            let m2 = evText.match(/^\[(.*?)\] (.*)$/s);
+            if (m2 && m2[1].includes(":")) {
+                boldTitle = boldTitle ? `${boldTitle} — ${m2[1]}` : m2[1];
+                evText = m2[2];
+            }
         }
 
         item.innerHTML = `

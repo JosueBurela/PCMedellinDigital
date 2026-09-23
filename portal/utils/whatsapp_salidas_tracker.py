@@ -54,7 +54,7 @@ def clasificar_mensaje_operativo(texto_original):
         r'\bconcluy(?:e|endo|o)\b'
     ]
     for p in patrones_llegada:
-        if re.search(p, texto): return 'ENTRADA', texto_original.strip()
+        if re.search(p, texto): return 'ENTRADA'
 
     patrones_salida = [
         r'\b(?:sale|salida|saliendo|salimos)\s+(?:a|hacia|al|rumbo a)?\s*(.+)',
@@ -63,12 +63,11 @@ def clasificar_mensaje_operativo(texto_original):
         r'\b(?:atender|apoyo)\s+(?:a|en)?\s*(.+)'
     ]
     for p in patrones_salida:
-        m = re.search(p, texto)
-        if m: return 'SALIDA', m.group(1).strip().capitalize()
+        if re.search(p, texto): return 'SALIDA'
     
     if 'sale' in texto or 'salida' in texto:
-        return 'SALIDA', "Salida operativa"
-    return 'NOVEDAD', texto_original.strip()
+        return 'SALIDA'
+    return 'NOVEDAD'
 
 def procesar_mensaje_grupo_salidas(data):
     key = data.get("key", {})
@@ -100,13 +99,14 @@ def procesar_mensaje_grupo_salidas(data):
     num_unidad = extraer_unidad(texto_limpio)
     vehiculo = buscar_vehiculo(num_unidad) if num_unidad else None
 
-    # Atrapar el número que le dio salida
     salida_activa_usuario = BitacoraSalidaVehiculo.objects.filter(
         operador_telefono=participant_jid, completado=False,
         fecha_salida__gte=dt_evento - datetime.timedelta(hours=14)
     ).order_by('-fecha_salida').first()
 
-    tipo_evento, detalle_evento = clasificar_mensaje_operativo(texto_limpio)
+    tipo_evento = clasificar_mensaje_operativo(texto_limpio)
+    raw_text = texto_limpio if texto_limpio else "[FOTO / IMAGEN]"
+    formatted_msg = f"[{dt_evento.strftime('%H:%M')}] {push_name}: {raw_text}"
 
     # Inferencia inteligente si no se nombra unidad
     if not vehiculo:
@@ -135,13 +135,13 @@ def procesar_mensaje_grupo_salidas(data):
             minutos = (dt_evento - salida_activa_usuario.fecha_salida).total_seconds() / 60
             if salida_activa_usuario.unidad == vehiculo and minutos < 60:
                 if foto_archivo and not salida_activa_usuario.foto_odometro_salida: salida_activa_usuario.foto_odometro_salida = foto_archivo
-                salida_activa_usuario.descripcion_servicio += f" | {detalle_evento}"
+                salida_activa_usuario.descripcion_servicio += f"\n{formatted_msg}"
                 salida_activa_usuario.save()
                 return {"status": "salida_updated"}
             else:
                 salida_activa_usuario.completado = True
                 salida_activa_usuario.fecha_llegada = dt_evento
-                salida_activa_usuario.descripcion_servicio += " | [Cierre automático: Operador tomó otra unidad]"
+                salida_activa_usuario.descripcion_servicio += "\n[Cierre automático: Operador tomó otra unidad]"
                 salida_activa_usuario.save()
                 salida_activa_usuario.unidad.estatus = 'DISPONIBLE'
                 salida_activa_usuario.unidad.save()
@@ -149,7 +149,7 @@ def procesar_mensaje_grupo_salidas(data):
         salida_existente = BitacoraSalidaVehiculo.objects.filter(unidad=vehiculo, completado=False, fecha_salida__gte=dt_evento - datetime.timedelta(hours=14)).first()
         if salida_existente:
             if foto_archivo and not salida_existente.foto_odometro_salida: salida_existente.foto_odometro_salida = foto_archivo
-            salida_existente.descripcion_servicio += f" | [Asume {push_name}] {detalle_evento}"
+            salida_existente.descripcion_servicio += f"\n{formatted_msg}"
             salida_existente.operador_telefono = participant_jid
             salida_existente.operador_nombre = push_name
             salida_existente.save()
@@ -157,7 +157,7 @@ def procesar_mensaje_grupo_salidas(data):
 
         nueva = BitacoraSalidaVehiculo.objects.create(
             unidad=vehiculo, operador_nombre=push_name, operador_telefono=participant_jid,
-            descripcion_servicio=detalle_evento or "Salida operativa", fecha_salida=dt_evento,
+            descripcion_servicio=formatted_msg, fecha_salida=dt_evento,
             odometro_salida=vehiculo.odometro_actual or 0, gasolina_salida=vehiculo.nivel_gasolina_actual or 'Lleno',
             foto_odometro_salida=foto_archivo, completado=False
         )
@@ -171,13 +171,13 @@ def procesar_mensaje_grupo_salidas(data):
             salida.fecha_llegada = dt_evento
             salida.duracion_minutos = max(1, int((dt_evento - salida.fecha_salida).total_seconds() / 60))
             salida.completado = True
-            salida.descripcion_servicio += f" | [Retorno {push_name}] {detalle_evento}"
+            salida.descripcion_servicio += f"\n{formatted_msg}"
             if foto_archivo: salida.foto_odometro_llegada = foto_archivo
             salida.save()
         else:
             BitacoraSalidaVehiculo.objects.create(
                 unidad=vehiculo, operador_nombre=push_name, operador_telefono=participant_jid,
-                descripcion_servicio="Retorno a base sin salida registrada", fecha_salida=dt_evento - datetime.timedelta(minutes=30),
+                descripcion_servicio=f"[CORTESÍA / RETORNO SIN SALIDA PREVIA]\n{formatted_msg}", fecha_salida=dt_evento - datetime.timedelta(minutes=30),
                 fecha_llegada=dt_evento, duracion_minutos=30, foto_odometro_llegada=foto_archivo,
                 odometro_salida=vehiculo.odometro_actual or 0, completado=True
             )
@@ -189,7 +189,7 @@ def procesar_mensaje_grupo_salidas(data):
     else:
         salida_activa = BitacoraSalidaVehiculo.objects.filter(unidad=vehiculo, completado=False).order_by('-fecha_salida').first()
         if salida_activa:
-            salida_activa.descripcion_servicio += f" \n[{dt_evento.strftime('%H:%M')}]: {detalle_evento}"
+            salida_activa.descripcion_servicio += f"\n{formatted_msg}"
             if foto_archivo and not salida_activa.foto_odometro_salida: salida_activa.foto_odometro_salida = foto_archivo
             salida_activa.save()
             return {"status": "novedad_anexada"}
