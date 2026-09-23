@@ -57,16 +57,14 @@ def clasificar_mensaje_operativo(texto_original):
         if re.search(p, texto): return 'ENTRADA'
 
     patrones_salida = [
-        r'\b(?:sale|salida|saliendo|salimos)\s+(?:a|hacia|al|rumbo a)?\s*(.+)',
-        r'\b(?:rumbo|comision|despacho)\s+(?:a|hacia|al)?\s*(.+)',
-        r'\b(?:se traslada|traslado)\s+(?:a|hacia|al)?\s*(.+)',
-        r'\b(?:atender|apoyo)\s+(?:a|en)?\s*(.+)'
+        r'\b(?:sale|salida|saliendo|salimos)\b',
+        r'\b(?:rumbo|comision|despacho|encomienda)\b',
+        r'\b(?:se traslada|traslado|trasladamos)\b',
+        r'\b(?:atender|apoyo)\b',
+        r'\b(?:al servicio|al punto|en camino|avanza|avanzando|aproxima|aproximando|procede|dirige|dirigiendo)\b'
     ]
     for p in patrones_salida:
         if re.search(p, texto): return 'SALIDA'
-    
-    if 'sale' in texto or 'salida' in texto:
-        return 'SALIDA'
     return 'NOVEDAD'
 
 def procesar_mensaje_grupo_salidas(data):
