@@ -106,9 +106,33 @@ def procesar_mensaje_grupo_salidas(data):
 
     # Inferencia inteligente si no se nombra unidad
     if not vehiculo:
-        if salida_activa_usuario:
+        quoted_context = message.get("extendedTextMessage", {}).get("contextInfo", {})
+        quoted_participant = quoted_context.get("participant", "")
+        quoted_msg = quoted_context.get("quotedMessage", {})
+        
+        # 1. ¿El mensaje original mencionado tiene unidad?
+        if quoted_msg:
+            quoted_text = quoted_msg.get("conversation", quoted_msg.get("extendedTextMessage", {}).get("text", ""))
+            if not quoted_text and "imageMessage" in quoted_msg:
+                quoted_text = quoted_msg["imageMessage"].get("caption", "")
+            if quoted_text:
+                num_unidad = extraer_unidad(quoted_text)
+                if num_unidad: vehiculo = buscar_vehiculo(num_unidad)
+
+        # 2. ¿El participante al que le están respondiendo tiene una salida activa?
+        if not vehiculo and quoted_participant:
+            salida_citada = BitacoraSalidaVehiculo.objects.filter(
+                operador_telefono=quoted_participant, completado=False,
+                fecha_salida__gte=dt_evento - datetime.timedelta(hours=14)
+            ).order_by('-fecha_salida').first()
+            if salida_citada: vehiculo = salida_citada.unidad
+
+        # 3. ¿El autor actual tiene salida activa?
+        if not vehiculo and salida_activa_usuario:
             vehiculo = salida_activa_usuario.unidad
-        else:
+            
+        # 4. Fallback general a la salida más reciente de la flotilla
+        if not vehiculo:
             salida_pendiente = BitacoraSalidaVehiculo.objects.filter(completado=False, fecha_salida__gte=dt_evento - datetime.timedelta(hours=14)).order_by('-fecha_salida').first()
             if salida_pendiente: vehiculo = salida_pendiente.unidad
 
