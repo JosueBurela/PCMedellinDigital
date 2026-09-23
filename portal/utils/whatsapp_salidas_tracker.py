@@ -105,30 +105,39 @@ def procesar_mensaje_grupo_salidas(data):
     ).order_by('-fecha_salida').first()
 
     tipo_evento = clasificar_mensaje_operativo(texto_limpio)
-    raw_text = texto_limpio if texto_limpio else "[FOTO / IMAGEN]"
-    formatted_msg = f"[{dt_evento.strftime('%H:%M')}] {push_name}: {raw_text}"
 
     # Inferencia inteligente si no se nombra unidad
     if not vehiculo:
         if salida_activa_usuario:
             vehiculo = salida_activa_usuario.unidad
         else:
-            # Cualquier otro mensaje (texto, enterado, fotos, novedades) que no mencione unidad explícita
-            # se anexa a la salida activa más reciente de toda la flotilla (asumiendo que hablan de ese servicio)
             salida_pendiente = BitacoraSalidaVehiculo.objects.filter(completado=False, fecha_salida__gte=dt_evento - datetime.timedelta(hours=14)).order_by('-fecha_salida').first()
             if salida_pendiente: vehiculo = salida_pendiente.unidad
 
     if not vehiculo: return {"status": "no_unit_detected"}
 
     foto_archivo = None
+    foto_url = ""
     if image_msg:
         b64_str = data.get("base64") or image_msg.get("base64")
         if not b64_str: b64_str = obtener_base64_media(key, message)
         if b64_str:
             try:
                 if "," in b64_str: b64_str = b64_str.split(",")[1]
-                foto_archivo = ContentFile(base64.b64decode(b64_str), name=f"tab_{vehiculo.numero_unidad}_{int(dt_evento.timestamp())}.jpg")
-            except: pass
+                file_data = base64.b64decode(b64_str)
+                foto_archivo = ContentFile(file_data, name=f"tab_{vehiculo.numero_unidad}_{int(dt_evento.timestamp())}.jpg")
+                from django.core.files.storage import default_storage
+                saved_name = default_storage.save(f"salidas_media/nov_{vehiculo.numero_unidad}_{int(dt_evento.timestamp())}.jpg", ContentFile(file_data))
+                foto_url = default_storage.url(saved_name)
+            except Exception as e:
+                logger.error(f"Error procesando foto URL: {e}")
+
+    if foto_url:
+        raw_text = f"{texto_limpio} [FOTO_URL:{foto_url}]".strip()
+    else:
+        raw_text = texto_limpio if texto_limpio else "[FOTO / IMAGEN]"
+        
+    formatted_msg = f"[{dt_evento.strftime('%H:%M')}] {push_name}: {raw_text}"
 
     if tipo_evento == 'SALIDA':
         if salida_activa_usuario:
