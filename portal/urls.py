@@ -146,6 +146,7 @@ urlpatterns = [
     path('chat/enviar/', views.enviar_mensaje_chat, name='enviar_mensaje_chat'),
     
     # Registro de Salidas y Atenciones Diarias (Flotilla & WhatsApp)
+    path('intranet/mapa-tv/', TemplateView.as_view(template_name='portal/mapa_tv.html'), name='mapa_tv'),
     path('intranet/salidas/', views.intranet_registro_salidas, name='intranet_registro_salidas'),
     path('intranet/salidas/cerrar/<int:salida_id>/', views.api_cerrar_salida_manual, name='api_cerrar_salida_manual'),
     path('intranet/salidas/crear/', views.api_crear_salida_manual, name='api_crear_salida_manual'),
