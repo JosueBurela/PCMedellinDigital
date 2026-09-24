@@ -44,12 +44,62 @@ def obtener_base64_media(key, message):
         logger.error(f"Error media: {e}")
         return None
 
+DICCIONARIO_PESOS = {
+    'SALIDA': [
+        (r'\b(sale|salida|saliendo|salimos)\b', 60),
+        (r'\b(procede|procediendo|dirige|dirigiendo|avanza|avanzando|avanzo|aproxima|aproximando)\b', 50),
+        (r'\b(rumbo|en camino|despacho)\b', 40),
+        (r'\b(traslada|trasladamos|trasladando|traslado)\b', 50),
+        (r'\b(atender|apoyo|servicio|punto|emergencia|encomienda)\b', 30),
+    ],
+    'ENTRADA': [
+        (r'\b(llega|llegada|llegando|llegamos|arribando|arribo)\b', 50),
+        (r'\b(entra|entrada|entrando)\b', 40),
+        (r'\b(retorna|retorno|retornando)\b', 50),
+        (r'\b(base|central|estacion)\b', 35),
+        (r'\b(10[-\s]?8)\b', 80),
+        (r'\b(concluy(?:e|endo|o)|concluida|concluido|finaliza|finalizado)\b', 50),
+        (r'\b(sin novedad)\b', 30),
+    ],
+    'CONFIRMACION': [
+        (r'\b(enterado|enterada|ent|nt)\b', 70),
+        (r'\b(recibido|recibida|rcb)\b', 70),
+        (r'\b(copiado|copia)\b', 70),
+        (r'\b(qsl)\b', 80),
+        (r'\b(pendiente)\b', 50),
+        (r'\b(ok|okey)\b', 40),
+        (r'\b(10[-\s]?4)\b', 80),
+    ]
+}
+
 def clasificar_mensaje_operativo(texto_original):
-    texto = normalizar_texto(texto_original)
+    # normalizacion
+    texto = re.sub(r'[^\w\s-]', '', texto_original).lower()
     
-    # Pre-filtro: Si el mensaje es una simple confirmación de la central, no es llegada ni salida
-    if re.search(r'^(enterado|recibido|copiado|qsl|pendiente|ok)\s+(en\s+)?(base|central|estacion)$', texto.strip()):
+    puntajes = {'SALIDA': 0, 'ENTRADA': 0, 'CONFIRMACION': 0}
+    
+    # Evaluar el modelo predictivo heuristico basado en pesos
+    for categoria, reglas in DICCIONARIO_PESOS.items():
+        for patron, peso in reglas:
+            if re.search(patron, texto):
+                puntajes[categoria] += peso
+                
+    max_puntaje = 0
+    ganador = 'NOVEDAD'
+    
+    for cat, pts in puntajes.items():
+        if pts > max_puntaje:
+            max_puntaje = pts
+            ganador = cat
+            
+    # Umbral de confianza
+    if max_puntaje < 35:
+        ganador = 'NOVEDAD'
+        
+    if ganador == 'CONFIRMACION':
         return 'NOVEDAD'
+        
+    return ganador
         
     # Remover frases de confirmación que contienen "en base" para evitar falsos positivos
     texto_evaluar = re.sub(r'\b(enterado|recibido|copiado|qsl|pendiente)\s+(en\s+)?base\b', '', texto)
