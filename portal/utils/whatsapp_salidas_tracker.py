@@ -55,10 +55,14 @@ DICCIONARIO_PESOS = {
         (r'\b(traslada|trasladamos|trasladando|traslado)\b', 50),
         (r'\b(atender|apoyo|servicio|punto|emergencia|encomienda)\b', 30),
     ],
+    'RETORNANDO': [
+        (r'\b(retorna|retorno|retornando|regresa|regresando|regresamos)\b', 80),
+        (r'\b(rumbo a base|procede a base|dirige a base)\b', 80),
+    ],
     'ENTRADA': [
         (r'\b(llega|llegada|llegando|llegamos|arribando|arribo)\b', 50),
         (r'\b(entra|entrada|entrando)\b', 40),
-        (r'\b(retorna|retorno|retornando)\b', 50),
+        (r'\b(en base|ya en base|estacionada|estacionado)\b', 60),
         (r'\b(base|central|estacion)\b', 35),
         (r'\b(10[-\s]?8)\b', 80),
         (r'\b(concluy(?:e|endo|o)|concluida|concluido|finaliza|finalizado)\b', 50),
@@ -99,7 +103,7 @@ def clasificar_mensaje_operativo(texto_original):
     if max_puntaje < 35:
         ganador = 'NOVEDAD'
         
-    if ganador == 'CONFIRMACION':
+    if ganador in ['CONFIRMACION', 'RETORNANDO']:
         return 'NOVEDAD'
         
     return ganador
