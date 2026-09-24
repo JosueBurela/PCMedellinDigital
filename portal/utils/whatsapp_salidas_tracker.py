@@ -69,13 +69,13 @@ DICCIONARIO_PESOS = {
         (r'\b(sin novedad)\b', 30),
     ],
     'CONFIRMACION': [
-        (r'\b(enterado|enterada|ent|nt)\b', 70),
-        (r'\b(recibido|recibida|rcb)\b', 70),
-        (r'\b(copiado|copia)\b', 70),
-        (r'\b(qsl)\b', 80),
-        (r'\b(pendiente)\b', 50),
+        (r'\b(enterado|enterada|ent|nt)\b', 100),
+        (r'\b(recibido|recibida|rcb)\b', 100),
+        (r'\b(copiado|copia)\b', 100),
+        (r'\b(qsl)\b', 100),
+        (r'\b(pendiente)\b', 100),
         (r'\b(ok|okey)\b', 40),
-        (r'\b(10[-\s]?4)\b', 80),
+        (r'\b(10[-\s]?4)\b', 100),
     ]
 }
 
