@@ -46,6 +46,14 @@ def obtener_base64_media(key, message):
 
 def clasificar_mensaje_operativo(texto_original):
     texto = normalizar_texto(texto_original)
+    
+    # Pre-filtro: Si el mensaje es una simple confirmación de la central, no es llegada ni salida
+    if re.search(r'^(enterado|recibido|copiado|qsl|pendiente|ok)\s+(en\s+)?(base|central|estacion)$', texto.strip()):
+        return 'NOVEDAD'
+        
+    # Remover frases de confirmación que contienen "en base" para evitar falsos positivos
+    texto_evaluar = re.sub(r'\b(enterado|recibido|copiado|qsl|pendiente)\s+(en\s+)?base\b', '', texto)
+
     patrones_llegada = [
         r'\b(?:llegando|llegada|llegamos|llega|arribando)\s+(?:a|al)?\s*(?:base|central|estacion)\b',
         r'\ben\s+base\b',
@@ -54,7 +62,7 @@ def clasificar_mensaje_operativo(texto_original):
         r'\bconcluy(?:e|endo|o)\b'
     ]
     for p in patrones_llegada:
-        if re.search(p, texto): return 'ENTRADA'
+        if re.search(p, texto_evaluar): return 'ENTRADA'
 
     patrones_salida = [
         r'\b(?:sale|salida|saliendo|salimos)\b',
@@ -64,7 +72,7 @@ def clasificar_mensaje_operativo(texto_original):
         r'\b(?:al servicio|al punto|en camino|avanza|avanzando|aproxima|aproximando|procede|dirige|dirigiendo)\b'
     ]
     for p in patrones_salida:
-        if re.search(p, texto): return 'SALIDA'
+        if re.search(p, texto_evaluar): return 'SALIDA'
     return 'NOVEDAD'
 
 def procesar_mensaje_grupo_salidas(data):
