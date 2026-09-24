@@ -37,7 +37,8 @@
         <span>Imprimir Parte</span>
       </a>
 
-      <a href="{% url 'mapa_tv' %}" target="_blank" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5 shrink-0">
+      <!-- Forzamos HTTP para evitar Mixed Content Block del mapa de CENAPRED -->
+      <a href="http://107-170-59-223.sslip.io/intranet/mapa-tv/" target="_blank" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold shadow-md transition flex items-center gap-1.5 shrink-0">
         <i data-lucide="tv" class="w-4 h-4"></i>
         <span>Modo TV (Mapa)</span>
       </a>
