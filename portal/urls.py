@@ -147,7 +147,6 @@ urlpatterns = [
     
     # Registro de Salidas y Atenciones Diarias (Flotilla & WhatsApp)
     path('intranet/salidas/', views.intranet_registro_salidas, name='intranet_registro_salidas'),
-    path('intranet/salidas/tv/', views.intranet_registro_salidas_tv, name='intranet_registro_salidas_tv'),
     path('intranet/salidas/cerrar/<int:salida_id>/', views.api_cerrar_salida_manual, name='api_cerrar_salida_manual'),
     path('intranet/salidas/crear/', views.api_crear_salida_manual, name='api_crear_salida_manual'),
     path('intranet/salidas/imprimir/', views.imprimir_reporte_salidas_pdf, name='imprimir_reporte_salidas_pdf'),
