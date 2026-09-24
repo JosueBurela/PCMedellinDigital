@@ -29,7 +29,10 @@ def extraer_unidad(texto):
 
 def buscar_vehiculo(num_unidad):
     num_limpio = num_unidad.strip()
-    return VehiculoUnidad.objects.filter(numero_unidad=num_limpio).first()
+    vehiculo = VehiculoUnidad.objects.filter(numero_unidad=num_limpio).first()
+    if not vehiculo:
+        vehiculo = VehiculoUnidad.objects.filter(numero_unidad__icontains=num_limpio).first()
+    return vehiculo
 
 def obtener_base64_media(key, message):
     url = f"{EVOLUTION_API_URL}/chat/getBase64FromMediaMessage/{INSTANCE_NAME}"
