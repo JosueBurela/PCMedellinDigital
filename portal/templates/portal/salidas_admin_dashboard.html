@@ -93,15 +93,6 @@
 
   </div>
 
-  <!-- RADAR Y MONITOREO METEOROLÓGICO CONAGUA (Mantiene la TV encendida) -->
-  <div class="bg-slate-900 rounded-3xl p-4 shadow-xl border border-slate-800 overflow-hidden relative">
-    <div class="absolute top-6 left-6 z-10 flex items-center gap-2 bg-black/60 backdrop-blur px-3 py-1.5 rounded-lg border border-white/10 pointer-events-none">
-      <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse shadow-[0_0_8px_rgba(239,68,68,0.8)]"></span>
-      <span class="text-white text-xs font-bold uppercase tracking-wider">Radar en Vivo SIPROC</span>
-    </div>
-    <iframe src="https://smn.conagua.gob.mx/tools/GUI/SIPROC/" class="w-full h-[500px] border-0 rounded-2xl filter contrast-125" loading="lazy"></iframe>
-  </div>
-
   <!-- SEMÁFORO EN VIVO DE FLOTILLA -->
   <div class="bg-slate-900 rounded-2xl p-4 text-white shadow-md border border-slate-800">
     <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-3">
@@ -525,28 +516,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 20000);
     {% endif %}
-});
-
-// ==========================================
-// WAKE LOCK API PARA EVITAR QUE LA TV SE APAGUE
-// ==========================================
-let wakeLock = null;
-const requestWakeLock = async () => {
-    try {
-        if ('wakeLock' in navigator) {
-            wakeLock = await navigator.wakeLock.request('screen');
-            console.log('Wake Lock is active! La pantalla no se suspendera.');
-        }
-    } catch (err) {
-        console.error('WakeLock error');
-    }
-};
-
-document.addEventListener('DOMContentLoaded', requestWakeLock);
-document.addEventListener('visibilitychange', () => {
-    if (wakeLock !== null && document.visibilityState === 'visible') {
-        requestWakeLock();
-    }
 });
 </script>
 {% endblock %}
