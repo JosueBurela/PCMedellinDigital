@@ -94,7 +94,7 @@ def procesar_mensaje_grupo_salidas(data):
         except Exception: dt_evento = timezone.now()
     else: dt_evento = timezone.now()
 
-    message = data.get("message", {})
+    message = data.get("message") or {}
     image_msg = message.get("imageMessage")
     texto = message.get("conversation", message.get("extendedTextMessage", {}).get("text", image_msg.get("caption", "") if image_msg else ""))
     texto_limpio = texto.strip()
