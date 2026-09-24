@@ -83,7 +83,7 @@ def clasificar_mensaje_operativo(texto_original):
     # normalizacion
     texto = re.sub(r'[^\w\s-]', '', texto_original).lower()
     
-    puntajes = {'SALIDA': 0, 'ENTRADA': 0, 'CONFIRMACION': 0}
+    puntajes = {'SALIDA': 0, 'ENTRADA': 0, 'CONFIRMACION': 0, 'RETORNANDO': 0}
     
     # Evaluar el modelo predictivo heuristico basado en pesos
     for categoria, reglas in DICCIONARIO_PESOS.items():
