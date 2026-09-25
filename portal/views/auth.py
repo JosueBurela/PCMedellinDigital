@@ -118,11 +118,17 @@ def reenviar_codigo_2fa(request):
     if ciudadano_id:
         ciudadano = Ciudadano.objects.filter(id=ciudadano_id).first()
         if ciudadano:
+            from portal.utils.email_utils import enviar_correo_2fa
             nuevo_codigo = str(random.randint(100000, 999999))
             ciudadano.codigo_2fa = nuevo_codigo
             ciudadano.codigo_2fa_expiracion = timezone.now() + timedelta(minutes=5)
             ciudadano.save()
-            messages.info(request, f"🔒 Nuevo código de seguridad de 2 pasos generado: {nuevo_codigo}")
+
+            enviado = enviar_correo_2fa(ciudadano, nuevo_codigo)
+            if enviado:
+                messages.success(request, f"🔒 Se ha enviado un nuevo código de verificación a tu correo: {ciudadano.correo}")
+            else:
+                messages.info(request, f"🔒 Nuevo código de seguridad de 2 pasos generado: {nuevo_codigo}")
     return redirect('verificar_2fa')
 
 def registro_personal(request):
