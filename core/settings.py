@@ -169,11 +169,11 @@ FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB
 # Para enviar correos reales, configura las siguientes variables con las credenciales
 # de tu servidor SMTP (ej. Gmail, Outlook, Hostinger o SendGrid).
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.getenv('EMAIL_PORT', 587))
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'smtp-relay.brevo.com')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 2525))
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'True').lower() in ('true', '1', 't')
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
-DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Protección Civil Medellín <soporte@medellin.gob.mx>')
-EMAIL_TIMEOUT = 5
-LOGIN_URL = 'login_unificado'
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'Protección Civil Medellín <jburela1@gmail.com>')
+EMAIL_TIMEOUT = 10
+LOGIN_URL = 'login_admin'
