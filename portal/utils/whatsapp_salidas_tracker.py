@@ -47,66 +47,60 @@ def obtener_base64_media(key, message):
         logger.error(f"Error media: {e}")
         return None
 
-DICCIONARIO_PESOS = {
-    'SALIDA': [
-        (r'\b(sale|salida|saliendo|salimos)\b', 60),
-        (r'\b(procede|procediendo|dirige|dirigiendo|avanza|avanzando|avanzo|aproxima|aproximando)\b', 50),
-        (r'\b(rumbo|en camino|despacho)\b', 40),
-        (r'\b(traslada|trasladamos|trasladando|traslado)\b', 50),
-        (r'\b(atender|apoyo|servicio|punto|emergencia|encomienda)\b', 30),
-    ],
-    'RETORNANDO': [
-        (r'\b(retorna|retorno|retornando|regresa|regresando|regresamos)\b', 80),
-        (r'\b(rumbo a base|procede a base|dirige a base)\b', 80),
-    ],
-    'ENTRADA': [
-        (r'\b(llega|llegada|llegando|llegamos|arribando|arribo)\b', 50),
-        (r'\b(entra|entrada|entrando)\b', 40),
-        (r'\b(en base|ya en base|estacionada|estacionado)\b', 60),
-        (r'\b(base|central|estacion)\b', 35),
-        (r'\b(10[-\s]?8)\b', 80),
-        (r'\b(concluy(?:e|endo|o)|concluida|concluido|finaliza|finalizado)\b', 50),
-        (r'\b(sin novedad)\b', 30),
-    ],
-    'CONFIRMACION': [
-        (r'\b(enterado|enterada|ent|nt)\b', 100),
-        (r'\b(recibido|recibida|rcb)\b', 100),
-        (r'\b(copiado|copia)\b', 100),
-        (r'\b(qsl)\b', 100),
-        (r'\b(pendiente)\b', 100),
-        (r'\b(ok|okey)\b', 40),
-        (r'\b(10[-\s]?4)\b', 100),
-    ]
-}
+
 
 def clasificar_mensaje_operativo(texto_original):
-    # normalizacion
     texto = re.sub(r'[^\w\s-]', '', texto_original).lower()
     
-    puntajes = {'SALIDA': 0, 'ENTRADA': 0, 'CONFIRMACION': 0, 'RETORNANDO': 0}
-    
-    # Evaluar el modelo predictivo heuristico basado en pesos
-    for categoria, reglas in DICCIONARIO_PESOS.items():
-        for patron, peso in reglas:
-            if re.search(patron, texto):
-                puntajes[categoria] += peso
-                
-    max_puntaje = 0
-    ganador = 'NOVEDAD'
-    
-    for cat, pts in puntajes.items():
-        if pts > max_puntaje:
-            max_puntaje = pts
-            ganador = cat
-            
-    # Umbral de confianza
-    if max_puntaje < 35:
-        ganador = 'NOVEDAD'
-        
-    if ganador in ['CONFIRMACION', 'RETORNANDO']:
+    # 1. ACUSES DE RECIBO (Ignorar cualquier otra palabra)
+    if re.search(r'\b(enterad[oa]|ent|nt|recibid[oa]|rcb|copiad[oa]|copia|qsl|10[-\s]?4|pendiente)\b', texto):
         return 'NOVEDAD'
         
-    return ganador
+    # 2. CANCELACIONES / FALSA ALARMA (Cierra la bitacora de inmediato)
+    if re.search(r'\b(falsa alarma|cancelad[oa]|se cancela|negativo)\b', texto):
+        return 'ENTRADA'
+        
+    # 3. REPORTES DE ESTATUS EN CAMINO (No son salidas nuevas ni llegadas a base)
+    if re.search(r'\b(retorna|retorno|retornando|regresa|regresando|regresamos)\b', texto) or \
+       re.search(r'\b(llegando|arribando|en el|al|llegamos).*?(punto|lugar|hospital|siniestro|servicio|emergencia|imss|issste|regional|cruz roja|clinica)\b', texto) or \
+       re.search(r'\b(traslad[oa]|trasladando|trasladamos)\b', texto):
+        return 'NOVEDAD'
+        
+    # 4. LLEGADA DEFINITIVA A BASE (Cierra la bitacora)
+    if re.search(r'\b(en base|ya en base|estacionad[oa]|10[-\s]?8)\b', texto) or \
+       re.search(r'\b(llega|llegada|llegando|arribando|arribo|entra|entrando).*?(base|central|estacion|cuartel)\b', texto) or \
+       re.search(r'\b(base|central).*?(sin novedad)\b', texto) or \
+       re.search(r'\b(concluy(?:e|endo|o)|concluida|concluido|finaliza|finalizado)\b', texto):
+        return 'ENTRADA'
+        
+    # 5. SALIDA / INICIO DE SERVICIO (Abre bitacora)
+    if re.search(r'\b(sale|salida|saliendo|salimos)\b', texto) or \
+       re.search(r'\b(procede|procediendo|dirige|dirigiendo|avanza|avanzando|avanzo|aproxima|aproximando)\b', texto) or \
+       re.search(r'\b(rumbo|en camino|despacho)\b', texto):
+        return 'SALIDA'
+        
+    return 'NOVEDAD'
+        
+    # 2. REPORTES DE ESTATUS EN CAMINO (No son salidas nuevas ni llegadas a base)
+    if re.search(r'\b(retorna|retorno|retornando|regresa|regresando|regresamos)\b', texto) or \
+       re.search(r'\b(llegando|arribando|en el|al|llegamos).*?(punto|lugar|hospital|siniestro|servicio|emergencia|imss|issste|regional|cruz roja|clinica)\b', texto) or \
+       re.search(r'\b(traslad[oa]|trasladando|trasladamos)\b', texto):
+        return 'NOVEDAD'
+        
+    # 3. LLEGADA DEFINITIVA A BASE (Cierra la bitacora)
+    if re.search(r'\b(en base|ya en base|estacionad[oa]|10[-\s]?8)\b', texto) or \
+       re.search(r'\b(llega|llegada|llegando|arribando|arribo|entra|entrando).*?(base|central|estacion|cuartel)\b', texto) or \
+       re.search(r'\b(base|central).*?(sin novedad)\b', texto) or \
+       re.search(r'\b(concluy(?:e|endo|o)|concluida|concluido|finaliza|finalizado)\b', texto):
+        return 'ENTRADA'
+        
+    # 4. SALIDA / INICIO DE SERVICIO (Abre bitacora)
+    if re.search(r'\b(sale|salida|saliendo|salimos)\b', texto) or \
+       re.search(r'\b(procede|procediendo|dirige|dirigiendo|avanza|avanzando|avanzo|aproxima|aproximando)\b', texto) or \
+       re.search(r'\b(rumbo|en camino|despacho)\b', texto):
+        return 'SALIDA'
+        
+    return 'NOVEDAD'
         
     # Remover frases de confirmación que contienen "en base" para evitar falsos positivos
     texto_evaluar = re.sub(r'\b(enterado|recibido|copiado|qsl|pendiente)\s+(en\s+)?base\b', '', texto)
