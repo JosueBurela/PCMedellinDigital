@@ -453,131 +453,144 @@
                                 </tbody>
                             </table>
                         </div>
-                    {% elif tramite.form_type == 'ANUNCIOS_PC' %}
-                                    <!-- Requisitos Formato 2 -->
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                    {% else %}
+                        <!-- TABLA GENERAL DE REQUISITOS PARA OTROS TRÁMITES -->
+                        <div class="overflow-x-auto border border-gray-150 rounded-2xl">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-gray-50 text-gray-500 font-bold uppercase tracking-wider border-b border-gray-150 text-[10px]">
+                                        <th class="p-3.5">Documento Requerido</th>
+                                        <th class="p-3.5 text-center w-28">Original</th>
+                                        <th class="p-3.5 text-center w-28">Copias</th>
                                     </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Anuncio/Espectacular (Fachada y Entorno)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen Responsivo de Estabilidad y Seguridad Estructural</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Bitácora de Mantenimiento de la Estructura</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Anuencia por escrito firmada por Vecinos Colindantes</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Análisis de Riesgo elaborado por un Tercer Acreditado</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                {% elif tramite.form_type == 'CONSTRUCCION_PC' %}
-                                    <!-- Requisitos Formato 3 -->
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Predio/Inmueble Actual</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Título de Propiedad o Escritura Pública del Predio</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Plano Arquitectónico Completo aprobado</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Constancia de no Afectación en materia de Protección Civil</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Licencia de Uso de Suelo Vigente</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                {% elif tramite.form_type == 'TERCEROS_PC' %}
-                                    <!-- Requisitos Formato 4 -->
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Cédula de Registro Estatal de Terceros Acreditados Vigente</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Currículum Vitae Técnico de Capacitador o Empresa Tercera</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                {% else %}
-                                    <!-- Default fallback layout loop for general PDFs -->
-                                    {% for req in tramite.requisitos_list %}
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">{{ req }}</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    {% empty %}
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial y Formato Único de Solicitud (PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    {% endfor %}
-                                {% endif %}
-                            </tbody>
-                        </table>
-                    </div>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 font-semibold text-slate-700">
+                                    {% if tramite.form_type == 'ANUNCIOS_PC' %}
+                                        <!-- Requisitos Formato 2 -->
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Anuncio/Espectacular (Fachada y Entorno)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen Responsivo de Estabilidad y Seguridad Estructural</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Bitácora de Mantenimiento de la Estructura</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Anuencia por escrito firmada por Vecinos Colindantes</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Análisis de Riesgo elaborado por un Tercer Acreditado</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                    {% elif tramite.form_type == 'CONSTRUCCION_PC' %}
+                                        <!-- Requisitos Formato 3 -->
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Predio/Inmueble Actual</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Título de Propiedad o Escritura Pública del Predio</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Plano Arquitectónico Completo aprobado</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Constancia de no Afectación en materia de Protección Civil</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Licencia de Uso de Suelo Vigente</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                    {% elif tramite.form_type == 'TERCEROS_PC' %}
+                                        <!-- Requisitos Formato 4 -->
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Cédula de Registro Estatal de Terceros Acreditados Vigente</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Currículum Vitae Técnico de Capacitador o Empresa Tercera</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                    {% else %}
+                                        <!-- Default fallback layout loop for general PDFs -->
+                                        {% for req in tramite.requisitos_list %}
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">{{ req }}</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial y Formato Único de Solicitud (PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                        </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% endif %}
 
                     <div class="bg-purple-50/50 border border-purple-100 rounded-2xl p-4 flex items-start gap-3">
                         <span class="text-lg">💡</span>

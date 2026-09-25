@@ -15,6 +15,6 @@ res = subprocess.run([
 ], capture_output=True, text=True, encoding='utf-8')
 
 if res.stdout:
-    print(res.stdout)
+    print(res.stdout.encode('ascii', errors='replace').decode('ascii'))
 if res.stderr:
-    print("[STDERR]", res.stderr)
+    print("[STDERR]", res.stderr.encode('ascii', errors='replace').decode('ascii'))
