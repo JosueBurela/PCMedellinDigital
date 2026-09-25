@@ -149,6 +149,12 @@
                                         Titulares de comercios o empresas que cuenten con anuencia emitida en el ejercicio previo y requieran su refrendo anual.
                                     {% elif tramite.sub_tipo == 'TEMPORAL' or tramite.id == 12 %}
                                         Comerciantes ambulantes, semifijos y temporales que ejerzan actividades en la vía pública o festividades del municipio.
+                                    {% elif tramite.sub_tipo == 'ANUNCIO' or tramite.id == 2 %}
+                                        Propietarios, arrendatarios, empresas o agencias de publicidad exterior que instalen estructuras (espectaculares, unipolares, pantallas o autosoportados) en Medellín de Bravo.
+                                    {% elif tramite.sub_tipo == 'ANTENA' or tramite.id == 1 %}
+                                        Empresas de telecomunicaciones, radiocomunicación, telefonía móvil o concesionarias de infraestructura pasiva con torres en Medellín de Bravo.
+                                    {% elif tramite.sub_tipo == 'RENOVACION_ANUNCIO' or tramite.id == 8 %}
+                                        Titulares de anuncios publicitarios y/o empresas operadoras de antenas autorizadas previamente en Medellín de Bravo que requieran su refrendo anual unificado.
                                     {% else %}
                                         Personas Físicas y Morales con Establecimiento en Medellín de Bravo
                                     {% endif %}
@@ -181,6 +187,12 @@
                                         Al inicio de cada ejercicio fiscal para refrendar la anuencia y mantener el expediente técnico al corriente.
                                     {% elif tramite.sub_tipo == 'TEMPORAL' or tramite.id == 12 %}
                                         Previo a la instalación de puestos en vía pública con uso de gas LP o instalaciones eléctricas temporales.
+                                    {% elif tramite.sub_tipo == 'ANUNCIO' or tramite.id == 2 %}
+                                        Previo a la colocación, montaje o regularización de cualquier anuncio publicitario exterior unipolar, autosoportado, adosado o pantalla electrónica.
+                                    {% elif tramite.sub_tipo == 'ANTENA' or tramite.id == 1 %}
+                                        Previo a la instalación, montaje u operación de torres arriostradas, monopolos o antenas de telecomunicación y radiotransmisión.
+                                    {% elif tramite.sub_tipo == 'RENOVACION_ANUNCIO' or tramite.id == 8 %}
+                                        Al inicio de cada ejercicio fiscal para refrendar de forma unificada la anuencia de seguridad de anuncios publicitarios y/o antenas de comunicación.
                                     {% else %}
                                         Establecimientos o promotores en el Municipio de Medellín de Bravo.
                                     {% endif %}
@@ -200,6 +212,12 @@
                                 Mantener la vigencia legal para operar, evitar sanciones o clausuras y asegurar la actualización periódica de equipos de combate contra incendio y capacitación de personal.
                             {% elif tramite.sub_tipo == 'TEMPORAL' or tramite.id == 12 %}
                                 Desarrollar la actividad comercial en vía pública con medidas preventivas básicas, previniendo riesgos de incendio o explosión por gas LP y fallas eléctricas.
+                            {% elif tramite.sub_tipo == 'ANUNCIO' or tramite.id == 2 %}
+                                Garantizar la estabilidad mecánica y anclaje de la estructura publicitaria ante vientos huracanados y rachas de norte en la región costera de Medellín de Bravo, previniendo riesgos de colapso, electrocución o daños a transeúntes y vehículos.
+                            {% elif tramite.sub_tipo == 'ANTENA' or tramite.id == 1 %}
+                                Certificar que la torre y su sistema de pararrayos y tierras físicas no representen un riesgo para los inmuebles vecinos y la población, garantizando su resistencia estructural ante los vientos dominantes del municipio.
+                            {% elif tramite.sub_tipo == 'RENOVACION_ANUNCIO' or tramite.id == 8 %}
+                                Unificar y agilizar en un solo trámite municipal el refrendo anual de seguridad para anuncios y antenas, asegurando la vigencia ininterrumpida de pólizas de seguro a terceros y el mantenimiento preventivo anual de la estructura.
                             {% else %}
                                 Dar cumplimiento a las disposiciones y medidas de seguridad que regulan el funcionamiento comercial e industrial en el municipio de Medellín de Bravo, Veracruz.
                             {% endif %}
@@ -453,6 +471,245 @@
                                 </tbody>
                             </table>
                         </div>
+                    {% elif tramite.form_type == 'ANUNCIOS_PC' %}
+                        <!-- Banner Explicativo del Proceso para Anuncios y Antenas (Modelo Oficial Medellín de Bravo) -->
+                        <div class="bg-gradient-to-r from-amber-50 via-white to-purple-50/60 border border-amber-200/80 rounded-3xl p-5 space-y-3 shadow-sm">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-8 h-8 rounded-xl bg-medellinOro text-white flex items-center justify-center font-black text-xs shadow-sm">
+                                    <i data-lucide="layers" class="w-4 h-4 text-slate-900"></i>
+                                </span>
+                                <div>
+                                    <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider">¿Cómo funciona el trámite de Anuncios y Antenas? El proceso va por pasos:</h4>
+                                    <p class="text-[10px] text-gray-500 font-medium">Se inicia la solicitud digital con los datos base y posteriormente se valida el expediente técnico y la seguridad estructural.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+                                <div class="bg-white/90 border border-amber-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-medellinVino text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-purple-100 text-medellinVino text-[10px] flex items-center justify-center font-bold">1</span>
+                                        Solicitud Inicial y Ubicación
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Cargas en línea los datos del solicitante, ubicación georreferenciada (coordenadas GPS), fotos del predio y contrato/predial.</p>
+                                </div>
+                                <div class="bg-white/90 border border-amber-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-medellinOro text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-amber-100 text-medellinOro text-[10px] flex items-center justify-center font-bold">2</span>
+                                        Expediente Técnico y Póliza
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Se integra la memoria de cálculo estructural firmada por Perito Colegiado/DRO, póliza de seguro de responsabilidad civil y dictamen de tierras/eléctrico.</p>
+                                </div>
+                                <div class="bg-white/90 border border-amber-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-emerald-600 text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 text-[10px] flex items-center justify-center font-bold">3</span>
+                                        Inspección Física y Emisión
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Inspectores verifican en sitio anclajes, soldaduras, pernos y distancias de seguridad. Cubierto el pago en Tesorería, se expide tu <strong>Anuencia Oficial</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TABLA DETALLADA DE REQUISITOS ANUNCIOS Y ANTENAS -->
+                        <div class="overflow-x-auto border border-gray-150 rounded-2xl">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-gray-50 text-gray-500 font-bold uppercase tracking-wider border-b border-gray-150 text-[10px]">
+                                        <th class="p-3.5">Fase / Documento</th>
+                                        <th class="p-3.5 text-center w-28">Modalidad</th>
+                                        <th class="p-3.5">Aplica para</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 font-semibold text-slate-700">
+                                    {% if tramite.sub_tipo == 'ANUNCIO' or tramite.id == 2 %}
+                                        <!-- Requisitos para Anuncios Publicitarios -->
+                                        <tr class="bg-amber-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-amber-800 text-[10px] uppercase tracking-wider">
+                                                Fase 1: Requisitos de Apertura Digital
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente (INE / Pasaporte) del propietario o representante legal</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Croquis de Ubicación Georreferenciado con coordenadas UTM/GPS y medidas del predio</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Fotografías a color actuales del inmueble y del anuncio o estructura proyectada</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Boleta de Pago del Impuesto Predial del Año en Curso o Contrato de Arrendamiento Notariado con anuencia del dueño</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                        <tr class="bg-purple-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-medellinVino text-[10px] uppercase tracking-wider">
+                                                Fase 2: Expediente Técnico de Seguridad y Responsiva
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Memoria de Cálculo y Dictamen Técnico de Estabilidad y Seguridad Estructural por Perito D.R.O. o Tercer Acreditado</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio para estructuras mayores y espectaculares</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Póliza de Seguro de Responsabilidad Civil y Daños a Terceros con cobertura anual vigente</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio para espectaculares y autosoportados</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Dictamen de Instalación Eléctrica bajo norma NOM-001-SEDE</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Anuncios luminosos, unipolares y pantallas LED</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">8. Bitácora periódica de Mantenimiento Preventivo y Correctivo de la estructura, soldaduras y tornillería</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">9. Anuencia por escrito o manifestación de no afectación de seguridad firmada por Vecinos Colindantes</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Estructuras colindantes con predios habitacionales</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">10. Recibo Oficial de Pago de Derechos emitido por Tesorería Municipal</td>
+                                            <td class="p-3.5 text-center text-emerald-600 font-bold">Comprobante de Pago</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Previo a la entrega de la anuencia</td>
+                                        </tr>
+
+                                    {% elif tramite.sub_tipo == 'ANTENA' or tramite.id == 1 %}
+                                        <!-- Requisitos para Antenas y Torres de Telecomunicaciones -->
+                                        <tr class="bg-amber-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-amber-800 text-[10px] uppercase tracking-wider">
+                                                Fase 1: Requisitos de Apertura Digital
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación oficial del representante y Acta Constitutiva con Poder Notarial de la empresa operadora</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Croquis y Plano de Ubicación con coordenadas GPS y radio de amortiguamiento o afectación</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Fotografías a color del predio, base de la torre y entorno circundante en 360 grados</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Título de Propiedad o Contrato de Arrendamiento del predio con autorización expresa para torre de telecomunicación</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                        <tr class="bg-purple-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-medellinVino text-[10px] uppercase tracking-wider">
+                                                Fase 2: Expediente Técnico de Ingeniería y Salvaguarda
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Dictamen de Seguridad y Memoria de Cálculo Estructural de la torre y cimentación (vientos costeros CFE/CENAPRED)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio avalado por Perito Colegiado</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Dictamen de Sistema de Tierras Físicas y Pararrayos con prueba de resistencia menor a 10 ohms (NOM-022-STPS)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Póliza de Seguro de Responsabilidad Civil con cobertura amplia frente a terceros por operación o caída</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">8. Bitácora de Mantenimiento Estructural (verticalidad, tensión de retenidas, pernos y pintura aeronáutica)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">9. Licencia de Uso de Suelo o Visto Bueno de Desarrollo Urbano / Imagen Urbana Municipal</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">10. Recibo Oficial de Pago de Derechos emitido por Tesorería Municipal</td>
+                                            <td class="p-3.5 text-center text-emerald-600 font-bold">Comprobante de Pago</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Previo a la entrega de la anuencia</td>
+                                        </tr>
+
+                                    {% elif tramite.sub_tipo == 'RENOVACION_ANUNCIO' or tramite.id == 8 %}
+                                        <!-- Requisitos para Renovación Unificada de Anuncios y Antenas -->
+                                        <tr class="bg-amber-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-amber-800 text-[10px] uppercase tracking-wider">
+                                                Fase 1: Requisitos de Apertura Digital
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente del solicitante o representante legal facultado (INE / Pasaporte)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Copia o Folio de la Anuencia de Protección Civil del Ejercicio Anterior emitida por PC Medellín</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio (Anuncio o Antena)</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Boleta de Pago del Impuesto Predial del Año en Curso o Contrato de Arrendamiento Vigente</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Fotografías recientes de la estructura en todos sus ángulos mostrando base, anclaje, tornillería y pintura actual</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                        <tr class="bg-purple-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-medellinVino text-[10px] uppercase tracking-wider">
+                                                Fase 2: Expediente Técnico de Refrendo Anual
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Dictamen Anual de Actualización de Estabilidad y Seguridad Estructural o Carta Responsiva de Perito Colegiado</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Póliza de Seguro de Responsabilidad Civil Renovada con vigencia para el ejercicio fiscal en curso</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Bitácora del Último Mantenimiento Preventivo Efectuado (ajuste de pernos, tensores, pruebas de tierra y anticorrosivo)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">8. Manifestación Bajo Protesta de no haber modificado dimensiones, altura ni peso de la estructura autorizada</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">9. Recibo Oficial de Pago de Refrendo de Derechos emitido por Tesorería Municipal</td>
+                                            <td class="p-3.5 text-center text-emerald-600 font-bold">Comprobante de Pago</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Previo a la entrega de la anuencia</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
                     {% else %}
                         <!-- TABLA GENERAL DE REQUISITOS PARA OTROS TRÁMITES -->
                         <div class="overflow-x-auto border border-gray-150 rounded-2xl">
@@ -465,49 +722,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100 font-semibold text-slate-700">
-                                    {% if tramite.form_type == 'ANUNCIOS_PC' %}
-                                        <!-- Requisitos Formato 2 -->
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Anuncio/Espectacular (Fachada y Entorno)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen Responsivo de Estabilidad y Seguridad Estructural</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Bitácora de Mantenimiento de la Estructura</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Anuencia por escrito firmada por Vecinos Colindantes</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Análisis de Riesgo elaborado por un Tercer Acreditado</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                    {% elif tramite.form_type == 'CONSTRUCCION_PC' %}
+                                    {% if tramite.form_type == 'CONSTRUCCION_PC' %}
                                         <!-- Requisitos Formato 3 -->
                                         <tr class="hover:bg-gray-50/50 transition">
                                             <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
@@ -614,10 +829,17 @@
                             <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wide">Monto de Pago de Derechos</span>
                             <p class="text-sm text-gray-800 leading-relaxed font-bold">
                                 El costo del trámite se calcula con base en la Ley de Ingresos del Municipio de Medellín de Bravo vigente:<br>
-                                <span class="text-medellinVino font-black text-base mt-2 block">Tasado en UMA según Giro, Metros² y Grado de Riesgo</span>
-                                <span class="text-gray-500 font-normal text-xs block mt-1">
-                                    El personal técnico de Protección Civil clasifica el establecimiento en Riesgo Bajo, Medio o Alto considerando la superficie construida, giro mercantil y carga de fuego, expidiendo la orden de cobro oficial correspondiente.
-                                </span>
+                                {% if tramite.form_type == 'ANUNCIOS_PC' %}
+                                    <span class="text-medellinVino font-black text-base mt-2 block">Tasado en UMA según Tipo de Estructura, Metros² o Altura</span>
+                                    <span class="text-gray-500 font-normal text-xs block mt-1">
+                                        El personal técnico de Protección Civil calcula la orden de pago oficial considerando la superficie total en m² para anuncios publicitarios (espectaculares, pantallas o autosoportados) o la altura total de la torre/antena de telecomunicaciones, emitiendo la línea de cobro de Tesorería Municipal.
+                                    </span>
+                                {% else %}
+                                    <span class="text-medellinVino font-black text-base mt-2 block">Tasado en UMA según Giro, Metros² y Grado de Riesgo</span>
+                                    <span class="text-gray-500 font-normal text-xs block mt-1">
+                                        El personal técnico de Protección Civil clasifica el establecimiento en Riesgo Bajo, Medio o Alto considerando la superficie construida, giro mercantil y carga de fuego, expidiendo la orden de cobro oficial correspondiente.
+                                    </span>
+                                {% endif %}
                             </p>
                         </div>
                     </div>

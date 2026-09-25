@@ -7,21 +7,41 @@
                                     <i data-lucide="check-circle" class="w-4 h-4"></i>
                                     <span>
                                         {% if tramite.sub_tipo == 'ANUNCIO' %}
-                                            Anuencia de anuncio de Protección Civil
+                                            Anuencia de Seguridad para Instalación de Anuncios Publicitarios y Estructuras
                                         {% elif tramite.sub_tipo == 'ANTENA' %}
-                                            Anuencia de antena de Protección Civil
+                                            Anuencia de Seguridad para Antenas y Torres de Telecomunicaciones
                                         {% elif tramite.sub_tipo == 'RENOVACION_ANUNCIO' %}
-                                            Renovación de anuencia de anuncio de Protección Civil
+                                            Renovación de Anuencia para Anuncios Publicitarios y Antenas de Telecomunicaciones
                                         {% else %}
                                             {{ tramite.sub_tipo }}
                                         {% endif %}
                                     </span>
                                 </div>
+
+                                {% if tramite.sub_tipo == 'RENOVACION_ANUNCIO' %}
+                                <div class="p-3 bg-amber-50/80 border border-amber-200 rounded-xl space-y-2 mt-2">
+                                    <label class="block text-[10px] font-bold text-amber-900 uppercase">¿Qué tipo de estructura renueva?</label>
+                                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                                        <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-amber-100 cursor-pointer shadow-2xs">
+                                            <input type="radio" name="sub_modalidad_renovacion" value="ANUNCIO" checked class="text-medellinVino focus:ring-medellinVino">
+                                            <span class="font-semibold text-slate-700">Anuncio Publicitario</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-amber-100 cursor-pointer shadow-2xs">
+                                            <input type="radio" name="sub_modalidad_renovacion" value="ANTENA" class="text-medellinVino focus:ring-medellinVino">
+                                            <span class="font-semibold text-slate-700">Antena / Torre</span>
+                                        </label>
+                                        <label class="flex items-center gap-2 p-2 bg-white rounded-lg border border-amber-100 cursor-pointer shadow-2xs">
+                                            <input type="radio" name="sub_modalidad_renovacion" value="AMBOS" class="text-medellinVino focus:ring-medellinVino">
+                                            <span class="font-semibold text-slate-700">Ambos en Predio</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                {% endif %}
                             {% else %}
                                 <select name="tipo_anuencia_anuncio" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold focus:outline-none focus:border-medellinVino transition-colors">
-                                    <option value="ANUNCIO">Anuencia de anuncio de Protección Civil</option>
-                                    <option value="ANTENA">Anuencia de antena de Protección Civil</option>
-                                    <option value="RENOVACION_ANUNCIO">Renovación de anuencia de anuncio de Protección Civil</option>
+                                    <option value="ANUNCIO">Anuencia de Seguridad para Anuncio Publicitario</option>
+                                    <option value="ANTENA">Anuencia de Seguridad para Antenas y Torres</option>
+                                    <option value="RENOVACION_ANUNCIO">Renovación de Anuencia para Anuncios y/o Antenas</option>
                                 </select>
                             {% endif %}
                         </div>
@@ -192,8 +212,38 @@
                             </div>
                         </div>
 
+                        <!-- Fase 2: Expediente Técnico Complementario (Opcional en apertura digital) -->
+                        <div class="pt-2 border-t border-gray-100 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="block text-[10px] font-black text-gray-400 uppercase tracking-widest">5. Expediente Técnico Complementario (Opcional en apertura inicial)</span>
+                                <span class="text-[9px] bg-purple-50 text-medellinVino px-2 py-0.5 rounded font-bold">Fase 2</span>
+                            </div>
+                            <p class="text-[10px] text-gray-500 font-normal">
+                                Si ya cuentas con la memoria de cálculo o dictámenes técnicos avalados por un Perito Colegiado o Tercer Acreditado, puedes cargarlos ahora para agilizar tu trámite:
+                            </p>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-[9px] font-bold text-gray-500 mb-1">e) Dictamen / Memoria de Estabilidad Estructural (PDF)</label>
+                                    <input type="file" name="file_responsiva_estabilidad" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-gray-100 file:text-slate-700 hover:file:bg-gray-200 cursor-pointer">
+                                </div>
+                                <div>
+                                    <label class="block text-[9px] font-bold text-gray-500 mb-1">f) Póliza de Seguro de Responsabilidad Civil (PDF)</label>
+                                    <input type="file" name="file_seguro" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-gray-100 file:text-slate-700 hover:file:bg-gray-200 cursor-pointer">
+                                </div>
+                                <div>
+                                    <label class="block text-[9px] font-bold text-gray-500 mb-1">g) Bitácora de Mantenimiento / Soldaduras (PDF)</label>
+                                    <input type="file" name="file_bitacora_anuncio" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-gray-100 file:text-slate-700 hover:file:bg-gray-200 cursor-pointer">
+                                </div>
+                                <div>
+                                    <label class="block text-[9px] font-bold text-gray-500 mb-1">h) Dictamen de Tierras / Eléctrico o Anuencia Vecinal (PDF)</label>
+                                    <input type="file" name="file_analisis_riesgo" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-[10px] file:font-bold file:bg-gray-100 file:text-slate-700 hover:file:bg-gray-200 cursor-pointer">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="pt-2 border-t border-gray-100">
-                            <label class="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase">Planos de Ingeniería / Anuncio (PDF Opcional)</label>
+                            <label class="block text-[10px] font-bold text-gray-500 mb-1.5 uppercase">Planos de Ingeniería / Anuncio / Torre (PDF Complementario)</label>
                             <input type="file" name="pdf_documento" accept="application/pdf" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-purple-50 file:text-medellinVino hover:file:bg-purple-100 cursor-pointer">
                         </div>
 
