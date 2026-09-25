@@ -50,7 +50,7 @@ def iniciar_tramite(request, tramite_id):
     # Requisito Obligatorio: El usuario debe estar logueado para iniciar un trámite
     if not ciudadano and not request.user.is_authenticated:
         messages.warning(request, "🔒 Para iniciar la solicitud de un trámite digital es necesario registrarse e iniciar sesión en el portal.")
-        return redirect('login_unificado')
+        return redirect('login_ciudadano')
 
     if ciudadano:
         nombre_prellenado = f"{ciudadano.nombre} {ciudadano.primer_apellido} {ciudadano.segundo_apellido or ''}".strip()
@@ -475,7 +475,7 @@ def perfil_ciudadano(request):
     curp_sesion = request.session.get('ciudadano_curp')
     if not ciudadano_id and not curp_sesion:
         messages.error(request, "Debes iniciar sesión como ciudadano para ver tu perfil.")
-        return redirect('login_unificado')
+        return redirect('login_ciudadano')
         
     if ciudadano_id:
         ciudadano = get_object_or_404(Ciudadano, id=ciudadano_id)
@@ -483,7 +483,7 @@ def perfil_ciudadano(request):
         ciudadano = Ciudadano.objects.filter(models.Q(curp=curp_sesion) | models.Q(correo=curp_sesion)).first()
         if not ciudadano:
             messages.error(request, "Sesión no válida o expirada.")
-            return redirect('login_unificado')
+            return redirect('login_ciudadano')
     
     # Obtener solicitudes (con select_related para evitar N+1 en tramite) y reportes
     solicitudes = SolicitudTramite.objects.filter(ciudadano=ciudadano).select_related('tramite').order_by('-creado_en')

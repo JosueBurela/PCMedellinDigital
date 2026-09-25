@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso Ciudadano - Protección Civil y Bomberos Medellín</title>
+    <title>Intranet Operativa - Protección Civil y Bomberos Medellín</title>
     <link rel="icon" type="image/png" href="{% static 'portal/img/logo_pc_circular.png' %}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -26,19 +26,19 @@
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         .bg-medellin-gradient {
-            background: linear-gradient(135deg, #320420 0%, #5A123E 45%, #476228 85%, #5B7B34 100%);
+            background: linear-gradient(135deg, #220316 0%, #43082B 45%, #2c3e19 85%, #3d5223 100%);
         }
     </style>
 </head>
 <body class="bg-medellin-gradient min-h-screen flex items-center justify-center p-4 md:p-6 antialiased text-slate-800 relative overflow-y-auto">
 
-    <!-- Esferas Ambientales -->
+    <!-- Esferas Ambientales Institucionales -->
     <div class="fixed inset-0 pointer-events-none overflow-hidden">
-        <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#E59E27]/25 rounded-full blur-3xl animate-pulse"></div>
-        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#5B7B34]/35 rounded-full blur-3xl"></div>
+        <div class="absolute -top-32 -left-32 w-96 h-96 bg-[#E59E27]/20 rounded-full blur-3xl animate-pulse"></div>
+        <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-[#5A123E]/40 rounded-full blur-3xl"></div>
     </div>
 
-    <!-- Contenedor Principal de Login Ciudadano -->
+    <!-- Contenedor Principal de Login Personal PC -->
     <div class="max-w-md w-full bg-white/95 backdrop-blur-2xl rounded-3xl shadow-2xl border border-white/40 p-6 md:p-8 space-y-6 relative z-10">
         
         <!-- Franja Superior Tricolor Medellín -->
@@ -52,11 +52,11 @@
                 <img src="{% static 'portal/img/logo_pc_circular.png' %}" alt="Protección Civil" class="h-14 w-auto object-contain">
             </div>
             <div>
-                <span class="inline-block bg-medellinVerde/10 text-medellinVerde font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-full border border-medellinVerde/20 mb-1.5">
-                    Ventanilla Digital Ciudadana
+                <span class="inline-block bg-medellinVino/10 text-medellinVino font-black text-[9px] uppercase tracking-widest px-3 py-1 rounded-full border border-medellinVino/20 mb-1.5">
+                    Acceso Institucional
                 </span>
-                <h1 class="text-xl md:text-2xl font-black text-medellinVino uppercase tracking-tight">Acceso Ciudadano</h1>
-                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Trámites, Anuencias y Dictámenes • Medellín de Bravo</p>
+                <h1 class="text-xl md:text-2xl font-black text-slate-900 uppercase tracking-tight">Intranet Operativa</h1>
+                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Personal de Protección Civil y Bomberos • Medellín</p>
             </div>
         </div>
 
@@ -78,24 +78,24 @@
             <span>Atención: Mayúsculas (Bloq Mayús) activadas.</span>
         </div>
 
-        <!-- Formulario de Inicio de Sesión Ciudadano -->
-        <form method="POST" action="{% url 'login_ciudadano' %}" class="space-y-4">
+        <!-- Formulario de Inicio de Sesión Personal -->
+        <form method="POST" action="{% url 'login_admin' %}" class="space-y-4">
             {% csrf_token %}
             
-            <!-- Correo Electrónico o CURP -->
+            <!-- Usuario o Correo Institucional -->
             <div class="space-y-1.5">
                 <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                    Correo Electrónico (o CURP)
+                    Usuario o Correo Institucional
                 </label>
                 <div class="relative">
                     <input type="text" id="identificador-input" name="identificador" required autocomplete="username"
                            class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-medellinVino focus:bg-white transition-all placeholder:font-medium placeholder:text-slate-400" 
-                           placeholder="tu_correo@ejemplo.com"/>
-                    <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
+                           placeholder="Ej. oficial.guardia o usuario.pc"/>
+                    <i data-lucide="shield" class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5"></i>
                 </div>
             </div>
 
-            <!-- Contraseña -->
+            <!-- Contraseña Institucional -->
             <div class="space-y-1.5">
                 <div class="flex justify-between items-center">
                     <label class="block text-[10px] font-black text-slate-500 uppercase tracking-widest">
@@ -118,37 +118,37 @@
             <div class="flex items-center justify-between text-xs pt-1">
                 <label class="flex items-center gap-2 cursor-pointer select-none text-slate-600 font-medium">
                     <input type="checkbox" id="remember-me" class="rounded border-slate-300 text-medellinVino focus:ring-medellinVino w-4 h-4">
-                    <span>Recordar mi correo</span>
+                    <span>Recordar mi usuario</span>
                 </label>
             </div>
 
             <!-- Botón Ingresar -->
             <button type="submit" class="w-full bg-gradient-to-r from-[#43082B] via-[#5A123E] to-[#5B7B34] hover:opacity-95 text-white font-extrabold py-3.5 rounded-2xl shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-xs tracking-wider uppercase flex items-center justify-center gap-2 cursor-pointer">
-                <span>Continuar a Verificación 2FA</span>
-                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                <i data-lucide="log-in" class="w-4 h-4"></i>
+                <span>Ingresar a Intranet</span>
             </button>
         </form>
 
-        <!-- Navegación y Enlace a Registro -->
+        <!-- Navegación y Acceso Ciudadano -->
         <div class="pt-4 border-t border-slate-100 space-y-3 text-center text-xs">
             <div class="flex justify-between items-center font-bold">
                 <a href="{% url 'home' %}" class="text-slate-400 hover:text-slate-700 flex items-center gap-1 transition">
                     <i data-lucide="home" class="w-3.5 h-3.5"></i> Volver al Inicio
                 </a>
-                <a href="{% url 'registro_ciudadano' %}" class="text-medellinVerde hover:underline flex items-center gap-1 transition font-extrabold">
-                    <i data-lucide="user-plus" class="w-3.5 h-3.5"></i> ¿No tienes cuenta? Regístrate ➔
+                <a href="{% url 'login_ciudadano' %}" class="text-medellinVino hover:underline flex items-center gap-1 transition font-extrabold">
+                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> ¿Eres Ciudadano? Entra aquí ➔
                 </a>
             </div>
             
-            <a href="{% url 'login_admin' %}" class="block text-[10px] font-bold text-slate-400 hover:text-medellinVino hover:underline transition pt-1">
-                ¿Eres personal de Protección Civil o Bomberos? Acceso a Intranet aquí ➔
+            <a href="{% url 'registro_personal' %}" class="block text-[10px] font-bold text-slate-400 hover:text-medellinVino hover:underline transition pt-1">
+                ¿Eres nuevo elemento de Protección Civil / Bomberos? Solicita cuenta institucional ➔
             </a>
         </div>
 
         <!-- Badge Seguridad SSL -->
         <div class="pt-2 text-center">
             <span class="inline-flex items-center gap-1.5 text-[9px] font-extrabold text-slate-500 uppercase tracking-widest bg-slate-100/80 px-3 py-1 rounded-full border border-slate-200">
-                <i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i> Autenticación Segura en 2 Pasos (2FA)
+                <i data-lucide="shield-check" class="w-3 h-3 text-emerald-600"></i> Red Interna Oficial • Encriptación SSL
             </span>
         </div>
 
@@ -186,18 +186,18 @@
         const inputIdentificador = document.getElementById('identificador-input');
         
         window.addEventListener('DOMContentLoaded', () => {
-            const savedEmail = localStorage.getItem('pc_citizen_saved_email');
-            if (savedEmail && inputIdentificador) {
-                inputIdentificador.value = savedEmail;
+            const savedUser = localStorage.getItem('pc_staff_saved_user');
+            if (savedUser && inputIdentificador) {
+                inputIdentificador.value = savedUser;
                 if (rememberCheckbox) rememberCheckbox.checked = true;
             }
         });
 
         document.querySelector('form').addEventListener('submit', () => {
             if (rememberCheckbox && rememberCheckbox.checked) {
-                localStorage.setItem('pc_citizen_saved_email', inputIdentificador.value);
+                localStorage.setItem('pc_staff_saved_user', inputIdentificador.value);
             } else {
-                localStorage.removeItem('pc_citizen_saved_email');
+                localStorage.removeItem('pc_staff_saved_user');
             }
         });
     </script>

@@ -18,16 +18,9 @@ from datetime import timedelta
 from django.utils import timezone
 
 def login_administrativo(request):
-    return redirect('login_unificado')
-
-def login_ciudadano(request):
-    return redirect('login_unificado')
-
-def acceso_unificado(request):
+    """Acceso exclusivo para Personal Administrativo y Operativo de Protección Civil y Bomberos."""
     if request.user.is_authenticated:
-        if request.user.is_staff or hasattr(request.user, 'rol_nivel'):
-            return redirect('intranet_hub')
-        return redirect('home')
+        return redirect('intranet_hub')
     if request.session.get('ciudadano_curp') or request.session.get('ciudadano_id'):
         return redirect('home')
         
@@ -36,32 +29,8 @@ def acceso_unificado(request):
         clave = request.POST.get('password', '').strip()
         
         if not identificador or not clave:
-            messages.error(request, "Por favor, completa todos los campos obligatorios.")
+            messages.error(request, "Por favor, ingresa tu usuario institucional y contraseña.")
         else:
-            # 1. Intentar validar como Ciudadano por Correo o CURP
-            ciudadano = Ciudadano.objects.filter(correo__iexact=identificador).first()
-            if not ciudadano and len(identificador) == 18:
-                ciudadano = Ciudadano.objects.filter(curp__iexact=identificador).first()
-
-            if ciudadano and check_password(clave, ciudadano.password):
-                from portal.utils.email_utils import enviar_correo_2fa
-                # Generar Código de Verificación en 2 Pasos (2FA) de 6 dígitos
-                codigo_2fa = str(random.randint(100000, 999999))
-                ciudadano.codigo_2fa = codigo_2fa
-                ciudadano.codigo_2fa_expiracion = timezone.now() + timedelta(minutes=5)
-                ciudadano.save()
-
-                request.session['pending_2fa_ciudadano_id'] = ciudadano.id
-                
-                # Intentar enviar por Correo SMTP Real
-                enviado_email = enviar_correo_2fa(ciudadano, codigo_2fa)
-                if enviado_email:
-                    messages.success(request, f"🔒 Se ha enviado un código de verificación de 6 dígitos a tu correo: {ciudadano.correo}")
-                else:
-                    messages.info(request, f"🔒 Se ha generado tu código de seguridad en 2 pasos: {codigo_2fa}")
-                return redirect('verificar_2fa')
-            
-            # 2. Intentar validar como Personal Administrativo / Operativo (por usuario o correo)
             admin_obj = PersonalAdministrativo.objects.filter(
                 Q(username__iexact=identificador) | Q(email__iexact=identificador)
             ).first()
@@ -70,15 +39,57 @@ def acceso_unificado(request):
             user = authenticate(request, username=username_to_auth, password=clave)
             if user is not None:
                 if not user.is_active:
-                    messages.error(request, "Tu cuenta institucional está en revisión o inactiva por el Administrador General.")
+                    messages.error(request, "Tu cuenta institucional está en revisión o inactiva por la Dirección General.")
                 else:
                     login(request, user)
                     messages.success(request, f"Sesión de personal iniciada: {user.first_name or user.username}.")
                     return redirect('intranet_hub')
             else:
-                messages.error(request, "Credenciales incorrectas. Por favor verifica tu usuario o correo y contraseña.")
+                messages.error(request, "Credenciales incorrectas. Verifica tu usuario y contraseña institucional.")
                 
-    return render(request, 'portal/login_unificado.html')
+    return render(request, 'portal/login_personal.html')
+
+def acceso_unificado(request):
+    """Mantiene compatibilidad hacia login_admin para rutas existentes."""
+    return login_administrativo(request)
+
+def login_ciudadano(request):
+    """Acceso exclusivo para Ciudadanos con envío de código 2FA por correo."""
+    if request.session.get('ciudadano_curp') or request.session.get('ciudadano_id'):
+        return redirect('home')
+    if request.user.is_authenticated:
+        return redirect('intranet_hub')
+        
+    if request.method == 'POST':
+        identificador = request.POST.get('identificador', '').strip()
+        clave = request.POST.get('password', '').strip()
+        
+        if not identificador or not clave:
+            messages.error(request, "Por favor, ingresa tu correo electrónico y contraseña.")
+        else:
+            ciudadano = Ciudadano.objects.filter(correo__iexact=identificador).first()
+            if not ciudadano and len(identificador) == 18:
+                ciudadano = Ciudadano.objects.filter(curp__iexact=identificador).first()
+
+            if ciudadano and check_password(clave, ciudadano.password):
+                from portal.utils.email_utils import enviar_correo_2fa
+                codigo_2fa = str(random.randint(100000, 999999))
+                ciudadano.codigo_2fa = codigo_2fa
+                ciudadano.codigo_2fa_expiracion = timezone.now() + timedelta(minutes=5)
+                ciudadano.save()
+
+                request.session['pending_2fa_ciudadano_id'] = ciudadano.id
+                
+                enviado_email = enviar_correo_2fa(ciudadano, codigo_2fa)
+                if enviado_email:
+                    messages.success(request, f"🔒 Se ha enviado un código de verificación de 6 dígitos a tu correo: {ciudadano.correo}")
+                else:
+                    messages.info(request, f"🔒 Se ha generado tu código de seguridad en 2 pasos: {codigo_2fa}")
+                return redirect('verificar_2fa')
+            else:
+                messages.error(request, "Correo electrónico o contraseña incorrectos. Si no tienes cuenta, por favor regístrate.")
+                
+    return render(request, 'portal/login_ciudadano.html')
 
 
 def verificar_2fa(request):

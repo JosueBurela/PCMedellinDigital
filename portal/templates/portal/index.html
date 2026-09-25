@@ -140,8 +140,8 @@
                     </div>
                 </div>
                 {% else %}
-                <a href="{% url 'login_unificado' %}" class="text-xs bg-medellinVino hover:bg-[#43082B] text-white font-bold px-4 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-1.5">
-                    <i data-lucide="key" class="w-3.5 h-3.5"></i> Ingresar al Portal
+                <a href="{% url 'login_ciudadano' %}" class="text-xs bg-medellinVino hover:bg-[#43082B] text-white font-bold px-4 py-2.5 rounded-xl shadow-md transition-all flex items-center gap-1.5">
+                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> Acceso Ciudadano
                 </a>
                 {% endif %}
                 
@@ -185,8 +185,11 @@
                     </a>
                 </div>
                 {% else %}
-                <a href="{% url 'login_unificado' %}" class="w-full bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3 rounded-xl shadow-md transition-all text-center text-xs flex items-center justify-center gap-1.5">
-                    <i data-lucide="key" class="w-3.5 h-3.5"></i> Ingresar al Portal
+                <a href="{% url 'login_ciudadano' %}" class="w-full bg-medellinVino hover:bg-[#43082B] text-white font-bold py-3 rounded-xl shadow-md transition-all text-center text-xs flex items-center justify-center gap-1.5">
+                    <i data-lucide="user-check" class="w-3.5 h-3.5"></i> Acceso Ciudadano
+                </a>
+                <a href="{% url 'login_admin' %}" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-2.5 rounded-xl text-center text-[11px] flex items-center justify-center gap-1.5 border border-slate-200">
+                    <i data-lucide="shield" class="w-3.5 h-3.5 text-medellinVino"></i> Intranet Personal PC
                 </a>
                 {% endif %}
             </div>
@@ -351,6 +354,9 @@
                         <p class="mb-0.5">&copy; 2026 H. Ayuntamiento de Medellín de Bravo.</p>
                         <p class="mb-0.5">Desarrollo Tecnológico por: <span class="text-white">Josué Jaziel Delgado Burela</span></p>
                         <p>Contacto: <a href="mailto:jburela1@gmal.com" class="text-purple-300 hover:text-white underline transition-colors">jburela1@gmal.com</a></p>
+                        <a href="{% url 'login_admin' %}" class="inline-flex items-center gap-1.5 text-purple-300 hover:text-white transition-colors text-[10px] font-bold mt-2 bg-white/10 px-2.5 py-1 rounded-lg border border-white/10">
+                            <i data-lucide="shield" class="w-3 h-3 text-medellinOro"></i> Acceso Intranet Personal PC
+                        </a>
                     </div>
                 </div>
 
