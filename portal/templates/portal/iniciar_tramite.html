@@ -120,41 +120,69 @@
                     </div>
 
                     <div class="space-y-4">
-                        <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Información del Registro</h3>
+                        <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Información del Registro Oficial</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4 text-xs">
                             <div class="flex justify-between py-2 border-b border-gray-50">
                                 <span class="text-gray-500 font-medium">Última Actualización:</span>
-                                <span class="font-bold text-slate-800">13 de Febrero de 2026</span>
+                                <span class="font-bold text-slate-800">Ejercicio Fiscal 2026</span>
                             </div>
                             <div class="flex justify-between py-2 border-b border-gray-50">
                                 <span class="text-gray-500 font-medium">Dependencia Responsable:</span>
-                                <span class="font-bold text-slate-800">Secretaría de Gobierno</span>
+                                <span class="font-bold text-slate-800">H. Ayuntamiento de Medellín de Bravo</span>
                             </div>
                             <div class="flex justify-between py-2 border-b border-gray-50">
                                 <span class="text-gray-500 font-medium">Dirección Operativa:</span>
-                                <span class="font-bold text-slate-800">Coordinación Municipal de Protección Civil</span>
+                                <span class="font-bold text-slate-800">Dirección Municipal de Protección Civil y Bomberos</span>
                             </div>
                             <div class="flex justify-between py-2 border-b border-gray-50">
                                 <span class="text-gray-500 font-medium">Tipo de Trámite:</span>
-                                <span class="font-bold text-slate-800">Municipal</span>
+                                <span class="font-bold text-slate-800">Municipal Oficial</span>
                             </div>
                             <div class="flex justify-between py-2 border-b border-gray-50">
                                 <span class="text-gray-500 font-medium">Dirigido a:</span>
                                 <span class="font-bold text-slate-800 text-right max-w-md block">
-                                    {% if tramite.id == 3 or "evento" in tramite.titulo.lower %}
-                                        Por la autorización de programas especiales de Protección Civil que se presenten para la realización de un evento o espectáculo en el municipio de Alvarado, para promotores particulares, se pagará:
+                                    {% if tramite.sub_tipo == 'OPERATIVA' or tramite.id == 3 %}
+                                        Toda persona física o moral propietaria o representante legal de un establecimiento comercial, industrial o de servicios en el municipio de Medellín de Bravo.
+                                    {% elif tramite.sub_tipo == 'RECOMENDACIONES' or tramite.id == 6 %}
+                                        Promotores, empresas y organizadores de espectáculos, rodeos, bailes, ferias o eventos de concentración masiva en Medellín de Bravo.
+                                    {% elif tramite.sub_tipo == 'RENOVACION' or tramite.id == 9 %}
+                                        Titulares de comercios o empresas que cuenten con anuencia emitida en el ejercicio previo y requieran su refrendo anual.
+                                    {% elif tramite.sub_tipo == 'TEMPORAL' or tramite.id == 12 %}
+                                        Comerciantes ambulantes, semifijos y temporales que ejerzan actividades en la vía pública o festividades del municipio.
                                     {% else %}
-                                        Personas Físicas y Morales con Establecimiento
+                                        Personas Físicas y Morales con Establecimiento en Medellín de Bravo
                                     {% endif %}
                                 </span>
                             </div>
                             <div class="flex justify-between py-2 border-b border-gray-50">
                                 <span class="text-gray-500 font-medium">Vigencia del Documento:</span>
                                 <span class="font-bold text-slate-800">
-                                    {% if tramite.id == 3 or "evento" in tramite.titulo.lower %}
-                                        Hasta concluir el evento
+                                    {% if tramite.sub_tipo == 'RECOMENDACIONES' or tramite.id == 6 %}
+                                        Temporal (vigente únicamente durante la fecha y duración del evento)
+                                    {% elif tramite.sub_tipo == 'TEMPORAL' or tramite.id == 12 %}
+                                        Temporal (por el periodo o temporada autorizada por la Dirección de Comercio)
                                     {% else %}
-                                        1 año a partir de su fecha de emisión
+                                        Año calendario (hasta el 31 de diciembre del año en curso) / 1 año fiscal
+                                    {% endif %}
+                                </span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">¿Requiere Inspección Física?:</span>
+                                <span class="font-bold text-emerald-600">Sí, verificación física de medidas de seguridad por inspectores oficiales</span>
+                            </div>
+                            <div class="flex justify-between py-2 border-b border-gray-50">
+                                <span class="text-gray-500 font-medium">En qué casos se presenta:</span>
+                                <span class="font-bold text-slate-800 text-right max-w-md block">
+                                    {% if tramite.sub_tipo == 'OPERATIVA' or tramite.id == 3 %}
+                                        Apertura de nuevos establecimientos o regularización de negocios comerciales, industriales y de servicios.
+                                    {% elif tramite.sub_tipo == 'RECOMENDACIONES' or tramite.id == 6 %}
+                                        Previo a la realización de cualquier evento masivo público o privado en el municipio.
+                                    {% elif tramite.sub_tipo == 'RENOVACION' or tramite.id == 9 %}
+                                        Al inicio de cada ejercicio fiscal para refrendar la anuencia y mantener el expediente técnico al corriente.
+                                    {% elif tramite.sub_tipo == 'TEMPORAL' or tramite.id == 12 %}
+                                        Previo a la instalación de puestos en vía pública con uso de gas LP o instalaciones eléctricas temporales.
+                                    {% else %}
+                                        Establecimientos o promotores en el Municipio de Medellín de Bravo.
                                     {% endif %}
                                 </span>
                             </div>
@@ -164,7 +192,17 @@
                     <div class="space-y-2 pt-2">
                         <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest">Beneficio Ciudadano</h3>
                         <p class="text-xs text-gray-600 leading-relaxed font-normal">
-                            Dar cumplimiento a las disposiciones y medidas de seguridad que regulan el funcionamiento comercial e industrial en el municipio de Medellín de Bravo, Veracruz.
+                            {% if tramite.sub_tipo == 'OPERATIVA' or tramite.id == 3 %}
+                                Dar cumplimiento a las obligaciones normativas y disposiciones de seguridad que regulan el funcionamiento comercial e industrial en el municipio de Medellín de Bravo, Veracruz, garantizando un entorno seguro para clientes y colaboradores.
+                            {% elif tramite.sub_tipo == 'RECOMENDACIONES' or tramite.id == 6 %}
+                                Garantizar la salvaguarda y seguridad física de los asistentes, prevenir accidentes masivos y contar con plan de auxilio y evacuación inmediata ante emergencias.
+                            {% elif tramite.sub_tipo == 'RENOVACION' or tramite.id == 9 %}
+                                Mantener la vigencia legal para operar, evitar sanciones o clausuras y asegurar la actualización periódica de equipos de combate contra incendio y capacitación de personal.
+                            {% elif tramite.sub_tipo == 'TEMPORAL' or tramite.id == 12 %}
+                                Desarrollar la actividad comercial en vía pública con medidas preventivas básicas, previniendo riesgos de incendio o explosión por gas LP y fallas eléctricas.
+                            {% else %}
+                                Dar cumplimiento a las disposiciones y medidas de seguridad que regulan el funcionamiento comercial e industrial en el municipio de Medellín de Bravo, Veracruz.
+                            {% endif %}
                         </p>
                     </div>
 
@@ -180,83 +218,242 @@
                     <div class="space-y-3">
                         <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest">Documentación Requerida</h3>
                         <p class="text-xs text-gray-500 leading-relaxed">
-                            A continuación se detallan los requisitos obligatorios que debe escanear e integrar al expediente técnico digital:
+                            A continuación se detallan los requisitos del trámite organizados por etapas de integración del expediente digital:
                         </p>
                     </div>
 
-                    <div class="overflow-x-auto border border-gray-150 rounded-2xl">
-                        <table class="w-full text-left border-collapse text-xs">
-                            <thead>
-                                <tr class="bg-gray-50 text-gray-400 font-bold uppercase tracking-wider border-b border-gray-150">
-                                    <th class="p-4">Documento / Requisito</th>
-                                    <th class="p-4 text-center">Original</th>
-                                    <th class="p-4 text-center">Copias</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-gray-100 font-semibold text-slate-700">
-                                {% if tramite.form_type == 'ANUENCIA_PC' %}
-                                    <!-- Requisitos Formato 1 -->
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                    {% if tramite.form_type == 'ANUENCIA_PC' %}
+                        <!-- Banner Explicativo del Proceso por Pasos (Modelo Oficial Medellín de Bravo) -->
+                        <div class="bg-gradient-to-r from-purple-50 via-white to-amber-50/60 border border-purple-100 rounded-3xl p-5 space-y-3 shadow-sm">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-8 h-8 rounded-xl bg-medellinVino text-white flex items-center justify-center font-black text-xs shadow-sm">
+                                    <i data-lucide="layers" class="w-4 h-4 text-amber-300"></i>
+                                </span>
+                                <div>
+                                    <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider">¿Cómo funciona el trámite? El proceso va por pasos:</h4>
+                                    <p class="text-[10px] text-gray-500 font-medium">No necesitas entregar todos los dictámenes el primer día; el expediente avanza de forma guiada.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+                                <div class="bg-white/90 border border-purple-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-medellinVino text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-purple-100 text-medellinVino text-[10px] flex items-center justify-center font-bold">1</span>
+                                        Solicitud Inicial Digital
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Inicias tu trámite en línea cargando los <strong>datos principales</strong> del establecimiento y los 4 requisitos base (INE, croquis, fotos de fachada y predial/contrato).</p>
+                                </div>
+                                <div class="bg-white/90 border border-purple-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-medellinOro text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-amber-100 text-medellinOro text-[10px] flex items-center justify-center font-bold">2</span>
+                                        Evaluación y Grado de Riesgo
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Protección Civil evalúa giro y metros cuadrados, determinando si el negocio es de <strong>Riesgo Bajo, Medio o Alto</strong>, calculando el pago e indicando si requiere programa interno.</p>
+                                </div>
+                                <div class="bg-white/90 border border-purple-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-emerald-600 text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 text-[10px] flex items-center justify-center font-bold">3</span>
+                                        Inspección Física y Emisión
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Inspectores verifican las condiciones de seguridad (extintores, botiquín, salidas). Al cubrir el pago en Tesorería Municipal, se expide tu <strong>Anuencia Oficial</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TABLA DETALLADA DE REQUISITOS SEGÚN SUB-TIPO -->
+                        <div class="overflow-x-auto border border-gray-150 rounded-2xl">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-gray-50 text-gray-500 font-bold uppercase tracking-wider border-b border-gray-150 text-[10px]">
+                                        <th class="p-3.5">Fase / Documento</th>
+                                        <th class="p-3.5 text-center w-28">Modalidad</th>
+                                        <th class="p-3.5">Aplica para</th>
                                     </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Establecimiento (Fachada e Interior)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Programa Interno de Protección Civil (PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Carta de Corresponsabilidad Técnica / Tercer Acreditado</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Constancia de Capacitación de Brigadas Internas</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen Técnico de Instalaciones de Gas LP/Natural</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen de Instalación Eléctrica Vigente</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Dictamen / Estudio de Estabilidad Estructural</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Póliza de Seguro de Responsabilidad Civil Vigente</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                    <tr class="hover:bg-gray-50/50 transition">
-                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Recibo o Comprobante del Pago de Derechos Administrativos</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                    </tr>
-                                {% elif tramite.form_type == 'ANUNCIOS_PC' %}
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 font-semibold text-slate-700">
+                                    {% if tramite.sub_tipo == 'OPERATIVA' or tramite.id == 3 %}
+                                        <!-- Paso 1: Obligatorios Iniciales -->
+                                        <tr class="bg-purple-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-medellinVino text-[10px] uppercase tracking-wider">
+                                                Fase 1: Requisitos de Apertura de Expediente (Carga Digital Inicial)
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente (INE / Pasaporte / Cédula) del propietario o representante legal</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio todos los establecimientos</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Croquis de Ubicación del Inmueble con calles colindantes y referencias</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio todos los establecimientos</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Fotografías a color de la Fachada del Establecimiento</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio todos los establecimientos</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Boleta de Pago del Impuesto Predial del Año en Curso o Contrato de Arrendamiento Vigente</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio todos los establecimientos</td>
+                                        </tr>
+
+                                        <!-- Paso 2: Complementarios según Grado de Riesgo -->
+                                        <tr class="bg-amber-50/40">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-amber-800 text-[10px] uppercase tracking-wider">
+                                                Fase 2: Documentación Técnica Complementaria (Determinada por PC según Riesgo)
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Programa Interno de Protección Civil en formato digital PDF</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Establecimientos de Riesgo Medio y Alto</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Carta de Corresponsabilidad Técnica de Tercer Acreditado con registro vigente</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Establecimientos de Riesgo Medio y Alto</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Constancias de Capacitación de Brigadas (Uso de extintores y primeros auxilios)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Todo establecimiento con personal activo</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">8. Dictamen Técnico de Instalaciones de Gas LP (NOM-004 y NOM-013 SEDG)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Solo si cuenta con instalación o consumo de gas LP</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">9. Dictamen de Instalación Eléctrica Vigente (NOM-001-SEDE)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Según la carga eléctrica o riesgo dictaminado</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">10. Dictamen / Estudio de Estabilidad Estructural</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Naves industriales, edificios, salones de fiesta</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">11. Póliza de Seguro de Responsabilidad Civil Vigente</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Locales con concentración pública o riesgo alto</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">12. Recibo Oficial de Pago de Derechos emitido por Tesorería Municipal</td>
+                                            <td class="p-3.5 text-center text-emerald-600 font-bold">Comprobante de Pago</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Previo a la entrega de la Anuencia</td>
+                                        </tr>
+
+                                    {% elif tramite.sub_tipo == 'RECOMENDACIONES' or tramite.id == 6 %}
+                                        <!-- Requisitos para Eventos Masivos -->
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente del Promotor u Organizador Responsable</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Croquis y Plano de Distribución del Evento (escenarios, rutas de evacuación, graderías, extintores y salidas)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Fotografías del Inmueble, Recinto o Predio donde se realizará el evento</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Programa Especial de Protección Civil y Plan de Evacuación para Eventos</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Póliza de Seguro de Responsabilidad Civil a Terceros vigente para el evento</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Contrato de Servicio Médico con Ambulancia Prehospitalaria y Paramédicos</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Eventos masivos o de afluencia considerable</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Permiso previo de Comercio y Gobernación Municipal (y SEDENA si hay pirotecnia)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                    {% elif tramite.sub_tipo == 'RENOVACION' or tramite.id == 9 %}
+                                        <!-- Requisitos para Renovación -->
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente del Titular o Representante (INE)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Copia o Folio de la Anuencia Operativa del Año Anterior emitida por PC Medellín</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Boleta de Pago del Impuesto Predial del Año en Curso o Contrato Vigente</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Fotografías Actuales de la Fachada y del Extintor con etiqueta de recarga anual vigente</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Constancia de Actualización de Capacitación de Brigadas Internas</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Vigencia anual de capacitación</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Manifestación bajo protesta de no haber realizado modificaciones al inmueble ni al giro</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                    {% elif tramite.sub_tipo == 'TEMPORAL' or tramite.id == 12 %}
+                                        <!-- Requisitos para Puestos Ambulantes / Temporal -->
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente del Comerciante (INE)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Croquis de Ubicación del Puesto en vía pública o tianguis con referencias</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Permiso o Cédula expedida por la Dirección de Comercio Municipal</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Fotografía del Puesto mostrando Extintor de Polvo Químico Seco (PQS mín. 4.5 kg) vigente</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Manguera de alta presión para gas LP con regulador y abrazaderas metálicas industriales</td>
+                                            <td class="p-3.5 text-center text-gray-500">Verificación Física</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Solo si utiliza cilindro de gas LP (máx. 20 kg)</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Cable de uso rudo continuo en una sola pieza (prohibidas extensiones caseras)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Verificación Física</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Solo si utiliza conexión eléctrica temporal</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% elif tramite.form_type == 'ANUNCIOS_PC' %}
                                     <!-- Requisitos Formato 2 -->
                                     <tr class="hover:bg-gray-50/50 transition">
                                         <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
@@ -401,11 +598,13 @@
                     <div class="space-y-4">
                         <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Costos del Trámite</h3>
                         <div class="bg-slate-50 border border-gray-155 rounded-2xl p-5 space-y-3">
-                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wide">Monto de Pago</span>
+                            <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wide">Monto de Pago de Derechos</span>
                             <p class="text-sm text-gray-800 leading-relaxed font-bold">
-                                El costo de este trámite no es fijo y está sujeto a la evaluación técnica de Protección Civil:<br>
-                                <span class="text-medellinVino font-black text-base mt-2 block">Determinado según el caso específico</span>
-                                <span class="text-gray-500 font-normal text-xs block mt-1">(El importe se calcula con base en la Ley de Ingresos Municipal vigente tras analizar la superficie en m², el giro comercial del establecimiento y el nivel de riesgo correspondiente).</span>
+                                El costo del trámite se calcula con base en la Ley de Ingresos del Municipio de Medellín de Bravo vigente:<br>
+                                <span class="text-medellinVino font-black text-base mt-2 block">Tasado en UMA según Giro, Metros² y Grado de Riesgo</span>
+                                <span class="text-gray-500 font-normal text-xs block mt-1">
+                                    El personal técnico de Protección Civil clasifica el establecimiento en Riesgo Bajo, Medio o Alto considerando la superficie construida, giro mercantil y carga de fuego, expidiendo la orden de cobro oficial correspondiente.
+                                </span>
                             </p>
                         </div>
                     </div>
@@ -414,15 +613,15 @@
                         <div class="space-y-2">
                             <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wide">Formas de Pago Aceptadas</span>
                             <ul class="text-xs text-gray-600 space-y-1.5 list-disc pl-4 font-normal">
-                                <li>Pago en efectivo en ventanilla de Tesorería Municipal.</li>
-                                <li>Pago con tarjeta de crédito/débito.</li>
-                                <li>Transferencia bancaria (solicitando cuenta clave en tesorería).</li>
+                                <li>Ventanilla de Tesorería Municipal en efectivo o tarjeta bancaria.</li>
+                                <li>Transferencia electrónica institucional (solicitando la línea de captura oficial).</li>
+                                <li>Módulo de cobro autorizado por el H. Ayuntamiento de Medellín de Bravo.</li>
                             </ul>
                         </div>
                         <div class="space-y-2">
                             <span class="block text-[10px] font-bold text-gray-400 uppercase tracking-wide">Tiempos de Respuesta</span>
                             <p class="text-xs text-gray-600 leading-relaxed font-normal">
-                                <strong>Plazo Máximo de Resolución:</strong> 3 a 5 días hábiles a partir de la correcta integración del expediente técnico digital y pago de derechos.
+                                <strong>Plazo de Resolución:</strong> 3 a 5 días hábiles posteriores a la verificación física del inmueble y solventación de las observaciones preventivas.
                             </p>
                         </div>
                     </div>
@@ -446,18 +645,18 @@
                                 <div class="flex gap-3">
                                     <span class="text-base text-medellinOro">🌐</span>
                                     <div>
-                                        <h4 class="text-xs font-bold text-gray-800 uppercase">En Línea</h4>
+                                        <h4 class="text-xs font-bold text-gray-800 uppercase">En Línea (Digital)</h4>
                                         <p class="text-xs text-gray-500 leading-relaxed font-normal mt-0.5">
-                                            A través de este portal digital las 24 horas del día. Puedes cargar los requisitos, revisar estatus en tiempo real y chatear con el validador oficial.
+                                            A través de este portal digital municipal las 24 horas del día. Puedes cargar los requisitos iniciales, dar seguimiento al estatus en tiempo real y chatear con el personal validador.
                                         </p>
                                     </div>
                                 </div>
                                 <div class="flex gap-3">
                                     <span class="text-base text-medellinVino">🏢</span>
                                     <div>
-                                        <h4 class="text-xs font-bold text-gray-800 uppercase">Presencial</h4>
+                                        <h4 class="text-xs font-bold text-gray-800 uppercase">Presencial en Base</h4>
                                         <p class="text-xs text-gray-500 leading-relaxed font-normal mt-0.5">
-                                            Acude a la Dirección de Protección Civil en el Palacio Municipal, Col. Centro, Medellín de Bravo, Ver. Lunes a Viernes de 9:00 AM a 4:00 PM.
+                                            Base Central de Protección Civil y Bomberos: Calz San Ramón, San Ramon, C.P. 94274 Fraccionamiento Arboledas San Ramón, Ver. Lunes a Viernes de 8:00 AM a 3:00 PM (Operativo de Emergencias 24/7).
                                         </p>
                                     </div>
                                 </div>
@@ -468,16 +667,17 @@
                         <div class="space-y-4">
                             <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest border-b border-gray-100 pb-2">Fundamento Jurídico</h3>
                             <p class="text-xs text-gray-600 leading-relaxed font-normal text-justify">
-                                Constitución Política de los Estados Unidos Mexicanos; Ley Orgánica del Municipio Libre; Reglamento de Protección Civil del Municipio de Medellín de Bravo, Veracruz; Ley General de Protección Civil y Reducción de Riesgos de Desastres del Estado de Veracruz.
+                                Constitución Política de los Estados Unidos Mexicanos; Ley Orgánica del Municipio Libre; Reglamento de Protección Civil del Municipio de Medellín de Bravo, Veracruz; Ley de Ingresos del Municipio de Medellín de Bravo vigente; Ley de Protección Civil y Reducción del Riesgo de Desastres para el Estado de Veracruz de Ignacio de la Llave.
                             </p>
                             
                             <div class="pt-2">
                                 <h4 class="text-xs font-bold text-gray-800 uppercase flex items-center gap-1.5 mb-1.5">
-                                    <i data-lucide="mail" class="w-3.5 h-3.5 text-medellinOro"></i> Contacto Oficial PC
+                                    <i data-lucide="phone-call" class="w-3.5 h-3.5 text-medellinOro"></i> Contacto Oficial PC Medellín
                                 </h4>
-                                <p class="text-xs text-gray-600 font-normal">
-                                    Email: <a href="mailto:proteccioncivil@medellindebravo.gob.mx" class="text-medellinVino hover:underline">proteccioncivil@medellindebravo.gob.mx</a><br>
-                                    Teléfono: 229 955 4774
+                                <p class="text-xs text-gray-600 font-normal space-y-0.5">
+                                    <span>Teléfono Base: <strong>229 955 4774</strong></span><br>
+                                    <span>WhatsApp de Atención: <strong>232 141 0935</strong></span><br>
+                                    <span>Email: <a href="mailto:proteccioncivil@medellindebravo.gob.mx" class="text-medellinVino hover:underline">proteccioncivil@medellindebravo.gob.mx</a></span>
                                 </p>
                             </div>
                         </div>
