@@ -58,7 +58,7 @@
                     Trámite Oficial
                 </span>
                 <span class="bg-white/5 text-purple-200 text-[9px] font-black uppercase tracking-widest px-2.5 py-1 rounded border border-white/10">
-                    {% if tramite.form_type == 'ANUENCIA_PC' %}Código: TR-140600-008{% elif tramite.form_type == 'ANUNCIOS_PC' %}Código: TR-140600-007{% else %}Código: TR-GENERAL{% endif %}
+                    {% if tramite.form_type == 'ANUENCIA_PC' %}Código: TR-140600-008{% elif tramite.form_type == 'ANUNCIOS_PC' %}Código: TR-140600-007{% elif tramite.form_type == 'CONSTRUCCION_PC' %}Código: TR-140600-003{% elif tramite.form_type == 'TERCEROS_PC' %}Código: TR-140600-001{% else %}Código: TR-GENERAL{% endif %}
                 </span>
             </div>
             
@@ -155,6 +155,16 @@
                                         Empresas de telecomunicaciones, radiocomunicación, telefonía móvil o concesionarias de infraestructura pasiva con torres en Medellín de Bravo.
                                     {% elif tramite.sub_tipo == 'RENOVACION_ANUNCIO' or tramite.id == 8 %}
                                         Titulares de anuncios publicitarios y/o empresas operadoras de antenas autorizadas previamente en Medellín de Bravo que requieran su refrendo anual unificado.
+                                    {% elif tramite.sub_tipo == 'CONSTRUCCION' or tramite.id == 11 %}
+                                        Propietarios, empresas constructoras, desarrolladores y Directores Responsables de Obra (DRO) para obra nueva en Medellín de Bravo.
+                                    {% elif tramite.sub_tipo == 'REMODELACION' or tramite.id == 5 %}
+                                        Propietarios, arrendatarios y peritos a cargo de obras de remodelación, adecuación estructural o ampliación en el municipio.
+                                    {% elif tramite.sub_tipo == 'DEMOLICION' or tramite.id == 4 %}
+                                        Propietarios, constructoras y peritos responsables de demoliciones parciales o totales de inmuebles o estructuras.
+                                    {% elif tramite.sub_tipo == 'NUEVO_INGRESO' or tramite.id == 7 %}
+                                        Profesionistas consultores en gestión de riesgos y empresas capacitadoras con registro estatal vigente ante la SPC Veracruz.
+                                    {% elif tramite.sub_tipo == 'RENOVACION_REGISTRO' or tramite.id == 10 %}
+                                        Consultores y capacitadores inscritos previamente en el Padrón Municipal de Medellín de Bravo que requieran su refrendo anual.
                                     {% else %}
                                         Personas Físicas y Morales con Establecimiento en Medellín de Bravo
                                     {% endif %}
@@ -167,6 +177,10 @@
                                         Temporal (vigente únicamente durante la fecha y duración del evento)
                                     {% elif tramite.sub_tipo == 'TEMPORAL' or tramite.id == 12 %}
                                         Temporal (por el periodo o temporada autorizada por la Dirección de Comercio)
+                                    {% elif tramite.form_type == 'CONSTRUCCION_PC' or tramite.sub_tipo == 'CONSTRUCCION' or tramite.sub_tipo == 'REMODELACION' or tramite.sub_tipo == 'DEMOLICION' %}
+                                        Durante la vigencia de la licencia municipal de construcción o término del programa de obra
+                                    {% elif tramite.form_type == 'TERCEROS_PC' or tramite.sub_tipo == 'NUEVO_INGRESO' or tramite.sub_tipo == 'RENOVACION_REGISTRO' %}
+                                        1 año fiscal (coincidente con la vigencia de la Cédula Estatal SPC Veracruz)
                                     {% else %}
                                         Año calendario (hasta el 31 de diciembre del año en curso) / 1 año fiscal
                                     {% endif %}
@@ -193,6 +207,16 @@
                                         Previo a la instalación, montaje u operación de torres arriostradas, monopolos o antenas de telecomunicación y radiotransmisión.
                                     {% elif tramite.sub_tipo == 'RENOVACION_ANUNCIO' or tramite.id == 8 %}
                                         Al inicio de cada ejercicio fiscal para refrendar de forma unificada la anuencia de seguridad de anuncios publicitarios y/o antenas de comunicación.
+                                    {% elif tramite.sub_tipo == 'CONSTRUCCION' or tramite.id == 11 %}
+                                        Previo al inicio de cualquier edificación o construcción de obra nueva, como requisito para la licencia de obra municipal.
+                                    {% elif tramite.sub_tipo == 'REMODELACION' or tramite.id == 5 %}
+                                        Previo a obras de ampliación, redistribución o adecuaciones en inmuebles comerciales, habitacionales o industriales.
+                                    {% elif tramite.sub_tipo == 'DEMOLICION' or tramite.id == 4 %}
+                                        Previo a la demolición de muros, losas, naves o inmuebles completos para salvaguardar a colindancias, peatones y vía pública.
+                                    {% elif tramite.sub_tipo == 'NUEVO_INGRESO' or tramite.id == 7 %}
+                                        Al solicitar por primera vez el registro municipal para formular Programas Internos de PC o impartir cursos en Medellín de Bravo.
+                                    {% elif tramite.sub_tipo == 'RENOVACION_REGISTRO' or tramite.id == 10 %}
+                                        Al inicio de cada ejercicio fiscal para refrendar la inscripción municipal y actualizar credencial y especialidades vigentes.
                                     {% else %}
                                         Establecimientos o promotores en el Municipio de Medellín de Bravo.
                                     {% endif %}
@@ -218,6 +242,16 @@
                                 Garantiza la estabilidad física de la torre y la correcta operación de tierras físicas y pararrayos, evitando riesgos a predios vecinos.
                             {% elif tramite.sub_tipo == 'RENOVACION_ANUNCIO' or tramite.id == 8 %}
                                 Refrenda en un solo trámite la seguridad de la estructura, manteniendo al día el mantenimiento preventivo y la póliza de seguro a terceros.
+                            {% elif tramite.sub_tipo == 'CONSTRUCCION' or tramite.id == 11 %}
+                                Valida la seguridad técnica del proyecto constructivo y previene riesgos hidrometeorológicos, de colapso y siniestros en la futura edificación.
+                            {% elif tramite.sub_tipo == 'REMODELACION' or tramite.id == 5 %}
+                                Garantiza que las modificaciones mantengan la estabilidad física, rutas de evacuación libres y normatividad de combate contra incendios.
+                            {% elif tramite.sub_tipo == 'DEMOLICION' or tramite.id == 4 %}
+                                Establece protocolos de confinamiento perimetral, control de escombros y horarios seguros, protegiendo predios colindantes y transeúntes.
+                            {% elif tramite.sub_tipo == 'NUEVO_INGRESO' or tramite.id == 7 %}
+                                Otorga validez oficial municipal a los Programas Internos y capacitaciones que formulen para establecimientos en Medellín de Bravo.
+                            {% elif tramite.sub_tipo == 'RENOVACION_REGISTRO' or tramite.id == 10 %}
+                                Mantiene al consultor activo en el catálogo público oficial de prestadores autorizados ante el sector comercial e industrial del municipio.
                             {% else %}
                                 Acredita las medidas de seguridad y prevención de riesgos normadas por el Municipio de Medellín de Bravo.
                             {% endif %}
@@ -710,6 +744,402 @@
                                 </tbody>
                             </table>
                         </div>
+                    {% elif tramite.form_type == 'CONSTRUCCION_PC' %}
+                        <!-- Banner Explicativo del Proceso para Construcción y Obras -->
+                        <div class="bg-gradient-to-r from-teal-50 via-white to-purple-50/60 border border-teal-200/80 rounded-3xl p-5 space-y-3 shadow-sm">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-8 h-8 rounded-xl bg-teal-600 text-white flex items-center justify-center font-black text-xs shadow-sm">
+                                    <i data-lucide="layers" class="w-4 h-4 text-white"></i>
+                                </span>
+                                <div>
+                                    <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider">¿Cómo funciona el trámite de Construcción y Obras? El proceso va por pasos:</h4>
+                                    <p class="text-[10px] text-gray-500 font-medium">Inicias la solicitud digital con la documentación básica del predio y avanzas con el proyecto técnico avalado por DRO.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+                                <div class="bg-white/90 border border-teal-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-medellinVino text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-purple-100 text-medellinVino text-[10px] flex items-center justify-center font-bold">1</span>
+                                        Solicitud y Acreditación
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Cargas en línea la identificación del titular/DRO, predial o escritura del inmueble y croquis de localización.</p>
+                                </div>
+                                <div class="bg-white/90 border border-teal-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-teal-700 text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-teal-100 text-teal-700 text-[10px] flex items-center justify-center font-bold">2</span>
+                                        Proyecto Técnico y Responsiva
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Se integra la memoria de seguridad, planos con rutas de emergencia/equipos y carta responsiva técnica del Director Responsable de Obra.</p>
+                                </div>
+                                <div class="bg-white/90 border border-teal-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-emerald-600 text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 text-[10px] flex items-center justify-center font-bold">3</span>
+                                        Validación Técnica y Dictamen
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Personal técnico valida la viabilidad en campo o gabinete. Con el pago en Tesorería, se emite tu <strong>Dictamen Oficial</strong>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TABLA DETALLADA DE REQUISITOS CONSTRUCCIÓN Y OBRAS -->
+                        <div class="overflow-x-auto border border-gray-150 rounded-2xl">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-gray-50 text-gray-500 font-bold uppercase tracking-wider border-b border-gray-150 text-[10px]">
+                                        <th class="p-3.5">Fase / Documento</th>
+                                        <th class="p-3.5 text-center w-28">Modalidad</th>
+                                        <th class="p-3.5">Aplica para</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 font-semibold text-slate-700">
+                                    {% if tramite.sub_tipo == 'CONSTRUCCION' or tramite.id == 11 %}
+                                        <!-- Requisitos Obra Nueva -->
+                                        <tr class="bg-teal-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-teal-800 text-[10px] uppercase tracking-wider">
+                                                Fase 1: Requisitos de Apertura Digital
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente del Propietario o Representante Legal (INE / Pasaporte)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Cédula Profesional y Registro del Director Responsable de Obra (DRO) o Perito</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Boleta Predial Pagada del Año en Curso o Título de Propiedad del Predio</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Fotografías actuales del predio, accesos y colindancias directas</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                        <tr class="bg-purple-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-medellinVino text-[10px] uppercase tracking-wider">
+                                                Fase 2: Expediente Técnico de Seguridad en Obra
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Memoria Descriptiva de Medidas de Seguridad y Prevención de Riesgos en Proceso de Construcción</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio avalado por DRO</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Plano Arquitectónico de Seguridad (rutas de evacuación, señalética, zonas de resguardo y equipo contra incendio proyectado)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Carta Responsiva Técnica firmada por el Director Responsable de Obra (DRO) colegiado</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">8. Estudio de Mecánica de Suelos y/o Análisis de Escurrimiento Pluvial</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Fraccionamientos, plazas comerciales y naves industriales</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">9. Licencia de Uso de Suelo emitida por Desarrollo Urbano Municipal</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">10. Recibo Oficial de Pago de Derechos emitido por Tesorería Municipal</td>
+                                            <td class="p-3.5 text-center text-emerald-600 font-bold">Comprobante de Pago</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Previo a la entrega del dictamen</td>
+                                        </tr>
+
+                                    {% elif tramite.sub_tipo == 'REMODELACION' or tramite.id == 5 %}
+                                        <!-- Requisitos Remodelación / Ampliación -->
+                                        <tr class="bg-teal-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-teal-800 text-[10px] uppercase tracking-wider">
+                                                Fase 1: Requisitos de Apertura Digital
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente del Propietario o Arrendatario (INE / Pasaporte)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Acreditación Legal del Inmueble (Escritura, Contrato Vigente o Predial Pagado del Año en Curso)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Fotografías actuales del área interior y fachadas a intervenir</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                        <tr class="bg-purple-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-medellinVino text-[10px] uppercase tracking-wider">
+                                                Fase 2: Expediente Técnico de Remodelación Segura
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Memoria Técnica Descriptiva de los trabajos de adecuación o ampliación a realizar</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Plano o Croquis de Distribución: estado actual vs. propuesta modificada con salidas de emergencia</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Carta Responsiva de Seguridad y Estabilidad Estructural avalada por Perito Colegiado / DRO</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio si se alteran muros de carga, losas o fachadas</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Protocolo de Seguridad Laboral y Control de Polvos/Escombros durante los trabajos</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">8. Recibo Oficial de Pago de Derechos emitido por Tesorería Municipal</td>
+                                            <td class="p-3.5 text-center text-emerald-600 font-bold">Comprobante de Pago</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Previo a la entrega del visto bueno</td>
+                                        </tr>
+
+                                    {% elif tramite.sub_tipo == 'DEMOLICION' or tramite.id == 4 %}
+                                        <!-- Requisitos Demolición -->
+                                        <tr class="bg-teal-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-teal-800 text-[10px] uppercase tracking-wider">
+                                                Fase 1: Requisitos de Apertura Digital
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente del Titular o Representante Legal (INE / Pasaporte)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Acreditación de Propiedad del Inmueble y Boleta Predial Pagada del Año en Curso</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Fotografías a color del inmueble o estructura a demoler y colindancias directas</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                        <tr class="bg-purple-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-medellinVino text-[10px] uppercase tracking-wider">
+                                                Fase 2: Expediente Técnico de Demolición y Protección Perimetral
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Protocolo y Procedimiento Técnico de Demolición (manual o mecánico) con cronograma detallado</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio avalado por Perito Colegiado / DRO</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Carta Responsiva Técnica de Protección a Colindancias firmada por el Perito Especializado</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Plan de Protección y Confinamiento Perimetral (tapiales, lonas antipolvo, desvío peatonal y señalética preventiva)</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Programa de Retiro y Disposición Final de Escombros en tiradero oficial autorizado</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">8. Póliza de Seguro de Responsabilidad Civil por Daños a Terceros y Colindancias</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">9. Recibo Oficial de Pago de Derechos emitido por Tesorería Municipal</td>
+                                            <td class="p-3.5 text-center text-emerald-600 font-bold">Comprobante de Pago</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Previo a la entrega del dictamen</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+
+                    {% elif tramite.form_type == 'TERCEROS_PC' %}
+                        <!-- Banner Explicativo del Proceso para Registro de Terceros -->
+                        <div class="bg-gradient-to-r from-indigo-50 via-white to-purple-50/60 border border-indigo-200/80 rounded-3xl p-5 space-y-3 shadow-sm">
+                            <div class="flex items-center gap-2.5">
+                                <span class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center font-black text-xs shadow-sm">
+                                    <i data-lucide="layers" class="w-4 h-4 text-white"></i>
+                                </span>
+                                <div>
+                                    <h4 class="text-xs font-black text-slate-800 uppercase tracking-wider">¿Cómo funciona el Registro de Terceros Acreditados? El proceso va por pasos:</h4>
+                                    <p class="text-[10px] text-gray-500 font-medium">Cargas tus credenciales y cédula estatal en línea para validación curricular antes de expedir tu alta municipal.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs pt-1">
+                                <div class="bg-white/90 border border-indigo-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-medellinVino text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-purple-100 text-medellinVino text-[10px] flex items-center justify-center font-bold">1</span>
+                                        Carga Digital y Cédula Estatal
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Cargas en línea tu identificación oficial, cédula vigente emitida por la SPC Veracruz y constancia de situación fiscal.</p>
+                                </div>
+                                <div class="bg-white/90 border border-indigo-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-indigo-700 text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 text-[10px] flex items-center justify-center font-bold">2</span>
+                                        Validación Curricular y Perfil
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Personal técnico valida tus especialidades técnicas, certificaciones de competencias laborales y carta compromiso de apego a la Ley 856.</p>
+                                </div>
+                                <div class="bg-white/90 border border-indigo-100 p-3.5 rounded-2xl space-y-1.5 shadow-xs">
+                                    <span class="font-black text-emerald-600 text-[11px] flex items-center gap-1.5">
+                                        <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 text-[10px] flex items-center justify-center font-bold">3</span>
+                                        Alta en Padrón y Credencial
+                                    </span>
+                                    <p class="text-gray-600 text-[11px] leading-relaxed">Realizado el pago en Tesorería Municipal, se expide tu <strong>Constancia de Registro Oficial</strong> y credencial municipal con QR.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TABLA DETALLADA DE REQUISITOS TERCEROS ACREDITADOS -->
+                        <div class="overflow-x-auto border border-gray-150 rounded-2xl">
+                            <table class="w-full text-left border-collapse text-xs">
+                                <thead>
+                                    <tr class="bg-gray-50 text-gray-500 font-bold uppercase tracking-wider border-b border-gray-150 text-[10px]">
+                                        <th class="p-3.5">Fase / Documento</th>
+                                        <th class="p-3.5 text-center w-28">Modalidad</th>
+                                        <th class="p-3.5">Aplica para</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100 font-semibold text-slate-700">
+                                    {% if tramite.sub_tipo == 'NUEVO_INGRESO' or tramite.id == 7 %}
+                                        <!-- Requisitos Nuevo Ingreso -->
+                                        <tr class="bg-indigo-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-indigo-800 text-[10px] uppercase tracking-wider">
+                                                Fase 1: Requisitos de Apertura Digital
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente del Consultor o Representante Legal (INE / Pasaporte)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Cédula de Registro Estatal de Tercero Acreditado o Empresa Capacitadora emitida por la SPC Veracruz (Vigente)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Constancia de Situación Fiscal actualizada y Comprobante de Domicilio Fiscal en Veracruz</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Fotografía tamaño infantil reciente a color con fondo blanco (para credencial con QR)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                        <tr class="bg-purple-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-medellinVino text-[10px] uppercase tracking-wider">
+                                                Fase 2: Expediente Curricular y Acreditación de Especialidad
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Título y Cédula Profesional del profesionista afín a Protección Civil, Seguridad Industrial o Gestión de Riesgos</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Currículum Vitae Técnico de la empresa o consultor acreditando experiencia en elaboración de Programas Internos</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Cartas de Certificación de Competencias Laborales (CONOCER / STPS) para temas de capacitación</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio para capacitadores de brigadas</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">8. Carta Compromiso y Responsiva Ética de apego a la Ley 856 de Veracruz y Reglamento Municipal de Medellín</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">9. Recibo Oficial de Pago de Derechos de Inscripción al Padrón emitido por Tesorería Municipal</td>
+                                            <td class="p-3.5 text-center text-emerald-600 font-bold">Comprobante de Pago</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Previo a la entrega de la constancia</td>
+                                        </tr>
+
+                                    {% elif tramite.sub_tipo == 'RENOVACION_REGISTRO' or tramite.id == 10 %}
+                                        <!-- Requisitos Refrendo Anual Terceros -->
+                                        <tr class="bg-indigo-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-indigo-800 text-[10px] uppercase tracking-wider">
+                                                Fase 1: Requisitos de Apertura Digital
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">1. Identificación Oficial Vigente del Consultor o Representante Legal (INE / Pasaporte)</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">2. Constancia o Número de Registro Municipal de Tercero Acreditado en Medellín de Bravo del Ejercicio Anterior</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">3. Cédula de Registro Estatal de la SPC Veracruz refrendada y vigente para el ejercicio fiscal en curso</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">4. Comprobante de Domicilio y Constancia de Situación Fiscal actualizada</td>
+                                            <td class="p-3.5 text-center text-medellinVino font-bold">Carga Digital (PDF/IMG)</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+
+                                        <tr class="bg-purple-50/30">
+                                            <td colspan="3" class="p-2.5 px-4 font-black text-medellinVino text-[10px] uppercase tracking-wider">
+                                                Fase 2: Expediente de Refrendo Anual
+                                            </td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">5. Relación o Informe de Programas Internos y capacitaciones impartidas en Medellín durante el año previo</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">6. Constancia de no haber incurrido en sanciones, amonestaciones o suspensiones ante la SPC Veracruz</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">7. Constancias de actualización técnica o educación continua en protección civil del último año</td>
+                                            <td class="p-3.5 text-center text-gray-500">Expediente Técnico</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Obligatorio</td>
+                                        </tr>
+                                        <tr class="hover:bg-gray-50/50 transition">
+                                            <td class="p-3.5 leading-relaxed font-bold text-gray-800">8. Recibo Oficial de Pago de Derechos de Refrendo Anual emitido por Tesorería Municipal</td>
+                                            <td class="p-3.5 text-center text-emerald-600 font-bold">Comprobante de Pago</td>
+                                            <td class="p-3.5 text-gray-500 font-normal">Previo a la entrega de la constancia</td>
+                                        </tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+
                     {% else %}
                         <!-- TABLA GENERAL DE REQUISITOS PARA OTROS TRÁMITES -->
                         <div class="overflow-x-auto border border-gray-150 rounded-2xl">
@@ -722,86 +1152,19 @@
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-100 font-semibold text-slate-700">
-                                    {% if tramite.form_type == 'CONSTRUCCION_PC' %}
-                                        <!-- Requisitos Formato 3 -->
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Croquis de Ubicación Georeferenciado</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Fotografías del Predio/Inmueble Actual</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Título de Propiedad o Escritura Pública del Predio</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Plano Arquitectónico Completo aprobado</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Constancia de no Afectación en materia de Protección Civil</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Licencia de Uso de Suelo Vigente</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                    {% elif tramite.form_type == 'TERCEROS_PC' %}
-                                        <!-- Requisitos Formato 4 -->
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial Vigente (INE / Pasaporte)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Boleta de Pago del Impuesto Predial del Año en Curso</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Cédula de Registro Estatal de Terceros Acreditados Vigente</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Currículum Vitae Técnico de Capacitador o Empresa Tercera</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                    {% else %}
-                                        <!-- Default fallback layout loop for general PDFs -->
-                                        {% for req in tramite.requisitos_list %}
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">{{ req }}</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        {% empty %}
-                                        <tr class="hover:bg-gray-50/50 transition">
-                                            <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial y Formato Único de Solicitud (PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
-                                            <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
-                                        </tr>
-                                        {% endfor %}
-                                    {% endif %}
+                                    {% for req in tramite.requisitos_list %}
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">{{ req }}</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    {% empty %}
+                                    <tr class="hover:bg-gray-50/50 transition">
+                                        <td class="p-4 leading-relaxed font-bold text-gray-800">Identificación Oficial y Formato Único de Solicitud (PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">No (Carga PDF)</td>
+                                        <td class="p-4 text-center text-gray-400 font-normal">N/A</td>
+                                    </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -833,6 +1196,16 @@
                                     <span class="text-medellinVino font-black text-base mt-2 block">Tasado en UMA según Tipo de Estructura, Metros² o Altura</span>
                                     <span class="text-gray-500 font-normal text-xs block mt-1">
                                         El personal técnico de Protección Civil calcula la orden de pago oficial considerando la superficie total en m² para anuncios publicitarios (espectaculares, pantallas o autosoportados) o la altura total de la torre/antena de telecomunicaciones, emitiendo la línea de cobro de Tesorería Municipal.
+                                    </span>
+                                {% elif tramite.form_type == 'CONSTRUCCION_PC' %}
+                                    <span class="text-medellinVino font-black text-base mt-2 block">Tasado en UMA según Metros² de Construcción o Demolición</span>
+                                    <span class="text-gray-500 font-normal text-xs block mt-1">
+                                        El personal técnico de Protección Civil calcula el derecho oficial en UMA considerando los metros cuadrados totales de la obra nueva, superficie a remodelar o volumen de demolición conforme a la Ley de Ingresos Municipal.
+                                    </span>
+                                {% elif tramite.form_type == 'TERCEROS_PC' %}
+                                    <span class="text-medellinVino font-black text-base mt-2 block">Cuota Oficial Anual de Inscripción o Refrendo al Padrón</span>
+                                    <span class="text-gray-500 font-normal text-xs block mt-1">
+                                        Cuota fija en UMA para registro inicial o refrendo anual de consultores independientes o empresas capacitadoras, expidiéndose la orden de pago de Tesorería Municipal.
                                     </span>
                                 {% else %}
                                     <span class="text-medellinVino font-black text-base mt-2 block">Tasado en UMA según Giro, Metros² y Grado de Riesgo</span>

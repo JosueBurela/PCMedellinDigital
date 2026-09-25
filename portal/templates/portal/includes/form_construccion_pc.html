@@ -7,11 +7,11 @@
                                     <i data-lucide="check-circle" class="w-4 h-4"></i>
                                     <span>
                                         {% if tramite.sub_tipo == 'CONSTRUCCION' %}
-                                            Revisión de planos, proyecto para No inconveniente de construcción
+                                            Dictamen de No Inconveniente y Medidas de Seguridad para Construcción de Obra Nueva
                                         {% elif tramite.sub_tipo == 'REMODELACION' %}
-                                            Inspección de inmueble y revisión de planos para remodelación y ampliación
+                                            Visto Bueno de Seguridad para Remodelación, Adecuación o Ampliación de Inmuebles
                                         {% elif tramite.sub_tipo == 'DEMOLICION' %}
-                                            Inspección de inmueble a demoler
+                                            Dictamen Técnico y Protocolo de Seguridad para Demolición de Inmuebles
                                         {% else %}
                                             {{ tramite.sub_tipo }}
                                         {% endif %}
@@ -19,9 +19,9 @@
                                 </div>
                             {% else %}
                                 <select name="tipo_anuencia_construccion" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold focus:outline-none focus:border-medellinVino transition-colors">
-                                    <option value="CONSTRUCCION">Revisión de planos, proyecto para No inconveniente de construcción</option>
-                                    <option value="REMODELACION">Inspección de inmueble y revisión de planos para remodelación y ampliación</option>
-                                    <option value="DEMOLICION">Inspección de inmueble a demoler</option>
+                                    <option value="CONSTRUCCION">Dictamen de No Inconveniente y Medidas de Seguridad para Construcción de Obra Nueva</option>
+                                    <option value="REMODELACION">Visto Bueno de Seguridad para Remodelación, Adecuación o Ampliación de Inmuebles</option>
+                                    <option value="DEMOLICION">Dictamen Técnico y Protocolo de Seguridad para Demolición de Inmuebles</option>
                                 </select>
                             {% endif %}
                         </div>

@@ -7,9 +7,9 @@
                                     <i data-lucide="check-circle" class="w-4 h-4"></i>
                                     <span>
                                         {% if tramite.sub_tipo == 'NUEVO_INGRESO' %}
-                                            Registro de Tercer Acreditado y/o Empresas Capacitadoras (Nuevo Ingreso)
+                                            Inscripción al Padrón Municipal de Terceros Acreditados y Empresas Capacitadoras
                                         {% elif tramite.sub_tipo == 'RENOVACION_REGISTRO' %}
-                                            Renovación de Registro en el Padrón Municipal
+                                            Refrendo Anual en el Padrón Municipal de Terceros Acreditados
                                         {% else %}
                                             {{ tramite.sub_tipo }}
                                         {% endif %}
@@ -17,8 +17,8 @@
                                 </div>
                             {% else %}
                                 <select name="tipo_anuencia_terceros" required class="w-full px-3 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-bold focus:outline-none focus:border-medellinVino transition-colors">
-                                    <option value="NUEVO_INGRESO">Registro de Tercer Acreditado y/o Empresas Capacitadoras (Nuevo Ingreso)</option>
-                                    <option value="RENOVACION_REGISTRO">Renovación de Registro en el Padrón Municipal</option>
+                                    <option value="NUEVO_INGRESO">Inscripción al Padrón Municipal de Terceros Acreditados y Empresas Capacitadoras</option>
+                                    <option value="RENOVACION_REGISTRO">Refrendo Anual en el Padrón Municipal de Terceros Acreditados</option>
                                 </select>
                             {% endif %}
                         </div>
